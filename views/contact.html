@@ -4,141 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Collaborative Investment Ltd</title>
+    <meta name="description" content="Get in touch with Collaborative Investment Ltd for business management, investment opportunities, and strategic partnerships. Lagos office: +234 812 997 8419">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <a href="/" class="logo">CIL<span>Nigeria</span></a>
-            <button class="mobile-menu-btn">☰</button>
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="CIL Logo" class="logo-img">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-links">
+            <a href="/">Home</a>
+            <span>></span>
+            <span>Contact Us</span>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <h1>Contact Us</h1>
-        <p>Get in touch to discuss how we can help grow your business or explore investment opportunities</p>
+        <p>Connect with our team to discuss business management, investment opportunities, and strategic partnerships.</p>
     </section>
 
     <!-- Contact Section -->
     <section class="section">
         <div class="contact-grid">
+
             <!-- Contact Information -->
             <div class="contact-info">
-                <h2>Get In Touch</h2>
-                <p>We're here to answer your questions and discuss potential partnerships.</p>
-                
+                <h2>Get in Touch</h2>
+                <p>We are available to answer your inquiries and provide guidance on how CIL can support your goals.</p>
+
                 <div class="info-item">
-                    <div class="info-icon">📍</div>
+                    <div class="info-icon"></div>
                     <div>
-                        <h3>Our Office</h3>
+                        <h3>Office Address</h3>
                         <p>212 Ijegun Road, Ikotun, Lagos, Nigeria</p>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon">📧</div>
+                    <div class="info-icon"></div>
                     <div>
-                        <h3>Email Us</h3>
+                        <h3>Email</h3>
                         <p>collaborativeinvestmentltd@gmail.com</p>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon">📞</div>
+                    <div class="info-icon"></div>
                     <div>
-                        <h3>Call Us</h3>
-                        <p>+234 812 997 8419</p>
-                        <p>+234 707 826 9765</p>
-                        <p>+234 907 137 9319</p>
+                        <h3>Contact Numbers</h3>
+                        <p><a href="tel:+2348129978419" style="color: var(--secondary);">+234 812 997 8419</a></p>
+                        <p><a href="tel:+2347078269765" style="color: var(--secondary);">+234 707 826 9765</a></p>
+                        <p><a href="tel:+2349071379319" style="color: var(--secondary);">+234 907 137 9319</a></p>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon">🕒</div>
+                    <div class="info-icon"></div>
+                    <div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/2348129978419" style="color: var(--secondary);">+234 812 997 8419</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon"></div>
                     <div>
                         <h3>Business Hours</h3>
-                        <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
-                        <p>Saturday: 10:00 AM - 2:00 PM</p>
+                        <p>Monday – Friday: 9:00 AM – 5:00 PM</p>
+                        <p>Saturday: 10:00 AM – 2:00 PM</p>
                         <p>Sunday: Closed</p>
                     </div>
                 </div>
 
                 <div style="margin-top: 2rem;">
                     <h3>Quick Links</h3>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
-                        <a href="/investment" style="color: var(--accent); text-decoration: none;">💼 Investment Opportunities</a>
-                        <a href="/services" style="color: var(--accent); text-decoration: none;">🚀 Business Management Services</a>
-                        <a href="/portfolio" style="color: var(--accent); text-decoration: none;">📊 Our Portfolio</a>
+                    <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 1rem;">
+                        <a href="/investment" class="quick-link"> Investment Opportunities</a>
+                        <a href="/services" class="quick-link"> Business Management Services</a>
+                        <a href="/portfolio" class="quick-link"> Our Portfolio</a>
+                        <a href="/downloads/cil-investment-prospectus.pdf" class="quick-link" download> Download Prospectus</a>
                     </div>
                 </div>
             </div>
 
             <!-- Contact Form -->
-            <div>
-                <h2>Send Us a Message</h2>
-                <form id="contactForm" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </div>
+<div>
+    <h2>Send Us a Message</h2>
+    <p style="margin-bottom: 1.5rem;">Fill out the form and our team will respond within 24 hours.</p>
 
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
+    <!-- Form Messages -->
+    <div id="form-messages" class="form-messages"></div>
 
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" class="form-control">
-                    </div>
+    <form id="contactForm" class="contact-form" method="POST" action="/contact">
+        <!-- ... rest of form fields remain the same ... -->
+        <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your full name">
+        </div>
 
-                    <div class="form-group">
-                        <label for="service">Service Interest</label>
-                        <select id="service" name="service" class="form-control">
-                            <option value="">Select a service...</option>
-                            <option value="business-management">Business Management</option>
-                            <option value="investment">Investment Opportunity</option>
-                            <option value="agriculture">Agricultural Ventures</option>
-                            <option value="manufacturing">Manufacturing</option>
-                            <option value="partnership">Strategic Partnership</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
+        <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email address">
+        </div>
 
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Tell us about your business or investment interests..."></textarea>
-                    </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number">
+        </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                </form>
+        <div class="form-group">
+            <label for="service">Service Interest *</label>
+            <select id="service" name="service" class="form-control" required>
+                <option value="">Select an option...</option>
+                <option value="business-management">Business Management</option>
+                <option value="investment">Investment Inquiry</option>
+                <option value="poultry-investment">Poultry Farm Investment</option>
+                <option value="block-investment">Block Manufacturing Investment</option>
+                <option value="aquaculture-investment">Aquaculture Investment</option>
+                <option value="partnership">Strategic Partnership</option>
+                <option value="agriculture">Agricultural Ventures</option>
+                <option value="manufacturing">Manufacturing & Fabrication</option>
+                <option value="diaspora-management">Diaspora Business Management</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="investment-amount">Investment Amount (if applicable)</label>
+            <select id="investment-amount" name="investment_amount" class="form-control">
+                <option value="">Select amount range...</option>
+                <option value="1-5m">₦1M - ₦5M</option>
+                <option value="5-10m">₦5M - ₦10M</option>
+                <option value="10-20m">₦10M - ₦20M</option>
+                <option value="20-50m">₦20M - ₦50M</option>
+                <option value="50m+">₦50M+</option>
+                <option value="not-applicable">Not Applicable</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Your Message *</label>
+            <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Tell us about your inquiry, business, investment goals, or partnership proposal..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="newsletter" value="true" checked>
+                Subscribe to our investment opportunities newsletter
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+    </form>
+</div>
+
+        </div>
+    </section>
+
+    <!-- Emergency Contact -->
+    <section class="section" style="background: var(--light); text-align: center;">
+        <div class="section-title">
+            <h2>Need Immediate Assistance?</h2>
+            <p>For urgent inquiries or emergency business support</p>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: var(--secondary);"> Emergency Line</h3>
+                    <p><a href="tel:+2348129978419" class="btn btn-primary" style="margin-top: 1rem;">+234 812 997 8419</a></p>
+                    <p>Available 24/7 for urgent matters</p>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--secondary);"> WhatsApp Business</h3>
+                    <p><a href="https://wa.me/2348129978419" class="btn btn-whatsapp" style="margin-top: 1rem;">Chat on WhatsApp</a></p>
+                    <p>Quick responses during business hours</p>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--secondary);"> Priority Email</h3>
+                    <p><a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary" style="margin-top: 1rem;">Send Priority Email</a></p>
+                    <p>Response within 2 hours</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Map Section -->
-    <section class="section" style="background: #f8f9fa; padding: 60px 5%;">
+    <section class="section" style="background:#f8f9fa;">
         <div class="section-title">
             <h2>Our Location</h2>
-            <p>Visit our office in Lagos</p>
+            <p>Visit our Lagos office for physical consultations</p>
         </div>
-        <div style="max-width: 1000px; margin: 0 auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-            <div style="background: #e9ecef; padding: 3rem; text-align: center; border-radius: 5px;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">📍 212 Ijegun Road, Ikotun, Lagos</h3>
-                <p style="color: var(--gray);">Map integration available - Directions to our office</p>
-                <div style="margin-top: 2rem;">
-                    <a href="https://maps.google.com" target="_blank" class="btn btn-primary">Get Directions</a>
+
+        <div style="max-width:1000px; margin:0 auto; background:white; padding:2rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+            <div style="background:#e9ecef; padding:3rem; text-align:center; border-radius:5px;">
+                <h3 style="color:var(--primary); margin-bottom:1rem;"> 212 Ijegun Road, Ikotun, Lagos</h3>
+                <p style="color:var(--gray); margin-bottom: 2rem;">Find us easily using Google Maps or any navigation app</p>
+                
+                <div style="background: white; padding: 2rem; border-radius: 8px; margin-bottom: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Office Directions</h4>
+                    <ul style="text-align: left; color: var(--gray);">
+                        <li>From Ikotun Roundabout: Take Ijegun Road</li>
+                        <li>Landmark: Stop at Barber Bus Stop</li>
+                        <li>Building: You will see Next Barber Shop</li>
+                        <li>Parking: Secure parking available</li>
+                    </ul>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="https://maps.google.com/?q=212+Ijegun+Road,+Ikotun,+Lagos" target="_blank" class="btn btn-primary">Get Directions on Google Maps</a>
+                    <a href="tel:+2348129978419" class="btn btn-secondary">Call for Directions</a>
                 </div>
             </div>
         </div>
@@ -148,48 +247,182 @@
     <section class="section">
         <div class="section-title">
             <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to common questions</p>
         </div>
 
-        <div style="max-width: 800px; margin: 0 auto;">
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: var(--primary);">🤔 How quickly can CIL start managing my business?</h3>
-                <p>We can typically begin the assessment phase within 1-2 weeks of initial consultation. Full management implementation usually takes 4-6 weeks depending on business complexity.</p>
+        <div style="max-width:800px; margin:0 auto;">
+            <div class="faq-item">
+                <h3 style="color:var(--primary);"> How soon can CIL begin managing a business?</h3>
+                <p>Assessment can begin within 1–2 weeks. Full management typically starts in 4–6 weeks after thorough due diligence and planning.</p>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: var(--primary);">💰 What is the minimum investment amount?</h3>
-                <p>Our current investment opportunities start from ₦5,000,000. We also consider smaller investments for specific projects on a case-by-case basis.</p>
+            <div class="faq-item">
+                <h3 style="color:var(--primary);"> Do you work with diaspora clients?</h3>
+                <p>Yes. We specialize in business & asset management for Nigerians abroad, with full transparency, monthly reporting, and secure communication channels.</p>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: var(--primary);">📊 How often will I receive performance reports?</h3>
-                <p>We provide monthly financial reports and quarterly comprehensive performance reviews for all managed businesses and investments.</p>
+            <div class="faq-item">
+                <h3 style="color:var(--primary);"> What is the minimum investment?</h3>
+                <p>Entry-level investments begin at ₦5,000,000 depending on the venture. Custom partnerships and smaller investments are also available for specific projects.</p>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: var(--primary);">🏢 Do you work with businesses outside Lagos and Ogun?</h3>
-                <p>Yes! While we're currently focused on Lagos and Ogun states, we're expanding to other regions. Contact us to discuss opportunities in your location.</p>
+            <div class="faq-item">
+                <h3 style="color:var(--primary);"> How often do investors receive reports?</h3>
+                <p>Monthly financial reports + quarterly performance reviews + annual comprehensive audits. Diaspora clients receive additional video conference updates.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 style="color:var(--primary);"> Do you operate outside Lagos and Ogun?</h3>
+                <p>Yes. We are expanding and can manage businesses nationwide depending on project scope. Currently operating in Lagos, Ogun, and planning expansion to Oyo State.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 style="color:var(--primary);"> What's the typical response time?</h3>
+                <p>Initial response within 2 hours during business hours. Comprehensive proposal within 24-48 hours for investment inquiries.</p>
             </div>
         </div>
     </section>
 
-    <!-- Immediate CTA -->
-    <section class="section" style="background: var(--primary); color: white; text-align: center;">
-        <h2 style="color: white; margin-bottom: 1rem;">Ready to Get Started?</h2>
-        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Contact us today for a free initial consultation</p>
+    <!-- CTA -->
+    <section class="section" style="background:var(--primary); color:white; text-align:center;">
+        <h2 style="margin-bottom:1rem; color: white;">Ready to Work With Us?</h2>
+        <p style="margin-bottom:2rem; font-size:1.2rem;">Book a consultation today and let's discuss your goals.</p>
+
         <div class="cta-buttons">
-            <a href="tel:+2348129978419" class="btn btn-primary" style="background: var(--secondary);">Call Now</a>
+            <a href="tel:+2348129978419" class="btn btn-primary" style="background:var(--secondary); color: var(--primary);">Call Now: +234 812 997 8419</a>
+            <a href="https://wa.me/2348129978419" class="btn btn-whatsapp">WhatsApp Us</a>
             <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary">Email Us</a>
         </div>
+
+        <div style="margin-top: 2rem;">
+            <p> <strong>Prefer to schedule a meeting?</strong></p>
+            <a href="/contact#contactForm" class="btn btn-secondary">Schedule Consultation</a>
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Collaborative Investment Ltd. All rights reserved.</p>
-            <p>Building Nigeria's Business Future</p>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
         </div>
-    </footer>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
 
     <script src="/js/main.js"></script>
 </body>

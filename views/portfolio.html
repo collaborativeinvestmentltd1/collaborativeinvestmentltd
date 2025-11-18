@@ -4,154 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Portfolio - Collaborative Investment Ltd</title>
+    <meta name="description" content="Explore our managed ventures including poultry farming, block manufacturing, machine fabrication, and diaspora asset management projects across Nigeria.">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <a href="/" class="logo">CIL<span>Nigeria</span></a>
-            <button class="mobile-menu-btn">☰</button>
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="CIL Logo" class="logo-img">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/portfolio" class="active">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-links">
+            <a href="/">Home</a>
+            <span>></span>
+            <span>Portfolio</span>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <h1>Our Portfolio</h1>
-        <p>Showcasing our growing network of successfully managed businesses and ventures</p>
+        <p>Showcasing the businesses we manage, develop, and scale across Nigeria</p>
     </section>
 
     <!-- Current Ventures -->
     <section class="section">
         <div class="section-title">
             <h2>Current Managed Ventures</h2>
-            <p>Active businesses under CIL professional management</p>
+            <p>Operational & actively managed enterprises under CIL</p>
         </div>
 
         <div class="portfolio-grid">
-            <!-- AIG Poultry Ventures -->
-            <div class="portfolio-item">
-                <div class="portfolio-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
-                    🐔
+
+            <!-- Poultry -->
+            <div class="portfolio-item" id="poultry">
+                <div class="portfolio-image">
+                    <img src="/img/poultry-farm.jpg" alt="CIL Poultry Enterprise - Commercial egg production facility" data-src="/img/poultry-farm.jpg" class="lazy">
                 </div>
                 <div class="portfolio-content">
-                    <h3>AIG Poultry Ventures</h3>
-                    <p><strong>Location:</strong> Abule Owu, Itori, Ogun State</p>
+                    <h3>CIL Poultry Enterprise</h3>
+                    <p><strong>Location:</strong> Ogun State</p>
                     <p><strong>Specialty:</strong> Commercial Egg Production</p>
-                    <p><strong>Capacity:</strong> 3,000 Birds (Expanding)</p>
-                    <p><strong>Status:</strong> Operational & Profitable</p>
-                    <div style="margin: 1rem 0;">
-                        <h4>Achievements:</h4>
-                        <ul style="text-align: left; margin-left: 1rem;">
-                            <li>Successful pilot phase completion</li>
-                            <li>Established market distribution</li>
-                            <li>Ready for commercial scale-up</li>
-                        </ul>
+                    <p><strong>Capacity:</strong> 3,000 Birds (Scaling to 5,000+)</p>
+                    <p><strong>Status:</strong> Fully Operational</p>
+                    <p><strong>Annual ROI:</strong> 35%</strong></p>
+
+                    <h4>Highlights:</h4>
+                    <ul style="text-align:left; margin-left:1rem;">
+                        <li>Daily egg production & regional distribution</li>
+                        <li>Stable buyer network and recurring demand</li>
+                        <li>Expansion-ready facility layout</li>
+                        <li>Modern feeding and healthcare systems</li>
+                    </ul>
+
+                    <div style="margin: 1.5rem 0;">
+                        <p><strong>Investment Opportunity:</strong> ₦15,000,000</p>
+                        <p><strong>Expansion Target:</strong> 7,000 bird capacity</p>
                     </div>
-                    <a href="/investment" class="btn btn-primary">Investment Opportunity</a>
+
+                    <a href="/investment#poultry" class="btn btn-primary">Investment Details</a>
                 </div>
             </div>
 
-            <!-- CIL Blockworks -->
-            <div class="portfolio-item">
-                <div class="portfolio-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
-                    🧱
+            <!-- Blockworks -->
+            <div class="portfolio-item" id="blockworks">
+                <div class="portfolio-image">
+                    <img src="/img/block-manufacturing.jpg" alt="CIL Blockworks - Concrete block production plant" data-src="/img/block-manufacturing.jpg" class="lazy">
                 </div>
                 <div class="portfolio-content">
                     <h3>CIL Blockworks</h3>
-                    <p><strong>Location:</strong> Lagos/Ogun Corridor</p>
-                    <p><strong>Specialty:</strong> Construction Materials</p>
+                    <p><strong>Location:</strong> Lagos / Ogun Corridor</p>
+                    <p><strong>Specialty:</strong> Concrete Blocks & Construction Materials</p>
                     <p><strong>Capacity:</strong> 3,000+ Blocks Daily</p>
-                    <p><strong>Status:</strong> Setup Phase</p>
-                    <div style="margin: 1rem 0;">
-                        <h4>Services:</h4>
-                        <ul style="text-align: left; margin-left: 1rem;">
-                            <li>Concrete block production</li>
-                            <li>Construction materials supply</li>
-                            <li>Equipment fabrication</li>
-                        </ul>
+                    <p><strong>Status:</strong> Operational & Expanding</p>
+                    <p><strong>Annual ROI:</strong> 45%</strong></p>
+
+                    <h4>Services:</h4>
+                    <ul style="text-align:left; margin-left:1rem;">
+                        <li>Block production (solid & hollow)</li>
+                        <li>Material supply & logistics</li>
+                        <li>Custom equipment fabrication</li>
+                        <li>Construction project support</li>
+                    </ul>
+
+                    <div style="margin: 1.5rem 0;">
+                        <p><strong>Investment Opportunity:</strong> ₦8,000,000</p>
+                        <p><strong>Market:</strong> High demand, low competition</p>
                     </div>
-                    <a href="/investment" class="btn btn-primary">Investment Opportunity</a>
+
+                    <a href="/investment#block" class="btn btn-primary">Investment Details</a>
                 </div>
             </div>
+
+            <!-- Fabrication -->
+            <div class="portfolio-item" id="fabrication">
+                <div class="portfolio-image">
+                    <img src="/img/machine-fabrication.jpg" alt="CIL Engineering - Industrial machine fabrication workshop" data-src="/img/machine-fabrication.jpg" class="lazy">
+                </div>
+                <div class="portfolio-content">
+                    <h3>CIL Engineering & Fabrication</h3>
+                    <p><strong>Location:</strong> Lagos</p>
+                    <p><strong>Specialty:</strong> Industrial Machine Fabrication</p>
+                    <p><strong>Status:</strong> Fully Operational</p>
+                    <p><strong>Clients:</strong> Domestic & International</p>
+
+                    <h4>Capabilities:</h4>
+                    <ul style="text-align:left; margin-left:1rem;">
+                        <li>Block-making machine fabrication</li>
+                        <li>Custom engineering solutions</li>
+                        <li>Repairs, maintenance & upgrades</li>
+                        <li>Industrial equipment manufacturing</li>
+                    </ul>
+
+                    <div style="margin: 1.5rem 0;">
+                        <p><strong>Lead Time:</strong> 4-6 weeks</p>
+                        <p><strong>Warranty:</strong> 12 months comprehensive</p>
+                    </div>
+
+                    <a href="/contact" class="btn btn-primary">Request Fabrication Quote</a>
+                </div>
+            </div>
+
+            <!-- Diaspora Asset Management -->
+            <div class="portfolio-item" id="diaspora">
+                <div class="portfolio-image">
+                    <img src="/img/diaspora-management.jpg" alt="Diaspora Asset Management - Property development oversight" data-src="/img/diaspora-management.jpg" class="lazy">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Diaspora Asset Management</h3>
+                    <p><strong>Clients:</strong> Nigerians Abroad</p>
+                    <p><strong>Services:</strong> Construction, Retail, Agricultural Projects</p>
+                    <p><strong>Status:</strong> Active & Growing</p>
+                    <p><strong>Reporting:</strong> Monthly updates</p>
+
+                    <h4>What We Manage:</h4>
+                    <ul style="text-align:left; margin-left:1rem;">
+                        <li>Business setup & full management</li>
+                        <li>Property development oversight</li>
+                        <li>Operations & monthly reporting</li>
+                        <li>Financial transparency & accountability</li>
+                    </ul>
+
+                    <div style="margin: 1.5rem 0;">
+                        <p><strong>Client Base:</strong> UK, USA, Canada, Europe</p>
+                        <p><strong>Success Rate:</strong> 100% client satisfaction</p>
+                    </div>
+
+                    <a href="/contact" class="btn btn-primary">Start a Project</a>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- Upcoming Projects -->
-    <section class="section" style="background: #f8f9fa;">
+    <section class="section" style="background:#f8f9fa;">
         <div class="section-title">
             <h2>Upcoming Projects</h2>
-            <p>New ventures in development phase</p>
+            <p>Businesses entering development or expansion phase</p>
         </div>
 
         <div class="portfolio-grid">
-            <!-- Aquaculture Project -->
-            <div class="portfolio-item">
-                <div class="portfolio-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
-                    🐟
+
+            <!-- Aquaculture -->
+            <div class="portfolio-item" id="aquaculture">
+                <div class="portfolio-image">
+                    <img src="/img/fish-farming.jpg" alt="CIL Aquaculture - Catfish production facility" data-src="/img/fish-farming.jpg" class="lazy">
                 </div>
                 <div class="portfolio-content">
                     <h3>CIL Aquaculture</h3>
                     <p><strong>Location:</strong> Ogun State</p>
                     <p><strong>Specialty:</strong> Catfish Production</p>
-                    <p><strong>Capacity:</strong> 10,000+ Juvenile Fish</p>
-                    <p><strong>Status:</strong> Planning Phase</p>
-                    <div style="margin: 1rem 0;">
-                        <h4>Features:</h4>
-                        <ul style="text-align: left; margin-left: 1rem;">
-                            <li>Modern fish pond design</li>
-                            <li>Integrated water management</li>
-                            <li>High-yield fish species</li>
-                        </ul>
+                    <p><strong>Capacity:</strong> 10,000+ Juveniles</p>
+                    <p><strong>Status:</strong> Development Phase</p>
+                    <p><strong>Expected ROI:</strong> 30% annually</p>
+
+                    <h4>Features:</h4>
+                    <ul style="text-align:left; margin-left:1rem;">
+                        <li>High-yield fish breeds</li>
+                        <li>Modern pond system</li>
+                        <li>Integrated water recycling</li>
+                        <li>Automated feeding systems</li>
+                    </ul>
+
+                    <div style="margin: 1.5rem 0;">
+                        <p><strong>Investment Required:</strong> ₦7,000,000</p>
+                        <p><strong>Project Duration:</strong> 24 months</p>
                     </div>
-                    <a href="/investment" class="btn btn-primary">Investment Opportunity</a>
+
+                    <a href="/investment#aquaculture" class="btn btn-primary">Invest in Aquaculture</a>
                 </div>
             </div>
 
-            <!-- Piggery Project -->
-            <div class="portfolio-item">
-                <div class="portfolio-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
-                    🐖
+            <!-- Piggery -->
+            <div class="portfolio-item" id="piggery">
+                <div class="portfolio-image">
+                    <img src="/img/piggery-farm.jpg" alt="CIL Piggery Program - Modern pig breeding facility" data-src="/img/piggery-farm.jpg" class="lazy">
                 </div>
                 <div class="portfolio-content">
-                    <h3>CIL Piggery</h3>
+                    <h3>CIL Piggery Program</h3>
                     <p><strong>Location:</strong> Ogun State</p>
-                    <p><strong>Specialty:</strong> Pig Breeding & Pork</p>
-                    <p><strong>Capacity:</strong> 20+ Weaners Initial</p>
-                    <p><strong>Status:</strong> Planning Phase</p>
-                    <div style="margin: 1rem 0;">
-                        <h4>Features:</h4>
-                        <ul style="text-align: left; margin-left: 1rem;">
-                            <li>Modern pigsty design</li>
-                            <li>Breeding program</li>
-                            <li>Pork production</li>
-                        </ul>
+                    <p><strong>Specialty:</strong> Pig Breeding & Meat Production</p>
+                    <p><strong>Capacity:</strong> 50+ Initial Stock</p>
+                    <p><strong>Status:</strong> Development Phase</p>
+                    <p><strong>Expected ROI:</strong> 40% annually</p>
+
+                    <h4>Features:</h4>
+                    <ul style="text-align:left; margin-left:1rem;">
+                        <li>Breeding units & controlled pens</li>
+                        <li>Feed formulation management</li>
+                        <li>Veterinary monitoring</li>
+                        <li>Waste management systems</li>
+                    </ul>
+
+                    <div style="margin: 1.5rem 0;">
+                        <p><strong>Investment Required:</strong> ₦5,000,000</p>
+                        <p><strong>Market:</strong> High demand for pork products</p>
                     </div>
-                    <a href="/investment" class="btn btn-primary">Investment Opportunity</a>
+
+                    <a href="/investment" class="btn btn-primary">Invest in Piggery</a>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- Portfolio Statistics -->
+    <!-- Statistics -->
     <section class="section stats">
         <div class="stats-grid">
             <div class="stat-item">
-                <h3>5</h3>
-                <p>Managed Businesses</p>
+                <h3>8</h3>
+                <p>Active Projects</p>
             </div>
             <div class="stat-item">
                 <h3>50</h3>
-                <p>Million+ Assets Under Management</p>
+                <p>Million+ Assets Managed</p>
             </div>
             <div class="stat-item">
                 <h3>12</h3>
@@ -164,51 +269,249 @@
         </div>
     </section>
 
-    <!-- Future Expansion -->
-    <section class="section">
+    <!-- Project Timeline -->
+    <section class="section" style="background: var(--light);">
         <div class="section-title">
-            <h2>Future Expansion Plans</h2>
-            <p>Our vision for continued growth and impact</p>
+            <h2>Project Development Timeline</h2>
+            <p>Our structured approach to business development</p>
         </div>
 
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">🛒</div>
+                <div class="service-icon"></div>
+                <h3>Phase 1: Planning</h3>
+                <p><strong>Weeks 1-2</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>Feasibility study</li>
+                    <li>Market research</li>
+                    <li>Business plan development</li>
+                    <li>Budget planning</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"></div>
+                <h3>Phase 2: Setup</h3>
+                <p><strong>Weeks 3-8</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>Infrastructure development</li>
+                    <li>Equipment installation</li>
+                    <li>Staff recruitment</li>
+                    <li>System implementation</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"></div>
+                <h3>Phase 3: Operations</h3>
+                <p><strong>Ongoing</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>Daily operations</li>
+                    <li>Quality control</li>
+                    <li>Performance monitoring</li>
+                    <li>Continuous improvement</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"></div>
+                <h3>Phase 4: Growth</h3>
+                <p><strong>Quarterly</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>Performance review</li>
+                    <li>Expansion planning</li>
+                    <li>Market expansion</li>
+                    <li>Investment optimization</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Expansion -->
+    <section class="section">
+        <div class="section-title">
+            <h2>Future Expansion</h2>
+            <p>Our long-term development roadmap</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"></div>
                 <h3>Retail Distribution</h3>
-                <p>Establishment of branded retail outlets for direct-to-consumer sales of our agricultural products.</p>
+                <p>Branded sales outlets for agricultural & manufactured products across major cities.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Timeline: 2025</strong>
+                </div>
             </div>
+
             <div class="service-card">
-                <div class="service-icon">🏪</div>
-                <h3>Supermarket Chain</h3>
-                <p>Development of neighborhood supermarket chain serving local communities.</p>
+                <div class="service-icon"></div>
+                <h3>Supermarket Network</h3>
+                <p>Development of neighborhood supermarkets across key urban centers in Southwest Nigeria.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Timeline: 2025-2026</strong>
+                </div>
             </div>
+
             <div class="service-card">
-                <div class="service-icon">🏨</div>
+                <div class="service-icon"></div>
                 <h3>Hospitality Ventures</h3>
-                <p>Strategic entry into hotel and restaurant management in high-growth areas.</p>
+                <p>Hotels, restaurants, and serviced apartments in developing economic zones.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Timeline: 2026</strong>
+                </div>
             </div>
+
             <div class="service-card">
-                <div class="service-icon">🌾</div>
+                <div class="service-icon"></div>
                 <h3>Agro-Processing</h3>
-                <p>Value-added processing of agricultural products for higher profit margins.</p>
+                <p>Converting raw farm products into more profitable processed goods for export markets.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Timeline: 2026-2027</strong>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section" style="background: var(--primary); color: white; text-align: center;">
-        <h2 style="color: white; margin-bottom: 1rem;">Interested in Our Ventures?</h2>
-        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Explore investment opportunities in our growing portfolio of managed businesses</p>
-        <a href="/investment" class="btn btn-primary" style="background: var(--secondary);">View Investment Opportunities</a>
+    <!-- CTA -->
+    <section class="section" style="background: var(--primary); color:white; text-align:center;">
+        <h2 style="margin-bottom:1rem; color: white;">Interested in Partnering or Investing?</h2>
+        <p style="margin-bottom:2rem; font-size:1.2rem;">Explore opportunities in our expanding portfolio of managed businesses.</p>
+        
+        <div class="cta-buttons">
+            <a href="/investment" class="btn btn-primary" style="background: var(--secondary); color: var(--primary);">View Investment Options</a>
+            <a href="/contact" class="btn btn-secondary">Schedule Consultation</a>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+            <p>💼 Download our investment prospectus:</p>
+            <a href="/downloads/cil-investment-prospectus.pdf" class="btn btn-secondary" style="margin-top: 1rem;">Download Prospectus (PDF)</a>
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Collaborative Investment Ltd. All rights reserved.</p>
-            <p>Building Nigeria's Business Future</p>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
         </div>
-    </footer>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
 
     <script src="/js/main.js"></script>
 </body>

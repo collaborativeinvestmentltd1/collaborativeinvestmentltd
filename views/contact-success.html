@@ -3,39 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - Collaborative Investment Ltd</title>
-    <meta name="description" content="The page you're looking for doesn't exist. Return to Collaborative Investment Ltd homepage or contact us for assistance.">
+    <title>Message Sent Successfully - Collaborative Investment Ltd</title>
+    <meta name="description" content="Thank you for contacting Collaborative Investment Ltd. We will get back to you shortly.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <a href="/" class="logo">
                 <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section class="hero" style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">
-        <div style="text-align: center;">
-            <h1 style="font-size: 4rem; margin-bottom: 1rem; color: var(--secondary);">404</h1>
-            <h2 style="margin-bottom: 1.5rem;">Page Not Found</h2>
-            <p style="margin-bottom: 2rem; font-size: 1.2rem; max-width: 500px;">The page you're looking for doesn't exist or has been moved.</p>
-            <div class="cta-buttons">
-                <a href="/" class="btn btn-primary">Go Home</a>
-                <a href="/contact" class="btn btn-secondary">Contact Us</a>
-                <a href="/investment" class="btn btn-whatsapp">Investment Opportunities</a>
-            </div>
+    <!-- Success Message -->
+    <section class="hero" style="min-height: 70vh; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center; max-width: 600px;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;"></div>
+            <h1 style="color: var(--success); margin-bottom: 1rem;">Message Sent Successfully!</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Thank you for contacting Collaborative Investment Ltd. We have received your message and will get back to you within 24 hours.
+            </p>
+            <p style="margin-bottom: 2rem; color: var(--gray);">
+                 A confirmation email has been sent to your inbox.<br>
+                 For urgent matters, call us at <a href="tel:+2348129978419" style="color: var(--secondary);">+234 812 997 8419</a>
+            </p>
             
-            <div style="margin-top: 3rem;">
-                <h3 style="margin-bottom: 1rem;">Popular Pages</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-                    <a href="/services" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Our Services</a>
-                    <a href="/portfolio" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Portfolio</a>
-                    <a href="/investment" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Investment</a>
-                    <a href="/about" class="btn btn-secondary" style="padding: 0.5rem 1rem;">About Us</a>
+            <div class="cta-buttons">
+                <a href="/" class="btn btn-primary">Return Home</a>
+                <a href="/investment" class="btn btn-secondary">View Investments</a>
+                <a href="/services" class="btn btn-whatsapp">Our Services</a>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: var(--light); border-radius: 12px;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">What Happens Next?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; text-align: center;">
+                    <div>
+                        <div style="font-size: 2rem;"></div>
+                        <p><strong>Email Response</strong><br>Within 24 hours</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem;"></div>
+                        <p><strong>Consultation</strong><br>Schedule a meeting</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem;"></div>
+                        <p><strong>Proposal</strong><br>Detailed investment plan</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,5 +179,7 @@
         </div>
     </div>
 </footer>
+
+    <script src="/js/main.js"></script>
 </body>
 </html>

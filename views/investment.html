@@ -4,208 +4,475 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Opportunities - Collaborative Investment Ltd</title>
+    <meta name="description" content="Invest in professionally managed ventures with structured growth, transparent reporting, and 15-50% annual returns. Asset-backed investments in agriculture and manufacturing.">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <a href="/" class="logo">CIL<span>Nigeria</span></a>
-            <button class="mobile-menu-btn">☰</button>
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="CIL Logo" class="logo-img">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
-                <li><a href="/investment">Investment</a></li>
+                <li><a href="/investment" class="active">Investment</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-links">
+            <a href="/">Home</a>
+            <span>></span>
+            <span>Investment</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
     <section class="hero">
         <h1>Investment Opportunities</h1>
-        <p>Structured investment opportunities in professionally managed businesses with clear growth trajectories</p>
+        <p>Invest in professionally managed ventures with structured growth, transparent reporting, and measurable returns.</p>
     </section>
 
     <!-- Investment Models -->
     <section class="section">
         <div class="section-title">
             <h2>Our Investment Models</h2>
-            <p>Flexible partnership structures designed for optimal returns</p>
+            <p>Flexible, secure, and performance-driven investment structures</p>
         </div>
 
         <div class="investment-cards">
+
+            <!-- Asset Backed -->
             <div class="investment-card">
-                <h3>💰 Asset-Backed Financing</h3>
-                <p><strong>Secure returns backed by physical assets</strong></p>
-                <p>Your investment is secured against tangible business assets including:</p>
-                <ul style="text-align: left; margin: 1rem 0;">
-                    <li>Real estate and landed property</li>
-                    <li>Manufacturing equipment</li>
-                    <li>Livestock and biological assets</li>
-                    <li>Business inventory</li>
+                <h3> Asset-Backed Financing</h3>
+                <p><strong>Low-risk investments secured by tangible assets</strong></p>
+                <p>Perfect for investors who want guaranteed protection. Assets may include:</p>
+                <ul style="text-align:left; margin:1rem 0;">
+                    <li>Business equipment & industrial machines</li>
+                    <li>Livestock & agricultural assets</li>
+                    <li>Retail inventory</li>
+                    <li>Land & physical structures</li>
                 </ul>
-                <div class="investment-amount">Returns: 15-25% p.a.</div>
+                <div class="investment-amount">Typical Returns: 15%–25% annually</div>
+                <div style="margin: 1rem 0;">
+                    <strong>Minimum Investment:</strong> ₦5,000,000
+                </div>
             </div>
 
+            <!-- Profit Sharing -->
             <div class="investment-card">
-                <h3>📊 Profit-Sharing Partnerships</h3>
-                <p><strong>Direct participation in business profits</strong></p>
-                <p>Become a strategic partner and share in the success of our managed ventures:</p>
-                <ul style="text-align: left; margin: 1rem 0;">
-                    <li>Monthly profit distributions</li>
-                    <li>Transparent financial reporting</li>
-                    <li>Regular performance updates</li>
-                    <li>Quarterly investor meetings</li>
+                <h3> Profit-Sharing Partnerships</h3>
+                <p><strong>Become a strategic partner in our operating ventures</strong></p>
+                <p>You earn a percentage of real monthly profits from managed businesses.</p>
+                <ul style="text-align:left; margin:1rem 0;">
+                    <li>Monthly profit returns</li>
+                    <li>Full financial transparency</li>
+                    <li>Detailed monthly and quarterly reports</li>
+                    <li>Perfect for diaspora investors</li>
                 </ul>
-                <div class="investment-amount">Returns: 20-40% p.a.</div>
+                <div class="investment-amount">Typical Returns: 20%–40% annually</div>
+                <div style="margin: 1rem 0;">
+                    <strong>Minimum Investment:</strong> ₦3,000,000
+                </div>
             </div>
 
+            <!-- Project Funding -->
             <div class="investment-card">
-                <h3>🎯 Project-Specific Funding</h3>
-                <p><strong>Targeted investment in expansion projects</strong></p>
-                <p>Fund specific business expansion projects with defined timelines and returns:</p>
-                <ul style="text-align: left; margin: 1rem 0;">
-                    <li>Clear project scope and timeline</li>
-                    <li>Defined exit strategies</li>
-                    <li>Milestone-based funding</li>
-                    <li>Project completion bonuses</li>
+                <h3> Project-Specific Funding</h3>
+                <p><strong>Invest in targeted expansion projects with clear timelines</strong></p>
+                <p>Each project has a defined cost, timeline, monitoring structure, and exit plan.</p>
+                <ul style="text-align:left; margin:1rem 0;">
+                    <li>Milestone-based deployment</li>
+                    <li>Short to medium term</li>
+                    <li>Strong profit margins (agribusiness & manufacturing)</li>
+                    <li>Guaranteed project oversight by CIL</li>
                 </ul>
-                <div class="investment-amount">Returns: 25-50% per project</div>
+                <div class="investment-amount">Typical Returns: 25%–50% per project</div>
+                <div style="margin: 1rem 0;">
+                    <strong>Project-based Investment</strong>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="section" style="background: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Investment Calculator</h2>
+                <p>Calculate potential returns on your investment with CIL</p>
+            </div>
+            
+            <div class="investment-cards">
+                <div class="investment-card">
+                    <h3>ROI Calculator</h3>
+                    <form id="roiCalculator">
+                        <div class="form-group">
+                            <label for="investmentAmount">Investment Amount (₦)</label>
+                            <input type="number" id="investmentAmount" class="form-control" placeholder="Enter amount" min="100000" step="50000" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="projectType">Project Type</label>
+                            <select id="projectType" class="form-control" required>
+                                <option value="poultry">Poultry Farming (35% ROI)</option>
+                                <option value="block">Block Manufacturing (45% ROI)</option>
+                                <option value="aquaculture">Aquaculture (30% ROI)</option>
+                                <option value="piggery">Piggery (40% ROI)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="investmentDuration">Investment Duration (Years)</label>
+                            <input type="range" id="investmentDuration" class="form-control" min="1" max="15" value="10">
+                            <span id="investmentPeriod" style="display: block; text-align: center; margin-top: 0.5rem; font-weight: 600;">10 Years</span>
+                        </div>
+                    </form>
+                    
+                    <div class="investment-results" style="margin-top: 2rem;">
+                        <h4>Projected Returns</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                            <div style="text-align: center;">
+                                <p style="font-size: 0.9rem; color: var(--gray);">Annual Return</p>
+                                <p id="annualReturn" class="investment-amount">₦0</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <p style="font-size: 0.9rem; color: var(--gray);">Total Return</p>
+                                <p id="totalReturn" class="investment-amount">₦0</p>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <p style="font-size: 0.9rem; color: var(--gray);">Total Value</p>
+                            <p id="totalValue" class="investment-amount" style="color: var(--success);">₦0</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Current Opportunities -->
-    <section class="section" style="background: #f8f9fa;">
+    <section class="section" style="background:#f8f9fa;">
         <div class="section-title">
             <h2>Current Investment Opportunities</h2>
-            <p>Immediate opportunities for strategic investment</p>
+            <p>Active and expansion-ready ventures available for partnership</p>
         </div>
 
         <div class="investment-cards">
-            <div class="investment-card">
-                <h3>🐔 Poultry Farm Expansion</h3>
-                <p><strong>Scale AIG Poultry Ventures to 5,000-bird capacity</strong></p>
-                <p>Expand our successful poultry operation to achieve commercial scale and maximize profitability.</p>
-                <div style="margin: 1.5rem 0;">
+
+            <!-- Poultry -->
+            <div class="investment-card" id="poultry">
+                <h3> Poultry Farm Expansion</h3>
+                <p><strong>Scale CIL Poultry to 5,000–7,000 bird capacity</strong></p>
+                <p>Well-structured and already operational. Expansion increases egg output, distribution capacity, and profit margins.</p>
+                <div style="margin:1.5rem 0;">
                     <p><strong>Investment Required:</strong> ₦15,000,000</p>
                     <p><strong>Project Duration:</strong> 18 months</p>
                     <p><strong>Expected ROI:</strong> 35% annually</p>
+                    <p><strong>Security:</strong> Farm assets & equipment</p>
                 </div>
-                <div class="investment-amount">Priority Investment</div>
-                <a href="/contact" class="btn btn-primary" style="margin-top: 1rem;">Express Interest</a>
+                <div class="investment-amount">Priority Opportunity</div>
+                <a href="/contact?interest=poultry" class="btn btn-primary" style="margin-top:1rem;">Express Interest</a>
             </div>
 
-            <div class="investment-card">
-                <h3>🧱 Block Manufacturing Scale-up</h3>
-                <p><strong>Establish commercial block production facility</strong></p>
-                <p>Launch CIL Blockworks with capacity for 5,000+ blocks daily to serve the construction boom.</p>
-                <div style="margin: 1.5rem 0;">
+            <!-- Block Manufacturing -->
+            <div class="investment-card" id="block">
+                <h3> Block Manufacturing Plant</h3>
+                <p><strong>Commercial block production + machine fabrication</strong></p>
+                <p>High demand, low competition, and daily cashflow. Includes block-making machines, mixers, and logistics setup.</p>
+                <div style="margin:1.5rem 0;">
                     <p><strong>Investment Required:</strong> ₦8,000,000</p>
                     <p><strong>Project Duration:</strong> 12 months</p>
                     <p><strong>Expected ROI:</strong> 45% annually</p>
+                    <p><strong>Security:</strong> Manufacturing equipment</p>
                 </div>
                 <div class="investment-amount">High Growth Potential</div>
-                <a href="/contact" class="btn btn-primary" style="margin-top: 1rem;">Express Interest</a>
+                <a href="/contact?interest=block" class="btn btn-primary" style="margin-top:1rem;">Express Interest</a>
             </div>
 
-            <div class="investment-card">
-                <h3>🐟 Integrated Fish Farm</h3>
-                <p><strong>Develop 10,000+ capacity catfish farm</strong></p>
-                <p>Establish modern aquaculture operation to meet growing demand for quality fish protein.</p>
-                <div style="margin: 1.5rem 0;">
+            <!-- Aquaculture -->
+            <div class="investment-card" id="aquaculture">
+                <h3> Integrated Fish Farm</h3>
+                <p><strong>Set up a 10,000+ catfish capacity aquaculture system</strong></p>
+                <p>Demand for catfish is rising nationwide. Strong margins, stable market, and short production cycles.</p>
+                <div style="margin:1.5rem 0;">
                     <p><strong>Investment Required:</strong> ₦7,000,000</p>
                     <p><strong>Project Duration:</strong> 24 months</p>
                     <p><strong>Expected ROI:</strong> 30% annually</p>
+                    <p><strong>Security:</strong> Farm infrastructure</p>
                 </div>
-                <div class="investment-amount">Sustainable Venture</div>
-                <a href="/contact" class="btn btn-primary" style="margin-top: 1rem;">Express Interest</a>
+                <div class="investment-amount">Sustainable Project</div>
+                <a href="/contact?interest=aquaculture" class="btn btn-primary" style="margin-top:1rem;">Express Interest</a>
             </div>
-        </div>
-    </section>
 
-    <!-- Why Invest With Us -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Why Invest With CIL?</h2>
-            <p>Professional management makes the difference</p>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🛡️</div>
-                <h3>Risk Mitigation</h3>
-                <p>Our professional management model eliminates common causes of business failure, protecting your investment.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📈</div>
-                <h3>Proven Track Record</h3>
-                <p>We have successfully managed and grown AIG Poultry Ventures from pilot to profitable operation.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🔍</div>
-                <h3>Transparent Operations</h3>
-                <p>Regular financial reporting and open communication ensure you're always informed about your investment.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">💼</div>
-                <h3>Professional Oversight</h3>
-                <p>Experienced management team with expertise in business strategy, finance, and operations.</p>
-            </div>
         </div>
     </section>
 
     <!-- Investment Process -->
-    <section class="section" style="background: var(--primary); color: white;">
+    <section class="section" style="background:var(--primary); color:white;">
         <div class="section-title">
-            <h2 style="color: white;">Investment Process</h2>
+            <h2 style="color:white;">Investment Process</h2>
+            <p style="color: rgba(255,255,255,0.9);">Simple, transparent, and secure investment journey</p>
         </div>
 
         <div class="services-grid">
-            <div class="service-card" style="background: rgba(255,255,255,0.1); color: white;">
+
+            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
                 <div class="service-icon">1</div>
-                <h3>Initial Consultation</h3>
-                <p>Discuss your investment goals and review available opportunities</p>
+                <h3>Consultation</h3>
+                <p>Discuss goals and investment categories with our experts.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Duration: 1-2 days</strong>
+                </div>
             </div>
-            <div class="service-card" style="background: rgba(255,255,255,0.1); color: white;">
+
+            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
                 <div class="service-icon">2</div>
                 <h3>Due Diligence</h3>
-                <p>Comprehensive review of business plans and financial projections</p>
+                <p>Review projections, business plans, and risk controls thoroughly.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Duration: 3-5 days</strong>
+                </div>
             </div>
-            <div class="service-card" style="background: rgba(255,255,255,0.1); color: white;">
+
+            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
                 <div class="service-icon">3</div>
-                <h3>Agreement</h3>
-                <p>Sign investment agreement with clear terms and conditions</p>
+                <h3>Agreement Signing</h3>
+                <p>Clear terms, timelines, and profit structure documentation.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Duration: 1-2 days</strong>
+                </div>
             </div>
-            <div class="service-card" style="background: rgba(255,255,255,0.1); color: white;">
+
+            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
                 <div class="service-icon">4</div>
-                <h3>Funding & Monitoring</h3>
-                <p>Fund deployment and regular performance monitoring</p>
+                <h3>Funding & Reporting</h3>
+                <p>Your project begins with structured oversight and monthly updates.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Ongoing</strong>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Why Invest -->
+    <section class="section">
+        <div class="section-title">
+            <h2>Why Invest With CIL?</h2>
+            <p>Professional, structured, transparent investment management</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"></div>
+                <h3>Risk-Controlled Model</h3>
+                <p>Every project is backed by operational oversight, financial controls, and real-time monitoring. Asset-backed security on all investments.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"></div>
+                <h3>Performance-Based Growth</h3>
+                <p>All ventures are structured for sustainability and long-term profitability. Proven track record of 25-50% annual returns.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"></div>
+                <h3>Transparent Reporting</h3>
+                <p>Investors receive monthly reports, financial statements, and growth analysis. Full visibility into your investment performance.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"></div>
+                <h3>Experienced Management</h3>
+                <p>Our team combines expertise across agriculture, construction, retail, and manufacturing with 10+ years collective experience.</p>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section" style="text-align: center;">
-        <h2 style="margin-bottom: 1rem;">Ready to Invest?</h2>
-        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Contact us to discuss investment opportunities and receive our detailed investment proposal</p>
-        <div class="cta-buttons">
-            <a href="/contact" class="btn btn-primary">Schedule Consultation</a>
-            <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary">Email Us Directly</a>
+    <!-- Testimonials -->
+    <section class="section" style="background: var(--light);">
+        <div class="section-title">
+            <h2>Investor Testimonials</h2>
+            <p>What our investment partners say about us</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "I invested ₦10M in the poultry expansion and received 35% returns in the first year. CIL's professional management and transparent reporting gave me complete confidence."
+                </div>
+                <div class="testimonial-author">- Dr. Adebayo, Medical Doctor & Investor</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "As someone living in the UK, I needed a trustworthy partner for my Nigerian investments. CIL's monthly reports and professional approach exceeded my expectations."
+                </div>
+                <div class="testimonial-author">- Mrs. Johnson, Diaspora Investor</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "The block manufacturing investment yielded 45% ROI. What impressed me most was the detailed monthly reporting and professional oversight of the project."
+                </div>
+                <div class="testimonial-author">- Engr. Musa, Construction Professional</div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Collaborative Investment Ltd. All rights reserved.</p>
-            <p>Building Nigeria's Business Future</p>
+    <!-- CTA -->
+    <section class="section" style="text-align:center;">
+        <h2 style="margin-bottom:1rem;">Ready to Invest?</h2>
+        <p style="margin-bottom:2rem; font-size:1.2rem;">Contact us to receive the full investment proposal and begin your partnership.</p>
+
+        <div class="cta-buttons">
+            <a href="/contact" class="btn btn-primary">Schedule a Consultation</a>
+            <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary">Email Us Directly</a>
+            <a href="https://wa.me/2348129978419" class="btn btn-whatsapp">WhatsApp</a>
         </div>
-    </footer>
+
+        <div style="margin-top: 2rem;">
+            <p>💼 <a href="/downloads/cil-investment-prospectus.pdf" download>Download Investment Prospectus (PDF)</a></p>
+        </div>
+    </section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
 
     <script src="/js/main.js"></script>
 </body>

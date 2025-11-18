@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Prospectus - Collaborative Investment Ltd</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #d4af37;
+            --accent: #2d5aa0;
+            --success: #00a859;
+            --light: #f8fafc;
+            --dark: #2d3748;
+            --gray: #718096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: white;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .prospectus-header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .company-logo {
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--accent);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .highlight-box {
+            background: var(--light);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .investment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .investment-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .investment-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .investment-table tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        .roi-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .contact-info {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .financial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .financial-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .financial-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+
+        .financial-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--secondary);
+        }
+
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: var(--secondary);
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .sector-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .sector-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .partnership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .partnership-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .partnership-card h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        @media print {
+            body {
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="prospectus-header">
+        <h1>INVESTMENT PROSPECTUS</h1>
+        <div class="subtitle">Building Sustainable Enterprises Across Nigeria</div>
+        <div>Date: November 2025 | RC: 8918603</div>
+    </div>
+
+    <div class="disclaimer">
+        <strong>IMPORTANT DISCLAIMER:</strong> This document is for informational purposes only and does not constitute an offer to sell or a solicitation to buy any securities. All investment projections are estimates based on market research and historical performance of similar ventures.
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <p><strong>Collaborative Investment Ltd (CIL)</strong> presents a unique opportunity to invest in Nigeria's rapidly growing SME sector, which contributes approximately 50% to the nation's GDP and employs over 80% of the workforce. Despite this economic significance, SMEs face critical challenges including limited access to capital, operational inefficiencies, and lack of professional management - creating an investment gap that CIL is strategically positioned to fill.</p>
+
+        <div class="highlight-box">
+            <strong>Investment Highlights:</strong>
+            <ul>
+                <li><strong>Proven Management Model:</strong> Structured oversight of 8-15 SMEs annually with clear accountability frameworks</li>
+                <li><strong>Diversified Portfolio Approach:</strong> Investments across 5 high-growth sectors with varying risk profiles</li>
+                <li><strong>Strong Financial Projections:</strong> Target portfolio ROI of 25-45% annually across sectors</li>
+                <li><strong>Asset-Backed Security:</strong> Tangible collateral and structured exit strategies for all investments</li>
+                <li><strong>Scalable Framework:</strong> Replicable business systems designed for nationwide expansion</li>
+                <li><strong>Social Impact:</strong> Creation of 150+ direct jobs and 300+ indirect jobs within 3 years</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Market Opportunity -->
+    <div class="section">
+        <h2>The Nigerian SME Investment Opportunity</h2>
+        <p>Nigeria's SME sector represents one of the most significant untapped investment opportunities in Africa. With over 41 million SMEs operating across the country, this sector has demonstrated remarkable resilience and growth potential despite economic challenges.</p>
+        
+        <div class="financial-grid">
+            <div class="financial-card">
+                <div class="financial-value">41.5M+</div>
+                <div class="financial-label">SMEs in Nigeria</div>
+            </div>
+            <div class="financial-card">
+                <div class="financial-value">48%</div>
+                <div class="financial-label">Contribution to National GDP</div>
+            </div>
+            <div class="financial-card">
+                <div class="financial-value">$158B</div>
+                <div class="financial-label">Annual Funding Gap</div>
+            </div>
+            <div class="financial-card">
+                <div class="financial-value">7.2%</div>
+                <div class="financial-label">Average Annual SME Growth</div>
+            </div>
+        </div>
+        
+        <p>Despite their economic importance, Nigerian SMEs face a $158 billion funding gap according to the International Finance Corporation. This creates an unprecedented opportunity for structured investment firms like CIL to bridge this gap while generating substantial returns.</p>
+    </div>
+
+    <!-- Investment Strategy -->
+    <div class="section">
+        <h2>Our Investment Strategy</h2>
+        <p>CIL employs a rigorous three-tier investment approach designed to maximize returns while minimizing risk:</p>
+        
+        <h3>1. Due Diligence & Selection</h3>
+        <p>We implement a comprehensive 7-point evaluation system for all potential SME investments:</p>
+        <ul>
+            <li>Market potential and competitive positioning analysis</li>
+            <li>Financial health assessment and cash flow evaluation</li>
+            <li>Management team capability assessment</li>
+            <li>Operational efficiency and scalability analysis</li>
+            <li>Collateral verification and asset valuation</li>
+            <li>Legal and regulatory compliance review</li>
+            <li>Social impact and job creation potential</li>
+        </ul>
+        
+        <h3>2. Active Management & Oversight</h3>
+        <p>Unlike traditional investment models, CIL provides hands-on management through:</p>
+        <ul>
+            <li>Weekly operational monitoring and performance tracking</li>
+            <li>Financial controls and transparent reporting systems</li>
+            <li>Strategic guidance and business development support</li>
+            <li>Regular stakeholder communication and progress updates</li>
+        </ul>
+        
+        <h3>3. Exit Planning & Value Realization</h3>
+        <p>We structure investments with clear exit strategies, including:</p>
+        <ul>
+            <li>12-36 month investment horizons with defined exit timelines</li>
+            <li>Revenue-sharing models with principal protection mechanisms</li>
+            <li>Buyback options for original business owners</li>
+            <li>Portfolio diversification to mitigate sector-specific risks</li>
+        </ul>
+    </div>
+
+    <!-- Investment Portfolio -->
+    <div class="section">
+        <h2>Comprehensive Investment Portfolio</h2>
+        <p>CIL has identified five high-growth sectors with strong revenue potential and manageable risk profiles. Each investment opportunity includes asset-backed security and professional management oversight.</p>
+
+        <div class="sector-grid">
+            <div class="sector-card">
+                <h4>Agriculture & Agribusiness</h4>
+                <p><strong>Investment Focus:</strong> Poultry, aquaculture, piggery operations, and feed production</p>
+                <p><strong>Market Opportunity:</strong> Nigeria's agricultural sector is valued at $85 billion with 5.5% annual growth</p>
+                <p><strong>Target ROI:</strong> 25-40% annually</p>
+                <p><strong>Key Ventures:</strong> 5,000-bird poultry farm, 10,000-fish capacity catfish farm, integrated feed mill</p>
+            </div>
+            
+            <div class="sector-card">
+                <h4>Construction & Manufacturing</h4>
+                <p><strong>Investment Focus:</strong> Block manufacturing, construction materials, fabrication of industrial equipment</p>
+                <p><strong>Market Opportunity:</strong> Nigeria faces a 22 million housing unit deficit driving construction material demand</p>
+                <p><strong>Target ROI:</strong> 35-50% annually</p>
+                <p><strong>Key Ventures:</strong> Automated block industry, fabrication workshop, construction material supply</p>
+            </div>
+            
+            <div class="sector-card">
+                <h4>Retail & Trade</h4>
+                <p><strong>Investment Focus:</strong> Supermarkets, retail outlets, import/export of consumer goods</p>
+                <p><strong>Market Opportunity:</strong> Nigeria's retail market is projected to reach $450 billion by 2027</p>
+                <p><strong>Target ROI:</strong> 20-35% annually</p>
+                <p><strong>Key Ventures:</strong> Neighborhood supermarkets, electronics distribution, export of local products</p>
+            </div>
+            
+            <div class="sector-card">
+                <h4>Hospitality & Entertainment</h4>
+                <p><strong>Investment Focus:</strong> Small-scale hotels, restaurants, event management, recreational facilities</p>
+                <p><strong>Market Opportunity:</strong> Nigeria's hospitality industry is growing at 8% annually with rising domestic tourism</p>
+                <p><strong>Target ROI:</strong> 25-40% annually</p>
+                <p><strong>Key Ventures:</strong> 20-room boutique hotel, sports bar & lounge, event management company</p>
+            </div>
+            
+            <div class="sector-card">
+                <h4>Diaspora Business Management</h4>
+                <p><strong>Investment Focus:</strong> Business setup, project management, and investment oversight for Nigerians abroad</p>
+                <p><strong>Market Opportunity:</strong> $25 billion in annual remittances with significant portion available for investment</p>
+                <p><strong>Target ROI:</strong> 15-25% annually + management fees</p>
+                <p><strong>Key Ventures:</strong> Property development management, business setup services, investment oversight</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Investment Opportunities Table -->
+    <div class="section">
+        <h2>Investment Opportunities & Projected Returns</h2>
+
+        <table class="investment-table">
+            <thead>
+                <tr>
+                    <th>Sector</th>
+                    <th>Minimum Investment</th>
+                    <th>Target ROI</th>
+                    <th>Investment Period</th>
+                    <th>Key Value Drivers</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Poultry Farming <span class="roi-badge">35% ROI</span></td>
+                    <td>₦5,000,000</td>
+                    <td>30–40% annually</td>
+                    <td>12–24 months</td>
+                    <td>High domestic demand, import substitution, scalable operations</td>
+                </tr>
+                <tr>
+                    <td>Block Manufacturing <span class="roi-badge">45% ROI</span></td>
+                    <td>₦8,000,000</td>
+                    <td>40–50% annually</td>
+                    <td>18–36 months</td>
+                    <td>Construction boom, housing deficit of 22M units, essential materials</td>
+                </tr>
+                <tr>
+                    <td>Aquaculture <span class="roi-badge">30% ROI</span></td>
+                    <td>₦3,000,000</td>
+                    <td>25–35% annually</td>
+                    <td>12–18 months</td>
+                    <td>Protein deficit, government support, export potential</td>
+                </tr>
+                <tr>
+                    <td>Piggery Operations <span class="roi-badge">40% ROI</span></td>
+                    <td>₦4,000,000</td>
+                    <td>35–45% annually</td>
+                    <td>18–24 months</td>
+                    <td>Growing pork consumption, limited commercial competition</td>
+                </tr>
+                <tr>
+                    <td>Machine Fabrication <span class="roi-badge">35% ROI</span></td>
+                    <td>₦10,000,000</td>
+                    <td>30–40% annually</td>
+                    <td>24–36 months</td>
+                    <td>Import substitution, industrial development, export to West Africa</td>
+                </tr>
+                <tr>
+                    <td>Retail Supermarkets <span class="roi-badge">25% ROI</span></td>
+                    <td>₦12,000,000</td>
+                    <td>20–30% annually</td>
+                    <td>24–36 months</td>
+                    <td>Consumer goods distribution, formal retail expansion</td>
+                </tr>
+                <tr>
+                    <td>Boutique Hotel <span class="roi-badge">30% ROI</span></td>
+                    <td>₦15,000,000</td>
+                    <td>25–35% annually</td>
+                    <td>36–48 months</td>
+                    <td>Growing domestic tourism, business travel, event hosting</td>
+                </tr>
+                <tr>
+                    <td>Diaspora Investment Fund <span class="roi-badge">20% ROI</span></td>
+                    <td>₦20,000,000</td>
+                    <td>15–25% annually</td>
+                    <td>24–36 months</td>
+                    <td>Professional management of diaspora investments with transparent reporting</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Strategic Partnerships Section -->
+    <div class="section">
+        <h2>Strategic Partnerships for Expansion</h2>
+        <p>CIL is building strategic alliances with key institutions to accelerate growth and maximize impact across Nigeria's SME ecosystem.</p>
+        
+        <div class="partnership-grid">
+            <div class="partnership-card">
+                <h4>Financial Institutions</h4>
+                <p>Partnerships with commercial banks and microfinance institutions for joint project financing, risk-sharing arrangements, and dedicated SME funding lines.</p>
+                <p><strong>Target:</strong> 3-5 banking partnerships by Q2 2026</p>
+            </div>
+            
+            <div class="partnership-card">
+                <h4>Development Agencies</h4>
+                <p>Collaboration with national and international development organizations for SME support programs, capacity building, and impact investment funding.</p>
+                <p><strong>Target:</strong> Partnerships with 2 major development agencies</p>
+            </div>
+            
+            <div class="partnership-card">
+                <h4>Technology Providers</h4>
+                <p>Alliances with fintech and business software providers to implement digital solutions for SME operations, financial management, and market access.</p>
+                <p><strong>Target:</strong> Technology integration across all portfolio companies</p>
+            </div>
+            
+            <div class="partnership-card">
+                <h4>Export Promotion Councils</h4>
+                <p>Partnerships to facilitate international market access for portfolio companies, particularly in agricultural exports and manufactured goods.</p>
+                <p><strong>Target:</strong> Export readiness for 5 portfolio companies by 2027</p>
+            </div>
+        </div>
+        
+        <h3>Partnership Benefits for Investors</h3>
+        <ul>
+            <li><strong>Reduced Risk:</strong> Shared due diligence and co-investment opportunities with established financial institutions</li>
+            <li><strong>Enhanced Returns:</strong> Access to specialized funding with favorable terms through development agency partnerships</li>
+            <li><strong>Operational Efficiency:</strong> Technology integration that improves portfolio company performance and monitoring</li>
+            <li><strong>Market Access:</strong> Expanded customer base and export opportunities through strategic alliances</li>
+        </ul>
+    </div>
+
+    <!-- Financial Projections -->
+    <div class="section">
+        <h2>Financial Projections & Growth Trajectory</h2>
+        <p>Based on comprehensive market analysis and conservative assumptions, CIL projects strong financial performance across its investment portfolio:</p>
+        
+        <div class="financial-grid">
+            <div class="financial-card">
+                <div class="financial-value">₦150M</div>
+                <div class="financial-label">Year 1 Portfolio Value</div>
+            </div>
+            <div class="financial-card">
+                <div class="financial-value">₦420M</div>
+                <div class="financial-label">Year 3 Portfolio Value</div>
+            </div>
+            <div class="financial-card">
+                <div class="financial-value">32%</div>
+                <div class="financial-label">Average Annual Portfolio ROI</div>
+            </div>
+            <div class="financial-card">
+                <div class="financial-value">15-20</div>
+                <div class="financial-label">SMEs Managed Annually by Year 3</div>
+            </div>
+        </div>
+        
+        <h3>Three-Year Growth Roadmap</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Year 1 (2025-2026)</div>
+                <p><strong>Foundation & Portfolio Building:</strong> Establish 8-10 SME partnerships across 3 key sectors. Target portfolio value of ₦150 million with focus on operational excellence and systems development. Secure 2 strategic institutional partnerships.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Year 2 (2026-2027)</div>
+                <p><strong>Expansion & Optimization:</strong> Scale to 12-15 SMEs across all 5 sectors. Expand geographic presence to 3 states. Target portfolio value of ₦280 million with optimized operational frameworks. Launch dedicated diaspora investment platform.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Year 3 (2027-2028)</div>
+                <p><strong>Scale & Market Leadership:</strong> Manage 15-20 SMEs with national presence across 6+ states. Target portfolio value of ₦420 million. Establish CIL as a recognized leader in SME investment management. Expand partnership network to international development agencies.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Invest Now -->
+    <div class="section">
+        <h2>Why Invest with CIL Now?</h2>
+        
+        <h3>Market Timing & Economic Tailwinds</h3>
+        <p>Several macroeconomic factors create an ideal environment for SME investment in Nigeria:</p>
+        <ul>
+            <li><strong>Government Support:</strong> Multiple initiatives supporting SME growth including the MSME Survival Fund and export expansion programs</li>
+            <li><strong>Consumer Demographics:</strong> Growing middle class with increasing purchasing power and consumption patterns</li>
+            <li><strong>Infrastructure Development:</strong> Ongoing improvements in transportation, power, and digital infrastructure enhancing business operations</li>
+            <li><strong>Import Substitution:</strong> Government policies favoring local production over imports across multiple sectors</li>
+            <li><strong>Diaspora Engagement:</strong> Increased interest from Nigerians abroad in investing in home country ventures with professional oversight</li>
+        </ul>
+        
+        <h3>Competitive Advantages</h3>
+        <p>CIL's unique operating model provides distinct advantages over traditional investment approaches:</p>
+        <ul>
+            <li><strong>Hands-On Management:</strong> Active oversight rather than passive investment</li>
+            <li><strong>Sector Expertise:</strong> Deep knowledge of local market dynamics and operational challenges</li>
+            <li><strong>Structured Systems:</strong> Proven frameworks for financial control, reporting, and performance management</li>
+            <li><strong>Risk Mitigation:</strong> Diversified portfolio approach with asset-backed security</li>
+            <li><strong>Impact Measurement:</strong> Clear metrics for both financial returns and social impact</li>
+            <li><strong>Partnership Network:</strong> Strategic alliances that enhance deal flow and reduce investment risk</li>
+        </ul>
+    </div>
+
+    <!-- Risk Management -->
+    <div class="section">
+        <h2>Risk Management Framework</h2>
+        <p>CIL employs a comprehensive risk management strategy to protect investor capital while maximizing returns:</p>
+        
+        <h3>Investment Risks & Mitigation Strategies</h3>
+        <ul>
+            <li><strong>Market Risk:</strong> Diversified portfolio across non-correlated sectors reduces exposure to sector-specific downturns</li>
+            <li><strong>Operational Risk:</strong> Weekly monitoring, standardized processes, and experienced management oversight</li>
+            <li><strong>Financial Risk:</strong> Asset-backed investments, revenue-sharing models, and controlled capital deployment</li>
+            <li><strong>Regulatory Risk:</strong> Compliance monitoring and legal review for all investments</li>
+            <li><strong>Exit Risk:</strong> Structured exit timelines with multiple exit strategy options</li>
+            <li><strong>Partnership Risk:</strong> Clear agreements with defined roles, responsibilities, and dispute resolution mechanisms</li>
+        </ul>
+    </div>
+
+    <!-- The Team -->
+    <div class="section">
+        <h2>Leadership Team</h2>
+        <p>CIL is led by experienced professionals with complementary skills in business development, operations, and financial management:</p>
+        
+        <h3>Mr. Aliu Ibrahim Garuba - Founder & CEO</h3>
+        <p>Entrepreneur with 8+ years of experience in business development and SME management. Deep understanding of Nigerian market dynamics and a proven track record of building sustainable enterprises.</p>
+        
+        <h3>Mr. Adedayo A. Adeshipe - Managing Director</h3>
+        <p>Operations specialist with expertise in process optimization and business scaling. Strong background in agricultural ventures and manufacturing operations.</p>
+        
+        <h3>Mr. Sunday E. Okwuoha - Administrative Secretary</h3>
+        <p>Administrative and compliance expert ensuring all operations adhere to regulatory requirements and internal control standards.</p>
+        
+        <p><strong>Extended Team:</strong> Seven additional associates focused on operations, business development, project supervision, and partnership coordination.</p>
+        
+        <div class="highlight-box">
+            <strong>Advisory Board:</strong> CIL is establishing an advisory board comprising industry experts from banking, agriculture, manufacturing, and diaspora engagement to provide strategic guidance and enhance governance.
+        </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="contact-info">
+        <h3>For Investment Inquiries</h3>
+        <p><strong>Collaborative Investment Ltd</strong><br>
+        212 Ijegun Road, Ikotun, Lagos<br>
+        Email: collaborativeinvestmentttd@gmail.com<br>
+        Phone: +234 707 826 9765, +234 907 137 9319</p>
+        
+        <p><strong>Investment Process:</strong> Interested investors will receive a detailed investment memorandum, followed by a management presentation, due diligence process, and finalized investment agreement.</p>
+        
+        <p><strong>Partnership Opportunities:</strong> Financial institutions, development agencies, and strategic partners are invited to discuss collaboration frameworks that align with our expansion strategy.</p>
+    </div>
+
+    <div class="footer">
+        <p>This document is confidential and intended only for qualified investors.</p>
+        <p>© 2025 Collaborative Investment Ltd. All Rights Reserved.</p>
+    </div>
+
+</body>
+</html>
