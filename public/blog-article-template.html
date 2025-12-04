@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Block Manufacturing Delivers 45% ROI in Nigeria - Collaborative Investment Ltd</title>
+    <meta name="description" content="Discover how commercial block production with professional management can yield consistent 45% annual returns in Nigeria's construction boom.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5d1a;
+            --secondary: #ffd700;
+            --light: #f8f9fa;
+            --dark: #333;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo-img {
+            height: 50px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-bottom a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-bottom a:hover {
+            color: white;
+        }
+        
+        /* Article-specific styles */
+        .article-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5530 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,50 1000,100 0,100"/></svg>');
+            background-size: cover;
+        }
+        
+        .article-category {
+            background: var(--secondary);
+            color: var(--primary);
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .article-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            position: relative;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        
+        .article-hero-image {
+            width: 100%;
+            max-width: 900px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 2rem auto 0;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+        
+        .article-summary {
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .summary-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .key-takeaways {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .takeaway-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .takeaway-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-body {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        .article-body h2 {
+            color: var(--primary);
+            margin: 3rem 0 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .article-body h3 {
+            color: var(--dark);
+            margin: 2rem 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .article-body li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff0cc 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2.5rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .insight-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5530 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .article-footer {
+            border-top: 2px solid var(--light-gray);
+            padding-top: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .share-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .share-btn {
+            background: var(--light);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .share-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .author-section {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* Investment Highlight Styles */
+        .investment-highlight {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .roi-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .feature-item::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem auto;
+            max-width: 1200px;
+        }
+        
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        
+        /* Topics Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .topic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            color: inherit;
+        }
+        
+        .topic-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .topic-count {
+            display: inline-block;
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .key-takeaways {
+                grid-template-columns: 1fr;
+            }
+            
+            .share-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .author-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="container">
+            <div class="article-category">💰 INVESTMENT & 🏭 MANUFACTURING</div>
+            <h1 class="article-title">Why Block Manufacturing Delivers 45% ROI in Nigeria</h1>
+            <div class="article-meta">
+                <span>📅 December 10, 2024</span>
+                <span>⏱ 7 min read</span>
+                <span>👁 1,543 views</span>
+                <span>👨‍💼 By CIL Investment Team</span>
+            </div>
+            <img src="/img/blog-block-manufacturing.jpg" alt="Modern block manufacturing facility with quality products" class="article-hero-image">
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="article-content">
+        <div class="container">
+            
+            <!-- Article Summary -->
+            <div class="article-summary">
+                <h3 class="summary-title">📈 Executive Summary</h3>
+                <p><strong>Commercial block production with professional management can yield consistent 45% annual returns in Nigeria, driven by the construction boom, efficient operations, and strategic market positioning.</strong></p>
+                
+                <div class="key-takeaways">
+                    <div class="takeaway-item">
+                        <div class="takeaway-icon">📊</div>
+                        <h4>Market Analysis</h4>
+                        <p>Nigeria's construction market needs 2 million housing units annually with 15% growth rate</p>
+                    </div>
+                    <div class="takeaway-item">
+                        <div class="takeaway-icon">💰</div>
+                        <h4>ROI Potential</h4>
+                        <p>45% average annual returns with proper management systems</p>
+                    </div>
+                    <div class="takeaway-item">
+                        <div class="takeaway-icon">🛡️</div>
+                        <h4>Risk Management</h4>
+                        <p>Quality control and market diversification minimize investment risks</p>
+                    </div>
+                    <div class="takeaway-item">
+                        <div class="takeaway-icon">📈</div>
+                        <h4>Scalability</h4>
+                        <p>From small manual operations to automated 10,000+ blocks daily</p>
+                    </div>
+                </div>
+                
+                <div class="investment-highlight">
+                    <strong>Investment Opportunity:</strong> ₦8M Block Plant 
+                    <span class="roi-badge">45% ROI</span>
+                </div>
+                
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap; font-size: 0.9rem; color: var(--gray);">
+                    <div><strong>Investment Range:</strong> ₦3M - ₦15M</div>
+                    <div><strong>Payback Period:</strong> 12-18 months</div>
+                    <div><strong>Management:</strong> Professional oversight included</div>
+                </div>
+            </div>
+
+            <!-- Article Body -->
+            <div class="article-body">
+                
+                <h2>🇳🇬 The Nigerian Construction Opportunity</h2>
+                <p>Nigeria's block manufacturing industry represents one of the most stable and profitable manufacturing investments in West Africa. With a housing deficit of over 17 million units and rapid urbanization, the demand for quality building materials continues to outstrip local production capacity.</p>
+                
+                <p>Current estimates show Nigeria needs approximately 2 million new housing units annually, while current production meets only 30% of this demand. This supply gap creates significant opportunities for well-managed block operations to capture market share and generate substantial returns.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">₦2.3T</div>
+                        <div class="stat-label">Construction Market</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15%</div>
+                        <div class="stat-label">Annual Growth</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">45%</div>
+                        <div class="stat-label">Average ROI</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">17M</div>
+                        <div class="stat-label">Housing Deficit</div>
+                    </div>
+                </div>
+
+                <h2>🏭 Operational Excellence in Block Manufacturing</h2>
+                <p>The key to achieving consistent 45% returns lies in operational efficiency and professional management. Our managed block operations implement several critical success factors:</p>
+                
+                <h3>Quality Control Systems</h3>
+                <p>Implementing strict quality control protocols ensures block strength meets NIS standards (3.5N/mm²), commanding premium pricing in the market. This includes material testing, production monitoring, and final product inspection.</p>
+                
+                <h3>Raw Material Optimization</h3>
+                <p>Raw materials constitute 60% of block production costs. Through strategic sourcing and material formulation, we achieve optimal cement-sand ratios while maintaining quality standards.</p>
+
+                <div class="insight-box">
+                    <div class="insight-title">💡 Professional Insight</div>
+                    <p>"The difference between profitable and struggling block operations often comes down to production efficiency and market positioning, not just capital investment. Professional oversight can transform a 25% ROI operation into a 45% ROI business through process optimization and strategic pricing."</p>
+                </div>
+
+                <h2>💰 Financial Model and Returns</h2>
+                <p>Our structured block manufacturing investment model demonstrates consistent profitability through multiple revenue streams and cost controls:</p>
+                
+                <h3>Revenue Streams</h3>
+                <ul>
+                    <li><strong>Standard Blocks:</strong> Consistent demand from residential construction</li>
+                    <li><strong>Hollow Blocks:</strong> Premium pricing for commercial projects</li>
+                    <li><strong>Interlocking Blocks:</strong> Growing market for modern construction</li>
+                    <li><strong>Custom Orders:</strong> Specialized products for specific projects</li>
+                </ul>
+                
+                <h3>Cost Management</h3>
+                <ul>
+                    <li>Bulk material procurement reduces costs by 20-25%</li>
+                    <li>Energy-efficient production minimizes operational overhead</li>
+                    <li>Strategic location selection reduces transportation costs</li>
+                    <li>Preventative maintenance extends equipment lifespan</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3 class="cta-title">Ready to Invest in Block Manufacturing?</h3>
+                    <p style="margin-bottom: 2rem; opacity: 0.9;">Our team can help you establish or scale a profitable block manufacturing operation with professional management and proven systems.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="/investment#block-manufacturing" class="btn btn-primary" style="background: var(--secondary); color: var(--primary);">View Investment Details</a>
+                        <a href="/contact?interest=block-manufacturing" class="btn btn-secondary">Schedule Consultation</a>
+                    </div>
+                </div>
+
+                <h2>📊 Case Study: 5,000-Blocks Daily Operation</h2>
+                <p>A recent CIL-managed project demonstrates the profitability potential:</p>
+                
+                <h3>Investment Breakdown</h3>
+                <ul>
+                    <li><strong>Initial Investment:</strong> ₦8,000,000</li>
+                    <li><strong>Infrastructure:</strong> ₦3,500,000 (factory setup, equipment)</li>
+                    <li><strong>Operating Capital:</strong> ₦4,500,000 (materials, labor, utilities)</li>
+                </ul>
+                
+                <h3>Annual Performance</h3>
+                <ul>
+                    <li><strong>Revenue:</strong> ₦14,600,000 (block sales)</li>
+                    <li><strong>Operating Costs:</strong> ₦8,760,000</li>
+                    <li><strong>Net Profit:</strong> ₦5,840,000 (73% ROI)</li>
+                    <li><strong>Management Fee:</strong> ₦1,800,000</li>
+                    <li><strong>Investor Return:</strong> ₦4,040,000 (50.5% net ROI)</li>
+                </ul>
+
+                <h2>🔍 Risk Mitigation Strategies</h2>
+                <p>While block manufacturing offers attractive returns, successful operations require comprehensive risk management:</p>
+                
+                <h3>Quality Assurance</h3>
+                <p>Regular material testing, production monitoring, and final product inspection ensure consistent quality that commands premium pricing and builds customer loyalty.</p>
+                
+                <h3>Market Diversification</h3>
+                <p>Maintaining multiple sales channels including direct contractors, retail distributors, and institutional projects ensures consistent revenue despite market fluctuations.</p>
+                
+                <h3>Raw Material Hedging</h3>
+                <p>Strategic purchasing during favorable market conditions and maintaining relationships with multiple suppliers locks in favorable material prices.</p>
+
+                <h2>🎯 Conclusion: The Path to 45% Returns</h2>
+                <p>Block manufacturing in Nigeria represents a proven investment opportunity with consistent returns when managed professionally. The combination of growing construction demand, operational efficiency, and multiple revenue streams creates the foundation for 45% annual returns.</p>
+                
+                <p>Successful block manufacturing investments require more than capital—they demand expertise in operations, market positioning, and quality management. Through CIL's structured approach, investors can participate in this lucrative sector with professional oversight and transparent reporting.</p>
+
+                <!-- Author Section -->
+                <div class="author-section">
+                    <div class="author-avatar">👨‍💼</div>
+                    <div class="author-info">
+                        <h4>Written by CIL Investment Team</h4>
+                        <p>Our investment team combines 15+ years of manufacturing expertise with proven business management systems to deliver consistent returns across multiple sectors including construction materials, agriculture, and renewable energy.</p>
+                        <a href="/about#team" style="color: var(--primary); font-weight: 600;">Meet Our Team →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article Footer -->
+            <div class="article-footer">
+                <div class="share-section">
+                    <div>
+                        <strong>Share this insight:</strong>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn" aria-label="Share on Facebook">📘</a>
+                            <a href="#" class="share-btn" aria-label="Share on Twitter">🐦</a>
+                            <a href="#" class="share-btn" aria-label="Share on LinkedIn">💼</a>
+                            <a href="https://wa.me/?text=Check%20out%20this%20block%20manufacturing%20investment%20article%20from%20Collaborative%20Investment%20Ltd" class="share-btn" aria-label="Share on WhatsApp">💬</a>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="/blog" class="btn btn-secondary">← Back to Blog</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="section" style="background: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Continue Your Investment Journey</h2>
+                <p>More insights on manufacturing and business investments</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Poultry Farming: 35% ROI</h3>
+                    <p>How structured poultry operations deliver consistent returns in Nigeria's growing agricultural sector.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
+                        🌱 AGRICULTURE • 5 min read
+                    </div>
+                    <a href="/blog/poultry-farming-investment" class="btn btn-primary" style="margin-top: 1rem;">Read Article</a>
+                </div>
+
+                <div class="service-card">
+                    <h3>Solar Energy Investments</h3>
+                    <p>Capitalizing on Nigeria's renewable energy transition with 40% return opportunities.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
+                        ☀️ SOLAR ENERGY • 6 min read
+                    </div>
+                    <a href="/blog/solar-energy-investment" class="btn btn-primary" style="margin-top: 1rem;">Read Article</a>
+                </div>
+
+                <div class="service-card">
+                    <h3>Diaspora Investment Guide</h3>
+                    <p>Secure investment strategies for Nigerians abroad with transparent management.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
+                        🌍 DIASPORA • 8 min read
+                    </div>
+                    <a href="/blog/diaspora-investment-guide" class="btn btn-primary" style="margin-top: 1rem;">Read Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Models Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Investment Partnership Models</h2>
+                <p>Flexible structures designed for different investor preferences</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Asset-Backed Financing</h3>
+                    <p><strong>Secure investments backed by tangible business assets</strong></p>
+                    <p>Perfect for risk-averse investors who want guaranteed protection with 15-25% annual returns.</p>
+                    <div style="margin-top: 1rem;">
+                        <strong>Minimum Investment:</strong> ₦5,000,000
+                    </div>
+                    <a href="/investment#asset-backed" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Profit-Sharing Partnerships</h3>
+                    <p><strong>Become a strategic partner in operating ventures</strong></p>
+                    <p>Earn percentage of real monthly profits with full financial transparency and detailed reporting.</p>
+                    <div style="margin-top: 1rem;">
+                        <strong>Minimum Investment:</strong> ₦3,000,000
+                    </div>
+                    <a href="/investment#profit-sharing" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Project-Specific Funding</h3>
+                    <p><strong>Targeted expansion projects with clear timelines</strong></p>
+                    <p>Invest in specific ventures with defined costs, monitoring structures, and exit plans.</p>
+                    <div style="margin-top: 1rem;">
+                        <strong>Project-based Investment</strong>
+                    </div>
+                    <a href="/investment#project-funding" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="container">
+        <div class="newsletter-section">
+            <div class="newsletter-content">
+                <h2 style="color: white; margin-bottom: 1rem;">Get Investment Opportunities First</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 1rem;">Be the first to know about new investment opportunities, exclusive insights, and market analysis.</p>
+                
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary" style="background: white; color: #667eea;">Subscribe to Updates</button>
+                </form>
+                
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-top: 1rem;">
+                    Weekly opportunities • No spam • Unsubscribe anytime
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Topics -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore Investment Categories</h2>
+                <p>Deep dive into our specialized business sectors</p>
+            </div>
+
+            <div class="topics-grid">
+                <a href="/blog/category/agriculture" class="topic-card">
+                    <div class="topic-icon">🌱</div>
+                    <h3>Agriculture & Livestock</h3>
+                    <p>Poultry, fish farming, piggery, and modern farming techniques with 25-40% ROI potential</p>
+                    <span class="topic-count">8 Articles</span>
+                </a>
+
+                <a href="/blog/category/manufacturing" class="topic-card">
+                    <div class="topic-icon">🏭</div>
+                    <h3>Construction & Manufacturing</h3>
+                    <p>Block production, machine fabrication, and industrial development with 35-45% returns</p>
+                    <span class="topic-count">6 Articles</span>
+                </a>
+
+                <a href="/blog/category/solar" class="topic-card">
+                    <div class="topic-icon">☀️</div>
+                    <h3>Solar Energy Solutions</h3>
+                    <p>Renewable energy investments, equipment production, and installation services</p>
+                    <span class="topic-count">5 Articles</span>
+                </a>
+
+                <a href="/blog/category/furniture" class="topic-card">
+                    <div class="topic-icon">🪑</div>
+                    <h3>Furniture & Upholstery</h3>
+                    <p>Custom furniture manufacturing, premium materials, and interior design market</p>
+                    <span class="topic-count">4 Articles</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="text-align: center;">
+        <div class="container">
+            <h2>Ready to Invest with Professional Management?</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Join our growing portfolio of investors enjoying consistent returns across multiple business sectors.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="/investment" class="btn btn-primary">View Investment Opportunities</a>
+                <a href="/contact" class="btn btn-secondary">Schedule Consultation</a>
+                <a href="https://wa.me/2348129978419" class="btn btn-whatsapp">WhatsApp Our Team</a>
+            </div>
+            
+            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">35-45%</div>
+                    <div style="font-size: 0.9rem; color: var(--gray);">Average Annual Returns</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">₦50M+</div>
+                    <div style="font-size: 0.9rem; color: var(--gray);">Assets Under Management</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">89%</div>
+                    <div style="font-size: 0.9rem; color: var(--gray);">Client Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Collaborative Investment Ltd</h3>
+                    <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">📘</a>
+                        <a href="https://x.com/Colainveltd" aria-label="Twitter" target="_blank">🐦</a>
+                        <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">💬</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/services">Our Services</a></li>
+                        <li><a href="/shop-categories">Shop Products</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
+                        <li><a href="/investment">Investment</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Blog Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="/blog/category/investment">Investment Guides</a></li>
+                        <li><a href="/blog/category/agriculture">Agriculture</a></li>
+                        <li><a href="/blog/category/business">Business Management</a></li>
+                        <li><a href="/blog/category/manufacturing">Manufacturing</a></li>
+                        <li><a href="/blog/category/diaspora">Diaspora Investing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📍 212 Ijegun Road, Ikotun, Lagos</p>
+                    <p>📧 collaborativeinvestmentltd@gmail.com</p>
+                    <p>📞 <a href="tel:+2348129978419">+234 812 997 8419</a></p>
+                    <p>📞 <a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                    <p>🕒 Mon-Fri: 9AM-5PM, Sat: 10AM-2PM</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Collaborative Investment Ltd. All rights reserved.</p>
+                <p>Building Nigeria's Business Future</p>
+                <p style="margin-top: 1rem;">
+                    <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+                    <a href="/terms" style="color: rgba(255,255,255,0.7);">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reading time estimation and view counter simulation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Estimate reading time
+            const articleText = document.querySelector('.article-body').textContent;
+            const wordCount = articleText.split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / 200); // 200 words per minute
+            
+            // Update reading time in meta (if element exists)
+            const readingTimeElement = document.querySelector('.article-meta span:nth-child(2)');
+            if (readingTimeElement) {
+                readingTimeElement.textContent = `⏱ ${readingTime} min read`;
+            }
+            
+            // Simulate view count (in a real implementation, this would come from a backend)
+            const viewCount = Math.floor(Math.random() * 500) + 1500;
+            const viewCountElement = document.querySelector('.article-meta span:nth-child(3)');
+            if (viewCountElement) {
+                viewCountElement.textContent = `👁 ${viewCount.toLocaleString()} views`;
+            }
+            
+            // Newsletter form handling
+            document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                const button = this.querySelector('button');
+                const originalText = button.textContent;
+                
+                // Simulate subscription
+                button.textContent = 'Subscribing...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.textContent = 'Subscribed!';
+                    this.reset();
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                }, 1000);
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.navbar')) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+/* order-tracking.css - page-specific styles (keeps small footprint) */
+
+.order-tracking-main {
+  padding: 2rem 0;
+  background: #fff;
+  color: #222;
+}
+
+.track-wrapper .track-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+.track-header .lead {
+  color: #556;
+  margin-top: .5rem;
+}
+
+/* Track form */
+.track-panel {
+  max-width: 900px;
+  margin: 0 auto 1.25rem;
+  background: var(--card-bg, #fbfbfb);
+  border: 1px solid var(--light-gray, #eee);
+  padding: 1rem;
+  border-radius: 8px;
+}
+.track-form .form-row {
+  margin-bottom: .75rem;
+}
+.track-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: .25rem;
+  color: #223;
+}
+.track-form input {
+  width: 100%;
+  padding: .6rem .75rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* two-column row */
+.track-form .two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
+}
+
+/* actions */
+.form-actions {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  margin-top: .5rem;
+}
+.btn { padding: .6rem .9rem; border-radius: 6px; border: none; cursor: pointer; }
+.btn-primary { background: #1a5276; color: #fff; }
+.btn-secondary { background: #e9ecef; color: #111; }
+
+/* small helper */
+.form-message { margin-top: .75rem; color: #c33; }
+
+/* status alert */
+.status-update-alert {
+  max-width: 900px;
+  margin: .75rem auto;
+  padding: .75rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg,#e8f5e9,#f1f8e9);
+  border-left: 4px solid #2ecc71;
+}
+.status-update-alert .alert-close { background: transparent; border: none; font-size: 1.1rem; }
+
+/* loading */
+.loading-state {
+  max-width: 900px;
+  margin: 1rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+.loading-spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 4px solid rgba(0,0,0,0.08);
+  border-top-color: #1a5276;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: .5rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* error */
+.error-state { max-width: 900px; margin: 1rem auto; padding: 1rem; background: #fff5f5; border: 1px solid #ffd6d6; border-radius: 8px; color:#a00; }
+
+/* order content */
+.order-content { max-width: 1100px; margin: 1rem auto; padding: 1rem; background: #fff; border-radius: 8px; border: 1px solid #eee; }
+.order-header { display:flex; justify-content:space-between; gap:1rem; align-items:center; margin-bottom:1rem; }
+.order-number { font-size:1.1rem; font-weight:700; }
+.status-badge { padding:.4rem .6rem; border-radius:999px; font-weight:700; color:#fff; display:inline-flex; align-items:center; gap:.5rem; font-size:.9rem; }
+.status-pending { background: #f39c12; }
+.status-processing { background: #3498db; }
+.status-shipped { background: #7f8c8d; }
+.status-delivered { background: #27ae60; }
+.status-cancelled { background: #e74c3c; }
+
+/* progress */
+.order-progress-bar { height: 8px; background: #f0f0f0; border-radius: 6px; overflow:hidden; margin-bottom:1rem; }
+.progress-fill { height:100%; background: linear-gradient(90deg,#1a5276,#d4af37); transition: width .5s ease; }
+
+/* timeline */
+.timeline { display:flex; flex-direction:column; gap:.6rem; }
+.timeline-item { display:flex; gap:.75rem; align-items:flex-start; }
+.timeline-dot { width:12px; height:12px; border-radius:50%; background:#dcdcdc; margin-top:.45rem; flex:0 0 12px; }
+.timeline-item.completed .timeline-dot { background:#27ae60; }
+.timeline-item.active .timeline-dot { background:#1a5276; }
+.timeline-content { background:#fafafa; padding:.6rem .8rem; border-radius:6px; border:1px solid #eee; }
+
+/* items */
+.items-list { margin: .5rem 0 1rem; }
+.item-row { display:flex; justify-content:space-between; gap:.5rem; padding:.5rem 0; border-bottom:1px dashed #eee; }
+.total-row { display:flex; justify-content:space-between; padding: .8rem 0; font-weight:700; }
+
+/* responsive */
+@media (max-width:900px) {
+  .track-form .two-col { grid-template-columns: 1fr; }
+  .order-header { flex-direction:column; align-items:flex-start; gap:.5rem; }
+}

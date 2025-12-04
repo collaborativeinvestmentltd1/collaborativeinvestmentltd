@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Furniture Collection - Collaborative Investment Ltd</title>
+    
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">>
+    <link rel="stylesheet" href="/css/furniture.css">
+    
+    <style>
+        /* Furniture Page Specific Styles */
+        :root {
+            --furniture-primary: #8B4513;  /* Saddle Brown */
+            --furniture-secondary: #D2691E; /* Chocolate */
+            --furniture-accent: #A0522D;   /* Sienna */
+            --furniture-light: #F5DEB3;    /* Wheat */
+            --furniture-dark: #654321;     /* Dark Brown */
+        }
+        
+        .furniture-header {
+            background: linear-gradient(135deg, var(--furniture-primary) 0%, var(--furniture-secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .furniture-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .furniture-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .back-link:hover {
+            color: white;
+        }
+        
+        .furniture-section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--furniture-primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            color: var(--furniture-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--furniture-accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-details {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .product-details p {
+            margin: 0.3rem 0;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--furniture-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary:hover {
+            background: var(--furniture-accent);
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        .stock-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #27ae60;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .stock-badge.low-stock {
+            background: #f39c12;
+        }
+        
+        .stock-badge.out-of-stock {
+            background: #e74c3c;
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .category-filter {
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        
+        .product-count {
+            text-align: center;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Category Navigation */
+        .category-nav {
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--furniture-light);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .category-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            scrollbar-width: none;
+        }
+        
+        .category-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-item {
+            white-space: nowrap;
+            padding: 0.8rem 1.5rem;
+            background: var(--furniture-light);
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--furniture-dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .category-item.active,
+        .category-item:hover {
+            background: var(--furniture-primary);
+            color: white;
+            border-color: var(--furniture-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .filter-controls {
+                flex-direction: column;
+            }
+            
+            .search-box, .category-filter {
+                min-width: 100%;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .furniture-header h1 {
+                font-size: 2rem;
+            }
+            
+            .category-scroll {
+                gap: 0.5rem;
+            }
+            
+            .category-item {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Category Header -->
+        <section class="furniture-header">
+            <div class="container">
+                <a href="/shop-categories" class="back-link">← Back to Categories</a>
+                <h1>Premium Furniture Collection</h1>
+                <p>Discover handcrafted furniture pieces for every space - from office elegance to outdoor comfort</p>
+            </div>
+        </section>
+
+        <!-- Category Navigation -->
+        <section class="category-nav">
+            <div class="container">
+                <div class="category-scroll">
+                    <button class="category-item active" data-category="all">All Furniture</button>
+                    <button class="category-item" data-category="office">🏢 Office</button>
+                    <button class="category-item" data-category="seating">🪑 Seating</button>
+                    <button class="category-item" data-category="living">🛋️ Living Room</button>
+                    <button class="category-item" data-category="dining">🍽️ Dining</button>
+                    <button class="category-item" data-category="bedroom">🛏️ Bedroom</button>
+                    <button class="category-item" data-category="commercial">🏪 Commercial</button>
+                    <button class="category-item" data-category="outdoor">🌳 Outdoor</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Furniture Products Section -->
+        <section class="furniture-section">
+            <div class="container">
+                <h2 class="section-title">Premium Furniture Collection</h2>
+                <p class="section-subtitle">Handcrafted pieces designed for comfort, style, and durability</p>
+                
+                <!-- Filter Controls -->
+                <div class="filter-controls">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="product-search" placeholder="Search furniture products...">
+                    </div>
+                    <select class="category-filter" id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="office">Office Furniture</option>
+                        <option value="seating">Seating & Sofas</option>
+                        <option value="living">Living Room</option>
+                        <option value="dining">Dining Sets</option>
+                        <option value="bedroom">Bedroom Furniture</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="outdoor">Outdoor Furniture</option>
+                    </select>
+                </div>
+                
+                <!-- Product Count -->
+                <div class="product-count" id="product-count">Loading furniture products...</div>
+                
+                <!-- Products Grid -->
+                <div class="products-grid" id="products-container">
+                    <!-- Products will be loaded by JavaScript -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>Collaborative Investment Ltd</h3>
+                    <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+                    <div class="social-links">
+                        <!-- Facebook -->
+                        <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                            </svg>
+                        </a>
+
+                        <!-- X / Twitter -->
+                        <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                            </svg>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                                <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.980.944.407 1.678.650 2.250.832.945.300 1.806.257 2.484.156.758-.112 2.340-.957 2.674-1.880.330-.924.330-1.715.230-1.880-.099-.165-.363-.264-.758-.462z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/services">Our Services</a></li>
+                        <li><a href="/shop-categories">Shop Categories</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
+                        <li><a href="/investment">Investment</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Shop Categories -->
+                <div class="footer-section">
+                    <h3>Shop Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="/shop-agriculture">Agriculture & Livestock</a></li>
+                        <li><a href="/shop-construction">Construction & Blocks</a></li>
+                        <li><a href="/shop-machinery">Machinery & Equipment</a></li>
+                        <li><a href="/shop-solar">Solar Energy</a></li>
+                        <li><a href="/shop-furniture">Furniture & Upholstery</a></li>
+                        <li><a href="/shop-all">All Products</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>212 Ijegun Road, Ikotun, Lagos</p>
+                    <p>collaborativeinvestmentltd@gmail.com</p>
+                    <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+                    <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                    <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+                <p>Building Nigeria's Business Future</p>
+
+                <p style="margin-top: 1rem;">
+                    <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+                    <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+                    <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // FURNITURE PRODUCTS DATA
+        const furnitureProducts = [
+            // Office Furniture
+            {
+                id: 'furn-office-001',
+                name: 'Mahogany Executive Desk',
+                category: 'office',
+                price: 450000,
+                image: '/img/furniture/executive-desk.jpg',
+                description: 'Solid mahogany executive desk with built-in cable management, leather inlay, and premium hardware.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Solid Mahogany Wood',
+                    features: 'Built-in cable management, leather inlay',
+                    dimensions: '180cm × 90cm × 75cm'
+                },
+                tags: ['office', 'desk', 'executive', 'mahogany']
+            },
+            {
+                id: 'furn-office-002',
+                name: 'Modern Conference Table',
+                category: 'office',
+                price: 680000,
+                image: '/img/furniture/conference-table.jpg',
+                description: 'Elegant 10-seater conference table with tempered glass top and polished metal base.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Tempered Glass & Metal',
+                    capacity: '10-12 seats',
+                    features: 'Professional design, durable construction'
+                },
+                tags: ['office', 'conference', 'table', 'glass']
+            },
+            {
+                id: 'furn-office-003',
+                name: 'Premium Ergonomic Chair',
+                category: 'office',
+                price: 185000,
+                image: '/img/furniture/ergonomic-office-chair.jpg',
+                description: 'High-back executive chair with advanced lumbar support, adjustable arms, and premium mesh fabric.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Premium Mesh & Leather',
+                    features: 'Lumbar support, adjustable arms',
+                    comfort: 'Ergonomic design'
+                },
+                tags: ['office', 'chair', 'ergonomic', 'executive']
+            },
+
+            // Seating & Sofas
+            {
+                id: 'furn-seating-001',
+                name: 'Luxury Single Seater',
+                category: 'seating',
+                price: 120000,
+                image: '/img/furniture/single-seater.jpg',
+                description: 'Premium single seater chair with high-density foam and premium fabric upholstery.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Premium Fabric',
+                    comfort: 'High-density foam',
+                    design: 'Modern compact design'
+                },
+                tags: ['seating', 'single', 'fabric', 'modern']
+            },
+            {
+                id: 'furn-seating-002',
+                name: 'Modern Two Seater Sofa',
+                category: 'seating',
+                price: 280000,
+                image: '/img/furniture/two-seater.jpg',
+                description: 'Contemporary two-seater sofa with wooden legs and premium cushioning for optimal comfort.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Premium Fabric',
+                    capacity: '2 seats',
+                    features: 'Wooden legs, premium cushioning'
+                },
+                tags: ['seating', 'sofa', 'two-seater', 'modern']
+            },
+            {
+                id: 'furn-seating-003',
+                name: 'Family Three Seater Sofa',
+                category: 'seating',
+                price: 420000,
+                image: '/img/furniture/three-seater.jpg',
+                description: 'Spacious three-seater sofa with deep seating and premium upholstery for family comfort.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Premium Upholstery',
+                    capacity: '3 seats',
+                    comfort: 'Deep seating design'
+                },
+                tags: ['seating', 'sofa', 'three-seater', 'family']
+            },
+            {
+                id: 'furn-seating-004',
+                name: 'Premium Relaxing Armchair',
+                category: 'seating',
+                price: 195000,
+                image: '/img/furniture/relaxing-chair.jpg',
+                description: 'Ultra-comfortable relaxing chair with reclining feature and premium leather upholstery.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Premium Leather',
+                    features: 'Reclining, footrest included',
+                    comfort: 'Ultra-comfort design'
+                },
+                tags: ['seating', 'armchair', 'reclining', 'leather']
+            },
+
+            // Living Room
+            {
+                id: 'furn-living-001',
+                name: '5-Piece Living Room Set',
+                category: 'living',
+                price: 850000,
+                image: '/img/furniture/living-room-full-set.jpg',
+                description: 'Complete living room package including 3-seater, 2-seater, center table, and 2 side tables.',
+                stock: 'In Stock',
+                details: {
+                    pieces: '5 pieces total',
+                    includes: '3-seater, 2-seater, center table, 2 side tables',
+                    style: 'Modern living room set'
+                },
+                tags: ['living', 'set', 'complete', 'modern']
+            },
+
+            // Dining
+            {
+                id: 'furn-dining-001',
+                name: 'Compact Dining Table',
+                category: 'dining',
+                price: 180000,
+                image: '/img/furniture/single-dining-table.jpg',
+                description: 'Space-saving single dining table perfect for small spaces or breakfast nooks.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Solid Wood',
+                    capacity: '4-6 seats',
+                    design: 'Space-saving compact design'
+                },
+                tags: ['dining', 'table', 'compact', 'wood']
+            },
+            {
+                id: 'furn-dining-002',
+                name: '8-Seater Dining Set',
+                category: 'dining',
+                price: 620000,
+                image: '/img/furniture/full-dining-set.jpg',
+                description: 'Complete dining set with extendable table and 8 upholstered chairs for family dining.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Wood & Fabric',
+                    capacity: '8 seats (extends to 10)',
+                    includes: 'Table + 8 chairs'
+                },
+                tags: ['dining', 'set', '8-seater', 'extendable']
+            },
+
+            // Bedroom
+            {
+                id: 'furn-bedroom-001',
+                name: 'King Size Bedroom Suite',
+                category: 'bedroom',
+                price: 950000,
+                image: '/img/furniture/king-bed-set.jpg',
+                description: 'Complete bedroom set including king bed, side tables, wardrobe, and dressing table.',
+                stock: 'In Stock',
+                details: {
+                    pieces: 'Complete bedroom suite',
+                    includes: 'King bed, side tables, wardrobe, dressing table',
+                    size: 'King size bed'
+                },
+                tags: ['bedroom', 'suite', 'king-size', 'complete']
+            },
+            {
+                id: 'furn-bedroom-002',
+                name: '6-Door Sliding Wardrobe',
+                category: 'bedroom',
+                price: 380000,
+                image: '/img/furniture/wardrobe-collection.jpg',
+                description: 'Spacious sliding door wardrobe with mirror panels, hanging space, and adjustable shelving.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Wood & Glass',
+                    doors: '6 sliding doors',
+                    features: 'Mirror panels, adjustable shelves'
+                },
+                tags: ['bedroom', 'wardrobe', 'storage', 'sliding']
+            },
+
+            // Commercial
+            {
+                id: 'furn-commercial-001',
+                name: 'Hotel Reception Desk',
+                category: 'commercial',
+                price: 1200000,
+                image: '/img/furniture/hotel-reception-desk.jpg',
+                description: 'Professional reception desk with built-in storage, cable management, and durable laminate finish.',
+                stock: 'Made to Order',
+                details: {
+                    material: 'Laminate & Metal',
+                    features: 'Built-in storage, cable management',
+                    use: 'Commercial reception desk'
+                },
+                tags: ['commercial', 'hotel', 'reception', 'desk']
+            },
+            {
+                id: 'furn-commercial-002',
+                name: 'Restaurant Dining Collection',
+                category: 'commercial',
+                price: 2500000,
+                image: '/img/furniture/restaurant-dining-set.jpg',
+                description: 'Complete 20-seater restaurant set with durable tables and stackable chairs for easy storage.',
+                stock: 'Made to Order',
+                details: {
+                    capacity: '20-seater set',
+                    features: 'Durable, stackable chairs',
+                    use: 'Commercial restaurant setup'
+                },
+                tags: ['commercial', 'restaurant', 'dining', 'set']
+            },
+
+            // Outdoor
+            {
+                id: 'furn-outdoor-001',
+                name: 'Teak Outdoor Dining Set',
+                category: 'outdoor',
+                price: 750000,
+                image: '/img/furniture/outdoor-dining-set.jpg',
+                description: '6-seater teak wood dining set with weather-resistant cushions and umbrella hole.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Teak Wood',
+                    capacity: '6 seats',
+                    features: 'Weather-resistant, includes cushions'
+                },
+                tags: ['outdoor', 'dining', 'teak', 'weather-resistant']
+            },
+            {
+                id: 'furn-outdoor-002',
+                name: 'Premium Patio Lounge Set',
+                category: 'outdoor',
+                price: 1100000,
+                image: '/img/furniture/patio-lounge-set.jpg',
+                description: 'Complete patio lounge set with deep seating, coffee table, and weather-proof cushions.',
+                stock: 'In Stock',
+                details: {
+                    material: 'Weather-proof materials',
+                    pieces: 'Complete lounge set',
+                    features: 'Deep seating, weather-proof cushions'
+                },
+                tags: ['outdoor', 'patio', 'lounge', 'set']
+            }
+        ];
+
+        // CART FUNCTIONS
+        function getCart() {
+            try {
+                const cart = localStorage.getItem('cart');
+                return cart ? JSON.parse(cart) : [];
+            } catch (error) {
+                console.error('Error reading cart:', error);
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            try {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                if (typeof window.renderCartDrawer === 'function') {
+                    window.renderCartDrawer();
+                }
+                return true;
+            } catch (error) {
+                console.error('Error saving cart:', error);
+                return false;
+            }
+        }
+
+        function addToCart(product) {
+            console.log('Adding to cart:', product);
+            
+            if (!product || !product.id || !product.name || !product.price) {
+                console.error('Invalid product data:', product);
+                return false;
+            }
+            
+            const cart = getCart();
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+                console.log('Updated existing item quantity:', existingItem.quantity);
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    image: product.image || '/img/logo.jpg',
+                    quantity: 1
+                });
+                console.log('Added new item to cart');
+            }
+            
+            const saved = saveCart(cart);
+            
+            if (saved) {
+                showCartNotification(product.name);
+                return true;
+            }
+            
+            return false;
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartBadge = document.getElementById('cart-count-badge');
+            
+            if (cartBadge) {
+                cartBadge.textContent = totalItems;
+                cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+            
+            return totalItems;
+        }
+
+        function showCartNotification(productName) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.cart-notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.innerHTML = `<span>✓ Added "${productName}" to cart</span>`;
+            
+            // Add styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // PRODUCT DISPLAY FUNCTIONS
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Furniture page loaded');
+            
+            // Initialize cart count
+            updateCartCount();
+            
+            // DOM Elements
+            const productsContainer = document.getElementById('products-container');
+            const searchInput = document.getElementById('product-search');
+            const categoryFilter = document.getElementById('category-filter');
+            const loadMoreBtn = document.getElementById('load-more');
+            const productCount = document.getElementById('product-count');
+            const categoryButtons = document.querySelectorAll('.category-item');
+            
+            // Pagination variables
+            let currentPage = 1;
+            const productsPerPage = 8;
+            let filteredProducts = [...furnitureProducts];
+            let isLoading = false;
+            let activeCategory = 'all';
+            
+            // Initialize the page
+            function initPage() {
+                currentPage = 1;
+                filterProducts();
+                setupEventListeners();
+                setupCartDrawer();
+                updateCartCount();
+                setupCategoryNavigation();
+            }
+            
+            // Setup category navigation
+            function setupCategoryNavigation() {
+                categoryButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Update active button
+                        categoryButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Get category and update filter
+                        const category = this.getAttribute('data-category');
+                        activeCategory = category;
+                        
+                        // Update filter dropdown
+                        categoryFilter.value = category === 'all' ? 'all' : category;
+                        
+                        // Filter products
+                        currentPage = 1;
+                        filterProducts();
+                    });
+                });
+            }
+            
+            // Setup event listeners
+            function setupEventListeners() {
+                // Search functionality
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        currentPage = 1;
+                        filterProducts();
+                    });
+                }
+                
+                // Category filter
+                if (categoryFilter) {
+                    categoryFilter.addEventListener('change', function() {
+                        currentPage = 1;
+                        activeCategory = this.value;
+                        
+                        // Update active category button
+                        categoryButtons.forEach(btn => {
+                            btn.classList.remove('active');
+                            if ((this.value === 'all' && btn.getAttribute('data-category') === 'all') ||
+                                btn.getAttribute('data-category') === this.value) {
+                                btn.classList.add('active');
+                            }
+                        });
+                        
+                        filterProducts();
+                    });
+                }
+                
+                // Load more button
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', function() {
+                        currentPage++;
+                        displayProducts();
+                    });
+                }
+                
+                // Single global event listener for add-to-cart buttons
+                document.addEventListener('click', function(e) {
+                    const addToCartBtn = e.target.closest('.add-to-cart');
+                    if (!addToCartBtn) return;
+                    
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    
+                    // Get product data
+                    const productId = addToCartBtn.getAttribute('data-id');
+                    const product = furnitureProducts.find(p => p.id === productId);
+                    
+                    if (product) {
+                        console.log('Add to cart clicked for:', product.name);
+                        
+                        // Add to cart
+                        addToCart(product);
+                        
+                        // Visual feedback
+                        const originalText = addToCartBtn.innerHTML;
+                        addToCartBtn.innerHTML = 'Added!';
+                        addToCartBtn.style.background = '#27ae60';
+                        addToCartBtn.disabled = true;
+                        
+                        setTimeout(() => {
+                            addToCartBtn.innerHTML = originalText;
+                            addToCartBtn.style.background = '';
+                            addToCartBtn.disabled = false;
+                        }, 1000);
+                    }
+                }, true); // Use capture phase
+            }
+            
+            // Filter products
+            function filterProducts() {
+                const searchTerm = (searchInput ? searchInput.value.toLowerCase() : '');
+                
+                filteredProducts = furnitureProducts.filter(product => {
+                    const matchesSearch = 
+                        product.name.toLowerCase().includes(searchTerm) ||
+                        product.description.toLowerCase().includes(searchTerm) ||
+                        product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                    
+                    const matchesCategory = 
+                        activeCategory === 'all' || 
+                        product.category === activeCategory;
+                    
+                    return matchesSearch && matchesCategory;
+                });
+                
+                currentPage = 1;
+                displayProducts();
+            }
+            
+            // Display products
+            function displayProducts() {
+                if (!productsContainer) return;
+                
+                const startIndex = (currentPage - 1) * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                
+                // Clear container if first page
+                if (currentPage === 1) {
+                    productsContainer.innerHTML = '';
+                }
+                
+                // Get products for this page
+                const pageProducts = filteredProducts.slice(startIndex, endIndex);
+                
+                // Create product cards
+                pageProducts.forEach(product => {
+                    const productCard = createProductCard(product);
+                    productsContainer.appendChild(productCard);
+                });
+                
+                // Update product count
+                updateProductCount();
+                
+                // Show/hide load more button
+                if (loadMoreBtn) {
+                    if (endIndex >= filteredProducts.length) {
+                        loadMoreBtn.style.display = 'none';
+                    } else {
+                        loadMoreBtn.style.display = 'block';
+                        loadMoreBtn.textContent = `Load More (${filteredProducts.length - endIndex} more)`;
+                    }
+                }
+                
+                // Animate new products
+                animateNewProducts();
+            }
+            
+            // Create product card
+            function createProductCard(product) {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                const stockClass = getStockClass(product.stock);
+                const formattedPrice = product.price.toLocaleString();
+                
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='/img/logo.jpg'">
+                        <span class="stock-badge ${stockClass}">${product.stock}</span>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">₦${formattedPrice}</div>
+                        <div class="product-details">
+                            ${product.details.material ? `<p><strong>Material:</strong> ${product.details.material}</p>` : ''}
+                            ${product.details.capacity ? `<p><strong>Capacity:</strong> ${product.details.capacity}</p>` : ''}
+                            ${product.details.pieces ? `<p><strong>Pieces:</strong> ${product.details.pieces}</p>` : ''}
+                            ${product.details.features ? `<p><strong>Features:</strong> ${product.details.features}</p>` : ''}
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary add-to-cart" 
+                                    data-id="${product.id}"
+                                    data-name="${product.name}"
+                                    data-price="${product.price}"
+                                    data-image="${product.image}">
+                                Add to Cart
+                            </button>
+                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${formattedPrice}" 
+                               class="btn-whatsapp" target="_blank">
+                                💬 WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            // Get stock class
+            function getStockClass(stock) {
+                if (stock === 'In Stock') return 'stock-in';
+                if (stock === 'Limited Stock' || stock === 'Made to Order') return 'stock-low';
+                return 'stock-out';
+            }
+            
+            // Update product count display
+            function updateProductCount() {
+                if (!productCount) return;
+                
+                const totalProducts = filteredProducts.length;
+                const showingProducts = Math.min(currentPage * productsPerPage, totalProducts);
+                
+                productCount.textContent = `Showing ${showingProducts} of ${totalProducts} furniture items`;
+                
+                if (totalProducts === 0) {
+                    productCount.textContent = 'No furniture items found matching your criteria';
+                }
+            }
+            
+            // Animate new products
+            function animateNewProducts() {
+                const allCards = productsContainer.querySelectorAll('.product-card');
+                const newCards = Array.from(allCards).slice(-productsPerPage);
+                
+                newCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }
+            
+            // Setup cart drawer
+            function setupCartDrawer() {
+                const cartDrawer = document.getElementById('cart-drawer');
+                const openCartBtn = document.getElementById('open-cart-drawer');
+                const closeCartBtn = document.getElementById('close-cart-drawer');
+                const cartOverlay = document.getElementById('cart-drawer-overlay');
+                
+                // Open cart drawer
+                if (openCartBtn) {
+                    openCartBtn.addEventListener('click', function() {
+                        cartDrawer.classList.add('active');
+                        cartOverlay.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        renderCartDrawer();
+                    });
+                }
+                
+                // Close cart drawer
+                function closeCartDrawer() {
+                    cartDrawer.classList.remove('active');
+                    cartOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeCartBtn) {
+                    closeCartBtn.addEventListener('click', closeCartDrawer);
+                }
+                
+                if (cartOverlay) {
+                    cartOverlay.addEventListener('click', closeCartDrawer);
+                }
+                
+                // Close on escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && cartDrawer.classList.contains('active')) {
+                        closeCartDrawer();
+                    }
+                });
+                
+                // Render cart drawer function
+                window.renderCartDrawer = function() {
+                    const cartItemsContainer = document.getElementById('cart-drawer-items');
+                    const drawerTotal = document.getElementById('drawer-total');
+                    
+                    if (!cartItemsContainer) return;
+                    
+                    const cart = getCart();
+                    
+                    if (cart.length === 0) {
+                        cartItemsContainer.innerHTML = `
+                            <div class="cart-drawer-empty">
+                                <div class="cart-drawer-empty-icon">🛒</div>
+                                <p>Your cart is empty</p>
+                                <a href="/shop-categories" class="btn btn-primary">Continue Shopping</a>
+                            </div>
+                        `;
+                        if (drawerTotal) drawerTotal.textContent = '₦0';
+                        return;
+                    }
+                    
+                    cartItemsContainer.innerHTML = cart.map(item => `
+                        <div class="cart-drawer-item" data-id="${item.id}">
+                            <img src="${item.image}" alt="${item.name}" 
+                                 class="cart-drawer-item-image" 
+                                 onerror="this.src='/img/logo.jpg'">
+                            <div class="cart-drawer-item-details">
+                                <h4 class="cart-drawer-item-name">${item.name}</h4>
+                                <p class="cart-drawer-item-price">₦${item.price.toLocaleString()} × ${item.quantity}</p>
+                                <div class="cart-drawer-item-actions">
+                                    <button class="cart-drawer-item-remove" data-id="${item.id}">Remove</button>
+                                </div>
+                            </div>
+                            <div class="cart-drawer-item-total">
+                                ₦${(item.price * item.quantity).toLocaleString()}
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    // Update total
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    if (drawerTotal) {
+                        drawerTotal.textContent = `₦${total.toLocaleString()}`;
+                    }
+                    
+                    // Attach remove button listeners
+                    cartItemsContainer.querySelectorAll('.cart-drawer-item-remove').forEach(button => {
+                        button.addEventListener('click', function(e) {
+                            const productId = e.target.dataset.id;
+                            removeFromCart(productId);
+                            renderCartDrawer();
+                            updateCartCount();
+                        });
+                    });
+                };
+                
+                // Remove from cart function
+                function removeFromCart(productId) {
+                    const cart = getCart().filter(item => item.id !== productId);
+                    saveCart(cart);
+                }
+            }
+            
+            // Start the page
+            initPage();
+            
+            // Make functions available globally
+            window.addToCart = addToCart;
+            window.updateCartCount = updateCartCount;
+            window.getCart = getCart;
+        });
+    </script>
+</body>
+</html>

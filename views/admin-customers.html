@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers Management - CIL Admin</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>CIL Admin</h2>
+                <p>Collaborative Investment Ltd</p>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="/admin/dashboard"> Dashboard</a></li>
+                <li><a href="/admin/products"> Products</a></li>
+                <li><a href="/admin/orders"> Orders</a></li>
+                <li><a href="/admin/customers" class="active"> Customers</a></li>
+                <li><a href="/admin/emails"> Email System</a></li>
+                <li><a href="/admin/analytics"> Analytics</a></li>
+                <li><a href="/admin/settings"> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="btn-logout"> Logout</button>
+            </div>
+        </nav>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Customers Management</h1>
+                <div class="header-actions">
+                    <button onclick="exportCustomers()" class="btn-refresh"> Export Customers</button>
+                    <button onclick="showAddCustomerModal()" class="btn-refresh"> Add Customer</button>
+                </div>
+            </header>
+
+            <!-- Customer Stats -->
+            <div class="stats-grid mini">
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="totalCustomers">0</h3>
+                        <p>Total Customers</p>
+                    </div>
+                </div>
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="activeCustomers">0</h3>
+                        <p>Active Buyers</p>
+                    </div>
+                </div>
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="avgOrderValue">₦0</h3>
+                        <p>Avg Order Value</p>
+                    </div>
+                </div>
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="repeatCustomers">0</h3>
+                        <p>Repeat Customers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Filters -->
+            <div class="filters-section">
+                <input type="text" id="customerSearch" placeholder="Search customers..." class="search-input">
+                <select id="typeFilter" class="filter-select">
+                    <option value="all">All Types</option>
+                    <option value="retail">Retail</option>
+                    <option value="wholesale">Wholesale</option>
+                    <option value="corporate">Corporate</option>
+                </select>
+                <select id="statusFilter" class="filter-select">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+
+            <!-- Customers Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Contact</th>
+                            <th>Location</th>
+                            <th>Orders</th>
+                            <th>Total Spent</th>
+                            <th>Last Order</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customersTable">
+                        <!-- Customers will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Customer Segmentation -->
+            <div class="segmentation-section">
+                <h3>Customer Segmentation</h3>
+                <div class="segmentation-grid">
+                    <div class="segment-card">
+                        <div class="segment-icon"></div>
+                        <h4>VIP Customers</h4>
+                        <p class="segment-count" id="vipCount">0</p>
+                        <p>Top 10% by spending</p>
+                    </div>
+                    <div class="segment-card">
+                        <div class="segment-icon"></div>
+                        <h4>Repeat Customers</h4>
+                        <p class="segment-count" id="repeatCount">0</p>
+                        <p>2+ orders</p>
+                    </div>
+                    <div class="segment-card">
+                        <div class="segment-icon"></div>
+                        <h4>New Customers</h4>
+                        <p class="segment-count" id="newCount">0</p>
+                        <p>Last 30 days</p>
+                    </div>
+                    <div class="segment-card">
+                        <div class="segment-icon"></div>
+                        <h4>Inactive</h4>
+                        <p class="segment-count" id="inactiveCount">0</p>
+                        <p>No orders in 90 days</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Details Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 id="modalCustomerTitle">Customer Details</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="customerDetailsContent">
+                    <!-- Customer details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Customer Modal -->
+    <div id="addCustomerModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Add New Customer</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="customerForm" onsubmit="saveCustomer(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="customerEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Customer Type</label>
+                            <select id="customerType">
+                                <option value="retail">Retail</option>
+                                <option value="wholesale">Wholesale</option>
+                                <option value="corporate">Corporate</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Address</label>
+                            <textarea id="customerAddress" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="customerCity">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" id="customerState">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" onclick="closeModal()" class="btn-cancel">Cancel</button>
+                        <button type="submit" class="btn-save">Save Customer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let customers = [];
+        let editingCustomerId = null;
+
+        // Load customers
+        async function loadCustomers() {
+            try {
+                const response = await fetch('/admin/api/customers');
+                customers = await response.json();
+                displayCustomers(customers);
+                updateCustomerStats();
+                updateSegmentation();
+            } catch (error) {
+                console.error('Error loading customers:', error);
+            }
+        }
+
+        // Display customers in table
+        function displayCustomers(customersToShow) {
+            const tbody = document.getElementById('customersTable');
+            
+            const html = customersToShow.map(customer => `
+                <tr>
+                    <td>
+                        <div class="customer-info">
+                            <strong>${customer.name}</strong>
+                            <small>${customer.type}</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="contact-info">
+                            <div>${customer.phone}</div>
+                            <small>${customer.email || 'No email'}</small>
+                        </div>
+                    </td>
+                    <td>${customer.city || 'N/A'}, ${customer.state || 'N/A'}</td>
+                    <td>${customer.orderCount || 0}</td>
+                    <td>₦${customer.totalSpent?.toLocaleString() || '0'}</td>
+                    <td>${customer.lastOrder ? new Date(customer.lastOrder).toLocaleDateString() : 'Never'}</td>
+                    <td>
+                        <span class="status-badge ${customer.status || 'active'}">
+                            ${customer.status || 'Active'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button onclick="viewCustomerDetails(${customer.id})" class="btn-view"> View</button>
+                            <button onclick="editCustomer(${customer.id})" class="btn-edit"> Edit</button>
+                            <button onclick="sendCustomerEmail(${customer.id})" class="btn-email"> Email</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+            
+            tbody.innerHTML = html;
+        }
+
+        // Update customer statistics
+        function updateCustomerStats() {
+            const total = customers.length;
+            const active = customers.filter(c => c.status !== 'inactive').length;
+            const repeat = customers.filter(c => (c.orderCount || 0) > 1).length;
+            const avgSpent = customers.length > 0 ? 
+                customers.reduce((sum, c) => sum + (c.totalSpent || 0), 0) / customers.length : 0;
+
+            document.getElementById('totalCustomers').textContent = total;
+            document.getElementById('activeCustomers').textContent = active;
+            document.getElementById('repeatCustomers').textContent = repeat;
+            document.getElementById('avgOrderValue').textContent = `₦${avgSpent.toLocaleString()}`;
+        }
+
+        // Update customer segmentation
+        function updateSegmentation() {
+            const vipCount = customers.filter(c => (c.totalSpent || 0) > 50000).length;
+            const repeatCount = customers.filter(c => (c.orderCount || 0) > 1).length;
+            const newCount = customers.filter(c => {
+                const thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                return c.createdAt && new Date(c.createdAt) > thirtyDaysAgo;
+            }).length;
+            const inactiveCount = customers.filter(c => {
+                const ninetyDaysAgo = new Date();
+                ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+                return c.lastOrder && new Date(c.lastOrder) < ninetyDaysAgo;
+            }).length;
+
+            document.getElementById('vipCount').textContent = vipCount;
+            document.getElementById('repeatCount').textContent = repeatCount;
+            document.getElementById('newCount').textContent = newCount;
+            document.getElementById('inactiveCount').textContent = inactiveCount;
+        }
+
+        // View customer details
+        async function viewCustomerDetails(customerId) {
+            const customer = customers.find(c => c.id == customerId);
+            if (!customer) return;
+
+            // Load customer orders
+            const ordersResponse = await fetch(`/admin/api/customers/${customerId}/orders`);
+            const orders = await ordersResponse.json();
+
+            const ordersHtml = orders.map(order => `
+                <div class="order-item">
+                    <div class="order-info">
+                        <strong>Order #${order.orderNumber}</strong>
+                        <span>${new Date(order.timestamp).toLocaleDateString()} - ₦${order.total?.toLocaleString()}</span>
+                    </div>
+                    <div class="order-status ${order.status}">
+                        ${order.status}
+                    </div>
+                </div>
+            `).join('') || '<p>No orders found</p>';
+
+            const content = `
+                <div class="customer-details">
+                    <div class="detail-section">
+                        <h4>Customer Information</h4>
+                        <div class="detail-grid">
+                            <div><strong>Name:</strong> ${customer.name}</div>
+                            <div><strong>Phone:</strong> ${customer.phone}</div>
+                            <div><strong>Email:</strong> ${customer.email || 'N/A'}</div>
+                            <div><strong>Type:</strong> ${customer.type}</div>
+                            <div><strong>Address:</strong> ${customer.address || 'N/A'}</div>
+                            <div><strong>Location:</strong> ${customer.city || ''} ${customer.state || ''}</div>
+                            <div><strong>Total Orders:</strong> ${customer.orderCount || 0}</div>
+                            <div><strong>Total Spent:</strong> ₦${customer.totalSpent?.toLocaleString() || '0'}</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Order History</h4>
+                        <div class="order-history">
+                            ${ordersHtml}
+                        </div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <button onclick="editCustomer(${customer.id})" class="btn-action"> Edit Customer</button>
+                        <button onclick="sendCustomerEmail(${customer.id})" class="btn-action"> Send Email</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('customerDetailsContent').innerHTML = content;
+            document.getElementById('modalCustomerTitle').textContent = `Customer: ${customer.name}`;
+            document.getElementById('customerModal').style.display = 'block';
+        }
+
+        // Show add customer modal
+        function showAddCustomerModal() {
+            editingCustomerId = null;
+            document.getElementById('customerForm').reset();
+            document.getElementById('addCustomerModal').style.display = 'block';
+        }
+
+        // Edit customer
+        function editCustomer(customerId) {
+            const customer = customers.find(c => c.id == customerId);
+            if (!customer) return;
+            
+            editingCustomerId = customerId;
+            
+            // Fill form with customer data
+            document.getElementById('customerName').value = customer.name || '';
+            document.getElementById('customerEmail').value = customer.email || '';
+            document.getElementById('customerPhone').value = customer.phone || '';
+            document.getElementById('customerType').value = customer.type || 'retail';
+            document.getElementById('customerAddress').value = customer.address || '';
+            document.getElementById('customerCity').value = customer.city || '';
+            document.getElementById('customerState').value = customer.state || '';
+            
+            document.getElementById('addCustomerModal').style.display = 'block';
+        }
+
+        // Save customer
+        async function saveCustomer(event) {
+            event.preventDefault();
+            
+            const customerData = {
+                name: document.getElementById('customerName').value,
+                email: document.getElementById('customerEmail').value,
+                phone: document.getElementById('customerPhone').value,
+                type: document.getElementById('customerType').value,
+                address: document.getElementById('customerAddress').value,
+                city: document.getElementById('customerCity').value,
+                state: document.getElementById('customerState').value
+            };
+            
+            try {
+                let response;
+                if (editingCustomerId) {
+                    response = await fetch(`/admin/api/customers/${editingCustomerId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(customerData)
+                    });
+                } else {
+                    response = await fetch('/admin/api/customers', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(customerData)
+                    });
+                }
+                
+                if (response.ok) {
+                    closeModal();
+                    loadCustomers();
+                }
+            } catch (error) {
+                console.error('Error saving customer:', error);
+            }
+        }
+
+        // Send email to customer
+        async function sendCustomerEmail(customerId) {
+            const customer = customers.find(c => c.id == customerId);
+            if (!customer || !customer.email) {
+                alert('No email address found for this customer');
+                return;
+            }
+
+            // Redirect to email system with customer pre-filled
+            window.location.href = `/admin/emails?to=${encodeURIComponent(customer.email)}`;
+        }
+
+        // Export customers
+        function exportCustomers() {
+            const csv = customers.map(customer => 
+                `"${customer.name}","${customer.email}","${customer.phone}","${customer.type}","${customer.orderCount || 0}","₦${customer.totalSpent || 0}"`
+            ).join('\n');
+            
+            const header = 'Name,Email,Phone,Type,Orders,TotalSpent\n';
+            const blob = new Blob([header + csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'customers-export.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('customerModal').style.display = 'none';
+            document.getElementById('addCustomerModal').style.display = 'none';
+        }
+
+        // Logout
+        async function logout() {
+            try {
+                await fetch('/admin/logout', { method: 'POST' });
+                window.location.href = '/admin/login';
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadCustomers);
+    </script>
+
+    <style>
+        .segmentation-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .segmentation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .segment-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: var(--light);
+            border: 1px solid var(--border);
+        }
+
+        .segment-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .segment-count {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+
+        .customer-info strong {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .customer-info small {
+            color: var(--gray);
+            font-size: 0.8rem;
+            text-transform: capitalize;
+        }
+
+        .contact-info div {
+            font-weight: 600;
+        }
+
+        .contact-info small {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .customer-details {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .order-history {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .order-status.pending { background: #fff3cd; color: #856404; }
+        .order-status.confirmed { background: #d1edff; color: #0c5460; }
+        .order-status.processing { background: #e8f4fd; color: #004085; }
+        .order-status.shipped { background: #d4edda; color: #155724; }
+        .order-status.delivered { background: #d1edff; color: #0c5460; }
+        .order-status.cancelled { background: #f8d7da; color: #721c24; }
+    </style>
+</body>
+</html>

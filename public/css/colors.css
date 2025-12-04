@@ -1,0 +1,130 @@
+/* colors.css - Central Color Scheme for All Pages */
+
+:root {
+    /* Primary Colors */
+    --primary: #1a5276;
+    --secondary: #f39c12;
+    --accent: #2980b9;
+    
+    /* Neutral Colors */
+    --light: #f8f9fa;
+    --dark: #2c3e50;
+    --light-gray: #ecf0f1;
+    --gray: #7f8c8d;
+    
+    /* Status Colors */
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    
+    /* Extended Colors (for gradients, hover states) */
+    --primary-dark: #154360;
+    --primary-light: #2e86c1;
+    --secondary-dark: #d68910;
+    --secondary-light: #f8c471;
+    --accent-dark: #1f618d;
+    --accent-light: #3498db;
+    
+    /* Background Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+    --gradient-light: linear-gradient(135deg, var(--light) 0%, #e9ecef 100%);
+}
+
+/* Text Colors */
+.text-primary { color: var(--primary) !important; }
+.text-secondary { color: var(--secondary) !important; }
+.text-accent { color: var(--accent) !important; }
+.text-dark { color: var(--dark) !important; }
+.text-light { color: var(--light) !important; }
+.text-gray { color: var(--gray) !important; }
+.text-success { color: var(--success) !important; }
+.text-warning { color: var(--warning) !important; }
+.text-danger { color: var(--danger) !important; }
+
+/* Background Colors */
+.bg-primary { background-color: var(--primary) !important; }
+.bg-secondary { background-color: var(--secondary) !important; }
+.bg-accent { background-color: var(--accent) !important; }
+.bg-dark { background-color: var(--dark) !important; }
+.bg-light { background-color: var(--light) !important; }
+.bg-light-gray { background-color: var(--light-gray) !important; }
+.bg-success { background-color: var(--success) !important; }
+.bg-warning { background-color: var(--warning) !important; }
+.bg-danger { background-color: var(--danger) !important; }
+
+/* Border Colors */
+.border-primary { border-color: var(--primary) !important; }
+.border-secondary { border-color: var(--secondary) !important; }
+.border-accent { border-color: var(--accent) !important; }
+.border-dark { border-color: var(--dark) !important; }
+.border-light { border-color: var(--light) !important; }
+
+/* Button Colors */
+.btn-primary {
+    background: var(--secondary) !important;
+    color: var(--primary) !important;
+    border-color: var(--secondary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #e67e22 !important;
+    border-color: #e67e22 !important;
+    color: white !important;
+}
+
+.btn-secondary {
+    background: transparent !important;
+    color: var(--primary) !important;
+    border: 2px solid var(--primary) !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+.btn-accent {
+    background: var(--accent) !important;
+    color: white !important;
+    border-color: var(--accent) !important;
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+/* Links */
+a {
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary);
+}
+
+/* Form Elements */
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--secondary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25) !important;
+}
+
+/* Utility Classes for Gradients */
+.gradient-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%) !important;
+}
+
+.gradient-dark {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%) !important;
+}
+
+.gradient-light {
+    background: linear-gradient(135deg, var(--light) 0%, #e9ecef 100%) !important;
+}

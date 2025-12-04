@@ -1,16 +1,56 @@
-// Mobile Menu Toggle
+// Mobile Menu Toggle - ENHANCED VERSION
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     const header = document.querySelector('.header');
     const navbar = document.querySelector('.navbar');
     
+    // Enhanced mobile menu toggle
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
             navLinks.classList.toggle('active');
+            this.classList.toggle('active');
             this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
         });
     }
+
+    // Close mobile menu when clicking on nav links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768 && navLinks.classList.contains('active')) {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+                document.body.style.overflow = '';
+            }
+        }
+    });
+
+    // Close menu on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuBtn.textContent = '☰';
+            document.body.style.overflow = '';
+        }
+    });
 
     // Sticky header on scroll
     window.addEventListener('scroll', function() {

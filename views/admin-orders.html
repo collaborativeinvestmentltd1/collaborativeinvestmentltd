@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Management - CIL Admin</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>CIL Admin</h2>
+                <p>Collaborative Investment Ltd</p>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="/admin/dashboard"> Dashboard</a></li>
+                <li><a href="/admin/products"> Products</a></li>
+                <li><a href="/admin/orders" class="active"> Orders</a></li>
+                <li><a href="/admin/customers"> Customers</a></li>
+                <li><a href="/admin/emails"> Email System</a></li>
+                <li><a href="/admin/analytics"> Analytics</a></li>
+                <li><a href="/admin/settings"> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="btn-logout"> Logout</button>
+            </div>
+        </nav>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Orders Management</h1>
+                <div class="header-actions">
+                    <button onclick="exportOrders()" class="btn-refresh"> Export Orders</button>
+                    <button onclick="createSampleOrders()" class="btn-refresh"> Sample Data</button>
+                </div>
+            </header>
+
+            <!-- Order Filters -->
+            <div class="filters-section">
+                <input type="text" id="orderSearch" placeholder="Search orders..." class="search-input" onkeyup="filterOrders()">
+                <select id="statusFilter" class="filter-select" onchange="filterOrders()">
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <input type="date" id="dateFilter" class="filter-select" onchange="filterOrders()">
+            </div>
+
+            <!-- Orders Stats -->
+            <div class="stats-grid mini">
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="pendingCount">0</h3>
+                        <p>Pending</p>
+                    </div>
+                </div>
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="processingCount">0</h3>
+                        <p>Processing</p>
+                    </div>
+                </div>
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="shippedCount">0</h3>
+                        <p>Shipped</p>
+                    </div>
+                </div>
+                <div class="stat-card mini">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="deliveredCount">0</h3>
+                        <p>Delivered</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></th>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Payment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTable">
+                        <!-- Orders will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Bulk Actions -->
+            <div class="bulk-actions">
+                <select id="bulkStatusAction" class="bulk-select">
+                    <option value="">Update Status</option>
+                    <option value="confirmed">Mark as Confirmed</option>
+                    <option value="processing">Mark as Processing</option>
+                    <option value="shipped">Mark as Shipped</option>
+                    <option value="delivered">Mark as Delivered</option>
+                    <option value="cancelled">Mark as Cancelled</option>
+                </select>
+                <button onclick="applyBulkStatus()" class="btn-action">Apply</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 id="modalOrderTitle">Order Details</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="orderDetailsContent">
+                    <!-- Order details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let orders = [];
+        let selectedOrders = new Set();
+        let filteredOrders = [];
+
+        // Load orders
+        async function loadOrders() {
+            try {
+                const response = await fetch('/admin/api/orders');
+                if (response.ok) {
+                    const ordersData = await response.json();
+                    
+                    // Ensure all orders have proper IDs
+                    orders = ordersData.map((order, index) => {
+                        // Generate a proper ID if missing
+                        if (!order.id && !order._id) {
+                            order.id = `order-${Date.now()}-${index}`;
+                        } else if (order._id) {
+                            // Handle MongoDB _id format
+                            order.id = order._id;
+                        }
+                        
+                        // Ensure order has required fields
+                        if (!order.orderNumber) {
+                            order.orderNumber = `ORD-${(order.id || index).toString().slice(-6).toUpperCase()}`;
+                        }
+                        
+                        if (!order.status) {
+                            order.status = 'pending';
+                        }
+                        
+                        if (!order.timestamp) {
+                            order.timestamp = new Date().toISOString();
+                        }
+                        
+                        if (!order.total) {
+                            order.total = order.items?.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0) || 0;
+                        }
+                        
+                        return order;
+                    });
+                    
+                    filteredOrders = [...orders];
+                    displayOrders(filteredOrders);
+                    updateOrderStats();
+                } else {
+                    console.error('Failed to fetch orders');
+                    // Initialize with empty array if API fails
+                    orders = [];
+                    filteredOrders = [];
+                    displayOrders([]);
+                    updateOrderStats();
+                }
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                orders = [];
+                filteredOrders = [];
+                displayOrders([]);
+                updateOrderStats();
+            }
+        }
+
+        // Create sample orders for testing
+        function createSampleOrders() {
+            const sampleOrders = [
+                {
+                    id: 'order-1',
+                    orderNumber: 'ORD-001',
+                    customerName: 'John Smith',
+                    customerPhone: '+2348012345678',
+                    customerEmail: 'john@example.com',
+                    customerLocation: 'Lagos, Nigeria',
+                    status: 'pending',
+                    paymentStatus: 'pending',
+                    total: 450000,
+                    timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                    items: [
+                        { name: 'Mahogany Executive Desk', price: 450000, quantity: 1 }
+                    ]
+                },
+                {
+                    id: 'order-2',
+                    orderNumber: 'ORD-002',
+                    customerName: 'Sarah Johnson',
+                    customerPhone: '+2348023456789',
+                    customerEmail: 'sarah@example.com',
+                    customerLocation: 'Abuja, Nigeria',
+                    status: 'confirmed',
+                    paymentStatus: 'paid',
+                    total: 1200000,
+                    timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+                    items: [
+                        { name: 'Automatic 2-Block Maker (Local)', price: 800000, quantity: 1 },
+                        { name: 'Small Industrial Mixer', price: 275000, quantity: 1 },
+                        { name: 'Hollow Sandcrete Blocks', price: 300, quantity: 500 }
+                    ]
+                },
+                {
+                    id: 'order-3',
+                    orderNumber: 'ORD-003',
+                    customerName: 'Mike Davis',
+                    customerPhone: '+2348034567890',
+                    customerEmail: 'mike@example.com',
+                    customerLocation: 'Port Harcourt, Nigeria',
+                    status: 'processing',
+                    paymentStatus: 'paid',
+                    total: 285000,
+                    timestamp: new Date().toISOString(),
+                    items: [
+                        { name: 'Crate of Eggs (30 pieces)', price: 2400, quantity: 10 },
+                        { name: 'Day Old Broiler Chicks', price: 450, quantity: 100 },
+                        { name: 'Chicken Feed (25kg bag)', price: 9500, quantity: 5 }
+                    ]
+                }
+            ];
+
+            // Store in localStorage for demo
+            localStorage.setItem('cil_orders', JSON.stringify(sampleOrders));
+            orders = sampleOrders;
+            filteredOrders = [...orders];
+            displayOrders(filteredOrders);
+            updateOrderStats();
+            alert('Sample orders created successfully!');
+        }
+
+        // Filter orders
+        function filterOrders() {
+            const searchTerm = document.getElementById('orderSearch').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+
+            filteredOrders = orders.filter(order => {
+                const matchesSearch = 
+                    (order.orderNumber && order.orderNumber.toLowerCase().includes(searchTerm)) ||
+                    (order.customerName && order.customerName.toLowerCase().includes(searchTerm)) ||
+                    (order.customerPhone && order.customerPhone.includes(searchTerm));
+                
+                const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
+                
+                const matchesDate = !dateFilter || 
+                    (order.timestamp && new Date(order.timestamp).toISOString().split('T')[0] === dateFilter);
+                
+                return matchesSearch && matchesStatus && matchesDate;
+            });
+
+            displayOrders(filteredOrders);
+        }
+
+        // Display orders in table
+        function displayOrders(ordersToShow) {
+            const tbody = document.getElementById('ordersTable');
+            
+            if (ordersToShow.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 2rem;">
+                            No orders found matching your criteria
+                            <br>
+                            <small>Try creating sample data or check your API endpoint</small>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            const html = ordersToShow.map(order => {
+                const orderId = order.id || order._id;
+                if (!orderId) {
+                    console.warn('Order missing ID:', order);
+                    return '';
+                }
+                
+                return `
+                <tr>
+                    <td>
+                        <input type="checkbox" value="${orderId}" onchange="toggleOrderSelection(this)" ${selectedOrders.has(orderId) ? 'checked' : ''}>
+                    </td>
+                    <td>
+                        <strong>${order.orderNumber || 'ORD-' + (orderId.toString().slice(-6))}</strong>
+                    </td>
+                    <td>
+                        <div class="customer-info">
+                            <strong>${order.customerName || 'N/A'}</strong>
+                            <small>${order.customerPhone || ''}</small>
+                        </div>
+                    </td>
+                    <td>${order.timestamp ? new Date(order.timestamp).toLocaleDateString() : 'N/A'}</td>
+                    <td>₦${(order.total || 0).toLocaleString()}</td>
+                    <td>
+                        <select onchange="updateOrderStatus('${orderId}', this.value)" class="status-select ${order.status}">
+                            <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
+                            <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                            <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>Processing</option>
+                            <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>Shipped</option>
+                            <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+                            <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                        </select>
+                    </td>
+                    <td>
+                        <span class="payment-status ${order.paymentStatus || 'pending'}">
+                            ${order.paymentStatus ? order.paymentStatus.charAt(0).toUpperCase() + order.paymentStatus.slice(1) : 'Pending'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button onclick="viewOrderDetails('${orderId}')" class="btn-view"> View</button>
+                            <button onclick="sendOrderUpdate('${orderId}')" class="btn-email"> Email</button>
+                            <button onclick="printInvoice('${orderId}')" class="btn-print"> Print</button>
+                        </div>
+                    </td>
+                </tr>
+            `}).join('');
+            
+            tbody.innerHTML = html;
+            updateSelectAllCheckbox();
+        }
+
+        // Toggle order selection
+        function toggleOrderSelection(checkbox) {
+            const orderId = checkbox.value;
+            if (checkbox.checked) {
+                selectedOrders.add(orderId);
+            } else {
+                selectedOrders.delete(orderId);
+            }
+            updateSelectAllCheckbox();
+        }
+
+        // Toggle select all
+        function toggleSelectAll(checkbox) {
+            const checkboxes = document.querySelectorAll('#ordersTable input[type="checkbox"]');
+            if (checkbox.checked) {
+                checkboxes.forEach(cb => {
+                    cb.checked = true;
+                    selectedOrders.add(cb.value);
+                });
+            } else {
+                checkboxes.forEach(cb => {
+                    cb.checked = false;
+                    selectedOrders.delete(cb.value);
+                });
+            }
+        }
+
+        // Update select all checkbox state
+        function updateSelectAllCheckbox() {
+            const checkboxes = document.querySelectorAll('#ordersTable input[type="checkbox"]');
+            const selectAll = document.getElementById('selectAll');
+            
+            if (checkboxes.length === 0) {
+                selectAll.checked = false;
+                selectAll.disabled = true;
+                return;
+            }
+            
+            selectAll.disabled = false;
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            selectAll.checked = allChecked;
+        }
+
+        // Apply bulk status update
+        async function applyBulkStatus() {
+            const statusSelect = document.getElementById('bulkStatusAction');
+            const newStatus = statusSelect.value;
+            
+            if (!newStatus) {
+                alert('Please select a status to apply');
+                return;
+            }
+            
+            if (selectedOrders.size === 0) {
+                alert('Please select at least one order');
+                return;
+            }
+            
+            if (!confirm(`Update ${selectedOrders.size} order(s) to "${newStatus}"?`)) {
+                return;
+            }
+            
+            try {
+                const updates = Array.from(selectedOrders).map(orderId => {
+                    // For demo purposes, update locally
+                    const order = orders.find(o => o.id === orderId || o._id === orderId);
+                    if (order) {
+                        order.status = newStatus;
+                    }
+                    
+                    // Also try to update via API
+                    return fetch(`/admin/api/orders/${orderId}/status`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ status: newStatus })
+                    }).catch(err => {
+                        console.warn(`API update failed for order ${orderId}:`, err);
+                        // Continue even if API fails
+                        return Promise.resolve();
+                    });
+                });
+                
+                await Promise.all(updates);
+                alert(`Successfully updated ${selectedOrders.size} order(s)`);
+                selectedOrders.clear();
+                displayOrders(filteredOrders);
+                updateOrderStats();
+            } catch (error) {
+                console.error('Error updating orders:', error);
+                alert('Error updating orders. Please try again.');
+            }
+        }
+
+        // Update order stats
+        function updateOrderStats() {
+            const pending = orders.filter(o => o.status === 'pending').length;
+            const processing = orders.filter(o => o.status === 'processing').length;
+            const shipped = orders.filter(o => o.status === 'shipped').length;
+            const delivered = orders.filter(o => o.status === 'delivered').length;
+
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('processingCount').textContent = processing;
+            document.getElementById('shippedCount').textContent = shipped;
+            document.getElementById('deliveredCount').textContent = delivered;
+        }
+
+        // Update order status
+        async function updateOrderStatus(orderId, newStatus) {
+            try {
+                // Update locally first for immediate feedback
+                const order = orders.find(o => o.id === orderId || o._id === orderId);
+                if (order) {
+                    order.status = newStatus;
+                    displayOrders(filteredOrders);
+                    updateOrderStats();
+                }
+
+                // Try to update via API
+                const response = await fetch(`/admin/api/orders/${orderId}/status`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (!response.ok) {
+                    console.warn('API update failed, using local data');
+                }
+            } catch (error) {
+                console.error('Error updating order status:', error);
+                // Continue with local data
+            }
+        }
+
+        // View order details
+        async function viewOrderDetails(orderId) {
+            const order = orders.find(o => o.id === orderId || o._id === orderId);
+            if (!order) {
+                alert('Order not found');
+                return;
+            }
+
+            const itemsHtml = order.items?.map(item => `
+                <div class="order-item">
+                    <div class="item-info">
+                        <strong>${item.name || 'Unknown Item'}</strong>
+                        <span>${item.quantity || 1} × ₦${(item.price || 0)?.toLocaleString()}</span>
+                    </div>
+                    <div class="item-total">
+                        ₦${((item.quantity || 1) * (item.price || 0))?.toLocaleString()}
+                    </div>
+                </div>
+            `).join('') || '<p>No items found</p>';
+
+            const content = `
+                <div class="order-details">
+                    <div class="detail-section">
+                        <h4>Order Information</h4>
+                        <div class="detail-grid">
+                            <div><strong>Order ID:</strong> ${order.orderNumber || 'N/A'}</div>
+                            <div><strong>Date:</strong> ${order.timestamp ? new Date(order.timestamp).toLocaleString() : 'N/A'}</div>
+                            <div><strong>Status:</strong> <span class="status-badge ${order.status}">${order.status}</span></div>
+                            <div><strong>Total:</strong> ₦${(order.total || 0).toLocaleString()}</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Customer Information</h4>
+                        <div class="detail-grid">
+                            <div><strong>Name:</strong> ${order.customerName || 'N/A'}</div>
+                            <div><strong>Phone:</strong> ${order.customerPhone || 'N/A'}</div>
+                            <div><strong>Email:</strong> ${order.customerEmail || 'N/A'}</div>
+                            <div><strong>Location:</strong> ${order.customerLocation || 'N/A'}</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Order Items</h4>
+                        <div class="order-items">
+                            ${itemsHtml}
+                        </div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <button onclick="sendOrderUpdate('${orderId}')" class="btn-action"> Send Update</button>
+                        <button onclick="printInvoice('${orderId}')" class="btn-action"> Print Invoice</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('orderDetailsContent').innerHTML = content;
+            document.getElementById('modalOrderTitle').textContent = `Order: ${order.orderNumber || orderId}`;
+            document.getElementById('orderModal').style.display = 'block';
+        }
+
+        // Send order update email
+        async function sendOrderUpdate(orderId) {
+            const order = orders.find(o => o.id === orderId || o._id === orderId);
+            if (!order) {
+                alert('Order not found');
+                return;
+            }
+
+            if (!order.customerEmail) {
+                alert('No customer email found for this order');
+                return;
+            }
+
+            const subject = `Order Update - ${order.orderNumber || orderId}`;
+            const message = `
+Dear ${order.customerName || 'Valued Customer'},
+
+Your order ${order.orderNumber || orderId} is currently ${order.status}.
+
+Order Details:
+- Total: ₦${(order.total || 0).toLocaleString()}
+- Status: ${order.status}
+- Items: ${order.items?.map(item => `${item.quantity || 1} × ${item.name || 'Item'}`).join(', ') || 'No items'}
+
+Thank you for your business!
+
+Best regards,
+Collaborative Investment Ltd
+            `.trim();
+
+            try {
+                const response = await fetch('/admin/api/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        to: order.customerEmail,
+                        subject: subject,
+                        message: message
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Order update email sent successfully!');
+                } else {
+                    alert('Failed to send email. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
+                alert('Error sending email. Please try again.');
+            }
+        }
+
+        // Print invoice
+        function printInvoice(orderId) {
+            const order = orders.find(o => o.id === orderId || o._id === orderId);
+            if (!order) {
+                alert('Order not found');
+                return;
+            }
+
+            const printWindow = window.open('', '_blank');
+            const invoiceContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Invoice - ${order.orderNumber || orderId}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 2rem; }
+                        .header { text-align: center; margin-bottom: 2rem; }
+                        .details { margin: 2rem 0; }
+                        .table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+                        .table th, .table td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+                        .total { font-weight: bold; font-size: 1.2rem; margin-top: 1rem; text-align: right; }
+                        .footer { margin-top: 2rem; text-align: center; color: #666; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>Collaborative Investment Ltd</h1>
+                        <h2>INVOICE</h2>
+                        <p>Order: ${order.orderNumber || orderId} | Date: ${order.timestamp ? new Date(order.timestamp).toLocaleDateString() : 'N/A'}</p>
+                    </div>
+                    
+                    <div class="details">
+                        <p><strong>Customer:</strong> ${order.customerName || 'N/A'}</p>
+                        <p><strong>Phone:</strong> ${order.customerPhone || 'N/A'}</p>
+                        <p><strong>Location:</strong> ${order.customerLocation || 'N/A'}</p>
+                    </div>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${order.items?.map(item => `
+                                <tr>
+                                    <td>${item.name || 'Item'}</td>
+                                    <td>${item.quantity || 1}</td>
+                                    <td>₦${(item.price || 0)?.toLocaleString()}</td>
+                                    <td>₦${((item.quantity || 1) * (item.price || 0))?.toLocaleString()}</td>
+                                </tr>
+                            `).join('') || '<tr><td colspan="4">No items</td></tr>'}
+                        </tbody>
+                    </table>
+                    
+                    <div class="total">
+                        Total Amount: ₦${(order.total || 0).toLocaleString()}
+                    </div>
+                    
+                    <div class="footer">
+                        <p>Thank you for your business!</p>
+                        <p>Collaborative Investment Ltd</p>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            printWindow.document.write(invoiceContent);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Export orders
+        function exportOrders() {
+            if (orders.length === 0) {
+                alert('No orders to export');
+                return;
+            }
+
+            const csv = orders.map(order => 
+                `"${order.orderNumber || order.id}","${order.customerName || 'N/A'}","${order.customerPhone || 'N/A'}","${order.total || 0}","${order.status}","${order.timestamp ? new Date(order.timestamp).toLocaleDateString() : 'N/A'}"`
+            ).join('\n');
+            
+            const header = 'OrderID,Customer,Phone,Amount,Status,Date\n';
+            const blob = new Blob([header + csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'orders-export-' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Logout
+        async function logout() {
+            try {
+                await fetch('/admin/logout', { method: 'POST' });
+                window.location.href = '/admin/login';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/admin/login';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to load from localStorage first for demo
+            const savedOrders = localStorage.getItem('cil_orders');
+            if (savedOrders) {
+                orders = JSON.parse(savedOrders);
+                filteredOrders = [...orders];
+                displayOrders(filteredOrders);
+                updateOrderStats();
+            }
+            
+            // Then try to load from API
+            loadOrders();
+        });
+    </script>
+
+    
+    <style>
+        .stats-grid.mini {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card.mini {
+            padding: 1rem;
+        }
+        
+        .stat-card.mini .stat-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .stat-card.mini .stat-info h3 {
+            font-size: 1.2rem;
+        }
+        
+        .customer-info strong {
+            display: block;
+        }
+        
+        .customer-info small {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+        
+        .status-select {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .status-select.pending { background: #fff3cd; }
+        .status-select.confirmed { background: #d1edff; }
+        .status-select.processing { background: #e8f4fd; }
+        .status-select.shipped { background: #d4edda; }
+        .status-select.delivered { background: #d1edff; }
+        .status-select.cancelled { background: #f8d7da; }
+        
+        .payment-status {
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .payment-status.paid { background: #d4edda; color: #155724; }
+        .payment-status.pending { background: #fff3cd; color: #856404; }
+        .payment-status.failed { background: #f8d7da; color: #721c24; }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        
+        .status-badge.pending { background: #fff3cd; color: #856404; }
+        .status-badge.confirmed { background: #d1edff; color: #0c5460; }
+        .status-badge.processing { background: #e8f4fd; color: #004085; }
+        .status-badge.shipped { background: #d4edda; color: #155724; }
+        .status-badge.delivered { background: #d1edff; color: #0c5460; }
+        .status-badge.cancelled { background: #f8d7da; color: #721c24; }
+        
+        .order-details {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .detail-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .detail-section h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .order-items {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-total {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .detail-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .btn-view, .btn-email, .btn-print {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .btn-view { background: #3498db; color: white; }
+        .btn-email { background: #f39c12; color: white; }
+        .btn-print { background: #27ae60; color: white; }
+        
+        .bulk-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+        }
+        
+        .bulk-select {
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            min-width: 200px;
+        }
+        
+        .btn-action {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .btn-action:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</body>
+</html>

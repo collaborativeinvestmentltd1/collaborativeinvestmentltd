@@ -1,0 +1,22 @@
+{
+  "adminUsers": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "collaborativeinvestmentltd@gmail.com",
+      "password": "admin123",
+      "role": "superadmin",
+      "createdAt": "2025-11-24T07:27:36.114Z"
+    }
+  ],
+  "products": [],
+  "orders": [],
+  "customers": [],
+  "emails": [],
+  "inventoryAlerts": [],
+  "salesData": [],
+  "coupons": [],
+  "supportTickets": [],
+  "adminLogs": [],
+  "backups": []
+}

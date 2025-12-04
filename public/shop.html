@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - Collaborative Investment Ltd</title>
+    <meta name="description" content="Browse all our quality products - construction materials, agriculture products, machinery, solar energy solutions, and furniture.">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/shop-all.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Shop Header -->
+    <section class="shop-header">
+        <div class="container">
+            <a href="/shop-categories" class="back-link">← Browse Categories</a>
+            <h1>All Products</h1>
+            <p>Complete catalog of our quality products across all business sectors</p>
+        </div>
+    </section>
+
+    <!-- Quick Categories Navigation -->
+    <section class="quick-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <a href="/shop-agriculture" class="category-tab">
+                    <span class="tab-icon">🐔</span>
+                    Agriculture
+                </a>
+                <a href="/shop-construction" class="category-tab">
+                    <span class="tab-icon">🏗️</span>
+                    Construction
+                </a>
+                <a href="/shop-machinery" class="category-tab">
+                    <span class="tab-icon">⚙️</span>
+                    Machinery
+                </a>
+                <a href="/shop-solar" class="category-tab">
+                    <span class="tab-icon">☀️</span>
+                    Solar
+                </a>
+                <a href="/shop-furniture" class="category-tab">
+                    <span class="tab-icon">🪑</span>
+                    Furniture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Content -->
+    <section class="products-section">
+        <div class="container">
+            <!-- Simple Filter Controls -->
+            <div class="filter-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="product-search" placeholder="Search all products...">
+                </div>
+                <select class="category-filter" id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="agriculture">Agriculture & Livestock</option>
+                    <option value="construction">Construction & Blocks</option>
+                    <option value="machinery">Machinery & Equipment</option>
+                    <option value="solar">Solar Energy</option>
+                    <option value="furniture">Furniture & Upholstery</option>
+                </select>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Products loaded by JavaScript -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-section">
+                <button class="btn btn-primary" id="load-more">Load More Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Order Section -->
+    <section class="quick-order-section">
+        <div class="container">
+            <h2>Need Help with Your Order?</h2>
+            <p>Contact us directly for bulk orders or product advice</p>
+            <div class="contact-options">
+                <a href="tel:+2348129978419" class="contact-btn">
+                     Call +234 812 997 8419
+                </a>
+                <a href="https://wa.me/2348129978419" class="contact-btn whatsapp" target="_blank">
+                     WhatsApp Order
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>Collaborative Investment Ltd</h3>
+                    <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+                    <div class="social-links">
+                        <!-- Facebook -->
+                        <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                            </svg>
+                        </a>
+
+                        <!-- X / Twitter -->
+                        <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                            </svg>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                                <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.980.944.407 1.678.650 2.250.832.945.300 1.806.257 2.484.156.758-.112 2.340-.957 2.674-1.880.330-.924.330-1.715.230-1.880-.099-.165-.363-.264-.758-.462z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/services">Our Services</a></li>
+                        <li><a href="/shop-categories">Shop Categories</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
+                        <li><a href="/investment">Investment</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Shop Categories -->
+                <div class="footer-section">
+                    <h3>Shop Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="/shop-agriculture">Agriculture & Livestock</a></li>
+                        <li><a href="/shop-construction">Construction & Blocks</a></li>
+                        <li><a href="/shop-machinery">Machinery & Equipment</a></li>
+                        <li><a href="/shop-solar">Solar Energy</a></li>
+                        <li><a href="/shop-furniture">Furniture & Upholstery</a></li>
+                        <li><a href="/shop-all">All Products</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>212 Ijegun Road, Ikotun, Lagos</p>
+                    <p>collaborativeinvestmentltd@gmail.com</p>
+                    <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+                    <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                    <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+                <p>Building Nigeria's Business Future</p>
+
+                <p style="margin-top: 1rem;">
+                    <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+                    <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+                    <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
+    <script src="/js/shop-all.js"></script>
+</body>
+</html>

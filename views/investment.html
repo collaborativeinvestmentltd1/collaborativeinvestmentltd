@@ -4,10 +4,2483 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Opportunities - Collaborative Investment Ltd</title>
-    <meta name="description" content="Invest in professionally managed ventures with structured growth, transparent reporting, and 15-50% annual returns. Asset-backed investments in agriculture and manufacturing.">
+    <meta name="description" content="Invest in professionally managed ventures with structured growth, transparent reporting, and 15-50% annual returns. Asset-backed investments in agriculture, construction, solar energy, and furniture.">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Compact Modern Investment Styles */
+        .investment-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .investment-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .investment-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .compact-section {
+            padding: 3rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Compact Investment Cards */
+        .compact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .compact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .compact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .card-header h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .card-content {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .card-features {
+            margin: 1rem 0;
+            padding-left: 1.2rem;
+        }
+
+        .card-features li {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+
+        .card-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .investment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .roi-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .investment-amount {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Compact Calculator */
+        .calculator-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 3rem 0;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .calculator-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .calculator-header p {
+            color: var(--gray);
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .input-with-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .calculator-input {
+            width: 100%;
+            padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .calculator-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .project-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin: 0.8rem 0;
+        }
+
+        .project-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+        }
+
+        .project-card.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .project-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            margin: 0 auto 0.5rem;
+            border-radius: 6px;
+        }
+
+        .project-name {
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .project-roi {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .calculator-results {
+            background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .result-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-calculator {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary-calc {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary-calc:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-outline-calc {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-calc:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Compact Process Section */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .process-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto 1rem;
+        }
+
+        .process-step h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .process-step p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .compact-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .investment-hero {
+                padding: 2rem 0;
+            }
+            
+            .investment-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .compact-section {
+                padding: 2rem 0;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .calculator-card, .calculator-results {
+                padding: 1.5rem;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+/* Current Opportunities Section */
+.current-opportunities {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.section-subtitle {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+}
+
+.section-badge {
+    margin-top: 1.5rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, var(--secondary) 0%, #e67e22 100%);
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Opportunity Filters */
+.opportunity-filters {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--light);
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    color: var(--dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.filter-info {
+    color: var(--gray);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-info i {
+    color: var(--accent);
+}
+
+/* Opportunities Grid */
+.opportunities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.opportunity-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+}
+
+.opportunity-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-color: var(--primary);
+}
+
+.opportunity-header {
+    position: relative;
+}
+
+.opportunity-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.opportunity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.opportunity-card:hover .opportunity-image img {
+    transform: scale(1.05);
+}
+
+.opportunity-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+.high-demand { background: var(--danger); }
+.high-return { background: var(--success); }
+.trending { background: var(--accent); }
+.stable { background: var(--primary); }
+.premium { background: #8B4513; }
+.quick-return { background: var(--warning); color: var(--dark); }
+.available-slots { background: rgba(0,0,0,0.7); }
+
+.opportunity-title {
+    padding: 1.5rem 1.5rem 0;
+}
+
+.opportunity-title h3 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.opportunity-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category, .status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.category.agriculture {
+    background: rgba(144, 238, 144, 0.2);
+    color: #228B22;
+}
+
+.category.manufacturing {
+    background: rgba(192, 192, 192, 0.2);
+    color: #696969;
+}
+
+.category.renewable {
+    background: rgba(255, 228, 181, 0.2);
+    color: #FF8C00;
+}
+
+.status.active {
+    background: rgba(39, 174, 96, 0.2);
+    color: var(--success);
+}
+
+.status i.fa-circle {
+    font-size: 0.6rem;
+}
+
+/* Opportunity Content */
+.opportunity-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.opportunity-description {
+    color: var(--dark);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.opportunity-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.stat i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    background: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat label {
+    display: block;
+    color: var(--gray);
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.stat h4 {
+    color: var(--dark);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.roi-high { color: var(--success); }
+.roi-medium { color: var(--warning); }
+
+.opportunity-features h5,
+.opportunity-security h5 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.opportunity-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.opportunity-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+    font-size: 0.9rem;
+}
+
+.opportunity-features i.fa-check {
+    color: var(--success);
+    font-size: 0.9rem;
+}
+
+.security-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.security-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(41, 128, 185, 0.1);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* Opportunity Footer */
+.opportunity-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+    background: var(--light);
+}
+
+.progress-container {
+    margin-bottom: 1.5rem;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-weight: 600;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+.opportunity-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.opportunity-actions .btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: var(--secondary);
+    color: var(--primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #e67e22;
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* View All Section */
+.view-all-opportunities {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.disclaimer {
+    color: var(--gray);
+    font-size: 0.85rem;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    line-height: 1.5;
+}
+
+.disclaimer i {
+    color: var(--warning);
+    flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .opportunities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .opportunity-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .opportunity-actions {
+        flex-direction: column;
+    }
+    
+    .filter-buttons {
+        justify-content: center;
+    }
+    
+    .opportunity-filters {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .opportunity-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .security-items {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .opportunity-title h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Stats Section Styles */
+.stats-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/img/stats-pattern.png') repeat;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--secondary);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+.stat-item:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+    transform: scale(1.1);
+    color: white;
+}
+
+.stat-item p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Animation for counting */
+.stat-number.animating {
+    animation: pulse 0.5s ease infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    to {
+        text-shadow: 0 2px 20px rgba(243, 156, 18, 0.4);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2.8rem;
+    }
+    
+    .stat-item {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .stats-section {
+        padding: 3rem 0;
+    }
+}
+
+/* Additional decorative elements */
+.stats-section::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    pointer-events: none;
+}
+
+/* Testimonial Slider Styles */
+.compact-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--light) 0%, #e9ecef 100%);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.section-header p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.testimonial-slider-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.testimonial-slider-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 30px;
+    padding: 10px 0;
+}
+
+.testimonial-slide {
+    flex: 0 0 calc(33.333% - 20px);
+    min-width: 0;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    border: 1px solid var(--light-gray);
+    position: relative;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-color: var(--secondary);
+}
+
+.testimonial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--light);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover .testimonial-avatar img {
+    transform: scale(1.05);
+}
+
+.testimonial-rating {
+    color: #FFD700;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.testimonial-content {
+    color: var(--dark);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.testimonial-content::before {
+    content: '"';
+    font-size: 4rem;
+    color: var(--light-gray);
+    position: absolute;
+    top: -1.5rem;
+    left: -0.5rem;
+    line-height: 1;
+    opacity: 0.5;
+}
+
+.testimonial-author {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.testimonial-investment {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(41, 128, 185, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin-top: auto;
+}
+
+.testimonial-investment i {
+    font-size: 1rem;
+}
+
+/* Slider Controls */
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.slider-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 82, 118, 0.2);
+}
+
+.slider-btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 82, 118, 0.3);
+}
+
+.slider-btn:active {
+    transform: translateY(0);
+}
+
+.slider-btn i {
+    font-size: 1.2rem;
+}
+
+.slider-dots {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.slider-dot.active {
+    background: var(--secondary);
+    transform: scale(1.2);
+}
+
+.slider-dot:hover {
+    background: var(--accent);
+}
+
+/* Auto-slide animation */
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-33.333% * 10)); /* Move by 10 slides */
+    }
+}
+
+.testimonial-slider-track.auto-slide {
+    animation: slide 80s linear infinite;
+}
+
+/* Pause animation on hover */
+.testimonial-slider-container:hover .testimonial-slider-track.auto-slide {
+    animation-play-state: paused;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .testimonial-slide {
+        flex: 0 0 calc(50% - 15px);
+    }
+    
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-50% * 10)); /* Adjust for 2 slides visible */
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-slide {
+        flex: 0 0 calc(100% - 20px);
+    }
+    
+    .slider-controls {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+    
+    .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% * 10)); /* Adjust for 1 slide visible */
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .testimonial-content {
+        font-size: 0.95rem;
+        padding-left: 1rem;
+    }
+    
+    .testimonial-content::before {
+        font-size: 3rem;
+        left: -0.25rem;
+    }
+    
+    .testimonial-avatar {
+        width: 50px;
+        height: 50px;
+        border-width: 2px;
+    }
+}
+
+/* Compact section specific adjustments */
+.compact-section .testimonial-card {
+    padding: 1.75rem;
+}
+
+.compact-section .testimonial-content {
+    font-size: 0.95rem;
+}
+
+/* Placeholder styling for images that haven't been uploaded yet */
+.testimonial-avatar img[src*="testimonials/"] {
+    /* This will show if image fails to load */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+}
+
+/* Investment Process Section */
+.investment-process-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.section-header p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Process Flow */
+.process-flow {
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+}
+
+.process-step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+    position: relative;
+}
+
+.process-step:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(26, 82, 118, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.process-step::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 60px;
+    bottom: -3rem;
+    width: 2px;
+    background: var(--light-gray);
+    z-index: 1;
+}
+
+.process-step:last-child::before {
+    display: none;
+}
+
+.step-content {
+    flex-grow: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.step-image {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 3px solid var(--light);
+}
+
+.step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.step-content:hover .step-image img {
+    transform: scale(1.05);
+}
+
+.step-details {
+    flex-grow: 1;
+}
+
+.step-details h3 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.step-details p {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.step-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.step-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.step-features i {
+    color: var(--success);
+    font-size: 1.1rem;
+}
+
+.step-timing {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    background: rgba(41, 128, 185, 0.1);
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+}
+
+.step-timing i {
+    font-size: 1.1rem;
+}
+
+/* Process Timeline */
+.process-timeline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    min-width: 120px;
+}
+
+.timeline-icon {
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--primary);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.timeline-item.completed .timeline-icon {
+    background: var(--primary);
+    color: white;
+}
+
+.timeline-item:hover .timeline-icon {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.timeline-content h4 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.timeline-content p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.timeline-connector {
+    width: 40px;
+    height: 2px;
+    background: var(--light-gray);
+    margin: 0 0.5rem;
+}
+
+/* Process CTA */
+.process-cta {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.process-cta .btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cta-subtext {
+    margin-top: 1rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.cta-subtext i {
+    color: var(--accent);
+}
+
+/* Why Invest Section */
+.why-invest-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+/* Benefits Grid */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.benefit-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid var(--light-gray);
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-color: var(--primary);
+}
+
+.benefit-icon {
+    height: 200px;
+    overflow: hidden;
+}
+
+.benefit-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.benefit-card:hover .benefit-icon img {
+    transform: scale(1.05);
+}
+
+.benefit-content {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit-content h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.benefit-content p {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.benefit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefit-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.benefit-list i {
+    color: var(--success);
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Performance Stats */
+.performance-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 12px;
+    color: white;
+}
+
+.stat-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.stat-content h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Invest CTA */
+.invest-cta {
+    background: var(--light);
+    border-radius: 12px;
+    padding: 4rem;
+    text-align: center;
+    border: 2px solid var(--light-gray);
+}
+
+.invest-cta h3 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.invest-cta p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 250px;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: var(--secondary);
+    color: var(--primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #e67e22;
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .step-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .step-image {
+        width: 100%;
+        max-width: 300px;
+        height: 200px;
+    }
+    
+    .process-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .step-number {
+        margin-bottom: 1rem;
+    }
+    
+    .process-step::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .process-timeline {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .timeline-connector {
+        width: 2px;
+        height: 40px;
+    }
+    
+    .performance-stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 2rem;
+    }
+    
+    .invest-cta {
+        padding: 2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .performance-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-content h3 {
+        font-size: 2rem;
+    }
+    
+    .invest-cta h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Investment Models Section */
+.investment-models-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.section-subtitle {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Investment Tabs */
+.investment-tabs {
+    margin-bottom: 4rem;
+}
+
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: white;
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    color: var(--dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.tab-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.tab-btn i {
+    font-size: 1.2rem;
+}
+
+.tab-content {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.tab-pane {
+    display: none;
+    padding: 3rem;
+}
+
+.tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.model-detail {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.model-visual {
+    position: relative;
+}
+
+.model-image {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    height: 300px;
+}
+
+.model-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.model-image:hover img {
+    transform: scale(1.05);
+}
+
+.model-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+.risk-level {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.low-risk {
+    background: var(--success);
+}
+
+.medium-risk {
+    background: var(--warning);
+}
+
+.high-risk {
+    background: var(--danger);
+}
+
+.custom-risk {
+    background: var(--accent);
+}
+
+.model-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.model-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.model-header h3 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.model-highlight {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.roi-display, .amount-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    background: var(--light);
+}
+
+.roi-display {
+    border-left: 4px solid var(--secondary);
+}
+
+.amount-display {
+    border-left: 4px solid var(--accent);
+}
+
+.roi-display strong, .amount-display strong {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.model-description {
+    color: var(--dark);
+    line-height: 1.7;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.model-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.feature-category h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.feature-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-category li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.feature-category i.fa-check-circle {
+    color: var(--success);
+    font-size: 1.1rem;
+}
+
+.model-stats {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--light);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.stat i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    background: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat h5 {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.stat p {
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.model-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.model-cta .btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: var(--secondary);
+    color: var(--primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #e67e22;
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Comparison Table */
+.comparison-section {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: var(--light);
+    border-radius: 15px;
+}
+
+.comparison-title {
+    text-align: center;
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.comparison-table {
+    overflow-x: auto;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.comparison-table th {
+    background: var(--primary);
+    color: white;
+    padding: 1.25rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.comparison-table td {
+    padding: 1.25rem;
+    text-align: center;
+    border-bottom: 1px solid var(--light-gray);
+    color: var(--dark);
+    font-weight: 500;
+}
+
+.comparison-table tbody tr:hover {
+    background: var(--light);
+}
+
+.risk-badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.risk-badge.low {
+    background: rgba(39, 174, 96, 0.2);
+    color: var(--success);
+}
+
+.risk-badge.medium {
+    background: rgba(243, 156, 18, 0.2);
+    color: var(--warning);
+}
+
+.risk-badge.high {
+    background: rgba(231, 76, 60, 0.2);
+    color: var(--danger);
+}
+
+.risk-badge.custom {
+    background: rgba(41, 128, 185, 0.2);
+    color: var(--accent);
+}
+
+.green {
+    color: var(--success);
+}
+
+.red {
+    color: var(--danger);
+}
+
+/* Assessment CTA */
+.assessment-cta {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 15px;
+    padding: 4rem;
+    text-align: center;
+    color: white;
+    margin-top: 3rem;
+}
+
+.assessment-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.assessment-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-large {
+    padding: 1.25rem 3rem;
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    color: var(--primary);
+    border: none;
+    font-weight: 700;
+}
+
+.btn-large:hover {
+    background: var(--secondary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .model-detail {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .model-image {
+        height: 250px;
+    }
+    
+    .model-stats {
+        flex-wrap: wrap;
+    }
+    
+    .stat {
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tab-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tab-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .model-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .model-highlight {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .model-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .model-cta {
+        flex-direction: column;
+    }
+    
+    .comparison-table {
+        font-size: 0.9rem;
+    }
+    
+    .assessment-cta {
+        padding: 2rem;
+    }
+    
+    .assessment-content h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-pane {
+        padding: 1.5rem;
+    }
+    
+    .model-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .stat {
+        width: 100%;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 0.75rem;
+    }
+}
+    </style>
 </head>
 
 <body>
@@ -16,339 +2489,1998 @@
     <header class="header">
         <nav class="navbar">
             <a href="/" class="logo">
-                <img src="/img/logo.jpg" alt="CIL Logo" class="logo-img">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">☰</button>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
                 <li><a href="/portfolio">Portfolio</a></li>
-                <li><a href="/investment" class="active">Investment</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
         </nav>
     </header>
+    <div id="cart-drawer-overlay"></div>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-        <div class="breadcrumb-links">
-            <a href="/">Home</a>
-            <span>></span>
-            <span>Investment</span>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
+</div>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1>Investment Opportunities</h1>
-        <p>Invest in professionally managed ventures with structured growth, transparent reporting, and measurable returns.</p>
-    </section>
-
-    <!-- Investment Models -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Our Investment Models</h2>
-            <p>Flexible, secure, and performance-driven investment structures</p>
-        </div>
-
-        <div class="investment-cards">
-
-            <!-- Asset Backed -->
-            <div class="investment-card">
-                <h3> Asset-Backed Financing</h3>
-                <p><strong>Low-risk investments secured by tangible assets</strong></p>
-                <p>Perfect for investors who want guaranteed protection. Assets may include:</p>
-                <ul style="text-align:left; margin:1rem 0;">
-                    <li>Business equipment & industrial machines</li>
-                    <li>Livestock & agricultural assets</li>
-                    <li>Retail inventory</li>
-                    <li>Land & physical structures</li>
-                </ul>
-                <div class="investment-amount">Typical Returns: 15%–25% annually</div>
-                <div style="margin: 1rem 0;">
-                    <strong>Minimum Investment:</strong> ₦5,000,000
-                </div>
-            </div>
-
-            <!-- Profit Sharing -->
-            <div class="investment-card">
-                <h3> Profit-Sharing Partnerships</h3>
-                <p><strong>Become a strategic partner in our operating ventures</strong></p>
-                <p>You earn a percentage of real monthly profits from managed businesses.</p>
-                <ul style="text-align:left; margin:1rem 0;">
-                    <li>Monthly profit returns</li>
-                    <li>Full financial transparency</li>
-                    <li>Detailed monthly and quarterly reports</li>
-                    <li>Perfect for diaspora investors</li>
-                </ul>
-                <div class="investment-amount">Typical Returns: 20%–40% annually</div>
-                <div style="margin: 1rem 0;">
-                    <strong>Minimum Investment:</strong> ₦3,000,000
-                </div>
-            </div>
-
-            <!-- Project Funding -->
-            <div class="investment-card">
-                <h3> Project-Specific Funding</h3>
-                <p><strong>Invest in targeted expansion projects with clear timelines</strong></p>
-                <p>Each project has a defined cost, timeline, monitoring structure, and exit plan.</p>
-                <ul style="text-align:left; margin:1rem 0;">
-                    <li>Milestone-based deployment</li>
-                    <li>Short to medium term</li>
-                    <li>Strong profit margins (agribusiness & manufacturing)</li>
-                    <li>Guaranteed project oversight by CIL</li>
-                </ul>
-                <div class="investment-amount">Typical Returns: 25%–50% per project</div>
-                <div style="margin: 1rem 0;">
-                    <strong>Project-based Investment</strong>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ROI Calculator -->
-    <section class="section" style="background: var(--light);">
+    <!-- Hero Section -->
+    <section class="investment-hero">
         <div class="container">
-            <div class="section-title">
-                <h2>Investment Calculator</h2>
-                <p>Calculate potential returns on your investment with CIL</p>
+            <h1>Strategic Investment Opportunities</h1>
+            <p>Professional management, transparent reporting, and 15-50% annual returns on asset-backed ventures</p>
+        </div>
+    </section>
+
+<!-- Investment Models -->
+<section class="investment-models-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Investment Models</h2>
+            <p class="section-subtitle">Choose the perfect investment structure that matches your financial goals and risk profile</p>
+        </div>
+        
+        <!-- Investment Models Tabs -->
+        <div class="investment-tabs">
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="asset-backed">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Asset-Backed</span>
+                </button>
+                <button class="tab-btn" data-tab="profit-sharing">
+                    <i class="fas fa-handshake"></i>
+                    <span>Profit Sharing</span>
+                </button>
+                <button class="tab-btn" data-tab="project-funding">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Project Funding</span>
+                </button>
+                <button class="tab-btn" data-tab="diaspora">
+                    <i class="fas fa-globe-africa"></i>
+                    <span>Diaspora Special</span>
+                </button>
             </div>
             
-            <div class="investment-cards">
-                <div class="investment-card">
-                    <h3>ROI Calculator</h3>
-                    <form id="roiCalculator">
-                        <div class="form-group">
-                            <label for="investmentAmount">Investment Amount (₦)</label>
-                            <input type="number" id="investmentAmount" class="form-control" placeholder="Enter amount" min="100000" step="50000" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="projectType">Project Type</label>
-                            <select id="projectType" class="form-control" required>
-                                <option value="poultry">Poultry Farming (35% ROI)</option>
-                                <option value="block">Block Manufacturing (45% ROI)</option>
-                                <option value="aquaculture">Aquaculture (30% ROI)</option>
-                                <option value="piggery">Piggery (40% ROI)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="investmentDuration">Investment Duration (Years)</label>
-                            <input type="range" id="investmentDuration" class="form-control" min="1" max="15" value="10">
-                            <span id="investmentPeriod" style="display: block; text-align: center; margin-top: 0.5rem; font-weight: 600;">10 Years</span>
-                        </div>
-                    </form>
-                    
-                    <div class="investment-results" style="margin-top: 2rem;">
-                        <h4>Projected Returns</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-                            <div style="text-align: center;">
-                                <p style="font-size: 0.9rem; color: var(--gray);">Annual Return</p>
-                                <p id="annualReturn" class="investment-amount">₦0</p>
+            <div class="tab-content">
+                <!-- Asset-Backed Tab -->
+                <div class="tab-pane active" id="asset-backed">
+                    <div class="model-detail">
+                        <div class="model-visual">
+                            <div class="model-image">
+                                <img src="/img/investment/asset-backed.jpg" alt="Asset-Backed Financing" loading="lazy">
                             </div>
-                            <div style="text-align: center;">
-                                <p style="font-size: 0.9rem; color: var(--gray);">Total Return</p>
-                                <p id="totalReturn" class="investment-amount">₦0</p>
+                            <div class="model-tag">
+                                <span class="risk-level low-risk">
+                                    <i class="fas fa-lock"></i>
+                                    Low Risk
+                                </span>
                             </div>
                         </div>
-                        <div style="text-align: center; margin-top: 1rem;">
-                            <p style="font-size: 0.9rem; color: var(--gray);">Total Value</p>
-                            <p id="totalValue" class="investment-amount" style="color: var(--success);">₦0</p>
+                        <div class="model-info">
+                            <div class="model-header">
+                                <h3>Asset-Backed Financing</h3>
+                                <div class="model-highlight">
+                                    <span class="roi-display">
+                                        <strong>15-25%</strong> Annual ROI
+                                    </span>
+                                    <span class="amount-display">
+                                        From <strong>₦5,000,000</strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="model-description">
+                                Secure investments backed by tangible business assets with guaranteed capital protection. Perfect for conservative investors seeking stable returns with maximum security.
+                            </p>
+                            
+                            <div class="model-features">
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-gem"></i> Asset Types</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> Industrial equipment & machinery</li>
+                                        <li><i class="fas fa-check-circle"></i> Livestock & agricultural assets</li>
+                                        <li><i class="fas fa-check-circle"></i> Commercial land & structures</li>
+                                        <li><i class="fas fa-check-circle"></i> Manufacturing inventories</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-chart-line"></i> Investment Benefits</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> 100% asset collateral protection</li>
+                                        <li><i class="fas fa-check-circle"></i> Fixed quarterly returns</li>
+                                        <li><i class="fas fa-check-circle"></i> Asset valuation reports</li>
+                                        <li><i class="fas fa-check-circle"></i> Insurance coverage included</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="model-stats">
+                                <div class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <h5>Duration</h5>
+                                        <p>6-24 Months</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-percentage"></i>
+                                    <div>
+                                        <h5>Returns Frequency</h5>
+                                        <p>Quarterly Payments</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <h5>Ideal For</h5>
+                                        <p>Conservative Investors</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="model-cta">
+                                <a href="/contact?model=asset-backed" class="btn btn-primary">
+                                    <i class="fas fa-file-contract"></i>
+                                    Request Asset Details
+                                </a>
+                                <a href="/investment#faq" class="btn btn-secondary">
+                                    <i class="fas fa-question-circle"></i>
+                                    Learn More
+                                </a>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Profit-Sharing Tab -->
+                <div class="tab-pane" id="profit-sharing">
+                    <div class="model-detail">
+                        <div class="model-visual">
+                            <div class="model-image">
+                                <img src="/img/investment/profit-sharing.jpg" alt="Profit-Sharing Partnerships" loading="lazy">
+                            </div>
+                            <div class="model-tag">
+                                <span class="risk-level medium-risk">
+                                    <i class="fas fa-balance-scale"></i>
+                                    Medium Risk
+                                </span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <div class="model-header">
+                                <h3>Profit-Sharing Partnerships</h3>
+                                <div class="model-highlight">
+                                    <span class="roi-display">
+                                        <strong>20-40%</strong> Annual ROI
+                                    </span>
+                                    <span class="amount-display">
+                                        From <strong>₦3,000,000</strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="model-description">
+                                Become a strategic partner in operational ventures with monthly profit distributions. Perfect for investors seeking higher returns with active business participation.
+                            </p>
+                            
+                            <div class="model-features">
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-money-bill-wave"></i> Revenue Structure</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> Monthly profit distributions</li>
+                                        <li><i class="fas fa-check-circle"></i> Quarterly performance bonuses</li>
+                                        <li><i class="fas fa-check-circle"></i> Annual profit sharing</li>
+                                        <li><i class="fas fa-check-circle"></i> Revenue-based escalations</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-chart-bar"></i> Transparency Features</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> Real-time financial dashboard</li>
+                                        <li><i class="fas fa-check-circle"></i> Monthly audit reports</li>
+                                        <li><i class="fas fa-check-circle"></i> Quarterly strategy meetings</li>
+                                        <li><i class="fas fa-check-circle"></i> Annual performance reviews</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="model-stats">
+                                <div class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <h5>Duration</h5>
+                                        <p>12-36 Months</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-percentage"></i>
+                                    <div>
+                                        <h5>Returns Frequency</h5>
+                                        <p>Monthly Distributions</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <h5>Ideal For</h5>
+                                        <p>Active Investors</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="model-cta">
+                                <a href="/contact?model=profit-sharing" class="btn btn-primary">
+                                    <i class="fas fa-handshake"></i>
+                                    Become A Partner
+                                </a>
+                                <a href="/investment#partnerships" class="btn btn-secondary">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                    View Sample Agreement
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Funding Tab -->
+                <div class="tab-pane" id="project-funding">
+                    <div class="model-detail">
+                        <div class="model-visual">
+                            <div class="model-image">
+                                <img src="/img/investment/project-funding.jpg" alt="Project-Specific Funding" loading="lazy">
+                            </div>
+                            <div class="model-tag">
+                                <span class="risk-level high-risk">
+                                    <i class="fas fa-bolt"></i>
+                                    High Potential
+                                </span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <div class="model-header">
+                                <h3>Project-Specific Funding</h3>
+                                <div class="model-highlight">
+                                    <span class="roi-display">
+                                        <strong>25-50%</strong> Annual ROI
+                                    </span>
+                                    <span class="amount-display">
+                                        <strong>Project-Based</strong> Capital
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="model-description">
+                                Targeted investments in high-growth expansion projects with defined timelines and exit strategies. Perfect for investors seeking maximum returns from specific business ventures.
+                            </p>
+                            
+                            <div class="model-features">
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-project-diagram"></i> Project Types</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> Business expansion funding</li>
+                                        <li><i class="fas fa-check-circle"></i> New product launches</li>
+                                        <li><i class="fas fa-check-circle"></i> Market expansion projects</li>
+                                        <li><i class="fas fa-check-circle"></i> Technology implementation</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-tasks"></i> Project Management</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> Milestone-based funding</li>
+                                        <li><i class="fas fa-check-circle"></i> Professional project oversight</li>
+                                        <li><i class="fas fa-check-circle"></i> Weekly progress reports</li>
+                                        <li><i class="fas fa-check-circle"></i> Exit strategy planning</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="model-stats">
+                                <div class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <h5>Duration</h5>
+                                        <p>3-18 Months</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-percentage"></i>
+                                    <div>
+                                        <h5>Returns Structure</h5>
+                                        <p>Project Completion</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <h5>Ideal For</h5>
+                                        <p>Strategic Investors</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="model-cta">
+                                <a href="/contact?model=project-funding" class="btn btn-primary">
+                                    <i class="fas fa-bullseye"></i>
+                                    View Current Projects
+                                </a>
+                                <a href="/portfolio" class="btn btn-secondary">
+                                    <i class="fas fa-chart-line"></i>
+                                    See Past Successes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diaspora Special Tab -->
+                <div class="tab-pane" id="diaspora">
+                    <div class="model-detail">
+                        <div class="model-visual">
+                            <div class="model-image">
+                                <img src="/img/investment/diaspora-special.jpg" alt="Diaspora Investment Special" loading="lazy">
+                            </div>
+                            <div class="model-tag">
+                                <span class="risk-level custom-risk">
+                                    <i class="fas fa-globe"></i>
+                                    Custom Solutions
+                                </span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <div class="model-header">
+                                <h3>Diaspora Investment Special</h3>
+                                <div class="model-highlight">
+                                    <span class="roi-display">
+                                        <strong>Customized</strong> Returns
+                                    </span>
+                                    <span class="amount-display">
+                                        <strong>Flexible</strong> Structures
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="model-description">
+                                Specialized investment solutions for Nigerians abroad, featuring remote management, international transfers, and multi-currency options with dedicated relationship management.
+                            </p>
+                            
+                            <div class="model-features">
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-plane-departure"></i> Diaspora Features</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> International wire transfers</li>
+                                        <li><i class="fas fa-check-circle"></i> Multi-currency accounts (USD, GBP, EUR)</li>
+                                        <li><i class="fas fa-check-circle"></i> Remote portfolio management</li>
+                                        <li><i class="fas fa-check-circle"></i> Virtual meeting options</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-user-shield"></i> Security Features</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> International compliance standards</li>
+                                        <li><i class="fas fa-check-circle"></i> Monthly video conference updates</li>
+                                        <li><i class="fas fa-check-circle"></i> Cross-border legal support</li>
+                                        <li><i class="fas fa-check-circle"></i> 24/7 international support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="model-stats">
+                                <div class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <h5>Support Hours</h5>
+                                        <p>24/7 Global</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-language"></i>
+                                    <div>
+                                        <h5>Languages</h5>
+                                        <p>EN, FR, ES, PT</p>
+                                    </div>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <h5>Ideal For</h5>
+                                        <p>Global Nigerians</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="model-cta">
+                                <a href="/contact?model=diaspora" class="btn btn-primary">
+                                    <i class="fas fa-globe-americas"></i>
+                                    International Inquiry
+                                </a>
+                                <a href="/services#diaspora" class="btn btn-secondary">
+                                    <i class="fas fa-headset"></i>
+                                    Schedule Global Call
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comparison Table -->
+        <div class="comparison-section">
+            <h3 class="comparison-title">Investment Model Comparison</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Features</th>
+                            <th>Asset-Backed</th>
+                            <th>Profit Sharing</th>
+                            <th>Project Funding</th>
+                            <th>Diaspora Special</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Minimum Investment</td>
+                            <td>₦5,000,000</td>
+                            <td>₦3,000,000</td>
+                            <td>Project-Based</td>
+                            <td>Customized</td>
+                        </tr>
+                        <tr>
+                            <td>Expected ROI</td>
+                            <td>15-25%</td>
+                            <td>20-40%</td>
+                            <td>25-50%</td>
+                            <td>Customized</td>
+                        </tr>
+                        <tr>
+                            <td>Risk Level</td>
+                            <td><span class="risk-badge low">Low</span></td>
+                            <td><span class="risk-badge medium">Medium</span></td>
+                            <td><span class="risk-badge high">High</span></td>
+                            <td><span class="risk-badge custom">Custom</span></td>
+                        </tr>
+                        <tr>
+                            <td>Investment Duration</td>
+                            <td>6-24 Months</td>
+                            <td>12-36 Months</td>
+                            <td>3-18 Months</td>
+                            <td>Flexible</td>
+                        </tr>
+                        <tr>
+                            <td>Returns Frequency</td>
+                            <td>Quarterly</td>
+                            <td>Monthly</td>
+                            <td>Project Completion</td>
+                            <td>Customized</td>
+                        </tr>
+                        <tr>
+                            <td>Capital Protection</td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-times red"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Reports</td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Exit Strategy</td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                            <td><i class="fas fa-check green"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Quick Assessment CTA -->
+        <div class="assessment-cta">
+            <div class="assessment-content">
+                <h3>Not Sure Which Model Fits You?</h3>
+                <p>Take our 2-minute investment assessment to find your perfect match</p>
+                <a href="/investment-assessment" class="btn btn-primary btn-large">
+                    <i class="fas fa-clipboard-check"></i>
+                    Take Free Assessment
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Investment Calculator -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-container">
+                <div class="calculator-card">
+                    <div class="calculator-header">
+                        <h2>ROI Calculator</h2>
+                        <p>Project your potential returns</p>
+                    </div>
+                    <div class="calculator-inputs">
+                        <div class="input-group">
+                            <label for="investmentAmount">Investment Amount</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">₦</span>
+                                <input type="number" id="investmentAmount" class="calculator-input" min="100000" step="100000" value="5000000">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Project Type</label>
+                            <div class="project-cards">
+                                <div class="project-card selected" data-type="poultry" data-roi="35">
+                                    <img src="/img/investment/poultry-calc.jpg" alt="Poultry" class="project-icon" onerror="this.src='/img/logo.jpg'">
+                                    <div class="project-name">Poultry</div>
+                                    <div class="project-roi">35%</div>
+                                </div>
+                                <div class="project-card" data-type="block" data-roi="45">
+                                    <img src="/img/investment/block-calc.jpg" alt="Block Making" class="project-icon" onerror="this.src='/img/logo.jpg'">
+                                    <div class="project-name">Block Making</div>
+                                    <div class="project-roi">45%</div>
+                                </div>
+                                <div class="project-card" data-type="solar" data-roi="40">
+                                    <img src="/img/investment/solar-calc.jpg" alt="Solar" class="project-icon" onerror="this.src='/img/logo.jpg'">
+                                    <div class="project-name">Solar</div>
+                                    <div class="project-roi">40%</div>
+                                </div>
+                                <div class="project-card" data-type="furniture" data-roi="35">
+                                    <img src="/img/investment/furniture-calc.jpg" alt="Furniture" class="project-icon" onerror="this.src='/img/logo.jpg'">
+                                    <div class="project-name">Furniture</div>
+                                    <div class="project-roi">35%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="investmentDuration">Duration: <span id="durationValue">5 Years</span></label>
+                            <input type="range" id="investmentDuration" class="calculator-input" min="1" max="10" value="5" step="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="calculator-results">
+                    <div class="calculator-header">
+                        <h3>Projection Results</h3>
+                        <p>Based on your selection</p>
+                    </div>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label">Annual Return</div>
+                            <div class="result-value" id="annualReturn">₦1,750,000</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Total Return</div>
+                            <div class="result-value" id="totalReturn">₦8,750,000</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Total Value</div>
+                            <div class="result-value" id="totalValue">₦13,750,000</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">ROI</div>
+                            <div class="result-value" id="roiPercentage">175%</div>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="/contact" class="btn-calculator btn-primary-calc">Start Investing</a>
+                        <a href="https://wa.me/2348129978419" class="btn-calculator btn-outline-calc" target="_blank">Consult via WhatsApp</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Current Opportunities -->
-    <section class="section" style="background:#f8f9fa;">
-        <div class="section-title">
+<!-- Current Opportunities -->
+<section class="current-opportunities">
+    <div class="container">
+        <div class="section-header">
             <h2>Current Investment Opportunities</h2>
-            <p>Active and expansion-ready ventures available for partnership</p>
+            <p class="section-subtitle">Actively managed ventures with proven track records, ready for immediate investment</p>
+            <div class="section-badge">
+                <span class="badge">
+                    <i class="fas fa-bolt"></i>
+                    Limited Slots Available
+                </span>
+            </div>
         </div>
 
-        <div class="investment-cards">
-
-            <!-- Poultry -->
-            <div class="investment-card" id="poultry">
-                <h3> Poultry Farm Expansion</h3>
-                <p><strong>Scale CIL Poultry to 5,000–7,000 bird capacity</strong></p>
-                <p>Well-structured and already operational. Expansion increases egg output, distribution capacity, and profit margins.</p>
-                <div style="margin:1.5rem 0;">
-                    <p><strong>Investment Required:</strong> ₦15,000,000</p>
-                    <p><strong>Project Duration:</strong> 18 months</p>
-                    <p><strong>Expected ROI:</strong> 35% annually</p>
-                    <p><strong>Security:</strong> Farm assets & equipment</p>
-                </div>
-                <div class="investment-amount">Priority Opportunity</div>
-                <a href="/contact?interest=poultry" class="btn btn-primary" style="margin-top:1rem;">Express Interest</a>
+        <!-- Investment Filters -->
+        <div class="opportunity-filters">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Opportunities</button>
+                <button class="filter-btn" data-filter="agriculture">
+                    <i class="fas fa-tractor"></i>
+                    Agriculture
+                </button>
+                <button class="filter-btn" data-filter="manufacturing">
+                    <i class="fas fa-industry"></i>
+                    Manufacturing
+                </button>
+                <button class="filter-btn" data-filter="renewable">
+                    <i class="fas fa-sun"></i>
+                    Renewable Energy
+                </button>
+                <button class="filter-btn" data-filter="high-demand">
+                    <i class="fas fa-fire"></i>
+                    High Demand
+                </button>
             </div>
-
-            <!-- Block Manufacturing -->
-            <div class="investment-card" id="block">
-                <h3> Block Manufacturing Plant</h3>
-                <p><strong>Commercial block production + machine fabrication</strong></p>
-                <p>High demand, low competition, and daily cashflow. Includes block-making machines, mixers, and logistics setup.</p>
-                <div style="margin:1.5rem 0;">
-                    <p><strong>Investment Required:</strong> ₦8,000,000</p>
-                    <p><strong>Project Duration:</strong> 12 months</p>
-                    <p><strong>Expected ROI:</strong> 45% annually</p>
-                    <p><strong>Security:</strong> Manufacturing equipment</p>
-                </div>
-                <div class="investment-amount">High Growth Potential</div>
-                <a href="/contact?interest=block" class="btn btn-primary" style="margin-top:1rem;">Express Interest</a>
+            <div class="filter-info">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    Showing <span id="opportunity-count">6</span> verified opportunities
+                </p>
             </div>
-
-            <!-- Aquaculture -->
-            <div class="investment-card" id="aquaculture">
-                <h3> Integrated Fish Farm</h3>
-                <p><strong>Set up a 10,000+ catfish capacity aquaculture system</strong></p>
-                <p>Demand for catfish is rising nationwide. Strong margins, stable market, and short production cycles.</p>
-                <div style="margin:1.5rem 0;">
-                    <p><strong>Investment Required:</strong> ₦7,000,000</p>
-                    <p><strong>Project Duration:</strong> 24 months</p>
-                    <p><strong>Expected ROI:</strong> 30% annually</p>
-                    <p><strong>Security:</strong> Farm infrastructure</p>
-                </div>
-                <div class="investment-amount">Sustainable Project</div>
-                <a href="/contact?interest=aquaculture" class="btn btn-primary" style="margin-top:1rem;">Express Interest</a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Investment Process -->
-    <section class="section" style="background:var(--primary); color:white;">
-        <div class="section-title">
-            <h2 style="color:white;">Investment Process</h2>
-            <p style="color: rgba(255,255,255,0.9);">Simple, transparent, and secure investment journey</p>
         </div>
 
-        <div class="services-grid">
+        <!-- Opportunities Grid -->
+        <div class="opportunities-grid">
+            <!-- Opportunity 1: Poultry Farm Expansion -->
+            <div class="opportunity-card" data-category="agriculture high-demand">
+                <div class="opportunity-header">
+                    <div class="opportunity-image">
+                        <img src="/img/investment/poultry-farm.jpg" alt="Poultry Farm Expansion" loading="lazy">
+                        <div class="opportunity-badge">
+                            <span class="badge-tag high-demand">
+                                <i class="fas fa-fire"></i>
+                                High Demand
+                            </span>
+                            <span class="badge-tag available-slots">
+                                <i class="fas fa-user-friends"></i>
+                                2/5 Slots Left
+                            </span>
+                        </div>
+                    </div>
+                    <div class="opportunity-title">
+                        <h3>Poultry Farm Expansion</h3>
+                        <div class="opportunity-meta">
+                            <span class="category agriculture">
+                                <i class="fas fa-tractor"></i>
+                                Agriculture
+                            </span>
+                            <span class="status active">
+                                <i class="fas fa-circle"></i>
+                                Active & Profitable
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
-                <div class="service-icon">1</div>
-                <h3>Consultation</h3>
-                <p>Discuss goals and investment categories with our experts.</p>
-                <div style="margin-top: 1rem;">
-                    <strong>Duration: 1-2 days</strong>
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Scale an operational poultry farm from 2,000 to 7,000 bird capacity. Fully operational farm with proven 35% ROI, established market, and existing customer base.
+                    </p>
+                    
+                    <div class="opportunity-stats">
+                        <div class="stat">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <label>Investment Needed</label>
+                                <h4>₦15,000,000</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <label>Projected ROI</label>
+                                <h4 class="roi-high">35-40%</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <label>Duration</label>
+                                <h4>18 Months</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="opportunity-features">
+                        <h5><i class="fas fa-check-circle"></i> Key Features</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Existing operational farm</li>
+                            <li><i class="fas fa-check"></i> 35% proven ROI track record</li>
+                            <li><i class="fas fa-check"></i> Established market demand</li>
+                            <li><i class="fas fa-check"></i> Professional veterinary support</li>
+                        </ul>
+                    </div>
+
+                    <div class="opportunity-security">
+                        <h5><i class="fas fa-shield-alt"></i> Security & Collateral</h5>
+                        <div class="security-items">
+                            <span class="security-item">
+                                <i class="fas fa-warehouse"></i>
+                                Farm Assets
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-home"></i>
+                                Land Property
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-file-contract"></i>
+                                Insurance Cover
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-footer">
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Funding Progress</span>
+                            <span>75% Funded</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="opportunity-actions">
+                        <a href="/contact?opportunity=poultry-farm" class="btn btn-primary">
+                            <i class="fas fa-file-signature"></i>
+                            Express Interest
+                        </a>
+                        <a href="/investment/poultry-farm-details" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            View Details
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
-                <div class="service-icon">2</div>
-                <h3>Due Diligence</h3>
-                <p>Review projections, business plans, and risk controls thoroughly.</p>
-                <div style="margin-top: 1rem;">
-                    <strong>Duration: 3-5 days</strong>
+            <!-- Opportunity 2: Block Manufacturing -->
+            <div class="opportunity-card" data-category="manufacturing high-demand">
+                <div class="opportunity-header">
+                    <div class="opportunity-image">
+                        <img src="/img/investment/block-plant.jpg" alt="Block Manufacturing Plant" loading="lazy">
+                        <div class="opportunity-badge">
+                            <span class="badge-tag high-return">
+                                <i class="fas fa-chart-line"></i>
+                                High Return
+                            </span>
+                            <span class="badge-tag available-slots">
+                                <i class="fas fa-user-friends"></i>
+                                1/4 Slots Left
+                            </span>
+                        </div>
+                    </div>
+                    <div class="opportunity-title">
+                        <h3>Block Manufacturing Plant</h3>
+                        <div class="opportunity-meta">
+                            <span class="category manufacturing">
+                                <i class="fas fa-industry"></i>
+                                Manufacturing
+                            </span>
+                            <span class="status active">
+                                <i class="fas fa-circle"></i>
+                                Operational
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Commercial block production with daily cash flow. High demand in construction sector, low competition, and proven 45% ROI potential with established distribution network.
+                    </p>
+                    
+                    <div class="opportunity-stats">
+                        <div class="stat">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <label>Investment Needed</label>
+                                <h4>₦8,000,000</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <label>Projected ROI</label>
+                                <h4 class="roi-high">40-45%</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <label>Duration</label>
+                                <h4>12 Months</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="opportunity-features">
+                        <h5><i class="fas fa-check-circle"></i> Key Features</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Daily production capacity: 5,000 blocks</li>
+                            <li><i class="fas fa-check"></i> Established distribution network</li>
+                            <li><i class="fas fa-check"></i> Government construction contracts</li>
+                            <li><i class="fas fa-check"></i> Professional quality control system</li>
+                        </ul>
+                    </div>
+
+                    <div class="opportunity-security">
+                        <h5><i class="fas fa-shield-alt"></i> Security & Collateral</h5>
+                        <div class="security-items">
+                            <span class="security-item">
+                                <i class="fas fa-cogs"></i>
+                                Manufacturing Equipment
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-truck"></i>
+                                Delivery Vehicles
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-building"></i>
+                                Factory Premises
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-footer">
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Funding Progress</span>
+                            <span>90% Funded</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="opportunity-actions">
+                        <a href="/contact?opportunity=block-manufacturing" class="btn btn-primary">
+                            <i class="fas fa-file-signature"></i>
+                            Express Interest
+                        </a>
+                        <a href="/investment/block-manufacturing-details" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            View Details
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
-                <div class="service-icon">3</div>
-                <h3>Agreement Signing</h3>
-                <p>Clear terms, timelines, and profit structure documentation.</p>
-                <div style="margin-top: 1rem;">
-                    <strong>Duration: 1-2 days</strong>
+            <!-- Opportunity 3: Solar Energy Solutions -->
+            <div class="opportunity-card" data-category="renewable">
+                <div class="opportunity-header">
+                    <div class="opportunity-image">
+                        <img src="/img/investment/solar-energy.jpg" alt="Solar Energy Solutions" loading="lazy">
+                        <div class="opportunity-badge">
+                            <span class="badge-tag trending">
+                                <i class="fas fa-trending-up"></i>
+                                Trending
+                            </span>
+                            <span class="badge-tag available-slots">
+                                <i class="fas fa-user-friends"></i>
+                                3/6 Slots Left
+                            </span>
+                        </div>
+                    </div>
+                    <div class="opportunity-title">
+                        <h3>Solar Energy Solutions</h3>
+                        <div class="opportunity-meta">
+                            <span class="category renewable">
+                                <i class="fas fa-sun"></i>
+                                Renewable Energy
+                            </span>
+                            <span class="status active">
+                                <i class="fas fa-circle"></i>
+                                Growing Market
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Expand solar equipment production and installation services to meet Nigeria's growing renewable energy demand. Government incentives and rising electricity costs driving market growth.
+                    </p>
+                    
+                    <div class="opportunity-stats">
+                        <div class="stat">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <label>Investment Needed</label>
+                                <h4>₦12,000,000</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <label>Projected ROI</label>
+                                <h4 class="roi-medium">35-40%</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <label>Duration</label>
+                                <h4>24 Months</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="opportunity-features">
+                        <h5><i class="fas fa-check-circle"></i> Key Features</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Growing renewable energy market</li>
+                            <li><i class="fas fa-check"></i> Government incentives available</li>
+                            <li><i class="fas fa-check"></i> Residential & commercial contracts</li>
+                            <li><i class="fas fa-check"></i> Professional installation team</li>
+                        </ul>
+                    </div>
+
+                    <div class="opportunity-security">
+                        <h5><i class="fas fa-shield-alt"></i> Security & Collateral</h5>
+                        <div class="security-items">
+                            <span class="security-item">
+                                <i class="fas fa-solar-panel"></i>
+                                Solar Equipment
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-warehouse"></i>
+                                Inventory Assets
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-file-contract"></i>
+                                Service Contracts
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-footer">
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Funding Progress</span>
+                            <span>60% Funded</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="opportunity-actions">
+                        <a href="/contact?opportunity=solar-energy" class="btn btn-primary">
+                            <i class="fas fa-file-signature"></i>
+                            Express Interest
+                        </a>
+                        <a href="/investment/solar-energy-details" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            View Details
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="service-card" style="background:rgba(255,255,255,0.1); color:white;">
-                <div class="service-icon">4</div>
-                <h3>Funding & Reporting</h3>
-                <p>Your project begins with structured oversight and monthly updates.</p>
-                <div style="margin-top: 1rem;">
-                    <strong>Ongoing</strong>
+            <!-- Opportunity 4: Catfish Farming Expansion -->
+            <div class="opportunity-card" data-category="agriculture">
+                <div class="opportunity-header">
+                    <div class="opportunity-image">
+                        <img src="/img/investment/catfish-farming.jpg" alt="Catfish Farming Expansion" loading="lazy">
+                        <div class="opportunity-badge">
+                            <span class="badge-tag stable">
+                                <i class="fas fa-chart-line"></i>
+                                Stable Returns
+                            </span>
+                            <span class="badge-tag available-slots">
+                                <i class="fas fa-user-friends"></i>
+                                4/8 Slots Left
+                            </span>
+                        </div>
+                    </div>
+                    <div class="opportunity-title">
+                        <h3>Catfish Farming Expansion</h3>
+                        <div class="opportunity-meta">
+                            <span class="category agriculture">
+                                <i class="fas fa-fish"></i>
+                                Aquaculture
+                            </span>
+                            <span class="status active">
+                                <i class="fas fa-circle"></i>
+                                High Demand
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Modern aquaculture operation expanding from 10,000 to 25,000 fingerlings capacity. Advanced water management system and established market channels for premium catfish.
+                    </p>
+                    
+                    <div class="opportunity-stats">
+                        <div class="stat">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <label>Investment Needed</label>
+                                <h4>₦6,500,000</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <label>Projected ROI</label>
+                                <h4 class="roi-medium">30-35%</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <label>Duration</label>
+                                <h4>8 Months</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="opportunity-features">
+                        <h5><i class="fas fa-check-circle"></i> Key Features</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Modern aquaculture technology</li>
+                            <li><i class="fas fa-check"></i> Established restaurant contracts</li>
+                            <li><i class="fas fa-check"></i> High survival rate (90%+)</li>
+                            <li><i class="fas fa-check"></i> Professional veterinary support</li>
+                        </ul>
+                    </div>
+
+                    <div class="opportunity-security">
+                        <h5><i class="fas fa-shield-alt"></i> Security & Collateral</h5>
+                        <div class="security-items">
+                            <span class="security-item">
+                                <i class="fas fa-tint"></i>
+                                Water Systems
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-fish"></i>
+                                Livestock Assets
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-home"></i>
+                                Farm Property
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-footer">
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Funding Progress</span>
+                            <span>50% Funded</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <div class="opportunity-actions">
+                        <a href="/contact?opportunity=catfish-farming" class="btn btn-primary">
+                            <i class="fas fa-file-signature"></i>
+                            Express Interest
+                        </a>
+                        <a href="/investment/catfish-farming-details" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            View Details
+                        </a>
+                    </div>
                 </div>
             </div>
 
+            <!-- Opportunity 5: Furniture Manufacturing -->
+            <div class="opportunity-card" data-category="manufacturing">
+                <div class="opportunity-header">
+                    <div class="opportunity-image">
+                        <img src="/img/investment/furniture-manufacturing.jpg" alt="Furniture Manufacturing" loading="lazy">
+                        <div class="opportunity-badge">
+                            <span class="badge-tag premium">
+                                <i class="fas fa-crown"></i>
+                                Premium Market
+                            </span>
+                            <span class="badge-tag available-slots">
+                                <i class="fas fa-user-friends"></i>
+                                5/10 Slots Left
+                            </span>
+                        </div>
+                    </div>
+                    <div class="opportunity-title">
+                        <h3>Premium Furniture Manufacturing</h3>
+                        <div class="opportunity-meta">
+                            <span class="category manufacturing">
+                                <i class="fas fa-chair"></i>
+                                Furniture
+                            </span>
+                            <span class="status active">
+                                <i class="fas fa-circle"></i>
+                                Growing Demand
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Expand custom furniture production for Nigeria's growing premium interior design market. Established clientele includes hotels, corporate offices, and luxury residences.
+                    </p>
+                    
+                    <div class="opportunity-stats">
+                        <div class="stat">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <label>Investment Needed</label>
+                                <h4>₦10,000,000</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <label>Projected ROI</label>
+                                <h4 class="roi-medium">30-35%</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <label>Duration</label>
+                                <h4>15 Months</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="opportunity-features">
+                        <h5><i class="fas fa-check-circle"></i> Key Features</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Premium custom furniture</li>
+                            <li><i class="fas fa-check"></i> Established hotel contracts</li>
+                            <li><i class="fas fa-check"></i> Skilled artisan workforce</li>
+                            <li><i class="fas fa-check"></i> Export quality standards</li>
+                        </ul>
+                    </div>
+
+                    <div class="opportunity-security">
+                        <h5><i class="fas fa-shield-alt"></i> Security & Collateral</h5>
+                        <div class="security-items">
+                            <span class="security-item">
+                                <i class="fas fa-tools"></i>
+                                Manufacturing Equipment
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-warehouse"></i>
+                                Raw Material Inventory
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-file-contract"></i>
+                                Client Contracts
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-footer">
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Funding Progress</span>
+                            <span>40% Funded</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                    </div>
+                    <div class="opportunity-actions">
+                        <a href="/contact?opportunity=furniture" class="btn btn-primary">
+                            <i class="fas fa-file-signature"></i>
+                            Express Interest
+                        </a>
+                        <a href="/investment/furniture-details" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opportunity 6: Piggery Business -->
+            <div class="opportunity-card" data-category="agriculture">
+                <div class="opportunity-header">
+                    <div class="opportunity-image">
+                        <img src="/img/investment/piggery-business.jpg" alt="Piggery Business Expansion" loading="lazy">
+                        <div class="opportunity-badge">
+                            <span class="badge-tag quick-return">
+                                <i class="fas fa-bolt"></i>
+                                Quick Returns
+                            </span>
+                            <span class="badge-tag available-slots">
+                                <i class="fas fa-user-friends"></i>
+                                3/6 Slots Left
+                            </span>
+                        </div>
+                    </div>
+                    <div class="opportunity-title">
+                        <h3>Piggery Business Expansion</h3>
+                        <div class="opportunity-meta">
+                            <span class="category agriculture">
+                                <i class="fas fa-piggy-bank"></i>
+                                Livestock
+                            </span>
+                            <span class="status active">
+                                <i class="fas fa-circle"></i>
+                                High Demand
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Expand piggery operations from 50 to 200 pigs with modern breeding facilities. High demand for pork products with established wholesale buyers and restaurants.
+                    </p>
+                    
+                    <div class="opportunity-stats">
+                        <div class="stat">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <label>Investment Needed</label>
+                                <h4>₦7,500,000</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <label>Projected ROI</label>
+                                <h4 class="roi-high">40-45%</h4>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <label>Duration</label>
+                                <h4>10 Months</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="opportunity-features">
+                        <h5><i class="fas fa-check-circle"></i> Key Features</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Modern breeding facilities</li>
+                            <li><i class="fas fa-check"></i> Established wholesale contracts</li>
+                            <li><i class="fas fa-check"></i> Professional veterinary care</li>
+                            <li><i class="fas fa-check"></i> Organic feed production</li>
+                        </ul>
+                    </div>
+
+                    <div class="opportunity-security">
+                        <h5><i class="fas fa-shield-alt"></i> Security & Collateral</h5>
+                        <div class="security-items">
+                            <span class="security-item">
+                                <i class="fas fa-piggy-bank"></i>
+                                Livestock Assets
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-home"></i>
+                                Farm Infrastructure
+                            </span>
+                            <span class="security-item">
+                                <i class="fas fa-tractor"></i>
+                                Farming Equipment
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunity-footer">
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Funding Progress</span>
+                            <span>70% Funded</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="opportunity-actions">
+                        <a href="/contact?opportunity=piggery" class="btn btn-primary">
+                            <i class="fas fa-file-signature"></i>
+                            Express Interest
+                        </a>
+                        <a href="/investment/piggery-details" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- Why Invest -->
-    <section class="section">
-        <div class="section-title">
+        <!-- View All Opportunities -->
+        <div class="view-all-opportunities">
+            <a href="/investment-portfolio" class="btn btn-outline">
+                <i class="fas fa-briefcase"></i>
+                View Full Investment Portfolio
+            </a>
+            <p class="disclaimer">
+                <i class="fas fa-exclamation-triangle"></i>
+                All opportunities are subject to availability and due diligence. Past performance doesn't guarantee future results.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Investment Process Section -->
+<section class="investment-process-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Investment Process</h2>
+            <p>A simple, transparent, and secure journey to profitable returns</p>
+        </div>
+        
+        <!-- Main Process Flow -->
+        <div class="process-flow">
+            <!-- Process Step 1 -->
+            <div class="process-step">
+                <div class="step-number">
+                    <span>01</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-image">
+                        <img src="/img/investment/consultation.jpg" alt="Initial Consultation" loading="lazy">
+                    </div>
+                    <div class="step-details">
+                        <h3>Initial Consultation</h3>
+                        <p>Discuss your investment goals, risk tolerance, and preferences with our expert advisors</p>
+                        <ul class="step-features">
+                            <li><i class="fas fa-check-circle"></i> Free personalized assessment</li>
+                            <li><i class="fas fa-check-circle"></i> Multiple investment options</li>
+                            <li><i class="fas fa-check-circle"></i> Customized strategy planning</li>
+                        </ul>
+                        <div class="step-timing">
+                            <i class="fas fa-clock"></i>
+                            <span>1-2 Business Days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Process Step 2 -->
+            <div class="process-step">
+                <div class="step-number">
+                    <span>02</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-image">
+                        <img src="/img/investment/due-diligence.jpg" alt="Due Diligence" loading="lazy">
+                    </div>
+                    <div class="step-details">
+                        <h3>Due Diligence & Analysis</h3>
+                        <p>Comprehensive review of business plans, financial projections, and risk management controls</p>
+                        <ul class="step-features">
+                            <li><i class="fas fa-check-circle"></i> Detailed market analysis</li>
+                            <li><i class="fas fa-check-circle"></i> Financial projections review</li>
+                            <li><i class="fas fa-check-circle"></i> Risk assessment report</li>
+                        </ul>
+                        <div class="step-timing">
+                            <i class="fas fa-clock"></i>
+                            <span>3-5 Business Days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Process Step 3 -->
+            <div class="process-step">
+                <div class="step-number">
+                    <span>03</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-image">
+                        <img src="/img/investment/agreement.jpg" alt="Agreement Signing" loading="lazy">
+                    </div>
+                    <div class="step-details">
+                        <h3>Agreement & Documentation</h3>
+                        <p>Clear contractual terms with transparent profit structure and documented responsibilities</p>
+                        <ul class="step-features">
+                            <li><i class="fas fa-check-circle"></i> Legal documentation</li>
+                            <li><i class="fas fa-check-circle"></i> Transparent terms</li>
+                            <li><i class="fas fa-check-circle"></i> Profit structure clarity</li>
+                        </ul>
+                        <div class="step-timing">
+                            <i class="fas fa-clock"></i>
+                            <span>1-2 Business Days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Process Step 4 -->
+            <div class="process-step">
+                <div class="step-number">
+                    <span>04</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-image">
+                        <img src="/img/investment/funding.jpg" alt="Funding & Implementation" loading="lazy">
+                    </div>
+                    <div class="step-details">
+                        <h3>Funding & Implementation</h3>
+                        <p>Project commencement with structured oversight and regular progress updates</p>
+                        <ul class="step-features">
+                            <li><i class="fas fa-check-circle"></i> Capital deployment</li>
+                            <li><i class="fas fa-check-circle"></i> Professional oversight</li>
+                            <li><i class="fas fa-check-circle"></i> Regular progress reports</li>
+                        </ul>
+                        <div class="step-timing">
+                            <i class="fas fa-clock"></i>
+                            <span>Ongoing Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Process Timeline -->
+        <div class="process-timeline">
+            <div class="timeline-item completed">
+                <div class="timeline-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>Consultation</h4>
+                    <p>1-2 days</p>
+                </div>
+            </div>
+            
+            <div class="timeline-connector"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>Due Diligence</h4>
+                    <p>3-5 days</p>
+                </div>
+            </div>
+            
+            <div class="timeline-connector"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>Agreement</h4>
+                    <p>1-2 days</p>
+                </div>
+            </div>
+            
+            <div class="timeline-connector"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>Implementation</h4>
+                    <p>Ongoing</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Button -->
+        <div class="process-cta">
+            <a href="/contact" class="btn btn-primary">
+                <i class="fas fa-calendar-check"></i>
+                Schedule Your Free Consultation
+            </a>
+            <p class="cta-subtext">
+                <i class="fas fa-shield-alt"></i>
+                100% Confidential • No Commitment Required
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Why Invest Section -->
+<section class="why-invest-section">
+    <div class="container">
+        <div class="section-header">
             <h2>Why Invest With CIL?</h2>
-            <p>Professional, structured, transparent investment management</p>
+            <p>Professional investment management with proven results and transparent operations</p>
         </div>
-
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Risk-Controlled Model</h3>
-                <p>Every project is backed by operational oversight, financial controls, and real-time monitoring. Asset-backed security on all investments.</p>
+        
+        <div class="benefits-grid">
+            <!-- Benefit 1 -->
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <img src="/img/investment/risk-controlled.jpg" alt="Risk Controlled Investments" loading="lazy">
+                </div>
+                <div class="benefit-content">
+                    <h3>Risk-Controlled Investments</h3>
+                    <p>Asset-backed security with professional operational oversight ensures capital protection</p>
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-check"></i> Asset-backed security</li>
+                        <li><i class="fas fa-check"></i> Professional oversight</li>
+                        <li><i class="fas fa-check"></i> Capital protection focus</li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Performance-Based Growth</h3>
-                <p>All ventures are structured for sustainability and long-term profitability. Proven track record of 25-50% annual returns.</p>
+            
+            <!-- Benefit 2 -->
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <img src="/img/investment/performance-growth.jpg" alt="Proven Performance" loading="lazy">
+                </div>
+                <div class="benefit-content">
+                    <h3>Proven Performance Record</h3>
+                    <p>Consistent 25-50% annual returns across all our managed investment ventures</p>
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-chart-line"></i> 25-50% annual returns</li>
+                        <li><i class="fas fa-trend-up"></i> Consistent growth</li>
+                        <li><i class="fas fa-medal"></i> Track record since 2022</li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Transparent Reporting</h3>
-                <p>Investors receive monthly reports, financial statements, and growth analysis. Full visibility into your investment performance.</p>
+            
+            <!-- Benefit 3 -->
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <img src="/img/investment/transparent-reporting.jpg" alt="Transparent Reporting" loading="lazy">
+                </div>
+                <div class="benefit-content">
+                    <h3>Transparent Reporting</h3>
+                    <p>Monthly financial statements, performance updates, and comprehensive growth analysis</p>
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-file-invoice-dollar"></i> Monthly statements</li>
+                        <li><i class="fas fa-chart-bar"></i> Performance analytics</li>
+                        <li><i class="fas fa-sync-alt"></i> Real-time updates</li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Experienced Management</h3>
-                <p>Our team combines expertise across agriculture, construction, retail, and manufacturing with 10+ years collective experience.</p>
+            
+            <!-- Benefit 4 -->
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <img src="/img/investment/experienced-management.jpg" alt="Expert Management" loading="lazy">
+                </div>
+                <div class="benefit-content">
+                    <h3>Expert Management Team</h3>
+                    <p>10+ years collective experience across agriculture, manufacturing, and renewable energy sectors</p>
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-users"></i> Experienced team</li>
+                        <li><i class="fas fa-graduation-cap"></i> Sector specialists</li>
+                        <li><i class="fas fa-cogs"></i> Operational excellence</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Benefit 5 -->
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <img src="/img/investment/diversified-portfolio.jpg" alt="Diversified Portfolio" loading="lazy">
+                </div>
+                <div class="benefit-content">
+                    <h3>Diversified Portfolio</h3>
+                    <p>Spread risk across multiple high-performing sectors for balanced growth and stability</p>
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-layer-group"></i> Multi-sector exposure</li>
+                        <li><i class="fas fa-balance-scale"></i> Risk diversification</li>
+                        <li><i class="fas fa-shield-alt"></i> Stable growth</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Benefit 6 -->
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <img src="/img/investment/customer-support.jpg" alt="Dedicated Support" loading="lazy">
+                </div>
+                <div class="benefit-content">
+                    <h3>Dedicated Investor Support</h3>
+                    <p>Personal relationship manager and 24/7 access to investment performance dashboard</p>
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-headset"></i> Personal manager</li>
+                        <li><i class="fas fa-dashboard"></i> Online dashboard</li>
+                        <li><i class="fas fa-mobile-alt"></i> Mobile access</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </section>
+        
+<!-- Quick Stats -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="45" data-suffix="+">0</h3>
+                <p>Quality Products</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="6">0</h3>
+                <p>Business Sectors</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="90" data-suffix="%">0</h3>
+                <p>Customer Satisfaction</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="3" data-suffix="+">0</h3>
+                <p>Years Experience</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- Testimonials -->
-    <section class="section" style="background: var(--light);">
-        <div class="section-title">
+<!-- Testimonials -->
+<section class="compact-section">
+    <div class="container">
+        <div class="section-header">
             <h2>Investor Testimonials</h2>
-            <p>What our investment partners say about us</p>
+            <p>What our partners say about working with us</p>
         </div>
-
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    "I invested ₦10M in the poultry expansion and received 35% returns in the first year. CIL's professional management and transparent reporting gave me complete confidence."
+        
+        <!-- Testimonial Slider Container -->
+        <div class="testimonial-slider-container">
+            <div class="testimonial-slider-track">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/dr-adebayo.jpg" alt="Dr. Adebayo" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "I invested ₦10M in the poultry expansion and received 35% returns in the first year. CIL's professional management and transparent reporting gave me complete confidence."
+                        </div>
+                        <div class="testimonial-author">- Dr. Adebayo, Medical Doctor & Investor</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-chart-line"></i>
+                            ₦10M Poultry Investment • 35% ROI
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-author">- Dr. Adebayo, Medical Doctor & Investor</div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/mrs-johnson.jpg" alt="Mrs. Johnson" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "As someone living in the UK, I needed a trustworthy partner for my Nigerian investments. CIL's monthly reports and professional approach exceeded my expectations."
+                        </div>
+                        <div class="testimonial-author">- Mrs. Johnson, Diaspora Investor</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-briefcase"></i>
+                            Diaspora Portfolio • 40% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/engr-musa.jpg" alt="Engr. Musa" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "The block manufacturing investment yielded 45% ROI. What impressed me most was the detailed monthly reporting and professional oversight of the project."
+                        </div>
+                        <div class="testimonial-author">- Engr. Musa, Construction Professional</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-industry"></i>
+                            Block Manufacturing • 45% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/prof-chinedu.jpg" alt="Prof. Chinedu" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "My ₦8M investment in catfish farming generated 30% returns in 8 months. CIL's technical expertise and market access made all the difference."
+                        </div>
+                        <div class="testimonial-author">- Prof. Chinedu, University Lecturer</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-fish"></i>
+                            Catfish Farming • 30% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/mr-ahmed.jpg" alt="Mr. Ahmed" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "Invested ₦12M in solar equipment production. CIL's understanding of Nigeria's energy market delivered 40% returns with minimal risk."
+                        </div>
+                        <div class="testimonial-author">- Mr. Ahmed, Energy Consultant</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-solar-panel"></i>
+                            Solar Energy • 40% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/mr-tunde.jpg" alt="Mr. Tunde" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "From Texas, I manage ₦25M across multiple CIL ventures. Their transparency and regular updates make long-distance investing stress-free."
+                        </div>
+                        <div class="testimonial-author">- Mr. Tunde, USA-Based Entrepreneur</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-globe-americas"></i>
+                            Multi-Sector Portfolio • 38% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 7 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/mrs-ngozi.jpg" alt="Mrs. Ngozi" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "Started with ₦5M in piggery business. CIL's management grew it to ₦8M in 18 months. Their veterinary support and market connections are excellent."
+                        </div>
+                        <div class="testimonial-author">- Mrs. Ngozi, Livestock Farmer</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-piggy-bank"></i>
+                            Piggery Business • 60% Growth
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 8 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/mr-samuel.jpg" alt="Mr. Samuel" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "Purchased 2 block-making machines from CIL. Their installation training and after-sales support helped me start production immediately."
+                        </div>
+                        <div class="testimonial-author">- Mr. Samuel, Manufacturing Business Owner</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-tools"></i>
+                            Machinery Investment • 50% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 9 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/chief-williams.jpg" alt="Chief Williams" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "CIL's custom furniture for my new hotel was delivered ahead of schedule. The quality and craftsmanship attracted premium clients immediately."
+                        </div>
+                        <div class="testimonial-author">- Chief Williams, Hotel Owner</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-chair"></i>
+                            Furniture Investment • 35% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 10 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/mr-okoro.jpg" alt="Mr. Okoro" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "Diversified ₦15M across 3 CIL ventures. The balanced portfolio approach delivered consistent 35% average returns with managed risk."
+                        </div>
+                        <div class="testimonial-author">- Mr. Okoro, Financial Analyst</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-chart-pie"></i>
+                            Diversified Portfolio • 35% Avg ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate first 2 slides for seamless looping -->
+                <!-- Duplicate 1 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/dr-adebayo.jpg" alt="Dr. Adebayo" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "I invested ₦10M in the poultry expansion and received 35% returns in the first year. CIL's professional management and transparent reporting gave me complete confidence."
+                        </div>
+                        <div class="testimonial-author">- Dr. Adebayo, Medical Doctor & Investor</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-chart-line"></i>
+                            ₦10M Poultry Investment • 35% ROI
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate 2 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="/img/testimonials/mrs-johnson.jpg" alt="Mrs. Johnson" loading="lazy">
+                            </div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "As someone living in the UK, I needed a trustworthy partner for my Nigerian investments. CIL's monthly reports and professional approach exceeded my expectations."
+                        </div>
+                        <div class="testimonial-author">- Mrs. Johnson, Diaspora Investor</div>
+                        <div class="testimonial-investment">
+                            <i class="fas fa-briefcase"></i>
+                            Diaspora Portfolio • 40% ROI
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    "As someone living in the UK, I needed a trustworthy partner for my Nigerian investments. CIL's monthly reports and professional approach exceeded my expectations."
+            <!-- Slider Controls -->
+            <div class="slider-controls">
+                <button class="slider-btn prev-btn" aria-label="Previous testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="slider-dots">
+                    <!-- Dots will be generated by JavaScript -->
                 </div>
-                <div class="testimonial-author">- Mrs. Johnson, Diaspora Investor</div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    "The block manufacturing investment yielded 45% ROI. What impressed me most was the detailed monthly reporting and professional oversight of the project."
-                </div>
-                <div class="testimonial-author">- Engr. Musa, Construction Professional</div>
+                <button class="slider-btn next-btn" aria-label="Next testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA -->
-    <section class="section" style="text-align:center;">
-        <h2 style="margin-bottom:1rem;">Ready to Invest?</h2>
-        <p style="margin-bottom:2rem; font-size:1.2rem;">Contact us to receive the full investment proposal and begin your partnership.</p>
-
-        <div class="cta-buttons">
-            <a href="/contact" class="btn btn-primary">Schedule a Consultation</a>
-            <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary">Email Us Directly</a>
-            <a href="https://wa.me/2348129978419" class="btn btn-whatsapp">WhatsApp</a>
-        </div>
-
-        <div style="margin-top: 2rem;">
-            <p>💼 <a href="/downloads/cil-investment-prospectus.pdf" download>Download Investment Prospectus (PDF)</a></p>
-        </div>
-    </section>
 
 <!-- Footer -->
 <footer class="footer">
@@ -379,7 +4511,7 @@
                 <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
                     <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.230-1.88-.099-.165-.363-.264-.758-.462z"/>
                     </svg>
                 </a>
 
@@ -420,12 +4552,12 @@
         <div class="footer-section">
             <h3>Services</h3>
             <ul class="footer-links">
-                <li><a href="/services#business-management">Business Management</a></li>
-                <li><a href="/services#agriculture">Agricultural Development</a></li>
-                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
-                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#agriculture">Agriculture & Agribusiness</a></li>
+                <li><a href="/services#manufacturing">Construction & Manufacturing</a></li>
                 <li><a href="/services#diaspora">Diaspora Management</a></li>
-                <li><a href="/investment">Investment Opportunities</a></li>
+                <li><a href="/services#hospitality">Hospitality & Entertainment</a></li>
+                <li><a href="/services#solar">Solar Energy Solutions</a></li>
+                <li><a href="/services#furniture">Furniture & Upholstery</a></li>
             </ul>
         </div>
 
@@ -474,6 +4606,522 @@
         </div>
     </div>
 
+    <script>
+        // Investment Calculator JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = {
+                amount: document.getElementById('investmentAmount'),
+                duration: document.getElementById('investmentDuration'),
+                durationValue: document.getElementById('durationValue'),
+                projectCards: document.querySelectorAll('.project-card'),
+                annualReturn: document.getElementById('annualReturn'),
+                totalReturn: document.getElementById('totalReturn'),
+                totalValue: document.getElementById('totalValue'),
+                roiPercentage: document.getElementById('roiPercentage')
+            };
+
+            let selectedProject = { type: 'poultry', roi: 35 };
+
+            // Initialize
+            updateDurationDisplay();
+            calculateROI();
+
+            // Event Listeners
+            elements.amount.addEventListener('input', calculateROI);
+            elements.duration.addEventListener('input', function() {
+                updateDurationDisplay();
+                calculateROI();
+            });
+
+            elements.projectCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    elements.projectCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedProject = {
+                        type: this.dataset.type,
+                        roi: parseInt(this.dataset.roi)
+                    };
+                    calculateROI();
+                });
+            });
+
+            function updateDurationDisplay() {
+                const years = elements.duration.value;
+                elements.durationValue.textContent = `${years} Year${years > 1 ? 's' : ''}`;
+            }
+
+            function calculateROI() {
+                const amount = parseFloat(elements.amount.value) || 0;
+                const duration = parseInt(elements.duration.value) || 1;
+                const roiRate = selectedProject.roi / 100;
+                
+                const annualReturnAmount = amount * roiRate;
+                const totalReturnAmount = annualReturnAmount * duration;
+                const totalValueAmount = amount + totalReturnAmount;
+                const roiPercent = (totalReturnAmount / amount) * 100;
+                
+                elements.annualReturn.textContent = `₦${formatNumber(annualReturnAmount)}`;
+                elements.totalReturn.textContent = `₦${formatNumber(totalReturnAmount)}`;
+                elements.totalValue.textContent = `₦${formatNumber(totalValueAmount)}`;
+                elements.roiPercentage.textContent = `${roiPercent.toFixed(0)}%`;
+            }
+
+            function formatNumber(num) {
+                return new Intl.NumberFormat('en-NG').format(Math.round(num));
+            }
+        });
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Stats counting animation
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+    
+    // Check if element is in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Count animation function
+    function animateCounter(element, target, duration = 2000) {
+        const suffix = element.getAttribute('data-suffix') || '';
+        const start = 0;
+        const increment = target / (duration / 16); // 60fps
+        let current = start;
+        
+        // Add animating class for visual feedback
+        element.classList.add('animating');
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+                element.classList.remove('animating');
+                
+                // Add suffix after animation completes
+                if (suffix === '+') {
+                    // For "45+", we want to show "45+" at the end
+                    element.textContent = Math.floor(target) + suffix;
+                } else if (suffix === '%') {
+                    // For percentage, we want "90%"
+                    element.textContent = Math.floor(target) + suffix;
+                } else if (suffix === '+') {
+                    // For years, we want "3+"
+                    element.textContent = Math.floor(target) + suffix;
+                } else {
+                    // For regular numbers
+                    element.textContent = Math.floor(target);
+                }
+            } else {
+                // Update number without suffix during animation
+                element.textContent = Math.floor(current);
+            }
+        }, 16);
+    }
+    
+    // Start counting when stats section is in view
+    function checkStatsVisibility() {
+        const statsSection = document.querySelector('.stats-section');
+        
+        if (statsSection && isInViewport(statsSection) && !hasAnimated) {
+            hasAnimated = true;
+            
+            // Add a small delay for better UX
+            setTimeout(() => {
+                statNumbers.forEach((element, index) => {
+                    const target = parseInt(element.getAttribute('data-target'));
+                    
+                    // Stagger the animations
+                    setTimeout(() => {
+                        animateCounter(element, target);
+                    }, index * 300); // 300ms delay between each counter
+                });
+            }, 500);
+        }
+    }
+    
+    // Check on scroll and load
+    window.addEventListener('scroll', checkStatsVisibility);
+    window.addEventListener('load', checkStatsVisibility);
+    
+    // Initial check in case page loads with section in view
+    checkStatsVisibility();
+    
+    // Reset animation when section leaves and re-enters viewport
+    let observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                // Reset the animation flag when leaving viewport
+                hasAnimated = false;
+                
+                // Reset counter values
+                statNumbers.forEach(element => {
+                    element.textContent = '0';
+                });
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+    
+    // Add hover effect enhancement
+    statNumbers.forEach(number => {
+        number.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('animating')) {
+                this.style.transform = 'scale(1.1)';
+            }
+        });
+        
+        number.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('animating')) {
+                this.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    // Optional: Add click to re-animate for demo purposes
+    statNumbers.forEach(number => {
+        number.addEventListener('click', function() {
+            if (!this.classList.contains('animating')) {
+                const target = parseInt(this.getAttribute('data-target'));
+                animateCounter(this, target, 1000); // Faster animation on click
+            }
+        });
+        
+        // Add tooltip for click hint
+        number.title = "Click to animate again";
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sliderTrack = document.querySelector('.testimonial-slider-track');
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dotsContainer = document.querySelector('.slider-dots');
+    
+    // Number of actual testimonials (excluding duplicates)
+    const actualSlidesCount = 10;
+    let currentSlide = 0;
+    let isTransitioning = false;
+    
+    // Create dots
+    for (let i = 0; i < actualSlidesCount; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot';
+        dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+    
+    const dots = document.querySelectorAll('.slider-dot');
+    
+    // Initialize
+    updateDots();
+    startAutoSlide();
+    
+    // Manual navigation
+    prevBtn.addEventListener('click', () => {
+        if (!isTransitioning) {
+            stopAutoSlide();
+            goToSlide(currentSlide - 1);
+            startAutoSlide();
+        }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        if (!isTransitioning) {
+            stopAutoSlide();
+            goToSlide(currentSlide + 1);
+            startAutoSlide();
+        }
+    });
+    
+    // Pause auto-slide on hover
+    const sliderContainer = document.querySelector('.testimonial-slider-container');
+    sliderContainer.addEventListener('mouseenter', () => {
+        sliderTrack.style.animationPlayState = 'paused';
+        stopAutoSlide();
+    });
+    
+    sliderContainer.addEventListener('mouseleave', () => {
+        sliderTrack.style.animationPlayState = 'running';
+        startAutoSlide();
+    });
+    
+    function goToSlide(slideIndex) {
+        if (isTransitioning) return;
+        
+        isTransitioning = true;
+        currentSlide = (slideIndex + actualSlidesCount) % actualSlidesCount;
+        
+        // Calculate transform value
+        const slideWidth = slides[0].offsetWidth + 30; // width + gap
+        const transformValue = -currentSlide * slideWidth;
+        
+        // Disable animation temporarily for smooth transition
+        sliderTrack.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        sliderTrack.style.transform = `translateX(${transformValue}px)`;
+        
+        // Update dots
+        updateDots();
+        
+        // Reset transitioning flag after animation
+        setTimeout(() => {
+            isTransitioning = false;
+            // If at the duplicate slides, jump to the beginning
+            if (currentSlide >= actualSlidesCount) {
+                goToSlide(0);
+            }
+        }, 500);
+    }
+    
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    function startAutoSlide() {
+        // Add auto-slide class for CSS animation
+        sliderTrack.classList.add('auto-slide');
+    }
+    
+    function stopAutoSlide() {
+        sliderTrack.classList.remove('auto-slide');
+        sliderTrack.style.transform = `translateX(${-currentSlide * (slides[0].offsetWidth + 30)}px)`;
+    }
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            goToSlide(currentSlide);
+        }, 250);
+    });
+    
+    // Handle visibility change (tab switch)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            sliderTrack.style.animationPlayState = 'paused';
+            stopAutoSlide();
+        } else {
+            sliderTrack.style.animationPlayState = 'running';
+            startAutoSlide();
+        }
+    });
+    
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    sliderContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoSlide();
+    });
+    
+    sliderContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoSlide();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - next slide
+                goToSlide(currentSlide + 1);
+            } else {
+                // Swipe right - previous slide
+                goToSlide(currentSlide - 1);
+            }
+        }
+    }
+    
+    // Lazy loading for testimonial images
+    const testimonialImages = document.querySelectorAll('.testimonial-avatar img');
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
+                imageObserver.unobserve(img);
+            }
+        });
+    }, { rootMargin: '50px 0px' });
+    
+    testimonialImages.forEach(img => imageObserver.observe(img));
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Tab functionality
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Remove active class from all buttons and panes
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanes.forEach(p => p.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding pane
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update URL hash without scrolling
+            history.pushState(null, null, `#${tabId}`);
+        });
+    });
+    
+    // Check for initial tab from URL hash
+    const hash = window.location.hash.substring(1);
+    if (hash && document.getElementById(hash)) {
+        const initialBtn = document.querySelector(`.tab-btn[data-tab="${hash}"]`);
+        if (initialBtn) {
+            initialBtn.click();
+        }
+    }
+    
+    // Add smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href.startsWith('#') && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Add animation to model cards on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe model detail elements
+    document.querySelectorAll('.model-detail').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const opportunityCards = document.querySelectorAll('.opportunity-card');
+    const opportunityCount = document.getElementById('opportunity-count');
+    
+    function updateOpportunityCount(count) {
+        opportunityCount.textContent = count;
+    }
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter cards
+            let visibleCount = 0;
+            opportunityCards.forEach(card => {
+                const categories = card.getAttribute('data-category').split(' ');
+                
+                if (filter === 'all' || categories.includes(filter)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            updateOpportunityCount(visibleCount);
+        });
+    });
+    
+    // Initialize count
+    updateOpportunityCount(opportunityCards.length);
+    
+    // Add animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe opportunity cards
+    document.querySelectorAll('.opportunity-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(card);
+    });
+    
+    // Add click tracking for analytics
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const opportunity = this.closest('.opportunity-card');
+            const title = opportunity.querySelector('h3').textContent;
+            console.log(`Interest expressed in: ${title}`);
+            // You can add your analytics tracking here
+        });
+    });
+});
+</script>
     <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
 </body>
 </html>

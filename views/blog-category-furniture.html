@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Manufacturing Blog - Custom Furniture & Interior Design Insights - Collaborative Investment Ltd</title>
+    <meta name="description" content="Explore our furniture manufacturing blog for the latest trends, investment opportunities, and business insights in Nigeria's growing furniture industry.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <style>
+        .category-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 2rem;
+        }
+        
+        .category-description {
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #666;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-card-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .blog-card-category {
+            background: #8B4513;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .blog-card-title {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+        
+        .blog-card-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-card-link {
+            color: #2d5aa0;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .blog-card-link:hover {
+            text-decoration: underline;
+        }
+        
+        .category-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1a365d;
+            text-decoration: none;
+            margin: 2rem 0;
+            font-weight: 600;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .investment-highlights {
+            background: linear-gradient(135deg, #1a365d, #2d5aa0);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+        
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .investment-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .investment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .material-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .material-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .material-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <div class="category-container">
+        <a href="/blog" class="back-link">← Back to All Blog Categories</a>
+        
+        <div class="category-header">
+            <h1>Furniture Manufacturing Insights</h1>
+            <p class="category-description">
+                Explore the art and business of furniture manufacturing in Nigeria. From custom craftsmanship to commercial production, 
+                discover investment opportunities, design trends, and business strategies in Nigeria's growing furniture industry.
+            </p>
+        </div>
+
+        <div class="category-stats">
+            <div class="stat-card">
+                <div class="stat-number">₦320B</div>
+                <div>Annual Furniture Market</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12%</div>
+                <div>Annual Market Growth</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">65%</div>
+                <div>Premium Furniture Imported</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">25-35%</div>
+                <div>Investment ROI</div>
+            </div>
+        </div>
+
+        <div class="material-showcase">
+            <div class="material-item">
+                <div class="material-icon"></div>
+                <div>Solid Wood</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon"></div>
+                <div>Engineered Wood</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon"></div>
+                <div>Upholstery</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon"></div>
+                <div>Finishes</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon"></div>
+                <div>Hardware</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon"></div>
+                <div>Custom Designs</div>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="/img/blog/custom-furniture-manufacturing.jpg" alt="Custom furniture workshop with craftsmen at work" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Nov 25, 2025</span>
+                        <span class="blog-card-category">Investment Guide</span>
+                    </div>
+                    <h3 class="blog-card-title">Custom Furniture Manufacturing: Crafting Profits in Nigeria's Interior Design Boom</h3>
+                    <p class="blog-card-excerpt">
+                        Complete guide to investing in custom furniture manufacturing in Nigeria. Learn about ROI, production costs, 
+                        market opportunities, and investment strategies with 25-35% annual returns.
+                    </p>
+                    <a href="/blog/custom-furniture-manufacturing" class="blog-card-link">
+                        Read Full Guide →
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="/img/blog/furniture-design-trends.jpg" alt="Modern furniture design trends and styles" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Coming Soon</span>
+                        <span class="blog-card-category">Design Trends</span>
+                    </div>
+                    <h3 class="blog-card-title">2025 Furniture Design Trends in Nigeria</h3>
+                    <p class="blog-card-excerpt">
+                        Explore the latest furniture design trends, materials, and styles shaping Nigeria's interior design landscape. 
+                        From minimalist modern to traditional craftsmanship with contemporary twists.
+                    </p>
+                    <a href="#" class="blog-card-link">
+                        Coming Soon →
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="/img/blog/wood-selection.jpg" alt="Different types of wood for furniture making" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Coming Soon</span>
+                        <span class="blog-card-category">Materials Guide</span>
+                    </div>
+                    <h3 class="blog-card-title">Wood Selection Guide for Nigerian Furniture Makers</h3>
+                    <p class="blog-card-excerpt">
+                        Comprehensive guide to selecting the right wood for different furniture applications. 
+                        Compare local and imported woods, durability, costs, and best uses for each type.
+                    </p>
+                    <a href="#" class="blog-card-link">
+                        Coming Soon →
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="/img/blog/furniture-business.jpg" alt="Furniture business management and operations" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Coming Soon</span>
+                        <span class="blog-card-category">Business Strategy</span>
+                    </div>
+                    <h3 class="blog-card-title">Building a Successful Furniture Business in Nigeria</h3>
+                    <p class="blog-card-excerpt">
+                        Essential strategies for starting and scaling a furniture manufacturing business. 
+                        Covering market positioning, pricing strategies, customer acquisition, and operational excellence.
+                    </p>
+                    <a href="#" class="blog-card-link">
+                        Coming Soon →
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="/img/blog/sustainable-furniture.jpg" alt="Sustainable and eco-friendly furniture production" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Coming Soon</span>
+                        <span class="blog-card-category">Sustainability</span>
+                    </div>
+                    <h3 class="blog-card-title">Sustainable Furniture Manufacturing Practices</h3>
+                    <p class="blog-card-excerpt">
+                        How to implement eco-friendly practices in furniture manufacturing. 
+                        Sustainable material sourcing, waste reduction, and meeting growing demand for green products.
+                    </p>
+                    <a href="#" class="blog-card-link">
+                        Coming Soon →
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="/img/blog/furniture-export.jpg" alt="Furniture export opportunities and markets" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Coming Soon</span>
+                        <span class="blog-card-category">Export Markets</span>
+                    </div>
+                    <h3 class="blog-card-title">Export Opportunities for Nigerian Furniture Makers</h3>
+                    <p class="blog-card-excerpt">
+                        Exploring international markets for Nigerian-made furniture. 
+                        Understanding export requirements, market preferences, and building global distribution networks.
+                    </p>
+                    <a href="#" class="blog-card-link">
+                        Coming Soon →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="investment-highlights">
+            <h2 style="text-align: center; margin-bottom: 1rem; color: white;">Furniture Investment Opportunities</h2>
+            <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9;">
+                Explore our managed furniture manufacturing investment programs with professional craftsmanship and premium returns
+            </p>
+            
+            <div class="investment-grid">
+                <div class="investment-card">
+                    <div class="investment-icon"></div>
+                    <h3>Residential Furniture</h3>
+                    <p>25% ROI</p>
+                    <p>₦4M - ₦10M Investment</p>
+                </div>
+                <div class="investment-card">
+                    <div class="investment-icon"></div>
+                    <h3>Office Furniture</h3>
+                    <p>30% ROI</p>
+                    <p>₦10M - ₦25M Investment</p>
+                </div>
+                <div class="investment-card">
+                    <div class="investment-icon"></div>
+                    <h3>Hospitality Furniture</h3>
+                    <p>35% ROI</p>
+                    <p>₦25M - ₦60M Investment</p>
+                </div>
+                <div class="investment-card">
+                    <div class="investment-icon"></div>
+                    <h3>Custom Luxury</h3>
+                    <p>40% ROI</p>
+                    <p>₦5M+ per project</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/investment#furniture" class="btn btn-primary" style="background: #ffd700; color: #1a365d; padding: 1rem 2rem; font-size: 1.1rem;">
+                    Explore Furniture Investments
+                </a>
+            </div>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 3rem 0;">
+            <h3 style="text-align: center; margin-bottom: 1rem;">Why Invest in Furniture Manufacturing?</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="text-align: center;">
+                    <h4>🏗️ Construction Boom</h4>
+                    <p>Rapid real estate development driving furniture demand</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>💰 Import Substitution</h4>
+                    <p>65% of premium furniture currently imported</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>📈 Growing Middle Class</h4>
+                    <p>Increasing disposable income and home ownership</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>🎯 Customization Demand</h4>
+                    <p>Growing preference for bespoke, personalized furniture</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0;">
+            <h3>Stay Updated with Furniture Industry Insights</h3>
+            <p>Subscribe to our newsletter for the latest furniture trends, investment opportunities, and manufacturing insights in Nigeria.</p>
+            <a href="/contact" class="btn btn-primary" style="margin-top: 1rem;">Subscribe to Updates</a>
+        </div>
+
+        <a href="/blog" class="back-link">← Back to All Blog Categories</a>
+    </div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>
+            <a href="/admin/login" style="color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.3);" 
+               title="Admin Access" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='inherit'">
+                Building Nigeria's Business Future
+            </a>
+        </p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>    
+    <script>
+        // Initialize lazy loading for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => imageObserver.observe(img));
+        });
+    </script>
+</body>
+</html>

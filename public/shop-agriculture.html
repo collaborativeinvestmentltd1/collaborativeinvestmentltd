@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Products - Livestock, Poultry, Fish & Farming Supplies | Collaborative Investment Ltd</title>
+    <meta name="description" content="Buy quality agricultural products - livestock, poultry, fish, farming supplies, animal feeds, and equipment. Crate of eggs, day-old chicks, catfish, pigs, and more.">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/shop-agriculture.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <style>
+        .product-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: 2px solid #1a365d;
+            background: white;
+            color: #1a365d;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: #1a365d;
+            color: white;
+        }
+        
+        .stock-badge {
+            background: #00a859;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .low-stock {
+            background: #d4af37;
+        }
+        
+        .out-of-stock {
+            background: #e53e3e;
+        }
+        
+        .bulk-discount {
+            background: #2d5aa0;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Category Header -->
+    <section class="category-header">
+        <div class="container">
+            <a href="/shop-categories" class="back-link">← Back to Categories</a>
+            <h1>Agriculture Products</h1>
+            <p>Quality livestock, poultry, fish, farming supplies, and animal feeds</p>
+        </div>
+    </section>
+
+    <!-- Product Filters -->
+    <section class="container">
+        <div class="product-filters">
+            <button class="filter-btn active" data-category="all">All Products</button>
+            <button class="filter-btn" data-category="poultry">Poultry</button>
+            <button class="filter-btn" data-category="livestock">Livestock</button>
+            <button class="filter-btn" data-category="fish">Fish & Aquaculture</button>
+            <button class="filter-btn" data-category="feeds">Animal Feeds</button>
+            <button class="filter-btn" data-category="supplies">Farming Supplies</button>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-grid" id="products-grid">
+                <!-- Poultry Products -->
+                <div class="product-card" data-category="poultry">
+                    <div class="product-image">
+                        <img src="/img/agriculture/crate-of-eggs.jpg" alt="Fresh Crate of Eggs" data-src="/img/agriculture/crate-of-eggs.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Crate of Eggs (30 pieces)</h3>
+                        <p class="product-description">Fresh farm eggs from our free-range layers. Rich in nutrients and perfect for consumption or hatching.</p>
+                        <div class="product-price">₦2,400</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 1 Crate</span>
+                            <span class="bulk-discount">Bulk Discount Available</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Crate of Eggs" data-price="2400">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="poultry">
+                    <div class="product-image">
+                        <img src="/img/agriculture/day-old-broilers.jpg" alt="Day Old Broiler Chicks" data-src="/img/agriculture/day-old-broilers.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Day Old Broiler Chicks</h3>
+                        <p class="product-description">High-quality broiler chicks with fast growth rate. Ready for meat production in 6-8 weeks.</p>
+                        <div class="product-price">₦450 each</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 50 chicks</span>
+                            <span class="bulk-discount">Vaccinated</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Day Old Broiler Chicks" data-price="450">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="poultry">
+                    <div class="product-image">
+                        <img src="/img/agriculture/day-old-layers.jpg" alt="Day Old Layer Chicks" data-src="/img/agriculture/day-old-layers.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Day Old Layer Chicks</h3>
+                        <p class="product-description">Premium layer breeds for high egg production. Start laying at 18-20 weeks.</p>
+                        <div class="product-price">₦500 each</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 50 chicks</span>
+                            <span class="bulk-discount">High Production</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Day Old Layer Chicks" data-price="500">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="poultry">
+                    <div class="product-image">
+                        <img src="/img/agriculture/point-of-lay-layers.jpg" alt="Point of Lay Layers" data-src="/img/agriculture/point-of-lay-layers.jpg" class="lazy">
+                        <span class="stock-badge low-stock">Limited Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Point of Lay Layers (18 weeks)</h3>
+                        <p class="product-description">Ready-to-lay pullets. Start producing eggs immediately. Fully vaccinated and dewormed.</p>
+                        <div class="product-price">₦2,500 each</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 10 birds</span>
+                            <span class="bulk-discount">Ready to Lay</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Point of Lay Layers" data-price="2500">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="poultry">
+                    <div class="product-image">
+                        <img src="/img/agriculture/adult-broilers.jpg" alt="Adult Broiler Chickens" data-src="/img/agriculture/adult-broilers.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Adult Broiler Chickens (6-8 weeks)</h3>
+                        <p class="product-description">Market-ready broiler chickens. Average weight 2-2.5kg. Perfect for immediate processing.</p>
+                        <div class="product-price">₦4,500 each</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 10 birds</span>
+                            <span class="bulk-discount">Market Ready</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Adult Broiler Chickens" data-price="4500">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Livestock Products -->
+                <div class="product-card" data-category="livestock">
+                    <div class="product-image">
+                        <img src="/img/agriculture/baby-pigs.jpg" alt="Baby Pigs (Weaners)" data-src="/img/agriculture/baby-pigs.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Baby Pigs (Weaners - 8 weeks)</h3>
+                        <p class="product-description">Healthy weaner pigs ready for growing. Crossbreed for fast growth and disease resistance.</p>
+                        <div class="product-price">₦18,000 each</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 5 pigs</span>
+                            <span class="bulk-discount">Fast Growth</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Baby Pigs (Weaners)" data-price="18000">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="livestock">
+                    <div class="product-image">
+                        <img src="/img/agriculture/adult-pigs.jpg" alt="Adult Pigs for Sale" data-src="/img/agriculture/adult-pigs.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Adult Pigs (6 months)</h3>
+                        <p class="product-description">Market-ready pigs for meat production or breeding. Average weight 80-100kg.</p>
+                        <div class="product-price">₦120,000 each</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 2 pigs</span>
+                            <span class="bulk-discount">Breeding Quality</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Adult Pigs" data-price="120000">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Fish & Aquaculture Products -->
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="/img/agriculture/catfish-juveniles.jpg" alt="Catfish Juveniles" data-src="/img/agriculture/catfish-juveniles.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Catfish Juveniles (Fingerlings)</h3>
+                        <p class="product-description">Healthy catfish fingerlings for pond stocking. Uniform size and disease-free.</p>
+                        <div class="product-price">₦25 each</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 100 pieces</span>
+                            <span class="bulk-discount">Fast Growing</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Catfish Juveniles" data-price="25">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="/img/agriculture/live-adult-catfish.jpg" alt="Live Adult Catfish" data-src="/img/agriculture/live-adult-catfish.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Live Adult Catfish (1kg+)</h3>
+                        <p class="product-description">Fresh live catfish ready for consumption. Grown in clean water systems.</p>
+                        <div class="product-price">₦1,200 per kg</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 5kg</span>
+                            <span class="bulk-discount">Fresh Daily</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Live Adult Catfish" data-price="1200">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="/img/agriculture/roasted-catfish.jpg" alt="Roasted/Smoked Catfish" data-src="/img/agriculture/roasted-catfish.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Roasted/Smoked Catfish</h3>
+                        <p class="product-description">Premium smoked catfish. Perfect for soups, peppersoup, and local delicacies.</p>
+                        <div class="product-price">₦1,800 per kg</div>
+                        <div class="product-meta">
+                            <span>Minimum Order: 2kg</span>
+                            <span class="bulk-discount">Ready to Eat</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Roasted/Smoked Catfish" data-price="1800">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Animal Feeds -->
+                <div class="product-card" data-category="feeds">
+                    <div class="product-image">
+                        <img src="/img/agriculture/chicken-feed.jpg" alt="Chicken Feed" data-src="/img/agriculture/chicken-feed.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Chicken Feed (25kg bag)</h3>
+                        <p class="product-description">Complete balanced feed for layers and broilers. High protein content for optimal growth.</p>
+                        <div class="product-price">₦9,500 per bag</div>
+                        <div class="product-meta">
+                            <span>Types: Starter, Grower, Layer</span>
+                            <span class="bulk-discount">Bulk Discount</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Chicken Feed" data-price="9500">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="feeds">
+                    <div class="product-image">
+                        <img src="/img/agriculture/catfish-feed.jpg" alt="Catfish Feed" data-src="/img/agriculture/catfish-feed.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Catfish Feed (15kg bag)</h3>
+                        <p class="product-description">Floating fish feed with 35-45% protein content. Promotes fast growth and good feed conversion.</p>
+                        <div class="product-price">₦7,200 per bag</div>
+                        <div class="product-meta">
+                            <span>Types: Starter, Grower, Finisher</span>
+                            <span class="bulk-discount">High Quality</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Catfish Feed" data-price="7200">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="feeds">
+                    <div class="product-image">
+                        <img src="/img/agriculture/pig-feed.jpg" alt="Pig Feed" data-src="/img/agriculture/pig-feed.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Pig Feed (25kg bag)</h3>
+                        <p class="product-description">Complete swine feed for different growth stages. Formulated for optimal weight gain.</p>
+                        <div class="product-price">₦8,500 per bag</div>
+                        <div class="product-meta">
+                            <span>Types: Weaner, Grower, Finisher</span>
+                            <span class="bulk-discount">Balanced Nutrition</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Pig Feed" data-price="8500">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Farming Supplies -->
+                <div class="product-card" data-category="supplies">
+                    <div class="product-image">
+                        <img src="/img/agriculture/poultry-drinker.jpg" alt="Poultry Drinker" data-src="/img/agriculture/poultry-drinker.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Automatic Poultry Drinker</h3>
+                        <p class="product-description">4-liter capacity automatic drinker. Ensures clean water supply and reduces labor.</p>
+                        <div class="product-price">₦1,800 each</div>
+                        <div class="product-meta">
+                            <span>Capacity: 4 liters</span>
+                            <span class="bulk-discount">Durable</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Poultry Drinker" data-price="1800">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="supplies">
+                    <div class="product-image">
+                        <img src="/img/agriculture/poultry-feeder.jpg" alt="Poultry Feeder" data-src="/img/agriculture/poultry-feeder.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Automatic Poultry Feeder</h3>
+                        <p class="product-description">5kg capacity automatic feeder. Reduces feed waste and ensures continuous feeding.</p>
+                        <div class="product-price">₦2,200 each</div>
+                        <div class="product-meta">
+                            <span>Capacity: 5kg</span>
+                            <span class="bulk-discount">Feed Saving</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Poultry Feeder" data-price="2200">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="supplies">
+                    <div class="product-image">
+                        <img src="/img/agriculture/incubator.jpg" alt="Egg Incubator" data-src="/img/agriculture/incubator.jpg" class="lazy">
+                        <span class="stock-badge low-stock">Limited Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Digital Egg Incubator (96 eggs)</h3>
+                        <p class="product-description">Automatic digital incubator with temperature and humidity control. 85%+ hatch rate.</p>
+                        <div class="product-price">₦85,000</div>
+                        <div class="product-meta">
+                            <span>Capacity: 96 eggs</span>
+                            <span class="bulk-discount">Digital Control</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Egg Incubator" data-price="85000">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="supplies">
+                    <div class="product-image">
+                        <img src="/img/agriculture/fish-net.jpg" alt="Fishing Net" data-src="/img/agriculture/fish-net.jpg" class="lazy">
+                        <span class="stock-badge">In Stock</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Fishing Net (Various Sizes)</h3>
+                        <p class="product-description">Durable fishing nets for pond harvesting. Various mesh sizes available.</p>
+                        <div class="product-price">₦4,500 - ₦12,000</div>
+                        <div class="product-meta">
+                            <span>Various sizes available</span>
+                            <span class="bulk-discount">Durable</span>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-product="Fishing Net" data-price="4500">Add to Cart</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#agriculture">Agriculture & Agribusiness</a></li>
+                <li><a href="/services#manufacturing">Construction & Manufacturing</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/services#hospitality">Hospitality & Entertainment</a></li>
+                <li><a href="/services#solar">Solar Energy Solutions</a></li>
+                <li><a href="/services#furniture">Furniture & Upholstery</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+<script src="/js/main.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/cart-drawer.js"></script>
+<script src="/js/shop-agriculture.js"></script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturing Investments - Collaborative Investment Ltd</title>
+    <meta name="description" content="Explore manufacturing investment opportunities in Nigeria including block production, machine fabrication, furniture manufacturing, and industrial equipment with CIL.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <style>
+        .category-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 2rem;
+        }
+        
+        .category-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .blog-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-card-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .blog-card-category {
+            background: #2d5aa0;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .blog-card-title {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+        
+        .blog-card-excerpt {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            color: #1a365d;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .investment-opportunities {
+            background: #f8f9fa;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+        
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .opportunity-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .opportunity-roi {
+            background: #2d5aa0;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1a365d;
+            text-decoration: none;
+            margin: 2rem 0;
+            font-weight: 600;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #1a365d, #2d5aa0);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .sector-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .sector-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sector-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d5aa0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <div class="category-container">
+        <a href="/blog" class="back-link">← Back to Blog</a>
+        
+        <div class="category-header">
+            <h1>Manufacturing Investments</h1>
+            <p>Explore profitable manufacturing investment opportunities in Nigeria's industrial sector</p>
+        </div>
+
+        <div class="category-stats">
+            <div class="stat-card">
+                <div class="stat-number">₦2.1T</div>
+                <div>Construction Materials Market</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30-50%</div>
+                <div>Average ROI</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">22M</div>
+                <div>Housing Unit Deficit</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">7.5%</div>
+                <div>Annual Growth Rate</div>
+            </div>
+        </div>
+
+        <div class="sector-grid">
+            <div class="sector-card">
+                <div class="sector-icon"></div>
+                <h4>Construction Materials</h4>
+                <p>Block manufacturing, cement products, building materials</p>
+            </div>
+            <div class="sector-card">
+                <div class="sector-icon"></div>
+                <h4>Industrial Equipment</h4>
+                <p>Machine fabrication, tools, manufacturing equipment</p>
+            </div>
+            <div class="sector-card">
+                <div class="sector-icon"></div>
+                <h4>Furniture Manufacturing</h4>
+                <p>Custom furniture, office equipment, interior products</p>
+            </div>
+            <div class="sector-card">
+                <div class="sector-icon"></div>
+                <h4>Metal Fabrication</h4>
+                <p>Steel products, aluminum works, structural components</p>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="/img/blog/block-manufacturing.jpg" alt="Block manufacturing plant in Nigeria" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Nov 25, 2025</span>
+                        <span class="blog-card-category">Construction</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="/blog/block-manufacturing-investment" style="color: inherit; text-decoration: none;">
+                            Block Manufacturing Investment: Building Wealth in Construction Boom
+                        </a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Complete guide to investing in block manufacturing with 45% annual returns. Learn about Nigeria's 22 million housing deficit and construction materials market opportunities.
+                    </p>
+                    <a href="/blog/block-manufacturing-investment" class="read-more">
+                        Read More →
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="/img/blog/block-machine-fabrication.jpg" alt="Block machine fabrication workshop" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Nov 25, 2025</span>
+                        <span class="blog-card-category">Equipment</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="/blog/block-machine-fabrication" style="color: inherit; text-decoration: none;">
+                            Block Machine Fabrication: Manufacturing Profits in Construction
+                        </a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Explore equipment manufacturing with 35% ROI. Detailed analysis of machine fabrication, market demand, and import substitution opportunities in Nigeria.
+                    </p>
+                    <a href="/blog/block-machine-fabrication" class="read-more">
+                        Read More →
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="/img/blog/furniture-workshop.jpg" alt="Custom furniture manufacturing workshop" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>Nov 25, 2025</span>
+                        <span class="blog-card-category">Furniture</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="/blog/custom-furniture-manufacturing" style="color: inherit; text-decoration: none;">
+                            Custom Furniture Manufacturing: Crafting Profits in Interior Design
+                        </a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Comprehensive guide to furniture investments with 30% annual returns. Learn about Nigeria's growing interior design market and import substitution opportunities.
+                    </p>
+                    <a href="/blog/custom-furniture-manufacturing" class="read-more">
+                        Read More →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="investment-opportunities">
+            <h2>Manufacturing Investment Opportunities</h2>
+            <p>Current investment opportunities available through CIL's managed manufacturing portfolio</p>
+            
+            <div class="opportunity-grid">
+                <div class="opportunity-card">
+                    <span class="opportunity-roi">45% ROI</span>
+                    <h4>CIL Blockworks</h4>
+                    <p><strong>Investment:</strong> ₦8,000,000 - ₦20,000,000</p>
+                    <p><strong>Term:</strong> 24 months</p>
+                    <p>3,000+ blocks daily production capacity</p>
+                </div>
+                
+                <div class="opportunity-card">
+                    <span class="opportunity-roi">35% ROI</span>
+                    <h4>CIL Engineering & Fabrication</h4>
+                    <p><strong>Investment:</strong> ₦10,000,000 - ₦25,000,000</p>
+                    <p><strong>Term:</strong> 36 months</p>
+                    <p>Block machine manufacturing and fabrication</p>
+                </div>
+                
+                <div class="opportunity-card">
+                    <span class="opportunity-roi">30% ROI</span>
+                    <h4>CIL Furniture Works</h4>
+                    <p><strong>Investment:</strong> ₦6,000,000 - ₦15,000,000</p>
+                    <p><strong>Term:</strong> 36 months</p>
+                    <p>Custom furniture manufacturing workshop</p>
+                </div>
+                
+                <div class="opportunity-card">
+                    <span class="opportunity-roi">40% ROI</span>
+                    <h4>CIL Aluminum Works</h4>
+                    <p><strong>Investment:</strong> ₦7,500,000 - ₦18,000,000</p>
+                    <p><strong>Term:</strong> 24 months</p>
+                    <p>Aluminum fabrication and product manufacturing</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Invest in Manufacturing?</h2>
+            <p>Join our successful manufacturing investment program and capitalize on Nigeria's industrial growth with professional management and proven systems.</p>
+            <div style="margin-top: 2rem;">
+                <a href="/contact" class="btn btn-primary" style="background: #d4af37; color: #1a365d; padding: 1rem 2rem; font-size: 1.1rem; margin-right: 1rem;">Contact Us</a>
+                <a href="/investment#manufacturing" class="btn btn-secondary" style="background: transparent; border: 2px solid white; color: white; padding: 1rem 2rem; font-size: 1.1rem;">View Investments</a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3>Looking for Other Investment Categories?</h3>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap;">
+                <a href="/blog/category/agriculture" class="btn btn-primary" style="background: #00a859; color: white; padding: 0.8rem 1.5rem;">Agriculture</a>
+                <a href="/blog/category/solar" class="btn btn-primary" style="background: #ffd700; color: #1a365d; padding: 0.8rem 1.5rem;">Solar Energy</a>
+                <a href="/blog/category/furniture" class="btn btn-primary" style="background: #8B4513; color: white; padding: 0.8rem 1.5rem;">Furniture</a>
+            </div>
+        </div>
+    </div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>
+            <a href="/admin/login" style="color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.3);" 
+               title="Admin Access" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='inherit'">
+                Building Nigeria's Business Future
+            </a>
+        </p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>    
+    <script>
+        // Initialize lazy loading for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => imageObserver.observe(img));
+        });
+    </script>
+</body>
+</html>

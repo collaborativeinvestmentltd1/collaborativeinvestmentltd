@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machinery & Equipment - Collaborative Investment Ltd</title>
+    <meta name="description" content="Buy block-making machines and industrial equipment">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="stylesheet" href="/css/machinery.css">
+    
+    <!-- Page-specific styles -->
+    <style>
+        :root {
+            --machinery-primary: #34495e;
+            --machinery-secondary: #2c3e50;
+            --machinery-accent: #3498db;
+        }
+        
+        .machinery-header {
+            background: linear-gradient(135deg, var(--machinery-primary) 0%, var(--machinery-secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .machinery-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .machinery-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .back-link:hover {
+            color: white;
+        }
+        
+        .machinery-section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--machinery-primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .machinery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .machine-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .machine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .machine-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .machine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .machine-card:hover .machine-image img {
+            transform: scale(1.05);
+        }
+        
+        .machine-content {
+            padding: 1.5rem;
+        }
+        
+        .machine-title {
+            font-size: 1.2rem;
+            color: var(--machinery-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .machine-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .machine-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--machinery-accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .machine-specs {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .machine-specs li {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.3rem 0;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .machine-specs li:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            font-weight: 600;
+        }
+        
+        .spec-value {
+            color: #666;
+        }
+        
+        .machine-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--machinery-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--machinery-accent);
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        .machine-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #e67e22;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .machine-tag.imported {
+            background: #3498db;
+        }
+        
+        .machine-tag.local {
+            background: #27ae60;
+        }
+        
+        .machine-tag.automatic {
+            background: #9b59b6;
+        }
+        
+        .machine-tag.manual {
+            background: #e74c3c;
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .category-filter {
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        
+        .product-count {
+            text-align: center;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .machine-type-section {
+            margin-bottom: 3rem;
+        }
+        
+        .machine-type-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--machinery-primary);
+            color: var(--machinery-primary);
+        }
+        
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--machinery-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background-color: var(--machinery-accent);
+            transform: translateY(-2px);
+        }
+        
+        .contact-btn.whatsapp {
+            background-color: #25D366;
+        }
+        
+        .contact-btn.whatsapp:hover {
+            background-color: #128C7E;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-controls {
+                flex-direction: column;
+            }
+            
+            .search-box, .category-filter {
+                min-width: 100%;
+            }
+            
+            .machinery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .machinery-header h1 {
+                font-size: 2rem;
+            }
+            
+            .machine-actions {
+                flex-direction: column;
+            }
+            
+            .contact-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Category Header -->
+        <section class="machinery-header">
+            <div class="container">
+                <a href="/shop-categories" class="back-link">← Back to Categories</a>
+                <h1>Machinery & Equipment</h1>
+                <p>Block-making machines and industrial equipment for construction businesses</p>
+            </div>
+        </section>
+
+        <!-- Machinery Products Section -->
+        <section class="machinery-section">
+            <div class="container">
+                <h2 class="section-title">Machinery & Equipment</h2>
+                <p class="section-subtitle">We offer a wide range of block-making machines, mixers, and industrial equipment for your construction business needs.</p>
+                
+                <!-- Filter Controls -->
+                <div class="filter-controls">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="machine-search" placeholder="Search machinery and equipment...">
+                    </div>
+                    <select class="category-filter" id="category-filter">
+                        <option value="all">All Machinery</option>
+                        <option value="2-block">2-Block Machines</option>
+                        <option value="3-block">3-Block Machines</option>
+                        <option value="5-block">5-Block Machines</option>
+                        <option value="mixer">Industrial Mixers</option>
+                    </select>
+                </div>
+                
+                <!-- Product Count -->
+                <div class="product-count" id="product-count">Loading machinery...</div>
+                
+                <!-- Machinery Grid -->
+                <div class="machinery-grid" id="machinery-container">
+                    <!-- Machines will be loaded by JavaScript -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="load-more" class="btn-primary" style="display: none;">Load More Machinery</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>
+            <a href="/admin/login" style="color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.3);" 
+               title="Admin Access" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='inherit'">
+                Building Nigeria's Business Future
+            </a>
+        </p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // MACHINERY PRODUCTS DATA
+        const machineryProducts = [
+            // 2-Block Machines
+            {
+                id: 'mach-001',
+                name: 'Imported Automatic 2-Block Maker',
+                category: '2-block',
+                price: 1200000,
+                image: '/img/machinery/imported-2-block-maker.jpg',
+                description: 'High-efficiency imported automatic machine producing 2 blocks per cycle with minimal manual operation.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '800-1,200 blocks/day',
+                    power: 'Electric (3-phase)',
+                    blockTypes: 'Hollow, Solid, Interlocking',
+                    operation: 'Fully Automatic',
+                    warranty: '1 Year'
+                },
+                tags: ['imported', 'automatic']
+            },
+            {
+                id: 'mach-002',
+                name: 'Local Automatic 2-Block Maker',
+                category: '2-block',
+                price: 950000,
+                image: '/img/machinery/local-2-block-maker.jpg',
+                description: 'Reliable locally manufactured automatic machine with good production capacity and easy maintenance.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '700-1,000 blocks/day',
+                    power: 'Electric (3-phase)',
+                    blockTypes: 'Hollow, Solid',
+                    operation: 'Semi-Automatic',
+                    warranty: '6 Months'
+                },
+                tags: ['local', 'automatic']
+            },
+            {
+                id: 'mach-003',
+                name: 'Manual 2-Block Maker',
+                category: '2-block',
+                price: 180000,
+                image: '/img/machinery/manual-2-block-maker.jpg',
+                description: 'Affordable manual machine perfect for startups and small-scale block production operations.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '300-500 blocks/day',
+                    power: 'Manual Operation',
+                    blockTypes: 'Hollow, Solid',
+                    operation: 'Manual',
+                    warranty: '3 Months'
+                },
+                tags: ['local', 'manual']
+            },
+
+            // 3-Block Machines
+            {
+                id: 'mach-004',
+                name: 'Imported Automatic 3-Block Maker',
+                category: '3-block',
+                price: 1800000,
+                image: '/img/machinery/imported-3-block-maker.jpg',
+                description: 'Advanced imported automatic machine with high production capacity and precision engineering.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '1,500-2,000 blocks/day',
+                    power: 'Electric (3-phase)',
+                    blockTypes: 'Hollow, Solid, Interlocking, Paving',
+                    operation: 'Fully Automatic with PLC',
+                    warranty: '1-2 Years'
+                },
+                tags: ['imported', 'automatic']
+            },
+            {
+                id: 'mach-005',
+                name: 'Local Automatic 3-Block Maker',
+                category: '3-block',
+                price: 1300000,
+                image: '/img/machinery/local-3-block-maker.jpg',
+                description: 'Durable locally manufactured machine with good production capacity and reliable performance.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '1,200-1,800 blocks/day',
+                    power: 'Electric (3-phase)',
+                    blockTypes: 'Hollow, Solid, Interlocking',
+                    operation: 'Semi-Automatic',
+                    warranty: '6 Months'
+                },
+                tags: ['local', 'automatic']
+            },
+            {
+                id: 'mach-006',
+                name: 'Manual 3-Block Maker',
+                category: '3-block',
+                price: 250000,
+                image: '/img/machinery/manual-3-block-maker.jpg',
+                description: 'Cost-effective manual machine suitable for small to medium-scale block production.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '500-800 blocks/day',
+                    power: 'Manual Operation',
+                    blockTypes: 'Hollow, Solid',
+                    operation: 'Manual',
+                    warranty: '3 Months'
+                },
+                tags: ['local', 'manual']
+            },
+
+            // 5-Block Machines
+            {
+                id: 'mach-007',
+                name: 'Imported Automatic 5-Block Maker',
+                category: '5-block',
+                price: 3800000,
+                image: '/img/machinery/imported-5-block-maker.jpg',
+                description: 'Industrial-grade imported machine with maximum production capacity for large-scale operations.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '3,000-4,500 blocks/day',
+                    power: 'Electric (3-phase)',
+                    blockTypes: 'All types including specialty blocks',
+                    operation: 'Fully Automatic with PLC',
+                    warranty: '1-2 Years'
+                },
+                tags: ['imported', 'automatic']
+            },
+            {
+                id: 'mach-008',
+                name: 'Local Automatic 5-Block Maker',
+                category: '5-block',
+                price: 2200000,
+                image: '/img/machinery/local-5-block-maker.jpg',
+                description: 'High-capacity locally manufactured machine designed for commercial block production.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '2,500-3,500 blocks/day',
+                    power: 'Electric (3-phase)',
+                    blockTypes: 'Hollow, Solid, Interlocking, Paving',
+                    operation: 'Semi-Automatic',
+                    warranty: '1 Year'
+                },
+                tags: ['local', 'automatic']
+            },
+            {
+                id: 'mach-009',
+                name: 'Manual 5-Block Maker',
+                category: '5-block',
+                price: 450000,
+                image: '/img/machinery/manual-5-block-maker.jpg',
+                description: 'Manual machine with high production capacity, suitable for medium-scale operations.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '800-1,200 blocks/day',
+                    power: 'Manual Operation',
+                    blockTypes: 'Hollow, Solid',
+                    operation: 'Manual',
+                    warranty: '3 Months'
+                },
+                tags: ['local', 'manual']
+            },
+
+            // Industrial Mixers
+            {
+                id: 'mach-010',
+                name: 'Large Industrial Mixer',
+                category: 'mixer',
+                price: 1200000,
+                image: '/img/machinery/large-industrial-mixer.jpg',
+                description: 'Heavy-duty mixer with large capacity for high-volume block production operations.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '500-1000 liters',
+                    power: 'Electric (3-phase) or Diesel',
+                    mixingTime: '3-5 minutes per batch',
+                    operation: 'Automatic',
+                    warranty: '1 Year'
+                },
+                tags: ['imported']
+            },
+            {
+                id: 'mach-011',
+                name: 'Medium Industrial Mixer',
+                category: 'mixer',
+                price: 700000,
+                image: '/img/machinery/medium-industrial-mixer.jpg',
+                description: 'Versatile mixer suitable for medium-scale block production and construction projects.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '250-500 liters',
+                    power: 'Electric (3-phase)',
+                    mixingTime: '4-6 minutes per batch',
+                    operation: 'Semi-Automatic',
+                    warranty: '6 Months'
+                },
+                tags: ['local']
+            },
+            {
+                id: 'mach-012',
+                name: 'Small Industrial Mixer',
+                category: 'mixer',
+                price: 350000,
+                image: '/img/machinery/small-industrial-mixer.jpg',
+                description: 'Compact mixer perfect for small-scale block production and construction sites.',
+                stock: 'In Stock',
+                details: {
+                    capacity: '100-250 liters',
+                    power: 'Electric (Single-phase)',
+                    mixingTime: '5-8 minutes per batch',
+                    operation: 'Manual',
+                    warranty: '3 Months'
+                },
+                tags: ['local']
+            }
+        ];
+
+        // CART FUNCTIONS - Same as construction page
+        function getCart() {
+            try {
+                const cart = localStorage.getItem('cart');
+                return cart ? JSON.parse(cart) : [];
+            } catch (error) {
+                console.error('Error reading cart:', error);
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            try {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                if (typeof window.renderCartDrawer === 'function') {
+                    window.renderCartDrawer();
+                }
+                return true;
+            } catch (error) {
+                console.error('Error saving cart:', error);
+                return false;
+            }
+        }
+
+        function addToCart(product) {
+            console.log('Adding to cart:', product);
+            
+            if (!product || !product.id || !product.name || !product.price) {
+                console.error('Invalid product data:', product);
+                return false;
+            }
+            
+            const cart = getCart();
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+                console.log('Updated existing item quantity:', existingItem.quantity);
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    image: product.image || '/img/logo.jpg',
+                    quantity: 1
+                });
+                console.log('Added new item to cart');
+            }
+            
+            const saved = saveCart(cart);
+            
+            if (saved) {
+                showCartNotification(product.name);
+                return true;
+            }
+            
+            return false;
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartBadge = document.getElementById('cart-count-badge');
+            
+            if (cartBadge) {
+                cartBadge.textContent = totalItems;
+                cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+            
+            return totalItems;
+        }
+
+        function showCartNotification(productName) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.cart-notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.innerHTML = `<span>✓ Added "${productName}" to cart</span>`;
+            
+            // Add styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // PRODUCT DISPLAY FUNCTIONS
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Machinery page loaded');
+            
+            // Initialize cart count
+            updateCartCount();
+            
+            // DOM Elements
+            const machineryContainer = document.getElementById('machinery-container');
+            const searchInput = document.getElementById('machine-search');
+            const categoryFilter = document.getElementById('category-filter');
+            const loadMoreBtn = document.getElementById('load-more');
+            const productCount = document.getElementById('product-count');
+            
+            // Pagination variables
+            let currentPage = 1;
+            const productsPerPage = 6;
+            let filteredMachines = [...machineryProducts];
+            
+            // Initialize the page
+            function initPage() {
+                currentPage = 1;
+                filterMachines();
+                setupEventListeners();
+                setupCartDrawer();
+                updateCartCount();
+            }
+            
+            // Setup event listeners
+            function setupEventListeners() {
+                // Search functionality
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        currentPage = 1;
+                        filterMachines();
+                    });
+                }
+                
+                // Category filter
+                if (categoryFilter) {
+                    categoryFilter.addEventListener('change', function() {
+                        currentPage = 1;
+                        filterMachines();
+                    });
+                }
+                
+                // Load more button
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', function() {
+                        currentPage++;
+                        displayMachines();
+                    });
+                }
+                
+                // Single global event listener for add-to-cart buttons
+                document.addEventListener('click', function(e) {
+                    const addToCartBtn = e.target.closest('.add-to-cart');
+                    if (!addToCartBtn) return;
+                    
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    
+                    // Get product data
+                    const productId = addToCartBtn.getAttribute('data-id');
+                    const product = machineryProducts.find(p => p.id === productId);
+                    
+                    if (product) {
+                        console.log('Add to cart clicked for:', product.name);
+                        
+                        // Add to cart
+                        addToCart(product);
+                        
+                        // Visual feedback
+                        const originalText = addToCartBtn.innerHTML;
+                        addToCartBtn.innerHTML = 'Added!';
+                        addToCartBtn.style.background = '#27ae60';
+                        
+                        setTimeout(() => {
+                            addToCartBtn.innerHTML = originalText;
+                            addToCartBtn.style.background = '';
+                        }, 1000);
+                    }
+                }, true);
+            }
+            
+            // Filter machines
+            function filterMachines() {
+                const searchTerm = (searchInput ? searchInput.value.toLowerCase() : '');
+                const selectedCategory = (categoryFilter ? categoryFilter.value : 'all');
+                
+                filteredMachines = machineryProducts.filter(machine => {
+                    const matchesSearch = 
+                        machine.name.toLowerCase().includes(searchTerm) ||
+                        machine.description.toLowerCase().includes(searchTerm) ||
+                        machine.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                    
+                    const matchesCategory = 
+                        selectedCategory === 'all' || 
+                        machine.category === selectedCategory;
+                    
+                    return matchesSearch && matchesCategory;
+                });
+                
+                currentPage = 1;
+                displayMachines();
+            }
+            
+            // Display machines
+            function displayMachines() {
+                if (!machineryContainer) return;
+                
+                const startIndex = (currentPage - 1) * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                
+                // Clear container if first page
+                if (currentPage === 1) {
+                    machineryContainer.innerHTML = '';
+                }
+                
+                // Get machines for this page
+                const pageMachines = filteredMachines.slice(startIndex, endIndex);
+                
+                // Create machine cards
+                pageMachines.forEach(machine => {
+                    const machineCard = createMachineCard(machine);
+                    machineryContainer.appendChild(machineCard);
+                });
+                
+                // Update product count
+                updateProductCount();
+                
+                // Show/hide load more button
+                if (loadMoreBtn) {
+                    if (endIndex >= filteredMachines.length) {
+                        loadMoreBtn.style.display = 'none';
+                    } else {
+                        loadMoreBtn.style.display = 'block';
+                        loadMoreBtn.textContent = `Load More (${filteredMachines.length - endIndex} more)`;
+                    }
+                }
+                
+                // Animate new machines
+                animateNewMachines();
+            }
+            
+            // Create machine card
+            function createMachineCard(machine) {
+                const card = document.createElement('div');
+                card.className = 'machine-card';
+                
+                const formattedPrice = machine.price.toLocaleString();
+                
+                // Create tags HTML
+                const tagsHTML = machine.tags.map(tag => {
+                    let tagClass = '';
+                    if (tag === 'imported') tagClass = 'imported';
+                    if (tag === 'local') tagClass = 'local';
+                    if (tag === 'automatic') tagClass = 'automatic';
+                    if (tag === 'manual') tagClass = 'manual';
+                    return `<span class="machine-tag ${tagClass}">${tag.charAt(0).toUpperCase() + tag.slice(1)}</span>`;
+                }).join('');
+                
+                card.innerHTML = `
+                    <div class="machine-image">
+                        <img src="${machine.image}" alt="${machine.name}" onerror="this.src='/img/logo.jpg'">
+                    </div>
+                    <div class="machine-content">
+                        ${tagsHTML}
+                        <h3 class="machine-title">${machine.name}</h3>
+                        <p class="machine-description">${machine.description}</p>
+                        <div class="machine-price">₦${formattedPrice}</div>
+                        <ul class="machine-specs">
+                            ${machine.details.capacity ? `<li><span class="spec-label">Capacity:</span> <span class="spec-value">${machine.details.capacity}</span></li>` : ''}
+                            ${machine.details.power ? `<li><span class="spec-label">Power:</span> <span class="spec-value">${machine.details.power}</span></li>` : ''}
+                            ${machine.details.blockTypes ? `<li><span class="spec-label">Block Types:</span> <span class="spec-value">${machine.details.blockTypes}</span></li>` : ''}
+                            ${machine.details.operation ? `<li><span class="spec-label">Operation:</span> <span class="spec-value">${machine.details.operation}</span></li>` : ''}
+                            ${machine.details.warranty ? `<li><span class="spec-label">Warranty:</span> <span class="spec-value">${machine.details.warranty}</span></li>` : ''}
+                        </ul>
+                        <div class="machine-actions">
+                            <button class="btn-primary add-to-cart" 
+                                    data-id="${machine.id}"
+                                    data-name="${machine.name}"
+                                    data-price="${machine.price}"
+                                    data-image="${machine.image}">
+                                Add to Cart
+                            </button>
+                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(machine.name)} - ₦${formattedPrice}" 
+                               class="btn-whatsapp" target="_blank">
+                                💬 WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            // Update product count display
+            function updateProductCount() {
+                if (!productCount) return;
+                
+                const totalMachines = filteredMachines.length;
+                const showingMachines = Math.min(currentPage * productsPerPage, totalMachines);
+                
+                productCount.textContent = `Showing ${showingMachines} of ${totalMachines} machines`;
+                
+                if (totalMachines === 0) {
+                    productCount.textContent = 'No machines found matching your criteria';
+                }
+            }
+            
+            // Animate new machines
+            function animateNewMachines() {
+                const allCards = machineryContainer.querySelectorAll('.machine-card');
+                const newCards = Array.from(allCards).slice(-productsPerPage);
+                
+                newCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }
+            
+            // Setup cart drawer (same as construction)
+            function setupCartDrawer() {
+                const cartDrawer = document.getElementById('cart-drawer');
+                const openCartBtn = document.getElementById('open-cart-drawer');
+                const closeCartBtn = document.getElementById('close-cart-drawer');
+                const cartOverlay = document.getElementById('cart-drawer-overlay');
+                
+                // Open cart drawer
+                if (openCartBtn) {
+                    openCartBtn.addEventListener('click', function() {
+                        cartDrawer.classList.add('active');
+                        cartOverlay.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        renderCartDrawer();
+                    });
+                }
+                
+                // Close cart drawer
+                function closeCartDrawer() {
+                    cartDrawer.classList.remove('active');
+                    cartOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeCartBtn) {
+                    closeCartBtn.addEventListener('click', closeCartDrawer);
+                }
+                
+                if (cartOverlay) {
+                    cartOverlay.addEventListener('click', closeCartDrawer);
+                }
+                
+                // Close on escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && cartDrawer.classList.contains('active')) {
+                        closeCartDrawer();
+                    }
+                });
+                
+                // Render cart drawer function
+                window.renderCartDrawer = function() {
+                    const cartItemsContainer = document.getElementById('cart-drawer-items');
+                    const drawerTotal = document.getElementById('drawer-total');
+                    
+                    if (!cartItemsContainer) return;
+                    
+                    const cart = getCart();
+                    
+                    if (cart.length === 0) {
+                        cartItemsContainer.innerHTML = `
+                            <div class="cart-drawer-empty">
+                                <div class="cart-drawer-empty-icon">🛒</div>
+                                <p>Your cart is empty</p>
+                                <a href="/shop-categories" class="btn btn-primary">Continue Shopping</a>
+                            </div>
+                        `;
+                        if (drawerTotal) drawerTotal.textContent = '₦0';
+                        return;
+                    }
+                    
+                    cartItemsContainer.innerHTML = cart.map(item => `
+                        <div class="cart-drawer-item" data-id="${item.id}">
+                            <img src="${item.image}" alt="${item.name}" 
+                                 class="cart-drawer-item-image" 
+                                 onerror="this.src='/img/logo.jpg'">
+                            <div class="cart-drawer-item-details">
+                                <h4 class="cart-drawer-item-name">${item.name}</h4>
+                                <p class="cart-drawer-item-price">₦${item.price.toLocaleString()} × ${item.quantity}</p>
+                                <div class="cart-drawer-item-actions">
+                                    <button class="cart-drawer-item-remove" data-id="${item.id}">Remove</button>
+                                </div>
+                            </div>
+                            <div class="cart-drawer-item-total">
+                                ₦${(item.price * item.quantity).toLocaleString()}
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    // Update total
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    if (drawerTotal) {
+                        drawerTotal.textContent = `₦${total.toLocaleString()}`;
+                    }
+                    
+                    // Attach remove button listeners
+                    cartItemsContainer.querySelectorAll('.cart-drawer-item-remove').forEach(button => {
+                        button.addEventListener('click', function(e) {
+                            const productId = e.target.dataset.id;
+                            removeFromCart(productId);
+                            renderCartDrawer();
+                            updateCartCount();
+                        });
+                    });
+                };
+                
+                // Remove from cart function
+                function removeFromCart(productId) {
+                    const cart = getCart().filter(item => item.id !== productId);
+                    saveCart(cart);
+                }
+            }
+            
+            // Start the page
+            initPage();
+            
+            // Make functions available globally
+            window.addToCart = addToCart;
+            window.updateCartCount = updateCartCount;
+            window.getCart = getCart;
+        });
+    </script>
+</body>
+</html>

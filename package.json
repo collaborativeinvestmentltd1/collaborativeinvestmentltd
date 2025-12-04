@@ -5,15 +5,34 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "setup-ssl": "node scripts/setup-ssl.js",
+    "backup-db": "node scripts/backup-database.js",
+    "pm2-start": "pm2 start ecosystem.config.js",
+    "pm2-stop": "pm2 stop cil-website",
+    "pm2-restart": "pm2 restart cil-website",
+    "pm2-logs": "pm2 logs cil-website",
+    "pm2-monit": "pm2 monit",
+    "production": "pm2 start ecosystem.config.js --env production",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "nodemailer": "^6.9.7"
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express-rate-limit": "^6.11.2",
+    "helmet": "^7.2.0",
+    "mongodb": "^5.0.0",
+    "nodemailer": "^6.9.1",
+    "pm2": "^6.0.14",
+    "winston": "^3.18.3"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^2.0.20"
   },
-  "keywords": ["investment", "business", "nigeria"],
-  "author": "Collaborative Investment Ltd",
-  "license": "MIT"
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
 }

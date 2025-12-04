@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful - Collaborative Investment Ltd</title>
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <main class="order-success-container">
+        <div class="container">
+            <div class="success-card">
+                <div class="success-icon"></div>
+                <h1>Order Placed Successfully!</h1>
+                <p>Thank you for your order. We have received it and will begin processing it shortly.</p>
+                
+                <div class="order-details">
+                    <p>Your Order Number is:</p>
+                    <h2 id="order-number">Loading...</h2>
+                </div>
+
+                <div class="next-steps">
+                    <h3>What's Next?</h3>
+                    <p>To finalize your order and arrange for payment and delivery, please contact us on WhatsApp with your order number.</p>
+                    <a href="#" id="whatsapp-link" class="btn btn-whatsapp" target="_blank">
+                         Confirm Order on WhatsApp
+                    </a>
+                </div>
+
+                <a href="/shop-all" class="continue-shopping-link">← Continue Shopping</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Collaborative Investment Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderNumber = urlParams.get('orderNumber');
+            const orderDetails = urlParams.get('details');
+            const whatsappNumber = '2348129978419'; // Your WhatsApp Number
+
+            if (orderNumber) {
+                document.getElementById('order-number').textContent = orderNumber;
+                const message = `Hello, I've just placed an order on your website. My order number is ${orderNumber}. Order details: ${decodeURIComponent(orderDetails)}`;
+                document.getElementById('whatsapp-link').href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            }
+        });
+    </script>
+
+</body>
+</html>

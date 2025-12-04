@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Investment Ltd</title>
-    <meta name="description" content="Collaborative Investment Ltd is a forward-thinking business development and investment management company committed to building sustainable enterprises across Nigeria.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <title>Collaborative Investment Ltd - Shop & Invest in Nigeria</title>
+    <meta name="description" content="Buy quality construction materials, agricultural products, livestock, machinery, solar systems, and furniture. Investment opportunities across Nigeria.">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <!-- Schema.org markup -->
@@ -30,7 +33,9 @@
             "@type": "ContactPoint",
             "telephone": "+234-812-997-8419",
             "contactType": "customer service",
-            "email": "collaborativeinvestmentltd@gmail.com"
+            "email": "collaborativeinvestmentltd@gmail.com",
+            "areaServed": "NG",
+            "availableLanguage": ["English", "Yoruba", "Igbo", "Hausa"]
         },
         "sameAs": [
             "https://x.com/Colainveltd",
@@ -40,11 +45,844 @@
     }
     </script>
     <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #f39c12;
+            --accent: #2980b9;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gray: #7f8c8d;
+            --light-gray: #ecf0f1;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+        
+        /* Enhanced Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/hero-pattern.svg') no-repeat center center;
+            opacity: 0.1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Section Styling */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section:nth-child(even) {
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Enhanced Shop Categories Preview */
+        .shop-categories-preview {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .categories-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-preview-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-preview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-preview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--primary);
+        }
+
+        .category-preview-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-preview-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-preview-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .category-preview-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .category-product-count {
+            display: inline-block;
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .testimonial-content {
+            color: var(--dark);
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--light-gray);
+            position: absolute;
+            top: -1rem;
+            left: -0.5rem;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            color: var(--primary);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* Quick Stats Section */
+        .stats-section {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .stat-item p {
+            color: rgba(255,255,255,0.8);
+            font-weight: 600;
+        }
+
+        /* Enhanced Header */
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        /* Enhanced Cart */
+        .cart-icon-wrapper {
+            position: relative;
+        }
+
+        .cart-icon-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .cart-icon-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        #cart-count-badge {
+            background: var(--secondary);
+            color: var(--primary);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .services-grid,
+            .categories-preview-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .service-card,
+            .category-preview-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stats Section Styles */
+.stats-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/img/stats-pattern.png') repeat;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--secondary);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+.stat-item:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+    transform: scale(1.1);
+    color: white;
+}
+
+.stat-item p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Animation for counting */
+.stat-number.animating {
+    animation: pulse 0.5s ease infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    to {
+        text-shadow: 0 2px 20px rgba(243, 156, 18, 0.4);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2.8rem;
+    }
+    
+    .stat-item {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .stats-section {
+        padding: 3rem 0;
+    }
+}
+
+/* Additional decorative elements */
+.stats-section::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    pointer-events: none;
+}
+
+/* Testimonials Slider Styles */
+.testimonials-slider-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px 0;
+}
+
+.testimonials-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 30px;
+    padding: 10px 0;
+}
+
+.testimonial-slide {
+    flex: 0 0 calc(33.333% - 20px);
+    min-width: 0;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--secondary);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.testimonial-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--light);
+}
+
+.testimonial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-content {
+    color: var(--dark);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    position: relative;
+    flex-grow: 1;
+}
+
+.testimonial-content::before {
+    content: '"';
+    font-size: 4rem;
+    color: var(--light-gray);
+    position: absolute;
+    top: -2rem;
+    left: -1rem;
+    line-height: 1;
+    opacity: 0.3;
+}
+
+.testimonial-author {
+    color: var(--primary);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.testimonial-role {
+    color: var(--gray);
+    font-size: 0.9rem;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Slider Controls */
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.slider-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 82, 118, 0.2);
+}
+
+.slider-btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 82, 118, 0.3);
+}
+
+.slider-btn:active {
+    transform: translateY(0);
+}
+
+.slider-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.slider-dots {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.slider-dot.active {
+    background: var(--secondary);
+    transform: scale(1.2);
+}
+
+.slider-dot:hover {
+    background: var(--accent);
+}
+
+/* Auto-slide animation */
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-33.333% * 10)); /* Move by 10 slides */
+    }
+}
+
+.testimonials-slider.auto-slide {
+    animation: slide 60s linear infinite;
+}
+
+/* Pause animation on hover */
+.testimonials-slider-container:hover .testimonials-slider.auto-slide {
+    animation-play-state: paused;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .testimonial-slide {
+        flex: 0 0 calc(50% - 15px);
+    }
+    
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-50% * 10)); /* Adjust for 2 slides visible */
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-slide {
+        flex: 0 0 calc(100% - 20px);
+    }
+    
+    .slider-controls {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% * 10)); /* Adjust for 1 slide visible */
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+    
+    .testimonial-content {
+        font-size: 0.95rem;
+    }
+    
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+
     </style>
 </head>
 
@@ -54,85 +892,119 @@
     <header class="header">
         <nav class="navbar">
             <a href="/" class="logo">
-                <img src="img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">☰</button>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
             <ul class="nav-links">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="about">About Us</a></li>
-                <li><a href="services">Our Services</a></li>
-                <li><a href="portfolio">Portfolio</a></li>
-                <li><a href="investment">Investment</a></li>
-                <li><a href="blog">Blog</a></li>
-                <li><a href="contact">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
         </nav>
     </header>
+    <div id="cart-drawer-overlay"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Empowering Businesses. Creating Opportunities. Building the Future.</h1>
-            <p>Collaborative Investment Ltd is a forward-thinking business development and investment management company committed to building sustainable enterprises across Nigeria.</p>
-            <div class="cta-buttons">
-                <a href="investment" class="btn btn-primary">Invest With Us</a>
-                <a href="contact" class="btn btn-secondary">Contact Us</a>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/img/company-background.jpg') center/cover no-repeat;">
+    <div class="container">
+        <h1>Empowering Nigerian Businesses. Creating Sustainable Opportunities.</h1>
+        <p>Collaborative Investment Ltd is your trusted partner for business development, investment management, and quality product sourcing across Nigeria. From agriculture to construction, we build success stories.</p>
+        <div class="cta-buttons">
+            <a href="/investment" class="btn btn-primary"> Invest With Us</a>
+            <a href="/shop-categories" class="btn btn-secondary"> Shop Products</a>
+            <a href="/contact" class="btn btn-whatsapp"> Quick Contact</a>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Stats -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="45" data-suffix="+">0</h3>
+                <p>Quality Products</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="6">0</h3>
+                <p>Business Sectors</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="90" data-suffix="%">0</h3>
+                <p>Customer Satisfaction</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="3" data-suffix="+">0</h3>
+                <p>Years Experience</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Company Overview -->
     <section class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Company Overview</h2>
-                <p>Collaborative Investment Ltd (CIL) is a Lagos-based business development and investment management company created to identify, restructure, manage, and scale small and medium-sized enterprises (SMEs) across Nigeria.</p>
+                <h2>Building Nigeria's Business Future</h2>
+                <p>Collaborative Investment Ltd (CIL) is a Lagos-based business development and investment management company dedicated to transforming SMEs into profitable, scalable enterprises across Nigeria.</p>
             </div>
             
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"></div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/company/mission.jpg" alt="Our Mission - Empowering Nigerian Businesses" loading="lazy">
+                    </div>
                     <h3>Our Mission</h3>
-                    <p>CIL aims to improve and empower local businesses by providing strategic investment, management support, and financial partnerships that ensure long-term growth and sustainability.</p>
+                    <p>To empower local businesses through strategic investment, management support, and financial partnerships that ensure long-term growth and sustainability.</p>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon"></div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/company/vision.jpg" alt="Our Vision - Trusted Business Development" loading="lazy">
+                    </div>
                     <h3>Our Vision</h3>
-                    <p>To be one of Nigeria's most trusted business development and investment firms by transforming small businesses into profitable, stable, and scalable ventures.</p>
+                    <p>To become Nigeria's most trusted business development firm by transforming small businesses into profitable, stable, and scalable ventures.</p>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon"></div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/company/values.jpg" alt="Our Values - Integrity and Collaboration" loading="lazy">
+                    </div>
                     <h3>Our Values</h3>
-                    <p>Integrity, Growth, Collaboration, and Accountability guide all our operations and partnerships.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Signals -->
-    <section class="section" style="background: var(--light);">
-        <div class="container">
-            <div class="section-title">
-                <h2>Trusted by Investors & Business Owners</h2>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>100%</h3>
-                    <p>Client Satisfaction</p>
-                </div>
-                <div class="stat-item">
-                    <h3>₦50M+</h3>
-                    <p>Assets Managed</p>
-                </div>
-                <div class="stat-item">
-                    <h3>12+</h3>
-                    <p>Jobs Created</p>
-                </div>
-                <div class="stat-item">
-                    <h3>5+</h3>
-                    <p>Business Sectors</p>
+                    <p>Integrity, Growth, Collaboration, and Accountability guide every decision and partnership we undertake.</p>
                 </div>
             </div>
         </div>
@@ -142,299 +1014,338 @@
     <section class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Our Areas of Focus</h2>
+                <h2>Our Business Sectors</h2>
                 <p>As a diversified investment firm, CIL strategically targets multiple high-impact sectors of Nigeria's economy.</p>
             </div>
 
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"></div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/sectors/agriculture-sector.jpg" alt="Agriculture & Agribusiness" loading="lazy">
+                    </div>
                     <h3>Agriculture & Agribusiness</h3>
-                    <p>Livestock production, feed systems, and agricultural value chain investments to enhance food security and rural development.</p>
-                    <a href="services#agriculture" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                    <p>Complete poultry solutions including day-old chicks, broilers, layers, eggs, pigs, catfish, and premium farming supplies.</p>
+                    <a href="/shop-agriculture" class="btn btn-primary" style="margin-top: 1rem;">Shop Agriculture</a>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-icon"></div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/sectors/construction-sector.jpg" alt="Construction & Manufacturing" loading="lazy">
+                    </div>
                     <h3>Construction & Manufacturing</h3>
-                    <p>Block production, construction materials, and fabrication of locally made block-making machines for domestic and export markets.</p>
-                    <a href="services#manufacturing" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                    <p>Quality concrete blocks, building materials, block-making machinery, and professional basketball court construction services.</p>
+                    <a href="/shop-construction" class="btn btn-primary" style="margin-top: 1rem;">Shop Construction</a>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-icon"></div>
-                    <h3>Retail & Trade</h3>
-                    <p>Supermarkets, retail stores, and import/export of consumer goods, electronics, and mechanical equipment.</p>
-                    <a href="services#retail" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon"></div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/sectors/diaspora-sector.jpg" alt="Diaspora Asset Management" loading="lazy">
+                    </div>
                     <h3>Diaspora Asset Management</h3>
                     <p>Dedicated division helping Nigerians abroad initiate and sustain businesses, manage construction projects, and oversee investments.</p>
-                    <a href="services#diaspora" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                    <a href="/services#diaspora" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-icon"></div>
-                    <h3>Hospitality & Entertainment</h3>
-                    <p>Development and management of hotels, bars, lounges, and restaurant brands with event management services.</p>
-                    <a href="services#hospitality" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/sectors/solar-sector.jpg" alt="Solar Energy Solutions" loading="lazy">
+                    </div>
+                    <h3>Solar Energy Solutions</h3>
+                    <p>Complete solar systems including panels, batteries, inverters for residential, commercial, and industrial applications.</p>
+                    <a href="/shop-solar" class="btn btn-primary" style="margin-top: 1rem;">Shop Solar</a>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/sectors/furniture-sector.jpg" alt="Furniture & Upholstery" loading="lazy">
+                    </div>
+                    <h3>Furniture & Upholstery</h3>
+                    <p>Custom-made chairs, leather and cloth upholstery, complete furniture sets with quality craftsmanship and materials.</p>
+                    <a href="/shop-furniture" class="btn btn-primary" style="margin-top: 1rem;">Shop Furniture</a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="/img/sectors/machinery-sector.jpg" alt="Machinery & Equipment" loading="lazy">
+                    </div>
+                    <h3>Machinery & Equipment</h3>
+                    <p>Industrial block-making machines and equipment for construction and manufacturing businesses.</p>
+                    <a href="/shop-machinery" class="btn btn-primary" style="margin-top: 1rem;">Shop Machinery</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Strategic Objectives -->
-    <section class="section" style="background: var(--light);">
+    <!-- Shop Categories Preview -->
+    <section class="shop-categories-preview">
         <div class="container">
             <div class="section-title">
-                <h2>Our Strategic Objectives</h2>
-                <p>Clear goals that guide our operations and partnerships</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Nationwide Presence</h3>
-                    <p>To establish a reliable and well-coordinated business development network across all 36 states of Nigeria.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Enterprise Growth & Management</h3>
-                    <p>To identify, support, and manage 8-15 SMEs annually under our structured investment and supervision framework.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Employment & Capacity Building</h3>
-                    <p>To create sustainable employment opportunities and provide skill development programs for young entrepreneurs.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Institutional Collaboration</h3>
-                    <p>To foster strategic partnerships with financial institutions for joint project financing and effective risk management.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Sustainable Community Development</h3>
-                    <p>To promote community-based ventures that enhance local productivity and drive inclusive economic growth.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Partner with CIL -->
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Partner with CIL</h2>
-                <p>Our structured approach delivers measurable results for investors and business owners</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Strong Management Oversight</h3>
-                    <p>Clear structures to monitor businesses for transparency and performance.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Structured Systems</h3>
-                    <p>Proper accounting, reporting, and compliance frameworks from the start.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Community Impact</h3>
-                    <p>Our model promotes local economic growth and creates youth employment.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Scalable Framework</h3>
-                    <p>Business systems built to be replicated across states and sectors as we grow.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Integrity & Transparency</h3>
-                    <p>Commitment to full transparency and professionalism in all partnerships.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Risk Management</h3>
-                    <p>Prioritizing credible SMEs and maintaining operational discipline.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Clients Say</h2>
-                <p>Success stories from our investors and business partners</p>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "CIL transformed my poultry farm from a struggling business to a profitable venture. Their management expertise and strategic oversight delivered 35% ROI in the first year."
-                    </div>
-                    <div class="testimonial-author">- Agricultural Investor, Ogun State</div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "As someone living abroad, I needed a trustworthy partner to manage my construction projects. CIL provided transparent reporting and delivered beyond expectations."
-                    </div>
-                    <div class="testimonial-author">- Diaspora Client, United Kingdom</div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "The block manufacturing investment yielded 45% returns. CIL's professional approach and regular updates gave me complete confidence in their management."
-                    </div>
-                    <div class="testimonial-author">- Local Investor, Lagos</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Preview -->
-    <section class="section" style="background: var(--light);">
-        <div class="container">
-            <div class="section-title">
-                <h2>Featured Projects</h2>
-                <p>A cross-sector portfolio demonstrating our expertise and growth capacity.</p>
-            </div>
-
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="img/poultry-farm.jpg" alt="CIL Poultry Farm - Commercial egg production facility" data-src="img/poultry-farm.jpg" class="lazy">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Agricultural Enterprise Program</h3>
-                        <p>Large-scale livestock, poultry, and aquaculture development built for high-yield agribusiness operations.</p>
-                        <div style="margin: 1.5rem 0;">
-                            <p><strong>Capacity:</strong> 3,000+ Birds</p>
-                            <p><strong>ROI:</strong> 35% Annually</p>
-                        </div>
-                        <a href="portfolio#poultry" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="img/block-manufacturing.jpg" alt="CIL Block Manufacturing - Concrete block production" data-src="img/block-manufacturing.jpg" class="lazy">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>CIL Block Manufacturing</h3>
-                        <p>Production of durable concrete blocks and construction materials to support local development.</p>
-                        <div style="margin: 1.5rem 0;">
-                            <p><strong>Capacity:</strong> 3,000+ Blocks Daily</p>
-                            <p><strong>ROI:</strong> 45% Annually</p>
-                        </div>
-                        <a href="portfolio#blockworks" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="img/machine-fabrication.jpg" alt="CIL Engineering - Industrial machine fabrication" data-src="img/machine-fabrication.jpg" class="lazy">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Industrial Machine Fabrication Hub</h3>
-                        <p>Design and fabrication of block-making machines and industrial equipment for domestic and export markets.</p>
-                        <div style="margin: 1.5rem 0;">
-                            <p><strong>Specialty:</strong> Custom Equipment</p>
-                            <p><strong>Market:</strong> Domestic & Export</p>
-                        </div>
-                        <a href="portfolio#fabrication" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="portfolio" class="btn btn-secondary">View Full Portfolio</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Investment CTA -->
-    <section class="section" style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white;">
-        <div class="container">
-            <div class="section-title">
-                <h2 style="color: white;">Ready to Invest?</h2>
-                <p style="color: rgba(255,255,255,0.9);">Join our growing community of successful investors</p>
-            </div>
-
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <h3 style="color: white;">15-50%</h3>
-                        <p>Annual Returns</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 style="color: white;">Asset Backed</h3>
-                        <p>Secure Investments</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 style="color: white;">Monthly Reports</h3>
-                        <p>Full Transparency</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cta-buttons">
-                <a href="investment" class="btn btn-primary" style="background: white; color: var(--primary);">View Investment Opportunities</a>
-                <a href="contact" class="btn btn-secondary">Schedule Consultation</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Investment Prospectus Download -->
-    <section class="section" style="background: var(--light);">
-        <div class="container">
-            <div class="section-title">
-                <h2>Investment Documentation</h2>
-                <p>Download our comprehensive investment prospectus for detailed information</p>
+                <h2>Shop Our Quality Products</h2>
+                <p>Browse our extensive catalog of quality products across all business sectors. Direct sales with nationwide delivery.</p>
             </div>
             
-            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                <div style="background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); border: 1px solid var(--light-gray);">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">📄</div>
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Investment Prospectus 2025</h3>
-                    <p style="color: var(--gray); margin-bottom: 1.5rem;">
-                        Complete guide to investment opportunities, financial projections, risk analysis, and partnership terms.
-                    </p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.8rem; color: var(--gray);">Pages</div>
-                            <div style="font-weight: 600; color: var(--primary);">10+</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.8rem; color: var(--gray);">Format</div>
-                            <div style="font-weight: 600; color: var(--primary);">PDF</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.8rem; color: var(--gray);">Updated</div>
-                            <div style="font-weight: 600; color: var(--primary);">Nov 2025</div>
-                        </div>
+            <div class="categories-preview-grid">
+                <a href="/shop-agriculture" class="category-preview-card fade-in">
+                    <div class="category-preview-image">
+                        <img src="/img/categories/agriculture-category.jpg" alt="Agriculture & Livestock" loading="lazy">
                     </div>
-                    
-                    <a href="downloads/CIL-Investment-Prospectus.pdf" 
-                       download 
-                       class="btn btn-primary"
-                       style="padding: 1rem 2rem; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                        Download Prospectus
-                    </a>
-                    
-                    <p style="font-size: 0.8rem; color: var(--gray); margin-top: 1rem;">
-                        Includes: ROI projections • Risk analysis • Investment terms • Management team
-                    </p>
-                </div>
+                    <h3>Agriculture & Livestock</h3>
+                    <p>Day-old chicks, broilers, layers, eggs, pigs, catfish, animal feeds, and farming equipment</p>
+                    <span class="category-product-count">17 products</span>
+                </a>
+                
+                <a href="/shop-construction" class="category-preview-card fade-in">
+                    <div class="category-preview-image">
+                        <img src="/img/categories/construction-category.jpg" alt="Construction Materials" loading="lazy">
+                    </div>
+                    <h3>Construction Materials</h3>
+                    <p>Concrete blocks, cement, building materials, and professional construction services</p>
+                    <span class="category-product-count">13 products</span>
+                </a>
+                
+                <a href="/shop-machinery" class="category-preview-card fade-in">
+                    <div class="category-preview-image">
+                        <img src="/img/categories/machinery-category.jpg" alt="Machinery & Equipment" loading="lazy">
+                    </div>
+                    <h3>Machinery & Equipment</h3>
+                    <p>Block-making machines, industrial mixers, and manufacturing equipment</p>
+                    <span class="category-product-count">8 products</span>
+                </a>
+                
+                <a href="/shop-solar" class="category-preview-card fade-in">
+                    <div class="category-preview-image">
+                        <img src="/img/categories/solar-category.jpg" alt="Solar Energy Systems" loading="lazy">
+                    </div>
+                    <h3>Solar Energy Systems</h3>
+                    <p>Solar panels, batteries, inverters, charge controllers, and complete solar packages</p>
+                    <span class="category-product-count">9 products</span>
+                </a>
+                
+                <a href="/shop-furniture" class="category-preview-card fade-in">
+                    <div class="category-preview-image">
+                        <img src="/img/categories/furniture-category.jpg" alt="Furniture & Upholstery" loading="lazy">
+                    </div>
+                    <h3>Furniture & Upholstery</h3>
+                    <p>Custom chairs, office furniture, living room sets, and premium upholstery services</p>
+                    <span class="category-product-count">16 products</span>
+                </a>
+                
+                <a href="/shop-all" class="category-preview-card fade-in">
+                    <div class="category-preview-image">
+                        <img src="/img/categories/all-products-category.jpg" alt="All Products" loading="lazy">
+                    </div>
+                    <h3>All Products</h3>
+                    <p>Browse our complete product catalog across all categories in one place</p>
+                    <span class="category-product-count">63+ products</span>
+                </a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="/shop-categories" class="btn btn-primary">View All Categories & Products</a>
             </div>
         </div>
     </section>
+
+<!-- Testimonials Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Success Stories</h2>
+            <p>Hear from our satisfied investors and business partners across Nigeria</p>
+        </div>
+
+        <!-- Testimonials Slider Container -->
+        <div class="testimonials-slider-container">
+            <div class="testimonials-slider">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/farmer-testimonial.jpg" alt="Agricultural Investor" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "CIL transformed my poultry farm from a struggling business to a profitable venture. Their management expertise and strategic oversight delivered 35% ROI in the first year alone. The quality of their day-old chicks is exceptional."
+                        </div>
+                        <div class="testimonial-author">- Adebayo Ogunleye, Ogun State</div>
+                        <div class="testimonial-role">Agricultural Investor</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/diaspora-testimonial.jpg" alt="Diaspora Client" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "As someone living abroad, I needed a trustworthy partner to manage my construction projects. CIL provided transparent reporting and delivered beyond expectations. Their block quality is superior to anything I've seen locally."
+                        </div>
+                        <div class="testimonial-author">- Chidi Okonkwo, United Kingdom</div>
+                        <div class="testimonial-role">Diaspora Client</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/investor-testimonial.jpg" alt="Local Investor" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "The block manufacturing investment yielded 45% returns. CIL's professional approach and regular updates gave me complete confidence in their management. Their solar systems have also been reliable for my business."
+                        </div>
+                        <div class="testimonial-author">- Femi Adekunle, Lagos</div>
+                        <div class="testimonial-role">Local Investor</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/solar-client.jpg" alt="Solar Client" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "CIL installed a 5KVA solar system for my factory and the results have been outstanding. Zero power outages for 6 months straight. Their after-sales support is excellent - they respond within hours when needed."
+                        </div>
+                        <div class="testimonial-author">- Bola Thompson, Ibadan</div>
+                        <div class="testimonial-role">Manufacturing Business Owner</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/furniture-client.jpg" alt="Furniture Client" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "The custom furniture for my office exceeded expectations. CIL's craftsmanship is top-notch and they delivered ahead of schedule. The upholstery quality has held up beautifully for 2 years now."
+                        </div>
+                        <div class="testimonial-author">- Grace Williams, Port Harcourt</div>
+                        <div class="testimonial-role">Corporate Client</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/catfish-farmer.jpg" alt="Catfish Farmer" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "Started with 5,000 fingerlings from CIL and now I'm producing 20,000 monthly. Their technical support and feeding formulas helped me achieve 90% survival rate. Best investment decision I ever made."
+                        </div>
+                        <div class="testimonial-author">- Ibrahim Mohammed, Kano</div>
+                        <div class="testimonial-role">Aquaculture Farmer</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 7 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/construction-client.jpg" alt="Construction Client" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "CIL supplied 50,000 blocks for our housing project. Not a single defective piece. Their consistent quality and timely delivery helped us finish 2 weeks ahead of schedule."
+                        </div>
+                        <div class="testimonial-author">- David Okoro, Abuja</div>
+                        <div class="testimonial-role">Construction Company CEO</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 8 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/piggery-client.jpg" alt="Piggery Investor" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "Invested in CIL's piggery expansion program. Their veterinary support and modern farming techniques doubled my production in 8 months. The ROI has been consistently above 40%."
+                        </div>
+                        <div class="testimonial-author">- Ngozi Eze, Enugu</div>
+                        <div class="testimonial-role">Livestock Investor</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 9 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/machinery-client.jpg" alt="Machinery Buyer" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "Bought 2 block-making machines from CIL. Their installation team trained my staff and the machines have been running non-stop for 18 months with minimal maintenance. Excellent durability."
+                        </div>
+                        <div class="testimonial-author">- Samuel Johnson, Ondo</div>
+                        <div class="testimonial-role">Block Manufacturer</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 10 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/usa-diaspora.jpg" alt="USA Diaspora Client" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "From Texas, I manage 3 businesses in Nigeria through CIL. Their monthly reports are detailed and honest. They've grown my investments by 150% in 3 years. Couldn't ask for a better partner."
+                        </div>
+                        <div class="testimonial-author">- Tunde Adeyemi, USA</div>
+                        <div class="testimonial-role">Diaspora Portfolio Manager</div>
+                    </div>
+                </div>
+
+                <!-- Duplicate slides for seamless looping -->
+                <!-- Testimonial 1 (Duplicate) -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/farmer-testimonial.jpg" alt="Agricultural Investor" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "CIL transformed my poultry farm from a struggling business to a profitable venture. Their management expertise and strategic oversight delivered 35% ROI in the first year alone. The quality of their day-old chicks is exceptional."
+                        </div>
+                        <div class="testimonial-author">- Adebayo Ogunleye, Ogun State</div>
+                        <div class="testimonial-role">Agricultural Investor</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 (Duplicate) -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="/img/testimonials/diaspora-testimonial.jpg" alt="Diaspora Client" loading="lazy">
+                        </div>
+                        <div class="testimonial-content">
+                            "As someone living abroad, I needed a trustworthy partner to manage my construction projects. CIL provided transparent reporting and delivered beyond expectations. Their block quality is superior to anything I've seen locally."
+                        </div>
+                        <div class="testimonial-author">- Chidi Okonkwo, United Kingdom</div>
+                        <div class="testimonial-role">Diaspora Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="slider-controls">
+            <button class="slider-btn prev-btn" aria-label="Previous testimonial">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <div class="slider-dots">
+                <!-- Dots will be generated by JavaScript -->
+            </div>
+            <button class="slider-btn next-btn" aria-label="Next testimonial">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer class="footer">
@@ -495,6 +1406,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
@@ -529,7 +1441,12 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
         <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-        <p>Building Nigeria's Business Future</p>
+        <p>
+            <a href="/admin/login" style="color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.3);" 
+               title="Admin Access" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='inherit'">
+                Building Nigeria's Business Future
+            </a>
+        </p>
 
         <p style="margin-top: 1rem;">
             <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
@@ -547,8 +1464,6 @@
             </p>
         </div>
     </div>
-</footer>
-
 
     <!-- Cookie Consent -->
     <div id="cookieConsent" class="cookie-consent">
@@ -561,14 +1476,29 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
     
     <script>
-        // Initialize lazy loading for images
+        // Scroll animations
         document.addEventListener('DOMContentLoaded', function() {
-            const lazyImages = document.querySelectorAll('img[data-src]');
+            const fadeElements = document.querySelectorAll('.fade-in');
             
-            const imageObserver = new IntersectionObserver((entries, observer) => {
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeElements.forEach(el => fadeObserver.observe(el));
+
+            // Lazy loading for images
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
@@ -581,6 +1511,260 @@
 
             lazyImages.forEach(img => imageObserver.observe(img));
         });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('.testimonials-slider');
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dotsContainer = document.querySelector('.slider-dots');
+    
+    // Number of actual testimonials (excluding duplicates)
+    const actualSlidesCount = 10;
+    let currentSlide = 0;
+    let isTransitioning = false;
+    
+    // Create dots
+    for (let i = 0; i < actualSlidesCount; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot';
+        dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+    
+    const dots = document.querySelectorAll('.slider-dot');
+    
+    // Initialize dots
+    updateDots();
+    
+    // Start auto-slide
+    slider.classList.add('auto-slide');
+    
+    // Manual navigation
+    prevBtn.addEventListener('click', () => {
+        if (!isTransitioning) {
+            goToSlide(currentSlide - 1);
+        }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        if (!isTransitioning) {
+            goToSlide(currentSlide + 1);
+        }
+    });
+    
+    // Pause auto-slide on hover
+    const sliderContainer = document.querySelector('.testimonials-slider-container');
+    sliderContainer.addEventListener('mouseenter', () => {
+        slider.style.animationPlayState = 'paused';
+    });
+    
+    sliderContainer.addEventListener('mouseleave', () => {
+        slider.style.animationPlayState = 'running';
+    });
+    
+    function goToSlide(slideIndex) {
+        if (isTransitioning) return;
+        
+        isTransitioning = true;
+        currentSlide = (slideIndex + actualSlidesCount) % actualSlidesCount;
+        
+        // Calculate transform value
+        const slideWidth = slides[0].offsetWidth + 30; // width + gap
+        const transformValue = -currentSlide * slideWidth;
+        
+        // Disable animation temporarily for instant jump
+        slider.style.transition = 'none';
+        slider.style.transform = `translateX(${transformValue}px)`;
+        
+        // Force reflow
+        slider.offsetHeight;
+        
+        // Re-enable transition
+        slider.style.transition = 'transform 0.5s ease-in-out';
+        
+        // Update dots
+        updateDots();
+        
+        // Reset transitioning flag after animation
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 500);
+    }
+    
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            goToSlide(currentSlide);
+        }, 250);
+    });
+    
+    // Handle visibility change (tab switch)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            slider.style.animationPlayState = 'paused';
+        } else {
+            slider.style.animationPlayState = 'running';
+        }
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Stats counting animation
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+    
+    // Check if element is in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Count animation function
+    function animateCounter(element, target, duration = 2000) {
+        const suffix = element.getAttribute('data-suffix') || '';
+        const start = 0;
+        const increment = target / (duration / 16); // 60fps
+        let current = start;
+        
+        // Add animating class for visual feedback
+        element.classList.add('animating');
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+                element.classList.remove('animating');
+                
+                // Add suffix after animation completes
+                if (suffix === '+') {
+                    // For "45+", we want to show "45+" at the end
+                    element.textContent = Math.floor(target) + suffix;
+                } else if (suffix === '%') {
+                    // For percentage, we want "90%"
+                    element.textContent = Math.floor(target) + suffix;
+                } else if (suffix === '+') {
+                    // For years, we want "3+"
+                    element.textContent = Math.floor(target) + suffix;
+                } else {
+                    // For regular numbers
+                    element.textContent = Math.floor(target);
+                }
+            } else {
+                // Update number without suffix during animation
+                element.textContent = Math.floor(current);
+            }
+        }, 16);
+    }
+    
+    // Start counting when stats section is in view
+    function checkStatsVisibility() {
+        const statsSection = document.querySelector('.stats-section');
+        
+        if (statsSection && isInViewport(statsSection) && !hasAnimated) {
+            hasAnimated = true;
+            
+            // Add a small delay for better UX
+            setTimeout(() => {
+                statNumbers.forEach((element, index) => {
+                    const target = parseInt(element.getAttribute('data-target'));
+                    
+                    // Stagger the animations
+                    setTimeout(() => {
+                        animateCounter(element, target);
+                    }, index * 300); // 300ms delay between each counter
+                });
+            }, 500);
+        }
+    }
+    
+    // Check on scroll and load
+    window.addEventListener('scroll', checkStatsVisibility);
+    window.addEventListener('load', checkStatsVisibility);
+    
+    // Initial check in case page loads with section in view
+    checkStatsVisibility();
+    
+    // Reset animation when section leaves and re-enters viewport
+    let observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                // Reset the animation flag when leaving viewport
+                hasAnimated = false;
+                
+                // Reset counter values
+                statNumbers.forEach(element => {
+                    element.textContent = '0';
+                });
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+    
+    // Add hover effect enhancement
+    statNumbers.forEach(number => {
+        number.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('animating')) {
+                this.style.transform = 'scale(1.1)';
+            }
+        });
+        
+        number.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('animating')) {
+                this.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    // Optional: Add click to re-animate for demo purposes
+    statNumbers.forEach(number => {
+        number.addEventListener('click', function() {
+            if (!this.classList.contains('animating')) {
+                const target = parseInt(this.getAttribute('data-target'));
+                animateCounter(this, target, 1000); // Faster animation on click
+            }
+        });
+        
+        // Add tooltip for click hint
+        number.title = "Click to animate again";
+    });
+});
+</script>
 </body>
 </html>

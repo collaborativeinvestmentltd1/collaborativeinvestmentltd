@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Products - Collaborative Investment Ltd</title>
+    
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="stylesheet" href="/css/shop-all.css">
+    
+    <style>
+        /* Construction page specific styles */
+        :root {
+            --construction-primary: #e67e22;
+            --construction-secondary: #f39c12;
+            --construction-accent: #d35400;
+        }
+        
+        .construction-header {
+            background: linear-gradient(135deg, var(--construction-primary) 0%, var(--construction-secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .construction-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .construction-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .back-link:hover {
+            color: white;
+        }
+        
+        .materials-section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--construction-primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            color: var(--construction-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--construction-accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-details {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .product-details p {
+            margin: 0.3rem 0;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--construction-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--construction-accent);
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        .stock-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #27ae60;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .stock-badge.low-stock {
+            background: #f39c12;
+        }
+        
+        .stock-badge.out-of-stock {
+            background: #e74c3c;
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .category-filter {
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        
+        .product-count {
+            text-align: center;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-controls {
+                flex-direction: column;
+            }
+            
+            .search-box, .category-filter {
+                min-width: 100%;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .construction-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Category Header -->
+        <section class="construction-header">
+            <div class="container">
+                <a href="/shop-categories" class="back-link">← Back to Categories</a>
+                <h1>Construction Blocks & Building Materials</h1>
+                <p>Quality concrete blocks, cement, and building materials for all your construction needs</p>
+            </div>
+        </section>
+
+        <!-- Construction Products Section -->
+        <section class="materials-section">
+            <div class="container">
+                <h2 class="section-title">Construction Products</h2>
+                <p class="section-subtitle">We offer a wide variety of high-quality construction blocks, materials, and custom products.</p>
+                
+                <!-- Filter Controls -->
+                <div class="filter-controls">
+                    <div class="search-box">
+                        <span class="search-icon"></span>
+                        <input type="text" id="product-search" placeholder="Search construction products...">
+                    </div>
+                    <select class="category-filter" id="category-filter">
+                        <option value="all">All Products</option>
+                        <option value="blocks">Construction Blocks</option>
+                        <option value="materials">Building Materials</option>
+                        <option value="courts">Sports Courts</option>
+                        <option value="custom">Custom Products</option>
+                    </select>
+                </div>
+                
+                <!-- Product Count -->
+                <div class="product-count" id="product-count">Loading construction products...</div>
+                
+                <!-- Products Grid -->
+                <div class="products-grid" id="products-container">
+                    <!-- Products will be loaded by JavaScript -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer content from cart.html -->
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // CONSTRUCTION PRODUCTS DATA
+        const constructionProducts = [
+            // Construction Blocks
+            {
+                id: 'con-block-001',
+                name: 'Hollow Sandcrete Blocks',
+                category: 'blocks',
+                price: 300,
+                image: '/img/construction/hollow-sandcrete-blocks.jpg',
+                description: 'Standard hollow blocks with cavities, ideal for load-bearing walls.',
+                stock: 'In Stock',
+                details: {
+                    sizes: '6-inch, 9-inch',
+                    uses: 'Load-bearing walls, partition walls',
+                    minOrder: '100 blocks'
+                },
+                tags: ['blocks', 'sandcrete', 'hollow']
+            },
+            {
+                id: 'con-block-002',
+                name: 'Solid Sandcrete Blocks',
+                category: 'blocks',
+                price: 350,
+                image: '/img/construction/solid-sandcrete-blocks.jpg',
+                description: 'Dense, solid blocks with no cavities for maximum strength.',
+                stock: 'In Stock',
+                details: {
+                    sizes: '6-inch, 9-inch',
+                    uses: 'Foundation walls, structural walls',
+                    minOrder: '100 blocks'
+                },
+                tags: ['blocks', 'sandcrete', 'solid']
+            },
+            {
+                id: 'con-block-003',
+                name: 'Interlocking Blocks',
+                category: 'blocks',
+                price: 425,
+                image: '/img/construction/interlocking-blocks.jpg',
+                description: 'Specially designed blocks that lock together without mortar.',
+                stock: 'In Stock',
+                details: {
+                    sizes: 'Various interlocking patterns',
+                    uses: 'Quick construction, temporary structures',
+                    minOrder: '100 blocks'
+                },
+                tags: ['blocks', 'interlocking', 'fast-build']
+            },
+            {
+                id: 'con-block-004',
+                name: 'Paving Blocks',
+                category: 'blocks',
+                price: 750,
+                image: '/img/construction/paving-blocks.jpg',
+                description: 'Durable blocks designed for outdoor flooring and driveways.',
+                stock: 'In Stock',
+                details: {
+                    sizes: 'Various shapes and thicknesses',
+                    uses: 'Driveways, walkways, outdoor flooring',
+                    minOrder: '10 sqm'
+                },
+                tags: ['paving', 'outdoor', 'flooring']
+            },
+
+            // Building Materials
+            {
+                id: 'con-mat-001',
+                name: 'Dangote Cement',
+                category: 'materials',
+                price: 4850,
+                image: '/img/construction/dangote-cement.jpg',
+                description: 'High-quality 42.5 grade cement for all construction purposes.',
+                stock: 'In Stock',
+                details: {
+                    type: '42.5 Grade',
+                    uses: 'General construction, concrete works',
+                    minOrder: '1 bag'
+                },
+                tags: ['cement', 'dangote', 'construction']
+            },
+            {
+                id: 'con-mat-002',
+                name: 'Lafarge Cement',
+                category: 'materials',
+                price: 4950,
+                image: '/img/construction/lafarge-cement.jpg',
+                description: 'Premium cement with excellent strength and durability.',
+                stock: 'In Stock',
+                details: {
+                    type: '42.5 Grade',
+                    uses: 'Structural concrete, plastering',
+                    minOrder: '1 bag'
+                },
+                tags: ['cement', 'lafarge', 'construction']
+            },
+            {
+                id: 'con-mat-003',
+                name: 'Sharp Sand',
+                category: 'materials',
+                price: 30000,
+                image: '/img/construction/sharp-sand.jpg',
+                description: 'Coarse sand suitable for concrete mixing and construction.',
+                stock: 'In Stock',
+                details: {
+                    type: 'Coarse sand',
+                    uses: 'Concrete mixing, construction',
+                    minOrder: '1 truck'
+                },
+                tags: ['sand', 'construction', 'materials']
+            },
+            {
+                id: 'con-mat-004',
+                name: 'Granite/Gravel',
+                category: 'materials',
+                price: 42500,
+                image: '/img/construction/granite.jpg',
+                description: 'Crushed stone aggregate for concrete and foundation works.',
+                stock: 'In Stock',
+                details: {
+                    type: '3/4 inch, 1/2 inch, stone dust',
+                    uses: 'Concrete, foundation, drainage',
+                    minOrder: '1 truck'
+                },
+                tags: ['granite', 'gravel', 'aggregate']
+            },
+
+            // Custom Products
+            {
+                id: 'con-custom-001',
+                name: 'Custom Table',
+                category: 'custom',
+                price: 110000,
+                image: '/img/construction/custom-table.jpg',
+                description: 'Handcrafted custom table designed to your specifications.',
+                stock: 'Made to Order',
+                details: {
+                    materials: 'Quality wood, metal, or composite',
+                    options: 'Various sizes, finishes, designs',
+                    delivery: '2-3 weeks production time'
+                },
+                tags: ['custom', 'table', 'furniture']
+            },
+            {
+                id: 'con-custom-002',
+                name: 'Custom Hanger for Boutique',
+                category: 'custom',
+                price: 90000,
+                image: '/img/construction/custom-hanger.jpg',
+                description: 'Premium custom clothing hangers for boutique displays.',
+                stock: 'Made to Order',
+                details: {
+                    materials: 'Wood, acrylic, or metal',
+                    options: 'Branding, sizes, finishes',
+                    delivery: '1-2 weeks production time'
+                },
+                tags: ['custom', 'hanger', 'boutique']
+            }
+        ];
+
+        // CART FUNCTIONS - Simplified version
+        function getCart() {
+            try {
+                const cart = localStorage.getItem('cart');
+                return cart ? JSON.parse(cart) : [];
+            } catch (error) {
+                console.error('Error reading cart:', error);
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            try {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                if (typeof window.renderCartDrawer === 'function') {
+                    window.renderCartDrawer();
+                }
+                return true;
+            } catch (error) {
+                console.error('Error saving cart:', error);
+                return false;
+            }
+        }
+
+        function addToCart(product) {
+            console.log('Adding to cart:', product);
+            
+            if (!product || !product.id || !product.name || !product.price) {
+                console.error('Invalid product data:', product);
+                return false;
+            }
+            
+            const cart = getCart();
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+                console.log('Updated existing item quantity:', existingItem.quantity);
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    image: product.image || '/img/logo.jpg',
+                    quantity: 1
+                });
+                console.log('Added new item to cart');
+            }
+            
+            const saved = saveCart(cart);
+            
+            if (saved) {
+                showCartNotification(product.name);
+                return true;
+            }
+            
+            return false;
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartBadge = document.getElementById('cart-count-badge');
+            
+            if (cartBadge) {
+                cartBadge.textContent = totalItems;
+                cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+            
+            return totalItems;
+        }
+
+        function showCartNotification(productName) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.cart-notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.innerHTML = `<span>✓ Added "${productName}" to cart</span>`;
+            
+            // Add styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // PRODUCT DISPLAY FUNCTIONS
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Construction page loaded');
+            
+            // Initialize cart count
+            updateCartCount();
+            
+            // DOM Elements
+            const productsContainer = document.getElementById('products-container');
+            const searchInput = document.getElementById('product-search');
+            const categoryFilter = document.getElementById('category-filter');
+            const loadMoreBtn = document.getElementById('load-more');
+            const productCount = document.getElementById('product-count');
+            
+            // Pagination variables
+            let currentPage = 1;
+            const productsPerPage = 8;
+            let filteredProducts = [...constructionProducts];
+            let isLoading = false;
+            
+            // Initialize the page
+            function initPage() {
+                currentPage = 1;
+                filterProducts();
+                setupEventListeners();
+                setupCartDrawer();
+                updateCartCount();
+            }
+            
+            // Setup event listeners
+            function setupEventListeners() {
+                // Search functionality
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        currentPage = 1;
+                        filterProducts();
+                    });
+                }
+                
+                // Category filter
+                if (categoryFilter) {
+                    categoryFilter.addEventListener('change', function() {
+                        currentPage = 1;
+                        filterProducts();
+                    });
+                }
+                
+                // Load more button
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', function() {
+                        currentPage++;
+                        displayProducts();
+                    });
+                }
+                
+                // Single global event listener for add-to-cart buttons
+                document.addEventListener('click', function(e) {
+                    const addToCartBtn = e.target.closest('.add-to-cart');
+                    if (!addToCartBtn) return;
+                    
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    
+                    // Get product data
+                    const productId = addToCartBtn.getAttribute('data-id');
+                    const product = constructionProducts.find(p => p.id === productId);
+                    
+                    if (product) {
+                        console.log('Add to cart clicked for:', product.name);
+                        
+                        // Add to cart
+                        addToCart(product);
+                        
+                        // Visual feedback
+                        const originalText = addToCartBtn.innerHTML;
+                        addToCartBtn.innerHTML = 'Added!';
+                        addToCartBtn.style.background = '#27ae60';
+                        
+                        setTimeout(() => {
+                            addToCartBtn.innerHTML = originalText;
+                            addToCartBtn.style.background = '';
+                        }, 1000);
+                    }
+                }, true); // Use capture phase
+            }
+            
+            // Filter products
+            function filterProducts() {
+                const searchTerm = (searchInput ? searchInput.value.toLowerCase() : '');
+                const selectedCategory = (categoryFilter ? categoryFilter.value : 'all');
+                
+                filteredProducts = constructionProducts.filter(product => {
+                    const matchesSearch = 
+                        product.name.toLowerCase().includes(searchTerm) ||
+                        product.description.toLowerCase().includes(searchTerm) ||
+                        product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                    
+                    const matchesCategory = 
+                        selectedCategory === 'all' || 
+                        product.category === selectedCategory;
+                    
+                    return matchesSearch && matchesCategory;
+                });
+                
+                currentPage = 1;
+                displayProducts();
+            }
+            
+            // Display products
+            function displayProducts() {
+                if (!productsContainer) return;
+                
+                const startIndex = (currentPage - 1) * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                
+                // Clear container if first page
+                if (currentPage === 1) {
+                    productsContainer.innerHTML = '';
+                }
+                
+                // Get products for this page
+                const pageProducts = filteredProducts.slice(startIndex, endIndex);
+                
+                // Create product cards
+                pageProducts.forEach(product => {
+                    const productCard = createProductCard(product);
+                    productsContainer.appendChild(productCard);
+                });
+                
+                // Update product count
+                updateProductCount();
+                
+                // Show/hide load more button
+                if (loadMoreBtn) {
+                    if (endIndex >= filteredProducts.length) {
+                        loadMoreBtn.style.display = 'none';
+                    } else {
+                        loadMoreBtn.style.display = 'block';
+                        loadMoreBtn.textContent = `Load More (${filteredProducts.length - endIndex} more)`;
+                    }
+                }
+                
+                // Animate new products
+                animateNewProducts();
+            }
+            
+            // Create product card
+            function createProductCard(product) {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                const stockClass = getStockClass(product.stock);
+                const formattedPrice = product.price.toLocaleString();
+                
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='/img/logo.jpg'">
+                        <span class="stock-badge ${stockClass}">${product.stock}</span>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">₦${formattedPrice}</div>
+                        <div class="product-details">
+                            ${product.details.sizes ? `<p><strong>Sizes:</strong> ${product.details.sizes}</p>` : ''}
+                            ${product.details.type ? `<p><strong>Type:</strong> ${product.details.type}</p>` : ''}
+                            ${product.details.uses ? `<p><strong>Uses:</strong> ${product.details.uses}</p>` : ''}
+                            ${product.details.minOrder ? `<p><strong>Min Order:</strong> ${product.details.minOrder}</p>` : ''}
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary add-to-cart" 
+                                    data-id="${product.id}"
+                                    data-name="${product.name}"
+                                    data-price="${product.price}"
+                                    data-image="${product.image}">
+                                Add to Cart
+                            </button>
+                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${formattedPrice}" 
+                               class="btn-whatsapp" target="_blank">
+                                 WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            // Get stock class
+            function getStockClass(stock) {
+                if (stock === 'In Stock') return 'stock-in';
+                if (stock === 'Limited Stock' || stock === 'Made to Order') return 'stock-low';
+                return 'stock-out';
+            }
+            
+            // Update product count display
+            function updateProductCount() {
+                if (!productCount) return;
+                
+                const totalProducts = filteredProducts.length;
+                const showingProducts = Math.min(currentPage * productsPerPage, totalProducts);
+                
+                productCount.textContent = `Showing ${showingProducts} of ${totalProducts} products`;
+                
+                if (totalProducts === 0) {
+                    productCount.textContent = 'No products found matching your criteria';
+                }
+            }
+            
+            // Animate new products
+            function animateNewProducts() {
+                const allCards = productsContainer.querySelectorAll('.product-card');
+                const newCards = Array.from(allCards).slice(-productsPerPage);
+                
+                newCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }
+            
+            // Setup cart drawer
+            function setupCartDrawer() {
+                const cartDrawer = document.getElementById('cart-drawer');
+                const openCartBtn = document.getElementById('open-cart-drawer');
+                const closeCartBtn = document.getElementById('close-cart-drawer');
+                const cartOverlay = document.getElementById('cart-drawer-overlay');
+                
+                // Open cart drawer
+                if (openCartBtn) {
+                    openCartBtn.addEventListener('click', function() {
+                        cartDrawer.classList.add('active');
+                        cartOverlay.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        renderCartDrawer();
+                    });
+                }
+                
+                // Close cart drawer
+                function closeCartDrawer() {
+                    cartDrawer.classList.remove('active');
+                    cartOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeCartBtn) {
+                    closeCartBtn.addEventListener('click', closeCartDrawer);
+                }
+                
+                if (cartOverlay) {
+                    cartOverlay.addEventListener('click', closeCartDrawer);
+                }
+                
+                // Close on escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && cartDrawer.classList.contains('active')) {
+                        closeCartDrawer();
+                    }
+                });
+                
+                // Render cart drawer function
+                window.renderCartDrawer = function() {
+                    const cartItemsContainer = document.getElementById('cart-drawer-items');
+                    const drawerTotal = document.getElementById('drawer-total');
+                    
+                    if (!cartItemsContainer) return;
+                    
+                    const cart = getCart();
+                    
+                    if (cart.length === 0) {
+                        cartItemsContainer.innerHTML = `
+                            <div class="cart-drawer-empty">
+                                <div class="cart-drawer-empty-icon">🛒</div>
+                                <p>Your cart is empty</p>
+                                <a href="/shop-categories" class="btn btn-primary">Continue Shopping</a>
+                            </div>
+                        `;
+                        if (drawerTotal) drawerTotal.textContent = '₦0';
+                        return;
+                    }
+                    
+                    cartItemsContainer.innerHTML = cart.map(item => `
+                        <div class="cart-drawer-item" data-id="${item.id}">
+                            <img src="${item.image}" alt="${item.name}" 
+                                 class="cart-drawer-item-image" 
+                                 onerror="this.src='/img/logo.jpg'">
+                            <div class="cart-drawer-item-details">
+                                <h4 class="cart-drawer-item-name">${item.name}</h4>
+                                <p class="cart-drawer-item-price">₦${item.price.toLocaleString()} × ${item.quantity}</p>
+                                <div class="cart-drawer-item-actions">
+                                    <button class="cart-drawer-item-remove" data-id="${item.id}">Remove</button>
+                                </div>
+                            </div>
+                            <div class="cart-drawer-item-total">
+                                ₦${(item.price * item.quantity).toLocaleString()}
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    // Update total
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    if (drawerTotal) {
+                        drawerTotal.textContent = `₦${total.toLocaleString()}`;
+                    }
+                    
+                    // Attach remove button listeners
+                    cartItemsContainer.querySelectorAll('.cart-drawer-item-remove').forEach(button => {
+                        button.addEventListener('click', function(e) {
+                            const productId = e.target.dataset.id;
+                            removeFromCart(productId);
+                            renderCartDrawer();
+                            updateCartCount();
+                        });
+                    });
+                };
+                
+                // Remove from cart function
+                function removeFromCart(productId) {
+                    const cart = getCart().filter(item => item.id !== productId);
+                    saveCart(cart);
+                }
+            }
+            
+            // Start the page
+            initPage();
+            
+            // Make functions available globally
+            window.addToCart = addToCart;
+            window.updateCartCount = updateCartCount;
+            window.getCart = getCart;
+        });
+    </script>
+</body>
+</html>

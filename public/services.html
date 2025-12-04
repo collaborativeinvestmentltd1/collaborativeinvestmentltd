@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Collaborative Investment Ltd</title>
+    <meta name="description" content="Comprehensive business solutions including agricultural development, construction, diaspora asset management, hospitality, solar energy, and furniture manufacturing.">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for enhanced services page */
+        .services-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5276 100%);
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+        
+        .services-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .services-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .services-nav {
+            background: #f8f9fa;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .services-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .service-nav-link {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .service-nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .service-section {
+            padding: 5rem 1rem;
+        }
+        
+        .service-section:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .service-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .service-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .service-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        .service-detail-card {
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto 4rem;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .service-detail-content {
+            flex: 1;
+            padding: 3rem;
+        }
+        
+        .service-detail-visual {
+            flex: 0 0 40%;
+            background: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-detail-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .service-detail-card .service-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .service-features {
+            margin: 2rem 0;
+        }
+        
+        .service-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .service-features li:before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .service-highlight {
+            background: #e8f4fd;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .service-highlight strong {
+            color: var(--primary);
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e8f4fd;
+        }
+        
+        .benefit-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .services-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5276 100%);
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+        
+        .services-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .services-cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background: #f0c040;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info a {
+            color: var(--secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .service-detail-card {
+                flex-direction: column;
+            }
+            
+            .service-detail-visual {
+                order: -1;
+                min-height: 250px;
+            }
+            
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .service-header h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
+        </nav>
+    </header>
+    <div id="cart-drawer-overlay"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-links">
+            <a href="/">Home</a>
+            <span>></span>
+            <span>Our Services</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="services-hero">
+        <h1>Our Professional Services</h1>
+        <p>Comprehensive, structured business solutions for sustainable growth and long-term profitability across multiple sectors.</p>
+        <a href="#core-services" class="btn-primary">Explore Our Services</a>
+    </section>
+
+    <!-- Services Navigation -->
+    <nav class="services-nav">
+        <div class="services-nav-container">
+            <a href="#agriculture" class="service-nav-link">🐔 Agriculture</a>
+            <a href="#manufacturing" class="service-nav-link">🏗️ Construction</a>
+            <a href="#diaspora" class="service-nav-link">🌍 Diaspora</a>
+            <a href="#hospitality" class="service-nav-link">🏨 Hospitality</a>
+            <a href="#solar" class="service-nav-link">☀️ Solar Energy</a>
+            <a href="#furniture" class="service-nav-link">🪑 Furniture</a>
+        </div>
+    </nav>
+
+    <!-- Core Services -->
+    <section class="service-section" id="core-services">
+        <div class="service-header">
+            <h2>Our Core Services</h2>
+            <p>Professional management, strategic development, and enterprise transformation across key sectors.</p>
+        </div>
+
+        <!-- Agriculture -->
+        <div class="service-detail-card" id="agriculture">
+            <div class="service-detail-content">
+                <h3>Agriculture & Agribusiness</h3>
+                <p class="service-subtitle">Complete poultry, livestock & aquaculture solutions</p>
+                
+                <div class="service-features">
+                    <ul>
+                        <li>Day-old chicks for broilers and layers</li>
+                        <li>Eggs production and sales</li>
+                        <li>Broiler chicken sales</li>
+                        <li>Pig sales (small and adults)</li>
+                        <li>Catfish sales (big and small)</li>
+                        <li>Farm setup and management</li>
+                    </ul>
+                </div>
+                
+                <div class="service-highlight">
+                    <strong>ROI: 25-40% annually</strong>
+                </div>
+            </div>
+            <div class="service-detail-visual">
+                <!-- Replace with your agriculture image -->
+                <img src="/img/services/agriculture.jpg" alt="Agriculture and Agribusiness Services" class="service-image">
+            </div>
+        </div>
+
+        <!-- Construction & Manufacturing -->
+        <div class="service-detail-card" id="manufacturing">
+            <div class="service-detail-visual">
+                <!-- Replace with your construction image -->
+                <img src="/img/services/construction.jpg" alt="Construction and Manufacturing Services" class="service-image">
+            </div>
+            <div class="service-detail-content">
+                <h3>Construction & Manufacturing</h3>
+                <p class="service-subtitle">Building materials and custom construction</p>
+                
+                <div class="service-features">
+                    <ul>
+                        <li>Block making machines</li>
+                        <li>Sales of concrete blocks</li>
+                        <li>Basketball court construction</li>
+                        <li>Custom made products for sale</li>
+                        <li>Construction project management</li>
+                        <li>Quality materials supply</li>
+                    </ul>
+                </div>
+                
+                <div class="service-highlight">
+                    <strong>Capacity: 3,000+ blocks daily</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diaspora Management -->
+        <div class="service-detail-card" id="diaspora">
+            <div class="service-detail-content">
+                <h3>Diaspora Asset Management</h3>
+                <p class="service-subtitle">Secure project management for Nigerians abroad</p>
+                
+                <div class="service-features">
+                    <ul>
+                        <li>Business startup and full management</li>
+                        <li>Construction project oversight</li>
+                        <li>Asset monitoring & reporting</li>
+                        <li>Monthly financial & operational reports</li>
+                        <li>Fraud prevention & accountability systems</li>
+                        <li>Property and investment management</li>
+                    </ul>
+                </div>
+                
+                <div class="service-highlight">
+                    <strong>Transparent reporting guaranteed</strong>
+                </div>
+            </div>
+            <div class="service-detail-visual">
+                <!-- Replace with your diaspora management image -->
+                <img src="/img/services/diaspora.jpg" alt="Diaspora Asset Management Services" class="service-image">
+            </div>
+        </div>
+
+        <!-- Hospitality & Entertainment -->
+        <div class="service-detail-card" id="hospitality">
+            <div class="service-detail-visual">
+                <!-- Replace with your hospitality image -->
+                <img src="/img/services/hospitality.jpg" alt="Hospitality and Entertainment Services" class="service-image">
+            </div>
+            <div class="service-detail-content">
+                <h3>Hospitality & Entertainment</h3>
+                <p class="service-subtitle">Professional hotel and lounge management</p>
+                
+                <div class="service-features">
+                    <ul>
+                        <li>Hotel management and operations</li>
+                        <li>Lounge and bar management</li>
+                        <li>Staff training and supervision</li>
+                        <li>Revenue optimization strategies</li>
+                        <li>Customer service excellence</li>
+                        <li>Facility maintenance and upgrades</li>
+                    </ul>
+                </div>
+                
+                <div class="service-highlight">
+                    <strong>Starting at: ₦400,000/month</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solar Energy -->
+        <div class="service-detail-card" id="solar">
+            <div class="service-detail-content">
+                <h3>Solar Energy Solutions</h3>
+                <p class="service-subtitle">Sales and production of solar equipment</p>
+                
+                <div class="service-features">
+                    <ul>
+                        <li>Solar panel sales and installation</li>
+                        <li>Battery storage systems</li>
+                        <li>Inverter & charge controller setup</li>
+                        <li>Complete solar power systems</li>
+                        <li>Professional installation services</li>
+                        <li>Energy consulting & system design</li>
+                    </ul>
+                </div>
+                
+                <div class="service-highlight">
+                    <strong>Residential & Commercial Solutions</strong>
+                </div>
+            </div>
+            <div class="service-detail-visual">
+                <!-- Replace with your solar energy image -->
+                <img src="/img/services/solar.jpg" alt="Solar Energy Solutions" class="service-image">
+            </div>
+        </div>
+
+        <!-- Furniture & Upholstery -->
+        <div class="service-detail-card" id="furniture">
+            <div class="service-detail-visual">
+                <!-- Replace with your furniture image -->
+                <img src="/img/services/furniture.jpg" alt="Furniture and Upholstery Services" class="service-image">
+            </div>
+            <div class="service-detail-content">
+                <h3>Furniture & Upholstery</h3>
+                <p class="service-subtitle">Custom furniture manufacturing and sales</p>
+                
+                <div class="service-features">
+                    <ul>
+                        <li>Custom made chairs and furniture</li>
+                        <li>Leather and cloth upholstery</li>
+                        <li>Production of complete chair sets</li>
+                        <li>Quality craftsmanship guarantee</li>
+                        <li>Bulk order fulfillment</li>
+                        <li>Custom design services</li>
+                    </ul>
+                </div>
+                
+                <div class="service-highlight">
+                    <strong>Custom quotes available</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Process -->
+    <section class="service-section" style="background: #f8f9fa;">
+        <div class="service-header">
+            <h2>Our Service Process</h2>
+            <p>A proven structure for business excellence and guaranteed results</p>
+        </div>
+
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>Discovery & Assessment</h3>
+                <p>We conduct thorough business analysis, identify challenges, and define clear objectives for your enterprise.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Duration: 1-2 weeks</strong>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>Strategic Planning</h3>
+                <p>We develop customized business plans, financial projections, and operational strategies aligned with your goals.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Comprehensive roadmap</strong>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>Implementation & Management</h3>
+                <p>We execute the plan with hands-on supervision, financial controls, and operational structure implementation.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Ongoing management</strong>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>Reporting & Optimization</h3>
+                <p>We provide monthly reports, performance reviews, and continuous improvements to ensure long-term success.</p>
+                <div style="margin-top: 1rem;">
+                    <strong>Monthly transparency</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="service-section">
+        <div class="service-header">
+            <h2>Benefits of Our Managed Model</h2>
+            <p>Why thousands of business owners trust us with their enterprises</p>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <!-- Replace with your benefit icon image -->
+                    <img src="/img/services/benefit-risk.png" alt="Reduced Business Risk">
+                </div>
+                <h3>Reduced Business Risk</h3>
+                <p>We eliminate the common causes of failure through structure and professional supervision.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <!-- Replace with your benefit icon image -->
+                    <img src="/img/services/benefit-profit.png" alt="Increased Profitability">
+                </div>
+                <h3>Increased Profitability</h3>
+                <p>Optimized operations and strict financial controls boost profit margins by 30-50%.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <!-- Replace with your benefit icon image -->
+                    <img src="/img/services/benefit-time.png" alt="Time & Stress Savings">
+                </div>
+                <h3>Time & Stress Savings</h3>
+                <p>You focus on growth while we run day-to-day operations with expert oversight.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <!-- Replace with your benefit icon image -->
+                    <img src="/img/services/benefit-investor.png" alt="Investor & Loan Readiness">
+                </div>
+                <h3>Investor & Loan Readiness</h3>
+                <p>A structured business attracts banks, investors, and grants with proper documentation.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <!-- Replace with your benefit icon image -->
+                    <img src="/img/services/benefit-growth.png" alt="Sustainable Long-Term Growth">
+                </div>
+                <h3>Sustainable Long-Term Growth</h3>
+                <p>Every business is built with expansion and longevity in mind through scalable systems.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <!-- Replace with your benefit icon image -->
+                    <img src="/img/services/benefit-accountability.png" alt="Full Accountability">
+                </div>
+                <h3>Full Accountability</h3>
+                <p>Monthly reports and transparency ensure you always stay informed about your business.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="service-section" style="background: #f8f9fa;">
+        <div class="service-header">
+            <h2>Success Stories</h2>
+        </div>
+
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "Our poultry farm was struggling with 40% mortality rates. CIL implemented proper management systems, and within 3 months, we achieved 95% survival rates and 35% ROI."
+                </div>
+                <div class="testimonial-author">- Poultry Farm Owner, Ogun State</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "As a diaspora client, I was skeptical about investing in Nigeria. CIL's transparent reporting and professional management gave me confidence. My block manufacturing investment yielded 45% returns in the first year."
+                </div>
+                <div class="testimonial-author">- Diaspora Investor, United States</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "CIL transformed our small furniture workshop into a structured enterprise. We now have proper production systems, quality control, and have expanded our customer base by 200%."
+                </div>
+                <div class="testimonial-author">- Furniture Business Owner, Lagos</div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
+    
+    <script>
+        // Smooth scrolling for service navigation
+        document.querySelectorAll('.service-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add scroll effect to service navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.services-nav');
+            if (window.scrollY > 200) {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
+</body>
+</html>

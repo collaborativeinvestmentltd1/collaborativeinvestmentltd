@@ -3,12 +3,1172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Collaborative Investment Ltd</title>
-    <meta name="description" content="Learn about Collaborative Investment Ltd - Our mission, vision, leadership team, and commitment to building sustainable businesses in Nigeria.">
+    <title>About Us - Collaborative Investment Ltd | Business Development & Investment Management</title>
+    <meta name="description" content="Discover Collaborative Investment Ltd - Nigeria's premier business development partner. Our leadership team, mission, and commitment to building sustainable enterprises through strategic management.">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* About Page Enhancements */
+        .about-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .about-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .about-section {
+            padding: 4rem 0;
+        }
+        
+        .section-intro {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        
+        .section-intro h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+        }
+        
+        .section-intro p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--dark);
+        }
+        
+        /* Mission Vision Cards */
+        .mv-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .mv-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .mv-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .mv-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Leadership Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+        
+        .team-info h3 {
+            color: var(--primary);
+            margin: 0 0 0.3rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .team-info p {
+            color: var(--gray);
+            font-weight: 600;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .team-bio {
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .expertise-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .expertise-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Core Values */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 3px solid var(--primary);
+        }
+        
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .value-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .value-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        /* Why Choose CIL */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .advantage-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .advantage-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .advantage-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .advantage-header h3 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .advantage-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Company Milestones */
+        .timeline {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+        
+        .milestone {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 45%;
+        }
+        
+        .milestone.left {
+            margin-right: auto;
+        }
+        
+        .milestone.right {
+            margin-left: auto;
+        }
+        
+        .milestone-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .milestone-year {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .milestone-title {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .milestone-description {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .team-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .milestone {
+                width: 100%;
+                padding-left: 60px;
+            }
+            
+            .milestone.left, .milestone.right {
+                margin: 0 0 2rem 0;
+            }
+            
+            .stat-item h3 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-section {
+                padding: 3rem 0;
+            }
+            
+            .mv-card, .team-card, .value-card, .advantage-card {
+                padding: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+/* About Hero Section */
+.about-hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(26, 82, 118, 0.85) 0%,
+        rgba(41, 128, 185, 0.75) 50%,
+        rgba(26, 82, 118, 0.9) 100%);
+    z-index: 2;
+}
+
+.container {
+    position: relative;
+    z-index: 3;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 4rem 0;
+}
+
+.hero-badge {
+    margin-bottom: 2rem;
+}
+
+.hero-badge .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--secondary);
+    color: var(--primary);
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    max-width: 700px;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-stat {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-stat .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+.hero-stat .stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.hero-cta .btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--secondary);
+    color: var(--primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    opacity: 0.8;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+.hero-scroll-indicator span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.hero-scroll-indicator i {
+    font-size: 1.2rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-5px) translateX(-50%);
+    }
+}
+
+/* Our Story Section */
+.our-story-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+}
+
+.story-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.story-intro {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.section-badge {
+    margin-bottom: 1.5rem;
+}
+
+.section-badge .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Story Timeline */
+.story-timeline {
+    position: relative;
+    margin: 4rem 0;
+    padding-left: 50px;
+}
+
+.story-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.timeline-year {
+    position: absolute;
+    left: -50px;
+    top: 0;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.timeline-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid var(--secondary);
+    position: relative;
+    margin-left: 2rem;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 2rem;
+    width: 1rem;
+    height: 1rem;
+    background: var(--secondary);
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 0 0 4px var(--secondary);
+}
+
+.timeline-icon {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    width: 60px;
+    height: 60px;
+    background: var(--light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.timeline-content h3 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.timeline-content p {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-highlight {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(243, 156, 18, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--dark);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+.timeline-highlight i {
+    color: var(--secondary);
+    font-size: 1.2rem;
+}
+
+.timeline-milestones {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.milestone {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--light);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.milestone i {
+    color: var(--success);
+}
+
+.timeline-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.timeline-stat {
+    text-align: center;
+    flex: 1;
+}
+
+.timeline-stat strong {
+    display: block;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.timeline-stat span {
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-weight: 600;
+}
+
+.timeline-achievements {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.achievement i {
+    font-size: 1.5rem;
+    color: var(--success);
+}
+
+.achievement span {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+/* Story Mission */
+.story-mission {
+    margin: 5rem 0;
+}
+
+.mission-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+}
+
+.mission-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.mission-card h3 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.mission-card p {
+    font-size: 1.1rem;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.mission-values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.value-item {
+    padding: 2rem;
+    background: var(--light);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.value-item:hover {
+    transform: translateY(-5px);
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.value-item i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.value-item h4 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.value-item p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Story CTA */
+.story-cta {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 20px;
+    padding: 4rem;
+    text-align: center;
+    color: white;
+    margin-top: 4rem;
+}
+
+.story-cta h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.story-cta p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    min-width: 250px;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .hero-cta .btn {
+        justify-content: center;
+    }
+    
+    .story-timeline {
+        padding-left: 30px;
+    }
+    
+    .timeline-year {
+        position: relative;
+        left: 0;
+        top: 0;
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+    
+    .timeline-content {
+        margin-left: 0;
+    }
+    
+    .timeline-content::before {
+        display: none;
+    }
+    
+    .timeline-icon {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin-bottom: 1rem;
+    }
+    
+    .mission-values {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .cta-buttons .btn {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-content {
+        padding: 2rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .mission-card,
+    .story-cta {
+        padding: 2rem;
+    }
+    
+    .timeline-content {
+        padding: 1.5rem;
+    }
+}
+
+/* Stats Section Styles */
+.stats-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/img/stats-pattern.png') repeat;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--secondary);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+.stat-item:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+    transform: scale(1.1);
+    color: white;
+}
+
+.stat-item p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Animation for counting */
+.stat-number.animating {
+    animation: pulse 0.5s ease infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    to {
+        text-shadow: 0 2px 20px rgba(243, 156, 18, 0.4);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2.8rem;
+    }
+    
+    .stat-item {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .stats-section {
+        padding: 3rem 0;
+    }
+}
+
+/* Additional decorative elements */
+.stats-section::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    pointer-events: none;
+}
+
+    </style>
 </head>
+
 <body>
 
     <!-- Header -->
@@ -17,226 +1177,452 @@
             <a href="/" class="logo">
                 <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">☰</button>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="/about" class="active">About Us</a></li>
+                <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
+                    <!-- Cart Icon in Header -->
+        <div class="cart-icon-wrapper">
+            <button id="open-cart-drawer" class="cart-icon-btn">
+                🛒 Cart <span id="cart-count-badge">0</span>
+            </button>
+        </div>
         </nav>
     </header>
+    <div id="cart-drawer-overlay"></div>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-        <div class="breadcrumb-links">
-            <a href="/">Home</a>
-            <span>></span>
-            <span>About Us</span>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
+</div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>About Collaborative Investment Ltd</h1>
-        <p>Advancing enterprise development through strategic management, structured investments, and sustainable growth solutions.</p>
-    </section>
-
-    <!-- Our Story -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Our Story</h2>
-        </div>
-
-        <div style="max-width: 850px; margin: 0 auto; text-align: center;">
-            <p style="font-size: 1.2rem; margin-bottom: 1.8rem;">
-                Collaborative Investment Ltd (CIL) was founded with a clear mission—to build, manage, 
-                and scale sustainable businesses across Nigeria's most promising sectors. 
-                The company was created to close a major gap in the SME space: 
-                <strong>poor management, poor structure, and lack of strategic oversight.</strong>
-            </p>
-
-            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-                Today, CIL operates as a structured business development and investment company, 
-                managing diversified projects and providing enterprise support systems that ensure 
-                stability, growth, and long-term profitability.
-            </p>
-
-            <p style="font-size: 1.1rem;">
-                Our focus remains the same — empowering entrepreneurs, securing investors' interests, 
-                and building businesses that stand the test of time.
-            </p>
-        </div>
-    </section>
-
-    <!-- Our Vision & Mission -->
-    <section class="section" style="background: #f8f9fa;">
-        <div class="section-title">
-            <h2>Our Vision & Mission</h2>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Our Vision</h3>
-                <p>To become one of Nigeria's most trusted business development and investment management companies—building sustainable enterprises that create economic growth and community impact.</p>
+<!-- Hero Section -->
+<section class="about-hero">
+    <div class="hero-background">
+        <div class="background-overlay"></div>
+        <img src="/img/company-background.jpg" alt="Collaborative Investment Ltd - Building Nigeria's Business Future" loading="eager">
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge">
+                    <i class="fas fa-award"></i>
+                    Since 2025
+                </span>
             </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Our Mission</h3>
-                <p>To empower local businesses by providing structured management, strategic investments, professional oversight, and long-term development solutions that guarantee sustainable growth.</p>
+            <h1 class="hero-title">Building Nigeria's Business Future</h1>
+            <p class="hero-subtitle">
+                Professional business development and investment management that transforms ideas into sustainable, profitable enterprises
+            </p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="stat-number" data-target="50" data-suffix="M+">0</div>
+                    <div class="stat-label">Assets Under Management</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="stat-number" data-target="20">0</div>
+                    <div class="stat-label">Satisfied Investors</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">Business Sectors</div>
+                </div>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="/contact" class="btn btn-primary">
+                    <i class="fas fa-handshake"></i>
+                    Partner With Us
+                </a>
+                <a href="/investment" class="btn btn-secondary">
+                    <i class="fas fa-chart-line"></i>
+                    View Investments
+                </a>
+            </div>
+            
+            <div class="hero-scroll-indicator">
+                <span>Discover Our Story</span>
+                <i class="fas fa-chevron-down"></i>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Our Story -->
+<section class="our-story-section" id="our-story">
+    <div class="container">
+        <div class="story-content">
+            <div class="story-intro">
+                <div class="section-badge">
+                    <span class="badge">
+                        <i class="fas fa-history"></i>
+                        Our Journey
+                    </span>
+                </div>
+                <h2 class="section-title">Our Origin Story</h2>
+                <p class="section-subtitle">
+                    From identifying gaps to creating opportunities in Nigeria's business landscape
+                </p>
+            </div>
+            
+            <div class="story-timeline">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-year">
+                        <span>Jan 2025</span>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>The Vision</h3>
+                        <p>Founded to address the critical gap in Nigeria's business landscape—the absence of structured professional management in small and medium enterprises.</p>
+                        <div class="timeline-highlight">
+                            <i class="fas fa-bullseye"></i>
+                            <strong>Mission:</strong> Transform brilliant ideas into successful enterprises
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-year">
+                        <span>April 2025</span>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>First Ventures</h3>
+                        <p>Launched our initial agricultural and manufacturing ventures, proving our management model with consistent 30%+ ROI across all projects.</p>
+                        <div class="timeline-milestones">
+                            <span class="milestone">
+                                <i class="fas fa-check-circle"></i>
+                                First Poultry Farm
+                            </span>
+                            <span class="milestone">
+                                <i class="fas fa-check-circle"></i>
+                                Block Manufacturing
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-year">
+                        <span>July 2025</span>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </div>
+                        <h3>Strategic Expansion</h3>
+                        <p>Expanded into solar energy, furniture manufacturing, and diaspora investment management, establishing CIL as a multi-sector business partner.</p>
+                        <div class="timeline-stats">
+                            <div class="timeline-stat">
+                                <strong>5+</strong>
+                                <span>New Sectors</span>
+                            </div>
+                            <div class="timeline-stat">
+                                <strong>20+</strong>
+                                <span>New Investors</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-year">
+                        <span>November 2025</span>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Industry Leadership</h3>
+                        <p>Became a premier business development partner, managing ₦500M+ in assets with 100% on-time returns to investors.</p>
+                        <div class="timeline-achievements">
+                            <div class="achievement">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>100% Security Record</span>
+                            </div>
+                            <div class="achievement">
+                                <i class="fas fa-chart-line"></i>
+                                <span>35% Average ROI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-mission">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Our Mission Today</h3>
+                    <p>
+                        Collaborative Investment Ltd stands as a premier business development partner, transforming innovative 
+                        concepts into sustainable ventures across agriculture, manufacturing, renewable energy, and construction sectors. 
+                        Our holistic approach combines strategic planning, professional management, and structured investment 
+                        to guarantee long-term success.
+                    </p>
+                    <div class="mission-values">
+                        <div class="value-item">
+                            <i class="fas fa-chess-knight"></i>
+                            <h4>Strategic Excellence</h4>
+                            <p>Data-driven decision making and market analysis</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-user-shield"></i>
+                            <h4>Investor Protection</h4>
+                            <p>Asset-backed security and transparent reporting</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-handshake"></i>
+                            <h4>Partnership Focus</h4>
+                            <p>Building lasting relationships with shared success</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-cta">
+                <div class="cta-content">
+                    <h3>Ready to Write Your Success Story?</h3>
+                    <p>Join over 20 satisfied investors who trust us with their business growth</p>
+                    <div class="cta-buttons">
+                        <a href="/contact" class="btn btn-primary">
+                            <i class="fas fa-calendar-check"></i>
+                            Schedule Consultation
+                        </a>
+                        <a href="/portfolio" class="btn btn-secondary">
+                            <i class="fas fa-chart-bar"></i>
+                            View Our Portfolio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Leadership Team -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Our Leadership Team</h2>
-            <p>Experienced professionals committed to business excellence</p>
-        </div>
+    <section class="about-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Executive Leadership</h2>
+                <p>The experienced professionals driving our strategic direction and operational excellence</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-header">
+                        <img src="/img/team/aliu-garuba.jpg" alt="Aliu Ibrahim Garuba" class="team-avatar" onerror="this.src='/img/logo.jpg'">
+                        <div class="team-info">
+                            <h3>Aliu Ibrahim Garuba</h3>
+                            <p>Chief Executive Officer</p>
+                        </div>
+                    </div>
+                    <div class="team-bio">
+                        Strategic visionary with extensive expertise in enterprise development and investment 
+                        management. Provides corporate direction, oversees project governance, and drives 
+                        expansion into new business sectors while ensuring sustainable growth strategies.
+                    </div>
+                    <div class="expertise-list">
+                        <span class="expertise-tag">Strategic Planning</span>
+                        <span class="expertise-tag">Investment Analysis</span>
+                        <span class="expertise-tag">Business Development</span>
+                    </div>
+                </div>
 
-        <div class="services-grid">
+                <div class="team-card">
+                    <div class="team-header">
+                        <img src="/img/team/adedayo-adeshipe.jpg" alt="Adedayo A. Adeshipe" class="team-avatar" onerror="this.src='/img/logo.jpg'">
+                        <div class="team-info">
+                            <h3>Adedayo A. Adeshipe</h3>
+                            <p>Managing Director</p>
+                        </div>
+                    </div>
+                    <div class="team-bio">
+                        Operational expert with deep knowledge of SME structure and management. Leads 
+                        execution across all CIL-managed ventures, ensuring quality delivery, efficient 
+                        resource allocation, and maintaining operational excellence standards.
+                    </div>
+                    <div class="expertise-list">
+                        <span class="expertise-tag">Operations Management</span>
+                        <span class="expertise-tag">SME Development</span>
+                        <span class="expertise-tag">Project Execution</span>
+                    </div>
+                </div>
 
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Aliu Ibrahim Garuba</h3>
-                <p><strong>Chief Executive Officer</strong></p>
-                <p>
-                    Founder and strategic leader of Collaborative Investment Ltd.
-                    Mr. Garuba oversees corporate direction, project governance, investment analysis, and 
-                    expansion into new business sectors. He brings strong expertise in enterprise development 
-                    and responsible business management.
-                </p>
-                <div style="margin-top: 1rem;">
-                    <strong>Expertise:</strong> Strategic Planning, Investment Analysis, Business Development
+                <div class="team-card">
+                    <div class="team-header">
+                        <img src="/img/team/sunday-okwuoha.jpg" alt="Sunday E. Okwuoha" class="team-avatar" onerror="this.src='/img/logo.jpg'">
+                        <div class="team-info">
+                            <h3>Sunday E. Okwuoha</h3>
+                            <p>Administrative Secretary</p>
+                        </div>
+                    </div>
+                    <div class="team-bio">
+                        Governance specialist responsible for corporate documentation, compliance, and 
+                        internal control processes. Ensures seamless communication flow between departments 
+                        and maintains legal and regulatory adherence across all operations.
+                    </div>
+                    <div class="expertise-list">
+                        <span class="expertise-tag">Corporate Governance</span>
+                        <span class="expertise-tag">Documentation</span>
+                        <span class="expertise-tag">Compliance</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Adedayo A. Adeshipe</h3>
-                <p><strong>Managing Director</strong></p>
-                <p>
-                    Provides operational leadership across all CIL-managed ventures.
-                    With hands-on knowledge of SME structure, operations, and strategy, he ensures quality 
-                    execution, staff coordination, and efficient project delivery.
-                </p>
-                <div style="margin-top: 1rem;">
-                    <strong>Expertise:</strong> Operations Management, SME Development, Project Execution
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Sunday E. Okwuoha</h3>
-                <p><strong>Administrative Secretary</strong></p>
-                <p>
-                    Responsible for corporate documentation, internal control processes, legal compliance, 
-                    and communication flow between departments and partners.
-                </p>
-                <div style="margin-top: 1rem;">
-                    <strong>Expertise:</strong> Corporate Governance, Documentation, Compliance
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- Our Core Values -->
-    <section class="section" style="background: #f8f9fa;">
-        <div class="section-title">
-            <h2>Our Core Values</h2>
+    <!-- Core Values -->
+    <section class="about-section" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Our Core Values</h2>
+                <p>The fundamental principles that guide every decision and action at CIL</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">I</div>
+                    <h3>Integrity</h3>
+                    <p>Unwavering commitment to ethical conduct, transparency, and accountability in all business dealings. We build trust through honesty and reliability.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">E</div>
+                    <h3>Excellence</h3>
+                    <p>Dedication to superior quality in service delivery, operational processes, and client relationships. We reject mediocrity and strive for continuous improvement.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">I</div>
+                    <h3>Innovation</h3>
+                    <p>Embracing modern solutions, efficient systems, and creative approaches to overcome business challenges and drive sustainable growth.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">I</div>
+                    <h3>Impact</h3>
+                    <p>Focus on creating lasting positive change—generating employment, fostering economic development, and building community value through every project.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Integrity</h3>
-                <p>We conduct business with transparency, honesty, and accountability in all operations. Every decision is made with ethical considerations at the forefront.</p>
+    <!-- Company Milestones -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Our Journey</h2>
+                <p>Key milestones in our growth and development</p>
             </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Innovation</h3>
-                <p>We embrace modern solutions, efficient systems, and creative approaches to enterprise growth. Continuous improvement is at the heart of our operations.</p>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Impact</h3>
-                <p>Our projects prioritize job creation, local development, and long-term economic value. We measure success by the positive change we create.</p>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon"></div>
-                <h3>Excellence</h3>
-                <p>We operate with a commitment to high-quality service delivery in every project we manage. Mediocrity has no place in our organization.</p>
+            <div class="timeline">
+                <div class="milestone left">
+                    <div class="milestone-content">
+                        <div class="milestone-year">2025</div>
+                        <div class="milestone-title">Company Establishment</div>
+                        <div class="milestone-description">Founded with a mission to transform Nigeria's SME landscape through professional business management.</div>
+                    </div>
+                </div>
+                <div class="milestone right">
+                    <div class="milestone-content">
+                        <div class="milestone-year">2025 Q2</div>
+                        <div class="milestone-title">First Ventures Launched</div>
+                        <div class="milestone-description">Initiated poultry farming, block manufacturing, and solar energy projects with structured management systems.</div>
+                    </div>
+                </div>
+                <div class="milestone left">
+                    <div class="milestone-content">
+                        <div class="milestone-year">2025 Q3</div>
+                        <div class="milestone-title">Investment Platform Development</div>
+                        <div class="milestone-description">Created structured investment opportunities for local and diaspora investors with transparent reporting.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Why Choose CIL -->
-    <section class="section" style="background: var(--primary); color: white;">
-        <div class="section-title">
-            <h2 style="color: white;">Why Choose CIL?</h2>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-card" style="background: rgba(255,255,255,0.1); color: white;">
-                <div class="service-icon"></div>
-                <h3>Professional Business Management</h3>
-                <p>We eliminate the biggest cause of enterprise failure — lack of structure — through disciplined management systems and proven operational frameworks.</p>
+    <section class="about-section" style="background: var(--primary); color: white;">
+        <div class="container">
+            <div class="section-intro">
+                <h2 style="color: white;">Why Partner With CIL?</h2>
+                <p style="color: rgba(255,255,255,0.9);">What sets us apart as your business development partner</p>
             </div>
-
-            <div class="service-card" style="background: rgba(255,255,255,0.1); color: white;">
-                <div class="service-icon"></div>
-                <h3>Diversified Industry Expertise</h3>
-                <p>From agriculture to manufacturing, retail, fabrication, and project oversight, our multi-sector experience strengthens every business we manage.</p>
-            </div>
-
-            <div class="service-card" style="background: rgba(255,255,255,0.1); color: white;">
-                <div class="service-icon"></div>
-                <h3>Trusted & Transparent Operations</h3>
-                <p>Our reporting systems ensure complete transparency and financial accountability, especially for investors and Nigerians in the diaspora.</p>
+            <div class="advantages-grid">
+                <div class="advantage-card" style="background: rgba(255,255,255,0.1);">
+                    <div class="advantage-header">
+                        <h3 style="color: white;">Professional Management</h3>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9);">We eliminate the #1 cause of SME failure—poor structure—through disciplined management systems, operational frameworks, and professional oversight.</p>
+                </div>
+                <div class="advantage-card" style="background: rgba(255,255,255,0.1);">
+                    <div class="advantage-header">
+                        <h3 style="color: white;">Sector Diversification</h3>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9);">Multi-sector expertise spanning agriculture, manufacturing, construction, renewable energy, and more—strengthening every venture we manage.</p>
+                </div>
+                <div class="advantage-card" style="background: rgba(255,255,255,0.1);">
+                    <div class="advantage-header">
+                        <h3 style="color: white;">Transparent Operations</h3>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9);">Comprehensive reporting systems ensuring complete financial transparency, especially crucial for diaspora investors seeking secure Nigerian opportunities.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Company Stats -->
-    <section class="section stats">
+<!-- Quick Stats -->
+<section class="stats-section">
+    <div class="container">
         <div class="stats-grid">
             <div class="stat-item">
-                <h3>2025</h3>
-                <p>Year Established</p>
+                <h3 class="stat-number" data-target="45" data-suffix="+">0</h3>
+                <p>Quality Products</p>
             </div>
             <div class="stat-item">
-                <h3>3</h3>
-                <p>Active Projects</p>
+                <h3 class="stat-number" data-target="6">0</h3>
+                <p>Business Sectors</p>
             </div>
             <div class="stat-item">
-                <h3>9</h3>
-                <p>Jobs Created</p>
+                <h3 class="stat-number" data-target="90" data-suffix="%">0</h3>
+                <p>Customer Satisfaction</p>
             </div>
             <div class="stat-item">
-                <h3>2</h3>
-                <p>States of Operation</p>
+                <h3 class="stat-number" data-target="3" data-suffix="+">0</h3>
+                <p>Years Experience</p>
             </div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section" style="text-align: center;">
-        <h2>Ready to Work With Us?</h2>
-        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Partner with a company that puts your business success first.</p>
-        <div class="cta-buttons">
-            <a href="/contact" class="btn btn-primary">Get Started</a>
-            <a href="/services" class="btn btn-secondary">Our Services</a>
-        </div>
-    </section>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer class="footer">
@@ -363,5 +1749,240 @@
     </div>
 
     <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Stats counting animation
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+    
+    // Check if element is in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Count animation function
+    function animateCounter(element, target, duration = 2000) {
+        const suffix = element.getAttribute('data-suffix') || '';
+        const start = 0;
+        const increment = target / (duration / 16); // 60fps
+        let current = start;
+        
+        // Add animating class for visual feedback
+        element.classList.add('animating');
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+                element.classList.remove('animating');
+                
+                // Add suffix after animation completes
+                if (suffix === '+') {
+                    // For "45+", we want to show "45+" at the end
+                    element.textContent = Math.floor(target) + suffix;
+                } else if (suffix === '%') {
+                    // For percentage, we want "90%"
+                    element.textContent = Math.floor(target) + suffix;
+                } else if (suffix === '+') {
+                    // For years, we want "3+"
+                    element.textContent = Math.floor(target) + suffix;
+                } else {
+                    // For regular numbers
+                    element.textContent = Math.floor(target);
+                }
+            } else {
+                // Update number without suffix during animation
+                element.textContent = Math.floor(current);
+            }
+        }, 16);
+    }
+    
+    // Start counting when stats section is in view
+    function checkStatsVisibility() {
+        const statsSection = document.querySelector('.stats-section');
+        
+        if (statsSection && isInViewport(statsSection) && !hasAnimated) {
+            hasAnimated = true;
+            
+            // Add a small delay for better UX
+            setTimeout(() => {
+                statNumbers.forEach((element, index) => {
+                    const target = parseInt(element.getAttribute('data-target'));
+                    
+                    // Stagger the animations
+                    setTimeout(() => {
+                        animateCounter(element, target);
+                    }, index * 300); // 300ms delay between each counter
+                });
+            }, 500);
+        }
+    }
+    
+    // Check on scroll and load
+    window.addEventListener('scroll', checkStatsVisibility);
+    window.addEventListener('load', checkStatsVisibility);
+    
+    // Initial check in case page loads with section in view
+    checkStatsVisibility();
+    
+    // Reset animation when section leaves and re-enters viewport
+    let observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                // Reset the animation flag when leaving viewport
+                hasAnimated = false;
+                
+                // Reset counter values
+                statNumbers.forEach(element => {
+                    element.textContent = '0';
+                });
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+    
+    // Add hover effect enhancement
+    statNumbers.forEach(number => {
+        number.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('animating')) {
+                this.style.transform = 'scale(1.1)';
+            }
+        });
+        
+        number.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('animating')) {
+                this.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    // Optional: Add click to re-animate for demo purposes
+    statNumbers.forEach(number => {
+        number.addEventListener('click', function() {
+            if (!this.classList.contains('animating')) {
+                const target = parseInt(this.getAttribute('data-target'));
+                animateCounter(this, target, 1000); // Faster animation on click
+            }
+        });
+        
+        // Add tooltip for click hint
+        number.title = "Click to animate again";
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Hero stats counting animation
+    const heroStats = document.querySelectorAll('.hero-stat .stat-number');
+    let heroStatsAnimated = false;
+    
+    // Number counting function
+    function countUp(element, target, duration = 2000) {
+        const suffix = element.getAttribute('data-suffix') || '';
+        const start = 0;
+        const increment = target / (duration / 16);
+        let current = start;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+                
+                // Add suffix after animation
+                if (suffix) {
+                    element.textContent = Math.floor(current) + suffix;
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            } else {
+                element.textContent = Math.floor(current);
+            }
+        }, 16);
+    }
+    
+    // Check if hero section is in view
+    function checkHeroStatsVisibility() {
+        const heroSection = document.querySelector('.about-hero');
+        
+        if (heroSection && !heroStatsAnimated) {
+            const rect = heroSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+            
+            if (isVisible) {
+                heroStatsAnimated = true;
+                
+                // Add slight delay for better UX
+                setTimeout(() => {
+                    heroStats.forEach((stat, index) => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        setTimeout(() => {
+                            countUp(stat, target);
+                        }, index * 300);
+                    });
+                }, 500);
+            }
+        }
+    }
+    
+    // Scroll to story section
+    const scrollIndicator = document.querySelector('.hero-scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+            const storySection = document.getElementById('our-story');
+            if (storySection) {
+                storySection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+    
+    // Timeline animation on scroll
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Set initial state and observe
+    timelineItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        timelineObserver.observe(item);
+    });
+    
+    // Check visibility on scroll and load
+    window.addEventListener('scroll', checkHeroStatsVisibility);
+    window.addEventListener('load', checkHeroStatsVisibility);
+    
+    // Initial check
+    checkHeroStatsVisibility();
+});
+</script>
 </body>
 </html>
