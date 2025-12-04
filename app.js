@@ -1,6 +1,5 @@
 require('dotenv').config();
 const http = require('http');
-const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
@@ -92,8 +91,8 @@ const ROUTES = {
     '/privacy-policy': 'privacy-policy.html',
     '/terms': 'terms.html',
     '/contact-success': 'contact-success.html',
-    '/order-track': 'order-track.html',           // Add comma here
-    '/order-tracking': 'order-tracking.html',     // New tracking page
+    '/order-track': 'order-track.html',
+    '/order-tracking': 'order-tracking.html',
     '/admin/login': 'admin-login.html',
     '/admin/dashboard': 'admin-dashboard.html',
     '/admin/products': 'admin-products.html',
@@ -925,6 +924,205 @@ function handleAdminLogout(req, res) {
     res.end(JSON.stringify({ success: true, message: 'Logged out successfully' }));
 }
 
+// Main request handler function
+async function requestHandler(req, res) {
+    const parsedUrl = url.parse(req.url, true);
+    const pathname = parsedUrl.pathname;
+
+    // Initialize filePath at the beginning
+    let filePath = '';
+
+    // Log request
+    logger.info(`${req.method} ${pathname} - ${req.socket.remoteAddress}`);
+    
+    // Security headers (Render handles HTTPS)
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*');
+
+    if (pathname === '/order-tracking') {
+        filePath = path.join(__dirname, 'views', 'order-tracking.html');
+    }
+    
+    // Handle special routes first
+    if (pathname === '/health') {
+        await handleHealthCheck(req, res);
+        return;
+    }
+    
+    if (pathname.startsWith('/admin/api/')) {
+        handleAdminAPI(req, res, pathname);
+        return;
+    }
+
+    if (req.method === 'POST' && pathname === '/admin/logout') {
+        await handleAdminLogout(req, res);
+        return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/orders') {
+        await handleCreateOrder(req, res);
+        return;
+    }
+    
+    if (req.method === 'POST' && pathname === '/admin/login') {
+        await handleAdminLogin(req, res);
+        return;
+    }
+    
+    if (req.method === 'POST' && pathname === '/contact') {
+        await handleContactForm(req, res);
+        return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/order/track') {
+        await handleOrderTrack(req, res);
+        return;
+    }
+
+    if (req.method === 'GET' && pathname.startsWith('/api/order/')) {
+        const orderNumber = pathname.split('/').pop();
+
+        try {
+            const order = await db.getOne('orders', { orderNumber });
+
+            if (!order) {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Order not found' }));
+                return;
+            }
+
+            res.writeHead(200, { 
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+            });
+            res.end(JSON.stringify({ success: true, order }));
+
+        } catch (error) {
+            logger.error('Order fetch error:', error);
+            res.writeHead(500, { 
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+            });
+            res.end(JSON.stringify({ success: false, message: 'Server error' }));
+        }
+        return;
+    }
+    
+    // Handle static files and HTML pages
+    const isStaticFile = STATIC_DIRS.some(dir => pathname.startsWith(dir));
+    
+    if (isStaticFile) {
+        filePath = path.join(__dirname, 'public', pathname.substring(1));
+    } else if (ROUTES[pathname] !== undefined) {
+        if (ROUTES[pathname] === null) {
+            res.writeHead(404);
+            res.end('Not Found');
+            return;
+        }
+        // Only set filePath if it hasn't been set by /order-tracking handler
+        if (!filePath) {
+            filePath = path.join(__dirname, 'views', ROUTES[pathname]);
+        }
+    } else if (pathname === '/favicon.ico') {
+        filePath = path.join(__dirname, 'public', 'img', 'favicon.ico');
+    } else {
+        filePath = path.join(__dirname, 'views', '404.html');
+    }
+
+    // Security: Prevent directory traversal
+    filePath = path.normalize(filePath);
+    if (!filePath.startsWith(__dirname)) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+    }
+
+    // Check cache first
+    const cached = cache.get(filePath);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        const cacheControl = isStaticFile 
+            ? 'public, max-age=86400'
+            : 'public, max-age=3600';
+        
+        res.writeHead(200, { 
+            'Content-Type': cached.contentType,
+            'Cache-Control': cacheControl
+        });
+        res.end(cached.content, 'utf-8');
+        return;
+    }
+
+    const extname = path.extname(filePath).toLowerCase();
+    const contentType = MIME_TYPES[extname] || 'application/octet-stream';
+
+    fs.readFile(filePath, (error, content) => {
+        if (error) {
+            if (error.code === 'ENOENT') {
+                // Page not found
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                res.end(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>404 - Page Not Found</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+                            h1 { color: #d4af37; }
+                            a { color: #1a365d; text-decoration: none; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>404 - Page Not Found</h1>
+                        <p>The page you're looking for doesn't exist.</p>
+                        <p><a href="/">← Go Back Home</a></p>
+                    </body>
+                    </html>
+                `);
+            } else {
+                logger.error('Server Error:', error);
+                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.end(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>500 - Server Error</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+                            h1 { color: #e53e3e; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>500 - Server Error</h1>
+                        <p>Something went wrong on our end. Please try again later.</p>
+                        <p><a href="/">← Go Back Home</a></p>
+                    </body>
+                    </html>
+                `);
+            }
+        } else {
+            // Cache the file
+            cache.set(filePath, {
+                content: content,
+                timestamp: Date.now(),
+                contentType: contentType
+            });
+            
+            const cacheControl = isStaticFile 
+                ? 'public, max-age=86400'
+                : 'public, max-age=3600';
+            
+            res.writeHead(200, { 
+                'Content-Type': contentType,
+                'Cache-Control': cacheControl
+            });
+            res.end(content, 'utf-8');
+        }
+    });
+}
+
 // Main server function
 async function startServer() {
     try {
@@ -938,228 +1136,27 @@ async function startServer() {
             fs.mkdirSync(logsDir, { recursive: true });
         }
         
-        // Request handler
-        const requestHandler = async (req, res) => {
-            const parsedUrl = url.parse(req.url, true);
-            const pathname = parsedUrl.pathname;
-    
-            // Initialize filePath at the beginning
-            let filePath = ''; // <-- ADD THIS LINE HERE
-    
-            // Log request
-            logger.info(`${req.method} ${pathname} - ${req.socket.remoteAddress}`);
-            
-            // Security headers
-            res.setHeader('X-Content-Type-Options', 'nosniff');
-            res.setHeader('X-Frame-Options', 'DENY');
-            res.setHeader('X-XSS-Protection', '1; mode=block');
-            if (sslOptions) {
-                res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-            }
-
-            if (pathname === '/order-tracking') {
-                filePath = path.join(__dirname, 'views', 'order-tracking.html');
-            }
-            
-            // Handle special routes first
-            if (pathname === '/health') {
-                await handleHealthCheck(req, res);
-                return;
-            }
-            
-            if (pathname.startsWith('/admin/api/')) {
-                handleAdminAPI(req, res, pathname);
-                return;
-            }
-
-            if (req.method === 'POST' && pathname === '/admin/logout') {
-                await handleAdminLogout(req, res);
-                return;
-            }
-
-            if (req.method === 'POST' && pathname === '/api/orders') {
-                await handleCreateOrder(req, res);
-                return;
-            }
-            
-            if (req.method === 'POST' && pathname === '/admin/login') {
-                await handleAdminLogin(req, res);
-                return;
-            }
-            
-            if (req.method === 'POST' && pathname === '/contact') {
-                await handleContactForm(req, res);
-                return;
-            }
-
-            if (req.method === 'POST' && pathname === '/api/order/track') {
-                await handleOrderTrack(req, res);
-                return;
-            }
-
-            if (req.method === 'GET' && pathname.startsWith('/api/order/')) {
-                const orderNumber = pathname.split('/').pop();
-    
-                try {
-                    const order = await db.getOne('orders', { orderNumber });
+        // Create HTTP server (Render handles HTTPS)
+        const server = http.createServer(requestHandler);
         
-                    if (!order) {
-                        res.writeHead(404, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ success: false, message: 'Order not found' }));
-                        return;
-                    }
-        
-                    res.writeHead(200, { 
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
-                    });
-                    res.end(JSON.stringify({ success: true, order }));
-        
-                } catch (error) {
-                    logger.error('Order fetch error:', error);
-                    res.writeHead(500, { 
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
-                    });
-                    res.end(JSON.stringify({ success: false, message: 'Server error' }));
-                }
-                return;
-            }
+        // Start server
+        const HOST = '0.0.0.0'; // Required for Render
+        server.listen(PORT, HOST, () => {
+            const protocol = 'http'; // Render handles HTTPS termination
+            const localUrl = `${protocol}://localhost:${PORT}`;
+            const renderUrl = `https://${DOMAIN}`;
             
-            // Handle static files and HTML pages
-            const isStaticFile = STATIC_DIRS.some(dir => pathname.startsWith(dir));
+            logger.info('🚀 Collaborative Investment Ltd Website successfully deployed on Render!');
+            logger.info(`📍 Local URL: ${localUrl}`);
+            logger.info(`📍 Render URL: ${renderUrl}`);
+            logger.info(`📧 Email: ${process.env.EMAIL_USER}`);
+            logger.info('💡 Server ready to accept requests');
             
-            if (isStaticFile) {
-                filePath = path.join(__dirname, 'public', pathname.substring(1));
-                 } else if (ROUTES[pathname] !== undefined) {
-                 // This will override /order-tracking if not careful
-                if (ROUTES[pathname] === null) {
-                    res.writeHead(404);
-                    res.end('Not Found');
-                    return;
-                }
-            // Only set filePath if it hasn't been set by /order-tracking handler
-                if (!filePath) {
-                    filePath = path.join(__dirname, 'views', ROUTES[pathname]);
-                }
-            } else if (pathname === '/favicon.ico') {
-                filePath = path.join(__dirname, 'public', 'img', 'favicon.ico');
-            } else {
-               filePath = path.join(__dirname, 'views', '404.html');
-            }
-
-            // Security: Prevent directory traversal
-            filePath = path.normalize(filePath);
-            if (!filePath.startsWith(__dirname)) {
-                res.writeHead(403);
-                res.end('Forbidden');
-                return;
-            }
-
-            // Check cache first
-            const cached = cache.get(filePath);
-            if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-                const cacheControl = isStaticFile 
-                    ? 'public, max-age=86400'
-                    : 'public, max-age=3600';
-                
-                res.writeHead(200, { 
-                    'Content-Type': cached.contentType,
-                    'Cache-Control': cacheControl
-                });
-                res.end(cached.content, 'utf-8');
-                return;
-            }
-
-            const extname = path.extname(filePath).toLowerCase();
-            const contentType = MIME_TYPES[extname] || 'application/octet-stream';
-
-            fs.readFile(filePath, (error, content) => {
-                if (error) {
-                    if (error.code === 'ENOENT') {
-                        // Page not found
-                        res.writeHead(404, { 'Content-Type': 'text/html' });
-                        res.end(`
-                            <!DOCTYPE html>
-                            <html>
-                            <head>
-                                <title>404 - Page Not Found</title>
-                                <style>
-                                    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-                                    h1 { color: #d4af37; }
-                                    a { color: #1a365d; text-decoration: none; }
-                                </style>
-                            </head>
-                            <body>
-                                <h1>404 - Page Not Found</h1>
-                                <p>The page you're looking for doesn't exist.</p>
-                                <p><a href="/">← Go Back Home</a></p>
-                            </body>
-                            </html>
-                        `);
-                    } else {
-                        logger.error('Server Error:', error);
-                        res.writeHead(500, { 'Content-Type': 'text/html' });
-                        res.end(`
-                            <!DOCTYPE html>
-                            <html>
-                            <head>
-                                <title>500 - Server Error</title>
-                                <style>
-                                    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-                                    h1 { color: #e53e3e; }
-                                </style>
-                            </head>
-                            <body>
-                                <h1>500 - Server Error</h1>
-                                <p>Something went wrong on our end. Please try again later.</p>
-                                <p><a href="/">← Go Back Home</a></p>
-                            </body>
-                            </html>
-                        `);
-                    }
-                } else {
-                    // Cache the file
-                    cache.set(filePath, {
-                        content: content,
-                        timestamp: Date.now(),
-                        contentType: contentType
-                    });
-                    
-                    const cacheControl = isStaticFile 
-                        ? 'public, max-age=86400'
-                        : 'public, max-age=3600';
-                    
-                    res.writeHead(200, { 
-                        'Content-Type': contentType,
-                        'Cache-Control': cacheControl
-                    });
-                    res.end(content, 'utf-8');
-                }
-            });
-        };
-
-        // Create server
-server.listen(PORT, HOST, () => {
-    const protocol = sslOptions ? 'https' : 'http';
-    const localUrl = `${protocol}://localhost:${PORT}`;
-    const networkUrl = `${protocol}://${HOST}:${PORT}`;
-    const hostUrl = `${protocol}://${DOMAIN}${PORT && ![80,443].includes(Number(PORT)) ? `:${PORT}` : ''}`;
-    
-    logger.info('🚀 Collaborative Investment Ltd Website successfully deployed!');
-    logger.info(`📍 Local URL: ${localUrl}`);
-    logger.info(`📍 Network URL: ${networkUrl}`);
-    logger.info(`📍 Domain URL: ${hostUrl}`);
-    logger.info(`📧 Email: ${process.env.EMAIL_USER}`);
-    logger.info('💡 Press Ctrl+C to stop the server');
-    
-    console.log('\n=== Server Access Information ===');
-    console.log(`🔐 Local Admin Panel: ${localUrl}/admin/login`);
-    console.log(`🌐 Network Admin Panel: ${protocol}://<your-ip>:${PORT}/admin/login`);
-    console.log('   Default credentials:', process.env.ADMIN_EMAIL, '/', process.env.ADMIN_PASSWORD);
-    console.log('🏥 Health check:', `${localUrl}/health`);
-    console.log('🗄️  MongoDB: Connected and ready');
-});
+            console.log('\n=== Server Access Information ===');
+            console.log(`🔐 Admin Panel: ${renderUrl}/admin/login`);
+            console.log('🏥 Health check:', `${renderUrl}/health`);
+            console.log('🗄️  MongoDB: Connected and ready');
+        });
         
         // Graceful shutdown
         process.on('SIGINT', async () => {
