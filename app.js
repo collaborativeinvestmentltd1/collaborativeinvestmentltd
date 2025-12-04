@@ -15,7 +15,6 @@ const logger = require('./utils/logger');
 
 const PORT = process.env.PORT || 3000;
 const DOMAIN = process.env.DOMAIN || 'localhost';
-const HOST = process.env.HOST || '0.0.0.0'; // Add this line
 
 // Validate required environment variables
 const requiredEnvVars = ['EMAIL_USER', 'EMAIL_PASS', 'MONGODB_URI'];
@@ -50,24 +49,6 @@ const transporter = nodemailer.createTransport(emailConfig);
 
 // Session configuration
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
-
-// SSL Configuration
-let sslOptions = null;
-if (process.env.SSL_KEY_PATH && process.env.SSL_CERT_PATH) {
-    try {
-        const keyPath = path.resolve(process.env.SSL_KEY_PATH);
-        const certPath = path.resolve(process.env.SSL_CERT_PATH);
-        sslOptions = {
-            key: fs.readFileSync(keyPath),
-            cert: fs.readFileSync(certPath),
-            ca: process.env.SSL_CA_PATH ? fs.readFileSync(path.resolve(process.env.SSL_CA_PATH)) : undefined
-        };
-        logger.info('SSL/TLS certificates loaded successfully from %s and %s', keyPath, certPath);
-    } catch (error) {
-        logger.error('Failed to load SSL certificates:', error.message);
-        sslOptions = null;
-    }
-}
 
 // Session storage with improved security
 const sessions = new Map();
@@ -1159,38 +1140,26 @@ async function startServer() {
         };
 
         // Create server
-        let server;
-        if (sslOptions && process.env.NODE_ENV === 'production') {
-            server = https.createServer(sslOptions, requestHandler);
-            logger.info('🔒 HTTPS server configured');
-        } else {
-            server = http.createServer(requestHandler);
-            logger.info('🌐 HTTP server configured (use HTTPS in production)');
-        }
-        
-        // Set timeout
-        server.setTimeout(30000);
-        
-        server.listen(PORT, HOST, () => {
-            const protocol = sslOptions ? 'https' : 'http';
-            const hostUrl = `${protocol}://${DOMAIN}${PORT && ![80,443].includes(Number(PORT)) ? `:${PORT}` : ''}`;
-            const localUrl = `${protocol}://localhost:${PORT}`;
-            const networkUrl = `${protocol}://${HOST}:${PORT}`;
+server.listen(PORT, HOST, () => {
+    const protocol = sslOptions ? 'https' : 'http';
+    const localUrl = `${protocol}://localhost:${PORT}`;
+    const networkUrl = `${protocol}://${HOST}:${PORT}`;
+    const hostUrl = `${protocol}://${DOMAIN}${PORT && ![80,443].includes(Number(PORT)) ? `:${PORT}` : ''}`;
     
-            logger.info('🚀 Collaborative Investment Ltd Website successfully deployed!');
-            logger.info(`📍 Local URL: ${localUrl}`);
-            logger.info(`📍 Network URL: ${networkUrl}`);
-            logger.info(`📍 Domain URL: ${hostUrl}`);
-            logger.info(`📧 Email: ${process.env.EMAIL_USER}`);
-            logger.info('💡 Press Ctrl+C to stop the server');
+    logger.info('🚀 Collaborative Investment Ltd Website successfully deployed!');
+    logger.info(`📍 Local URL: ${localUrl}`);
+    logger.info(`📍 Network URL: ${networkUrl}`);
+    logger.info(`📍 Domain URL: ${hostUrl}`);
+    logger.info(`📧 Email: ${process.env.EMAIL_USER}`);
+    logger.info('💡 Press Ctrl+C to stop the server');
     
-            console.log('\n=== Server Access Information ===');
-            console.log(`🔐 Local Admin Panel: ${localUrl}/admin/login`);
-            console.log(`🌐 Network Admin Panel: http://<your-ip>:${PORT}/admin/login`);
-            console.log('   Default credentials:', process.env.ADMIN_EMAIL, '/', process.env.ADMIN_PASSWORD);
-            console.log('🏥 Health check:', `${localUrl}/health`);
-            console.log('🗄️  MongoDB: Connected and ready');
-        });
+    console.log('\n=== Server Access Information ===');
+    console.log(`🔐 Local Admin Panel: ${localUrl}/admin/login`);
+    console.log(`🌐 Network Admin Panel: ${protocol}://<your-ip>:${PORT}/admin/login`);
+    console.log('   Default credentials:', process.env.ADMIN_EMAIL, '/', process.env.ADMIN_PASSWORD);
+    console.log('🏥 Health check:', `${localUrl}/health`);
+    console.log('🗄️  MongoDB: Connected and ready');
+});
         
         // Graceful shutdown
         process.on('SIGINT', async () => {
