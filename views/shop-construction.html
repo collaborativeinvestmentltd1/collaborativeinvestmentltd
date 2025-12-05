@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Construction Products - Collaborative Investment Ltd</title>
+    <title>CIL Construction Works - Collaborative Investment Ltd</title>
     
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -17,6 +17,8 @@
             --construction-primary: #e67e22;
             --construction-secondary: #f39c12;
             --construction-accent: #d35400;
+            --construction-light: #fef5e7;
+            --construction-dark: #76410c;
         }
         
         .construction-header {
@@ -25,83 +27,180 @@
             padding: 3rem 0;
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .construction-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/construction/construction-pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .construction-header .container {
+            position: relative;
+            z-index: 2;
         }
         
         .construction-header h1 {
             color: white;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
-        .construction-header p {
+        .construction-header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            font-weight: 500;
+        }
+        
+        .construction-tagline {
             font-size: 1.1rem;
             opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .back-link {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: inline-block;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
         
         .back-link:hover {
             color: white;
+            background: rgba(0,0,0,0.3);
+            transform: translateX(-5px);
         }
         
-        .materials-section {
+        .construction-services {
             padding: 3rem 0;
+            background: var(--construction-light);
         }
         
         .section-title {
             text-align: center;
-            color: var(--construction-primary);
+            color: var(--construction-dark);
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--construction-accent);
+            margin: 1rem auto 2rem;
+            border-radius: 2px;
         }
         
         .section-subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            max-width: 800px;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--construction-accent);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .category-name {
+            color: var(--construction-dark);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .category-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
         
         .product-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
+            position: relative;
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
         .product-image {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
+            position: relative;
         }
         
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
         
         .product-card:hover .product-image img {
@@ -113,38 +212,79 @@
         }
         
         .product-title {
-            font-size: 1.2rem;
-            color: var(--construction-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--construction-dark);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            line-height: 1.4;
         }
         
         .product-description {
             color: #666;
             margin-bottom: 1rem;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            min-height: 4.5em;
+        }
+        
+        .product-specs {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .spec-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .spec-value {
+            color: var(--construction-dark);
+            font-weight: 600;
         }
         
         .product-price {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 800;
             color: var(--construction-accent);
             margin-bottom: 0.5rem;
         }
         
-        .product-details {
+        .product-stock {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
             margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #666;
         }
         
-        .product-details p {
-            margin: 0.3rem 0;
+        .stock-in {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .stock-custom {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .stock-limited {
+            background: #f8d7da;
+            color: #721c24;
         }
         
         .product-actions {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
             margin-top: 1rem;
         }
@@ -153,58 +293,57 @@
             background: var(--construction-primary);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            flex: 1;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         
         .btn-primary:hover {
             background: var(--construction-accent);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .btn-whatsapp {
             background: #25D366;
             color: white;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            flex: 1;
         }
         
         .btn-whatsapp:hover {
             background: #128C7E;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .stock-badge {
+        .product-category-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #27ae60;
-            color: white;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            color: var(--construction-dark);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             z-index: 2;
-        }
-        
-        .stock-badge.low-stock {
-            background: #f39c12;
-        }
-        
-        .stock-badge.out-of-stock {
-            background: #e74c3c;
+            backdrop-filter: blur(10px);
         }
         
         .filter-controls {
@@ -213,6 +352,10 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .search-box {
@@ -223,37 +366,115 @@
         
         .search-box input {
             width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.5rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--construction-primary);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+            outline: none;
         }
         
         .search-icon {
             position: absolute;
-            left: 12px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #666;
+            color: #999;
+            font-size: 1.2rem;
         }
         
         .category-filter {
-            padding: 0.8rem 1rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             background: white;
             font-size: 1rem;
-            min-width: 200px;
+            min-width: 220px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter:focus {
+            border-color: var(--construction-primary);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+            outline: none;
         }
         
         .product-count {
             text-align: center;
-            margin: 1rem 0;
-            color: #666;
-            font-size: 0.9rem;
+            margin: 1.5rem 0;
+            color: var(--construction-dark);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, var(--construction-dark) 0%, var(--construction-primary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 20px;
+        }
+        
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-call {
+            background: white;
+            color: var(--construction-dark);
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-call:hover {
+            background: var(--construction-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         @media (max-width: 768px) {
+            .construction-header h1 {
+                font-size: 2rem;
+            }
+            
+            .construction-header .subtitle {
+                font-size: 1.1rem;
+            }
+            
             .filter-controls {
                 flex-direction: column;
             }
@@ -266,15 +487,44 @@
                 grid-template-columns: 1fr;
             }
             
-            .construction-header h1 {
-                font-size: 2rem;
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
             }
         }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .fade-in-up:nth-child(2) { animation-delay: 0.1s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.3s; }
+        .fade-in-up:nth-child(5) { animation-delay: 0.4s; }
     </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -287,33 +537,33 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon in Header -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -322,51 +572,133 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
     <!-- Main Content -->
     <main>
         <!-- Category Header -->
         <section class="construction-header">
             <div class="container">
-                <a href="/shop-categories" class="back-link">← Back to Categories</a>
-                <h1>Construction Blocks & Building Materials</h1>
-                <p>Quality concrete blocks, cement, and building materials for all your construction needs</p>
+                <a href="/shop-categories" class="back-link">
+                    ← Back to Categories
+                </a>
+                <h1>CIL Construction Works</h1>
+                <p class="subtitle">Building Excellence in Construction & Fabrication</p>
+                <p class="construction-tagline">
+                    Advanced poultry equipment, custom construction machinery, premium sports courts, 
+                    automated gate systems, and bespoke furniture solutions
+                </p>
+            </div>
+        </section>
+
+        <!-- Construction Services Overview -->
+        <section class="construction-services">
+            <div class="container">
+                <h2 class="section-title">Our Construction Services</h2>
+                <p class="section-subtitle">
+                    We specialize in fabricating high-quality construction equipment, sports facilities, 
+                    and custom metal works for residential, commercial, and industrial applications.
+                </p>
+                
+                <div class="category-grid">
+                    <div class="category-card fade-in-up">
+                        <div class="category-icon">🐔</div>
+                        <h3 class="category-name">Poultry Equipment</h3>
+                        <p class="category-description">
+                            Advanced battery cages and automated poultry systems for modern farming
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <div class="category-icon">🧱</div>
+                        <h3 class="category-name">Block Machines</h3>
+                        <p class="category-description">
+                            Manual and automatic block making machines for construction businesses
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <div class="category-icon">🏀</div>
+                        <h3 class="category-name">Sports Courts</h3>
+                        <p class="category-description">
+                            Professional basketball courts in standard and custom sizes
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <div class="category-icon">🚪</div>
+                        <h3 class="category-name">Electric Gates</h3>
+                        <p class="category-description">
+                            Modern remote-controlled electric gate systems for security
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <div class="category-icon">🪑</div>
+                        <h3 class="category-name">Furniture & Chairs</h3>
+                        <p class="category-description">
+                            Custom tables and various metal chair designs for all spaces
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Construction Products Section -->
-        <section class="materials-section">
+        <section class="container" style="padding: 3rem 0;">
+            <h2 class="section-title">Construction Products</h2>
+            <p class="section-subtitle">
+                Browse our range of construction equipment and custom fabrication services. 
+                All products are available for order with flexible customization options.
+            </p>
+            
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="product-search" placeholder="Search construction products...">
+                </div>
+                <select class="category-filter" id="category-filter">
+                    <option value="all">All Products</option>
+                    <option value="poultry">Poultry Equipment</option>
+                    <option value="machines">Block Machines</option>
+                    <option value="courts">Sports Courts</option>
+                    <option value="gates">Electric Gates</option>
+                    <option value="furniture">Furniture & Chairs</option>
+                </select>
+            </div>
+            
+            <!-- Product Count -->
+            <div class="product-count" id="product-count">Loading construction products...</div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="contact-cta">
             <div class="container">
-                <h2 class="section-title">Construction Products</h2>
-                <p class="section-subtitle">We offer a wide variety of high-quality construction blocks, materials, and custom products.</p>
-                
-                <!-- Filter Controls -->
-                <div class="filter-controls">
-                    <div class="search-box">
-                        <span class="search-icon"></span>
-                        <input type="text" id="product-search" placeholder="Search construction products...">
-                    </div>
-                    <select class="category-filter" id="category-filter">
-                        <option value="all">All Products</option>
-                        <option value="blocks">Construction Blocks</option>
-                        <option value="materials">Building Materials</option>
-                        <option value="courts">Sports Courts</option>
-                        <option value="custom">Custom Products</option>
-                    </select>
-                </div>
-                
-                <!-- Product Count -->
-                <div class="product-count" id="product-count">Loading construction products...</div>
-                
-                <!-- Products Grid -->
-                <div class="products-grid" id="products-container">
-                    <!-- Products will be loaded by JavaScript -->
-                </div>
-                
-                <!-- Load More Button -->
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+                <h2>Ready to Start Your Construction Project?</h2>
+                <p>
+                    Contact us today for custom quotations, technical specifications, 
+                    and professional consultation on your construction needs.
+                </p>
+                <div class="contact-buttons">
+                    <a href="https://wa.me/2348129978419" class="btn-whatsapp" target="_blank">
+                        💬 WhatsApp Us
+                    </a>
+                    <a href="tel:+2348129978419" class="btn-call">
+                        📞 Call Now: +234 812 997 8419
+                    </a>
+                    <a href="/contact" class="btn-primary">
+                        📧 Contact Form
+                    </a>
                 </div>
             </div>
         </section>
@@ -379,166 +711,260 @@
 
     <!-- JavaScript -->
     <script>
-        // CONSTRUCTION PRODUCTS DATA
+        // CIL CONSTRUCTION PRODUCTS DATA
         const constructionProducts = [
-            // Construction Blocks
+            // Poultry Equipment
             {
-                id: 'con-block-001',
-                name: 'Hollow Sandcrete Blocks',
-                category: 'blocks',
-                price: 300,
-                image: '/img/construction/hollow-sandcrete-blocks.jpg',
-                description: 'Standard hollow blocks with cavities, ideal for load-bearing walls.',
-                stock: 'In Stock',
-                details: {
-                    sizes: '6-inch, 9-inch',
-                    uses: 'Load-bearing walls, partition walls',
-                    minOrder: '100 blocks'
+                id: 'con-poultry-001',
+                name: 'Advanced Battery Cage System',
+                category: 'poultry',
+                price: 450000,
+                image: '/img/construction/battery-cage-system.jpg',
+                description: 'Modern multi-tier battery cage system for efficient poultry farming with automated feeding.',
+                stock: 'Made to Order',
+                specs: {
+                    capacity: '500-5000 birds',
+                    material: 'Galvanized steel',
+                    features: 'Auto feeders, egg collection'
                 },
-                tags: ['blocks', 'sandcrete', 'hollow']
+                tags: ['poultry', 'cages', 'automated']
             },
             {
-                id: 'con-block-002',
-                name: 'Solid Sandcrete Blocks',
-                category: 'blocks',
-                price: 350,
-                image: '/img/construction/solid-sandcrete-blocks.jpg',
-                description: 'Dense, solid blocks with no cavities for maximum strength.',
+                id: 'con-poultry-002',
+                name: 'Poultry Pen Partition System',
+                category: 'poultry',
+                price: 285000,
+                image: '/img/construction/poultry-pen-partition.jpg',
+                description: 'Modular partition system for creating efficient poultry pens with proper ventilation.',
                 stock: 'In Stock',
-                details: {
-                    sizes: '6-inch, 9-inch',
-                    uses: 'Foundation walls, structural walls',
-                    minOrder: '100 blocks'
+                specs: {
+                    panels: 'Modular system',
+                    material: 'Steel mesh & frame',
+                    installation: 'Quick assembly'
                 },
-                tags: ['blocks', 'sandcrete', 'solid']
-            },
-            {
-                id: 'con-block-003',
-                name: 'Interlocking Blocks',
-                category: 'blocks',
-                price: 425,
-                image: '/img/construction/interlocking-blocks.jpg',
-                description: 'Specially designed blocks that lock together without mortar.',
-                stock: 'In Stock',
-                details: {
-                    sizes: 'Various interlocking patterns',
-                    uses: 'Quick construction, temporary structures',
-                    minOrder: '100 blocks'
-                },
-                tags: ['blocks', 'interlocking', 'fast-build']
-            },
-            {
-                id: 'con-block-004',
-                name: 'Paving Blocks',
-                category: 'blocks',
-                price: 750,
-                image: '/img/construction/paving-blocks.jpg',
-                description: 'Durable blocks designed for outdoor flooring and driveways.',
-                stock: 'In Stock',
-                details: {
-                    sizes: 'Various shapes and thicknesses',
-                    uses: 'Driveways, walkways, outdoor flooring',
-                    minOrder: '10 sqm'
-                },
-                tags: ['paving', 'outdoor', 'flooring']
+                tags: ['poultry', 'pens', 'modular']
             },
 
-            // Building Materials
+            // Block Machines
             {
-                id: 'con-mat-001',
-                name: 'Dangote Cement',
-                category: 'materials',
-                price: 4850,
-                image: '/img/construction/dangote-cement.jpg',
-                description: 'High-quality 42.5 grade cement for all construction purposes.',
+                id: 'con-machine-001',
+                name: 'Manual Block Making Machine',
+                category: 'machines',
+                price: 325000,
+                image: '/img/construction/manual-block-machine.jpg',
+                description: 'Robust manual block machine producing 4-6 blocks per cycle, perfect for small businesses.',
                 stock: 'In Stock',
-                details: {
-                    type: '42.5 Grade',
-                    uses: 'General construction, concrete works',
-                    minOrder: '1 bag'
+                specs: {
+                    production: '4-6 blocks/cycle',
+                    power: 'Manual operation',
+                    blocks: 'All standard sizes'
                 },
-                tags: ['cement', 'dangote', 'construction']
+                tags: ['block', 'machine', 'manual']
             },
             {
-                id: 'con-mat-002',
-                name: 'Lafarge Cement',
-                category: 'materials',
-                price: 4950,
-                image: '/img/construction/lafarge-cement.jpg',
-                description: 'Premium cement with excellent strength and durability.',
-                stock: 'In Stock',
-                details: {
-                    type: '42.5 Grade',
-                    uses: 'Structural concrete, plastering',
-                    minOrder: '1 bag'
+                id: 'con-machine-002',
+                name: 'Automatic Block Making Machine',
+                category: 'machines',
+                price: 1250000,
+                image: '/img/construction/automatic-block-machine.jpg',
+                description: 'Fully automatic block making machine with hydraulic system for high-volume production.',
+                stock: 'Made to Order',
+                specs: {
+                    production: '2000+ blocks/day',
+                    power: 'Electric 15HP',
+                    automation: 'Fully automatic'
                 },
-                tags: ['cement', 'lafarge', 'construction']
-            },
-            {
-                id: 'con-mat-003',
-                name: 'Sharp Sand',
-                category: 'materials',
-                price: 30000,
-                image: '/img/construction/sharp-sand.jpg',
-                description: 'Coarse sand suitable for concrete mixing and construction.',
-                stock: 'In Stock',
-                details: {
-                    type: 'Coarse sand',
-                    uses: 'Concrete mixing, construction',
-                    minOrder: '1 truck'
-                },
-                tags: ['sand', 'construction', 'materials']
-            },
-            {
-                id: 'con-mat-004',
-                name: 'Granite/Gravel',
-                category: 'materials',
-                price: 42500,
-                image: '/img/construction/granite.jpg',
-                description: 'Crushed stone aggregate for concrete and foundation works.',
-                stock: 'In Stock',
-                details: {
-                    type: '3/4 inch, 1/2 inch, stone dust',
-                    uses: 'Concrete, foundation, drainage',
-                    minOrder: '1 truck'
-                },
-                tags: ['granite', 'gravel', 'aggregate']
+                tags: ['block', 'machine', 'automatic']
             },
 
-            // Custom Products
+            // Sports Courts
             {
-                id: 'con-custom-001',
-                name: 'Custom Table',
-                category: 'custom',
-                price: 110000,
-                image: '/img/construction/custom-table.jpg',
-                description: 'Handcrafted custom table designed to your specifications.',
+                id: 'con-court-001',
+                name: 'Standard Basketball Court',
+                category: 'courts',
+                price: 850000,
+                image: '/img/construction/basketball-standard-court.jpg',
+                description: 'FIBA standard basketball court with professional markings and equipment.',
                 stock: 'Made to Order',
-                details: {
-                    materials: 'Quality wood, metal, or composite',
-                    options: 'Various sizes, finishes, designs',
-                    delivery: '2-3 weeks production time'
+                specs: {
+                    size: '28m × 15m',
+                    surface: 'Concrete/asphalt',
+                    features: 'Professional hoops, markings'
                 },
-                tags: ['custom', 'table', 'furniture']
+                tags: ['basketball', 'court', 'sports']
             },
             {
-                id: 'con-custom-002',
-                name: 'Custom Hanger for Boutique',
-                category: 'custom',
-                price: 90000,
-                image: '/img/construction/custom-hanger.jpg',
-                description: 'Premium custom clothing hangers for boutique displays.',
+                id: 'con-court-002',
+                name: 'Custom Size Basketball Court',
+                category: 'courts',
+                price: 650000,
+                image: '/img/construction/basketball-custom-court.jpg',
+                description: 'Custom-sized basketball court designed to fit your available space.',
                 stock: 'Made to Order',
-                details: {
-                    materials: 'Wood, acrylic, or metal',
-                    options: 'Branding, sizes, finishes',
-                    delivery: '1-2 weeks production time'
+                specs: {
+                    size: 'Custom dimensions',
+                    surface: 'Various options',
+                    flexibility: 'Adapts to space'
                 },
-                tags: ['custom', 'hanger', 'boutique']
+                tags: ['basketball', 'court', 'custom']
+            },
+            {
+                id: 'con-court-003',
+                name: 'Premium Basketball Court Package',
+                category: 'courts',
+                price: 1850000,
+                image: '/img/construction/basketball-premium-court.jpg',
+                description: 'Complete premium package with seating, lighting, and professional equipment.',
+                stock: 'Made to Order',
+                specs: {
+                    size: 'Standard + extras',
+                    includes: 'Lighting, seating, scoreboard',
+                    quality: 'Professional grade'
+                },
+                tags: ['basketball', 'premium', 'complete']
+            },
+
+            // Electric Gates
+            {
+                id: 'con-gate-001',
+                name: 'Sliding Electric Gate',
+                category: 'gates',
+                price: 450000,
+                image: '/img/construction/sliding-electric-gate.jpg',
+                description: 'Modern sliding electric gate with remote control and safety features.',
+                stock: 'Made to Order',
+                specs: {
+                    type: 'Sliding',
+                    power: 'Electric motor',
+                    control: 'Remote & manual'
+                },
+                tags: ['gate', 'electric', 'sliding']
+            },
+            {
+                id: 'con-gate-002',
+                name: 'Swinging Electric Gate',
+                category: 'gates',
+                price: 385000,
+                image: '/img/construction/swinging-electric-gate.jpg',
+                description: 'Dual swinging electric gate system for wide entrances with automatic opening.',
+                stock: 'Made to Order',
+                specs: {
+                    type: 'Swinging',
+                    style: 'Single or dual',
+                    features: 'Safety sensors'
+                },
+                tags: ['gate', 'electric', 'swinging']
+            },
+            {
+                id: 'con-gate-003',
+                name: 'Cantilever Electric Gate',
+                category: 'gates',
+                price: 550000,
+                image: '/img/construction/cantilever-gate.jpg',
+                description: 'Heavy-duty cantilever gate system for industrial and commercial use.',
+                stock: 'Made to Order',
+                specs: {
+                    type: 'Cantilever',
+                    capacity: 'Heavy duty',
+                    installation: 'Professional'
+                },
+                tags: ['gate', 'industrial', 'cantilever']
+            },
+
+            // Furniture & Chairs
+            {
+                id: 'con-furniture-001',
+                name: 'Executive Conference Table',
+                category: 'furniture',
+                price: 285000,
+                image: '/img/construction/conference-table.jpg',
+                description: 'Custom executive conference table with premium finish and cable management.',
+                stock: 'Made to Order',
+                specs: {
+                    size: 'Custom dimensions',
+                    material: 'Wood/metal composite',
+                    style: 'Modern executive'
+                },
+                tags: ['table', 'conference', 'executive']
+            },
+            {
+                id: 'con-furniture-002',
+                name: 'Restaurant Dining Table',
+                category: 'furniture',
+                price: 165000,
+                image: '/img/construction/restaurant-table.jpg',
+                description: 'Durable restaurant dining tables in various sizes and designs.',
+                stock: 'Made to Order',
+                specs: {
+                    sizes: 'Various options',
+                    material: 'Solid construction',
+                    finish: 'Customizable'
+                },
+                tags: ['table', 'restaurant', 'dining']
+            },
+            {
+                id: 'con-furniture-003',
+                name: 'Metal Office Chair',
+                category: 'furniture',
+                price: 35000,
+                image: '/img/construction/metal-office-chair.jpg',
+                description: 'Ergonomic metal frame office chair with adjustable features.',
+                stock: 'In Stock',
+                specs: {
+                    frame: 'Steel metal',
+                    features: 'Adjustable height',
+                    comfort: 'Padded seat'
+                },
+                tags: ['chair', 'office', 'metal']
+            },
+            {
+                id: 'con-furniture-004',
+                name: 'Outdoor Metal Chairs',
+                category: 'furniture',
+                price: 28500,
+                image: '/img/construction/outdoor-metal-chairs.jpg',
+                description: 'Weather-resistant metal chairs for outdoor cafes and gardens.',
+                stock: 'In Stock',
+                specs: {
+                    material: 'Weatherproof metal',
+                    style: 'Outdoor design',
+                    finish: 'Powder coated'
+                },
+                tags: ['chair', 'outdoor', 'metal']
+            },
+            {
+                id: 'con-furniture-005',
+                name: 'Custom Metal Bar Stools',
+                category: 'furniture',
+                price: 32500,
+                image: '/img/construction/metal-bar-stools.jpg',
+                description: 'Custom height metal bar stools for bars and kitchen counters.',
+                stock: 'Made to Order',
+                specs: {
+                    height: 'Adjustable/custom',
+                    material: 'Steel construction',
+                    style: 'Modern bar stool'
+                },
+                tags: ['chair', 'bar', 'stool']
+            },
+            {
+                id: 'con-furniture-006',
+                name: 'Industrial Work Table',
+                category: 'furniture',
+                price: 185000,
+                image: '/img/construction/industrial-work-table.jpg',
+                description: 'Heavy-duty industrial work table for workshops and factories.',
+                stock: 'Made to Order',
+                specs: {
+                    capacity: 'Heavy duty',
+                    material: 'Industrial steel',
+                    features: 'Tool storage'
+                },
+                tags: ['table', 'industrial', 'work']
             }
         ];
 
-        // CART FUNCTIONS - Simplified version
+        // CART FUNCTIONS
         function getCart() {
             try {
                 const cart = localStorage.getItem('cart');
@@ -583,7 +1009,8 @@
                     name: product.name,
                     price: parseFloat(product.price),
                     image: product.image || '/img/logo.jpg',
-                    quantity: 1
+                    quantity: 1,
+                    category: product.category
                 });
                 console.log('Added new item to cart');
             }
@@ -647,7 +1074,7 @@
 
         // PRODUCT DISPLAY FUNCTIONS
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Construction page loaded');
+            console.log('CIL Construction page loaded');
             
             // Initialize cart count
             updateCartCount();
@@ -672,6 +1099,18 @@
                 setupEventListeners();
                 setupCartDrawer();
                 updateCartCount();
+                animateFadeInElements();
+            }
+            
+            // Animate fade-in elements
+            function animateFadeInElements() {
+                const fadeElements = document.querySelectorAll('.fade-in-up');
+                fadeElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.animationDelay = `${index * 0.1}s`;
+                        el.classList.add('fade-in-up');
+                    }, 100);
+                });
             }
             
             // Setup event listeners
@@ -720,7 +1159,7 @@
                         
                         // Visual feedback
                         const originalText = addToCartBtn.innerHTML;
-                        addToCartBtn.innerHTML = 'Added!';
+                        addToCartBtn.innerHTML = '✓ Added!';
                         addToCartBtn.style.background = '#27ae60';
                         
                         setTimeout(() => {
@@ -728,7 +1167,7 @@
                             addToCartBtn.style.background = '';
                         }, 1000);
                     }
-                }, true); // Use capture phase
+                }, true);
             }
             
             // Filter products
@@ -740,7 +1179,7 @@
                     const matchesSearch = 
                         product.name.toLowerCase().includes(searchTerm) ||
                         product.description.toLowerCase().includes(searchTerm) ||
-                        product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                        (product.tags && product.tags.some(tag => tag.toLowerCase().includes(searchTerm)));
                     
                     const matchesCategory = 
                         selectedCategory === 'all' || 
@@ -794,37 +1233,45 @@
             // Create product card
             function createProductCard(product) {
                 const card = document.createElement('div');
-                card.className = 'product-card';
+                card.className = 'product-card fade-in-up';
                 
                 const stockClass = getStockClass(product.stock);
                 const formattedPrice = product.price.toLocaleString();
+                const categoryName = getCategoryName(product.category);
                 
                 card.innerHTML = `
+                    <div class="product-category-badge">${categoryName}</div>
                     <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}" onerror="this.src='/img/logo.jpg'">
-                        <span class="stock-badge ${stockClass}">${product.stock}</span>
+                        <img src="${product.image}" alt="${product.name}" 
+                             onerror="this.onerror=null; this.src='/img/logo.jpg'">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">${product.name}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="product-price">₦${formattedPrice}</div>
-                        <div class="product-details">
-                            ${product.details.sizes ? `<p><strong>Sizes:</strong> ${product.details.sizes}</p>` : ''}
-                            ${product.details.type ? `<p><strong>Type:</strong> ${product.details.type}</p>` : ''}
-                            ${product.details.uses ? `<p><strong>Uses:</strong> ${product.details.uses}</p>` : ''}
-                            ${product.details.minOrder ? `<p><strong>Min Order:</strong> ${product.details.minOrder}</p>` : ''}
+                        
+                        <div class="product-specs">
+                            ${product.specs ? Object.entries(product.specs).map(([key, value]) => `
+                                <div class="spec-item">
+                                    <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1)}:</span>
+                                    <span class="spec-value">${value}</span>
+                                </div>
+                            `).join('') : ''}
                         </div>
+                        
+                        <div class="product-price">₦${formattedPrice}</div>
+                        <div class="product-stock ${stockClass}">${product.stock}</div>
+                        
                         <div class="product-actions">
                             <button class="btn-primary add-to-cart" 
                                     data-id="${product.id}"
                                     data-name="${product.name}"
                                     data-price="${product.price}"
                                     data-image="${product.image}">
-                                Add to Cart
+                                🛒 Add to Cart
                             </button>
-                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${formattedPrice}" 
+                            <a href="https://wa.me/2348129978419?text=I'm interested in CIL Construction: ${encodeURIComponent(product.name)} - ₦${formattedPrice}" 
                                class="btn-whatsapp" target="_blank">
-                                 WhatsApp
+                                💬 WhatsApp
                             </a>
                         </div>
                     </div>
@@ -836,8 +1283,21 @@
             // Get stock class
             function getStockClass(stock) {
                 if (stock === 'In Stock') return 'stock-in';
-                if (stock === 'Limited Stock' || stock === 'Made to Order') return 'stock-low';
-                return 'stock-out';
+                if (stock === 'Made to Order') return 'stock-custom';
+                if (stock === 'Limited Stock') return 'stock-limited';
+                return 'stock-custom';
+            }
+            
+            // Get category display name
+            function getCategoryName(category) {
+                const categories = {
+                    'poultry': 'Poultry',
+                    'machines': 'Machines',
+                    'courts': 'Courts',
+                    'gates': 'Gates',
+                    'furniture': 'Furniture'
+                };
+                return categories[category] || category;
             }
             
             // Update product count display
@@ -847,10 +1307,10 @@
                 const totalProducts = filteredProducts.length;
                 const showingProducts = Math.min(currentPage * productsPerPage, totalProducts);
                 
-                productCount.textContent = `Showing ${showingProducts} of ${totalProducts} products`;
-                
                 if (totalProducts === 0) {
-                    productCount.textContent = 'No products found matching your criteria';
+                    productCount.textContent = 'No construction products found matching your criteria';
+                } else {
+                    productCount.textContent = `Showing ${showingProducts} of ${totalProducts} construction products`;
                 }
             }
             
@@ -860,6 +1320,9 @@
                 const newCards = Array.from(allCards).slice(-productsPerPage);
                 
                 newCards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    
                     setTimeout(() => {
                         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                         card.style.opacity = '1';
@@ -921,7 +1384,7 @@
                             <div class="cart-drawer-empty">
                                 <div class="cart-drawer-empty-icon">🛒</div>
                                 <p>Your cart is empty</p>
-                                <a href="/shop-categories" class="btn btn-primary">Continue Shopping</a>
+                                <a href="/shop-construction" class="btn btn-primary">Browse Construction Products</a>
                             </div>
                         `;
                         if (drawerTotal) drawerTotal.textContent = '₦0';
@@ -977,6 +1440,7 @@
             window.addToCart = addToCart;
             window.updateCartCount = updateCartCount;
             window.getCart = getCart;
+            window.showCartNotification = showCartNotification;
         });
     </script>
 </body>
