@@ -1,3 +1,43 @@
+// Quick notification fallback
+if (typeof notification === 'undefined') {
+    window.notification = function(message, type = 'info') {
+        console.log(`[${type.toUpperCase()}] ${message}`);
+        
+        // Simple browser notification
+        if (Notification.permission === 'granted') {
+            new Notification('Cart Notification', {
+                body: message,
+                icon: '/img/logo.jpg'
+            });
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    new Notification('Cart Notification', {
+                        body: message,
+                        icon: '/img/logo.jpg'
+                    });
+                }
+            });
+        }
+        
+        // Also show a simple toast
+        const toast = document.createElement('div');
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 9999;
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    };
+}
+
 // Cart Utility Functions
 function getCart() {
     return JSON.parse(localStorage.getItem('cart')) || [];
@@ -128,6 +168,125 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
+// Ensure notification function exists
+if (typeof notification === 'undefined') {
+    window.notification = function(message, type = 'success', duration = 3000) {
+        // Create notification element
+        const notificationEl = document.createElement('div');
+        notificationEl.className = `notification ${type}`;
+        notificationEl.innerHTML = `
+            <div class="notification-content">
+                ${message}
+            </div>
+            <button class="notification-close">&times;</button>
+        `;
+        
+        // Add styles if they don't exist
+        if (!document.querySelector('#notification-styles')) {
+            const styles = document.createElement('style');
+            styles.id = 'notification-styles';
+            styles.textContent = `
+                .notification {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    color: white;
+                    z-index: 9999;
+                    min-width: 300px;
+                    max-width: 400px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    animation: slideIn 0.3s ease;
+                }
+                
+                .notification.success {
+                    background: #28a745;
+                    border-left: 4px solid #218838;
+                }
+                
+                .notification.error {
+                    background: #dc3545;
+                    border-left: 4px solid #c82333;
+                }
+                
+                .notification.warning {
+                    background: #ffc107;
+                    color: #212529;
+                    border-left: 4px solid #e0a800;
+                }
+                
+                .notification.info {
+                    background: #17a2b8;
+                    border-left: 4px solid #138496;
+                }
+                
+                .notification-close {
+                    background: transparent;
+                    border: none;
+                    color: inherit;
+                    font-size: 20px;
+                    cursor: pointer;
+                    margin-left: 10px;
+                    padding: 0;
+                    line-height: 1;
+                }
+                
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(styles);
+        }
+        
+        // Add to body
+        document.body.appendChild(notificationEl);
+        
+        // Close button functionality
+        notificationEl.querySelector('.notification-close').addEventListener('click', () => {
+            notificationEl.remove();
+        });
+        
+        // Auto remove after duration
+        if (duration > 0) {
+            setTimeout(() => {
+                if (notificationEl.parentNode) {
+                    notificationEl.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notificationEl.remove(), 300);
+                }
+            }, duration);
+        }
+        
+        // Add slideOut animation
+        if (!document.querySelector('#notification-animations')) {
+            const animations = document.createElement('style');
+            animations.id = 'notification-animations';
+            animations.textContent = `
+                @keyframes slideOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(animations);
+        }
+    };
+}
 // Enhanced success notification with tracking
 function showOrderSuccess(orderNumber, customerName) {
     // Remove existing notifications
