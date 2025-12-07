@@ -91,7 +91,7 @@ function renderProducts() {
                     </button>
                     <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${product.price} ${product.unit}" 
                        class="btn-whatsapp" target="_blank">
-                        💬 WhatsApp
+                         WhatsApp
                     </a>
                 </div>
             </div>

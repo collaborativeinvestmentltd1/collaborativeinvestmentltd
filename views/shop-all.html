@@ -4,18 +4,642 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Products - Collaborative Investment Ltd</title>
-    <meta name="description" content="Browse all our quality products - construction materials, agriculture products, machinery, solar energy solutions, and furniture.">
+    <meta name="description" content="Browse all products from Collaborative Investment Ltd - Agriculture, Construction, Furniture, Machinery, and Solar Energy products in one place.">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="stylesheet" href="/css/shop-all.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Unified styles for all products page */
+        :root {
+            --shop-primary: #2c3e50;
+            --shop-secondary: #3498db;
+            --shop-accent: #e74c3c;
+            --shop-success: #27ae60;
+            --shop-warning: #f39c12;
+            --shop-light: #f8f9fa;
+            --shop-dark: #1a252f;
+        }
+        
+        .shop-header {
+            background: linear-gradient(135deg, var(--shop-primary) 0%, var(--shop-secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shop-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/shop-pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .shop-header .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .shop-header h1 {
+            color: white;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .shop-header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            font-weight: 500;
+        }
+        
+        .shop-tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .back-link {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: white;
+            background: rgba(0,0,0,0.3);
+            transform: translateX(-5px);
+        }
+        
+        .categories-section {
+            padding: 3rem 0;
+            background: var(--shop-light);
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--shop-dark);
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--shop-accent);
+            margin: 1rem auto 2rem;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            justify-content: center;
+        }
+        
+        .category-tab {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .category-tab:hover {
+            background: #e9ecef;
+            border-color: var(--shop-secondary);
+        }
+        
+        .category-tab.active {
+            background: var(--shop-primary);
+            color: white;
+            border-color: var(--shop-primary);
+        }
+        
+        .category-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .category-badge {
+            padding: 0.5rem 1rem;
+            background: var(--shop-secondary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .badge-count {
+            background: rgba(255,255,255,0.2);
+            padding: 0.1rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.95);
+            color: var(--shop-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            color: var(--shop-dark);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            line-height: 1.4;
+            flex: 1;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex: 2;
+            overflow: hidden;
+            display: webkit-box;
+            -webkit-box-orient: vertical;
+        }
+        
+        .product-specs {
+            background: #f8f9fa;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            flex: 1;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+        }
+        
+        .spec-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .spec-value {
+            color: var(--shop-dark);
+            font-weight: 600;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--shop-success);
+            margin: 0.5rem 0;
+        }
+        
+        .product-stock {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stock-in {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .stock-custom {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .stock-limited {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .product-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--shop-primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary:hover {
+            background: var(--shop-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--shop-secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 1.2rem;
+        }
+        
+        .sort-select {
+            padding: 0.9rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            font-size: 1rem;
+            min-width: 180px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sort-select:focus {
+            border-color: var(--shop-secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+        
+        .product-count {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--shop-dark);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .load-more-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .load-more-btn {
+            background: var(--shop-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .load-more-btn:hover {
+            background: var(--shop-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, var(--shop-dark) 0%, var(--shop-primary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 20px;
+        }
+        
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-call {
+            background: white;
+            color: var(--shop-dark);
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-call:hover {
+            background: var(--shop-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-icon {
+            font-size: 1.2rem;
+            margin-right: 0.3rem;
+        }
+        
+        .category-tab .count {
+            background: rgba(255,255,255,0.2);
+            padding: 0.1rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 0.3rem;
+        }
+        
+        .no-products {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            grid-column: 1 / -1;
+        }
+        
+        .no-products-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+        
+        .no-products h3 {
+            color: var(--shop-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .no-products p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .shop-header h1 {
+                font-size: 2rem;
+            }
+            
+            .shop-header .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .category-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .filter-controls {
+                flex-direction: column;
+            }
+            
+            .search-box, .sort-select {
+                min-width: 100%;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .category-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .product-card {
+                border-radius: 12px;
+            }
+            
+            .product-content {
+                padding: 1rem;
+            }
+            
+            .product-title {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+    </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -28,33 +652,33 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories">Shop Categories</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon in Header -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -63,205 +687,245 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
-    <!-- Shop Header -->
-    <section class="shop-header">
-        <div class="container">
-            <a href="/shop-categories" class="back-link">← Browse Categories</a>
-            <h1>All Products</h1>
-            <p>Complete catalog of our quality products across all business sectors</p>
-        </div>
-    </section>
-
-    <!-- Quick Categories Navigation -->
-    <section class="quick-categories">
-        <div class="container">
-            <div class="category-tabs">
-                <a href="/shop-agriculture" class="category-tab">
-                    <span class="tab-icon"></span>
-                    Agriculture
+    <!-- Main Content -->
+    <main>
+        <!-- Shop Header -->
+        <section class="shop-header">
+            <div class="container">
+                <a href="/" class="back-link">
+                    ← Back to Home
                 </a>
-                <a href="/shop-construction" class="category-tab">
-                    <span class="tab-icon"></span>
-                    Construction
-                </a>
-                <a href="/shop-machinery" class="category-tab">
-                    <span class="tab-icon"></span>
-                    Machinery
-                </a>
-                <a href="/shop-solar" class="category-tab">
-                    <span class="tab-icon"></span>
-                    Solar
-                </a>
-                <a href="/shop-furniture" class="category-tab">
-                    <span class="tab-icon"></span>
-                    Furniture
-                </a>
+                <h1>All Products</h1>
+                <p class="subtitle">Everything You Need in One Place</p>
+                <p class="shop-tagline">
+                    Browse our complete collection of Agriculture, Construction, Furniture, 
+                    Machinery, and Solar Energy products
+                </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Shop Content -->
-    <section class="products-section">
-        <div class="container">
-            <!-- Simple Filter Controls -->
+        <!-- Categories Tabs -->
+        <section class="categories-section">
+            <div class="container">
+                <h2 class="section-title">Browse by Category</h2>
+                <p class="section-subtitle">
+                    Select a category to filter products or browse everything below
+                </p>
+                
+                <div class="category-tabs" id="category-tabs">
+                    <button class="category-tab active" data-category="all">
+                        <span class="category-icon"></span> All Products <span class="count" id="count-all">0</span>
+                    </button>
+                    <button class="category-tab" data-category="agriculture">
+                        <span class="category-icon"></span> Agriculture <span class="count" id="count-agriculture">0</span>
+                    </button>
+                    <button class="category-tab" data-category="construction">
+                        <span class="category-icon"></span> Construction <span class="count" id="count-construction">0</span>
+                    </button>
+                    <button class="category-tab" data-category="furniture">
+                        <span class="category-icon"></span> Furniture <span class="count" id="count-furniture">0</span>
+                    </button>
+                    <button class="category-tab" data-category="machinery">
+                        <span class="category-icon"></span> Machinery <span class="count" id="count-machinery">0</span>
+                    </button>
+                    <button class="category-tab" data-category="solar">
+                        <span class="category-icon"></span> Solar Energy <span class="count" id="count-solar">0</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="container" style="padding: 3rem 0;">
             <div class="filter-controls">
                 <div class="search-box">
-                    <span class="search-icon"></span>
                     <input type="text" id="product-search" placeholder="Search all products...">
                 </div>
-                <select class="category-filter" id="category-filter">
-                    <option value="all">All Categories</option>
-                    <option value="agriculture">Agriculture & Livestock</option>
-                    <option value="construction">Construction & Blocks</option>
-                    <option value="machinery">Machinery & Equipment</option>
-                    <option value="solar">Solar Energy</option>
-                    <option value="furniture">Furniture & Upholstery</option>
+                <select class="sort-select" id="sort-select">
+                    <option value="name-asc">Sort by: Name (A-Z)</option>
+                    <option value="name-desc">Sort by: Name (Z-A)</option>
+                    <option value="price-asc">Sort by: Price (Low to High)</option>
+                    <option value="price-desc">Sort by: Price (High to Low)</option>
+                    <option value="newest">Sort by: Newest First</option>
                 </select>
             </div>
-
+            
             <!-- Product Count -->
             <div class="product-count" id="product-count">Loading products...</div>
-
+            
             <!-- Products Grid -->
             <div class="products-grid" id="products-container">
                 <!-- Products will be loaded by JavaScript -->
             </div>
-
-            <!-- Load More Button -->
-            <div class="load-more-section">
-                <button class="btn btn-primary" id="load-more">Load More Products</button>
+            
+            <!-- No Products Message (Initially Hidden) -->
+            <div class="no-products" id="no-products" style="display: none;">
+                <h3>No Products Found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+                <button class="btn-primary" id="reset-filters">Reset All Filters</button>
             </div>
-        </div>
-    </section>
-
-    <!-- Quick Order Section -->
-    <section class="quick-order-section">
-        <div class="container">
-            <h2>Need Help with Your Order?</h2>
-            <p>Contact us directly for bulk orders or product advice</p>
-            <div class="contact-options">
-                <a href="tel:+2348129978419" class="contact-btn">
-                     Call +234 812 997 8419
-                </a>
-                <a href="https://wa.me/2348129978419" class="contact-btn whatsapp" target="_blank">
-                     WhatsApp Order
-                </a>
+            
+            <!-- Load More -->
+            <div class="load-more-container">
+                <button id="load-more" class="load-more-btn" style="display: none;">
+                    Load More Products
+                </button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- About Section -->
-                <div class="footer-section">
-                    <h3>Collaborative Investment Ltd</h3>
-                    <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
-
-                    <div class="social-links">
-                        <!-- Facebook -->
-                        <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
-                            </svg>
-                        </a>
-
-                        <!-- X / Twitter -->
-                        <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
-                            </svg>
-                        </a>
-
-                        <!-- WhatsApp -->
-                        <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                                <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.980.944.407 1.678.650 2.250.832.945.300 1.806.257 2.484.156.758-.112 2.340-.957 2.674-1.880.330-.924.330-1.715.230-1.880-.099-.165-.363-.264-.758-.462z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/services">Our Services</a></li>
-                        <li><a href="/shop-categories">Shop Categories</a></li>
-                        <li><a href="/portfolio">Portfolio</a></li>
-                        <li><a href="/investment">Investment</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Shop Categories -->
-                <div class="footer-section">
-                    <h3>Shop Categories</h3>
-                    <ul class="footer-links">
-                        <li><a href="/shop-agriculture">Agriculture & Livestock</a></li>
-                        <li><a href="/shop-construction">Construction & Blocks</a></li>
-                        <li><a href="/shop-machinery">Machinery & Equipment</a></li>
-                        <li><a href="/shop-solar">Solar Energy</a></li>
-                        <li><a href="/shop-furniture">Furniture & Upholstery</a></li>
-                        <li><a href="/shop-all">All Products</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact -->
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>212 Ijegun Road, Ikotun, Lagos</p>
-                    <p>collaborativeinvestmentltd@gmail.com</p>
-                    <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
-                    <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                    <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
-                </div>
-            </div>
-
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-                <p>Building Nigeria's Business Future</p>
-
-                <p style="margin-top: 1rem;">
-                    <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                    <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                    <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        <!-- Contact CTA Section -->
+        <section class="contact-cta">
+            <div class="container">
+                <h2>Need Help Choosing?</h2>
+                <p>
+                    Our product specialists are available to help you select the right products 
+                    for your specific needs. Contact us for personalized recommendations.
                 </p>
+                <div class="contact-buttons">
+                    <a href="https://wa.me/2348129978419" class="btn-whatsapp" target="_blank">
+                        <span></span> WhatsApp Consultation
+                    </a>
+                    <a href="tel:+2348129978419" class="btn-call">
+                        <span></span> Call: +234 812 997 8419
+                    </a>
+                    <a href="/contact" class="btn-primary">
+                        <span></span> Contact Form
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
             </div>
         </div>
-    </footer>
 
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#agriculture">Agriculture & Agribusiness</a></li>
+                <li><a href="/services#manufacturing">Construction & Manufacturing</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/services#hospitality">Hospitality & Entertainment</a></li>
+                <li><a href="/services#solar">Solar Energy Solutions</a></li>
+                <li><a href="/services#furniture">Furniture & Upholstery</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/shop-all.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
-    <script src="/js/shop-all.js"></script>
     <script src="/js/cart-drawer.js"></script>
-
-<script>
-    // Debug script
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded in shop-all.html');
-        
-        // Monitor all clicks
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
-                const button = e.target.classList.contains('add-to-cart') ? e.target : e.target.closest('.add-to-cart');
-                console.log('Add to Cart button clicked!');
-                console.log('Button attributes:', {
-                    id: button.getAttribute('data-id'),
-                    name: button.getAttribute('data-name'),
-                    price: button.getAttribute('data-price'),
-                    image: button.getAttribute('data-image')
-                });
-            }
-        });
-    });
-</script>
 </body>
 </html>

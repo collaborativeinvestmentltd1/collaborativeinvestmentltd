@@ -3,75 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar Energy Products - Collaborative Investment Ltd</title>
+    <title>CIL Solar Energy Products - Collaborative Investment Ltd</title>
     
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
-    <link rel="stylesheet" href="/css/solar.css">
     <link rel="stylesheet" href="/css/shop-all.css">
     
     <style>
-        /* Solar page specific styles */
+        /* Solar page specific styles - Enhanced from construction */
         :root {
-            --solar-primary: #f39c12;    /* Sun Yellow */
+            --solar-primary: #f1c40f;    /* Sun Yellow */
             --solar-secondary: #e67e22;   /* Orange */
             --solar-accent: #d35400;      /* Dark Orange */
-            --solar-light: #fff3cd;       /* Light Yellow */
-            --solar-dark: #8b4513;        /* Solar Brown */
+            --solar-light: #fef9e7;       /* Light Yellow */
+            --solar-dark: #7d6608;        /* Solar Brown */
+            --solar-blue: #3498db;        /* Panel Blue */
+            --solar-green: #27ae60;       /* Eco Green */
         }
         
         .solar-header {
-            background: linear-gradient(135deg, var(--solar-primary) 0%, var(--solar-secondary) 100%);
+            background: linear-gradient(135deg, var(--solar-primary) 0%, var(--solar-accent) 100%);
             color: white;
             padding: 3rem 0;
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solar-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/solar/solar-pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .solar-header .container {
+            position: relative;
+            z-index: 2;
         }
         
         .solar-header h1 {
             color: white;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
-        .solar-header p {
+        .solar-header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            font-weight: 500;
+        }
+        
+        .solar-tagline {
             font-size: 1.1rem;
             opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .back-link {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: inline-block;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
         
         .back-link:hover {
             color: white;
+            background: rgba(0,0,0,0.3);
+            transform: translateX(-5px);
         }
         
-        .solar-section {
+        .solar-services {
             padding: 3rem 0;
+            background: var(--solar-light);
         }
         
         .section-title {
             text-align: center;
-            color: var(--solar-primary);
+            color: var(--solar-dark);
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--solar-accent);
+            margin: 1rem auto 2rem;
+            border-radius: 2px;
         }
         
         .section-subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            max-width: 800px;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--solar-accent);
+        }
+        
+        .category-name {
+            color: var(--solar-dark);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .category-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .products-grid {
@@ -83,29 +173,31 @@
         
         .product-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
+            position: relative;
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
         .product-image {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
-            background: var(--solar-light);
+            position: relative;
+            background: linear-gradient(135deg, var(--solar-light) 0%, #f8f9fa 100%);
         }
         
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
         
         .product-card:hover .product-image img {
@@ -117,62 +209,117 @@
         }
         
         .product-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--solar-dark);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            line-height: 1.3;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            line-height: 1.4;
         }
         
         .product-description {
             color: #666;
             margin-bottom: 1rem;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            min-height: 4.5em;
         }
         
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--solar-accent);
-            margin-bottom: 0.5rem;
+        .product-specs {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
         }
         
-        .price-range {
+        .spec-item {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .spec-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .spec-value {
+            color: var(--solar-dark);
+            font-weight: 600;
+        }
+        
+        .capacity-options {
+            display: flex;
             gap: 0.5rem;
             margin: 0.5rem 0;
+            flex-wrap: wrap;
         }
         
-        .price-option {
-            text-align: center;
-            flex: 1;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
+        .capacity-option {
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
             border-radius: 6px;
-            background: #f8f9fa;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            flex: 1;
+            text-align: center;
+            min-width: 80px;
         }
         
-        .price-option.active {
-            background: var(--solar-light);
+        .capacity-option:hover {
             border-color: var(--solar-primary);
         }
         
-        .product-details {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #666;
+        .capacity-option.selected {
+            background: var(--solar-primary);
+            color: white;
+            border-color: var(--solar-primary);
         }
         
-        .product-details p {
-            margin: 0.3rem 0;
+        .price-display {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--solar-accent);
+            margin: 1rem 0;
+        }
+        
+        .capacity-price {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .product-stock {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .stock-in {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .stock-custom {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .stock-limited {
+            background: #f8d7da;
+            color: #721c24;
         }
         
         .product-actions {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
             margin-top: 1rem;
         }
@@ -181,58 +328,57 @@
             background: var(--solar-primary);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            flex: 1;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         
         .btn-primary:hover {
             background: var(--solar-accent);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .btn-whatsapp {
             background: #25D366;
             color: white;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            flex: 1;
         }
         
         .btn-whatsapp:hover {
             background: #128C7E;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .stock-badge {
+        .product-category-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #27ae60;
-            color: white;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            color: var(--solar-dark);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             z-index: 2;
-        }
-        
-        .stock-badge.low-stock {
-            background: #f39c12;
-        }
-        
-        .stock-badge.out-of-stock {
-            background: #e74c3c;
+            backdrop-filter: blur(10px);
         }
         
         .filter-controls {
@@ -241,6 +387,10 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .search-box {
@@ -251,37 +401,107 @@
         
         .search-box input {
             width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.5rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--solar-primary);
+            box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.1);
+            outline: none;
         }
         
         .search-icon {
             position: absolute;
-            left: 12px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #666;
+            color: #999;
+            font-size: 1.2rem;
         }
         
         .category-filter {
-            padding: 0.8rem 1rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             background: white;
             font-size: 1rem;
-            min-width: 200px;
+            min-width: 220px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter:focus {
+            border-color: var(--solar-primary);
+            box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.1);
+            outline: none;
         }
         
         .product-count {
             text-align: center;
-            margin: 1rem 0;
-            color: #666;
-            font-size: 0.9rem;
+            margin: 1.5rem 0;
+            color: var(--solar-dark);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
         
-        /* Solar tag styles */
+        .contact-cta {
+            background: linear-gradient(135deg, var(--solar-dark) 0%, var(--solar-primary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 20px;
+        }
+        
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-call {
+            background: white;
+            color: var(--solar-dark);
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-call:hover {
+            background: var(--solar-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Solar tags */
         .solar-tag {
             display: inline-block;
             padding: 0.3rem 0.8rem;
@@ -293,24 +513,40 @@
             color: white;
         }
         
-        .solar-tag.mono {
+        .tag-mono {
             background: #3498db;
         }
         
-        .solar-tag.poly {
-            background: #27ae60;
+        .tag-poly {
+            background: #2ecc71;
         }
         
-        .solar-tag.lithium {
+        .tag-lithium {
             background: #9b59b6;
         }
         
-        .solar-tag.gel {
+        .tag-gel {
             background: #e74c3c;
         }
         
-        .solar-tag.pure-sine {
+        .tag-agm {
+            background: #f39c12;
+        }
+        
+        .tag-pure-sine {
             background: #1abc9c;
+        }
+        
+        .tag-hybrid {
+            background: #e67e22;
+        }
+        
+        .tag-mppt {
+            background: #34495e;
+        }
+        
+        .tag-pwm {
+            background: #95a5a6;
         }
         
         .warranty-badge {
@@ -324,50 +560,15 @@
             margin-left: 0.5rem;
         }
         
-        /* Category Navigation */
-        .category-nav {
-            background: white;
-            padding: 1rem 0;
-            border-bottom: 2px solid var(--solar-light);
-            position: sticky;
-            top: 80px;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .category-scroll {
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            padding: 0.5rem 0;
-            scrollbar-width: none;
-        }
-        
-        .category-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .category-item {
-            white-space: nowrap;
-            padding: 0.8rem 1.5rem;
-            background: var(--solar-light);
-            border-radius: 25px;
-            text-decoration: none;
-            color: var(--solar-dark);
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            cursor: pointer;
-        }
-        
-        .category-item.active,
-        .category-item:hover {
-            background: var(--solar-primary);
-            color: white;
-            border-color: var(--solar-primary);
-        }
-        
         @media (max-width: 768px) {
+            .solar-header h1 {
+                font-size: 2rem;
+            }
+            
+            .solar-header .subtitle {
+                font-size: 1.1rem;
+            }
+            
             .filter-controls {
                 flex-direction: column;
             }
@@ -380,29 +581,44 @@
                 grid-template-columns: 1fr;
             }
             
-            .solar-header h1 {
-                font-size: 2rem;
+            .category-grid {
+                grid-template-columns: 1fr;
             }
             
-            .category-scroll {
-                gap: 0.5rem;
+            .product-actions {
+                grid-template-columns: 1fr;
             }
             
-            .category-item {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .price-range {
+            .contact-buttons {
                 flex-direction: column;
-                gap: 0.5rem;
             }
         }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .fade-in-up:nth-child(2) { animation-delay: 0.1s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.3s; }
+        .fade-in-up:nth-child(5) { animation-delay: 0.4s; }
     </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -415,33 +631,33 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon in Header -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -450,433 +666,651 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
     <!-- Main Content -->
     <main>
         <!-- Category Header -->
         <section class="solar-header">
             <div class="container">
-                <a href="/shop-categories" class="back-link">← Back to Categories</a>
-                <h1>Solar Energy Products</h1>
-                <p>Complete solar power systems and components for homes, businesses, and industries</p>
+                <a href="/shop-categories" class="back-link">
+                    ← Back to Categories
+                </a>
+                <h1>CIL Solar Energy Products</h1>
+                <p class="subtitle">Powering Nigeria with Clean, Reliable Solar Energy</p>
+                <p class="solar-tagline">
+                    Complete solar power systems, panels, inverters, batteries, and installation services 
+                    for homes, businesses, and industries
+                </p>
             </div>
         </section>
 
-        <!-- Category Navigation -->
-        <section class="category-nav">
+        <!-- Solar Services Overview -->
+        <section class="solar-services">
             <div class="container">
-                <div class="category-scroll">
-                    <button class="category-item active" data-category="all">All Products</button>
-                    <button class="category-item" data-category="panels"> Solar Panels</button>
-                    <button class="category-item" data-category="batteries"> Batteries</button>
-                    <button class="category-item" data-category="inverters"> Inverters</button>
-                    <button class="category-item" data-category="controllers"> Controllers</button>
-                    <button class="category-item" data-category="systems"> Systems</button>
-                    <button class="category-item" data-category="accessories"> Accessories</button>
+                <h2 class="section-title">Our Solar Solutions</h2>
+                <p class="section-subtitle">
+                    We provide comprehensive solar energy solutions from small home systems to large 
+                    industrial installations with professional consultation and installation.
+                </p>
+                
+                <div class="category-grid">
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Solar Panels</h3>
+                        <p class="category-description">
+                            High-efficiency monocrystalline and polycrystalline solar panels
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Solar Batteries</h3>
+                        <p class="category-description">
+                            Deep cycle batteries including lithium, gel, and AGM types
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Solar Inverters</h3>
+                        <p class="category-description">
+                            Pure sine wave and hybrid inverters for reliable power conversion
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Charge Controllers</h3>
+                        <p class="category-description">
+                            MPPT and PWM controllers for optimal solar charging
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Complete Systems</h3>
+                        <p class="category-description">
+                            Turnkey solar power systems with installation and maintenance
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Solar Products Section -->
-        <section class="solar-section">
+        <section class="container" style="padding: 3rem 0;">
+            <h2 class="section-title">Solar Energy Products</h2>
+            <p class="section-subtitle">
+                Browse our extensive range of solar products including panels, batteries, inverters, 
+                and complete power systems for every energy need.
+            </p>
+            
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <div class="search-box">
+                    <input type="text" id="product-search" placeholder="Search solar products...">
+                </div>
+                <select class="category-filter" id="category-filter">
+                    <option value="all">All Solar Products</option>
+                    <option value="panels">Solar Panels</option>
+                    <option value="batteries">Solar Batteries</option>
+                    <option value="inverters">Inverters</option>
+                    <option value="controllers">Charge Controllers</option>
+                    <option value="systems">Complete Systems</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="lights">Solar Lights</option>
+                </select>
+            </div>
+            
+            <!-- Product Count -->
+            <div class="product-count" id="product-count">Loading solar products...</div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="contact-cta">
             <div class="container">
-                <h2 class="section-title">Solar Energy Products</h2>
-                <p class="section-subtitle">High-quality solar components and complete systems for every need</p>
-                
-                <!-- Filter Controls -->
-                <div class="filter-controls">
-                    <div class="search-box">
-                        <span class="search-icon"></span>
-                        <input type="text" id="product-search" placeholder="Search solar products...">
-                    </div>
-                    <select class="category-filter" id="category-filter">
-                        <option value="all">All Categories</option>
-                        <option value="panels">Solar Panels</option>
-                        <option value="batteries">Solar Batteries</option>
-                        <option value="inverters">Inverters</option>
-                        <option value="controllers">Charge Controllers</option>
-                        <option value="systems">Complete Systems</option>
-                        <option value="accessories">Accessories</option>
-                    </select>
-                </div>
-                
-                <!-- Product Count -->
-                <div class="product-count" id="product-count">Loading solar products...</div>
-                
-                <!-- Products Grid -->
-                <div class="products-grid" id="products-container">
-                    <!-- Products will be loaded by JavaScript -->
-                </div>
-                
-                <!-- Load More Button -->
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+                <h2>Need Solar Consultation?</h2>
+                <p>
+                    Contact us today for free solar energy consultation, system sizing, 
+                    professional installation, and maintenance services.
+                </p>
+                <div class="contact-buttons">
+                    <a href="https://wa.me/2348129978419" class="btn-whatsapp" target="_blank">
+                         WhatsApp Us
+                    </a>
+                    <a href="tel:+2348129978419" class="btn-call">
+                         Call Now: +234 812 997 8419
+                    </a>
+                    <a href="/contact" class="btn-primary">
+                         Free Consultation
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- About Section -->
-                <div class="footer-section">
-                    <h3>Collaborative Investment Ltd</h3>
-                    <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
 
-                    <div class="social-links">
-                        <!-- Facebook -->
-                        <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
-                            </svg>
-                        </a>
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
 
-                        <!-- X / Twitter -->
-                        <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
-                            </svg>
-                        </a>
+            <div class="social-links">
 
-                        <!-- WhatsApp -->
-                        <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                                <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.980.944.407 1.678.650 2.250.832.945.300 1.806.257 2.484.156.758-.112 2.340-.957 2.674-1.880.330-.924.330-1.715.230-1.880-.099-.165-.363-.264-.758-.462z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
 
-                <!-- Quick Links -->
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/services">Our Services</a></li>
-                        <li><a href="/shop-categories">Shop Categories</a></li>
-                        <li><a href="/portfolio">Portfolio</a></li>
-                        <li><a href="/investment">Investment</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
 
-                <!-- Shop Categories -->
-                <div class="footer-section">
-                    <h3>Shop Categories</h3>
-                    <ul class="footer-links">
-                        <li><a href="/shop-agriculture">Agriculture & Livestock</a></li>
-                        <li><a href="/shop-construction">Construction & Blocks</a></li>
-                        <li><a href="/shop-machinery">Machinery & Equipment</a></li>
-                        <li><a href="/shop-solar">Solar Energy</a></li>
-                        <li><a href="/shop-furniture">Furniture & Upholstery</a></li>
-                        <li><a href="/shop-all">All Products</a></li>
-                    </ul>
-                </div>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
 
-                <!-- Contact -->
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>212 Ijegun Road, Ikotun, Lagos</p>
-                    <p>collaborativeinvestmentltd@gmail.com</p>
-                    <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
-                    <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                    <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
-                </div>
-            </div>
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
 
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-                <p>Building Nigeria's Business Future</p>
-
-                <p style="margin-top: 1rem;">
-                    <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                    <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                    <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
-                </p>
             </div>
         </div>
-    </footer>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#agriculture">Agriculture & Agribusiness</a></li>
+                <li><a href="/services#manufacturing">Construction & Manufacturing</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/services#hospitality">Hospitality & Entertainment</a></li>
+                <li><a href="/services#solar">Solar Energy Solutions</a></li>
+                <li><a href="/services#furniture">Furniture & Upholstery</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
-        // SOLAR PRODUCTS DATA
+        // SOLAR PRODUCTS DATA - EXPANDED WITH HIGH-DEMAND PRODUCTS
         const solarProducts = [
-            // Solar Panels
+            // =========== SOLAR PANELS (Best Sellers) ===========
             {
                 id: 'solar-panel-001',
-                name: 'Monocrystalline Solar Panel 100W',
+                name: 'Monocrystalline Solar Panel 330W',
                 category: 'panels',
-                price: 25000,
-                image: '/img/solar/monocrystalline-panel.jpg',
-                description: 'High-efficiency monocrystalline solar panel with 100W output.',
+                price: 45000,
+                basePrice: 45000,
+                image: '/img/solar/monocrystalline-330w.jpg',
+                description: 'High-efficiency monocrystalline solar panel with 330W output, perfect for residential and commercial installations.',
                 stock: 'In Stock',
-                details: {
-                    type: 'Monocrystalline',
-                    wattage: '100W',
-                    efficiency: '19-22%',
-                    warranty: '25 years'
+                capacities: {
+                    '330W (Single)': 45000,
+                    '3.3KW (10 Panels)': 425000,
+                    '6.6KW (20 Panels)': 825000
                 },
-                tags: ['mono', 'solar', 'panel', '100w']
+                specs: {
+                    type: 'Monocrystalline',
+                    wattage: '330W',
+                    efficiency: '20-22%',
+                    warranty: '25 years linear'
+                },
+                tags: ['mono', 'panel', 'best-seller', '330w']
             },
             {
                 id: 'solar-panel-002',
-                name: 'Monocrystalline Solar Panel 200W',
+                name: 'Polycrystalline Solar Panel 300W',
                 category: 'panels',
-                price: 45000,
-                image: '/img/solar/monocrystalline-panel.jpg',
-                description: 'High-efficiency monocrystalline solar panel with 200W output.',
+                price: 38000,
+                basePrice: 38000,
+                image: '/img/solar/polycrystalline-300w.jpg',
+                description: 'Cost-effective polycrystalline solar panel with 300W output for budget-conscious projects.',
                 stock: 'In Stock',
-                details: {
-                    type: 'Monocrystalline',
-                    wattage: '200W',
-                    efficiency: '19-22%',
+                capacities: {
+                    '300W (Single)': 38000,
+                    '3KW (10 Panels)': 365000,
+                    '6KW (20 Panels)': 715000
+                },
+                specs: {
+                    type: 'Polycrystalline',
+                    wattage: '300W',
+                    efficiency: '16-18%',
                     warranty: '25 years'
                 },
-                tags: ['mono', 'solar', 'panel', '200w']
+                tags: ['poly', 'panel', 'budget', '300w']
             },
             {
                 id: 'solar-panel-003',
-                name: 'Polycrystalline Solar Panel 100W',
+                name: 'Monocrystalline Solar Panel 550W',
                 category: 'panels',
-                price: 20000,
-                image: '/img/solar/polycrystalline-panel.jpg',
-                description: 'Cost-effective polycrystalline solar panel with 100W output.',
+                price: 75000,
+                basePrice: 75000,
+                image: '/img/solar/monocrystalline-550w.jpg',
+                description: 'High-power 550W monocrystalline panel for commercial and industrial installations.',
                 stock: 'In Stock',
-                details: {
-                    type: 'Polycrystalline',
-                    wattage: '100W',
-                    efficiency: '15-17%',
-                    warranty: '25 years'
+                capacities: {
+                    '550W (Single)': 75000,
+                    '5.5KW (10 Panels)': 725000,
+                    '11KW (20 Panels)': 1425000
                 },
-                tags: ['poly', 'solar', 'panel', '100w']
-            },
-            {
-                id: 'solar-panel-004',
-                name: 'Polycrystalline Solar Panel 200W',
-                category: 'panels',
-                price: 38000,
-                image: '/img/solar/polycrystalline-panel.jpg',
-                description: 'Cost-effective polycrystalline solar panel with 200W output.',
-                stock: 'In Stock',
-                details: {
-                    type: 'Polycrystalline',
-                    wattage: '200W',
-                    efficiency: '15-17%',
-                    warranty: '25 years'
+                specs: {
+                    type: 'Monocrystalline',
+                    wattage: '550W',
+                    efficiency: '21-23%',
+                    warranty: '25 years linear'
                 },
-                tags: ['poly', 'solar', 'panel', '200w']
+                tags: ['mono', 'panel', 'commercial', '550w']
             },
 
-            // Solar Batteries
+            // =========== SOLAR BATTERIES (High Demand) ===========
             {
                 id: 'solar-battery-001',
-                name: 'Lithium Solar Battery 100Ah',
+                name: 'Lithium LiFePO4 Battery 100Ah',
                 category: 'batteries',
-                price: 120000,
-                image: '/img/solar/lithium-battery.jpg',
-                description: 'Advanced LiFePO4 lithium battery with long lifespan and high efficiency.',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/solar/lifepo4-100ah.jpg',
+                description: 'Advanced lithium iron phosphate battery with 3000+ cycles and 5-year warranty.',
                 stock: 'In Stock',
-                details: {
-                    type: 'Lithium LiFePO4',
+                capacities: {
+                    '100Ah (Single)': 125000,
+                    '200Ah (2 units)': 245000,
+                    '400Ah (4 units)': 480000
+                },
+                specs: {
+                    type: 'LiFePO4 Lithium',
                     capacity: '100Ah',
                     cycles: '3000+',
                     warranty: '5 years'
                 },
-                tags: ['lithium', 'battery', '100ah']
+                tags: ['lithium', 'battery', 'best-seller', 'lifepo4']
             },
             {
                 id: 'solar-battery-002',
-                name: 'Gel Solar Battery 100Ah',
+                name: 'Gel Deep Cycle Battery 200Ah',
                 category: 'batteries',
-                price: 45000,
-                image: '/img/solar/gel-battery.jpg',
-                description: 'Maintenance-free gel battery with good deep cycle performance.',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/solar/gel-200ah.jpg',
+                description: 'Maintenance-free gel battery with excellent deep cycle performance for solar systems.',
                 stock: 'In Stock',
-                details: {
+                capacities: {
+                    '200Ah (Single)': 85000,
+                    '400Ah (2 units)': 165000,
+                    '800Ah (4 units)': 325000
+                },
+                specs: {
                     type: 'Gel VRLA',
-                    capacity: '100Ah',
-                    cycles: '800-1200',
+                    capacity: '200Ah',
+                    cycles: '1200+',
                     warranty: '2 years'
                 },
-                tags: ['gel', 'battery', '100ah']
+                tags: ['gel', 'battery', 'deep-cycle', '200ah']
             },
             {
                 id: 'solar-battery-003',
-                name: 'AGM Solar Battery 100Ah',
+                name: 'AGM Solar Battery 150Ah',
                 category: 'batteries',
-                price: 35000,
-                image: '/img/solar/agm-battery.jpg',
-                description: 'Affordable AGM battery suitable for solar applications.',
+                price: 65000,
+                basePrice: 65000,
+                image: '/img/solar/agm-150ah.jpg',
+                description: 'Affordable AGM battery suitable for entry-level solar power systems.',
                 stock: 'In Stock',
-                details: {
-                    type: 'AGM VRLA',
-                    capacity: '100Ah',
-                    cycles: '500-800',
-                    warranty: '1 year'
+                capacities: {
+                    '150Ah (Single)': 65000,
+                    '300Ah (2 units)': 125000,
+                    '600Ah (4 units)': 245000
                 },
-                tags: ['agm', 'battery', '100ah']
+                specs: {
+                    type: 'AGM VRLA',
+                    capacity: '150Ah',
+                    cycles: '800+',
+                    warranty: '18 months'
+                },
+                tags: ['agm', 'battery', 'budget', '150ah']
             },
 
-            // Inverters
+            // =========== SOLAR INVERTERS (Most Popular) ===========
             {
                 id: 'solar-inverter-001',
-                name: 'Pure Sine Wave Inverter 1KVA',
+                name: 'Pure Sine Wave Inverter 3KVA',
                 category: 'inverters',
-                price: 45000,
-                image: '/img/solar/pure-sine-inverter.jpg',
-                description: 'Clean pure sine wave output suitable for sensitive electronics.',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/solar/pure-sine-3kva.jpg',
+                description: '3KVA pure sine wave inverter perfect for homes with sensitive electronics.',
                 stock: 'In Stock',
-                details: {
+                capacities: {
+                    '3KVA (24V)': 125000,
+                    '3KVA (48V)': 135000,
+                    'With LCD Display': 145000
+                },
+                specs: {
                     type: 'Pure Sine Wave',
-                    capacity: '1KVA',
+                    capacity: '3KVA/2400W',
                     efficiency: '90-95%',
                     warranty: '2 years'
                 },
-                tags: ['pure-sine', 'inverter', '1kva']
+                tags: ['pure-sine', 'inverter', 'best-seller', '3kva']
             },
             {
                 id: 'solar-inverter-002',
-                name: 'Pure Sine Wave Inverter 2KVA',
+                name: 'Hybrid Solar Inverter 5KVA',
                 category: 'inverters',
-                price: 85000,
-                image: '/img/solar/pure-sine-inverter.jpg',
-                description: 'Clean pure sine wave output suitable for sensitive electronics.',
+                price: 325000,
+                basePrice: 325000,
+                image: '/img/solar/hybrid-5kva.jpg',
+                description: '5KVA hybrid inverter with MPPT solar charger and grid backup functionality.',
                 stock: 'In Stock',
-                details: {
-                    type: 'Pure Sine Wave',
-                    capacity: '2KVA',
-                    efficiency: '90-95%',
-                    warranty: '2 years'
+                capacities: {
+                    '5KVA (48V)': 325000,
+                    'With WIFI Monitoring': 375000,
+                    'With Bluetooth': 350000
                 },
-                tags: ['pure-sine', 'inverter', '2kva']
+                specs: {
+                    type: 'Hybrid MPPT',
+                    capacity: '5KVA/4000W',
+                    features: 'Solar + Grid + Generator',
+                    warranty: '3 years'
+                },
+                tags: ['hybrid', 'inverter', 'mppt', '5kva']
             },
             {
                 id: 'solar-inverter-003',
-                name: 'Hybrid Solar Inverter',
+                name: 'Pure Sine Wave Inverter 1.5KVA',
                 category: 'inverters',
-                price: 315000,
-                image: '/img/solar/hybrid-inverter.jpg',
-                description: 'Advanced hybrid inverter with solar charging and backup functionality.',
+                price: 75000,
+                basePrice: 75000,
+                image: '/img/solar/pure-sine-1.5kva.jpg',
+                description: 'Compact 1.5KVA pure sine wave inverter for small homes and offices.',
                 stock: 'In Stock',
-                details: {
-                    type: 'Hybrid MPPT',
-                    capacity: '3-5KVA',
-                    features: 'Solar + Grid charging',
-                    warranty: '3 years'
+                capacities: {
+                    '1.5KVA (12V)': 75000,
+                    '1.5KVA (24V)': 80000,
+                    'With UPS function': 85000
                 },
-                tags: ['hybrid', 'inverter', 'mppt']
+                specs: {
+                    type: 'Pure Sine Wave',
+                    capacity: '1.5KVA/1200W',
+                    efficiency: '85-90%',
+                    warranty: '18 months'
+                },
+                tags: ['pure-sine', 'inverter', 'compact', '1.5kva']
             },
 
-            // Charge Controllers
+            // =========== CHARGE CONTROLLERS ===========
             {
                 id: 'solar-controller-001',
-                name: 'MPPT Charge Controller 40A',
+                name: 'MPPT Charge Controller 60A',
                 category: 'controllers',
-                price: 45000,
-                image: '/img/solar/mppt-controller.jpg',
-                description: 'Maximum Power Point Tracking controller for maximum energy harvest.',
+                price: 65000,
+                basePrice: 65000,
+                image: '/img/solar/mppt-60a.jpg',
+                description: '60A MPPT charge controller for maximum solar energy harvest.',
                 stock: 'In Stock',
-                details: {
+                capacities: {
+                    '60A (12/24V)': 65000,
+                    '60A (48V)': 75000,
+                    'With LCD Display': 85000
+                },
+                specs: {
                     type: 'MPPT',
-                    current: '40A',
+                    current: '60A',
                     efficiency: '98-99%',
                     warranty: '2 years'
                 },
-                tags: ['mppt', 'controller', '40a']
+                tags: ['mppt', 'controller', '60a', 'best-seller']
             },
             {
                 id: 'solar-controller-002',
-                name: 'PWM Charge Controller 30A',
+                name: 'PWM Charge Controller 40A',
                 category: 'controllers',
-                price: 15000,
-                image: '/img/solar/pwm-controller.jpg',
-                description: 'Pulse Width Modulation controller for basic solar systems.',
+                price: 25000,
+                basePrice: 25000,
+                image: '/img/solar/pwm-40a.jpg',
+                description: '40A PWM charge controller for basic solar power systems.',
                 stock: 'In Stock',
-                details: {
+                capacities: {
+                    '40A (12V)': 25000,
+                    '40A (12/24V)': 30000,
+                    'With LCD': 35000
+                },
+                specs: {
                     type: 'PWM',
-                    current: '30A',
+                    current: '40A',
                     efficiency: '75-80%',
                     warranty: '1 year'
                 },
-                tags: ['pwm', 'controller', '30a']
+                tags: ['pwm', 'controller', 'budget', '40a']
             },
 
-            // Complete Systems
+            // =========== COMPLETE SYSTEMS (Best Sellers) ===========
             {
                 id: 'solar-system-001',
-                name: 'Home Solar System Package',
+                name: 'Home Solar System 3KVA',
                 category: 'systems',
-                price: 650000,
-                image: '/img/solar/home-solar-system.jpg',
-                description: 'Complete solar power system for residential use.',
+                price: 850000,
+                basePrice: 850000,
+                image: '/img/solar/home-system-3kva.jpg',
+                description: 'Complete 3KVA solar power system for 3-4 bedroom homes with installation.',
                 stock: 'Made to Order',
-                details: {
-                    includes: '4x panels, batteries, inverter, controller',
-                    capacity: '1.2KW system',
-                    features: 'Professional installation included',
+                capacities: {
+                    'Basic (3KVA)': 850000,
+                    'Standard (4KVA)': 1150000,
+                    'Premium (5KVA)': 1450000
+                },
+                specs: {
+                    includes: '6x330W panels, 4x200Ah batteries, 3KVA inverter, MPPT, installation',
+                    backup: '8-12 hours',
                     warranty: '5 years system'
                 },
-                tags: ['system', 'home', 'package']
+                tags: ['system', 'home', 'best-seller', '3kva']
             },
             {
                 id: 'solar-system-002',
-                name: 'Business Solar System Package',
+                name: 'Business Solar System 10KVA',
                 category: 'systems',
-                price: 1850000,
-                image: '/img/solar/business-solar-system.jpg',
-                description: 'Commercial solar power system for offices and businesses.',
+                price: 2250000,
+                basePrice: 2250000,
+                image: '/img/solar/business-system-10kva.jpg',
+                description: '10KVA commercial solar system for offices, shops, and small businesses.',
                 stock: 'Made to Order',
-                details: {
-                    includes: '10x panels, battery bank, hybrid inverter',
-                    capacity: '4KW system',
-                    features: 'Professional installation included',
+                capacities: {
+                    'Basic (10KVA)': 2250000,
+                    'Standard (15KVA)': 3250000,
+                    'Premium (20KVA)': 4250000
+                },
+                specs: {
+                    includes: '20x330W panels, 8x200Ah batteries, 10KVA hybrid inverter, professional installation',
+                    backup: 'Full business day',
                     warranty: '5 years system'
                 },
-                tags: ['system', 'business', 'package']
+                tags: ['system', 'business', 'commercial', '10kva']
             },
 
-            // Accessories
+            // =========== SOLAR LIGHTS (High Volume) ===========
+            {
+                id: 'solar-light-001',
+                name: 'Solar Street Light 60W',
+                category: 'lights',
+                price: 45000,
+                basePrice: 45000,
+                image: '/img/solar/street-light-60w.jpg',
+                description: '60W solar street light with motion sensor and 12-hour operation.',
+                stock: 'In Stock',
+                capacities: {
+                    '60W (Single)': 45000,
+                    'Pack of 4': 175000,
+                    'Pack of 10': 425000
+                },
+                specs: {
+                    type: 'LED Solar Street Light',
+                    power: '60W LED',
+                    battery: 'Lithium 12.8V 40Ah',
+                    operation: '12-14 hours'
+                },
+                tags: ['light', 'street', 'solar', '60w']
+            },
+            {
+                id: 'solar-light-002',
+                name: 'Solar Flood Light 100W',
+                category: 'lights',
+                price: 35000,
+                basePrice: 35000,
+                image: '/img/solar/flood-light-100w.jpg',
+                description: '100W solar flood light for security and area illumination.',
+                stock: 'In Stock',
+                capacities: {
+                    '100W (Single)': 35000,
+                    'Pack of 4': 135000,
+                    'Pack of 10': 325000
+                },
+                specs: {
+                    type: 'Solar Flood Light',
+                    power: '100W LED',
+                    battery: 'Lithium 12.8V 30Ah',
+                    coverage: 'Large area'
+                },
+                tags: ['light', 'flood', 'security', '100w']
+            },
+
+            // =========== ACCESSORIES ===========
             {
                 id: 'solar-accessory-001',
-                name: 'Solar DC Cables',
+                name: 'Solar DC Cable Set',
                 category: 'accessories',
-                price: 2500,
-                image: '/img/solar/solar-cables.jpg',
-                description: 'UV-resistant solar cables for outdoor installations.',
+                price: 15000,
+                basePrice: 15000,
+                image: '/img/solar/dc-cables.jpg',
+                description: 'Complete set of UV-resistant solar DC cables with connectors.',
                 stock: 'In Stock',
-                details: {
-                    type: 'PV1-F 4mm²',
-                    voltage: '1000V DC',
-                    length: 'Per meter',
+                capacities: {
+                    'Basic Set': 15000,
+                    'Standard Set': 25000,
+                    'Professional Set': 45000
+                },
+                specs: {
+                    cable: 'PV1-F 6mm²',
+                    length: '20 meters total',
+                    connectors: 'MC4 included',
                     color: 'Red/Black'
                 },
-                tags: ['cables', 'accessory', 'solar']
+                tags: ['cables', 'accessory', 'installation']
             },
             {
                 id: 'solar-accessory-002',
                 name: 'Solar Mounting Structure',
                 category: 'accessories',
-                price: 25000,
+                price: 35000,
+                basePrice: 35000,
                 image: '/img/solar/mounting-structure.jpg',
-                description: 'Galvanized steel structure for roof mounting.',
+                description: 'Galvanized steel mounting structure for 6 solar panels.',
                 stock: 'In Stock',
-                details: {
-                    material: 'Galvanized Steel',
-                    capacity: '4 panels',
-                    type: 'Roof mount',
+                capacities: {
+                    'For 6 panels': 35000,
+                    'For 12 panels': 65000,
+                    'For 24 panels': 125000
+                },
+                specs: {
+                    material: 'Hot-dip galvanized steel',
+                    capacity: '6 panels',
+                    type: 'Roof ground adjustable',
                     warranty: '10 years'
                 },
-                tags: ['mounting', 'structure', 'accessory']
+                tags: ['mounting', 'structure', 'installation']
             }
         ];
 
-        // CART FUNCTIONS
+        // CART FUNCTIONS (Same as construction page)
         function getCart() {
             try {
                 const cart = localStorage.getItem('cart');
@@ -901,27 +1335,36 @@
             }
         }
 
-        function addToCart(product) {
-            console.log('Adding to cart:', product);
+        function addToCart(product, selectedCapacity = null) {
+            console.log('Adding to cart:', product, 'Capacity:', selectedCapacity);
             
-            if (!product || !product.id || !product.name || !product.price) {
+            if (!product || !product.id || !product.name) {
                 console.error('Invalid product data:', product);
                 return false;
             }
             
             const cart = getCart();
-            const existingItem = cart.find(item => item.id === product.id);
+            const productKey = selectedCapacity ? `${product.id}-${selectedCapacity}` : product.id;
+            const productName = selectedCapacity ? `${product.name} (${selectedCapacity})` : product.name;
+            const productPrice = selectedCapacity && product.capacities && product.capacities[selectedCapacity] 
+                ? product.capacities[selectedCapacity] 
+                : product.price;
+            
+            const existingItem = cart.find(item => item.id === productKey);
             
             if (existingItem) {
                 existingItem.quantity += 1;
                 console.log('Updated existing item quantity:', existingItem.quantity);
             } else {
                 cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: parseFloat(product.price),
+                    id: productKey,
+                    name: productName,
+                    price: parseFloat(productPrice),
                     image: product.image || '/img/logo.jpg',
-                    quantity: 1
+                    quantity: 1,
+                    category: product.category,
+                    originalId: product.id,
+                    capacity: selectedCapacity
                 });
                 console.log('Added new item to cart');
             }
@@ -929,7 +1372,7 @@
             const saved = saveCart(cart);
             
             if (saved) {
-                showCartNotification(product.name);
+                showCartNotification(productName);
                 return true;
             }
             
@@ -985,7 +1428,7 @@
 
         // PRODUCT DISPLAY FUNCTIONS
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Solar page loaded');
+            console.log('CIL Solar page loaded');
             
             // Initialize cart count
             updateCartCount();
@@ -996,13 +1439,12 @@
             const categoryFilter = document.getElementById('category-filter');
             const loadMoreBtn = document.getElementById('load-more');
             const productCount = document.getElementById('product-count');
-            const categoryButtons = document.querySelectorAll('.category-item');
             
             // Pagination variables
             let currentPage = 1;
-            const productsPerPage = 8;
+            const productsPerPage = 12;
             let filteredProducts = [...solarProducts];
-            let activeCategory = 'all';
+            let isLoading = false;
             
             // Initialize the page
             function initPage() {
@@ -1011,28 +1453,17 @@
                 setupEventListeners();
                 setupCartDrawer();
                 updateCartCount();
-                setupCategoryNavigation();
+                animateFadeInElements();
             }
             
-            // Setup category navigation
-            function setupCategoryNavigation() {
-                categoryButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        // Update active button
-                        categoryButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // Get category and update filter
-                        const category = this.getAttribute('data-category');
-                        activeCategory = category;
-                        
-                        // Update filter dropdown
-                        categoryFilter.value = category === 'all' ? 'all' : category;
-                        
-                        // Filter products
-                        currentPage = 1;
-                        filterProducts();
-                    });
+            // Animate fade-in elements
+            function animateFadeInElements() {
+                const fadeElements = document.querySelectorAll('.fade-in-up');
+                fadeElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.animationDelay = `${index * 0.1}s`;
+                        el.classList.add('fade-in-up');
+                    }, 100);
                 });
             }
             
@@ -1050,17 +1481,6 @@
                 if (categoryFilter) {
                     categoryFilter.addEventListener('change', function() {
                         currentPage = 1;
-                        activeCategory = this.value;
-                        
-                        // Update active category button
-                        categoryButtons.forEach(btn => {
-                            btn.classList.remove('active');
-                            if ((this.value === 'all' && btn.getAttribute('data-category') === 'all') ||
-                                btn.getAttribute('data-category') === this.value) {
-                                btn.classList.add('active');
-                            }
-                        });
-                        
                         filterProducts();
                     });
                 }
@@ -1083,42 +1503,42 @@
                     
                     // Get product data
                     const productId = addToCartBtn.getAttribute('data-id');
+                    const selectedCapacity = addToCartBtn.getAttribute('data-capacity');
                     const product = solarProducts.find(p => p.id === productId);
                     
                     if (product) {
-                        console.log('Add to cart clicked for:', product.name);
+                        console.log('Add to cart clicked for:', product.name, 'Capacity:', selectedCapacity);
                         
                         // Add to cart
-                        addToCart(product);
+                        addToCart(product, selectedCapacity);
                         
                         // Visual feedback
                         const originalText = addToCartBtn.innerHTML;
-                        addToCartBtn.innerHTML = 'Added!';
+                        addToCartBtn.innerHTML = '✓ Added!';
                         addToCartBtn.style.background = '#27ae60';
-                        addToCartBtn.disabled = true;
                         
                         setTimeout(() => {
                             addToCartBtn.innerHTML = originalText;
                             addToCartBtn.style.background = '';
-                            addToCartBtn.disabled = false;
                         }, 1000);
                     }
-                }, true); // Use capture phase
+                }, true);
             }
             
             // Filter products
             function filterProducts() {
                 const searchTerm = (searchInput ? searchInput.value.toLowerCase() : '');
+                const selectedCategory = (categoryFilter ? categoryFilter.value : 'all');
                 
                 filteredProducts = solarProducts.filter(product => {
                     const matchesSearch = 
                         product.name.toLowerCase().includes(searchTerm) ||
                         product.description.toLowerCase().includes(searchTerm) ||
-                        product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                        (product.tags && product.tags.some(tag => tag.toLowerCase().includes(searchTerm)));
                     
                     const matchesCategory = 
-                        activeCategory === 'all' || 
-                        product.category === activeCategory;
+                        selectedCategory === 'all' || 
+                        product.category === selectedCategory;
                     
                     return matchesSearch && matchesCategory;
                 });
@@ -1168,38 +1588,76 @@
             // Create product card
             function createProductCard(product) {
                 const card = document.createElement('div');
-                card.className = 'product-card';
+                card.className = 'product-card fade-in-up';
                 
                 const stockClass = getStockClass(product.stock);
                 const formattedPrice = product.price.toLocaleString();
-                const tagClass = getTagClass(product.tags[0]);
+                const categoryName = getCategoryName(product.category);
+                const hasCapacities = product.capacities && Object.keys(product.capacities).length > 0;
+                const primaryTag = product.tags ? product.tags[0] : '';
+                const tagClass = getTagClass(primaryTag);
+                
+                // Determine default capacity and price
+                let defaultCapacity = null;
+                let defaultPrice = product.price;
+                if (hasCapacities) {
+                    const capacities = Object.keys(product.capacities);
+                    defaultCapacity = capacities[0]; // First option
+                    defaultPrice = product.capacities[defaultCapacity];
+                }
                 
                 card.innerHTML = `
+                    <div class="product-category-badge">${categoryName}</div>
+                    ${primaryTag ? `<span class="solar-tag ${tagClass}">${primaryTag.toUpperCase()}</span>` : ''}
                     <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}" onerror="this.src='/img/logo.jpg'">
-                        <span class="stock-badge ${stockClass}">${product.stock}</span>
+                        <img src="${product.image}" alt="${product.name}" 
+                             onerror="this.onerror=null; this.src='/img/logo.jpg'">
                     </div>
                     <div class="product-content">
-                        <span class="solar-tag ${tagClass}">${product.details.type || product.category}</span>
-                        ${product.details.warranty ? `<span class="warranty-badge">${product.details.warranty}</span>` : ''}
                         <h3 class="product-title">${product.name}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="product-price">₦${formattedPrice}</div>
-                        <div class="product-details">
-                            ${product.details.wattage ? `<p><strong>Wattage:</strong> ${product.details.wattage}</p>` : ''}
-                            ${product.details.capacity ? `<p><strong>Capacity:</strong> ${product.details.capacity}</p>` : ''}
-                            ${product.details.efficiency ? `<p><strong>Efficiency:</strong> ${product.details.efficiency}</p>` : ''}
-                            ${product.details.includes ? `<p><strong>Includes:</strong> ${product.details.includes}</p>` : ''}
+                        
+                        <div class="product-specs">
+                            ${product.specs ? Object.entries(product.specs).map(([key, value]) => `
+                                <div class="spec-item">
+                                    <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1)}:</span>
+                                    <span class="spec-value">${value}</span>
+                                </div>
+                            `).join('') : ''}
                         </div>
+                        
+                        ${hasCapacities ? `
+                            <div class="capacity-options" id="capacity-options-${product.id}">
+                                ${Object.keys(product.capacities).map((capacity, index) => `
+                                    <button class="capacity-option ${index === 0 ? 'selected' : ''}" 
+                                            data-product="${product.id}"
+                                            data-capacity="${capacity}"
+                                            data-price="${product.capacities[capacity]}">
+                                        ${capacity}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div class="price-display" id="price-display-${product.id}">
+                                ₦${defaultPrice.toLocaleString()}
+                            </div>
+                        ` : `
+                            <div class="price-display">
+                                ₦${formattedPrice}
+                            </div>
+                        `}
+                        
+                        <div class="product-stock ${stockClass}">${product.stock}</div>
+                        
                         <div class="product-actions">
                             <button class="btn-primary add-to-cart" 
                                     data-id="${product.id}"
                                     data-name="${product.name}"
-                                    data-price="${product.price}"
-                                    data-image="${product.image}">
-                                Add to Cart
+                                    data-price="${defaultPrice}"
+                                    data-image="${product.image}"
+                                    ${hasCapacities ? `data-capacity="${defaultCapacity}"` : ''}>
+                                 Add to Cart
                             </button>
-                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${formattedPrice}" 
+                            <a href="https://wa.me/2348129978419?text=I'm interested in CIL Solar: ${encodeURIComponent(product.name)} - ₦${defaultPrice.toLocaleString()}${hasCapacities ? ` (${defaultCapacity})` : ''}" 
                                class="btn-whatsapp" target="_blank">
                                  WhatsApp
                             </a>
@@ -1207,29 +1665,82 @@
                     </div>
                 `;
                 
+                // Add capacity selection functionality
+                if (hasCapacities) {
+                    setTimeout(() => {
+                        const capacityOptions = card.querySelectorAll(`#capacity-options-${product.id} .capacity-option`);
+                        const priceDisplay = card.querySelector(`#price-display-${product.id}`);
+                        const addToCartBtn = card.querySelector('.add-to-cart');
+                        
+                        capacityOptions.forEach(option => {
+                            option.addEventListener('click', function() {
+                                // Remove selected class from all options
+                                capacityOptions.forEach(opt => opt.classList.remove('selected'));
+                                
+                                // Add selected class to clicked option
+                                this.classList.add('selected');
+                                
+                                // Update price display
+                                const newPrice = this.getAttribute('data-price');
+                                priceDisplay.textContent = `₦${parseFloat(newPrice).toLocaleString()}`;
+                                
+                                // Update add to cart button
+                                const selectedCapacity = this.getAttribute('data-capacity');
+                                addToCartBtn.setAttribute('data-capacity', selectedCapacity);
+                                addToCartBtn.setAttribute('data-price', newPrice);
+                                
+                                // Update WhatsApp link
+                                const whatsappBtn = card.querySelector('.btn-whatsapp');
+                                const newWhatsappLink = `https://wa.me/2348129978419?text=I'm interested in CIL Solar: ${encodeURIComponent(product.name)} - ₦${parseFloat(newPrice).toLocaleString()} (${selectedCapacity})`;
+                                whatsappBtn.setAttribute('href', newWhatsappLink);
+                            });
+                        });
+                    }, 100);
+                }
+                
                 return card;
-            }
-            
-            // Get tag class
-            function getTagClass(tag) {
-                const tagClasses = {
-                    'mono': 'mono',
-                    'poly': 'poly',
-                    'lithium': 'lithium',
-                    'gel': 'gel',
-                    'pure-sine': 'pure-sine',
-                    'hybrid': 'pure-sine',
-                    'mppt': 'pure-sine',
-                    'pwm': 'modified-sine'
-                };
-                return tagClasses[tag] || 'mono';
             }
             
             // Get stock class
             function getStockClass(stock) {
                 if (stock === 'In Stock') return 'stock-in';
-                if (stock === 'Made to Order') return 'stock-low';
-                return 'stock-out';
+                if (stock === 'Made to Order') return 'stock-custom';
+                if (stock === 'Service') return 'stock-limited';
+                if (stock === 'Limited Stock') return 'stock-limited';
+                return 'stock-custom';
+            }
+            
+            // Get category display name
+            function getCategoryName(category) {
+                const categories = {
+                    'panels': 'Solar Panels',
+                    'batteries': 'Batteries',
+                    'inverters': 'Inverters',
+                    'controllers': 'Controllers',
+                    'systems': 'Complete Systems',
+                    'accessories': 'Accessories',
+                    'lights': 'Solar Lights'
+                };
+                return categories[category] || category;
+            }
+            
+            // Get tag class
+            function getTagClass(tag) {
+                const tagClasses = {
+                    'mono': 'tag-mono',
+                    'poly': 'tag-poly',
+                    'lithium': 'tag-lithium',
+                    'gel': 'tag-gel',
+                    'agm': 'tag-agm',
+                    'pure-sine': 'tag-pure-sine',
+                    'hybrid': 'tag-hybrid',
+                    'mppt': 'tag-mppt',
+                    'pwm': 'tag-pwm',
+                    'best-seller': 'tag-pure-sine',
+                    'commercial': 'tag-hybrid',
+                    'budget': 'tag-pwm'
+                };
+                return tagClasses[tag] || 'tag-mono';
             }
             
             // Update product count display
@@ -1239,10 +1750,10 @@
                 const totalProducts = filteredProducts.length;
                 const showingProducts = Math.min(currentPage * productsPerPage, totalProducts);
                 
-                productCount.textContent = `Showing ${showingProducts} of ${totalProducts} solar products`;
-                
                 if (totalProducts === 0) {
                     productCount.textContent = 'No solar products found matching your criteria';
+                } else {
+                    productCount.textContent = `Showing ${showingProducts} of ${totalProducts} solar products`;
                 }
             }
             
@@ -1252,6 +1763,9 @@
                 const newCards = Array.from(allCards).slice(-productsPerPage);
                 
                 newCards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    
                     setTimeout(() => {
                         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                         card.style.opacity = '1';
@@ -1260,7 +1774,7 @@
                 });
             }
             
-            // Setup cart drawer
+            // Setup cart drawer (same as construction)
             function setupCartDrawer() {
                 const cartDrawer = document.getElementById('cart-drawer');
                 const openCartBtn = document.getElementById('open-cart-drawer');
@@ -1313,7 +1827,7 @@
                             <div class="cart-drawer-empty">
                                 <div class="cart-drawer-empty-icon">🛒</div>
                                 <p>Your cart is empty</p>
-                                <a href="/shop-categories" class="btn btn-primary">Continue Shopping</a>
+                                <a href="/shop-solar" class="btn btn-primary">Browse Solar Products</a>
                             </div>
                         `;
                         if (drawerTotal) drawerTotal.textContent = '₦0';
@@ -1369,6 +1883,7 @@
             window.addToCart = addToCart;
             window.updateCartCount = updateCartCount;
             window.getCart = getCart;
+            window.showCartNotification = showCartNotification;
         });
     </script>
 </body>

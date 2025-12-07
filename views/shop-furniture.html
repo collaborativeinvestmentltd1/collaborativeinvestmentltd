@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Furniture Collection - Collaborative Investment Ltd</title>
+    <title>CIL Premium Furniture Collection - Collaborative Investment Ltd</title>
     
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
-    <link rel="stylesheet" href="/css/cart-drawer.css">>
-    <link rel="stylesheet" href="/css/furniture.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="stylesheet" href="/css/shop-all.css">
     
     <style>
-        /* Furniture Page Specific Styles */
+        /* Furniture page specific styles - Enhanced */
         :root {
-            --furniture-primary: #8B4513;  /* Saddle Brown */
-            --furniture-secondary: #D2691E; /* Chocolate */
-            --furniture-accent: #A0522D;   /* Sienna */
-            --furniture-light: #F5DEB3;    /* Wheat */
-            --furniture-dark: #654321;     /* Dark Brown */
+            --furniture-primary: #8B4513;    /* Saddle Brown */
+            --furniture-secondary: #D2691E;   /* Chocolate */
+            --furniture-accent: #A0522D;      /* Sienna */
+            --furniture-light: #F5DEB3;       /* Wheat */
+            --furniture-dark: #654321;        /* Dark Brown */
+            --furniture-gold: #D4AF37;        /* Gold accent */
+            --furniture-cream: #FFFDD0;       /* Cream */
         }
         
         .furniture-header {
@@ -27,50 +29,139 @@
             padding: 3rem 0;
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .furniture-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/furniture/wood-pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .furniture-header .container {
+            position: relative;
+            z-index: 2;
         }
         
         .furniture-header h1 {
             color: white;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
-        .furniture-header p {
+        .furniture-header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            font-weight: 500;
+        }
+        
+        .furniture-tagline {
             font-size: 1.1rem;
             opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .back-link {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: inline-block;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
         
         .back-link:hover {
             color: white;
+            background: rgba(0,0,0,0.3);
+            transform: translateX(-5px);
         }
         
-        .furniture-section {
+        .furniture-services {
             padding: 3rem 0;
+            background: var(--furniture-light);
         }
         
         .section-title {
             text-align: center;
-            color: var(--furniture-primary);
+            color: var(--furniture-dark);
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--furniture-accent);
+            margin: 1rem auto 2rem;
+            border-radius: 2px;
         }
         
         .section-subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            max-width: 800px;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--furniture-accent);
+        }
+        
+        .category-name {
+            color: var(--furniture-dark);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .category-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .products-grid {
@@ -82,29 +173,31 @@
         
         .product-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
+            position: relative;
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
         .product-image {
-            height: 250px;
+            height: 220px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, var(--furniture-cream) 0%, #f8f9fa 100%);
         }
         
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
         
         .product-card:hover .product-image img {
@@ -116,39 +209,117 @@
         }
         
         .product-title {
-            font-size: 1.2rem;
-            color: var(--furniture-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            line-height: 1.3;
+            font-size: 1.3rem;
+            color: var(--furniture-dark);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            line-height: 1.4;
         }
         
         .product-description {
             color: #666;
             margin-bottom: 1rem;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            min-height: 4.5em;
         }
         
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--furniture-accent);
+        .product-specs {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 0.5rem;
-        }
-        
-        .product-details {
-            margin-bottom: 1rem;
             font-size: 0.9rem;
-            color: #666;
         }
         
-        .product-details p {
-            margin: 0.3rem 0;
+        .spec-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .spec-value {
+            color: var(--furniture-dark);
+            font-weight: 600;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .size-option {
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            flex: 1;
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .size-option:hover {
+            border-color: var(--furniture-primary);
+        }
+        
+        .size-option.selected {
+            background: var(--furniture-primary);
+            color: white;
+            border-color: var(--furniture-primary);
+        }
+        
+        .price-display {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--furniture-accent);
+            margin: 1rem 0;
+        }
+        
+        .size-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .product-stock {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .stock-in {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .stock-custom {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .stock-limited {
+            background: #f8d7da;
+            color: #721c24;
         }
         
         .product-actions {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
             margin-top: 1rem;
         }
@@ -157,60 +328,57 @@
             background: var(--furniture-primary);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            flex: 1;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         
         .btn-primary:hover {
             background: var(--furniture-accent);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .btn-whatsapp {
             background: #25D366;
             color: white;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            flex: 1;
-            font-size: 0.9rem;
         }
         
         .btn-whatsapp:hover {
             background: #128C7E;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .stock-badge {
+        .product-category-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #27ae60;
-            color: white;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            color: var(--furniture-dark);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             z-index: 2;
-        }
-        
-        .stock-badge.low-stock {
-            background: #f39c12;
-        }
-        
-        .stock-badge.out-of-stock {
-            background: #e74c3c;
+            backdrop-filter: blur(10px);
         }
         
         .filter-controls {
@@ -219,6 +387,10 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .search-box {
@@ -229,80 +401,166 @@
         
         .search-box input {
             width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.5rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--furniture-primary);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+            outline: none;
         }
         
         .search-icon {
             position: absolute;
-            left: 12px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #666;
+            color: #999;
+            font-size: 1.2rem;
         }
         
         .category-filter {
-            padding: 0.8rem 1rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             background: white;
             font-size: 1rem;
-            min-width: 200px;
+            min-width: 220px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter:focus {
+            border-color: var(--furniture-primary);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+            outline: none;
         }
         
         .product-count {
             text-align: center;
-            margin: 1rem 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        /* Category Navigation */
-        .category-nav {
+            margin: 1.5rem 0;
+            color: var(--furniture-dark);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.8rem;
             background: white;
-            padding: 1rem 0;
-            border-bottom: 2px solid var(--furniture-light);
-            position: sticky;
-            top: 80px;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
         
-        .category-scroll {
+        .contact-cta {
+            background: linear-gradient(135deg, var(--furniture-dark) 0%, var(--furniture-primary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 20px;
+        }
+        
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-buttons {
             display: flex;
             gap: 1rem;
-            overflow-x: auto;
-            padding: 0.5rem 0;
-            scrollbar-width: none;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
-        .category-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .category-item {
-            white-space: nowrap;
-            padding: 0.8rem 1.5rem;
-            background: var(--furniture-light);
-            border-radius: 25px;
-            text-decoration: none;
+        .btn-call {
+            background: white;
             color: var(--furniture-dark);
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .category-item.active,
-        .category-item:hover {
-            background: var(--furniture-primary);
+        .btn-call:hover {
+            background: var(--furniture-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Furniture tags */
+        .furniture-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
             color: white;
-            border-color: var(--furniture-primary);
+        }
+        
+        .tag-wood {
+            background: #8B4513;
+        }
+        
+        .tag-leather {
+            background: #D2691E;
+        }
+        
+        .tag-fabric {
+            background: #A0522D;
+        }
+        
+        .tag-metal {
+            background: #696969;
+        }
+        
+        .tag-modern {
+            background: #1abc9c;
+        }
+        
+        .tag-classic {
+            background: #9b59b6;
+        }
+        
+        .tag-luxury {
+            background: var(--furniture-gold);
+        }
+        
+        .warranty-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--furniture-secondary);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
         }
         
         @media (max-width: 768px) {
+            .furniture-header h1 {
+                font-size: 2rem;
+            }
+            
+            .furniture-header .subtitle {
+                font-size: 1.1rem;
+            }
+            
             .filter-controls {
                 flex-direction: column;
             }
@@ -315,34 +573,44 @@
                 grid-template-columns: 1fr;
             }
             
-            .furniture-header h1 {
-                font-size: 2rem;
+            .category-grid {
+                grid-template-columns: 1fr;
             }
             
-            .category-scroll {
-                gap: 0.5rem;
+            .product-actions {
+                grid-template-columns: 1fr;
             }
             
-            .category-item {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
+            .contact-buttons {
+                flex-direction: column;
             }
         }
         
-        @media (max-width: 480px) {
-            .product-actions {
-                flex-direction: column;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            
-            .products-grid {
-                gap: 1.5rem;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .fade-in-up:nth-child(2) { animation-delay: 0.1s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.3s; }
+        .fade-in-up:nth-child(5) { animation-delay: 0.4s; }
     </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -355,33 +623,33 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon in Header -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -390,192 +658,303 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
     <!-- Main Content -->
     <main>
         <!-- Category Header -->
         <section class="furniture-header">
             <div class="container">
-                <a href="/shop-categories" class="back-link">← Back to Categories</a>
-                <h1>Premium Furniture Collection</h1>
-                <p>Discover handcrafted furniture pieces for every space - from office elegance to outdoor comfort</p>
+                <a href="/shop-categories" class="back-link">
+                    ← Back to Categories
+                </a>
+                <h1>CIL Premium Furniture Collection</h1>
+                <p class="subtitle">Handcrafted Excellence for Homes, Offices, and Commercial Spaces</p>
+                <p class="furniture-tagline">
+                    Discover our premium collection of office furniture, living room sets, dining ensembles, 
+                    bedroom suites, and commercial furnishings crafted for comfort, style, and durability
+                </p>
             </div>
         </section>
 
-        <!-- Category Navigation -->
-        <section class="category-nav">
+        <!-- Furniture Services Overview -->
+        <section class="furniture-services">
             <div class="container">
-                <div class="category-scroll">
-                    <button class="category-item active" data-category="all">All Furniture</button>
-                    <button class="category-item" data-category="office"> Office</button>
-                    <button class="category-item" data-category="seating"> Seating</button>
-                    <button class="category-item" data-category="living"> Living Room</button>
-                    <button class="category-item" data-category="dining"> Dining</button>
-                    <button class="category-item" data-category="bedroom"> Bedroom</button>
-                    <button class="category-item" data-category="commercial"> Commercial</button>
-                    <button class="category-item" data-category="outdoor"> Outdoor</button>
+                <h2 class="section-title">Our Furniture Categories</h2>
+                <p class="section-subtitle">
+                    We specialize in creating premium furniture pieces that combine aesthetic appeal with 
+                    functional design for every space and need.
+                </p>
+                
+                <div class="category-grid">
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Office Furniture</h3>
+                        <p class="category-description">
+                            Professional desks, chairs, and conference tables for productive workspaces
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Living Room Sets</h3>
+                        <p class="category-description">
+                            Comfortable sofas, center tables, and entertainment units for family living
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Dining Ensembles</h3>
+                        <p class="category-description">
+                            Elegant dining tables and chairs for memorable family gatherings
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Bedroom Suites</h3>
+                        <p class="category-description">
+                            Complete bedroom sets including beds, wardrobes, and dressing tables
+                        </p>
+                    </div>
+                    
+                    <div class="category-card fade-in-up">
+                        <h3 class="category-name">Commercial Furniture</h3>
+                        <p class="category-description">
+                            Durable furniture for hotels, restaurants, schools, and offices
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Furniture Products Section -->
-        <section class="furniture-section">
+        <section class="container" style="padding: 3rem 0;">
+            <h2 class="section-title">Furniture Collection</h2>
+            <p class="section-subtitle">
+                Browse our extensive collection of premium furniture. All items available in custom sizes, 
+                materials, and finishes to match your specific requirements.
+            </p>
+            
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <div class="search-box">
+                    <input type="text" id="product-search" placeholder="Search furniture products...">
+                </div>
+                <select class="category-filter" id="category-filter">
+                    <option value="all">All Furniture Products</option>
+                    <option value="office">Office Furniture</option>
+                    <option value="living">Living Room</option>
+                    <option value="dining">Dining Sets</option>
+                    <option value="bedroom">Bedroom Furniture</option>
+                    <option value="seating">Seating & Chairs</option>
+                    <option value="commercial">Commercial Furniture</option>
+                    <option value="outdoor">Outdoor Furniture</option>
+                    <option value="accessories">Furniture Accessories</option>
+                </select>
+            </div>
+            
+            <!-- Product Count -->
+            <div class="product-count" id="product-count">Loading furniture products...</div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="contact-cta">
             <div class="container">
-                <h2 class="section-title">Premium Furniture Collection</h2>
-                <p class="section-subtitle">Handcrafted pieces designed for comfort, style, and durability</p>
-                
-                <!-- Filter Controls -->
-                <div class="filter-controls">
-                    <div class="search-box">
-                        <span class="search-icon"></span>
-                        <input type="text" id="product-search" placeholder="Search furniture products...">
-                    </div>
-                    <select class="category-filter" id="category-filter">
-                        <option value="all">All Categories</option>
-                        <option value="office">Office Furniture</option>
-                        <option value="seating">Seating & Sofas</option>
-                        <option value="living">Living Room</option>
-                        <option value="dining">Dining Sets</option>
-                        <option value="bedroom">Bedroom Furniture</option>
-                        <option value="commercial">Commercial</option>
-                        <option value="outdoor">Outdoor Furniture</option>
-                    </select>
-                </div>
-                
-                <!-- Product Count -->
-                <div class="product-count" id="product-count">Loading furniture products...</div>
-                
-                <!-- Products Grid -->
-                <div class="products-grid" id="products-container">
-                    <!-- Products will be loaded by JavaScript -->
-                </div>
-                
-                <!-- Load More Button -->
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+                <h2>Need Custom Furniture Design?</h2>
+                <p>
+                    Contact us today for custom furniture designs, material selection, professional consultation, 
+                    and interior design services for your home or commercial space.
+                </p>
+                <div class="contact-buttons">
+                    <a href="https://wa.me/2348129978419" class="btn-whatsapp" target="_blank">
+                         WhatsApp Consultation
+                    </a>
+                    <a href="tel:+2348129978419" class="btn-call">
+                         Call Now: +234 812 997 8419
+                    </a>
+                    <a href="/contact" class="btn-primary">
+                         Custom Design Request
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- About Section -->
-                <div class="footer-section">
-                    <h3>Collaborative Investment Ltd</h3>
-                    <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
 
-                    <div class="social-links">
-                        <!-- Facebook -->
-                        <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
-                            </svg>
-                        </a>
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
 
-                        <!-- X / Twitter -->
-                        <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
-                            </svg>
-                        </a>
+            <div class="social-links">
 
-                        <!-- WhatsApp -->
-                        <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                            <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                                <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.980.944.407 1.678.650 2.250.832.945.300 1.806.257 2.484.156.758-.112 2.340-.957 2.674-1.880.330-.924.330-1.715.230-1.880-.099-.165-.363-.264-.758-.462z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
 
-                <!-- Quick Links -->
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/services">Our Services</a></li>
-                        <li><a href="/shop-categories">Shop Categories</a></li>
-                        <li><a href="/portfolio">Portfolio</a></li>
-                        <li><a href="/investment">Investment</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
 
-                <!-- Shop Categories -->
-                <div class="footer-section">
-                    <h3>Shop Categories</h3>
-                    <ul class="footer-links">
-                        <li><a href="/shop-agriculture">Agriculture & Livestock</a></li>
-                        <li><a href="/shop-construction">Construction & Blocks</a></li>
-                        <li><a href="/shop-machinery">Machinery & Equipment</a></li>
-                        <li><a href="/shop-solar">Solar Energy</a></li>
-                        <li><a href="/shop-furniture">Furniture & Upholstery</a></li>
-                        <li><a href="/shop-all">All Products</a></li>
-                    </ul>
-                </div>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
 
-                <!-- Contact -->
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>212 Ijegun Road, Ikotun, Lagos</p>
-                    <p>collaborativeinvestmentltd@gmail.com</p>
-                    <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
-                    <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                    <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
-                </div>
-            </div>
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
 
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-                <p>Building Nigeria's Business Future</p>
-
-                <p style="margin-top: 1rem;">
-                    <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                    <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                    <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
-                </p>
             </div>
         </div>
-    </footer>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#agriculture">Agriculture & Agribusiness</a></li>
+                <li><a href="/services#manufacturing">Construction & Manufacturing</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/services#hospitality">Hospitality & Entertainment</a></li>
+                <li><a href="/services#solar">Solar Energy Solutions</a></li>
+                <li><a href="/services#furniture">Furniture & Upholstery</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>Building Nigeria's Business Future</p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
-        // FURNITURE PRODUCTS DATA
+        // FURNITURE PRODUCTS DATA - EXPANDED WITH MORE PRODUCTS
         const furnitureProducts = [
-            // Office Furniture
+            // =========== OFFICE FURNITURE (15 products) ===========
             {
                 id: 'furn-office-001',
-                name: 'Mahogany Executive Desk',
+                name: 'Executive Mahogany Desk',
                 category: 'office',
                 price: 450000,
-                image: '/img/furniture/executive-desk.jpg',
+                basePrice: 450000,
+                image: '/img/furniture/executive-mahogany-desk.jpg',
                 description: 'Solid mahogany executive desk with built-in cable management, leather inlay, and premium hardware.',
                 stock: 'In Stock',
-                details: {
-                    material: 'Solid Mahogany Wood',
-                    features: 'Built-in cable management, leather inlay',
-                    dimensions: '180cm × 90cm × 75cm'
+                sizes: {
+                    'Standard (180x90cm)': 450000,
+                    'Large (200x100cm)': 550000,
+                    'Executive (220x110cm)': 650000
                 },
-                tags: ['office', 'desk', 'executive', 'mahogany']
+                specs: {
+                    material: 'Solid Mahogany Wood',
+                    finish: 'Hand-rubbed oil finish',
+                    features: 'Cable management, leather inlay'
+                },
+                tags: ['office', 'desk', 'mahogany', 'executive']
             },
             {
                 id: 'furn-office-002',
                 name: 'Modern Conference Table',
                 category: 'office',
                 price: 680000,
-                image: '/img/furniture/conference-table.jpg',
+                basePrice: 680000,
+                image: '/img/furniture/modern-conference-table.jpg',
                 description: 'Elegant 10-seater conference table with tempered glass top and polished metal base.',
                 stock: 'In Stock',
-                details: {
+                sizes: {
+                    '8-Seater': 550000,
+                    '10-Seater': 680000,
+                    '12-Seater': 850000
+                },
+                specs: {
                     material: 'Tempered Glass & Metal',
-                    capacity: '10-12 seats',
+                    capacity: '8-12 seats',
                     features: 'Professional design, durable construction'
                 },
                 tags: ['office', 'conference', 'table', 'glass']
@@ -585,226 +964,1540 @@
                 name: 'Premium Ergonomic Chair',
                 category: 'office',
                 price: 185000,
+                basePrice: 185000,
                 image: '/img/furniture/ergonomic-office-chair.jpg',
                 description: 'High-back executive chair with advanced lumbar support, adjustable arms, and premium mesh fabric.',
                 stock: 'In Stock',
-                details: {
+                sizes: {
+                    'Standard': 185000,
+                    'Executive': 225000,
+                    'Managerial': 285000
+                },
+                specs: {
                     material: 'Premium Mesh & Leather',
-                    features: 'Lumbar support, adjustable arms',
-                    comfort: 'Ergonomic design'
+                    features: 'Lumbar support, adjustable arms, tilt mechanism',
+                    comfort: 'Ergonomic design with breathable mesh'
                 },
-                tags: ['office', 'chair', 'ergonomic', 'executive']
+                tags: ['office', 'chair', 'ergonomic', 'mesh']
+            },
+            {
+                id: 'furn-office-004',
+                name: 'Office Reception Desk',
+                category: 'office',
+                price: 320000,
+                basePrice: 320000,
+                image: '/img/furniture/reception-desk.jpg',
+                description: 'Professional reception desk with built-in storage, cable management, and durable laminate finish.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small (1.5m)': 220000,
+                    'Medium (2m)': 320000,
+                    'Large (2.5m)': 420000
+                },
+                specs: {
+                    material: 'Laminate & Metal',
+                    features: 'Built-in storage, cable management',
+                    style: 'Modern professional'
+                },
+                tags: ['office', 'reception', 'desk', 'professional']
+            },
+            {
+                id: 'furn-office-005',
+                name: 'Office Storage Cabinet',
+                category: 'office',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/furniture/storage-cabinet.jpg',
+                description: 'Multi-drawer storage cabinet with lockable doors for document and office supply storage.',
+                stock: 'In Stock',
+                sizes: {
+                    '2-Drawer': 85000,
+                    '4-Drawer': 125000,
+                    '6-Drawer': 165000
+                },
+                specs: {
+                    material: 'Steel construction',
+                    drawers: '2-6 drawers',
+                    security: 'Lockable doors'
+                },
+                tags: ['office', 'storage', 'cabinet', 'filing']
+            },
+            {
+                id: 'furn-office-006',
+                name: 'Office Visitor Chairs',
+                category: 'office',
+                price: 45000,
+                basePrice: 45000,
+                image: '/img/furniture/visitor-chairs.jpg',
+                description: 'Set of 4 comfortable visitor chairs with modern design for reception and waiting areas.',
+                stock: 'In Stock',
+                sizes: {
+                    'Set of 2': 25000,
+                    'Set of 4': 45000,
+                    'Set of 6': 65000
+                },
+                specs: {
+                    material: 'Fabric & Metal',
+                    set: '2-6 chairs',
+                    comfort: 'Padded seats'
+                },
+                tags: ['office', 'chairs', 'visitor', 'set']
+            },
+            {
+                id: 'furn-office-007',
+                name: 'Office Bookshelf',
+                category: 'office',
+                price: 95000,
+                basePrice: 95000,
+                image: '/img/furniture/office-bookshelf.jpg',
+                description: 'Sturdy office bookshelf with multiple shelves for books, files, and office decor.',
+                stock: 'In Stock',
+                sizes: {
+                    '4-Tier': 65000,
+                    '5-Tier': 85000,
+                    '6-Tier': 105000
+                },
+                specs: {
+                    material: 'Wood composite',
+                    shelves: 'Adjustable shelves',
+                    capacity: 'Heavy duty'
+                },
+                tags: ['office', 'bookshelf', 'storage', 'shelves']
+            },
+            {
+                id: 'furn-office-008',
+                name: 'Office Partition System',
+                category: 'office',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/office-partition.jpg',
+                description: 'Modular office partition system for creating private workspaces and cubicles.',
+                stock: 'Made to Order',
+                sizes: {
+                    'Basic (4 panels)': 125000,
+                    'Standard (8 panels)': 225000,
+                    'Premium (12 panels)': 325000
+                },
+                specs: {
+                    material: 'Glass & metal',
+                    panels: 'Modular system',
+                    height: 'Adjustable height'
+                },
+                tags: ['office', 'partition', 'cubicle', 'privacy']
+            },
+            {
+                id: 'furn-office-009',
+                name: 'Executive Desk Chair',
+                category: 'office',
+                price: 285000,
+                basePrice: 285000,
+                image: '/img/furniture/executive-desk-chair.jpg',
+                description: 'Luxury executive desk chair with premium leather and advanced ergonomic features.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 285000,
+                    'Deluxe': 385000,
+                    'Premium': 485000
+                },
+                specs: {
+                    material: 'Genuine leather',
+                    features: 'Memory foam, adjustable everything',
+                    warranty: '5 years'
+                },
+                tags: ['office', 'chair', 'executive', 'leather']
+            },
+            {
+                id: 'furn-office-010',
+                name: 'Office Training Table',
+                category: 'office',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/training-table.jpg',
+                description: 'Training room table with durable surface and built-in power outlets for workshops.',
+                stock: 'In Stock',
+                sizes: {
+                    '4-Seater': 125000,
+                    '6-Seater': 185000,
+                    '8-Seater': 245000
+                },
+                specs: {
+                    material: 'Laminate top',
+                    features: 'Built-in power, cable management',
+                    style: 'Training room design'
+                },
+                tags: ['office', 'training', 'table', 'workshop']
+            },
+            {
+                id: 'furn-office-011',
+                name: 'Office Corner Desk',
+                category: 'office',
+                price: 225000,
+                basePrice: 225000,
+                image: '/img/furniture/corner-desk.jpg',
+                description: 'Space-saving L-shaped corner desk with ample workspace and storage.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard L': 185000,
+                    'Large L': 245000,
+                    'Executive L': 325000
+                },
+                specs: {
+                    material: 'Wood & metal',
+                    shape: 'L-shaped corner',
+                    storage: 'Built-in shelves'
+                },
+                tags: ['office', 'desk', 'corner', 'L-shaped']
+            },
+            {
+                id: 'furn-office-012',
+                name: 'Office Filing Cabinet',
+                category: 'office',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/furniture/filing-cabinet.jpg',
+                description: 'Secure filing cabinet with lockable drawers for important document storage.',
+                stock: 'In Stock',
+                sizes: {
+                    '2-Drawer': 65000,
+                    '4-Drawer': 85000,
+                    '6-Drawer': 115000
+                },
+                specs: {
+                    material: 'Steel construction',
+                    security: 'Locking mechanism',
+                    capacity: 'Letter/legal size'
+                },
+                tags: ['office', 'filing', 'cabinet', 'storage']
+            },
+            {
+                id: 'furn-office-013',
+                name: 'Office Whiteboard',
+                category: 'office',
+                price: 35000,
+                basePrice: 35000,
+                image: '/img/furniture/office-whiteboard.jpg',
+                description: 'Magnetic whiteboard with aluminum frame for presentations and brainstorming.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small (60x90cm)': 25000,
+                    'Medium (90x120cm)': 35000,
+                    'Large (120x180cm)': 55000
+                },
+                specs: {
+                    material: 'Melamine surface',
+                    features: 'Magnetic, marker-friendly',
+                    frame: 'Aluminum frame'
+                },
+                tags: ['office', 'whiteboard', 'presentation', 'magnetic']
+            },
+            {
+                id: 'furn-office-014',
+                name: 'Office Printer Stand',
+                category: 'office',
+                price: 45000,
+                basePrice: 45000,
+                image: '/img/furniture/printer-stand.jpg',
+                description: 'Sturdy printer stand with paper storage and cable management features.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 35000,
+                    'Large': 45000,
+                    'Extra Large': 65000
+                },
+                specs: {
+                    material: 'Metal frame',
+                    storage: 'Paper trays included',
+                    mobility: 'Locking casters'
+                },
+                tags: ['office', 'printer', 'stand', 'storage']
+            },
+            {
+                id: 'furn-office-015',
+                name: 'Office Credenza',
+                category: 'office',
+                price: 285000,
+                basePrice: 285000,
+                image: '/img/furniture/credenza.jpg',
+                description: 'Executive credenza with combination of drawers, cabinets, and display shelves.',
+                stock: 'Made to Order',
+                sizes: {
+                    'Standard (1.8m)': 225000,
+                    'Executive (2.4m)': 325000,
+                    'Custom': 425000
+                },
+                specs: {
+                    material: 'Wood veneer',
+                    storage: 'Multiple compartments',
+                    style: 'Executive design'
+                },
+                tags: ['office', 'credenza', 'storage', 'executive']
             },
 
-            // Seating & Sofas
-            {
-                id: 'furn-seating-001',
-                name: 'Luxury Single Seater',
-                category: 'seating',
-                price: 120000,
-                image: '/img/furniture/single-seater.jpg',
-                description: 'Premium single seater chair with high-density foam and premium fabric upholstery.',
-                stock: 'In Stock',
-                details: {
-                    material: 'Premium Fabric',
-                    comfort: 'High-density foam',
-                    design: 'Modern compact design'
-                },
-                tags: ['seating', 'single', 'fabric', 'modern']
-            },
-            {
-                id: 'furn-seating-002',
-                name: 'Modern Two Seater Sofa',
-                category: 'seating',
-                price: 280000,
-                image: '/img/furniture/two-seater.jpg',
-                description: 'Contemporary two-seater sofa with wooden legs and premium cushioning for optimal comfort.',
-                stock: 'In Stock',
-                details: {
-                    material: 'Premium Fabric',
-                    capacity: '2 seats',
-                    features: 'Wooden legs, premium cushioning'
-                },
-                tags: ['seating', 'sofa', 'two-seater', 'modern']
-            },
-            {
-                id: 'furn-seating-003',
-                name: 'Family Three Seater Sofa',
-                category: 'seating',
-                price: 420000,
-                image: '/img/furniture/three-seater.jpg',
-                description: 'Spacious three-seater sofa with deep seating and premium upholstery for family comfort.',
-                stock: 'In Stock',
-                details: {
-                    material: 'Premium Upholstery',
-                    capacity: '3 seats',
-                    comfort: 'Deep seating design'
-                },
-                tags: ['seating', 'sofa', 'three-seater', 'family']
-            },
-            {
-                id: 'furn-seating-004',
-                name: 'Premium Relaxing Armchair',
-                category: 'seating',
-                price: 195000,
-                image: '/img/furniture/relaxing-chair.jpg',
-                description: 'Ultra-comfortable relaxing chair with reclining feature and premium leather upholstery.',
-                stock: 'In Stock',
-                details: {
-                    material: 'Premium Leather',
-                    features: 'Reclining, footrest included',
-                    comfort: 'Ultra-comfort design'
-                },
-                tags: ['seating', 'armchair', 'reclining', 'leather']
-            },
-
-            // Living Room
+            // =========== LIVING ROOM FURNITURE (15 products) ===========
             {
                 id: 'furn-living-001',
-                name: '5-Piece Living Room Set',
+                name: '3-Piece Living Room Set',
                 category: 'living',
-                price: 850000,
-                image: '/img/furniture/living-room-full-set.jpg',
-                description: 'Complete living room package including 3-seater, 2-seater, center table, and 2 side tables.',
+                price: 450000,
+                basePrice: 450000,
+                image: '/img/furniture/3-piece-living-set.jpg',
+                description: 'Complete 3-piece living room set including sofa, loveseat, and center table.',
                 stock: 'In Stock',
-                details: {
-                    pieces: '5 pieces total',
-                    includes: '3-seater, 2-seater, center table, 2 side tables',
-                    style: 'Modern living room set'
+                sizes: {
+                    '3-Piece Set': 450000,
+                    '4-Piece Set': 550000,
+                    '5-Piece Set': 650000
                 },
-                tags: ['living', 'set', 'complete', 'modern']
+                specs: {
+                    pieces: 'Sofa, loveseat, center table',
+                    material: 'Premium fabric',
+                    style: 'Modern contemporary'
+                },
+                tags: ['living', 'set', 'sofa', 'modern']
+            },
+            {
+                id: 'furn-living-002',
+                name: 'Sectional Sofa',
+                category: 'living',
+                price: 585000,
+                basePrice: 585000,
+                image: '/img/furniture/sectional-sofa.jpg',
+                description: 'L-shaped sectional sofa with chaise lounge for spacious family living rooms.',
+                stock: 'In Stock',
+                sizes: {
+                    '3-Seater': 385000,
+                    '4-Seater': 485000,
+                    '5-Seater': 585000
+                },
+                specs: {
+                    style: 'L-shaped sectional',
+                    material: 'Premium upholstery',
+                    comfort: 'High-density foam'
+                },
+                tags: ['living', 'sofa', 'sectional', 'L-shaped']
+            },
+            {
+                id: 'furn-living-003',
+                name: 'Center Coffee Table',
+                category: 'living',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/furniture/coffee-table.jpg',
+                description: 'Modern coffee table with tempered glass top and metal legs.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small (90x60cm)': 65000,
+                    'Medium (120x60cm)': 85000,
+                    'Large (150x80cm)': 115000
+                },
+                specs: {
+                    material: 'Glass & metal',
+                    style: 'Modern minimalist',
+                    features: 'Tempered safety glass'
+                },
+                tags: ['living', 'table', 'coffee', 'glass']
+            },
+            {
+                id: 'furn-living-004',
+                name: 'TV Stand Unit',
+                category: 'living',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/furniture/tv-stand.jpg',
+                description: 'Entertainment center with TV stand, storage shelves, and cable management.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small (1.2m)': 95000,
+                    'Medium (1.8m)': 135000,
+                    'Large (2.4m)': 185000
+                },
+                specs: {
+                    material: 'Wood composite',
+                    features: 'Cable management, adjustable shelves',
+                    capacity: 'Up to 65" TV'
+                },
+                tags: ['living', 'TV', 'stand', 'entertainment']
+            },
+            {
+                id: 'furn-living-005',
+                name: 'Accent Chair',
+                category: 'living',
+                price: 65000,
+                basePrice: 65000,
+                image: '/img/furniture/accent-chair.jpg',
+                description: 'Stylish accent chair with premium fabric and elegant wooden legs.',
+                stock: 'In Stock',
+                sizes: {
+                    'Single': 65000,
+                    'Set of 2': 125000,
+                    'Set of 4': 225000
+                },
+                specs: {
+                    material: 'Fabric & wood',
+                    style: 'Modern accent',
+                    comfort: 'Padded seat and back'
+                },
+                tags: ['living', 'chair', 'accent', 'decor']
+            },
+            {
+                id: 'furn-living-006',
+                name: 'Bookshelf Unit',
+                category: 'living',
+                price: 95000,
+                basePrice: 95000,
+                image: '/img/furniture/living-bookshelf.jpg',
+                description: 'Living room bookshelf with display shelves and storage compartments.',
+                stock: 'In Stock',
+                sizes: {
+                    '4-Shelf': 75000,
+                    '5-Shelf': 95000,
+                    '6-Shelf': 115000
+                },
+                specs: {
+                    material: 'Wood construction',
+                    shelves: 'Adjustable heights',
+                    style: 'Modern storage'
+                },
+                tags: ['living', 'bookshelf', 'storage', 'display']
+            },
+            {
+                id: 'furn-living-007',
+                name: 'Console Table',
+                category: 'living',
+                price: 75000,
+                basePrice: 75000,
+                image: '/img/furniture/console-table.jpg',
+                description: 'Elegant console table for hallway or behind-sofa placement with storage drawer.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard (1.2m)': 65000,
+                    'Long (1.8m)': 85000,
+                    'Extra Long (2.4m)': 115000
+                },
+                specs: {
+                    material: 'Wood & metal',
+                    features: 'Storage drawer, slim design',
+                    use: 'Hallway or behind sofa'
+                },
+                tags: ['living', 'table', 'console', 'hallway']
+            },
+            {
+                id: 'furn-living-008',
+                name: 'Ottoman Coffee Table',
+                category: 'living',
+                price: 55000,
+                basePrice: 55000,
+                image: '/img/furniture/ottoman-table.jpg',
+                description: 'Multipurpose ottoman that serves as coffee table, footrest, and extra seating.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small (60x60cm)': 45000,
+                    'Medium (80x80cm)': 55000,
+                    'Large (100x100cm)': 75000
+                },
+                specs: {
+                    material: 'Upholstered fabric',
+                    function: 'Table, footrest, seat',
+                    storage: 'Some models with storage'
+                },
+                tags: ['living', 'ottoman', 'multipurpose', 'storage']
+            },
+            {
+                id: 'furn-living-009',
+                name: 'Wall Display Unit',
+                category: 'living',
+                price: 115000,
+                basePrice: 115000,
+                image: '/img/furniture/wall-display.jpg',
+                description: 'Wall-mounted display unit with shelves and cabinets for living room decor.',
+                stock: 'Made to Order',
+                sizes: {
+                    'Small (1m)': 85000,
+                    'Medium (1.5m)': 115000,
+                    'Large (2m)': 155000
+                },
+                specs: {
+                    material: 'Wood & glass',
+                    mounting: 'Wall-mounted',
+                    style: 'Modern floating shelves'
+                },
+                tags: ['living', 'wall', 'display', 'shelves']
+            },
+            {
+                id: 'furn-living-010',
+                name: 'Fireplace TV Stand',
+                category: 'living',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/fireplace-tv-stand.jpg',
+                description: 'Entertainment center with built-in electric fireplace and TV mounting.',
+                stock: 'Made to Order',
+                sizes: {
+                    'Standard': 185000,
+                    'Large': 245000,
+                    'Custom': 325000
+                },
+                specs: {
+                    features: 'Electric fireplace, TV mount',
+                    material: 'Wood & metal',
+                    style: 'Modern entertainment center'
+                },
+                tags: ['living', 'fireplace', 'TV', 'entertainment']
+            },
+            {
+                id: 'furn-living-011',
+                name: 'Sofa Bed',
+                category: 'living',
+                price: 285000,
+                basePrice: 285000,
+                image: '/img/furniture/sofa-bed.jpg',
+                description: 'Convertible sofa that transforms into comfortable bed for guests.',
+                stock: 'In Stock',
+                sizes: {
+                    'Single': 225000,
+                    'Double': 285000,
+                    'Queen': 385000
+                },
+                specs: {
+                    function: 'Sofa converts to bed',
+                    mattress: 'Included comfortable mattress',
+                    size: 'Various sizes available'
+                },
+                tags: ['living', 'sofa', 'bed', 'convertible']
+            },
+            {
+                id: 'furn-living-012',
+                name: 'Bar Cabinet',
+                category: 'living',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/furniture/bar-cabinet.jpg',
+                description: 'Stylish bar cabinet with glass shelves, wine storage, and locking doors.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 115000,
+                    'Deluxe': 165000,
+                    'Premium': 225000
+                },
+                specs: {
+                    material: 'Wood & glass',
+                    storage: 'Wine racks, glass holders',
+                    features: 'Locking doors, lighting'
+                },
+                tags: ['living', 'bar', 'cabinet', 'wine']
+            },
+            {
+                id: 'furn-living-013',
+                name: 'Display Cabinet',
+                category: 'living',
+                price: 145000,
+                basePrice: 145000,
+                image: '/img/furniture/display-cabinet.jpg',
+                description: 'Glass display cabinet for showcasing collectibles, china, or books.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small': 95000,
+                    'Medium': 145000,
+                    'Large': 195000
+                },
+                specs: {
+                    material: 'Wood & tempered glass',
+                    lighting: 'Optional LED lights',
+                    security: 'Locking glass doors'
+                },
+                tags: ['living', 'display', 'cabinet', 'glass']
+            },
+            {
+                id: 'furn-living-014',
+                name: 'Room Divider',
+                category: 'living',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/furniture/room-divider.jpg',
+                description: 'Decorative room divider/screen for creating separate spaces in open floor plans.',
+                stock: 'In Stock',
+                sizes: {
+                    '3-Panel': 65000,
+                    '4-Panel': 85000,
+                    '6-Panel': 115000
+                },
+                specs: {
+                    material: 'Wood & fabric/paper',
+                    panels: 'Folding screen design',
+                    style: 'Decorative room divider'
+                },
+                tags: ['living', 'divider', 'screen', 'decor']
+            },
+            {
+                id: 'furn-living-015',
+                name: 'Floor Lamp',
+                category: 'living',
+                price: 35000,
+                basePrice: 35000,
+                image: '/img/furniture/floor-lamp.jpg',
+                description: 'Modern floor lamp with adjustable height and dimmable LED lighting.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard (1.5m)': 25000,
+                    'Tall (1.8m)': 35000,
+                    'Extra Tall (2.1m)': 45000
+                },
+                specs: {
+                    lighting: 'Dimmable LED',
+                    adjustment: 'Height adjustable',
+                    style: 'Modern floor lamp'
+                },
+                tags: ['living', 'lamp', 'lighting', 'floor']
             },
 
-            // Dining
+            // =========== DINING SETS (15 products) ===========
             {
                 id: 'furn-dining-001',
-                name: 'Compact Dining Table',
+                name: '6-Seater Dining Set',
                 category: 'dining',
-                price: 180000,
-                image: '/img/furniture/single-dining-table.jpg',
-                description: 'Space-saving single dining table perfect for small spaces or breakfast nooks.',
+                price: 285000,
+                basePrice: 285000,
+                image: '/img/furniture/6-seater-dining.jpg',
+                description: 'Complete 6-seater dining set with table and upholstered chairs.',
                 stock: 'In Stock',
-                details: {
-                    material: 'Solid Wood',
-                    capacity: '4-6 seats',
-                    design: 'Space-saving compact design'
+                sizes: {
+                    '6-Seater': 285000,
+                    '8-Seater': 385000,
+                    '10-Seater': 485000
                 },
-                tags: ['dining', 'table', 'compact', 'wood']
+                specs: {
+                    pieces: 'Table + 6 chairs',
+                    material: 'Wood & fabric',
+                    style: 'Modern dining set'
+                },
+                tags: ['dining', 'set', '6-seater', 'table']
             },
             {
                 id: 'furn-dining-002',
-                name: '8-Seater Dining Set',
+                name: 'Extendable Dining Table',
                 category: 'dining',
-                price: 620000,
-                image: '/img/furniture/full-dining-set.jpg',
-                description: 'Complete dining set with extendable table and 8 upholstered chairs for family dining.',
+                price: 225000,
+                basePrice: 225000,
+                image: '/img/furniture/extendable-table.jpg',
+                description: 'Dining table with extension leaves to accommodate more guests.',
                 stock: 'In Stock',
-                details: {
-                    material: 'Wood & Fabric',
-                    capacity: '8 seats (extends to 10)',
-                    includes: 'Table + 8 chairs'
+                sizes: {
+                    'Seats 6-8': 185000,
+                    'Seats 8-10': 225000,
+                    'Seats 10-12': 285000
                 },
-                tags: ['dining', 'set', '8-seater', 'extendable']
+                specs: {
+                    feature: 'Extendable with leaves',
+                    material: 'Solid wood',
+                    extension: 'Extra leaves included'
+                },
+                tags: ['dining', 'table', 'extendable', 'wood']
+            },
+            {
+                id: 'furn-dining-003',
+                name: 'Dining Chairs Set',
+                category: 'dining',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/dining-chairs.jpg',
+                description: 'Set of 6 upholstered dining chairs with comfortable padding.',
+                stock: 'In Stock',
+                sizes: {
+                    'Set of 4': 125000,
+                    'Set of 6': 185000,
+                    'Set of 8': 245000
+                },
+                specs: {
+                    set: '4-8 chairs',
+                    material: 'Fabric upholstery',
+                    comfort: 'Padded seats'
+                },
+                tags: ['dining', 'chairs', 'set', 'upholstered']
+            },
+            {
+                id: 'furn-dining-004',
+                name: 'Bar Stool Set',
+                category: 'dining',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/furniture/bar-stools.jpg',
+                description: 'Set of 4 adjustable height bar stools for kitchen islands.',
+                stock: 'In Stock',
+                sizes: {
+                    'Set of 2': 75000,
+                    'Set of 4': 125000,
+                    'Set of 6': 185000
+                },
+                specs: {
+                    feature: 'Height adjustable',
+                    material: 'Metal & fabric',
+                    height: 'Standard bar height'
+                },
+                tags: ['dining', 'stools', 'bar', 'adjustable']
+            },
+            {
+                id: 'furn-dining-005',
+                name: 'Buffet Sideboard',
+                category: 'dining',
+                price: 145000,
+                basePrice: 145000,
+                image: '/img/furniture/sideboard.jpg',
+                description: 'Dining room sideboard for storage and serving during meals.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard (1.2m)': 115000,
+                    'Large (1.8m)': 165000,
+                    'Extra Large (2.4m)': 225000
+                },
+                specs: {
+                    material: 'Wood construction',
+                    storage: 'Drawers and cabinets',
+                    use: 'Serving and storage'
+                },
+                tags: ['dining', 'sideboard', 'buffet', 'storage']
+            },
+            {
+                id: 'furn-dining-006',
+                name: 'Kitchen Island',
+                category: 'dining',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/kitchen-island.jpg',
+                description: 'Mobile kitchen island with storage, seating, and work surface.',
+                stock: 'Made to Order',
+                sizes: {
+                    'Small': 125000,
+                    'Medium': 185000,
+                    'Large': 245000
+                },
+                specs: {
+                    features: 'Storage, seating, workspace',
+                    material: 'Wood & metal',
+                    mobility: 'Locking casters'
+                },
+                tags: ['dining', 'kitchen', 'island', 'mobile']
+            },
+            {
+                id: 'furn-dining-007',
+                name: 'China Cabinet',
+                category: 'dining',
+                price: 225000,
+                basePrice: 225000,
+                image: '/img/furniture/china-cabinet.jpg',
+                description: 'Display china cabinet with glass doors and interior lighting.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 185000,
+                    'Large': 245000,
+                    'Extra Large': 325000
+                },
+                specs: {
+                    material: 'Wood & glass',
+                    lighting: 'Interior LED lights',
+                    display: 'Glass doors for display'
+                },
+                tags: ['dining', 'china', 'cabinet', 'display']
+            },
+            {
+                id: 'furn-dining-008',
+                name: 'Outdoor Dining Set',
+                category: 'dining',
+                price: 285000,
+                basePrice: 285000,
+                image: '/img/furniture/outdoor-dining.jpg',
+                description: 'Weather-resistant outdoor dining set for patio or garden.',
+                stock: 'In Stock',
+                sizes: {
+                    '4-Seater': 225000,
+                    '6-Seater': 285000,
+                    '8-Seater': 385000
+                },
+                specs: {
+                    material: 'Weather-resistant materials',
+                    set: 'Table and chairs',
+                    use: 'Outdoor dining'
+                },
+                tags: ['dining', 'outdoor', 'patio', 'weather-resistant']
+            },
+            {
+                id: 'furn-dining-009',
+                name: 'Folding Dining Table',
+                category: 'dining',
+                price: 95000,
+                basePrice: 95000,
+                image: '/img/furniture/folding-table.jpg',
+                description: 'Space-saving folding dining table for small apartments.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small (seats 4)': 65000,
+                    'Medium (seats 6)': 95000,
+                    'Large (seats 8)': 135000
+                },
+                specs: {
+                    feature: 'Folding design',
+                    material: 'Wood & metal',
+                    storage: 'Folds flat for storage'
+                },
+                tags: ['dining', 'table', 'folding', 'space-saving']
+            },
+            {
+                id: 'furn-dining-010',
+                name: 'Round Dining Table',
+                category: 'dining',
+                price: 165000,
+                basePrice: 165000,
+                image: '/img/furniture/round-table.jpg',
+                description: 'Round dining table perfect for conversation and small spaces.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small (120cm)': 125000,
+                    'Medium (150cm)': 165000,
+                    'Large (180cm)': 225000
+                },
+                specs: {
+                    shape: 'Round table',
+                    material: 'Solid wood',
+                    seating: 'Comfortable for conversation'
+                },
+                tags: ['dining', 'table', 'round', 'conversation']
+            },
+            {
+                id: 'furn-dining-011',
+                name: 'Dining Bench',
+                category: 'dining',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/furniture/dining-bench.jpg',
+                description: 'Upholstered dining bench for family-style seating.',
+                stock: 'In Stock',
+                sizes: {
+                    '2-Seater': 65000,
+                    '3-Seater': 85000,
+                    '4-Seater': 115000
+                },
+                specs: {
+                    seating: 'Bench style',
+                    material: 'Wood & fabric',
+                    comfort: 'Padded seating'
+                },
+                tags: ['dining', 'bench', 'seating', 'family']
+            },
+            {
+                id: 'furn-dining-012',
+                name: 'Server Cart',
+                category: 'dining',
+                price: 75000,
+                basePrice: 75000,
+                image: '/img/furniture/server-cart.jpg',
+                description: 'Mobile serving cart for dining room or kitchen.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 65000,
+                    'Large': 85000,
+                    'Deluxe': 115000
+                },
+                specs: {
+                    features: 'Shelves, wine rack',
+                    material: 'Wood & metal',
+                    mobility: 'Wheels for easy movement'
+                },
+                tags: ['dining', 'cart', 'serving', 'mobile']
+            },
+            {
+                id: 'furn-dining-013',
+                name: 'Formal Dining Set',
+                category: 'dining',
+                price: 485000,
+                basePrice: 485000,
+                image: '/img/furniture/formal-dining.jpg',
+                description: 'Formal dining set with elegant table and upholstered chairs.',
+                stock: 'Made to Order',
+                sizes: {
+                    '8-Seater': 385000,
+                    '10-Seater': 485000,
+                    '12-Seater': 585000
+                },
+                specs: {
+                    style: 'Formal elegant',
+                    material: 'Premium wood & fabric',
+                    set: 'Table + matching chairs'
+                },
+                tags: ['dining', 'formal', 'elegant', 'luxury']
+            },
+            {
+                id: 'furn-dining-014',
+                name: 'Pub Table Set',
+                category: 'dining',
+                price: 165000,
+                basePrice: 165000,
+                image: '/img/furniture/pub-table.jpg',
+                description: 'Tall pub table with matching stools for casual dining.',
+                stock: 'In Stock',
+                sizes: {
+                    'Set for 2': 125000,
+                    'Set for 4': 185000,
+                    'Set for 6': 245000
+                },
+                tags: ['dining', 'pub', 'table', 'casual']
+            },
+            {
+                id: 'furn-dining-015',
+                name: 'Children Dining Set',
+                category: 'dining',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/furniture/children-dining.jpg',
+                description: 'Kid-sized dining set with table and chairs.',
+                stock: 'In Stock',
+                sizes: {
+                    '2-Chair Set': 65000,
+                    '4-Chair Set': 95000,
+                    '6-Chair Set': 135000
+                },
+                specs: {
+                    size: 'Child-sized',
+                    material: 'Safe materials',
+                    design: 'Colorful and fun'
+                },
+                tags: ['dining', 'children', 'kids', 'playroom']
             },
 
-            // Bedroom
+            // =========== BEDROOM FURNITURE (15 products) ===========
             {
                 id: 'furn-bedroom-001',
-                name: 'King Size Bedroom Suite',
+                name: 'Queen Bed Frame',
                 category: 'bedroom',
-                price: 950000,
-                image: '/img/furniture/king-bed-set.jpg',
-                description: 'Complete bedroom set including king bed, side tables, wardrobe, and dressing table.',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/queen-bed.jpg',
+                description: 'Solid wood queen bed frame with headboard and footboard.',
                 stock: 'In Stock',
-                details: {
-                    pieces: 'Complete bedroom suite',
-                    includes: 'King bed, side tables, wardrobe, dressing table',
-                    size: 'King size bed'
+                sizes: {
+                    'Single': 125000,
+                    'Queen': 185000,
+                    'King': 245000
                 },
-                tags: ['bedroom', 'suite', 'king-size', 'complete']
+                specs: {
+                    size: 'Queen size',
+                    material: 'Solid wood',
+                    features: 'Headboard & footboard'
+                },
+                tags: ['bedroom', 'bed', 'queen', 'wood']
             },
             {
                 id: 'furn-bedroom-002',
-                name: '6-Door Sliding Wardrobe',
+                name: 'Wardrobe Closet',
                 category: 'bedroom',
-                price: 380000,
-                image: '/img/furniture/wardrobe-collection.jpg',
-                description: 'Spacious sliding door wardrobe with mirror panels, hanging space, and adjustable shelving.',
-                stock: 'In Stock',
-                details: {
-                    material: 'Wood & Glass',
-                    doors: '6 sliding doors',
-                    features: 'Mirror panels, adjustable shelves'
+                price: 285000,
+                basePrice: 285000,
+                image: '/img/furniture/wardrobe.jpg',
+                description: 'Spacious wardrobe with hanging space, shelves, and drawers.',
+                stock: 'Made to Order',
+                sizes: {
+                    '3-Door': 225000,
+                    '4-Door': 285000,
+                    '6-Door': 385000
                 },
-                tags: ['bedroom', 'wardrobe', 'storage', 'sliding']
+                specs: {
+                    doors: 'Sliding or hinged',
+                    storage: 'Hanging, shelves, drawers',
+                    material: 'Wood construction'
+                },
+                tags: ['bedroom', 'wardrobe', 'closet', 'storage']
+            },
+            {
+                id: 'furn-bedroom-003',
+                name: 'Dressing Table',
+                category: 'bedroom',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/furniture/dressing-table.jpg',
+                description: 'Vanity dressing table with mirror and storage drawers.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 95000,
+                    'Large': 135000,
+                    'Deluxe': 185000
+                },
+                specs: {
+                    features: 'Mirror, drawers, stool',
+                    material: 'Wood & glass',
+                    style: 'Vanity dressing table'
+                },
+                tags: ['bedroom', 'dressing', 'table', 'vanity']
+            },
+            {
+                id: 'furn-bedroom-004',
+                name: 'Nightstand Set',
+                category: 'bedroom',
+                price: 95000,
+                basePrice: 95000,
+                image: '/img/furniture/nightstands.jpg',
+                description: 'Set of 2 matching nightstands with drawers.',
+                stock: 'In Stock',
+                sizes: {
+                    'Single': 65000,
+                    'Set of 2': 95000,
+                    'Set of 3': 135000
+                },
+                specs: {
+                    set: 'Matching pair',
+                    storage: 'Drawers for bedside items',
+                    material: 'Wood construction'
+                },
+                tags: ['bedroom', 'nightstand', 'set', 'bedside']
+            },
+            {
+                id: 'furn-bedroom-005',
+                name: 'Chest of Drawers',
+                category: 'bedroom',
+                price: 145000,
+                basePrice: 145000,
+                image: '/img/furniture/chest-drawers.jpg',
+                description: 'Tall chest of drawers for clothing storage.',
+                stock: 'In Stock',
+                sizes: {
+                    '4-Drawer': 115000,
+                    '6-Drawer': 145000,
+                    '8-Drawer': 185000
+                },
+                specs: {
+                    drawers: 'Multiple drawers',
+                    material: 'Wood construction',
+                    storage: 'Clothing and linens'
+                },
+                tags: ['bedroom', 'chest', 'drawers', 'storage']
+            },
+            {
+                id: 'furn-bedroom-006',
+                name: 'Bedroom Bench',
+                category: 'bedroom',
+                price: 65000,
+                basePrice: 65000,
+                image: '/img/furniture/bedroom-bench.jpg',
+                description: 'Upholstered bench for foot of bed seating and storage.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 55000,
+                    'Large': 75000,
+                    'Storage': 95000
+                },
+                specs: {
+                    feature: 'Foot of bed bench',
+                    material: 'Fabric & wood',
+                    storage: 'Some with storage'
+                },
+                tags: ['bedroom', 'bench', 'seating', 'decor']
+            },
+            {
+                id: 'furn-bedroom-007',
+                name: 'Mirrored Wardrobe',
+                category: 'bedroom',
+                price: 325000,
+                basePrice: 325000,
+                image: '/img/furniture/mirrored-wardrobe.jpg',
+                description: 'Wardrobe with mirrored doors to create space illusion.',
+                stock: 'Made to Order',
+                sizes: {
+                    '3-Door': 285000,
+                    '4-Door': 365000,
+                    '6-Door': 485000
+                },
+                specs: {
+                    feature: 'Mirrored doors',
+                    material: 'Wood & mirror',
+                    effect: 'Creates space illusion'
+                },
+                tags: ['bedroom', 'wardrobe', 'mirror', 'storage']
+            },
+            {
+                id: 'furn-bedroom-008',
+                name: 'Canopy Bed',
+                category: 'bedroom',
+                price: 385000,
+                basePrice: 385000,
+                image: '/img/furniture/canopy-bed.jpg',
+                description: 'Romantic canopy bed frame with fabric draping.',
+                stock: 'Made to Order',
+                sizes: {
+                    'Queen': 385000,
+                    'King': 485000,
+                    'Custom': 585000
+                },
+                specs: {
+                    style: 'Canopy design',
+                    material: 'Wood & fabric',
+                    feature: 'Draping included'
+                },
+                tags: ['bedroom', 'bed', 'canopy', 'romantic']
+            },
+            {
+                id: 'furn-bedroom-009',
+                name: 'Bedroom Armoire',
+                category: 'bedroom',
+                price: 245000,
+                basePrice: 245000,
+                image: '/img/furniture/armoire.jpg',
+                description: 'Traditional armoire with doors and interior storage.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 195000,
+                    'Large': 265000,
+                    'Extra Large': 345000
+                },
+                specs: {
+                    style: 'Traditional armoire',
+                    storage: 'Hanging and shelves',
+                    material: 'Solid wood'
+                },
+                tags: ['bedroom', 'armoire', 'storage', 'traditional']
+            },
+            {
+                id: 'furn-bedroom-010',
+                name: 'Storage Bed',
+                category: 'bedroom',
+                price: 225000,
+                basePrice: 225000,
+                image: '/img/furniture/storage-bed.jpg',
+                description: 'Bed frame with built-in storage drawers.',
+                stock: 'In Stock',
+                sizes: {
+                    'Single': 165000,
+                    'Queen': 225000,
+                    'King': 285000
+                },
+                specs: {
+                    feature: 'Built-in storage drawers',
+                    material: 'Wood construction',
+                    storage: 'Under-bed storage'
+                },
+                tags: ['bedroom', 'bed', 'storage', 'practical']
+            },
+            {
+                id: 'furn-bedroom-011',
+                name: 'Jewelry Armoire',
+                category: 'bedroom',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/furniture/jewelry-armoire.jpg',
+                description: 'Small armoire specifically for jewelry storage.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small': 65000,
+                    'Medium': 85000,
+                    'Large': 115000
+                },
+                specs: {
+                    purpose: 'Jewelry storage',
+                    features: 'Ring holders, necklace hooks',
+                    security: 'Locking mechanism'
+                },
+                tags: ['bedroom', 'jewelry', 'storage', 'armoire']
+            },
+            {
+                id: 'furn-bedroom-012',
+                name: 'Bedroom TV Stand',
+                category: 'bedroom',
+                price: 95000,
+                basePrice: 95000,
+                image: '/img/furniture/bedroom-tv-stand.jpg',
+                description: 'TV stand designed for bedroom with storage for media.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small': 75000,
+                    'Medium': 95000,
+                    'Large': 135000
+                },
+                specs: {
+                    purpose: 'Bedroom TV placement',
+                    storage: 'Media and component storage',
+                    material: 'Wood composite'
+                },
+                tags: ['bedroom', 'TV', 'stand', 'entertainment']
+            },
+            {
+                id: 'furn-bedroom-013',
+                name: 'Bedroom Chair',
+                category: 'bedroom',
+                price: 75000,
+                basePrice: 75000,
+                image: '/img/furniture/bedroom-chair.jpg',
+                description: 'Comfortable accent chair for bedroom reading nook.',
+                stock: 'In Stock',
+                sizes: {
+                    'Single': 65000,
+                    'Rocking': 85000,
+                    'Recliner': 115000
+                },
+                specs: {
+                    purpose: 'Bedroom seating',
+                    comfort: 'Upholstered for comfort',
+                    style: 'Bedroom accent chair'
+                },
+                tags: ['bedroom', 'chair', 'seating', 'reading']
+            },
+            {
+                id: 'furn-bedroom-014',
+                name: 'Bedroom Bookcase',
+                category: 'bedroom',
+                price: 115000,
+                basePrice: 115000,
+                image: '/img/furniture/bedroom-bookcase.jpg',
+                description: 'Slim bookcase designed for bedroom storage.',
+                stock: 'In Stock',
+                sizes: {
+                    '4-Shelf': 85000,
+                    '5-Shelf': 115000,
+                    '6-Shelf': 145000
+                },
+                specs: {
+                    purpose: 'Bedroom storage',
+                    design: 'Slim profile',
+                    material: 'Wood construction'
+                },
+                tags: ['bedroom', 'bookcase', 'shelves', 'storage']
+            },
+            {
+                id: 'furn-bedroom-015',
+                name: 'Complete Bedroom Set',
+                category: 'bedroom',
+                price: 685000,
+                basePrice: 685000,
+                image: '/img/furniture/complete-bedroom.jpg',
+                description: 'Complete bedroom suite including bed, wardrobe, dressing table, and nightstands.',
+                stock: 'Made to Order',
+                sizes: {
+                    'Standard Set': 585000,
+                    'Deluxe Set': 785000,
+                    'Premium Set': 985000
+                },
+                specs: {
+                    pieces: 'Complete matching set',
+                    material: 'Premium wood',
+                    style: 'Coordinated bedroom suite'
+                },
+                tags: ['bedroom', 'set', 'complete', 'suite']
             },
 
-            // Commercial
+            // =========== SEATING & CHAIRS (15 products) ===========
             {
-                id: 'furn-commercial-001',
-                name: 'Hotel Reception Desk',
-                category: 'commercial',
-                price: 1200000,
-                image: '/img/furniture/hotel-reception-desk.jpg',
-                description: 'Professional reception desk with built-in storage, cable management, and durable laminate finish.',
-                stock: 'Made to Order',
-                details: {
-                    material: 'Laminate & Metal',
-                    features: 'Built-in storage, cable management',
-                    use: 'Commercial reception desk'
-                },
-                tags: ['commercial', 'hotel', 'reception', 'desk']
-            },
-            {
-                id: 'furn-commercial-002',
-                name: 'Restaurant Dining Collection',
-                category: 'commercial',
-                price: 2500000,
-                image: '/img/furniture/restaurant-dining-set.jpg',
-                description: 'Complete 20-seater restaurant set with durable tables and stackable chairs for easy storage.',
-                stock: 'Made to Order',
-                details: {
-                    capacity: '20-seater set',
-                    features: 'Durable, stackable chairs',
-                    use: 'Commercial restaurant setup'
-                },
-                tags: ['commercial', 'restaurant', 'dining', 'set']
-            },
-
-            // Outdoor
-            {
-                id: 'furn-outdoor-001',
-                name: 'Teak Outdoor Dining Set',
-                category: 'outdoor',
-                price: 750000,
-                image: '/img/furniture/outdoor-dining-set.jpg',
-                description: '6-seater teak wood dining set with weather-resistant cushions and umbrella hole.',
+                id: 'furn-seating-001',
+                name: 'Accent Armchair',
+                category: 'seating',
+                price: 85000,
+                basePrice: 85000,
+                image: '/img/furniture/accent-armchair.jpg',
+                description: 'Stylish accent armchair for living room or bedroom.',
                 stock: 'In Stock',
-                details: {
-                    material: 'Teak Wood',
-                    capacity: '6 seats',
-                    features: 'Weather-resistant, includes cushions'
+                sizes: {
+                    'Standard': 75000,
+                    'Large': 95000,
+                    'Oversized': 125000
                 },
-                tags: ['outdoor', 'dining', 'teak', 'weather-resistant']
+                specs: {
+                    style: 'Accent chair',
+                    material: 'Fabric upholstery',
+                    comfort: 'Padded seat and back'
+                },
+                tags: ['seating', 'armchair', 'accent', 'fabric']
             },
             {
-                id: 'furn-outdoor-002',
-                name: 'Premium Patio Lounge Set',
-                category: 'outdoor',
-                price: 1100000,
-                image: '/img/furniture/patio-lounge-set.jpg',
-                description: 'Complete patio lounge set with deep seating, coffee table, and weather-proof cushions.',
+                id: 'furn-seating-002',
+                name: 'Recliner Chair',
+                category: 'seating',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/recliner-chair.jpg',
+                description: 'Comfortable recliner chair with multiple positions.',
                 stock: 'In Stock',
-                details: {
-                    material: 'Weather-proof materials',
-                    pieces: 'Complete lounge set',
-                    features: 'Deep seating, weather-proof cushions'
+                sizes: {
+                    'Standard': 165000,
+                    'Deluxe': 225000,
+                    'Massage': 325000
                 },
-                tags: ['outdoor', 'patio', 'lounge', 'set']
+                specs: {
+                    feature: 'Reclining mechanism',
+                    material: 'Leather or fabric',
+                    comfort: 'Multiple positions'
+                },
+                tags: ['seating', 'recliner', 'comfort', 'leather']
+            },
+            {
+                id: 'furn-seating-003',
+                name: 'Rocking Chair',
+                category: 'seating',
+                price: 95000,
+                basePrice: 95000,
+                image: '/img/furniture/rocking-chair.jpg',
+                description: 'Traditional rocking chair for nursery or relaxation.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 85000,
+                    'Large': 115000,
+                    'Glider': 135000
+                },
+                specs: {
+                    feature: 'Rocking motion',
+                    material: 'Wood & cushion',
+                    use: 'Nursery or relaxation'
+                },
+                tags: ['seating', 'rocking', 'chair', 'traditional']
+            },
+            {
+                id: 'furn-seating-004',
+                name: 'Folding Chairs',
+                category: 'seating',
+                price: 25000,
+                basePrice: 25000,
+                image: '/img/furniture/folding-chairs.jpg',
+                description: 'Set of 4 folding chairs for events and extra seating.',
+                stock: 'In Stock',
+                sizes: {
+                    'Set of 4': 25000,
+                    'Set of 6': 35000,
+                    'Set of 8': 45000
+                },
+                specs: {
+                    feature: 'Folding for storage',
+                    material: 'Metal & plastic',
+                    use: 'Events and extra seating'
+                },
+                tags: ['seating', 'folding', 'chairs', 'events']
+            },
+            {
+                id: 'furn-seating-005',
+                name: 'Dining Chair',
+                category: 'seating',
+                price: 35000,
+                basePrice: 35000,
+                image: '/img/furniture/single-dining-chair.jpg',
+                description: 'Single upholstered dining chair.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 30000,
+                    'Upholstered': 35000,
+                    'Premium': 45000
+                },
+                specs: {
+                    purpose: 'Dining seating',
+                    material: 'Wood & fabric',
+                    comfort: 'Padded seat'
+                },
+                tags: ['seating', 'dining', 'chair', 'single']
+            },
+            {
+                id: 'furn-seating-006',
+                name: 'Office Chair',
+                category: 'seating',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/furniture/basic-office-chair.jpg',
+                description: 'Basic ergonomic office chair with adjustable features.',
+                stock: 'In Stock',
+                sizes: {
+                    'Basic': 95000,
+                    'Standard': 125000,
+                    'Ergonomic': 185000
+                },
+                specs: {
+                    purpose: 'Office seating',
+                    features: 'Adjustable height',
+                    comfort: 'Ergonomic design'
+                },
+                tags: ['seating', 'office', 'chair', 'ergonomic']
+            },
+            {
+                id: 'furn-seating-007',
+                name: 'Bean Bag Chair',
+                category: 'seating',
+                price: 35000,
+                basePrice: 35000,
+                image: '/img/furniture/bean-bag.jpg',
+                description: 'Large bean bag chair for casual seating.',
+                stock: 'In Stock',
+                sizes: {
+                    'Small': 25000,
+                    'Medium': 35000,
+                    'Large': 45000
+                },
+                specs: {
+                    style: 'Casual bean bag',
+                    filling: 'EPS beads',
+                    cover: 'Removable washable cover'
+                },
+                tags: ['seating', 'beanbag', 'casual', 'kids']
+            },
+            {
+                id: 'furn-seating-008',
+                name: 'Bench Seating',
+                category: 'seating',
+                price: 75000,
+                basePrice: 75000,
+                image: '/img/furniture/bench-seating.jpg',
+                description: 'Wooden bench for entryway or dining.',
+                stock: 'In Stock',
+                sizes: {
+                    '2-Seater': 55000,
+                    '3-Seater': 75000,
+                    '4-Seater': 95000
+                },
+                specs: {
+                    style: 'Bench seating',
+                    material: 'Solid wood',
+                    use: 'Entryway or dining'
+                },
+                tags: ['seating', 'bench', 'wood', 'entryway']
+            },
+            {
+                id: 'furn-seating-009',
+                name: 'Swivel Chair',
+                category: 'seating',
+                price: 115000,
+                basePrice: 115000,
+                image: '/img/furniture/swivel-chair.jpg',
+                description: '360-degree swivel chair for office or living room.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 95000,
+                    'Deluxe': 135000,
+                    'Executive': 185000
+                },
+                specs: {
+                    feature: '360-degree swivel',
+                    material: 'Fabric & metal',
+                    base: 'Sturdy five-point base'
+                },
+                tags: ['seating', 'swivel', 'chair', 'office']
+            },
+            {
+                id: 'furn-seating-010',
+                name: 'Chaise Lounge',
+                category: 'seating',
+                price: 185000,
+                basePrice: 185000,
+                image: '/img/furniture/chaise-lounge.jpg',
+                description: 'Elegant chaise lounge for living room or bedroom.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 165000,
+                    'Large': 225000,
+                    'Premium': 285000
+                },
+                specs: {
+                    style: 'Chaise lounge',
+                    material: 'Upholstered fabric',
+                    comfort: 'Reclining position'
+                },
+                tags: ['seating', 'chaise', 'lounge', 'elegant']
+            },
+            {
+                id: 'furn-seating-011',
+                name: 'Stool Set',
+                category: 'seating',
+                price: 65000,
+                basePrice: 65000,
+                image: '/img/furniture/stool-set.jpg',
+                description: 'Set of 3 adjustable height stools.',
+                stock: 'In Stock',
+                sizes: {
+                    'Set of 2': 45000,
+                    'Set of 3': 65000,
+                    'Set of 4': 85000
+                },
+                specs: {
+                    feature: 'Height adjustable',
+                    material: 'Metal & wood',
+                    use: 'Kitchen or bar'
+                },
+                tags: ['seating', 'stools', 'set', 'adjustable']
+            },
+            {
+                id: 'furn-seating-012',
+                name: 'Floor Cushions',
+                category: 'seating',
+                price: 25000,
+                basePrice: 25000,
+                image: '/img/furniture/floor-cushions.jpg',
+                description: 'Set of 4 floor cushions for casual seating.',
+                stock: 'In Stock',
+                sizes: {
+                    'Set of 2': 15000,
+                    'Set of 4': 25000,
+                    'Set of 6': 35000
+                },
+                specs: {
+                    style: 'Floor seating',
+                    material: 'Fabric filled',
+                    use: 'Casual floor seating'
+                },
+                tags: ['seating', 'cushions', 'floor', 'casual']
+            },
+            {
+                id: 'furn-seating-013',
+                name: 'Director Chair',
+                category: 'seating',
+                price: 55000,
+                basePrice: 55000,
+                image: '/img/furniture/director-chair.jpg',
+                description: 'Classic director chair with canvas seat and back.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 45000,
+                    'Folding': 55000,
+                    'Premium': 75000
+                },
+                specs: {
+                    style: 'Director chair',
+                    material: 'Wood & canvas',
+                    feature: 'Folding design'
+                },
+                tags: ['seating', 'director', 'chair', 'canvas']
+            },
+            {
+                id: 'furn-seating-014',
+                name: 'Side Chair',
+                category: 'seating',
+                price: 45000,
+                basePrice: 45000,
+                image: '/img/furniture/side-chair.jpg',
+                description: 'Simple side chair for various rooms.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 35000,
+                    'Upholstered': 45000,
+                    'Wooden': 55000
+                },
+                specs: {
+                    purpose: 'General seating',
+                    material: 'Various options',
+                    style: 'Simple side chair'
+                },
+                tags: ['seating', 'side', 'chair', 'simple']
+            },
+            {
+                id: 'furn-seating-015',
+                name: 'Lounge Chair',
+                category: 'seating',
+                price: 125000,
+                basePrice: 125000,
+                image: '/img/furniture/lounge-chair.jpg',
+                description: 'Comfortable lounge chair for reading or relaxing.',
+                stock: 'In Stock',
+                sizes: {
+                    'Standard': 105000,
+                    'Large': 135000,
+                    'Premium': 185000
+                },
+                specs: {
+                    purpose: 'Lounge seating',
+                    comfort: 'Deep seating',
+                    material: 'Upholstered fabric'
+                },
+                tags: ['seating', 'lounge', 'chair', 'reading']
             }
         ];
 
-        // CART FUNCTIONS
+        // CART FUNCTIONS (Same as other pages)
         function getCart() {
             try {
                 const cart = localStorage.getItem('cart');
@@ -829,27 +2522,36 @@
             }
         }
 
-        function addToCart(product) {
-            console.log('Adding to cart:', product);
+        function addToCart(product, selectedSize = null) {
+            console.log('Adding to cart:', product, 'Size:', selectedSize);
             
-            if (!product || !product.id || !product.name || !product.price) {
+            if (!product || !product.id || !product.name) {
                 console.error('Invalid product data:', product);
                 return false;
             }
             
             const cart = getCart();
-            const existingItem = cart.find(item => item.id === product.id);
+            const productKey = selectedSize ? `${product.id}-${selectedSize}` : product.id;
+            const productName = selectedSize ? `${product.name} (${selectedSize})` : product.name;
+            const productPrice = selectedSize && product.sizes && product.sizes[selectedSize] 
+                ? product.sizes[selectedSize] 
+                : product.price;
+            
+            const existingItem = cart.find(item => item.id === productKey);
             
             if (existingItem) {
                 existingItem.quantity += 1;
                 console.log('Updated existing item quantity:', existingItem.quantity);
             } else {
                 cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: parseFloat(product.price),
+                    id: productKey,
+                    name: productName,
+                    price: parseFloat(productPrice),
                     image: product.image || '/img/logo.jpg',
-                    quantity: 1
+                    quantity: 1,
+                    category: product.category,
+                    originalId: product.id,
+                    size: selectedSize
                 });
                 console.log('Added new item to cart');
             }
@@ -857,7 +2559,7 @@
             const saved = saveCart(cart);
             
             if (saved) {
-                showCartNotification(product.name);
+                showCartNotification(productName);
                 return true;
             }
             
@@ -913,7 +2615,7 @@
 
         // PRODUCT DISPLAY FUNCTIONS
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Furniture page loaded');
+            console.log('CIL Furniture page loaded');
             
             // Initialize cart count
             updateCartCount();
@@ -924,14 +2626,12 @@
             const categoryFilter = document.getElementById('category-filter');
             const loadMoreBtn = document.getElementById('load-more');
             const productCount = document.getElementById('product-count');
-            const categoryButtons = document.querySelectorAll('.category-item');
             
             // Pagination variables
             let currentPage = 1;
-            const productsPerPage = 8;
+            const productsPerPage = 12;
             let filteredProducts = [...furnitureProducts];
             let isLoading = false;
-            let activeCategory = 'all';
             
             // Initialize the page
             function initPage() {
@@ -940,28 +2640,17 @@
                 setupEventListeners();
                 setupCartDrawer();
                 updateCartCount();
-                setupCategoryNavigation();
+                animateFadeInElements();
             }
             
-            // Setup category navigation
-            function setupCategoryNavigation() {
-                categoryButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        // Update active button
-                        categoryButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // Get category and update filter
-                        const category = this.getAttribute('data-category');
-                        activeCategory = category;
-                        
-                        // Update filter dropdown
-                        categoryFilter.value = category === 'all' ? 'all' : category;
-                        
-                        // Filter products
-                        currentPage = 1;
-                        filterProducts();
-                    });
+            // Animate fade-in elements
+            function animateFadeInElements() {
+                const fadeElements = document.querySelectorAll('.fade-in-up');
+                fadeElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.animationDelay = `${index * 0.1}s`;
+                        el.classList.add('fade-in-up');
+                    }, 100);
                 });
             }
             
@@ -979,17 +2668,6 @@
                 if (categoryFilter) {
                     categoryFilter.addEventListener('change', function() {
                         currentPage = 1;
-                        activeCategory = this.value;
-                        
-                        // Update active category button
-                        categoryButtons.forEach(btn => {
-                            btn.classList.remove('active');
-                            if ((this.value === 'all' && btn.getAttribute('data-category') === 'all') ||
-                                btn.getAttribute('data-category') === this.value) {
-                                btn.classList.add('active');
-                            }
-                        });
-                        
                         filterProducts();
                     });
                 }
@@ -1012,42 +2690,42 @@
                     
                     // Get product data
                     const productId = addToCartBtn.getAttribute('data-id');
+                    const selectedSize = addToCartBtn.getAttribute('data-size');
                     const product = furnitureProducts.find(p => p.id === productId);
                     
                     if (product) {
-                        console.log('Add to cart clicked for:', product.name);
+                        console.log('Add to cart clicked for:', product.name, 'Size:', selectedSize);
                         
                         // Add to cart
-                        addToCart(product);
+                        addToCart(product, selectedSize);
                         
                         // Visual feedback
                         const originalText = addToCartBtn.innerHTML;
-                        addToCartBtn.innerHTML = 'Added!';
+                        addToCartBtn.innerHTML = '✓ Added!';
                         addToCartBtn.style.background = '#27ae60';
-                        addToCartBtn.disabled = true;
                         
                         setTimeout(() => {
                             addToCartBtn.innerHTML = originalText;
                             addToCartBtn.style.background = '';
-                            addToCartBtn.disabled = false;
                         }, 1000);
                     }
-                }, true); // Use capture phase
+                }, true);
             }
             
             // Filter products
             function filterProducts() {
                 const searchTerm = (searchInput ? searchInput.value.toLowerCase() : '');
+                const selectedCategory = (categoryFilter ? categoryFilter.value : 'all');
                 
                 filteredProducts = furnitureProducts.filter(product => {
                     const matchesSearch = 
                         product.name.toLowerCase().includes(searchTerm) ||
                         product.description.toLowerCase().includes(searchTerm) ||
-                        product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                        (product.tags && product.tags.some(tag => tag.toLowerCase().includes(searchTerm)));
                     
                     const matchesCategory = 
-                        activeCategory === 'all' || 
-                        product.category === activeCategory;
+                        selectedCategory === 'all' || 
+                        product.category === selectedCategory;
                     
                     return matchesSearch && matchesCategory;
                 });
@@ -1097,35 +2775,76 @@
             // Create product card
             function createProductCard(product) {
                 const card = document.createElement('div');
-                card.className = 'product-card';
+                card.className = 'product-card fade-in-up';
                 
                 const stockClass = getStockClass(product.stock);
                 const formattedPrice = product.price.toLocaleString();
+                const categoryName = getCategoryName(product.category);
+                const hasSizes = product.sizes && Object.keys(product.sizes).length > 0;
+                const primaryTag = product.tags ? product.tags[0] : '';
+                const tagClass = getTagClass(primaryTag);
+                
+                // Determine default size and price
+                let defaultSize = null;
+                let defaultPrice = product.price;
+                if (hasSizes) {
+                    const sizes = Object.keys(product.sizes);
+                    defaultSize = sizes[1] || sizes[0]; // Prefer Medium, fallback to Small
+                    defaultPrice = product.sizes[defaultSize];
+                }
                 
                 card.innerHTML = `
+                    <div class="product-category-badge">${categoryName}</div>
+                    ${primaryTag ? `<span class="furniture-tag ${tagClass}">${primaryTag.toUpperCase()}</span>` : ''}
                     <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}" onerror="this.src='/img/logo.jpg'">
-                        <span class="stock-badge ${stockClass}">${product.stock}</span>
+                        <img src="${product.image}" alt="${product.name}" 
+                             onerror="this.onerror=null; this.src='/img/logo.jpg'">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">${product.name}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="product-price">₦${formattedPrice}</div>
-                        <div class="product-details">
-                            ${product.details.material ? `<p><strong>Material:</strong> ${product.details.material}</p>` : ''}
-                            ${product.details.capacity ? `<p><strong>Capacity:</strong> ${product.details.capacity}</p>` : ''}
-                            ${product.details.pieces ? `<p><strong>Pieces:</strong> ${product.details.pieces}</p>` : ''}
-                            ${product.details.features ? `<p><strong>Features:</strong> ${product.details.features}</p>` : ''}
+                        
+                        <div class="product-specs">
+                            ${product.specs ? Object.entries(product.specs).map(([key, value]) => `
+                                <div class="spec-item">
+                                    <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1)}:</span>
+                                    <span class="spec-value">${value}</span>
+                                </div>
+                            `).join('') : ''}
                         </div>
+                        
+                        ${hasSizes ? `
+                            <div class="size-options" id="size-options-${product.id}">
+                                ${Object.keys(product.sizes).map((size, index) => `
+                                    <button class="size-option ${index === 1 ? 'selected' : ''}" 
+                                            data-product="${product.id}"
+                                            data-size="${size}"
+                                            data-price="${product.sizes[size]}">
+                                        ${size}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div class="price-display" id="price-display-${product.id}">
+                                ₦${defaultPrice.toLocaleString()}
+                            </div>
+                        ` : `
+                            <div class="price-display">
+                                ₦${formattedPrice}
+                            </div>
+                        `}
+                        
+                        <div class="product-stock ${stockClass}">${product.stock}</div>
+                        
                         <div class="product-actions">
                             <button class="btn-primary add-to-cart" 
                                     data-id="${product.id}"
                                     data-name="${product.name}"
-                                    data-price="${product.price}"
-                                    data-image="${product.image}">
-                                Add to Cart
+                                    data-price="${defaultPrice}"
+                                    data-image="${product.image}"
+                                    ${hasSizes ? `data-size="${defaultSize}"` : ''}>
+                                 Add to Cart
                             </button>
-                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${formattedPrice}" 
+                            <a href="https://wa.me/2348129978419?text=I'm interested in CIL Furniture: ${encodeURIComponent(product.name)} - ₦${defaultPrice.toLocaleString()}${hasSizes ? ` (${defaultSize})` : ''}" 
                                class="btn-whatsapp" target="_blank">
                                  WhatsApp
                             </a>
@@ -1133,14 +2852,162 @@
                     </div>
                 `;
                 
+                // Add size selection functionality
+                if (hasSizes) {
+                    setTimeout(() => {
+                        const sizeOptions = card.querySelectorAll(`#size-options-${product.id} .size-option`);
+                        const priceDisplay = card.querySelector(`#price-display-${product.id}`);
+                        const addToCartBtn = card.querySelector('.add-to-cart');
+                        
+                        sizeOptions.forEach(option => {
+                            option.addEventListener('click', function() {
+                                // Remove selected class from all options
+                                sizeOptions.forEach(opt => opt.classList.remove('selected'));
+                                
+                                // Add selected class to clicked option
+                                this.classList.add('selected');
+                                
+                                // Update price display
+                                const newPrice = this.getAttribute('data-price');
+                                priceDisplay.textContent = `₦${parseFloat(newPrice).toLocaleString()}`;
+                                
+                                // Update add to cart button
+                                const selectedSize = this.getAttribute('data-size');
+                                addToCartBtn.setAttribute('data-size', selectedSize);
+                                addToCartBtn.setAttribute('data-price', newPrice);
+                                
+                                // Update WhatsApp link
+                                const whatsappBtn = card.querySelector('.btn-whatsapp');
+                                const newWhatsappLink = `https://wa.me/2348129978419?text=I'm interested in CIL Furniture: ${encodeURIComponent(product.name)} - ₦${parseFloat(newPrice).toLocaleString()} (${selectedSize})`;
+                                whatsappBtn.setAttribute('href', newWhatsappLink);
+                            });
+                        });
+                    }, 100);
+                }
+                
                 return card;
             }
             
             // Get stock class
             function getStockClass(stock) {
                 if (stock === 'In Stock') return 'stock-in';
-                if (stock === 'Limited Stock' || stock === 'Made to Order') return 'stock-low';
-                return 'stock-out';
+                if (stock === 'Made to Order') return 'stock-custom';
+                if (stock === 'Service') return 'stock-limited';
+                if (stock === 'Limited Stock') return 'stock-limited';
+                return 'stock-custom';
+            }
+            
+            // Get category display name
+            function getCategoryName(category) {
+                const categories = {
+                    'office': 'Office',
+                    'living': 'Living Room',
+                    'dining': 'Dining',
+                    'bedroom': 'Bedroom',
+                    'seating': 'Seating',
+                    'commercial': 'Commercial',
+                    'outdoor': 'Outdoor',
+                    'accessories': 'Accessories'
+                };
+                return categories[category] || category;
+            }
+            
+            // Get tag class
+            function getTagClass(tag) {
+                const tagClasses = {
+                    'wood': 'tag-wood',
+                    'leather': 'tag-leather',
+                    'fabric': 'tag-fabric',
+                    'metal': 'tag-metal',
+                    'modern': 'tag-modern',
+                    'classic': 'tag-classic',
+                    'luxury': 'tag-luxury',
+                    'office': 'tag-wood',
+                    'executive': 'tag-luxury',
+                    'glass': 'tag-modern',
+                    'mesh': 'tag-modern',
+                    'professional': 'tag-wood',
+                    'filing': 'tag-wood',
+                    'set': 'tag-classic',
+                    'sofa': 'tag-fabric',
+                    'sectional': 'tag-fabric',
+                    'L-shaped': 'tag-modern',
+                    'table': 'tag-wood',
+                    'coffee': 'tag-wood',
+                    'entertainment': 'tag-modern',
+                    'chair': 'tag-fabric',
+                    'accent': 'tag-fabric',
+                    'decor': 'tag-modern',
+                    'storage': 'tag-wood',
+                    'display': 'tag-glass',
+                    'TV': 'tag-modern',
+                    'ottoman': 'tag-fabric',
+                    'multipurpose': 'tag-modern',
+                    'wall': 'tag-modern',
+                    'fireplace': 'tag-luxury',
+                    'bed': 'tag-wood',
+                    'convertible': 'tag-modern',
+                    'bar': 'tag-wood',
+                    'wine': 'tag-luxury',
+                    'china': 'tag-classic',
+                    'patio': 'tag-wood',
+                    'weather-resistant': 'tag-metal',
+                    'folding': 'tag-metal',
+                    'space-saving': 'tag-modern',
+                    'round': 'tag-classic',
+                    'conversation': 'tag-classic',
+                    'bench': 'tag-wood',
+                    'seating': 'tag-fabric',
+                    'family': 'tag-fabric',
+                    'cart': 'tag-metal',
+                    'serving': 'tag-wood',
+                    'mobile': 'tag-metal',
+                    'formal': 'tag-luxury',
+                    'elegant': 'tag-luxury',
+                    'pub': 'tag-wood',
+                    'casual': 'tag-fabric',
+                    'children': 'tag-modern',
+                    'kids': 'tag-modern',
+                    'playroom': 'tag-modern',
+                    'queen': 'tag-wood',
+                    'king': 'tag-wood',
+                    'closet': 'tag-wood',
+                    'vanity': 'tag-classic',
+                    'bedside': 'tag-wood',
+                    'chest': 'tag-wood',
+                    'drawers': 'tag-wood',
+                    'mirror': 'tag-modern',
+                    'canopy': 'tag-luxury',
+                    'romantic': 'tag-luxury',
+                    'armoire': 'tag-classic',
+                    'traditional': 'tag-classic',
+                    'practical': 'tag-modern',
+                    'jewelry': 'tag-luxury',
+                    'entertainment': 'tag-modern',
+                    'reading': 'tag-fabric',
+                    'shelves': 'tag-wood',
+                    'suite': 'tag-luxury',
+                    'recliner': 'tag-leather',
+                    'comfort': 'tag-fabric',
+                    'rocking': 'tag-classic',
+                    'nursery': 'tag-modern',
+                    'events': 'tag-metal',
+                    'ergonomic': 'tag-modern',
+                    'beanbag': 'tag-fabric',
+                    'entryway': 'tag-wood',
+                    'swivel': 'tag-metal',
+                    'chaise': 'tag-luxury',
+                    'stools': 'tag-wood',
+                    'adjustable': 'tag-metal',
+                    'cushions': 'tag-fabric',
+                    'floor': 'tag-fabric',
+                    'director': 'tag-classic',
+                    'canvas': 'tag-fabric',
+                    'side': 'tag-wood',
+                    'simple': 'tag-wood',
+                    'lounge': 'tag-fabric'
+                };
+                return tagClasses[tag] || 'tag-wood';
             }
             
             // Update product count display
@@ -1150,10 +3017,10 @@
                 const totalProducts = filteredProducts.length;
                 const showingProducts = Math.min(currentPage * productsPerPage, totalProducts);
                 
-                productCount.textContent = `Showing ${showingProducts} of ${totalProducts} furniture items`;
-                
                 if (totalProducts === 0) {
-                    productCount.textContent = 'No furniture items found matching your criteria';
+                    productCount.textContent = 'No furniture products found matching your criteria';
+                } else {
+                    productCount.textContent = `Showing ${showingProducts} of ${totalProducts} furniture products`;
                 }
             }
             
@@ -1163,6 +3030,9 @@
                 const newCards = Array.from(allCards).slice(-productsPerPage);
                 
                 newCards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    
                     setTimeout(() => {
                         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                         card.style.opacity = '1';
@@ -1224,7 +3094,7 @@
                             <div class="cart-drawer-empty">
                                 <div class="cart-drawer-empty-icon">🛒</div>
                                 <p>Your cart is empty</p>
-                                <a href="/shop-categories" class="btn btn-primary">Continue Shopping</a>
+                                <a href="/shop-furniture" class="btn btn-primary">Browse Furniture</a>
                             </div>
                         `;
                         if (drawerTotal) drawerTotal.textContent = '₦0';
@@ -1280,6 +3150,7 @@
             window.addToCart = addToCart;
             window.updateCartCount = updateCartCount;
             window.getCart = getCart;
+            window.showCartNotification = showCartNotification;
         });
     </script>
 </body>

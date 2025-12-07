@@ -67,6 +67,7 @@ const ROUTES = {
     '/shop-solar': 'shop-solar.html',
     '/shop-livestock': 'shop-livestock.html',
     '/shop-all': 'shop-all.html',
+    '/shop-diaspora': 'shop-diaspora.html',
     '/shop-furniture': 'shop-furniture.html',
     '/portfolio': 'portfolio.html',
     '/cart': 'cart.html',
@@ -1152,10 +1153,6 @@ async function startServer() {
             logger.info(`📧 Email: ${process.env.EMAIL_USER}`);
             logger.info('💡 Server ready to accept requests');
             
-            console.log('\n=== Server Access Information ===');
-            console.log(`🔐 Admin Panel: ${renderUrl}/admin/login`);
-            console.log('🏥 Health check:', `${renderUrl}/health`);
-            console.log('🗄️  MongoDB: Connected and ready');
         });
         
         // Graceful shutdown

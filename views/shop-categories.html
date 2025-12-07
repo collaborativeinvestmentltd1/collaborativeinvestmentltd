@@ -5,16 +5,459 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Categories - Collaborative Investment Ltd</title>
     <meta name="description" content="Browse our products by category - Agriculture, Construction, Solar Energy, Furniture, and Machinery">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/colors.css">
-    <link rel="stylesheet" href="/css/shop.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="stylesheet" href="/css/shop-categories.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    
+    <!-- Enhanced Styling -->
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-color: #f8f9fa;
+            --dark-color: #1a252f;
+            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 15px 35px rgba(0,0,0,0.15);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+        
+        /* Hero Section */
+        .shop-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shop-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/shop-pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .shop-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .shop-hero .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            padding: 5rem 0;
+            background: var(--light-color);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Enhanced Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--secondary-color);
+        }
+        
+        .category-card:hover::before {
+            opacity: 1;
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .category-icon::before {
+            content: '';
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .category-card[href*="agriculture"] .category-icon::before {
+            content: '🌱';
+        }
+        
+        .category-card[href*="construction"] .category-icon::before {
+            content: '🏗️';
+        }
+        
+        .category-card[href*="machinery"] .category-icon::before {
+            content: '⚙️';
+        }
+        
+        .category-card[href*="solar"] .category-icon::before {
+            content: '☀️';
+        }
+        
+        .category-card[href*="furniture"] .category-icon::before {
+            content: '🛋️';
+        }
+        
+        .category-card.view-all .category-icon::before {
+            content: '📦';
+        }
+        
+        .category-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .category-count {
+            display: inline-block;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .category-count {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Quick Order Section */
+        .quick-order-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .quick-order-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-order-section > p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-options {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--dark-color);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+            background: var(--light-color);
+        }
+        
+        .contact-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .contact-btn.whatsapp:hover {
+            background: #128C7E;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            padding: 1rem 0;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .breadcrumb-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .breadcrumb-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .breadcrumb-separator {
+            color: #999;
+        }
+        
+        /* Featured Products Preview */
+        .featured-preview {
+            padding: 4rem 0;
+            background: var(--light-color);
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .preview-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        
+        .preview-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .shop-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .shop-hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .shop-hero {
+                padding: 3rem 0;
+            }
+            
+            .shop-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .category-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -22,38 +465,43 @@
                 <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
             
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories" class="active">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -62,77 +510,144 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
-    <!-- Categories Hero -->
-    <section class="categories-hero">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
         <div class="container">
-            <h1>Shop Our Products</h1>
-            <p>Quality products across all our business sectors</p>
+            <div class="breadcrumb-links">
+                <a href="/">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Shop Categories</span>
+            </div>
         </div>
-    </section>
+    </nav>
 
-    <!-- Categories Grid -->
-    <section class="categories-section">
+    <!-- Hero Section -->
+    <section class="shop-hero">
         <div class="container">
-            <div class="categories-grid">
-                <a href="/shop-agriculture" class="category-card">
-                    <div class="category-icon"></div>
-                    <h3>Agriculture & Livestock</h3>
-                    <p>Day-old chicks, broilers, layers, eggs, pigs, catfish, and farming supplies</p>
-                    <span class="category-count">15 products</span>
-                </a>
-
-                <a href="/shop-construction" class="category-card">
-                    <div class="category-icon"></div>
-                    <h3>Construction & Blocks</h3>
-                    <p>Concrete blocks, building materials, and basketball court construction</p>
-                    <span class="category-count">6 products</span>
-                </a>
-
-                <a href="/shop-machinery" class="category-card">
-                    <div class="category-icon"></div>
-                    <h3>Machinery & Equipment</h3>
-                    <p>Block-making machines and industrial equipment</p>
-                    <span class="category-count">4 products</span>
-                </a>
-
-                <a href="/shop-solar" class="category-card">
-                    <div class="category-icon"></div>
-                    <h3>Solar Energy</h3>
-                    <p>Solar panels, batteries, inverters, and complete systems</p>
-                    <span class="category-count">8 products</span>
-                </a>
-
-                <a href="/shop-furniture" class="category-card">
-                    <div class="category-icon"></div>
-                    <h3>Furniture & Upholstery</h3>
-                    <p>Custom-made chairs, leather and cloth upholstery, complete chair sets</p>
-                    <span class="category-count">12 products</span>
-                </a>
-
-                <a href="/shop-all" class="category-card view-all">
-                    <div class="category-icon"></div>
-                    <h3>View All Products</h3>
-                    <p>Browse our complete product catalog</p>
-                    <span class="category-count">45 products</span>
+            <div class="hero-content fade-in-up">
+                <h1>Discover Our Products</h1>
+                <p class="subtitle">Premium quality products across agriculture, construction, solar energy, furniture, and machinery</p>
+                <a href="#categories" class="btn btn-primary" style="background: white; color: var(--primary-color);">
+                    Explore Categories 
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Quick Order -->
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="250">0</span>
+                    <span class="stat-label">Products Available</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="6">0</span>
+                    <span class="stat-label">Business Sectors</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="150">0</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="24">0</span>
+                    <span class="stat-label">Hour Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Grid -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Browse by Category</h2>
+                <p class="section-subtitle">Select a category to explore our comprehensive range of products and services</p>
+            </div>
+            
+            <div class="categories-grid">
+                <!-- Agriculture -->
+                <a href="/shop-agriculture" class="category-card fade-in-up" data-delay="100">
+                    <h3>Agriculture & Livestock</h3>
+                    <p>Comprehensive range of agricultural products including day-old chicks, broilers, layers, eggs, pigs, catfish, fingerlings, and essential farming supplies</p>
+                    <span class="category-count">25+ products</span>
+                </a>
+
+                <!-- Construction -->
+                <a href="/shop-construction" class="category-card fade-in-up" data-delay="200">
+                    <h3>Construction & Manufacturing</h3>
+                    <p>Building materials, concrete blocks, sports court construction, electric gates, and complete construction solutions</p>
+                    <span class="category-count">45+ products</span>
+                </a>
+
+                <!-- Machinery -->
+                <a href="/shop-machinery" class="category-card fade-in-up" data-delay="300">
+                    <h3>Machinery & Equipment</h3>
+                    <p>Industrial machinery including block-making machines, concrete mixers, and production equipment</p>
+                    <span class="category-count">15+ products</span>
+                </a>
+
+                <!-- Solar -->
+                <a href="/shop-solar" class="category-card fade-in-up" data-delay="400">
+                    <h3>Solar Energy Solutions</h3>
+                    <p>Complete solar power systems, panels, batteries, inverters, and professional installation services</p>
+                    <span class="category-count">20+ products</span>
+                </a>
+
+                <!-- Furniture -->
+                <a href="/shop-furniture" class="category-card fade-in-up" data-delay="500">
+                    <h3>Furniture & Upholstery</h3>
+                    <p>Custom-made furniture, leather and cloth upholstery, office furniture, and complete interior solutions</p>
+                    <span class="category-count">75+ products</span>
+                </a>
+
+                <!-- Disapora -->
+                <a href="/shop-diaspora" class="category-card fade-in-up" data-delay="500">
+                    <h3>Diaspora Buisness & Project Management</h3>
+                    <p>Custom-made plans and investment strategies for People who are in or out of the country but have plans to invest in Nigeria but needs a reputable company to handle the projects or business management </p>
+                    <span class="category-count">5 Opportunities</span>
+                </a>
+
+                <!-- View All -->
+                <a href="/shop-all" class="category-card view-all fade-in-up pulse" data-delay="600">
+                    <h3>View All Products</h3>
+                    <p>Browse our complete product catalog with advanced search and filtering options</p>
+                    <span class="category-count">180+ products</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Order Section -->
     <section class="quick-order-section">
         <div class="container">
-            <h2>Need Help Ordering?</h2>
-            <p>Contact us directly for bulk orders or custom requirements</p>
+            <h2>Need Help With Your Order?</h2>
+            <p>Our product specialists are ready to assist you with bulk orders, custom requirements, or any questions</p>
             <div class="contact-options">
                 <a href="tel:+2348129978419" class="contact-btn">
                      Call +234 812 997 8419
                 </a>
                 <a href="https://wa.me/2348129978419" class="contact-btn whatsapp" target="_blank">
-                     WhatsApp Order
+                     WhatsApp Consultation
                 </a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com" class="contact-btn">
+                     Email Inquiry
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Preview -->
+    <section class="featured-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-subtitle">Check out some of our most popular products</p>
+            </div>
+            <div class="preview-grid" id="featured-products">
+                <!-- JavaScript will populate this -->
             </div>
         </div>
     </section>
@@ -261,9 +776,235 @@
             </div>
         </div>
     </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
     <script src="/js/shop-categories.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/cart-drawer.js"></script>
+    
+    <!-- Enhanced Shop Categories JavaScript -->
+    <script>
+        // Enhanced shop-categories.js
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Enhanced Shop Categories loaded');
+            
+            // Initialize counters
+            initCounters();
+            
+            // Setup category cards
+            setupCategoryCards();
+            
+            // Load featured products
+            loadFeaturedProducts();
+            
+            // Setup animations
+            setupAnimations();
+            
+            // Cart initialization
+            updateCartCount();
+        });
+        
+        function initCounters() {
+            // Animate counter numbers
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                // Start counter when in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        }
+        
+        function setupCategoryCards() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            categoryCards.forEach(card => {
+                // Add hover effect
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                // Add click animation
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Add ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.7);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    // Navigate after animation
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 300);
+                });
+            });
+        }
+        
+        function loadFeaturedProducts() {
+            const featuredContainer = document.getElementById('featured-products');
+            if (!featuredContainer) return;
+            
+            // Sample featured products
+            const featuredProducts = [
+                {
+                    name: 'Monocrystalline Solar Panel 330W',
+                    category: 'Solar',
+                    price: '₦45,000',
+                    image: '/img/solar/monocrystalline-330w.jpg'
+                },
+                {
+                    name: 'Day Old Broiler Chicks',
+                    category: 'Agriculture',
+                    price: '₦450',
+                    image: '/img/agriculture/day-old-broilers.jpg'
+                },
+                {
+                    name: 'Automatic Block Machine',
+                    category: 'Machinery',
+                    price: '₦2,500,000',
+                    image: '/img/machinery/auto-5-block.jpg'
+                },
+                {
+                    name: 'Executive Office Chair',
+                    category: 'Furniture',
+                    price: '₦185,000',
+                    image: '/img/furniture/ergonomic-office-chair.jpg'
+                }
+            ];
+            
+            featuredProducts.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'preview-item';
+                item.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='/img/logo.jpg'">
+                    <h4>${product.name}</h4>
+                    <p class="product-category">${product.category}</p>
+                    <p class="product-price">${product.price}</p>
+                `;
+                featuredContainer.appendChild(item);
+            });
+        }
+        
+        function setupAnimations() {
+            // Stagger fade-in animations
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach((element, index) => {
+                const delay = element.getAttribute('data-delay') || 0;
+                setTimeout(() => {
+                    element.style.animationDelay = `${index * 100 + parseInt(delay)}ms`;
+                    element.classList.add('fade-in-up');
+                }, 50);
+            });
+            
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.category-card, .stat-item, .preview-item').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        function updateCartCount() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                const badge = document.getElementById('cart-count-badge');
+                if (badge) {
+                    badge.textContent = totalItems;
+                    badge.style.display = totalItems > 0 ? 'flex' : 'none';
+                }
+            } catch (error) {
+                console.error('Error updating cart count:', error);
+            }
+        }
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .animated {
+                animation: fadeIn 0.6s ease forwards;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

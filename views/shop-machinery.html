@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machinery & Equipment - Collaborative Investment Ltd</title>
-    <meta name="description" content="Buy block-making machines and industrial equipment">
+    <title>Machinery & Construction Materials - Collaborative Investment Ltd</title>
+    <meta name="description" content="Buy block-making machines, construction blocks, cement, and industrial equipment">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
-    <link rel="stylesheet" href="/css/machinery.css">
     
     <!-- Page-specific styles -->
     <style>
@@ -19,6 +18,8 @@
             --machinery-primary: #34495e;
             --machinery-secondary: #2c3e50;
             --machinery-accent: #3498db;
+            --machinery-success: #27ae60;
+            --machinery-warning: #f39c12;
         }
         
         .machinery-header {
@@ -27,29 +28,59 @@
             padding: 3rem 0;
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .machinery-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/machinery/gears-pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .machinery-header .container {
+            position: relative;
+            z-index: 2;
         }
         
         .machinery-header h1 {
             color: white;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
         .machinery-header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
         
         .back-link {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: inline-block;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
         
         .back-link:hover {
             color: white;
+            background: rgba(0,0,0,0.3);
+            transform: translateX(-5px);
         }
         
         .machinery-section {
@@ -60,50 +91,98 @@
             text-align: center;
             color: var(--machinery-primary);
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--machinery-accent);
+            margin: 1rem auto 2rem;
+            border-radius: 2px;
         }
         
         .section-subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            max-width: 800px;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+        
+        .category-tab {
+            padding: 0.8rem 1.5rem;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .category-tab:hover {
+            background: #e9ecef;
+            border-color: var(--machinery-accent);
+        }
+        
+        .category-tab.active {
+            background: var(--machinery-primary);
+            color: white;
+            border-color: var(--machinery-primary);
         }
         
         .machinery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
         
         .machine-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
+            position: relative;
         }
         
         .machine-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
         .machine-image {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
+            position: relative;
         }
         
         .machine-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
         
         .machine-card:hover .machine-image img {
@@ -114,55 +193,91 @@
             padding: 1.5rem;
         }
         
-        .machine-title {
-            font-size: 1.2rem;
-            color: var(--machinery-primary);
-            margin-bottom: 0.5rem;
+        .machine-category {
+            color: var(--machinery-accent);
             font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .machine-title {
+            font-size: 1.3rem;
+            color: var(--machinery-primary);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            line-height: 1.4;
         }
         
         .machine-description {
             color: #666;
             margin-bottom: 1rem;
             font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .machine-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--machinery-accent);
-            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            min-height: 4.5em;
         }
         
         .machine-specs {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #666;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
         }
         
-        .machine-specs li {
+        .spec-item {
             display: flex;
             justify-content: space-between;
-            margin: 0.3rem 0;
-            padding: 0.25rem 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .machine-specs li:last-child {
-            border-bottom: none;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
         
         .spec-label {
-            font-weight: 600;
+            color: #666;
+            font-weight: 500;
         }
         
         .spec-value {
-            color: #666;
+            color: var(--machinery-primary);
+            font-weight: 600;
+        }
+        
+        .machine-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--machinery-success);
+            margin: 0.5rem 0;
+        }
+        
+        .bulk-price {
+            font-size: 0.9rem;
+            color: var(--machinery-warning);
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+        
+        .machine-stock {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .stock-in {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .stock-made {
+            background: #fff3cd;
+            color: #856404;
         }
         
         .machine-actions {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
             margin-top: 1rem;
         }
@@ -171,65 +286,62 @@
             background: var(--machinery-primary);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            flex: 1;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         
         .btn-primary:hover {
             background: var(--machinery-accent);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .btn-whatsapp {
             background: #25D366;
             color: white;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            flex: 1;
         }
         
         .btn-whatsapp:hover {
             background: #128C7E;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .machine-tags {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
         
         .machine-tag {
-            display: inline-block;
             padding: 0.3rem 0.8rem;
-            background: #e67e22;
-            color: white;
+            background: rgba(255,255,255,0.9);
+            color: var(--machinery-primary);
             border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .machine-tag.imported {
-            background: #3498db;
-        }
-        
-        .machine-tag.local {
-            background: #27ae60;
-        }
-        
-        .machine-tag.automatic {
-            background: #9b59b6;
-        }
-        
-        .machine-tag.manual {
-            background: #e74c3c;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(10px);
         }
         
         .filter-controls {
@@ -238,6 +350,10 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .search-box {
@@ -248,86 +364,130 @@
         
         .search-box input {
             width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.5rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--machinery-accent);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
         }
         
         .search-icon {
             position: absolute;
-            left: 12px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #666;
-        }
-        
-        .category-filter {
-            padding: 0.8rem 1rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            font-size: 1rem;
-            min-width: 200px;
+            color: #999;
+            font-size: 1.2rem;
         }
         
         .product-count {
             text-align: center;
-            margin: 1rem 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .machine-type-section {
-            margin-bottom: 3rem;
-        }
-        
-        .machine-type-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--machinery-primary);
+            margin: 1.5rem 0;
             color: var(--machinery-primary);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
         
-        .contact-options {
+        .bulk-order-cta {
+            background: linear-gradient(135deg, var(--machinery-success) 0%, #2ecc71 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .bulk-order-cta h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .bulk-order-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, var(--machinery-primary) 0%, var(--machinery-secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 20px;
+        }
+        
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-buttons {
             display: flex;
-            justify-content: center;
             gap: 1rem;
-            margin-top: 1.5rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
         
-        .contact-btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--machinery-primary);
-            color: white;
+        .btn-call {
+            background: white;
+            color: var(--machinery-primary);
             text-decoration: none;
-            border-radius: 6px;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .contact-btn:hover {
-            background-color: var(--machinery-accent);
+        .btn-call:hover {
+            background: #f8f9fa;
             transform: translateY(-2px);
-        }
-        
-        .contact-btn.whatsapp {
-            background-color: #25D366;
-        }
-        
-        .contact-btn.whatsapp:hover {
-            background-color: #128C7E;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         @media (max-width: 768px) {
+            .machinery-header h1 {
+                font-size: 2rem;
+            }
+            
+            .machinery-header p {
+                font-size: 1.1rem;
+            }
+            
+            .category-tabs {
+                flex-wrap: wrap;
+            }
+            
             .filter-controls {
                 flex-direction: column;
             }
             
-            .search-box, .category-filter {
+            .search-box {
                 min-width: 100%;
             }
             
@@ -335,29 +495,35 @@
                 grid-template-columns: 1fr;
             }
             
-            .machinery-header h1 {
-                font-size: 2rem;
-            }
-            
             .machine-actions {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
             
-            .contact-options {
+            .contact-buttons {
                 flex-direction: column;
-                align-items: center;
             }
-            
-            .contact-btn {
-                width: 100%;
-                text-align: center;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
         }
     </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -370,33 +536,33 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon in Header -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -405,51 +571,96 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
     <!-- Main Content -->
     <main>
         <!-- Category Header -->
         <section class="machinery-header">
             <div class="container">
-                <a href="/shop-categories" class="back-link">← Back to Categories</a>
-                <h1>Machinery & Equipment</h1>
-                <p>Block-making machines and industrial equipment for construction businesses</p>
+                <a href="/shop-categories" class="back-link">
+                    ← Back to Categories
+                </a>
+                <h1>Machinery & Construction Materials</h1>
+                <p>Premium block-making machines, construction materials, and industrial equipment for your building projects</p>
+            </div>
+        </section>
+
+        <!-- Category Tabs -->
+        <section class="container">
+            <div class="category-tabs" id="category-tabs">
+                <button class="category-tab active" data-category="all">All Products</button>
+                <button class="category-tab" data-category="machines">Block Machines</button>
+                <button class="category-tab" data-category="blocks">Construction Blocks</button>
+                <button class="category-tab" data-category="cement">Bulk Cement</button>
+                <button class="category-tab" data-category="mixers">Industrial Mixers</button>
+            </div>
+        </section>
+
+        <!-- Bulk Order CTA -->
+        <section class="container">
+            <div class="bulk-order-cta">
+                <h3> Bulk Order Specials</h3>
+                <p>Order 100 units or more and enjoy special wholesale prices. Perfect for construction companies, contractors, and large projects.</p>
+                <div class="contact-buttons">
+                    <a href="https://wa.me/2348129978419?text=I want to place a bulk order for construction materials" 
+                       class="btn-whatsapp" target="_blank">
+                         Request Bulk Quote
+                    </a>
+                    <a href="tel:+2348129978419" class="btn-call">
+                         Call for Bulk Pricing
+                    </a>
+                </div>
             </div>
         </section>
 
         <!-- Machinery Products Section -->
         <section class="machinery-section">
             <div class="container">
-                <h2 class="section-title">Machinery & Equipment</h2>
-                <p class="section-subtitle">We offer a wide range of block-making machines, mixers, and industrial equipment for your construction business needs.</p>
+                <h2 class="section-title">Machinery & Materials</h2>
+                <p class="section-subtitle">
+                    Explore our comprehensive range of block-making machines, construction materials, 
+                    and industrial equipment for your building projects.
+                </p>
                 
                 <!-- Filter Controls -->
                 <div class="filter-controls">
                     <div class="search-box">
-                        <span class="search-icon"></span>
-                        <input type="text" id="machine-search" placeholder="Search machinery and equipment...">
+                        <input type="text" id="machine-search" placeholder="Search machinery and materials...">
                     </div>
-                    <select class="category-filter" id="category-filter">
-                        <option value="all">All Machinery</option>
-                        <option value="2-block">2-Block Machines</option>
-                        <option value="3-block">3-Block Machines</option>
-                        <option value="5-block">5-Block Machines</option>
-                        <option value="mixer">Industrial Mixers</option>
-                    </select>
                 </div>
                 
                 <!-- Product Count -->
-                <div class="product-count" id="product-count">Loading machinery...</div>
+                <div class="product-count" id="product-count">Loading machinery and materials...</div>
                 
                 <!-- Machinery Grid -->
                 <div class="machinery-grid" id="machinery-container">
-                    <!-- Machines will be loaded by JavaScript -->
+                    <!-- Products will be loaded by JavaScript -->
                 </div>
                 
                 <!-- Load More Button -->
                 <div style="text-align: center; margin-top: 2rem;">
-                    <button id="load-more" class="btn-primary" style="display: none;">Load More Machinery</button>
+                    <button id="load-more" class="btn-primary" style="display: none;">Load More Products</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="contact-cta">
+            <div class="container">
+                <h2>Need Professional Advice?</h2>
+                <p>
+                    Our experts are ready to help you choose the right machinery and materials for your specific project requirements.
+                </p>
+                <div class="contact-buttons">
+                    <a href="https://wa.me/2348129978419" class="btn-whatsapp" target="_blank">
+                         WhatsApp Consultation
+                    </a>
+                    <a href="tel:+2348129978419" class="btn-call">
+                         Call: +234 812 997 8419
+                    </a>
+                    <a href="/contact" class="btn-primary">
+                         Contact Form
+                    </a>
                 </div>
             </div>
         </section>
@@ -526,12 +737,12 @@
         <div class="footer-section">
             <h3>Services</h3>
             <ul class="footer-links">
-                <li><a href="/services#business-management">Business Management</a></li>
-                <li><a href="/services#agriculture">Agricultural Development</a></li>
-                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
-                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#agriculture">Agriculture & Agribusiness</a></li>
+                <li><a href="/services#manufacturing">Construction & Manufacturing</a></li>
                 <li><a href="/services#diaspora">Diaspora Management</a></li>
-                <li><a href="/investment">Investment Opportunities</a></li>
+                <li><a href="/services#hospitality">Hospitality & Entertainment</a></li>
+                <li><a href="/services#solar">Solar Energy Solutions</a></li>
+                <li><a href="/services#furniture">Furniture & Upholstery</a></li>
             </ul>
         </div>
 
@@ -549,12 +760,7 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
         <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-        <p>
-            <a href="/admin/login" style="color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.3);" 
-               title="Admin Access" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='inherit'">
-                Building Nigeria's Business Future
-            </a>
-        </p>
+        <p>Building Nigeria's Business Future</p>
 
         <p style="margin-top: 1rem;">
             <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
@@ -572,6 +778,7 @@
             </p>
         </div>
     </div>
+</footer>
 
     <!-- Cookie Consent -->
     <div id="cookieConsent" class="cookie-consent">
@@ -586,222 +793,341 @@
 
     <!-- JavaScript -->
     <script>
-        // MACHINERY PRODUCTS DATA
+        // EXPANDED MACHINERY PRODUCTS DATA
         const machineryProducts = [
-            // 2-Block Machines
+            // =========== BLOCK MACHINES ===========
             {
                 id: 'mach-001',
-                name: 'Imported Automatic 2-Block Maker',
-                category: '2-block',
-                price: 1200000,
-                image: '/img/machinery/imported-2-block-maker.jpg',
-                description: 'High-efficiency imported automatic machine producing 2 blocks per cycle with minimal manual operation.',
+                name: 'Manual Block Making Machine (2 Blocks)',
+                category: 'machines',
+                subcategory: 'manual',
+                price: 450000,
+                basePrice: 450000,
+                image: '/img/machinery/manual-2-block.jpg',
+                description: 'Manual operation block-making machine producing 2 blocks per cycle.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '800-1,200 blocks/day',
-                    power: 'Electric (3-phase)',
-                    blockTypes: 'Hollow, Solid, Interlocking',
-                    operation: 'Fully Automatic',
-                    warranty: '1 Year'
+                specs: {
+                    capacity: '2 blocks/cycle',
+                    production: '300-500 blocks/day',
+                    power: 'Manual operation',
+                    blockTypes: '6", 9" hollow/solid',
+                    warranty: '3 months'
                 },
-                tags: ['imported', 'automatic']
+                tags: ['machine', 'manual', '2-block']
             },
             {
                 id: 'mach-002',
-                name: 'Local Automatic 2-Block Maker',
-                category: '2-block',
+                name: 'Semi-Automatic Block Machine (3 Blocks)',
+                category: 'machines',
+                subcategory: 'semi-auto',
                 price: 950000,
-                image: '/img/machinery/local-2-block-maker.jpg',
-                description: 'Reliable locally manufactured automatic machine with good production capacity and easy maintenance.',
+                basePrice: 950000,
+                image: '/img/machinery/semi-auto-3-block.jpg',
+                description: 'Semi-automatic block machine with motorized vibration for 3 blocks per cycle.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '700-1,000 blocks/day',
-                    power: 'Electric (3-phase)',
-                    blockTypes: 'Hollow, Solid',
-                    operation: 'Semi-Automatic',
-                    warranty: '6 Months'
+                specs: {
+                    capacity: '3 blocks/cycle',
+                    production: '800-1200 blocks/day',
+                    power: 'Electric 3HP',
+                    blockTypes: 'All standard sizes',
+                    warranty: '6 months'
                 },
-                tags: ['local', 'automatic']
+                tags: ['machine', 'semi-auto', '3-block']
             },
             {
                 id: 'mach-003',
-                name: 'Manual 2-Block Maker',
-                category: '2-block',
-                price: 180000,
-                image: '/img/machinery/manual-2-block-maker.jpg',
-                description: 'Affordable manual machine perfect for startups and small-scale block production operations.',
-                stock: 'In Stock',
-                details: {
-                    capacity: '300-500 blocks/day',
-                    power: 'Manual Operation',
-                    blockTypes: 'Hollow, Solid',
-                    operation: 'Manual',
-                    warranty: '3 Months'
+                name: 'Automatic Block Machine (5 Blocks)',
+                category: 'machines',
+                subcategory: 'auto',
+                price: 2500000,
+                basePrice: 2500000,
+                image: '/img/machinery/auto-5-block.jpg',
+                description: 'Fully automatic hydraulic block machine producing 5 blocks per cycle.',
+                stock: 'Made to Order',
+                specs: {
+                    capacity: '5 blocks/cycle',
+                    production: '2000-3000 blocks/day',
+                    power: 'Electric 10HP',
+                    blockTypes: 'All types including paving',
+                    warranty: '1 year'
                 },
-                tags: ['local', 'manual']
+                tags: ['machine', 'automatic', '5-block']
             },
-
-            // 3-Block Machines
             {
                 id: 'mach-004',
-                name: 'Imported Automatic 3-Block Maker',
-                category: '3-block',
-                price: 1800000,
-                image: '/img/machinery/imported-3-block-maker.jpg',
-                description: 'Advanced imported automatic machine with high production capacity and precision engineering.',
-                stock: 'In Stock',
-                details: {
-                    capacity: '1,500-2,000 blocks/day',
-                    power: 'Electric (3-phase)',
-                    blockTypes: 'Hollow, Solid, Interlocking, Paving',
-                    operation: 'Fully Automatic with PLC',
-                    warranty: '1-2 Years'
+                name: 'Mobile Block Making Machine',
+                category: 'machines',
+                subcategory: 'mobile',
+                price: 1850000,
+                basePrice: 1850000,
+                image: '/img/machinery/mobile-block-machine.jpg',
+                description: 'Mobile block machine with diesel engine for on-site production.',
+                stock: 'Made to Order',
+                specs: {
+                    capacity: '4 blocks/cycle',
+                    production: '1500-2000 blocks/day',
+                    power: 'Diesel engine',
+                    mobility: 'Trailer mounted',
+                    warranty: '6 months'
                 },
-                tags: ['imported', 'automatic']
-            },
-            {
-                id: 'mach-005',
-                name: 'Local Automatic 3-Block Maker',
-                category: '3-block',
-                price: 1300000,
-                image: '/img/machinery/local-3-block-maker.jpg',
-                description: 'Durable locally manufactured machine with good production capacity and reliable performance.',
-                stock: 'In Stock',
-                details: {
-                    capacity: '1,200-1,800 blocks/day',
-                    power: 'Electric (3-phase)',
-                    blockTypes: 'Hollow, Solid, Interlocking',
-                    operation: 'Semi-Automatic',
-                    warranty: '6 Months'
-                },
-                tags: ['local', 'automatic']
-            },
-            {
-                id: 'mach-006',
-                name: 'Manual 3-Block Maker',
-                category: '3-block',
-                price: 250000,
-                image: '/img/machinery/manual-3-block-maker.jpg',
-                description: 'Cost-effective manual machine suitable for small to medium-scale block production.',
-                stock: 'In Stock',
-                details: {
-                    capacity: '500-800 blocks/day',
-                    power: 'Manual Operation',
-                    blockTypes: 'Hollow, Solid',
-                    operation: 'Manual',
-                    warranty: '3 Months'
-                },
-                tags: ['local', 'manual']
+                tags: ['machine', 'mobile', 'diesel']
             },
 
-            // 5-Block Machines
+            // =========== CONSTRUCTION BLOCKS ===========
             {
-                id: 'mach-007',
-                name: 'Imported Automatic 5-Block Maker',
-                category: '5-block',
-                price: 3800000,
-                image: '/img/machinery/imported-5-block-maker.jpg',
-                description: 'Industrial-grade imported machine with maximum production capacity for large-scale operations.',
+                id: 'block-001',
+                name: '6-inch Hollow Sandcrete Blocks',
+                category: 'blocks',
+                subcategory: '6-inch',
+                price: 670,
+                basePrice: 670,
+                image: '/img/machinery/6-inch-blocks.jpg',
+                description: 'Standard 6-inch hollow sandcrete blocks, minimum order 100 blocks.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '3,000-4,500 blocks/day',
-                    power: 'Electric (3-phase)',
-                    blockTypes: 'All types including specialty blocks',
-                    operation: 'Fully Automatic with PLC',
-                    warranty: '1-2 Years'
+                specs: {
+                    size: '6 inches (450x225x150mm)',
+                    type: 'Hollow',
+                    strength: '3.5N/mm²',
+                    weight: 'Approx 15kg',
+                    minOrder: '100 blocks'
                 },
-                tags: ['imported', 'automatic']
+                tags: ['blocks', '6-inch', 'hollow']
             },
             {
-                id: 'mach-008',
-                name: 'Local Automatic 5-Block Maker',
-                category: '5-block',
-                price: 2200000,
-                image: '/img/machinery/local-5-block-maker.jpg',
-                description: 'High-capacity locally manufactured machine designed for commercial block production.',
+                id: 'block-002',
+                name: '6-inch Solid Sandcrete Blocks',
+                category: 'blocks',
+                subcategory: '6-inch',
+                price: 750,
+                basePrice: 750,
+                image: '/img/machinery/6-inch-solid-blocks.jpg',
+                description: 'High-density 6-inch solid blocks for load-bearing walls.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '2,500-3,500 blocks/day',
-                    power: 'Electric (3-phase)',
-                    blockTypes: 'Hollow, Solid, Interlocking, Paving',
-                    operation: 'Semi-Automatic',
-                    warranty: '1 Year'
+                specs: {
+                    size: '6 inches (450x225x150mm)',
+                    type: 'Solid',
+                    strength: '4.5N/mm²',
+                    weight: 'Approx 22kg',
+                    minOrder: '100 blocks'
                 },
-                tags: ['local', 'automatic']
+                tags: ['blocks', '6-inch', 'solid']
             },
             {
-                id: 'mach-009',
-                name: 'Manual 5-Block Maker',
-                category: '5-block',
-                price: 450000,
-                image: '/img/machinery/manual-5-block-maker.jpg',
-                description: 'Manual machine with high production capacity, suitable for medium-scale operations.',
+                id: 'block-003',
+                name: '9-inch Hollow Sandcrete Blocks',
+                category: 'blocks',
+                subcategory: '9-inch',
+                price: 770,
+                basePrice: 770,
+                image: '/img/machinery/9-inch-blocks.jpg',
+                description: 'Standard 9-inch hollow sandcrete blocks, minimum order 100 blocks.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '800-1,200 blocks/day',
-                    power: 'Manual Operation',
-                    blockTypes: 'Hollow, Solid',
-                    operation: 'Manual',
-                    warranty: '3 Months'
+                specs: {
+                    size: '9 inches (450x225x225mm)',
+                    type: 'Hollow',
+                    strength: '3.5N/mm²',
+                    weight: 'Approx 20kg',
+                    minOrder: '100 blocks'
                 },
-                tags: ['local', 'manual']
+                tags: ['blocks', '9-inch', 'hollow']
+            },
+            {
+                id: 'block-004',
+                name: '9-inch Solid Sandcrete Blocks',
+                category: 'blocks',
+                subcategory: '9-inch',
+                price: 850,
+                basePrice: 850,
+                image: '/img/machinery/9-inch-solid-blocks.jpg',
+                description: 'High-density 9-inch solid blocks for foundation and structural walls.',
+                stock: 'In Stock',
+                specs: {
+                    size: '9 inches (450x225x225mm)',
+                    type: 'Solid',
+                    strength: '4.5N/mm²',
+                    weight: 'Approx 30kg',
+                    minOrder: '100 blocks'
+                },
+                tags: ['blocks', '9-inch', 'solid']
+            },
+            {
+                id: 'block-005',
+                name: 'Interlocking Blocks',
+                category: 'blocks',
+                subcategory: 'interlocking',
+                price: 950,
+                basePrice: 950,
+                image: '/img/machinery/interlocking-blocks.jpg',
+                description: 'Specially designed interlocking blocks for quick construction.',
+                stock: 'In Stock',
+                specs: {
+                    size: 'Various patterns',
+                    type: 'Interlocking',
+                    feature: 'No mortar needed',
+                    application: 'Quick build structures',
+                    minOrder: '100 blocks'
+                },
+                tags: ['blocks', 'interlocking']
+            },
+            {
+                id: 'block-006',
+                name: 'Paving Blocks',
+                category: 'blocks',
+                subcategory: 'paving',
+                price: 1250,
+                basePrice: 1250,
+                image: '/img/machinery/paving-blocks.jpg',
+                description: 'High-quality paving blocks for driveways and walkways.',
+                stock: 'In Stock',
+                specs: {
+                    size: 'Various (60x60mm to 100x100mm)',
+                    thickness: '60-80mm',
+                    color: 'Natural gray or colored',
+                    application: 'Driveways, walkways',
+                    minOrder: '10 sqm'
+                },
+                tags: ['blocks', 'paving', 'outdoor']
             },
 
-            // Industrial Mixers
+            // =========== BULK CEMENT ===========
             {
-                id: 'mach-010',
-                name: 'Large Industrial Mixer',
-                category: 'mixer',
-                price: 1200000,
-                image: '/img/machinery/large-industrial-mixer.jpg',
-                description: 'Heavy-duty mixer with large capacity for high-volume block production operations.',
+                id: 'cement-001',
+                name: 'Dangote Cement (42.5 Grade)',
+                category: 'cement',
+                subcategory: 'dangote',
+                price: 8000,
+                basePrice: 8000,
+                image: '/img/machinery/dangote-cement.jpg',
+                description: 'Premium 42.5 grade cement, minimum bulk order 100 bags.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '500-1000 liters',
-                    power: 'Electric (3-phase) or Diesel',
-                    mixingTime: '3-5 minutes per batch',
-                    operation: 'Automatic',
-                    warranty: '1 Year'
+                specs: {
+                    brand: 'Dangote',
+                    grade: '42.5R',
+                    setting: 'Quick setting',
+                    packaging: '50kg bags',
+                    minOrder: '100 bags'
                 },
-                tags: ['imported']
+                tags: ['cement', 'dangote', 'bulk']
             },
             {
-                id: 'mach-011',
-                name: 'Medium Industrial Mixer',
-                category: 'mixer',
-                price: 700000,
-                image: '/img/machinery/medium-industrial-mixer.jpg',
-                description: 'Versatile mixer suitable for medium-scale block production and construction projects.',
+                id: 'cement-002',
+                name: 'Lafarge Cement (42.5 Grade)',
+                category: 'cement',
+                subcategory: 'lafarge',
+                price: 8200,
+                basePrice: 8200,
+                image: '/img/machinery/lafarge-cement.jpg',
+                description: 'High-quality Lafarge cement for structural concrete.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '250-500 liters',
-                    power: 'Electric (3-phase)',
-                    mixingTime: '4-6 minutes per batch',
-                    operation: 'Semi-Automatic',
-                    warranty: '6 Months'
+                specs: {
+                    brand: 'Lafarge',
+                    grade: '42.5R',
+                    strength: 'High early strength',
+                    packaging: '50kg bags',
+                    minOrder: '100 bags'
                 },
-                tags: ['local']
+                tags: ['cement', 'lafarge', 'bulk']
             },
             {
-                id: 'mach-012',
-                name: 'Small Industrial Mixer',
-                category: 'mixer',
+                id: 'cement-003',
+                name: 'BUA Cement (42.5 Grade)',
+                category: 'cement',
+                subcategory: 'bua',
+                price: 7900,
+                basePrice: 7900,
+                image: '/img/machinery/bua-cement.jpg',
+                description: 'Reliable BUA cement for all construction applications.',
+                stock: 'In Stock',
+                specs: {
+                    brand: 'BUA',
+                    grade: '42.5R',
+                    application: 'General construction',
+                    packaging: '50kg bags',
+                    minOrder: '100 bags'
+                },
+                tags: ['cement', 'bua', 'bulk']
+            },
+
+            // =========== INDUSTRIAL MIXERS ===========
+            {
+                id: 'mixer-001',
+                name: 'Small Concrete Mixer (200L)',
+                category: 'mixers',
+                subcategory: 'small',
                 price: 350000,
-                image: '/img/machinery/small-industrial-mixer.jpg',
-                description: 'Compact mixer perfect for small-scale block production and construction sites.',
+                basePrice: 350000,
+                image: '/img/machinery/small-mixer.jpg',
+                description: 'Compact concrete mixer suitable for small-scale operations.',
                 stock: 'In Stock',
-                details: {
-                    capacity: '100-250 liters',
-                    power: 'Electric (Single-phase)',
-                    mixingTime: '5-8 minutes per batch',
-                    operation: 'Manual',
-                    warranty: '3 Months'
+                specs: {
+                    capacity: '200 liters',
+                    power: 'Electric 3HP',
+                    mixing: 'Drum rotation',
+                    mobility: 'Wheel mounted',
+                    warranty: '3 months'
                 },
-                tags: ['local']
+                tags: ['mixer', 'concrete', 'small']
+            },
+            {
+                id: 'mixer-002',
+                name: 'Medium Concrete Mixer (500L)',
+                category: 'mixers',
+                subcategory: 'medium',
+                price: 700000,
+                basePrice: 700000,
+                image: '/img/machinery/medium-mixer.jpg',
+                description: 'Medium capacity mixer for construction sites and block production.',
+                stock: 'In Stock',
+                specs: {
+                    capacity: '500 liters',
+                    power: 'Electric 7.5HP',
+                    mixing: 'Forced action',
+                    features: 'Tilting drum',
+                    warranty: '6 months'
+                },
+                tags: ['mixer', 'concrete', 'medium']
+            },
+            {
+                id: 'mixer-003',
+                name: 'Large Industrial Mixer (1000L)',
+                category: 'mixers',
+                subcategory: 'large',
+                price: 1200000,
+                basePrice: 1200000,
+                image: '/img/machinery/large-mixer.jpg',
+                description: 'Heavy-duty industrial mixer for high-volume block production.',
+                stock: 'Made to Order',
+                specs: {
+                    capacity: '1000 liters',
+                    power: 'Electric 15HP or Diesel',
+                    mixing: 'Planetary action',
+                    automation: 'Auto discharge',
+                    warranty: '1 year'
+                },
+                tags: ['mixer', 'industrial', 'large']
+            },
+            {
+                id: 'mixer-004',
+                name: 'Mortar Mixer (150L)',
+                category: 'mixers',
+                subcategory: 'mortar',
+                price: 250000,
+                basePrice: 250000,
+                image: '/img/machinery/mortar-mixer.jpg',
+                description: 'Specialized mortar mixer for plaster and mortar production.',
+                stock: 'In Stock',
+                specs: {
+                    capacity: '150 liters',
+                    power: 'Electric 2HP',
+                    application: 'Mortar/plaster mixing',
+                    features: 'Paddle mixing',
+                    warranty: '3 months'
+                },
+                tags: ['mixer', 'mortar', 'plaster']
             }
         ];
 
-        // CART FUNCTIONS - Same as construction page
+        // CART FUNCTIONS
         function getCart() {
             try {
                 const cart = localStorage.getItem('cart');
@@ -846,7 +1172,9 @@
                     name: product.name,
                     price: parseFloat(product.price),
                     image: product.image || '/img/logo.jpg',
-                    quantity: 1
+                    quantity: 1,
+                    category: product.category,
+                    minOrder: product.specs?.minOrder || 1
                 });
                 console.log('Added new item to cart');
             }
@@ -918,14 +1246,15 @@
             // DOM Elements
             const machineryContainer = document.getElementById('machinery-container');
             const searchInput = document.getElementById('machine-search');
-            const categoryFilter = document.getElementById('category-filter');
+            const categoryTabs = document.getElementById('category-tabs');
             const loadMoreBtn = document.getElementById('load-more');
             const productCount = document.getElementById('product-count');
             
             // Pagination variables
             let currentPage = 1;
-            const productsPerPage = 6;
+            const productsPerPage = 12;
             let filteredMachines = [...machineryProducts];
+            let currentCategory = 'all';
             
             // Initialize the page
             function initPage() {
@@ -934,6 +1263,28 @@
                 setupEventListeners();
                 setupCartDrawer();
                 updateCartCount();
+                setupCategoryTabs();
+            }
+            
+            // Setup category tabs
+            function setupCategoryTabs() {
+                if (!categoryTabs) return;
+                
+                const tabs = categoryTabs.querySelectorAll('.category-tab');
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        tabs.forEach(t => t.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Update current category
+                        currentCategory = this.dataset.category;
+                        currentPage = 1;
+                        filterMachines();
+                    });
+                });
             }
             
             // Setup event listeners
@@ -941,14 +1292,6 @@
                 // Search functionality
                 if (searchInput) {
                     searchInput.addEventListener('input', function() {
-                        currentPage = 1;
-                        filterMachines();
-                    });
-                }
-                
-                // Category filter
-                if (categoryFilter) {
-                    categoryFilter.addEventListener('change', function() {
                         currentPage = 1;
                         filterMachines();
                     });
@@ -982,7 +1325,7 @@
                         
                         // Visual feedback
                         const originalText = addToCartBtn.innerHTML;
-                        addToCartBtn.innerHTML = 'Added!';
+                        addToCartBtn.innerHTML = '✓ Added!';
                         addToCartBtn.style.background = '#27ae60';
                         
                         setTimeout(() => {
@@ -996,7 +1339,6 @@
             // Filter machines
             function filterMachines() {
                 const searchTerm = (searchInput ? searchInput.value.toLowerCase() : '');
-                const selectedCategory = (categoryFilter ? categoryFilter.value : 'all');
                 
                 filteredMachines = machineryProducts.filter(machine => {
                     const matchesSearch = 
@@ -1005,8 +1347,8 @@
                         machine.tags.some(tag => tag.toLowerCase().includes(searchTerm));
                     
                     const matchesCategory = 
-                        selectedCategory === 'all' || 
-                        machine.category === selectedCategory;
+                        currentCategory === 'all' || 
+                        machine.category === currentCategory;
                     
                     return matchesSearch && matchesCategory;
                 });
@@ -1056,45 +1398,60 @@
             // Create machine card
             function createMachineCard(machine) {
                 const card = document.createElement('div');
-                card.className = 'machine-card';
+                card.className = 'machine-card fade-in-up';
                 
                 const formattedPrice = machine.price.toLocaleString();
+                const isBulkItem = machine.specs?.minOrder && parseInt(machine.specs.minOrder) >= 100;
+                const bulkTotal = isBulkItem ? (machine.price * 100).toLocaleString() : '';
                 
                 // Create tags HTML
-                const tagsHTML = machine.tags.map(tag => {
-                    let tagClass = '';
-                    if (tag === 'imported') tagClass = 'imported';
-                    if (tag === 'local') tagClass = 'local';
-                    if (tag === 'automatic') tagClass = 'automatic';
-                    if (tag === 'manual') tagClass = 'manual';
-                    return `<span class="machine-tag ${tagClass}">${tag.charAt(0).toUpperCase() + tag.slice(1)}</span>`;
-                }).join('');
+                const tagsHTML = machine.tags.map(tag => 
+                    `<span class="machine-tag">${tag}</span>`
+                ).join('');
                 
                 card.innerHTML = `
+                    <div class="machine-tags">
+                        ${tagsHTML}
+                    </div>
                     <div class="machine-image">
-                        <img src="${machine.image}" alt="${machine.name}" onerror="this.src='/img/logo.jpg'">
+                        <img src="${machine.image}" alt="${machine.name}" 
+                             onerror="this.onerror=null; this.src='/img/logo.jpg'">
                     </div>
                     <div class="machine-content">
-                        ${tagsHTML}
+                        <div class="machine-category">${machine.category.toUpperCase()}</div>
                         <h3 class="machine-title">${machine.name}</h3>
                         <p class="machine-description">${machine.description}</p>
+                        
+                        <div class="machine-specs">
+                            ${machine.specs ? Object.entries(machine.specs).map(([key, value]) => `
+                                <div class="spec-item">
+                                    <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1)}:</span>
+                                    <span class="spec-value">${value}</span>
+                                </div>
+                            `).join('') : ''}
+                        </div>
+                        
                         <div class="machine-price">₦${formattedPrice}</div>
-                        <ul class="machine-specs">
-                            ${machine.details.capacity ? `<li><span class="spec-label">Capacity:</span> <span class="spec-value">${machine.details.capacity}</span></li>` : ''}
-                            ${machine.details.power ? `<li><span class="spec-label">Power:</span> <span class="spec-value">${machine.details.power}</span></li>` : ''}
-                            ${machine.details.blockTypes ? `<li><span class="spec-label">Block Types:</span> <span class="spec-value">${machine.details.blockTypes}</span></li>` : ''}
-                            ${machine.details.operation ? `<li><span class="spec-label">Operation:</span> <span class="spec-value">${machine.details.operation}</span></li>` : ''}
-                            ${machine.details.warranty ? `<li><span class="spec-label">Warranty:</span> <span class="spec-value">${machine.details.warranty}</span></li>` : ''}
-                        </ul>
+                        
+                        ${isBulkItem ? `
+                            <div class="bulk-price">
+                                Bulk Order (100 units): ₦${bulkTotal}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="machine-stock ${machine.stock === 'In Stock' ? 'stock-in' : 'stock-made'}">
+                            ${machine.stock}
+                        </div>
+                        
                         <div class="machine-actions">
                             <button class="btn-primary add-to-cart" 
                                     data-id="${machine.id}"
                                     data-name="${machine.name}"
                                     data-price="${machine.price}"
                                     data-image="${machine.image}">
-                                Add to Cart
+                                 Add to Cart
                             </button>
-                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(machine.name)} - ₦${formattedPrice}" 
+                            <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(machine.name)} - ₦${formattedPrice}${machine.specs?.minOrder ? ` (Min order: ${machine.specs.minOrder})` : ''}" 
                                class="btn-whatsapp" target="_blank">
                                  WhatsApp
                             </a>
@@ -1112,10 +1469,10 @@
                 const totalMachines = filteredMachines.length;
                 const showingMachines = Math.min(currentPage * productsPerPage, totalMachines);
                 
-                productCount.textContent = `Showing ${showingMachines} of ${totalMachines} machines`;
-                
                 if (totalMachines === 0) {
-                    productCount.textContent = 'No machines found matching your criteria';
+                    productCount.textContent = 'No products found matching your criteria';
+                } else {
+                    productCount.textContent = `Showing ${showingMachines} of ${totalMachines} products`;
                 }
             }
             
@@ -1125,6 +1482,9 @@
                 const newCards = Array.from(allCards).slice(-productsPerPage);
                 
                 newCards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    
                     setTimeout(() => {
                         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                         card.style.opacity = '1';
@@ -1133,7 +1493,7 @@
                 });
             }
             
-            // Setup cart drawer (same as construction)
+            // Setup cart drawer
             function setupCartDrawer() {
                 const cartDrawer = document.getElementById('cart-drawer');
                 const openCartBtn = document.getElementById('open-cart-drawer');
@@ -1186,7 +1546,7 @@
                             <div class="cart-drawer-empty">
                                 <div class="cart-drawer-empty-icon">🛒</div>
                                 <p>Your cart is empty</p>
-                                <a href="/shop-categories" class="btn btn-primary">Continue Shopping</a>
+                                <a href="/shop-machinery" class="btn btn-primary">Browse Machinery</a>
                             </div>
                         `;
                         if (drawerTotal) drawerTotal.textContent = '₦0';
@@ -1201,6 +1561,7 @@
                             <div class="cart-drawer-item-details">
                                 <h4 class="cart-drawer-item-name">${item.name}</h4>
                                 <p class="cart-drawer-item-price">₦${item.price.toLocaleString()} × ${item.quantity}</p>
+                                ${item.minOrder > 1 ? `<p class="cart-drawer-item-min-order">Min order: ${item.minOrder}</p>` : ''}
                                 <div class="cart-drawer-item-actions">
                                     <button class="cart-drawer-item-remove" data-id="${item.id}">Remove</button>
                                 </div>
@@ -1242,6 +1603,7 @@
             window.addToCart = addToCart;
             window.updateCartCount = updateCartCount;
             window.getCart = getCart;
+            window.showCartNotification = showCartNotification;
         });
     </script>
 </body>

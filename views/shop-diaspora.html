@@ -1,0 +1,2600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diaspora Investment Portal - Collaborative Investment Ltd</title>
+    <meta name="description" content="Secure investment opportunities for Nigerians in diaspora. Real projects in Solar Energy, Construction, Agriculture, Machinery, and Furniture with guaranteed returns and professional management.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    
+    <!-- Diaspora Investment Page Styles -->
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #d4af37;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #3498db;
+            --light: #f8f9fa;
+            --dark: #1a252f;
+            --gray: #6c757d;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 10px 30px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 15px 40px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+        }
+        
+        /* Diaspora Hero Section - Enhanced */
+        .diaspora-hero {
+            background: linear-gradient(135deg, rgba(26, 82, 118, 0.95) 0%, rgba(41, 128, 185, 0.9) 100%),
+                        url('/img/diaspora/diaspora-hero-bg.jpg') center/cover no-repeat;
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .diaspora-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/img/diaspora/pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+        }
+        
+        .hero-text h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--secondary) 100%);
+            webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-text .highlight {
+            color: var(--secondary);
+            display: block;
+        }
+        
+        .hero-text p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            margin-bottom: 2.5rem;
+        }
+        
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #d4af37;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero-image-container {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .hero-image-container:hover .hero-image {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            padding: 2rem;
+        }
+        
+        .image-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .image-overlay p {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+        
+        /* Diaspora Benefits - Enhanced */
+        .diaspora-benefits {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+        }
+        
+        .benefits-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+        
+        .benefits-intro h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .benefits-intro p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .benefit-icon {
+            height: 80px;
+            width: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: -40px auto 1.5rem;
+            position: relative;
+            z-index: 2;
+            border: 5px solid white;
+        }
+        
+        .benefit-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 4px solid var(--secondary);
+        }
+        
+        .benefit-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .benefit-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+        
+        .benefit-content p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .benefit-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .benefit-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .benefit-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .benefit-features li i {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+        
+        /* Investment Calculator */
+        .investment-calculator {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .calculator-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary) 0%, #154360 100%);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .calculator-header {
+            background: var(--secondary);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .calculator-header h2 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 2.2rem;
+        }
+        
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .calculator-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .calculator-inputs {
+            padding: 3rem;
+            background: white;
+        }
+        
+        .calculator-results {
+            padding: 3rem;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.1);
+        }
+        
+        .slider-container {
+            padding: 1rem 0;
+        }
+        
+        .slider-value {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 0.5rem;
+        }
+        
+        .project-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .project-option {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        
+        .project-option:hover {
+            background: #e2e8f0;
+        }
+        
+        .project-option.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .project-option h4 {
+            margin: 0 0 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .project-option .return-rate {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .result-display {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .result-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .result-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .result-breakdown {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .breakdown-item.total {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        /* Investment Process - Enhanced */
+        .investment-process {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+        
+        @media (max-width: 992px) {
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        @media (max-width: 992px) {
+            .process-steps::before {
+                display: none;
+            }
+        }
+        
+        .process-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            border: 5px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .process-step h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .process-step p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* Project Showcase - Enhanced */
+        .project-showcase {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .project-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 4px solid var(--secondary);
+        }
+        
+        .project-content {
+            padding: 2rem;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .project-category {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .project-status {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .project-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+        
+        .project-content p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .project-stat {
+            text-align: center;
+        }
+        
+        .project-stat-value {
+            display: block;
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .project-stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Sector Overview */
+        .sector-overview {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+        }
+        
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .sector-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .sector-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .sector-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .sector-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .sector-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sector-stats {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        
+        .sector-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .sector-stat:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+        }
+        
+        .stat-value {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Diaspora Testimonials - Enhanced */
+        .diaspora-testimonials {
+            padding: 6rem 0;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 5rem;
+            color: var(--secondary);
+            opacity: 0.1;
+            font-family: serif;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary);
+        }
+        
+        .testimonial-info h4 {
+            margin: 0 0 0.5rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-info p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .testimonial-quote {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin: 0;
+            position: relative;
+        }
+        
+        .testimonial-rating {
+            margin-top: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        /* Diaspora CTA - Enhanced */
+        .diaspora-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, #154360 100%),
+                        url('/img/diaspora/diaspora-cta-bg.jpg') center/cover no-repeat;
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .diaspora-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .cta-content h2 {
+            font-size: 3.2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff 0%, var(--secondary) 100%);
+            webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .cta-content p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+        
+        .cta-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .cta-stat {
+            text-align: center;
+        }
+        
+        .cta-stat-value {
+            display: block;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .cta-stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Enhanced Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(26, 82, 118, 0.1);
+        }
+        
+        .header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 2rem auto 0;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Investment Features Grid */
+        .investment-features {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-item h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .feature-item p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                height: 350px;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .diaspora-hero {
+                padding: 4rem 0 3rem;
+                min-height: auto;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-actions {
+                justify-content: center;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cta-stats {
+                gap: 2rem;
+            }
+            
+            .cta-stat-value {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid,
+            .project-grid,
+            .testimonial-grid,
+            .sector-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-inputs,
+            .calculator-results {
+                padding: 2rem;
+            }
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: #c19b2e;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Investment Table */
+        .investment-table {
+            overflow-x: auto;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .investment-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .investment-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .investment-table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .investment-table tr:hover {
+            background: #f8fafc;
+        }
+        
+        .investment-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+        }
+        
+        .faq-grid {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        .faq-answer.active {
+            padding: 0 2rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about" class="active">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            
+            <!-- Cart Icon in Header -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+
+    <!-- Diaspora Hero Section -->
+    <section class="diaspora-hero">
+        <div class="hero-content-wrapper">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-badges">
+                        <div class="hero-badge">
+                            <span>Global Nigerians</span>
+                        </div>
+                        <div class="hero-badge">
+                            <span>100% Secure</span>
+                        </div>
+                    </div>
+                    <h1>
+                        Diaspora Investment<br>
+                        <span class="highlight">Made Simple & Secure</span>
+                    </h1>
+                    <p>Connect your global success with Nigeria's growth. Invest in tangible Nigerian businesses with professional management, guaranteed returns, and complete transparency from anywhere in the world.</p>
+                    
+                    <div class="hero-actions">
+                        <a href="#calculator" class="btn btn-primary">
+                            Calculate Your Returns
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            Schedule Free Consultation
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image-container">
+                    <img src="/img/diaspora/diaspora-investment.jpg" class="hero-image" alt="">
+                    <div class="image-overlay">
+                        <h3>Partner with Nigeria's Growth</h3>
+                        <p>Invest in Solar Energy, Construction, Agriculture, and Manufacturing with proven track records</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diaspora Benefits -->
+    <section class="diaspora-benefits">
+        <div class="container">
+            <div class="benefits-intro">
+                <h2>Designed Specifically for Diaspora Investors</h2>
+                <p>We understand the unique needs of Nigerians living abroad. Our investment platform is built with remote management, complete transparency, and international standards in mind.</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <!-- Benefit 1 -->
+                <div class="benefit-card">
+                    <img src="/img/diaspora/remotemanagement.jpg" alt="Remote Management" class="benefit-image">
+                    <div class="benefit-content">
+                        <h3>Complete Remote Management</h3>
+                        <p>Manage your entire investment portfolio from anywhere in the world with our digital platform.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check-circle"></i> Virtual project monitoring</li>
+                            <li><i class="fas fa-check-circle"></i> Online document signing</li>
+                            <li><i class="fas fa-check-circle"></i> Digital profit distributions</li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 account access</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-card">
+                    <img src="/img/diaspora/transparency.jpg" alt="Transparent Reporting" class="benefit-image">
+                    <div class="benefit-content">
+                        <h3>Real-Time Transparency</h3>
+                        <p>See exactly how your investment is performing with live updates and comprehensive reporting.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check-circle"></i> Live project cameras</li>
+                            <li><i class="fas fa-check-circle"></i> Quarterly financial audits</li>
+                            <li><i class="fas fa-check-circle"></i> Monthly progress reports</li>
+                            <li><i class="fas fa-check-circle"></i> Direct manager access</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-card">
+                    <img src="/img/diaspora/security.jpg" alt="Legal Security" class="benefit-image">
+                    <div class="benefit-content">
+                        <h3>Asset-Backed Security</h3>
+                        <p>Your investment is protected by tangible assets and comprehensive legal documentation.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check-circle"></i> Registered investment agreements</li>
+                            <li><i class="fas fa-check-circle"></i> Property collateralization</li>
+                            <li><i class="fas fa-check-circle"></i> Comprehensive insurance</li>
+                            <li><i class="fas fa-check-circle"></i> Legal recourse protection</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sector Overview -->
+    <section class="sector-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Investment Sectors</h2>
+                <p>Invest in Nigeria's most promising sectors with proven track records and government support.</p>
+            </div>
+            
+            <div class="sector-grid">
+                <!-- Solar Energy -->
+                <div class="sector-card">
+                    <h3>Solar Energy</h3>
+                    <p>Renewable energy solutions for homes, businesses, and communities. High demand with government incentives.</p>
+                    <div class="sector-stats">
+                        <div class="sector-stat">
+                            <span class="stat-label">Average Return:</span>
+                            <span class="stat-value">22% p.a.</span>
+                        </div>
+                        <div class="sector-stat">
+                            <span class="stat-label">Growth Rate:</span>
+                            <span class="stat-value">30% annually</span>
+                        </div>
+                        <div class="sector-stat">
+                            <span class="stat-label">Market Size:</span>
+                            <span class="stat-value">₦500B+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Construction -->
+                <div class="sector-card">
+                    <h3>Construction</h3>
+                    <p>Modern construction equipment manufacturing and building materials production. Essential for infrastructure development.</p>
+                    <div class="sector-stats">
+                        <div class="sector-stat">
+                            <span class="stat-label">Average Return:</span>
+                            <span class="stat-value">20% p.a.</span>
+                        </div>
+                        <div class="sector-stat">
+                            <span class="stat-label">Growth Rate:</span>
+                            <span class="stat-value">25% annually</span>
+                        </div>
+                        <div class="sector-stat">
+                            <span class="stat-label">Market Size:</span>
+                            <span class="stat-value">₦1.2T+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Agriculture -->
+                <div class="sector-card">
+                    <h3>Agriculture</h3>
+                    <p>Modern farming equipment, poultry systems, and agricultural processing. Backed by government agricultural revolution.</p>
+                    <div class="sector-stats">
+                        <div class="sector-stat">
+                            <span class="stat-label">Average Return:</span>
+                            <span class="stat-value">18% p.a.</span>
+                        </div>
+                        <div class="sector-stat">
+                            <span class="stat-label">Growth Rate:</span>
+                            <span class="stat-value">20% annually</span>
+                        </div>
+                        <div class="sector-stat">
+                            <span class="stat-label">Market Size:</span>
+                            <span class="stat-value">₦2.5T+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Process -->
+    <section class="investment-process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple 4-Step Investment Process</h2>
+                <p>From initial consultation to profit distribution - everything managed remotely for your convenience.</p>
+            </div>
+            
+            <div class="process-steps">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <h3>Virtual Consultation</h3>
+                    <p>Schedule a video meeting with our investment specialists to discuss opportunities and answer all your questions.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <h3>Digital Documentation</h3>
+                    <p>Sign all investment agreements and legal documents electronically from anywhere in the world.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <h3>Secure Funding</h3>
+                    <p>Transfer funds through our international banking partners with complete security and tracking.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="process-step">
+                    <h3>Progress Monitoring</h3>
+                    <p>Track your investment performance through our online dashboard with real-time updates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Features -->
+    <section class="investment-features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Invest with CIL?</h2>
+                <p>We provide unique advantages that make us the preferred choice for diaspora investors.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Proven Track Record</h3>
+                    <p>10+ years of successful business management and investor returns across multiple sectors.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>Legal Compliance</h3>
+                    <p>Full compliance with Nigerian investment laws and international best practices.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>Risk Management</h3>
+                    <p>Comprehensive risk assessment and mitigation strategies for all investments.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>Global Support</h3>
+                    <p>24/7 support for diaspora investors across different time zones and locations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Showcase -->
+    <section class="project-showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2>Current Investment Opportunities</h2>
+                <p>Real projects currently open for diaspora investment with proven returns and transparent operations.</p>
+            </div>
+            
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="/img/diaspora/solar-project.jpg" alt="Solar Energy Project" class="project-image">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">Solar Energy</span>
+                            <span class="project-status">Open for Investment</span>
+                        </div>
+                        <h3>Commercial Solar Installation Project</h3>
+                        <p>Installation of solar power systems for 50 commercial buildings across Lagos State with 5-year maintenance contracts and revenue sharing agreements.</p>
+                        
+                        <div class="project-stats">
+                            <div class="project-stat">
+                                <span class="project-stat-value">₦60M</span>
+                                <span class="project-stat-label">Project Size</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-value">22%</span>
+                                <span class="project-stat-label">Annual Return</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-value">75%</span>
+                                <span class="project-stat-label">Funded</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <a href="#contact" class="btn btn-primary" style="flex: 1;">
+                                More Details
+                            </a>
+                            <a href="#calculator" class="btn btn-outline" style="flex: 1;">
+                                Calculate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="/img/diaspora/construction-project.jpg" alt="Construction Project" class="project-image">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">Construction</span>
+                            <span class="project-status">Open for Investment</span>
+                        </div>
+                        <h3>Block Manufacturing Expansion</h3>
+                        <p>Modernizing concrete block production with automated machinery for increased efficiency, output capacity, and market reach across Southwest Nigeria.</p>
+                        
+                        <div class="project-stats">
+                            <div class="project-stat">
+                                <span class="project-stat-value">₦30M</span>
+                                <span class="project-stat-label">Project Size</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-value">20%</span>
+                                <span class="project-stat-label">Annual Return</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-value">90%</span>
+                                <span class="project-stat-label">Funded</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <a href="#contact" class="btn btn-primary" style="flex: 1;">
+                                More Details
+                            </a>
+                            <a href="#calculator" class="btn btn-outline" style="flex: 1;">
+                                Calculate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="/img/diaspora/agriculture-project.jpg" alt="Agriculture Project" class="project-image">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">Agriculture</span>
+                            <span class="project-status">Open for Investment</span>
+                        </div>
+                        <h3>Poultry Farm Modernization</h3>
+                        <p>Upgrading 10,000-bird capacity poultry farm with automated feeding systems, improved processing facilities, and cold storage for expanded market reach.</p>
+                        
+                        <div class="project-stats">
+                            <div class="project-stat">
+                                <span class="project-stat-value">₦30M</span>
+                                <span class="project-stat-label">Project Size</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-value">18%</span>
+                                <span class="project-stat-label">Annual Return</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-value">60%</span>
+                                <span class="project-stat-label">Funded</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <a href="#contact" class="btn btn-primary" style="flex: 1;">
+                                More Details
+                            </a>
+                            <a href="#calculator" class="btn btn-outline" style="flex: 1;">
+                                Calculate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Table -->
+    <section class="sector-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Investment Packages</h2>
+                <p>Choose from our flexible investment packages designed for diaspora investors.</p>
+            </div>
+            
+            <div class="investment-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Package</th>
+                            <th>Minimum Investment</th>
+                            <th>Duration</th>
+                            <th>Annual Return</th>
+                            <th>Monthly Reports</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Starter Package</strong></td>
+                            <td>₦5,000,000</td>
+                            <td>12 Months</td>
+                            <td>18-22%</td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Growth Package</strong></td>
+                            <td>₦15,000,000</td>
+                            <td>24 Months</td>
+                            <td>20-24%</td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Premium Package</strong></td>
+                            <td>₦30,000,000</td>
+                            <td>36 Months</td>
+                            <td>22-26%</td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>VIP Package</strong></td>
+                            <td>₦50,000,000+</td>
+                            <td>Custom</td>
+                            <td>25-30%</td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Common questions from diaspora investors answered clearly and transparently.</p>
+            </div>
+            
+            <div class="faq-grid">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I invest from outside Nigeria?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our investment process is fully digital and designed for diaspora investors. You can:</p>
+                        <ul>
+                            <li>Schedule a virtual consultation via video call</li>
+                            <li>Sign all documents electronically using our secure platform</li>
+                            <li>Transfer funds through our international banking partners</li>
+                            <li>Monitor your investment through our online dashboard</li>
+                        </ul>
+                        <p>We handle everything in Nigeria on your behalf.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How are my investments protected?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We provide multiple layers of protection for your investment:</p>
+                        <ul>
+                            <li><strong>Asset Collateralization:</strong> All investments are backed by tangible assets</li>
+                            <li><strong>Legal Documentation:</strong> Registered investment agreements with Nigerian authorities</li>
+                            <li><strong>Insurance Coverage:</strong> Comprehensive insurance on all projects</li>
+                            <li><strong>Transparent Operations:</strong> Regular audits and financial reporting</li>
+                            <li><strong>Directorship Option:</strong> Option to join project boards for oversight</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I receive my returns?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Returns are distributed quarterly through the following methods:</p>
+                        <ul>
+                            <li><strong>International Bank Transfer:</strong> Direct to your foreign bank account</li>
+                            <li><strong>Digital Wallets:</strong> Transfer to your preferred digital wallet</li>
+                            <li><strong>Naira Account:</strong> Option to keep returns in Nigeria for reinvestment</li>
+                            <li><strong>Automatic Reinvestment:</strong> Option to automatically reinvest returns</li>
+                        </ul>
+                        <p>All transfers include detailed statements and are fully documented.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is the minimum investment amount?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer flexible investment tiers to suit different investor profiles:</p>
+                        <ul>
+                            <li><strong>Starter Tier:</strong> ₦5,000,000 minimum (approx. $3,200)</li>
+                            <li><strong>Growth Tier:</strong> ₦15,000,000 minimum (approx. $9,600)</li>
+                            <li><strong>Premium Tier:</strong> ₦30,000,000 minimum (approx. $19,200)</li>
+                            <li><strong>VIP Tier:</strong> ₦50,000,000+ minimum (approx. $32,000+)</li>
+                        </ul>
+                        <p>Larger investments receive preferential returns and additional benefits.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I visit my investment projects?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we encourage investors to visit their projects. We offer:</p>
+                        <ul>
+                            <li><strong>Virtual Tours:</strong> Live video tours of projects from anywhere</li>
+                            <li><strong>Scheduled Visits:</strong> Organized visits when you're in Nigeria</li>
+                            <li><strong>Live Cameras:</strong> 24/7 access to project site cameras</li>
+                            <li><strong>Project Reports:</strong> Detailed photographic and video documentation</li>
+                            <li><strong>Manager Meetings:</strong> Direct access to project managers</li>
+                        </ul>
+                        <p>We handle all logistics for investor visits to Nigeria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diaspora Testimonials -->
+    <section class="diaspora-testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Success Stories</h2>
+                <p>Hear from diaspora investors who have successfully invested with CIL.</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="/img/diaspora/testimonial-1.jpg" alt="Chinedu Okonkwo" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Dr. Chinedu Okonkwo</h4>
+                            <p>Medical Doctor • London, UK</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-quote">
+                        "As a medical professional in the UK, I needed a reliable investment channel back home. CIL's transparent reporting and professional management gave me confidence. My solar investment has been consistently returning 22% annually, and I can monitor everything from my phone."
+                    </p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="/img/diaspora/testimonial-2.jpg" alt="Amina Bello" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Amina Bello</h4>
+                            <p>Tech Executive • Dubai, UAE</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-quote">
+                        "The virtual project tours and monthly video updates make me feel connected to my investment from Dubai. Seeing the actual construction projects through live cameras gives me peace of mind. The quarterly distributions always arrive on schedule."
+                    </p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="/img/diaspora/testimonial-3.jpg" alt="David Johnson" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>David Johnson</h4>
+                            <p>Engineer • Texas, USA</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-quote">
+                        "I've invested in both solar and agriculture projects. The quarterly profit distributions always arrive on schedule, and the online dashboard makes tracking everything so easy from the US. What impressed me most was the legal documentation - everything was properly registered."
+                    </p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3>Collaborative Investment Ltd</h3>
+            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+
+            <div class="social-links">
+
+                <!-- Facebook -->
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                <stop offset="0%" stop-color="#feda75"/>
+                                <stop offset="25%" stop-color="#fa7e1e"/>
+                                <stop offset="50%" stop-color="#d62976"/>
+                                <stop offset="75%" stop-color="#962fbf"/>
+                                <stop offset="100%" stop-color="#4f5bd5"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul class="footer-links">
+                <li><a href="/services#business-management">Business Management</a></li>
+                <li><a href="/services#agriculture">Agricultural Development</a></li>
+                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                <li><a href="/services#diaspora">Diaspora Management</a></li>
+                <li><a href="/investment">Investment Opportunities</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>212 Ijegun Road, Ikotun, Lagos</p>
+            <p>collaborativeinvestmentltd@gmail.com</p>
+            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+        <p>
+            <a href="/admin/login" style="color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.3);" 
+               title="Admin Access" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='inherit'">
+                Building Nigeria's Business Future
+            </a>
+        </p>
+
+        <p style="margin-top: 1rem;">
+            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+        </p>
+
+        <!-- Social media text links -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Follow us:
+                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
+                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Enhanced Diaspora Investment page loaded');
+            
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Cart functionality
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+                    const cartBadge = document.getElementById('cart-count-badge');
+                    if (cartBadge) {
+                        cartBadge.textContent = cartCount;
+                        cartBadge.style.display = cartCount > 0 ? 'flex' : 'none';
+                    }
+                } catch (error) {
+                    console.error('Error updating cart count:', error);
+                }
+            }
+            
+            // Investment Calculator
+            const investmentAmount = document.getElementById('investmentAmount');
+            const periodSelect = document.getElementById('investmentPeriod');
+            const projectOptions = document.querySelectorAll('.project-option');
+            const sliderValue = document.querySelector('.slider-value');
+            const periodYears = document.getElementById('periodYears');
+            const totalReturns = document.getElementById('totalReturns');
+            const principalAmount = document.getElementById('principalAmount');
+            const annualReturns = document.getElementById('annualReturns');
+            const compoundedReturns = document.getElementById('compoundedReturns');
+            const totalValue = document.getElementById('totalValue');
+            
+            let currentReturnRate = 22; // Default solar rate
+            
+            // Format currency
+            function formatCurrency(amount) {
+                return '₦' + amount.toLocaleString('en-NG');
+            }
+            
+            // Calculate returns
+            function calculateReturns() {
+                const amount = parseInt(investmentAmount.value);
+                const years = parseInt(periodSelect.value);
+                const annualReturn = currentReturnRate / 100;
+                
+                // Calculate compounded returns
+                const compounded = amount * Math.pow(1 + annualReturn, years) - amount;
+                const annualReturnAmount = amount * annualReturn;
+                const total = amount + compounded;
+                
+                // Update display
+                sliderValue.textContent = formatCurrency(amount);
+                periodYears.textContent = years;
+                principalAmount.textContent = formatCurrency(amount);
+                annualReturns.textContent = formatCurrency(annualReturnAmount);
+                compoundedReturns.textContent = formatCurrency(compounded);
+                totalReturns.textContent = formatCurrency(compounded);
+                totalValue.textContent = formatCurrency(total);
+            }
+            investmentAmount.addEventListener('input', calculateReturns);
+            periodSelect.addEventListener('change', calculateReturns);
+            
+            // Project option selection
+            projectOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    projectOptions.forEach(opt => opt.classList.remove('active'));
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    // Update return rate
+                    currentReturnRate = parseInt(this.dataset.return);
+                    calculateReturns();
+                });
+            });
+            
+            // Initialize calculator
+            calculateReturns();
+            
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const toggle = item.querySelector('.faq-toggle');
+                
+                question.addEventListener('click', function() {
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.faq-answer').classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                    answer.classList.toggle('active');
+                    
+                    // Update toggle symbol
+                    toggle.textContent = answer.classList.contains('active') ? '−' : '+';
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    this.setAttribute('aria-expanded', this.classList.contains('active'));
+                });
+            }
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.navbar') && navLinks.classList.contains('active')) {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Cart drawer functionality
+            const cartDrawer = document.getElementById('cart-drawer');
+            const cartOverlay = document.getElementById('cart-drawer-overlay');
+            const openCartBtn = document.getElementById('open-cart-drawer');
+            const closeCartBtn = document.getElementById('close-cart-drawer');
+            const cartDrawerItems = document.getElementById('cart-drawer-items');
+            const drawerTotal = document.getElementById('drawer-total');
+            
+            function openCartDrawer() {
+                cartDrawer.classList.add('open');
+                cartOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                updateCartDrawer();
+            }
+            
+            function closeCartDrawer() {
+                cartDrawer.classList.remove('open');
+                cartOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            
+            function updateCartDrawer() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+                    
+                    if (cartCount === 0) {
+                        cartDrawerItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+                        drawerTotal.textContent = '₦0';
+                        return;
+                    }
+                    
+                    let total = 0;
+                    let itemsHtml = '';
+                    
+                    cart.forEach(item => {
+                        const itemTotal = item.price * item.quantity;
+                        total += itemTotal;
+                        
+                        itemsHtml += `
+                            <div class="drawer-item">
+                                <div class="drawer-item-info">
+                                    <h4>${item.name}</h4>
+                                    <p>${formatCurrency(item.price)} × ${item.quantity}</p>
+                                </div>
+                                <div class="drawer-item-actions">
+                                    <span class="drawer-item-total">${formatCurrency(itemTotal)}</span>
+                                    <button class="remove-item-btn" data-id="${item.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    cartDrawerItems.innerHTML = itemsHtml;
+                    drawerTotal.textContent = formatCurrency(total);
+                    
+                    // Add event listeners to remove buttons
+                    document.querySelectorAll('.remove-item-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const itemId = this.dataset.id;
+                            removeFromCart(itemId);
+                            updateCartDrawer();
+                            updateCartCount();
+                        });
+                    });
+                    
+                } catch (error) {
+                    console.error('Error updating cart drawer:', error);
+                    cartDrawerItems.innerHTML = '<p class="error">Error loading cart. Please try again.</p>';
+                }
+            }
+            
+            function removeFromCart(itemId) {
+                try {
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    cart = cart.filter(item => item.id !== itemId);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                } catch (error) {
+                    console.error('Error removing from cart:', error);
+                }
+            }
+            
+            // Cart event listeners
+            if (openCartBtn) openCartBtn.addEventListener('click', openCartDrawer);
+            if (closeCartBtn) closeCartBtn.addEventListener('click', closeCartDrawer);
+            if (cartOverlay) cartOverlay.addEventListener('click', closeCartDrawer);
+            
+            // Close cart drawer with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && cartDrawer.classList.contains('open')) {
+                    closeCartDrawer();
+                }
+            });
+            
+            // Initialize cart count
+            updateCartCount();
+            
+            // Add animation on scroll
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.benefit-card, .process-step, .sector-card, .project-card, .testimonial-card');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            }
+            
+            // Set initial animation styles
+            document.querySelectorAll('.benefit-card, .process-step, .sector-card, .project-card, .testimonial-card').forEach(el => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(30px)";
+                el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            // Initial check
+            animateOnScroll();
+            
+            // Add form validation for investment calculator
+            const formInputs = document.querySelectorAll('.calculator-inputs input, .calculator-inputs select');
+            formInputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        this.style.borderColor = 'var(--accent)';
+                    } else {
+                        this.style.borderColor = '#e2e8f0';
+                    }
+                });
+            });
+            
+            // Add investment simulation button
+            const simulationExamples = [
+                { amount: 5000000, period: 3, return: 22 },
+                { amount: 10000000, period: 2, return: 20 },
+                { amount: 20000000, period: 5, return: 18 }
+            ];
+            
+            // Add simulation buttons container
+            const calculatorContainer = document.querySelector('.calculator-inputs');
+            const simulationContainer = document.createElement('div');
+            simulationContainer.className = 'simulation-examples';
+            simulationContainer.innerHTML = `
+                <h3>Quick Examples:</h3>
+                <div class="simulation-buttons"></div>
+            `;
+            
+            const buttonsContainer = simulationContainer.querySelector('.simulation-buttons');
+            simulationExamples.forEach(sim => {
+                const button = document.createElement('button');
+                button.className = 'simulation-btn';
+                button.innerHTML = `
+                    ₦${(sim.amount/1000000)}M / ${sim.period}yrs / ${sim.return}%
+                `;
+                button.addEventListener('click', function() {
+                    investmentAmount.value = sim.amount;
+                    periodSelect.value = sim.period;
+                    
+                    // Find matching project option
+                    projectOptions.forEach(opt => {
+                        opt.classList.remove('active');
+                        if (parseInt(opt.dataset.return) === sim.return) {
+                            opt.classList.add('active');
+                        }
+                    });
+                    
+                    currentReturnRate = sim.return;
+                    calculateReturns();
+                    
+                    // Smooth scroll to results
+                    document.querySelector('.calculator-results').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                });
+                buttonsContainer.appendChild(button);
+            });
+            
+            calculatorContainer.appendChild(simulationContainer);
+            
+            // Add print investment plan button
+            const resultsContainer = document.querySelector('.calculator-results');
+            const printButton = document.createElement('button');
+            printButton.className = 'btn btn-outline';
+            printButton.innerHTML = '<i class="fas fa-print"></i> Print Investment Plan';
+            printButton.addEventListener('click', function() {
+                printInvestmentPlan();
+            });
+            resultsContainer.appendChild(printButton);
+            
+            function printInvestmentPlan() {
+                const investmentData = {
+                    amount: parseInt(investmentAmount.value),
+                    period: parseInt(periodSelect.value),
+                    returnRate: currentReturnRate,
+                    project: document.querySelector('.project-option.active h4').textContent
+                };
+                
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Investment Plan - Collaborative Investment Ltd</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 40px; }
+                            .header { text-align: center; margin-bottom: 40px; }
+                            .investment-details { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; }
+                            .detail-row { display: flex; justify-content: space-between; margin: 10px 0; }
+                            .total { font-weight: bold; font-size: 1.2em; color: #1a5276; }
+                            .footer { margin-top: 40px; font-size: 0.9em; color: #666; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <h1>Investment Plan</h1>
+                            <p>Collaborative Investment Ltd - Diaspora Investment Portal</p>
+                        </div>
+                        
+                        <div class="investment-details">
+                            <div class="detail-row">
+                                <span>Project Type:</span>
+                                <span>${investmentData.project}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Investment Amount:</span>
+                                <span>${formatCurrency(investmentData.amount)}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Investment Period:</span>
+                                <span>${investmentData.period} Years</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Annual Return Rate:</span>
+                                <span>${investmentData.returnRate}%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="projected-returns">
+                            <h2>Projected Returns</h2>
+                            ${generateReturnTable(investmentData)}
+                        </div>
+                        
+                        <div class="footer">
+                            <p>This is a projection based on current rates. Actual returns may vary.</p>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.print();
+            }
+            
+            function generateReturnTable(data) {
+                let table = '<table style="width:100%; border-collapse:collapse; margin-top:20px;">';
+                table += '<tr style="background:#1a5276; color:white;">';
+                table += '<th style="padding:10px;">Year</th>';
+                table += '<th style="padding:10px;">Annual Return</th>';
+                table += '<th style="padding:10px;">Cumulative</th>';
+                table += '</tr>';
+                
+                let cumulative = data.amount;
+                for (let year = 1; year <= data.period; year++) {
+                    const annualReturn = cumulative * (data.returnRate/100);
+                    cumulative += annualReturn;
+                    
+                    table += '<tr style="border-bottom:1px solid #ddd;">';
+                    table += `<td style="padding:10px;">Year ${year}</td>`;
+                    table += `<td style="padding:10px;">${formatCurrency(annualReturn)}</td>`;
+                    table += `<td style="padding:10px;">${formatCurrency(cumulative)}</td>`;
+                    table += '</tr>';
+                }
+                
+                table += '</table>';
+                return table;
+            }
+            
+            // Add styles for new elements
+            const additionalStyles = document.createElement('style');
+            additionalStyles.textContent = `
+                .simulation-examples {
+                    margin-top: 30px;
+                    padding: 20px;
+                    background: #f8fafc;
+                    border-radius: 8px;
+                }
+                
+                .simulation-examples h3 {
+                    color: var(--primary);
+                    margin-bottom: 15px;
+                    font-size: 1.2rem;
+                }
+                
+                .simulation-buttons {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+                
+                .simulation-btn {
+                    padding: 10px 15px;
+                    background: white;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    transition: var(--transition);
+                    font-size: 0.9rem;
+                }
+                
+                .simulation-btn:hover {
+                    border-color: var(--primary);
+                    background: var(--primary);
+                    color: white;
+                }
+                
+                .drawer-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 15px 0;
+                    border-bottom: 1px solid #eee;
+                }
+                
+                .drawer-item-info h4 {
+                    margin: 0 0 5px 0;
+                    font-size: 1rem;
+                }
+                
+                .drawer-item-info p {
+                    margin: 0;
+                    font-size: 0.9rem;
+                    color: #666;
+                }
+                
+                .drawer-item-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                }
+                
+                .drawer-item-total {
+                    font-weight: 600;
+                    color: var(--primary);
+                }
+                
+                .remove-item-btn {
+                    background: none;
+                    border: none;
+                    color: #e74c3c;
+                    cursor: pointer;
+                    font-size: 1rem;
+                }
+                
+                .empty-cart {
+                    text-align: center;
+                    color: #666;
+                    padding: 40px 20px;
+                }
+                
+                .error {
+                    color: #e74c3c;
+                    text-align: center;
+                    padding: 20px;
+                }
+                
+                @media (max-width: 768px) {
+                    .simulation-buttons {
+                        flex-direction: column;
+                    }
+                    
+                    .simulation-btn {
+                        width: 100%;
+                    }
+                }
+            `;
+            document.head.appendChild(additionalStyles);
+            
+            // Add WhatsApp chat button
+            const whatsappButton = document.createElement('a');
+            whatsappButton.href = 'https://wa.me/2348129978419';
+            whatsappButton.target = '_blank';
+            whatsappButton.className = 'whatsapp-float';
+            whatsappButton.innerHTML = '<i class="fab fa-whatsapp"></i>';
+            whatsappButton.title = 'Chat with us on WhatsApp';
+            document.body.appendChild(whatsappButton);
+            
+            // Add WhatsApp button styles
+            const whatsappStyles = document.createElement('style');
+            whatsappStyles.textContent = `
+                .whatsapp-float {
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    width: 60px;
+                    height: 60px;
+                    background: #25D366;
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 2rem;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    transition: all 0.3s ease;
+                    text-decoration: none;
+                }
+                
+                .whatsapp-float:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+                    background: #128C7E;
+                }
+                
+                @media (max-width: 768px) {
+                    .whatsapp-float {
+                        width: 50px;
+                        height: 50px;
+                        font-size: 1.5rem;
+                        bottom: 20px;
+                        right: 20px;
+                    }
+                }
+            `;
+            document.head.appendChild(whatsappStyles);
+            
+            // Add active navigation highlighting
+            const currentPage = window.location.pathname;
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage || 
+                    (currentPage.includes('investment') && link.getAttribute('href').includes('investment'))) {
+                    link.classList.add('active');
+                }
+            });
+            
+        }); // End of DOMContentLoaded
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
+</body>
+</html>
