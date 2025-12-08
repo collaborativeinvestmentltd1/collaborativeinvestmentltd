@@ -12,9 +12,72 @@ function getCategoryDisplayName(category) {
         'construction': 'Construction',
         'furniture': 'Furniture',
         'machinery': 'Machinery',
-        'solar': 'Solar'
+        'solar': 'Solar',
+        'poultry': 'Poultry',
+        'livestock': 'Livestock',
+        'fish': 'Fish & Aquaculture',
+        'feeds': 'Animal Feeds',
+        'supplies': 'Farming Supplies',
+        'machines': 'Machinery',
+        'courts': 'Sports Courts',
+        'gates': 'Electric Gates',
+        'office': 'Office Furniture',
+        'living': 'Living Room',
+        'dining': 'Dining Sets',
+        'bedroom': 'Bedroom',
+        'seating': 'Seating',
+        'panels': 'Solar Panels',
+        'batteries': 'Solar Batteries',
+        'inverters': 'Solar Inverters',
+        'controllers': 'Charge Controllers',
+        'systems': 'Solar Systems',
+        'lights': 'Solar Lights',
+        'accessories': 'Solar Accessories',
+        'blocks': 'Construction Blocks',
+        'cement': 'Bulk Cement',
+        'mixers': 'Industrial Mixers'
     };
     return categories[category] || category;
+}
+
+// Helper function to get main category from product
+function getMainCategory(product) {
+    const category = product.category;
+    const mainCategoryMap = {
+        'poultry': 'agriculture',
+        'livestock': 'agriculture',
+        'fish': 'agriculture',
+        'feeds': 'agriculture',
+        'supplies': 'agriculture',
+        
+        // Construction subcategories
+        'machines': 'construction',
+        'courts': 'construction',
+        'gates': 'construction',
+        
+        // Furniture subcategories
+        'office': 'furniture',
+        'living': 'furniture',
+        'dining': 'furniture',
+        'bedroom': 'furniture',
+        'seating': 'furniture',
+        
+        // Machinery subcategories
+        'blocks': 'machinery',
+        'cement': 'machinery',
+        'mixers': 'machinery',
+        
+        // Solar subcategories
+        'panels': 'solar',
+        'batteries': 'solar',
+        'inverters': 'solar',
+        'controllers': 'solar',
+        'systems': 'solar',
+        'lights': 'solar',
+        'accessories': 'solar'
+    };
+    
+    return mainCategoryMap[category] || category;
 }
 
 // COMBINED PRODUCTS DATA FROM ALL CATEGORIES
@@ -4626,7 +4689,10 @@ function getCategoryDisplayName(category) {
             }
         ];
 
-// NOW combine all products AFTER all arrays are defined
+// ====================================================
+// Make sure all arrays are properly defined here
+
+// Combined products
 const allProducts = [
     ...agricultureProducts,
     ...constructionProducts,
@@ -4635,7 +4701,11 @@ const allProducts = [
     ...solarProducts,
 ];
 
-// Make available globally
+// Debug: Check if products are loaded
+console.log('Total products loaded:', allProducts.length);
+console.log('Sample product:', allProducts[0]);
+
+// Make products available globally
 window.allProducts = allProducts;
 
 // CART FUNCTIONS
@@ -4664,7 +4734,7 @@ function saveCart(cart) {
 }
 
 function addToCart(product) {
-    console.log('Adding to cart:', product);
+    console.log('Adding to cart:', product.name);
     
     if (!product || !product.id || !product.name || !product.price) {
         console.error('Invalid product data:', product);
@@ -4764,6 +4834,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const noProducts = document.getElementById('no-products');
     const resetFiltersBtn = document.getElementById('reset-filters');
     
+    // Check if DOM elements exist
+    if (!productsContainer) {
+        console.error('CRITICAL: products-container not found in HTML!');
+        alert('Error: Products container not found. Please check your HTML.');
+        return;
+    }
+    
+    if (!allProducts || allProducts.length === 0) {
+        console.error('CRITICAL: No products loaded!');
+        productsContainer.innerHTML = '<div class="no-products"><h3>No products available at the moment</h3><p>Please check back later.</p></div>';
+        return;
+    }
+    
     // Pagination variables
     let currentPage = 1;
     const productsPerPage = 12;
@@ -4793,7 +4876,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (category === 'all') {
                     count = allProducts.length;
                 } else {
-                    count = allProducts.filter(product => product.category === category).length;
+                    count = allProducts.filter(product => getMainCategory(product) === category).length;
                 }
                 countElement.textContent = count;
                 console.log(`Category ${category}: ${count} products`);
@@ -4861,13 +4944,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (sortSelect) sortSelect.value = 'name-asc';
                 
                 // Reset category tabs
-                const tabs = categoryTabs.querySelectorAll('.category-tab');
-                tabs.forEach(tab => {
-                    tab.classList.remove('active');
-                    if (tab.dataset.category === 'all') {
-                        tab.classList.add('active');
-                    }
-                });
+                if (categoryTabs) {
+                    const tabs = categoryTabs.querySelectorAll('.category-tab');
+                    tabs.forEach(tab => {
+                        tab.classList.remove('active');
+                        if (tab.dataset.category === 'all') {
+                            tab.classList.add('active');
+                        }
+                    });
+                }
                 
                 currentCategory = 'all';
                 currentPage = 1;
@@ -4877,7 +4962,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Single global event listener for add-to-cart buttons
         document.addEventListener('click', function(e) {
-            const addToCartBtn = e.target.closest('.add-to-cart');
+            const addToCartBtn = e.target.closest('.btn-primary.add-to-cart');
             if (!addToCartBtn) return;
             
             e.preventDefault();
@@ -4891,19 +4976,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Add to cart clicked for:', product.name);
                 
                 // Add to cart
-                addToCart(product);
+                const success = addToCart(product);
                 
-                // Visual feedback
-                const originalText = addToCartBtn.innerHTML;
-                addToCartBtn.innerHTML = '✓ Added!';
-                addToCartBtn.style.background = '#27ae60';
-                
-                setTimeout(() => {
-                    addToCartBtn.innerHTML = originalText;
-                    addToCartBtn.style.background = '';
-                }, 1000);
+                if (success) {
+                    // Visual feedback
+                    const originalText = addToCartBtn.innerHTML;
+                    const originalBackground = addToCartBtn.style.background;
+                    
+                    addToCartBtn.innerHTML = '✓ Added!';
+                    addToCartBtn.style.background = '#27ae60';
+                    
+                    setTimeout(() => {
+                        addToCartBtn.innerHTML = originalText;
+                        addToCartBtn.style.background = originalBackground;
+                    }, 1500);
+                }
             } else {
                 console.error('Product not found with ID:', productId);
+                alert('Product not found!');
             }
         }, true);
     }
@@ -4918,7 +5008,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentCategory === 'all') {
             filteredProducts = [...allProducts];
         } else {
-            filteredProducts = allProducts.filter(product => product.category === currentCategory);
+            filteredProducts = allProducts.filter(product => {
+                return getMainCategory(product) === currentCategory;
+            });
         }
         
         console.log(`After category filter (${currentCategory}):`, filteredProducts.length, 'products');
@@ -4928,7 +5020,8 @@ document.addEventListener('DOMContentLoaded', function() {
             filteredProducts = filteredProducts.filter(product => {
                 return (
                     product.name.toLowerCase().includes(searchTerm) ||
-                    product.description.toLowerCase().includes(searchTerm) ||
+                    (product.description && product.description.toLowerCase().includes(searchTerm)) ||
+                    (product.tags && product.tags.some(tag => tag.toLowerCase().includes(searchTerm))) ||
                     (product.specs && Object.values(product.specs).some(value => 
                         value.toString().toLowerCase().includes(searchTerm)
                     ))
@@ -4962,7 +5055,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 sortedProducts.sort((a, b) => b.price - a.price);
                 break;
             case 'newest':
-                // Since we don't have dates, we'll use IDs as a proxy
+                // Sort by ID (assuming newer products have higher IDs)
                 sortedProducts.sort((a, b) => b.id.localeCompare(a.id));
                 break;
         }
@@ -4972,10 +5065,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Display products
     function displayProducts() {
-        if (!productsContainer) {
-            console.error('Products container not found!');
-            return;
-        }
+        console.log('Displaying products...');
         
         const startIndex = (currentPage - 1) * productsPerPage;
         const endIndex = startIndex + productsPerPage;
@@ -4991,14 +5081,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const pageProducts = filteredProducts.slice(startIndex, endIndex);
         
         // Show/hide no products message
-        if (filteredProducts.length === 0) {
-            console.log('No products found');
-            noProducts.style.display = 'block';
-            productsContainer.innerHTML = '';
+        if (noProducts) {
+            if (filteredProducts.length === 0) {
+                console.log('No products found');
+                noProducts.style.display = 'block';
+                productsContainer.innerHTML = '';
+            } else {
+                noProducts.style.display = 'none';
+                
+                // Create product cards
+                pageProducts.forEach(product => {
+                    const productCard = createProductCard(product);
+                    productsContainer.appendChild(productCard);
+                });
+            }
         } else {
-            noProducts.style.display = 'none';
-            
-            // Create product cards
+            // If noProducts element doesn't exist, just show products
             pageProducts.forEach(product => {
                 const productCard = createProductCard(product);
                 productsContainer.appendChild(productCard);
@@ -5035,26 +5133,39 @@ document.addEventListener('DOMContentLoaded', function() {
         const formattedPrice = product.price.toLocaleString();
         const categoryName = getCategoryDisplayName(product.category);
         
+        // Build specs HTML if available
+        let specsHTML = '';
+        if (product.specs && Object.keys(product.specs).length > 0) {
+            const specEntries = Object.entries(product.specs).slice(0, 2);
+            specsHTML = `
+                <div class="product-specs">
+                    ${specEntries.map(([key, value]) => `
+                        <div class="spec-item">
+                            <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ')}:</span>
+                            <span class="spec-value">${value}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // Build description (truncate if too long)
+        let description = product.description || 'No description available';
+        if (description.length > 120) {
+            description = description.substring(0, 120) + '...';
+        }
+        
         card.innerHTML = `
             <div class="product-category-badge">${categoryName}</div>
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" 
+                <img src="${product.image || '/img/logo.jpg'}" alt="${product.name}" 
                      onerror="this.onerror=null; this.src='/img/logo.jpg'">
             </div>
             <div class="product-content">
                 <h3 class="product-title">${product.name}</h3>
-                <p class="product-description">${product.description}</p>
+                <p class="product-description">${description}</p>
                 
-                ${product.specs ? `
-                    <div class="product-specs">
-                        ${Object.entries(product.specs).slice(0, 2).map(([key, value]) => `
-                            <div class="spec-item">
-                                <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1)}:</span>
-                                <span class="spec-value">${value}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                ` : ''}
+                ${specsHTML}
                 
                 <div class="product-price">₦${formattedPrice}</div>
                 
@@ -5065,7 +5176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             data-id="${product.id}"
                             data-name="${product.name}"
                             data-price="${product.price}"
-                            data-image="${product.image}">
+                            data-image="${product.image || '/img/logo.jpg'}">
                         Add to Cart
                     </button>
                     <a href="https://wa.me/2348129978419?text=I'm interested in: ${encodeURIComponent(product.name)} - ₦${formattedPrice}" 
@@ -5081,7 +5192,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update product count display
     function updateProductCount() {
-        if (!productCount) return;
+        if (!productCount) {
+            console.warn('product-count element not found');
+            return;
+        }
         
         const totalProducts = filteredProducts.length;
         const showingProducts = Math.min(currentPage * productsPerPage, totalProducts);
@@ -5120,11 +5234,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const cartOverlay = document.getElementById('cart-drawer-overlay');
         
         // Open cart drawer
-        if (openCartBtn) {
+        if (openCartBtn && cartDrawer) {
             openCartBtn.addEventListener('click', function() {
                 console.log('Opening cart drawer');
                 cartDrawer.classList.add('active');
-                cartOverlay.classList.add('active');
+                if (cartOverlay) cartOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 renderCartDrawer();
             });
@@ -5133,8 +5247,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Close cart drawer
         function closeCartDrawer() {
             console.log('Closing cart drawer');
-            cartDrawer.classList.remove('active');
-            cartOverlay.classList.remove('active');
+            if (cartDrawer) cartDrawer.classList.remove('active');
+            if (cartOverlay) cartOverlay.classList.remove('active');
             document.body.style.overflow = '';
         }
         
@@ -5148,7 +5262,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Close on escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && cartDrawer.classList.contains('active')) {
+            if (e.key === 'Escape' && cartDrawer && cartDrawer.classList.contains('active')) {
                 closeCartDrawer();
             }
         });
@@ -5178,7 +5292,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             cartItemsContainer.innerHTML = cart.map(item => `
                 <div class="cart-drawer-item" data-id="${item.id}">
-                    <img src="${item.image}" alt="${item.name}" 
+                    <img src="${item.image || '/img/logo.jpg'}" alt="${item.name}" 
                          class="cart-drawer-item-image" 
                          onerror="this.src='/img/logo.jpg'">
                     <div class="cart-drawer-item-details">
@@ -5217,6 +5331,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const cart = getCart().filter(item => item.id !== productId);
             saveCart(cart);
         }
+        
+        // Initial render
+        if (typeof window.renderCartDrawer === 'function') {
+            window.renderCartDrawer();
+        }
     }
     
     // Start the page
@@ -5228,4 +5347,5 @@ document.addEventListener('DOMContentLoaded', function() {
     window.updateCartCount = updateCartCount;
     window.getCart = getCart;
     window.showCartNotification = showCartNotification;
+    window.getMainCategory = getMainCategory;
 });
