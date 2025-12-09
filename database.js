@@ -194,19 +194,29 @@ const dbOperations = {
         }
     },
 
-    async update(collection, id, updates) {
-        try {
-            updates.updatedAt = new Date();
-            const result = await mongoDB.collection(collection).updateOne(
-                { _id: new ObjectId(id) },
-                { $set: updates }
-            );
-            return result.modifiedCount > 0;
-        } catch (error) {
-            console.error(`Error updating in ${collection}:`, error);
-            throw error;
+// In database.js, update the update function:
+async update(collection, query, updates) {
+    try {
+        updates.updatedAt = new Date();
+        
+        // Convert _id to ObjectId if it's a string that looks like ObjectId
+        if (query._id) {
+            if (typeof query._id === 'string' && /^[0-9a-fA-F]{24}$/.test(query._id)) {
+                query._id = new ObjectId(query._id);
+            }
+            // If it's already an ObjectId object, keep it as is
         }
-    },
+        
+        const result = await mongoDB.collection(collection).updateOne(
+            query,
+            { $set: updates }
+        );
+        return result.modifiedCount > 0;
+    } catch (error) {
+        console.error(`Error updating in ${collection}:`, error);
+        throw error;
+    }
+},
 
     async delete(collection, id) {
         try {
@@ -309,10 +319,15 @@ const dbOperations = {
 };
 
 // Close database connection
+// In database.js, update the closeDB function:
 async function closeDB() {
-    if (client) {
-        await client.close();
-        console.log('✅ MongoDB connection closed');
+    try {
+        if (client) {
+            await client.close();
+            console.log('✅ MongoDB connection closed');
+        }
+    } catch (error) {
+        console.warn('⚠️ MongoDB connection close warning:', error.message);
     }
 }
 

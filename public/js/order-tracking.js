@@ -5,6 +5,78 @@ document.addEventListener('DOMContentLoaded', () => {
   const REFRESH_INTERVAL = 30000; // ms
   const MAX_RETRIES = 3;
 
+// Add this function at the top of order-tracking.js (after 'use strict')
+function normalizeOrderNumberClient(orderNumber) {
+    if (!orderNumber) return '';
+    
+    let clean = orderNumber.toUpperCase().trim();
+    
+    // Handle different formats
+    if (clean.includes('-')) {
+        const parts = clean.split('-').filter(p => p);
+        
+        // Format: 367193-944 (without CIL)
+        if (parts.length === 2 && parts[0].length === 6 && parts[1].length === 3) {
+            const currentYear = new Date().getFullYear();
+            return `CIL-${currentYear}-${parts[0]}`;
+        }
+        
+        // Format: CIL-367193-944
+        if (parts.length === 3 && parts[0] === 'CIL' && parts[1].length === 6 && parts[2].length === 3) {
+            const currentYear = new Date().getFullYear();
+            return `CIL-${currentYear}-${parts[1]}`;
+        }
+    }
+    
+    // Add CIL- prefix if missing
+    if (!clean.startsWith('CIL')) {
+        clean = 'CIL-' + clean;
+    } else if (clean.startsWith('CIL') && !clean.startsWith('CIL-')) {
+        clean = 'CIL-' + clean.substring(3);
+    }
+    
+    return clean;
+}
+
+// Update the handleFormSubmit function to normalize before sending
+async function handleFormSubmit(e) {
+    e.preventDefault();
+    hideElement(el.error);
+    hideElement(el.orderContent);
+    hideElement(el.statusAlert);
+    hideElement(el.formMessage);
+
+    let orderNumber = (el.orderNumberInput.value || '').trim();
+    const email = (el.emailInput.value || '').trim();
+    const phone = (el.phoneInput.value || '').trim();
+
+    if (!orderNumber) {
+        showFormMessage('Please enter your order number', 'error');
+        return;
+    }
+
+    // Normalize the order number
+    orderNumber = normalizeOrderNumberClient(orderNumber);
+    
+    // Update input field with normalized value for user feedback
+    el.orderNumberInput.value = orderNumber;
+    
+    // Basic format check (accept various formats)
+    if (!/^CIL-[A-Z0-9-]+$/i.test(orderNumber)) {
+        showFormMessage('Invalid order number format. Expected format: CIL-YYYY-XXXXX or similar', 'error');
+        return;
+    }
+
+    // Disable UI
+    disableTrackButton(true);
+
+    // Fetch
+    await fetchAndShowOrder(orderNumber, email, phone);
+
+    // Re-enable UI
+    disableTrackButton(false);
+}
+
   // State
   let currentOrder = null;
   let isFetching = false;

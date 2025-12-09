@@ -61,6 +61,64 @@ class OrderTracker {
         }
     }
 
+// Add this function at the top of OrderTracker class
+normalizeOrderNumber(orderNumber) {
+    if (!orderNumber) return '';
+    
+    let clean = orderNumber.toUpperCase().trim();
+    
+    // Handle your specific format: CIL-367193-944
+    if (clean.includes('-')) {
+        const parts = clean.split('-').filter(p => p);
+        
+        // Format: CIL-367193-944
+        if (parts.length === 3 && parts[0] === 'CIL' && parts[1].length === 6 && parts[2].length === 3) {
+            const currentYear = new Date().getFullYear();
+            return `CIL-${currentYear}-${parts[1]}`;
+        }
+        
+        // Format: 367193-944
+        if (parts.length === 2 && parts[0].length === 6 && parts[1].length === 3) {
+            const currentYear = new Date().getFullYear();
+            return `CIL-${currentYear}-${parts[0]}`;
+        }
+    }
+    
+    // Simple normalization for other formats
+    if (!clean.startsWith('CIL')) {
+        clean = 'CIL-' + clean;
+    }
+    
+    return clean;
+}
+
+// Update the handleTrackOrder function to use normalization
+async handleTrackOrder(e) {
+    e.preventDefault();
+    
+    // Get form data
+    let orderNumber = document.getElementById('orderNumber')?.value.trim();
+    const email = document.getElementById('email')?.value.trim();
+    const phone = document.getElementById('phone')?.value.trim();
+    
+    // Validate
+    if (!orderNumber) {
+        this.showError('Please enter your order number');
+        return;
+    }
+
+    // Normalize order number
+    orderNumber = this.normalizeOrderNumber(orderNumber);
+    
+    // Update the input field
+    const orderNumberInput = document.getElementById('orderNumber');
+    if (orderNumberInput) {
+        orderNumberInput.value = orderNumber;
+    }
+
+    await this.fetchAndRedirect(orderNumber, email, phone);
+}
+
     async handleTrackOrder(e) {
         e.preventDefault();
         

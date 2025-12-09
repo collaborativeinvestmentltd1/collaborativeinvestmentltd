@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIL Nigeria - Shop & Invest in Quality Products</title>
-    <meta name="description" content="Shop quality construction materials, agricultural products, livestock, machinery, solar systems, and furniture. Investment opportunities across Nigeria.">
+    <title>CIL Nigeria - Investment & Business Development Partners</title>
+    <meta name="description" content="Strategic investment partners for Nigerian businesses. We invest in, develop, and manage profitable ventures across multiple sectors while providing quality products.">
     
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -12,11 +12,14 @@
     <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="stylesheet" href="/css/shop-all.css">
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #1a5276;
-            --secondary: #f39c12;
-            --accent: #2980b9;
+            --secondary: #145A32;
+            --accent: #D68910;
             --light: #f8f9fa;
             --dark: #2c3e50;
             --success: #27ae60;
@@ -24,78 +27,682 @@
             --danger: #e74c3c;
             --gray: #7f8c8d;
             --light-gray: #ecf0f1;
+            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 10px 30px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 15px 40px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Enhanced Hero Section */
-        .home-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        /* Header/Navbar */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links .active {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .cart-icon-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon-btn {
+            background: var(--primary);
             color: white;
-            padding: 4rem 0;
-            text-align: center;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #cart-count-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Menu Styles */
+        @media screen and (max-width: 992px) {
+            .navbar {
+                padding: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                order: 1;
+            }
+
+            .logo {
+                order: 2;
+                margin: 0 auto;
+            }
+
+            .cart-icon-wrapper {
+                order: 3;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                padding: 80px 20px 20px;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+                overflow-y: auto;
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                margin: 0;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid #eee;
+            }
+        }
+
+        /* Hero Section - Investment Focused */
+        .investment-hero {
+            background: linear-gradient(135deg, rgba(26, 82, 118, 0.95) 0%, rgba(41, 128, 185, 0.9) 100%),
+                        url('/img/investment-hero-bg.jpg') center/cover no-repeat;
+            color: white;
+            padding: 6rem 0 4rem;
             position: relative;
             overflow: hidden;
-            margin-bottom: 2rem;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
         }
-
-        .home-hero::before {
+        
+        .investment-hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('/img/hero-pattern.svg') repeat;
+            background: linear-gradient(45deg, rgba(20, 90, 50, 0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(20, 90, 50, 0.1) 25%, transparent 25%);
+            background-size: 60px 60px;
             opacity: 0.1;
         }
 
-        .home-hero .container {
+        .hero-content-wrapper {
             position: relative;
             z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .home-hero h1 {
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text .highlight {
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(20, 90, 50, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(20, 90, 50, 0.5);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image-container {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .hero-image-container:hover .hero-image {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: white;
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            padding: 2rem;
         }
 
-        .home-hero .subtitle {
+        .image-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .image-overlay p {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        /* Investment Models Section */
+        .investment-models {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .model-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .model-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .model-icon {
+            height: 80px;
+            width: 80px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: -40px auto 1.5rem;
+            position: relative;
+            z-index: 2;
+            border: 5px solid white;
+        }
+
+        .model-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .model-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .model-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .model-content p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .model-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .model-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .model-features li:last-child {
+            border-bottom: none;
+        }
+
+        .model-features li i {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+
+        /* Our Business Portfolio */
+        .business-portfolio {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .portfolio-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .portfolio-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .portfolio-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-stats {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .portfolio-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .portfolio-stat:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: var(--gray);
+        }
+
+        .stat-value {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Why Choose CIL */
+        .why-choose {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .reason-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .reason-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .reason-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .reason-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Products Preview */
+        .products-preview {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .preview-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .preview-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .preview-content {
+            padding: 1.5rem;
+        }
+
+        .preview-content h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .preview-category {
+            display: inline-block;
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .preview-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin: 0.5rem 0;
+        }
+
+        /* Investment CTA */
+        .investment-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, #154360 100%),
+                        url('/img/investment-cta-bg.jpg') center/cover no-repeat;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .investment-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-content p {
             font-size: 1.3rem;
             opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            font-weight: 500;
-            line-height: 1.6;
+            margin-bottom: 3rem;
+            line-height: 1.8;
         }
 
-        .home-tagline {
+        .cta-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cta-stat {
+            text-align: center;
+        }
+
+        .cta-stat-value {
+            display: block;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-stat-label {
             font-size: 1.1rem;
             opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto 2rem;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2rem;
         }
 
+        /* Button Styles */
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            gap: 0.75rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: none;
             cursor: pointer;
-            font-family: inherit;
         }
 
         .btn-primary {
@@ -104,306 +711,96 @@
         }
 
         .btn-primary:hover {
-            background: #e67e22;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #0e4d27;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(20, 90, 50, 0.3);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: #b36d0e;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(214, 137, 16, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
-        .btn-whatsapp {
-            background: #25D366;
-            color: white;
-        }
-
-        .btn-whatsapp:hover {
-            background: #128C7E;
-            transform: translateY(-2px);
-        }
-
-        /* Enhanced Section Styling */
-        .home-section {
-            padding: 4rem 0;
-        }
-
-        .home-section:nth-child(even) {
-            background: var(--light);
-        }
-
-        .section-title {
+        /* Section Header */
+        .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 5rem;
         }
 
-        .section-title h2 {
+        .section-header h2 {
+            font-size: 2.8rem;
             color: var(--primary);
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
+            margin-bottom: 1.5rem;
             position: relative;
+            display: inline-block;
         }
 
-        .section-title h2::after {
+        .section-header h2::after {
             content: '';
-            display: block;
-            width: 80px;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
             height: 4px;
             background: var(--accent);
-            margin: 1rem auto;
             border-radius: 2px;
         }
 
-        .section-subtitle {
-            text-align: center;
+        .section-header p {
             color: var(--gray);
-            margin-bottom: 3rem;
+            max-width: 700px;
+            margin: 2rem auto 0;
             font-size: 1.2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* Category Cards (Matching shop-construction style) */
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .category-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            border-color: var(--accent);
-        }
-
-        .category-image {
-            height: 180px;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .category-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .category-card:hover .category-image img {
-            transform: scale(1.05);
-        }
-
-        .category-name {
-            color: var(--dark);
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .category-description {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .category-product-count {
-            display: inline-block;
-            background: var(--light);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid var(--light-gray);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .service-image {
-            height: 200px;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .service-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .service-card p {
-            color: var(--gray);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Stats Section */
-        .stats-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white;
-            padding: 4rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('/img/stats-pattern.png') repeat;
-            opacity: 0.1;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stat-item {
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: var(--secondary);
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-item p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        /* Featured Products */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-
-        .product-image {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        .product-content {
-            padding: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 1.2rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .price-display {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin: 1rem 0;
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -420,58 +817,75 @@
             opacity: 0;
         }
 
-        .fade-in-up:nth-child(2) { animation-delay: 0.1s; }
-        .fade-in-up:nth-child(3) { animation-delay: 0.2s; }
-        .fade-in-up:nth-child(4) { animation-delay: 0.3s; }
-        .fade-in-up:nth-child(5) { animation-delay: 0.4s; }
-
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-image {
+                height: 350px;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .home-hero h1 {
+            .investment-hero {
+                padding: 4rem 0 3rem;
+                min-height: auto;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-actions {
+                justify-content: center;
+            }
+            
+            .cta-content h2 {
                 font-size: 2rem;
-            }
-            
-            .home-hero .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .category-grid,
-            .services-grid,
-            .products-grid {
-                grid-template-columns: 1fr;
             }
             
             .cta-buttons {
                 flex-direction: column;
-                align-items: center;
             }
             
             .btn {
                 width: 100%;
-                max-width: 300px;
                 justify-content: center;
             }
             
-            .section-title h2 {
-                font-size: 1.8rem;
+            .cta-stats {
+                gap: 2rem;
             }
             
-            .home-section {
-                padding: 3rem 0;
+            .cta-stat-value {
+                font-size: 2.5rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .home-hero {
-                padding: 3rem 0;
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2rem;
             }
             
-            .home-hero h1 {
+            .section-header h2 {
                 font-size: 1.8rem;
             }
             
-            .container {
-                padding: 0 15px;
+            .models-grid,
+            .portfolio-grid,
+            .reasons-grid,
+            .preview-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -485,12 +899,17 @@
                 <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
             
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/shop-categories" class="active">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
@@ -498,7 +917,7 @@
                 <li><a href="/contact">Contact</a></li>
             </ul>
             
-            <!-- Cart Icon in Header -->
+            <!-- Cart Icon -->
             <div class="cart-icon-wrapper">
                 <button id="open-cart-drawer" class="cart-icon-btn">
                     🛒 Cart <span id="cart-count-badge">0</span>
@@ -528,436 +947,518 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="home-hero">
-            <div class="container">
-                <h1>Empowering Nigerian Businesses</h1>
-                <p class="subtitle">Quality Products • Strategic Investments • Sustainable Growth</p>
-                <p class="home-tagline">
-                    Collaborative Investment Ltd is your trusted partner for business development, 
-                    investment management, and quality product sourcing across Nigeria.
-                </p>
-                <div class="cta-buttons">
-                    <a href="/investment" class="btn btn-primary">Invest With Us</a>
-                    <a href="/shop-categories" class="btn btn-secondary">Shop Products</a>
-                    <a href="https://wa.me/2348129978419" class="btn btn-whatsapp" target="_blank">WhatsApp Us</a>
+        <!-- Investment Hero Section -->
+        <section class="investment-hero">
+            <div class="hero-content-wrapper">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <div class="hero-badges">
+                            <div class="hero-badge">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Strategic Investments</span>
+                            </div>
+                            <div class="hero-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Guaranteed Returns</span>
+                            </div>
+                        </div>
+                        <h1>
+                            Strategic Investment Partners<br>
+                            <span class="highlight">for Nigerian Businesses</span>
+                        </h1>
+                        <p>Collaborative Investment Ltd is a premier investment company that develops, manages, and scales profitable businesses across Nigeria's most promising sectors.</p>
+                        
+                        <div class="hero-actions">
+                            <a href="/investment" class="btn btn-accent">
+                                <i class="fas fa-handshake"></i>
+                                Invest With Us
+                            </a>
+                            <a href="/services" class="btn btn-secondary">
+                                <i class="fas fa-cogs"></i>
+                                Our Business Services
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image-container">
+                        <img src="/img/investment-meeting.jpg" class="hero-image" alt="Strategic Investment Meeting">
+                        <div class="image-overlay">
+                            <h3>Building Business Success</h3>
+                            <p>We invest in, develop, and manage profitable ventures across multiple sectors</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Shop Categories Preview -->
-        <section class="home-section">
+        <!-- Investment Models Section -->
+        <section class="investment-models">
             <div class="container">
-                <div class="section-title">
-                    <h2>Shop Our Quality Products</h2>
-                    <p class="section-subtitle">
-                        Browse our extensive catalog of quality products across all business sectors. 
-                        Direct sales with nationwide delivery and flexible payment options.
-                    </p>
+                <div class="section-header">
+                    <h2>Our Investment Models</h2>
+                    <p>Choose from our proven investment frameworks designed for maximum returns and sustainable growth</p>
                 </div>
                 
-                <div class="category-grid">
-                    <a href="/shop-construction" class="category-card fade-in-up">
-                        <div class="category-image">
-                            <img src="/img/categories/construction-category.jpg" alt="Construction Materials">
+                <div class="models-grid">
+                    <!-- Model 1: Direct Business Investment -->
+                    <div class="model-card fade-in-up">
+                        <img src="/img/models/direct-investment.jpg" alt="Direct Business Investment" class="model-image">
+                        <div class="model-content">
+                            <div class="model-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>Direct Business Investment</h3>
+                            <p>Invest directly in our established businesses across 6 sectors with guaranteed returns and professional management.</p>
+                            
+                            <ul class="model-features">
+                                <li><i class="fas fa-check-circle"></i> 18-30% Annual Returns</li>
+                                <li><i class="fas fa-check-circle"></i> Professional Management</li>
+                                <li><i class="fas fa-check-circle"></i> Monthly Performance Reports</li>
+                                <li><i class="fas fa-check-circle"></i> Asset-Backed Security</li>
+                            </ul>
+                            
+                            <a href="/investment#direct" class="btn btn-primary" style="width: 100%;">
+                                Invest Now
+                            </a>
                         </div>
-                        <h3 class="category-name">Construction Works</h3>
-                        <p class="category-description">
-                            Battery poultry cages, block machines, sports courts, electric gates
-                        </p>
-                        <span class="category-product-count">75+ products</span>
-                    </a>
+                    </div>
                     
-                    <a href="/shop-agriculture" class="category-card fade-in-up">
-                        <div class="category-image">
-                            <img src="/img/categories/agriculture-category.jpg" alt="Agriculture & Livestock">
+                    <!-- Model 2: Diaspora Business Management -->
+                    <div class="model-card fade-in-up">
+                        <img src="/img/models/diaspora-management.jpg" alt="Diaspora Business Management" class="model-image">
+                        <div class="model-content">
+                            <div class="model-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <h3>Diaspora Business Management</h3>
+                            <p>We setup and manage your Nigerian business while you maintain full ownership from anywhere in the world.</p>
+                            
+                            <ul class="model-features">
+                                <li><i class="fas fa-check-circle"></i> Complete Business Setup</li>
+                                <li><i class="fas fa-check-circle"></i> Professional Staff Management</li>
+                                <li><i class="fas fa-check-circle"></i> Domiciliary Account Access</li>
+                                <li><i class="fas fa-check-circle"></i> Virtual Business Monitoring</li>
+                            </ul>
+                            
+                            <a href="/shop-diaspora" class="btn btn-primary" style="width: 100%;">
+                                Start Your Business
+                            </a>
                         </div>
-                        <h3 class="category-name">Agriculture & Livestock</h3>
-                        <p class="category-description">
-                            Day-old chicks, broilers, layers, pigs, catfish, animal feeds, equipment
-                        </p>
-                        <span class="category-product-count">17 products</span>
-                    </a>
+                    </div>
                     
-                    <a href="/shop-solar" class="category-card fade-in-up">
-                        <div class="category-image">
-                            <img src="/img/categories/solar-category.jpg" alt="Solar Energy Systems">
+                    <!-- Model 3: Joint Venture Partnerships -->
+                    <div class="model-card fade-in-up">
+                        <img src="/img/models/joint-venture.jpg" alt="Joint Venture Partnerships" class="model-image">
+                        <div class="model-content">
+                            <div class="model-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>Joint Venture Partnerships</h3>
+                            <p>Partner with us to scale your existing business or start new ventures with shared investment and expertise.</p>
+                            
+                            <ul class="model-features">
+                                <li><i class="fas fa-check-circle"></i> Shared Capital Investment</li>
+                                <li><i class="fas fa-check-circle"></i> Professional Management Support</li>
+                                <li><i class="fas fa-check-circle"></i> Market Access & Networks</li>
+                                <li><i class="fas fa-check-circle"></i> Profit Sharing Agreement</li>
+                            </ul>
+                            
+                            <a href="/investment#joint-venture" class="btn btn-primary" style="width: 100%;">
+                                Explore Partnerships
+                            </a>
                         </div>
-                        <h3 class="category-name">Solar Energy Systems</h3>
-                        <p class="category-description">
-                            Solar panels, batteries, inverters, complete solar packages for all needs
-                        </p>
-                        <span class="category-product-count">9 products</span>
-                    </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Business Portfolio -->
+        <section class="business-portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Business Portfolio</h2>
+                    <p>We operate and invest in 6 high-growth sectors with proven track records and sustainable business models</p>
+                </div>
+                
+                <div class="portfolio-grid">
+                    <!-- Agriculture -->
+                    <div class="portfolio-card fade-in-up">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h3>Agriculture & Livestock</h3>
+                        <p>Poultry farming, fish farming, crop production, and livestock management with modern equipment and techniques.</p>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Success Rate:</span>
+                                <span class="stat-value">85-90%</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">ROI Period:</span>
+                                <span class="stat-value">3-4 months</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Annual Growth:</span>
+                                <span class="stat-value">25%+</span>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <a href="/shop-furniture" class="category-card fade-in-up">
-                        <div class="category-image">
-                            <img src="/img/categories/furniture-category.jpg" alt="Furniture & Upholstery">
+                    <!-- Construction -->
+                    <div class="portfolio-card fade-in-up">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-hard-hat"></i>
                         </div>
-                        <h3 class="category-name">Furniture & Upholstery</h3>
-                        <p class="category-description">
-                            Custom chairs, office furniture, living room sets, premium upholstery
-                        </p>
-                        <span class="category-product-count">16 products</span>
-                    </a>
+                        <h3>Construction & Manufacturing</h3>
+                        <p>Block manufacturing, building materials, electric gates, and construction services with premium quality standards.</p>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Success Rate:</span>
+                                <span class="stat-value">90%+</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Market Demand:</span>
+                                <span class="stat-value">Unconditional</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Annual Growth:</span>
+                                <span class="stat-value">30%+</span>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <a href="/shop-machinery" class="category-card fade-in-up">
-                        <div class="category-image">
-                            <img src="/img/categories/machinery-category.jpg" alt="Machinery & Equipment">
+                    <!-- Solar Energy -->
+                    <div class="portfolio-card fade-in-up">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-solar-panel"></i>
                         </div>
-                        <h3 class="category-name">Machinery & Equipment</h3>
-                        <p class="category-description">
-                            Block-making machines, industrial mixers, manufacturing equipment
-                        </p>
-                        <span class="category-product-count">8 products</span>
+                        <h3>Solar Energy Solutions</h3>
+                        <p>Complete solar systems installation, sales, and maintenance services for homes, businesses, and communities.</p>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Success Rate:</span>
+                                <span class="stat-value">75-80%</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Market Size:</span>
+                                <span class="stat-value">₦500B+</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Annual Growth:</span>
+                                <span class="stat-value">35%+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 4rem;">
+                    <a href="/portfolio" class="btn btn-accent">
+                        <i class="fas fa-chart-bar"></i>
+                        View Full Portfolio
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose CIL -->
+        <section class="why-choose">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Choose CIL as Your Investment Partner</h2>
+                    <p>We combine strategic investment expertise with hands-on business management for guaranteed success</p>
+                </div>
+                
+                <div class="reasons-grid">
+                    <div class="reason-card fade-in-up">
+                        <div class="reason-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Proven Track Record</h3>
+                        <p>10+ years of successful business management and investor returns across multiple sectors</p>
+                    </div>
                     
-                    <a href="/shop-all" class="category-card fade-in-up">
-                        <div class="category-image">
-                            <img src="/img/categories/all-products-category.jpg" alt="All Products">
+                    <div class="reason-card fade-in-up">
+                        <div class="reason-icon">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3 class="category-name">All Products</h3>
-                        <p class="category-description">
-                            Browse our complete product catalog across all categories in one place
-                        </p>
-                        <span class="category-product-count">125+ products</span>
-                    </a>
+                        <h3>Asset-Backed Security</h3>
+                        <p>All investments protected by tangible assets and comprehensive legal documentation</p>
+                    </div>
+                    
+                    <div class="reason-card fade-in-up">
+                        <div class="reason-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Complete Transparency</h3>
+                        <p>Regular financial reporting, live project monitoring, and open communication</p>
+                    </div>
+                    
+                    <div class="reason-card fade-in-up">
+                        <div class="reason-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Professional Management</h3>
+                        <p>Experienced team handling daily operations, staffing, and business development</p>
+                    </div>
+                    
+                    <div class="reason-card fade-in-up">
+                        <div class="reason-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>Legal Compliance</h3>
+                        <p>Full compliance with Nigerian investment laws and international best practices</p>
+                    </div>
+                    
+                    <div class="reason-card fade-in-up">
+                        <div class="reason-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Dedicated support for investors across different time zones and locations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Preview -->
+        <section class="products-preview">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Quality Products From Our Businesses</h2>
+                    <p>Shop premium products manufactured and supplied by our portfolio businesses</p>
+                </div>
+                
+                <div class="preview-grid">
+                    <div class="preview-card fade-in-up">
+                        <img src="/img/products/electric-gate.jpg" alt="Electric Gate System" class="preview-image">
+                        <div class="preview-content">
+                            <span class="preview-category">Construction</span>
+                            <h4>Electric Gate System</h4>
+                            <p class="preview-price">₦850,000</p>
+                            <a href="/shop-construction#electric-gates" class="btn btn-outline" style="width: 100%;">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-card fade-in-up">
+                        <img src="/img/products/solar-system.jpg" alt="Complete Solar System" class="preview-image">
+                        <div class="preview-content">
+                            <span class="preview-category">Solar Energy</span>
+                            <h4>5KVA Solar System</h4>
+                            <p class="preview-price">₦1,200,000</p>
+                            <a href="/shop-solar#5kva-system" class="btn btn-outline" style="width: 100%;">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-card fade-in-up">
+                        <img src="/img/products/poultry-cage.jpg" alt="Poultry Battery Cage" class="preview-image">
+                        <div class="preview-content">
+                            <span class="preview-category">Agriculture</span>
+                            <h4>Poultry Battery Cage</h4>
+                            <p class="preview-price">₦450,000</p>
+                            <a href="/shop-agriculture#poultry-cage" class="btn btn-outline" style="width: 100%;">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-card fade-in-up">
+                        <img src="/img/products/block-machine.jpg" alt="Block Making Machine" class="preview-image">
+                        <div class="preview-content">
+                            <span class="preview-category">Machinery</span>
+                            <h4>Automatic Block Machine</h4>
+                            <p class="preview-price">₦2,500,000</p>
+                            <a href="/shop-machinery#block-machine" class="btn btn-outline" style="width: 100%;">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 
                 <div style="text-align: center; margin-top: 3rem;">
-                    <a href="/shop-categories" class="btn btn-primary">View All Categories</a>
+                    <a href="/shop-categories" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Shop All Products
+                    </a>
                 </div>
             </div>
         </section>
 
-<!-- Business Sectors -->
-<section class="home-section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our 6 Business Sectors</h2>
-            <p class="section-subtitle">
-                As a diversified investment firm, CIL strategically targets multiple high-impact sectors 
-                of Nigeria's economy with premium products that guarantee 75-90% sales success.
+        <!-- Investment CTA -->
+        <section class="investment-cta">
+            <div class="cta-content">
+                <h2>Start Your Investment Journey Today</h2>
+                <p>Join successful investors who are building wealth through our strategic investment platforms and business management services.</p>
+                
+                <div class="cta-stats">
+                    <div class="cta-stat">
+                        <span class="cta-stat-value">₦2.5B+</span>
+                        <span class="cta-stat-label">Assets Under Management</span>
+                    </div>
+                    <div class="cta-stat">
+                        <span class="cta-stat-value">98%</span>
+                        <span class="cta-stat-label">Success Rate</span>
+                    </div>
+                    <div class="cta-stat">
+                        <span class="cta-stat-value">25+</span>
+                        <span class="cta-stat-label">Investment Partners</span>
+                    </div>
+                    <div class="cta-stat">
+                        <span class="cta-stat-value">6</span>
+                        <span class="cta-stat-label">Business Sectors</span>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="/investment" class="btn btn-accent">
+                        <i class="fas fa-chart-line"></i>
+                        Explore Investment Options
+                    </a>
+                    <a href="https://wa.me/2348129978419" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp Consultation
+                    </a>
+                    <a href="/contact" class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: white; border-color: white;">
+                        <i class="fas fa-calendar"></i>
+                        Schedule Meeting
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <!-- About Section -->
+            <div class="footer-section">
+                <h3>Collaborative Investment Ltd</h3>
+                <p>Strategic investment partners developing and managing profitable Nigerian businesses across multiple sectors.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                        <i class="fab fa-facebook" style="font-size: 1.5rem; color: #1877F2;"></i>
+                    </a>
+                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                        <i class="fab fa-twitter" style="font-size: 1.5rem; color: #ffffff;"></i>
+                    </a>
+                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                        <i class="fab fa-whatsapp" style="font-size: 1.5rem; color: #25D366;"></i>
+                    </a>
+                    <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: #E4405F;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/services">Our Services</a></li>
+                    <li><a href="/shop-categories">Shop Products</a></li>
+                    <li><a href="/portfolio">Portfolio</a></li>
+                    <li><a href="/investment">Investment</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="/services#business-management">Business Investment</a></li>
+                    <li><a href="/services#agriculture">Agricultural Development</a></li>
+                    <li><a href="/services#manufacturing">Manufacturing</a></li>
+                    <li><a href="/services#diaspora">Diaspora Management</a></li>
+                    <li><a href="/investment">Investment Opportunities</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>collaborativeinvestmentltd@gmail.com</p>
+                <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+            <p>Building Nigeria's Business Future Through Strategic Investments</p>
+            <p style="margin-top: 1rem;">
+                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
             </p>
         </div>
-        
-        <div class="services-grid">
-            <!-- 1. CONSTRUCTION & MANUFACTURING -->
-            <div class="service-card fade-in-up">
-                <div class="service-image">
-                    <img src="/img/sectors/construction-sector.jpg" alt="Construction & Manufacturing">
-                </div>
-                <h3>Construction & Manufacturing</h3>
-                <p><strong>Premium Products (85-90% Success):</strong></p>
-                <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
-                    <li>Electric Gate Systems (Unconditional Demand)</li>
-                    <li>Manual & Automatic Block Machines</li>
-                    <li>Professional Sports Courts</li>
-                    <li>Poultry & Livestock Equipment</li>
-                </ul>
-                <p><strong>Why Unconditional:</strong> Every new property needs security, construction never stops, schools need sports facilities, agriculture expansion continues.</p>
-                <a href="/shop-construction" class="btn btn-primary" style="margin-top: 1rem;">Shop Construction (75+ Products)</a>
-            </div>
-            
-            <!-- 2. AGRICULTURE & AGRIBUSINESS -->
-            <div class="service-card fade-in-up">
-                <div class="service-image">
-                    <img src="/img/sectors/agriculture-sector.jpg" alt="Agriculture & Agribusiness">
-                </div>
-                <h3>Agriculture & Agribusiness</h3>
-                <p><strong>Premium Products (80-85% Success):</strong></p>
-                <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
-                    <li>Day-Old Chicks & Poults</li>
-                    <li>Livestock & Fish Fingerlings</li>
-                    <li>Automatic Feeding Systems</li>
-                    <li>Animal Feeds & Supplies</li>
-                </ul>
-                <p><strong>Why Unconditional:</strong> Food security priority, government subsidies available, high farmer ROI (3-4 months), year-round demand.</p>
-                <a href="/shop-agriculture" class="btn btn-primary" style="margin-top: 1rem;">Shop Agriculture (70+ Products)</a>
-            </div>
-            
-            <!-- 3. SOLAR ENERGY SOLUTIONS -->
-            <div class="service-card fade-in-up">
-                <div class="service-image">
-                    <img src="/img/sectors/solar-sector.jpg" alt="Solar Energy Solutions">
-                </div>
-                <h3>Solar Energy Solutions</h3>
-                <p><strong>Premium Products (75-80% Success):</strong></p>
-                <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
-                    <li>3-10KVA Complete Solar Systems</li>
-                    <li>Solar Street Lights</li>
-                    <li>Lithium & Gel Batteries</li>
-                    <li>Hybrid Inverters</li>
-                </ul>
-                <p><strong>Why Unconditional:</strong> Constant power outages, business necessity, government renewable energy focus, rising electricity costs.</p>
-                <a href="/shop-solar" class="btn btn-primary" style="margin-top: 1rem;">Shop Solar (15+ Products)</a>
-            </div>
-            
-            <!-- 4. FURNITURE & UPHOLSTERY -->
-            <div class="service-card fade-in-up">
-                <div class="service-image">
-                    <img src="/img/sectors/furniture-sector.jpg" alt="Furniture & Upholstery">
-                </div>
-                <h3>Furniture & Upholstery</h3>
-                <p><strong>Premium Products (80-85% Success):</strong></p>
-                <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
-                    <li>Metal Office Chairs & Desks</li>
-                    <li>Executive Conference Tables</li>
-                    <li>Living & Dining Room Sets</li>
-                    <li>Bedroom Furniture Suites</li>
-                </ul>
-                <p><strong>Why Unconditional:</strong> Every new office needs furniture, durable metal lasts 10+ years, government school projects, home furnishing demand.</p>
-                <a href="/shop-furniture" class="btn btn-primary" style="margin-top: 1rem;">Shop Furniture (75+ Products)</a>
-            </div>
-            
-            <!-- 5. INDUSTRIAL MACHINERY -->
-            <div class="service-card fade-in-up">
-                <div class="service-image">
-                    <img src="/img/sectors/machinery-sector.jpg" alt="Industrial Machinery">
-                </div>
-                <h3>Industrial Machinery</h3>
-                <p><strong>Premium Products (85-90% Success):</strong></p>
-                <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
-                    <li>Block Making Machines</li>
-                    <li>Concrete & Mortar Mixers</li>
-                    <li>Construction Blocks (Bulk)</li>
-                    <li>Bulk Cement Supply</li>
-                </ul>
-                <p><strong>Why Unconditional:</strong> Infrastructure development, housing deficit, government projects, construction industry growth.</p>
-                <a href="/shop-machinery" class="btn btn-primary" style="margin-top: 1rem;">Shop Machinery (15+ Products)</a>
-            </div>
-            
-            <!-- 6. DIASPORA MANAGEMENT (SERVICES) -->
-            <div class="service-card fade-in-up">
-                <div class="service-image">
-                    <img src="/img/sectors/diaspora-sector.jpg" alt="Diaspora Management">
-                </div>
-                <h3>Diaspora Asset Management</h3>
-                <p><strong>Premium Services (85-90% Success):</strong></p>
-                <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
-                    <li>Property Construction Management</li>
-                    <li>Business Setup & Management</li>
-                    <li>Investment Portfolio Management</li>
-                    <li>Agricultural Project Management</li>
-                </ul>
-                <p><strong>Why Unconditional:</strong> 17M Nigerians abroad need trusted partners, transparent reporting, professional oversight, secure investments.</p>
-                <a href="/services#diaspora" class="btn btn-primary" style="margin-top: 1rem;">Diaspora Services</a>
-            </div>
-        </div>
-        
-        <!-- Product Statistics -->
-        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
-            <div class="stat-card" style="background: var(--light); padding: 1.5rem; border-radius: 10px; text-align: center;">
-                <h3 style="font-size: 2.5rem; color: var(--primary); margin: 0;">250+</h3>
-                <p style="margin: 0.5rem 0 0; font-weight: 600;">Premium Products</p>
-            </div>
-            <div class="stat-card" style="background: var(--light); padding: 1.5rem; border-radius: 10px; text-align: center;">
-                <h3 style="font-size: 2.5rem; color: var(--primary); margin: 0;">6</h3>
-                <p style="margin: 0.5rem 0 0; font-weight: 600;">Business Sectors</p>
-            </div>
-            <div class="stat-card" style="background: var(--light); padding: 1.5rem; border-radius: 10px; text-align: center;">
-                <h3 style="font-size: 2.5rem; color: var(--primary); margin: 0;">75-90%</h3>
-                <p style="margin: 0.5rem 0 0; font-weight: 600;">Success Rate</p>
-            </div>
-            <div class="stat-card" style="background: var(--light); padding: 1.5rem; border-radius: 10px; text-align: center;">
-                <h3 style="font-size: 2.5rem; color: var(--primary); margin: 0;">100%</h3>
-                <p style="margin: 0.5rem 0 0; font-weight: 600;">Guaranteed Quality</p>
-            </div>
-        </div>
-        
-        <!-- Loan Investment Callout -->
-        <div class="loan-investment-callout" style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); 
-                color: white; padding: 2.5rem; border-radius: 15px; margin-top: 3rem; text-align: center;">
-            <h3 style="color: white; margin-bottom: 1rem; font-size: 1.8rem;">Ready to Scale Production?</h3>
-            <p style="margin-bottom: 1.5rem; opacity: 0.9; font-size: 1.1rem;">
-                Our top 3 unconditional products with 85-90% success rate:<br>
-                <strong style="font-size: 1.2rem;">1. Electric Gate Systems</strong> • 
-                <strong style="font-size: 1.2rem;">2. Poultry Cage Systems</strong> • 
-                <strong style="font-size: 1.2rem;">3. Block Making Machines</strong>
-            </p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="/investment#manufacturing-loan" class="btn btn-primary" style="background: white; color: var(--primary); padding: 0.8rem 2rem; font-weight: 600;">
-                    Explore Production Financing
-                </a>
-                <a href="/shop-all" class="btn btn-outline" style="border-color: white; color: white; padding: 0.8rem 2rem; font-weight: 600;">
-                    View All Products
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-</main>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-grid">
-
-        <!-- About Section -->
-        <div class="footer-section">
-            <h3>Collaborative Investment Ltd</h3>
-            <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
-
-            <div class="social-links">
-
-                <!-- Facebook -->
-                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
-                    </svg>
-                </a>
-
-                <!-- X / Twitter -->
-                <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
-                    </svg>
-                </a>
-
-                <!-- WhatsApp -->
-                <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                    <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                        <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
-                    </svg>
-                </a>
-
-                <!-- Instagram -->
-                <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
-                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
-                                <stop offset="0%" stop-color="#feda75"/>
-                                <stop offset="25%" stop-color="#fa7e1e"/>
-                                <stop offset="50%" stop-color="#d62976"/>
-                                <stop offset="75%" stop-color="#962fbf"/>
-                                <stop offset="100%" stop-color="#4f5bd5"/>
-                            </linearGradient>
-                        </defs>
-                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 ..."/>
-                    </svg>
-                </a>
-
-            </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="footer-section">
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li>
-                <li><a href="/portfolio">Portfolio</a></li>
-                <li><a href="/investment">Investment</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </div>
-
-        <!-- Services -->
-        <div class="footer-section">
-            <h3>Services</h3>
-            <ul class="footer-links">
-                <li><a href="/services#business-management">Business Management</a></li>
-                <li><a href="/services#agriculture">Agricultural Development</a></li>
-                <li><a href="/services#manufacturing">Block Manufacturing</a></li>
-                <li><a href="/services#fabrication">Machine Fabrication</a></li>
-                <li><a href="/services#diaspora">Diaspora Management</a></li>
-                <li><a href="/investment">Investment Opportunities</a></li>
-            </ul>
-        </div>
-
-        <!-- Contact -->
-        <div class="footer-section">
-            <h3>Contact Info</h3>
-            <p>212 Ijegun Road, Ikotun, Lagos</p>
-            <p>collaborativeinvestmentltd@gmail.com</p>
-            <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
-            <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-            <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
-        </div>
-    </div>
-
-    <!-- Footer Bottom -->
-    <div class="footer-bottom">
-        <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-        <p>
-            <a href="/admin/login" style="color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.3);" 
-               title="Admin Access" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='inherit'">
-                Building Nigeria's Business Future
-            </a>
-        </p>
-
-        <p style="margin-top: 1rem;">
-            <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-            <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-            <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
-        </p>
-
-        <!-- Social media text links -->
-        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                Follow us:
-                <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
-                <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
-                <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
-            </p>
-        </div>
-    </div>
-
-    <!-- Cookie Consent -->
-    <div id="cookieConsent" class="cookie-consent">
-        <div class="cookie-content">
-            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-            <div class="cookie-buttons">
-                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
-                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/cart-drawer.js"></script>
-
-    <!-- Cookie Consent -->
-    <div id="cookieConsent" class="cookie-consent">
-        <div class="cookie-content">
-            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-            <div class="cookie-buttons">
-                <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
-                <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
-            </div>
-        </div>
-    </div>
+    </footer>
 
     <!-- JavaScript -->
     <script>
-        // Reuse cart functions from shop-construction.html
-        function getCart() {
-            try {
-                const cart = localStorage.getItem('cart');
-                return cart ? JSON.parse(cart) : [];
-            } catch (error) {
-                console.error('Error reading cart:', error);
-                return [];
-            }
-        }
-
-        function updateCartCount() {
-            const cart = getCart();
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            const cartBadge = document.getElementById('cart-count-badge');
-            
-            if (cartBadge) {
-                cartBadge.textContent = totalItems;
-                cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
-            }
-        }
-
-        // Initialize cart drawer (reuse from shop-construction)
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('CIL Investment Homepage loaded');
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    navLinks.classList.toggle('active');
+                    
+                    // Change icon
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+                    }
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 992 && 
+                        !event.target.closest('.nav-links') && 
+                        !event.target.closest('.mobile-menu-btn') &&
+                        navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        if (icon) {
+                            icon.className = 'fas fa-bars';
+                        }
+                    }
+                });
+            }
+
+            // Cart functionality
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+                    const cartBadge = document.getElementById('cart-count-badge');
+                    if (cartBadge) {
+                        cartBadge.textContent = cartCount;
+                        cartBadge.style.display = cartCount > 0 ? 'flex' : 'none';
+                    }
+                } catch (error) {
+                    console.error('Error updating cart count:', error);
+                }
+            }
+
             // Initialize cart count
             updateCartCount();
             
@@ -969,16 +1470,15 @@
             
             if (openCartBtn) {
                 openCartBtn.addEventListener('click', function() {
-                    cartDrawer.classList.add('active');
-                    cartOverlay.classList.add('active');
+                    cartDrawer.classList.add('open');
+                    cartOverlay.classList.add('open');
                     document.body.style.overflow = 'hidden';
-                    renderCartDrawer();
                 });
             }
             
             function closeCartDrawer() {
-                cartDrawer.classList.remove('active');
-                cartOverlay.classList.remove('active');
+                cartDrawer.classList.remove('open');
+                cartOverlay.classList.remove('open');
                 document.body.style.overflow = '';
             }
             
@@ -986,18 +1486,8 @@
             if (cartOverlay) cartOverlay.addEventListener('click', closeCartDrawer);
             
             // Stats counting animation
-            const statNumbers = document.querySelectorAll('.stat-number');
+            const statNumbers = document.querySelectorAll('.cta-stat-value');
             let hasAnimated = false;
-            
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
-            }
             
             function animateCounter(element, target, duration = 2000) {
                 let current = 0;
@@ -1015,14 +1505,36 @@
             }
             
             function checkStatsVisibility() {
-                const statsSection = document.querySelector('.stats-section');
-                if (statsSection && isInViewport(statsSection) && !hasAnimated) {
-                    hasAnimated = true;
+                const ctaSection = document.querySelector('.investment-cta');
+                if (ctaSection && !hasAnimated) {
+                    const rect = ctaSection.getBoundingClientRect();
+                    const isVisible = (
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    );
                     
-                    statNumbers.forEach((element, index) => {
-                        const target = parseInt(element.getAttribute('data-target'));
-                        setTimeout(() => animateCounter(element, target), index * 300);
-                    });
+                    if (isVisible && !hasAnimated) {
+                        hasAnimated = true;
+                        
+                        statNumbers.forEach((element, index) => {
+                            const text = element.textContent;
+                            let target = 0;
+                            
+                            if (text.includes('B+')) {
+                                target = parseFloat(text.replace('B+', '')) * 1000000000;
+                            } else if (text.includes('%')) {
+                                target = parseFloat(text.replace('%', ''));
+                            } else if (text.includes('+')) {
+                                target = parseFloat(text.replace('+', ''));
+                            } else {
+                                target = parseFloat(text);
+                            }
+                            
+                            setTimeout(() => animateCounter(element, target), index * 300);
+                        });
+                    }
                 }
             }
             
@@ -1037,60 +1549,61 @@
                     el.classList.add('fade-in-up');
                 }, 100);
             });
+            
+            // Add WhatsApp float button
+            const whatsappButton = document.createElement('a');
+            whatsappButton.href = 'https://wa.me/2348129978419';
+            whatsappButton.target = '_blank';
+            whatsappButton.rel = 'noopener noreferrer';
+            whatsappButton.className = 'whatsapp-float';
+            whatsappButton.innerHTML = '<i class="fab fa-whatsapp"></i>';
+            whatsappButton.title = 'Chat with us on WhatsApp';
+            whatsappButton.setAttribute('aria-label', 'Chat with us on WhatsApp');
+            document.body.appendChild(whatsappButton);
+            
+            // Add WhatsApp button styles
+            const whatsappStyles = document.createElement('style');
+            whatsappStyles.textContent = `
+                .whatsapp-float {
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    width: 60px;
+                    height: 60px;
+                    background: #25D366;
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 2rem;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    transition: all 0.3s ease;
+                    text-decoration: none;
+                }
+                
+                .whatsapp-float:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+                    background: #128C7E;
+                }
+                
+                @media (max-width: 768px) {
+                    .whatsapp-float {
+                        width: 50px;
+                        height: 50px;
+                        font-size: 1.5rem;
+                        bottom: 20px;
+                        right: 20px;
+                    }
+                }
+            `;
+            document.head.appendChild(whatsappStyles);
         });
-        
-        // Cart drawer rendering function (reuse)
-        window.renderCartDrawer = function() {
-            const cartItemsContainer = document.getElementById('cart-drawer-items');
-            const drawerTotal = document.getElementById('drawer-total');
-            
-            if (!cartItemsContainer) return;
-            
-            const cart = getCart();
-            
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `
-                    <div class="cart-drawer-empty">
-                        <div class="cart-drawer-empty-icon">🛒</div>
-                        <p>Your cart is empty</p>
-                        <a href="/shop-categories" class="btn btn-primary">Browse Products</a>
-                    </div>
-                `;
-                if (drawerTotal) drawerTotal.textContent = '₦0';
-                return;
-            }
-            
-            cartItemsContainer.innerHTML = cart.map(item => `
-                <div class="cart-drawer-item" data-id="${item.id}">
-                    <img src="${item.image}" alt="${item.name}" 
-                         class="cart-drawer-item-image" 
-                         onerror="this.src='/img/logo.jpg'">
-                    <div class="cart-drawer-item-details">
-                        <h4 class="cart-drawer-item-name">${item.name}</h4>
-                        <p class="cart-drawer-item-price">₦${item.price.toLocaleString()} × ${item.quantity}</p>
-                        <div class="cart-drawer-item-actions">
-                            <button class="cart-drawer-item-remove" data-id="${item.id}">Remove</button>
-                        </div>
-                    </div>
-                    <div class="cart-drawer-item-total">
-                        ₦${(item.price * item.quantity).toLocaleString()}
-                    </div>
-                </div>
-            `).join('');
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            if (drawerTotal) drawerTotal.textContent = `₦${total.toLocaleString()}`;
-            
-            cartItemsContainer.querySelectorAll('.cart-drawer-item-remove').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const productId = e.target.dataset.id;
-                    const cart = getCart().filter(item => item.id !== productId);
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    renderCartDrawer();
-                    updateCartCount();
-                });
-            });
-        };
     </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/cart-drawer.js"></script>
 </body>
 </html>

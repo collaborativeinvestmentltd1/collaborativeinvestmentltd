@@ -172,12 +172,17 @@ function checkAdminAuth(req) {
     return null;
 }
 
-// Helper functions
 function generateOrderNumber() {
     const timestamp = Date.now().toString();
     const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-    return `CIL-${timestamp.slice(-6)}-${random}`;
+    const currentYear = new Date().getFullYear();
+    
+    // New format: CIL-YYYY-TIMESTAMPPART
+    // Use last 6 digits of timestamp for consistency
+    const timestampPart = timestamp.slice(-6);
+    return `CIL-${timestampPart}-${random}`; // Keep the old format for backward compatibility
 }
+
 
 function handleOrderTrack(req, res) {
     return new Promise((resolve) => {
@@ -203,15 +208,46 @@ function handleOrderTrack(req, res) {
                     return resolve();
                 }
                 
-                // Build query
-                const query = { orderNumber };
-                if (email) query.customerEmail = email;
-                if (phone) query.customerPhone = phone;
+                // Normalize the order number
+                const normalizedOrderNumber = orderNumber.toUpperCase().trim();
                 
-                // Find order
-                const orders = await db.getAll('orders', query);
+                console.log(`Tracking request for: ${normalizedOrderNumber}`);
                 
-                if (orders.length === 0) {
+                // Try multiple search strategies
+                let order = null;
+                
+                // Strategy 1: Exact match on orderNumber
+                console.log(`Strategy 1: Exact match for ${normalizedOrderNumber}`);
+                order = await findOrderByNumber(normalizedOrderNumber);
+                
+                // Strategy 2: Search in alternativeOrderNumbers
+                if (!order) {
+                    console.log(`Strategy 2: Search alternativeOrderNumbers for ${normalizedOrderNumber}`);
+                    order = await findOrderByAlternativeNumber(normalizedOrderNumber);
+                }
+                
+                // Strategy 3: Try different formats
+                if (!order) {
+                    console.log(`Strategy 3: Generate alternative formats for ${normalizedOrderNumber}`);
+                    const alternativeFormats = generateAlternativeFormats(normalizedOrderNumber);
+                    for (const format of alternativeFormats) {
+                        console.log(`  Trying format: ${format}`);
+                        order = await findOrderByNumber(format);
+                        if (order) {
+                            console.log(`  Found with format: ${format}`);
+                            break;
+                        }
+                        
+                        order = await findOrderByAlternativeNumber(format);
+                        if (order) {
+                            console.log(`  Found in alternatives with format: ${format}`);
+                            break;
+                        }
+                    }
+                }
+                
+                if (!order) {
+                    console.log(`Order not found for: ${normalizedOrderNumber}`);
                     res.writeHead(404, { 
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
@@ -223,7 +259,42 @@ function handleOrderTrack(req, res) {
                     return resolve();
                 }
                 
-                const order = orders[0];
+                console.log(`Order found: ${order.orderNumber} for customer: ${order.customerName}`);
+                
+                // Additional verification with email/phone if provided
+                if (email && order.customerEmail) {
+                    const providedEmail = email.toLowerCase().trim();
+                    const orderEmail = order.customerEmail.toLowerCase().trim();
+                    if (providedEmail !== orderEmail) {
+                        console.log(`Email mismatch: ${providedEmail} vs ${orderEmail}`);
+                        res.writeHead(403, { 
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                        });
+                        res.end(JSON.stringify({ 
+                            success: false, 
+                            message: 'Order found but email does not match. Please verify your email address.' 
+                        }));
+                        return resolve();
+                    }
+                }
+                
+                if (phone && order.customerPhone) {
+                    const providedPhone = phone.replace(/\D/g, '');
+                    const orderPhone = order.customerPhone.replace(/\D/g, '');
+                    if (providedPhone !== orderPhone) {
+                        console.log(`Phone mismatch: ${providedPhone} vs ${orderPhone}`);
+                        res.writeHead(403, { 
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                        });
+                        res.end(JSON.stringify({ 
+                            success: false, 
+                            message: 'Order found but phone number does not match. Please verify your phone number.' 
+                        }));
+                        return resolve();
+                    }
+                }
                 
                 // Remove sensitive information
                 const safeOrder = {
@@ -234,10 +305,22 @@ function handleOrderTrack(req, res) {
                     total: order.total,
                     items: order.items,
                     customerName: order.customerName,
+                    customerEmail: order.customerEmail,
+                    customerPhone: order.customerPhone,
+                    customerAddress: order.customerAddress || '',
                     estimatedDelivery: order.estimatedDelivery || null,
                     trackingNumber: order.trackingNumber || null,
-                    statusUpdates: order.statusUpdates || [],
-                    notes: order.notes || ''
+                    statusUpdates: order.statusUpdates || [
+                        {
+                            status: order.status,
+                            title: 'Order Placed',
+                            description: 'Your order has been received and is being processed.',
+                            date: order.createdAt,
+                            completed: true
+                        }
+                    ],
+                    notes: order.notes || '',
+                    source: order.source || 'website_cart'
                 };
                 
                 res.writeHead(200, { 
@@ -263,6 +346,91 @@ function handleOrderTrack(req, res) {
             resolve();
         });
     });
+}
+
+// Helper functions - add these after handleOrderTrack function
+
+async function findOrderByNumber(orderNumber) {
+    try {
+        const orders = await db.getAll('orders', { orderNumber });
+        return orders.length > 0 ? orders[0] : null;
+    } catch (error) {
+        console.error('Error in findOrderByNumber:', error);
+        return null;
+    }
+}
+
+async function findOrderByAlternativeNumber(orderNumber) {
+    try {
+        const orders = await db.getAll('orders', { 
+            alternativeOrderNumbers: orderNumber 
+        });
+        return orders.length > 0 ? orders[0] : null;
+    } catch (error) {
+        console.error('Error in findOrderByAlternativeNumber:', error);
+        return null;
+    }
+}
+
+function generateAlternativeFormats(orderNumber) {
+    const formats = [];
+    
+    console.log(`Generating formats for: ${orderNumber}`);
+    
+    // Original: CIL-367193-944
+    if (orderNumber.match(/^CIL-\d{6}-\d{3}$/)) {
+        const parts = orderNumber.split('-');
+        const timestamp = parts[1]; // 367193
+        const random = parts[2]; // 944
+        const currentYear = new Date().getFullYear();
+        
+        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
+        formats.push(timestamp); // 367193
+        formats.push(`CIL-${timestamp}`); // CIL-367193
+        formats.push(`${timestamp}-${random}`); // 367193-944
+        formats.push(`CIL-${timestamp}-${random}`); // Original format (just in case)
+        
+        // Also try without leading zeros in the middle part
+        const numericTimestamp = parseInt(timestamp, 10).toString();
+        if (numericTimestamp !== timestamp) {
+            formats.push(`CIL-${currentYear}-${numericTimestamp}`);
+            formats.push(numericTimestamp);
+            formats.push(`CIL-${numericTimestamp}`);
+        }
+    }
+    // Try if it's just numbers
+    else if (orderNumber.match(/^\d{6}$/)) {
+        const timestamp = orderNumber; // 367193
+        const currentYear = new Date().getFullYear();
+        
+        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
+        formats.push(`CIL-${timestamp}`); // CIL-367193
+        formats.push(`CIL-${timestamp}-???`); // Try with placeholder
+    }
+    // Try if it's numbers with hyphen
+    else if (orderNumber.match(/^\d{6}-\d{3}$/)) {
+        const parts = orderNumber.split('-');
+        const timestamp = parts[0]; // 367193
+        const random = parts[1]; // 944
+        const currentYear = new Date().getFullYear();
+        
+        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
+        formats.push(`CIL-${timestamp}`); // CIL-367193
+        formats.push(`CIL-${timestamp}-${random}`); // CIL-367193-944
+        formats.push(timestamp); // 367193
+    }
+    // Try if it's CIL- followed by numbers
+    else if (orderNumber.match(/^CIL-\d{6}$/)) {
+        const timestamp = orderNumber.replace('CIL-', ''); // 367193
+        const currentYear = new Date().getFullYear();
+        
+        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
+        formats.push(timestamp); // 367193
+        formats.push(`CIL-${timestamp}-???`); // Try with placeholder
+    }
+    
+    console.log(`Generated formats: ${formats.join(', ')}`);
+    return formats;
 }
 
 // Email template functions
@@ -845,6 +1013,7 @@ function handleCreateOrder(req, res) {
                     status: 'pending',
                     items,
                     source: 'website_cart',
+                    alternativeOrderNumbers: generateAlternativeFormats(orderNumber), // Add this line
                     statusUpdates: [  // Add this field
                         {
                             status: 'pending',

@@ -287,6 +287,7 @@ if (typeof notification === 'undefined') {
         }
     };
 }
+
 // Enhanced success notification with tracking
 function showOrderSuccess(orderNumber, customerName) {
     // Remove existing notifications
@@ -400,27 +401,27 @@ function showOrderSuccess(orderNumber, customerName) {
         }
     }, 100);
     
+    // Add slide out animation
+    const slideOutStyle = document.createElement('style');
+    slideOutStyle.textContent = `
+        @keyframes slideOutUp {
+            from {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+            to {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+        }
+    `;
+    document.head.appendChild(slideOutStyle);
+    
     // Remove after 10 seconds (increased from 5)
     setTimeout(() => {
         if (notification.parentNode) {
             notification.style.animation = 'slideOutUp 0.3s ease';
             overlay.style.opacity = '0';
-            
-            // Add slide out animation
-            const slideOutStyle = document.createElement('style');
-            slideOutStyle.textContent = `
-                @keyframes slideOutUp {
-                    from {
-                        opacity: 1;
-                        transform: translate(-50%, -50%);
-                    }
-                    to {
-                        opacity: 0;
-                        transform: translate(-50%, -60%);
-                    }
-                }
-            `;
-            document.head.appendChild(slideOutStyle);
             
             setTimeout(() => {
                 if (notification.parentNode) notification.parentNode.removeChild(notification);
@@ -429,46 +430,6 @@ function showOrderSuccess(orderNumber, customerName) {
         }
     }, 15000); // 15 seconds
 }
-    
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        color: #2d3748;
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        z-index: 10000;
-        max-width: 400px;
-        width: 90%;
-        text-align: center;
-        border: 3px solid #28a745;
-        animation: slideInDown 0.3s ease;
-    `;
-    
-    // Add overlay
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.7);
-        z-index: 9999;
-    `;
-    
-    document.body.appendChild(overlay);
-    document.body.appendChild(notification);
-    
-    // Remove after 5 seconds
-    setTimeout(() => {
-        notification.remove();
-        overlay.remove();
-    }, 15000); // 15 seconds
 
 // Send order to server
 async function sendOrderToServer(orderData) {
@@ -520,6 +481,36 @@ function showCartNotification(productName) {
     `;
     
     document.body.appendChild(notification);
+    
+    // Add slide out animation
+    if (!document.querySelector('#cart-notification-animations')) {
+        const animations = document.createElement('style');
+        animations.id = 'cart-notification-animations';
+        animations.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(animations);
+    }
     
     // Remove after 3 seconds
     setTimeout(() => {
