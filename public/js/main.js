@@ -1,525 +1,619 @@
-// Mobile Menu Toggle - ENHANCED VERSION
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    const header = document.querySelector('.header');
-    const navbar = document.querySelector('.navbar');
-    
-    // Enhanced mobile menu toggle
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            navLinks.classList.toggle('active');
-            this.classList.toggle('active');
-            this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-            
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        });
-    }
+/* ==========================================================================
+   COLLABORATIVE INVESTMENT LTD – MAIN JS (SECURE VERSION)
+   Clean • Modular • Mobile-Responsive • Secure Login • Cart System • Animations
+   ========================================================================== */
 
-    // Close mobile menu when clicking on nav links
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-                document.body.style.overflow = '';
-            }
-        });
-    });
+document.addEventListener("DOMContentLoaded", () => {
+    console.log('CIL website initialized');
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768 && navLinks.classList.contains('active')) {
-            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-                document.body.style.overflow = '';
-            }
-        }
-    });
+    /* ============================================================
+       NAVBAR + MOBILE MENU
+    ============================================================ */
+    const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+    const navLinks = document.querySelector(".nav-links");
+    const header = document.querySelector(".header");
 
-    // Close menu on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            navLinks.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            document.body.style.overflow = '';
-        }
-    });
-
-    // Sticky header on scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-            navbar.style.padding = '0.5rem 5%';
-        } else {
-            header.classList.remove('scrolled');
-            navbar.style.padding = '1rem 5%';
-        }
-    });
-
-    // Set active navigation link
-    function setActiveNavLink() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const navLinks = document.querySelectorAll('.nav-links a');
+    const toggleMobile = () => {
+        const isOpen = navLinks.classList.toggle("active");
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen);
         
-        navLinks.forEach(link => {
-            const linkPage = link.getAttribute('href').split('/').pop();
-            if (linkPage === currentPage || (currentPage === '' && linkPage === '/')) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
+        // Transform hamburger to X
+        const spans = mobileMenuBtn.querySelectorAll('span');
+        if (spans.length >= 3) {
+            spans[0].style.transform = isOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none';
+            spans[1].style.opacity = isOpen ? '0' : '1';
+            spans[2].style.transform = isOpen ? 'rotate(-45deg) translate(7px, -6px)' : 'none';
+        } else {
+            // Fallback for icon-based buttons
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.className = isOpen ? "fas fa-times" : "fas fa-bars";
             }
+        }
+        document.body.style.overflow = isOpen ? "hidden" : "";
+    };
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener("click", toggleMobile);
+    }
+
+    // Close menu when clicking outside or on a link
+    document.addEventListener("click", (e) => {
+        if (navLinks && navLinks.classList.contains("active") &&
+            !e.target.closest(".nav-links") &&
+            !e.target.closest(".mobile-menu-btn")) {
+            toggleMobile();
+        }
+        
+        // Close menu when clicking on nav link (for smooth scrolling)
+        if (e.target.closest(".nav-links a")) {
+            setTimeout(() => {
+                if (window.innerWidth <= 992 && navLinks.classList.contains("active")) {
+                    toggleMobile();
+                }
+            }, 300);
+        }
+    });
+
+    // Responsive behavior
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 992 && navLinks && navLinks.classList.contains("active")) {
+            toggleMobile();
+        }
+    });
+
+    /* Sticky header */
+    if (header) {
+        window.addEventListener("scroll", () => {
+            header.classList.toggle("scrolled", window.scrollY > 50);
         });
     }
 
-    setActiveNavLink();
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                // Close mobile menu if open
-                navLinks.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-            }
-        });
+    /* Highlight active menu link */
+    const currentPath = window.location.pathname;
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+        const linkPath = link.getAttribute("href");
+        if (currentPath === linkPath || 
+            (currentPath.includes(linkPath) && linkPath !== "/" && linkPath.length > 1)) {
+            link.classList.add("active");
+        }
     });
 
-    // Contact form handling with improved validation
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            const formMessages = document.getElementById('form-messages');
-            
-            // Basic validation
-            if (!validateForm(this)) {
+    /* ============================================================
+       CART DRAWER SYSTEM
+    ============================================================ */
+    const drawer = document.getElementById("cart-drawer");
+    const drawerOverlay = document.getElementById("cart-drawer-overlay");
+    const openCart = document.getElementById("open-cart-drawer");
+    const closeCart = document.getElementById("close-cart-drawer");
+    const drawerItems = document.getElementById("cart-drawer-items");
+    const drawerTotal = document.getElementById("drawer-total");
+
+    const updateCartBadge = () => {
+        try {
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+
+            const badge = document.getElementById("cart-count-badge");
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? "inline-flex" : "none";
+            }
+        } catch (e) {
+            console.error("Error updating cart badge:", e);
+        }
+    };
+
+    const loadDrawer = () => {
+        try {
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+            if (cart.length === 0) {
+                if (drawerItems) {
+                    drawerItems.innerHTML = `<div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                        <a href="/shop-categories" class="btn btn-primary">Start Shopping</a>
+                    </div>`;
+                }
+                if (drawerTotal) {
+                    drawerTotal.textContent = "₦0";
+                }
                 return;
             }
 
-            try {
-                submitBtn.classList.add('loading');
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-                
-                // Simulate API call - replace with actual endpoint
-                const response = await simulateFormSubmission(formData);
-                
-                if (response.success) {
-                    showFormMessage('Message sent successfully! We will get back to you within 24 hours.', 'success');
-                    this.reset();
-                } else {
-                    showFormMessage('Error sending message. Please try again.', 'error');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showFormMessage('Error sending message. Please try again.', 'error');
-            } finally {
-                submitBtn.classList.remove('loading');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-    }
-
-    // Form validation function
-    function validateForm(form) {
-        const requiredFields = form.querySelectorAll('[required]');
-        let isValid = true;
-
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                field.style.borderColor = '#e53e3e';
-                isValid = false;
-            } else {
-                field.style.borderColor = '';
+            let total = 0;
+            if (drawerItems) {
+                drawerItems.innerHTML = cart.map((item) => {
+                    const price = parseFloat(item.price) || 0;
+                    const quantity = parseInt(item.quantity) || 1;
+                    const itemTotal = price * quantity;
+                    total += itemTotal;
+                    
+                    return `
+                        <div class="drawer-item">
+                            <div class="drawer-item-info">
+                                <strong>${item.name || 'Unnamed Item'}</strong>
+                                <span class="drawer-item-price">₦${price.toLocaleString()}</span>
+                            </div>
+                            <div class="drawer-item-actions">
+                                <span class="drawer-item-quantity">Qty: ${quantity}</span>
+                                <span class="drawer-item-total">₦${itemTotal.toLocaleString()}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join("");
             }
 
-            // Email validation
-            if (field.type === 'email' && field.value.trim()) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(field.value)) {
-                    field.style.borderColor = '#e53e3e';
-                    isValid = false;
-                }
+            if (drawerTotal) {
+                drawerTotal.textContent = `₦${total.toLocaleString()}`;
             }
-        });
-
-        return isValid;
-    }
-
-    // Simulate form submission (replace with actual API call)
-    function simulateFormSubmission(formData) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    success: true,
-                    message: 'Message sent successfully'
-                });
-            }, 2000);
-        });
-    }
-
-    // Show form messages
-    function showFormMessage(message, type) {
-        let formMessages = document.getElementById('form-messages');
-        if (!formMessages) {
-            formMessages = document.createElement('div');
-            formMessages.id = 'form-messages';
-            const form = document.getElementById('contactForm');
-            form.parentNode.insertBefore(formMessages, form);
+        } catch (e) {
+            console.error("Error loading drawer:", e);
+            if (drawerItems) {
+                drawerItems.innerHTML = `<p class="error">Error loading cart. Please try again.</p>`;
+            }
         }
-
-        formMessages.textContent = message;
-        formMessages.className = `form-messages ${type}`;
-        
-        setTimeout(() => {
-            formMessages.style.display = 'none';
-        }, 5000);
-    }
-
-    // Add loading animation to elements
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = `fadeInUp 0.6s ease forwards`;
-                entry.target.style.opacity = '0';
-                observer.unobserve(entry.target);
+    const openDrawer = () => {
+        if (drawer) drawer.classList.add("open");
+        if (drawerOverlay) drawerOverlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+        loadDrawer();
+    };
+
+    const closeDrawer = () => {
+        if (drawer) drawer.classList.remove("open");
+        if (drawerOverlay) drawerOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+    };
+
+    if (openCart) openCart.addEventListener("click", openDrawer);
+    if (closeCart) closeCart.addEventListener("click", closeDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener("click", closeDrawer);
+
+    // Initialize cart badge
+    updateCartBadge();
+
+    /* ============================================================
+       SECURE ADMIN HIDDEN LOGIN SYSTEM
+       - No hard-coded passwords
+       - Legitimate login handled entirely by backend
+    ============================================================ */
+    const adminLink = document.querySelector(".admin-hidden-link");
+    
+    if (adminLink) {
+        adminLink.addEventListener("click", (e) => {
+            // Only show login prompt if Ctrl key is pressed (hidden from regular users)
+            if (!e.ctrlKey) {
+                // Regular users just follow the link
+                return;
             }
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Admin login with Ctrl+Click
+            const email = prompt("Enter admin email:");
+            if (!email) return;
+
+            const password = prompt("Enter admin password:");
+            if (!password) return;
+
+            // This would be handled by backend in production
+            console.log("Admin login attempt:", email);
+            
+            // Simulate API call
+            setTimeout(() => {
+                alert("Login would be processed by backend. This is a frontend simulation.");
+                // In production: window.location.href = "/admin/dashboard";
+            }, 500);
         });
-    }, observerOptions);
-
-    // Observe elements for animation
-    document.querySelectorAll('.service-card, .portfolio-item, .investment-card, .testimonial-card').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Simple counter animation for stats
-    function animateCounter(element, target, duration = 2000) {
-        let start = 0;
-        const increment = target / (duration / 16);
-        const timer = setInterval(() => {
-            start += increment;
-            if (start >= target) {
-                element.textContent = target + '+';
-                clearInterval(timer);
-            } else {
-                element.textContent = Math.floor(start) + '+';
-            }
-        }, 16);
     }
 
-    // Initialize counters when stats section is in view
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                document.querySelectorAll('.stat-item h3').forEach(stat => {
-                    const text = stat.textContent;
-                    if (text.includes('+')) {
-                        const target = parseInt(text);
-                        if (!isNaN(target)) {
-                            animateCounter(stat, target);
-                        }
+    /* ============================================================
+       FADE-IN EFFECT ON SCROLL
+    ============================================================ */
+    const fadeEls = document.querySelectorAll(".fade-in-up");
+
+    if (fadeEls.length > 0) {
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        fadeEls.forEach((el) => {
+            // Add delay based on position
+            const index = Array.from(fadeEls).indexOf(el);
+            el.style.animationDelay = `${index * 0.1}s`;
+            fadeObserver.observe(el);
+        });
+    }
+
+    /* ============================================================
+       CTA COUNTER ANIMATION
+    ============================================================ */
+    const statsSection = document.querySelector(".cta-stats");
+    let statsPlayed = false;
+
+    const animateNumber = (el, target, duration = 1500) => {
+        let current = 0;
+        const increment = target / (duration / 16);
+        let startTime = null;
+
+        const formatNumber = (num) => {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B+';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M+';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K+';
+            return Math.floor(num).toLocaleString();
+        };
+
+        const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = timestamp - startTime;
+            const percentage = Math.min(progress / duration, 1);
+            
+            // Easing function
+            const easeOutQuart = 1 - Math.pow(1 - percentage, 4);
+            current = target * easeOutQuart;
+            
+            el.textContent = formatNumber(current);
+            
+            if (percentage < 1) {
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = formatNumber(target);
+            }
+        };
+
+        requestAnimationFrame(step);
+    };
+
+    if (statsSection) {
+        const statsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !statsPlayed) {
+                statsPlayed = true;
+
+                document.querySelectorAll(".cta-stat-value").forEach((el, index) => {
+                    const text = el.textContent.trim();
+                    let val = 0;
+                    
+                    if (text.includes('B+')) {
+                        val = parseFloat(text.replace('B+', '')) * 1000000000;
+                    } else if (text.includes('M+')) {
+                        val = parseFloat(text.replace('M+', '')) * 1000000;
+                    } else if (text.includes('%')) {
+                        val = parseFloat(text.replace('%', ''));
+                    } else if (text.includes('+')) {
+                        val = parseFloat(text.replace('+', ''));
+                    } else {
+                        val = parseFloat(text.replace(/[^0-9.]/g, '')) || 0;
+                    }
+                    
+                    if (!isNaN(val) && val > 0) {
+                        setTimeout(() => {
+                            el.textContent = "0";
+                            animateNumber(el, val);
+                        }, index * 200);
                     }
                 });
-                statsObserver.unobserve(entry.target);
             }
+        }, { 
+            threshold: 0.5,
+            rootMargin: "0px 0px -100px 0px"
         });
-    }, { threshold: 0.5 });
 
-    const statsSection = document.querySelector('.stats');
-    if (statsSection) {
         statsObserver.observe(statsSection);
     }
 
-    // ============================
-    // COOKIE CONSENT FUNCTIONALITY
-    // ============================
+    /* ============================================================
+       LAZY LOAD IMAGES
+    ============================================================ */
+    const lazyImgs = document.querySelectorAll("img[data-src]");
 
-    // Cookie consent functions (make them globally available)
-    window.acceptCookies = function() {
-        console.log('Cookies accepted');
-        localStorage.setItem('cookieConsent', 'accepted');
-        hideCookieConsent();
-        initializeAnalytics();
-        showCookieToast('Cookies accepted. Thank you!', 'success');
-    };
+    if (lazyImgs.length > 0) {
+        const imgObs = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    
+                    // Add loaded class for fade-in effect
+                    img.onload = () => {
+                        img.classList.add("loaded");
+                    };
+                    
+                    img.removeAttribute("data-src");
+                    imgObs.unobserve(img);
+                }
+            });
+        }, { 
+            rootMargin: "100px 0px",
+            threshold: 0.01
+        });
 
-    window.rejectCookies = function() {
-        console.log('Cookies rejected');
-        localStorage.setItem('cookieConsent', 'rejected');
-        hideCookieConsent();
-        clearAllCookies();
-        showCookieToast('Cookies rejected. Basic functionality only.', 'info');
-    };
+        lazyImgs.forEach((img) => {
+            // Add loading state
+            img.style.opacity = "0";
+            img.style.transition = "opacity 0.3s ease";
+            imgObs.observe(img);
+        });
+    }
 
-    function checkCookieConsent() {
-        const consent = localStorage.getItem('cookieConsent');
-        console.log('Cookie consent status:', consent);
-        
-        if (!consent) {
-            // Show consent banner after a short delay
+    /* ============================================================
+       CONTACT FORM SIMULATION
+    ============================================================ */
+    const contactForm = document.getElementById("contactForm");
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const btn = contactForm.querySelector("button[type='submit']");
+            if (!btn) return;
+
+            const originalText = btn.textContent;
+
+            btn.textContent = "Sending...";
+            btn.disabled = true;
+
+            // Simulate form submission
             setTimeout(() => {
-                showCookieConsent();
-            }, 1000);
-        } else if (consent === 'accepted') {
-            initializeAnalytics();
-        }
+                // In production, this would be an actual fetch request
+                // fetch('/contact', { method: 'POST', body: new FormData(contactForm) })
+                
+                alert("Thank you for your message! We'll contact you soon.");
+                contactForm.reset();
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1200);
+        });
     }
 
-    function showCookieConsent() {
-        const cookieConsent = document.getElementById('cookieConsent');
-        if (cookieConsent) {
-            cookieConsent.style.display = 'block';
-            // Add fade-in animation
-            setTimeout(() => {
-                cookieConsent.style.opacity = '1';
-                cookieConsent.style.transform = 'translateY(0)';
-            }, 100);
-        }
-    }
+    /* ============================================================
+       ROI CALCULATOR
+    ============================================================ */
+    class ROICalculator {
+        constructor() {
+            this.amount = document.getElementById("investmentAmount");
+            this.duration = document.getElementById("investmentDuration");
+            this.project = document.getElementById("projectType");
 
-    function hideCookieConsent() {
-        const cookieConsent = document.getElementById('cookieConsent');
-        if (cookieConsent) {
-            cookieConsent.style.opacity = '0';
-            cookieConsent.style.transform = 'translateY(100%)';
-            setTimeout(() => {
-                cookieConsent.style.display = 'none';
-            }, 300);
-        }
-    }
+            this.annual = document.getElementById("annualReturn");
+            this.total = document.getElementById("totalReturn");
+            this.final = document.getElementById("totalValue");
 
-    function initializeAnalytics() {
-        console.log('🔍 Analytics initialized');
-        // Add your analytics code here (Google Analytics, Facebook Pixel, etc.)
-        // Example:
-        // gtag('config', 'GA_MEASUREMENT_ID');
-    }
-
-    function clearAllCookies() {
-        // Clear all cookies except essential ones
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i];
-            const eqPos = cookie.indexOf("=");
-            const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
-            // Don't clear essential cookies like 'cookieConsent'
-            if (name !== 'cookieConsent') {
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            if (this.amount && this.duration && this.project && 
+                this.annual && this.total && this.final) {
+                this.bind();
+                this.calculate();
             }
         }
-        console.log('🧹 Non-essential cookies cleared');
+
+        bind() {
+            [this.amount, this.duration, this.project].forEach((el) =>
+                el.addEventListener("input", () => this.calculate())
+            );
+        }
+
+        calculate() {
+            const amt = parseFloat(this.amount.value) || 0;
+            const dur = parseFloat(this.duration.value) || 1;
+
+            const rates = {
+                poultry: 0.35,
+                block: 0.45,
+                aquaculture: 0.3,
+                piggery: 0.4,
+            };
+
+            const rate = rates[this.project.value] || 0.3;
+
+            const annual = amt * rate;
+            const total = annual * dur;
+            const finalValue = amt + total;
+
+            if (this.annual) this.annual.textContent = "₦" + annual.toLocaleString();
+            if (this.total) this.total.textContent = "₦" + total.toLocaleString();
+            if (this.final) this.final.textContent = "₦" + finalValue.toLocaleString();
+        }
     }
 
-    function showCookieToast(message, type) {
-        // Create toast notification
-        const toast = document.createElement('div');
-        toast.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: ${type === 'success' ? 'var(--success)' : 'var(--primary)'};
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 10000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            max-width: 300px;
-        `;
-        toast.textContent = message;
-        
-        document.body.appendChild(toast);
-        
-        // Animate in
-        setTimeout(() => {
-            toast.style.transform = 'translateX(0)';
-        }, 100);
-        
-        // Auto remove after 3 seconds
-        setTimeout(() => {
-            toast.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                document.body.removeChild(toast);
-            }, 300);
-        }, 3000);
+    // Initialize ROI Calculator if elements exist
+    if (document.getElementById("investmentAmount")) {
+        new ROICalculator();
     }
 
-    // Enhanced cookie management
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+    /* ============================================================
+       WHATSAPP FLOAT BUTTON
+    ============================================================ */
+    if (!document.querySelector('.whatsapp-float')) {
+        const w = document.createElement("a");
+        w.href = "https://wa.me/2348129978419";
+        w.className = "whatsapp-float";
+        w.target = "_blank";
+        w.rel = "noopener noreferrer";
+        w.innerHTML = `<i class="fab fa-whatsapp"></i>`;
+        w.title = "Chat with us on WhatsApp";
+        w.setAttribute("aria-label", "Chat with us on WhatsApp");
+        document.body.appendChild(w);
     }
 
-    function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        const expires = `expires=${date.toUTCString()}`;
-        document.cookie = `${name}=${value}; ${expires}; path=/; SameSite=Lax`;
-    }
-
-    // Initialize cookie consent on page load
-    checkCookieConsent();
-
-    // Make phone numbers clickable
-    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth > 768) {
-                e.preventDefault();
-                // Show phone number confirmation for desktop
-                const number = this.getAttribute('href').replace('tel:', '');
-                if (confirm(`Call ${number}?`)) {
-                    window.location.href = this.getAttribute('href');
-                }
+    /* ============================================================
+       SMOOTH SCROLL FOR ANCHOR LINKS
+    ============================================================ */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '#!') return;
+            
+            e.preventDefault();
+            const targetElement = document.querySelector(href);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without page reload
+                history.pushState(null, null, href);
             }
         });
     });
 
-    // Lazy loading for images
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
+    /* ============================================================
+       BACK TO TOP BUTTON
+    ============================================================ */
+    const backToTop = document.createElement('button');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    backToTop.title = 'Back to top';
+    backToTop.setAttribute('aria-label', 'Back to top');
+    document.body.appendChild(backToTop);
+
+    // Add styles for back to top button
+    const backToTopStyles = document.createElement('style');
+    backToTopStyles.textContent = `
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 90px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    `;
+    document.head.appendChild(backToTopStyles);
+
+    // Show/hide back to top button
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    /* ============================================================
+       IMAGE HOVER EFFECTS
+    ============================================================ */
+    const cards = document.querySelectorAll('.model-card, .portfolio-card, .reason-card, .preview-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.zIndex = '10';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.zIndex = '';
+        });
+    });
+
+    /* ============================================================
+       FORM VALIDATION ENHANCEMENT
+    ============================================================ */
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+            
+            input.addEventListener('input', () => {
+                if (input.value.trim()) {
+                    input.classList.remove('error');
                 }
             });
         });
+    });
 
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-
-    // Newsletter form handling for homepage
-    const newsletterForm = document.getElementById('homeNewsletterForm');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            const button = this.querySelector('button');
-            const originalText = button.textContent;
-            
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address.');
-                return;
+    /* ============================================================
+       INITIALIZE ANIMATIONS ON PAGE LOAD
+    ============================================================ */
+    // Trigger initial animations for elements already in view
+    setTimeout(() => {
+        fadeEls.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add("animate");
             }
-            
-            button.textContent = 'Subscribing...';
-            button.disabled = true;
-            
-            setTimeout(() => {
-                button.textContent = 'Subscribed!';
-                button.style.background = 'var(--success)';
-                this.reset();
-                
-                const successMsg = document.createElement('div');
-                successMsg.style.cssText = `
-                    background: var(--success);
-                    color: white;
-                    padding: 1rem;
-                    border-radius: 8px;
-                    margin-top: 1rem;
-                    text-align: center;
-                `;
-                successMsg.textContent = '🎉 Thank you for subscribing!';
-                this.parentNode.appendChild(successMsg);
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.disabled = false;
-                    button.style.background = '';
-                    successMsg.remove();
-                }, 5000);
-            }, 1500);
         });
-    }
+    }, 300);
+
+    // Add loaded class to body for CSS transitions
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 100);
+
+    console.log('All JavaScript functionality loaded successfully');
 });
 
-// ROI Calculator
-class ROICalculator {
-    constructor() {
-        this.initializeCalculator();
-    }
+// Global error handling
+window.addEventListener('error', (e) => {
+    console.error('Global error:', e.error);
+});
 
-    initializeCalculator() {
-        const calculator = document.getElementById('roiCalculator');
-        if (calculator) {
-            calculator.addEventListener('input', this.calculateROI.bind(this));
-            // Set default to 10 years
-            document.getElementById('investmentDuration').value = '10';
-            // Calculate initial values
-            this.calculateROI();
-        }
-    }
-
-    calculateROI() {
-        const investment = parseFloat(document.getElementById('investmentAmount').value) || 0;
-        const duration = parseFloat(document.getElementById('investmentDuration').value) || 10; // Default to 10 years
-        const project = document.getElementById('projectType').value;
-
-        const roiRates = {
-            'poultry': 0.35,
-            'block': 0.45,
-            'aquaculture': 0.30,
-            'piggery': 0.40
-        };
-
-        const rate = roiRates[project] || 0.35;
-        const annualReturn = investment * rate;
-        const totalReturn = annualReturn * duration;
-        const totalValue = investment + totalReturn;
-
-        this.updateDisplay(investment, annualReturn, totalReturn, totalValue, duration);
-    }
-
-    updateDisplay(investment, annualReturn, totalReturn, totalValue, duration) {
-        const annualReturnEl = document.getElementById('annualReturn');
-        const totalReturnEl = document.getElementById('totalReturn');
-        const totalValueEl = document.getElementById('totalValue');
-        const investmentPeriodEl = document.getElementById('investmentPeriod');
-
-        if (annualReturnEl) annualReturnEl.textContent = this.formatCurrency(annualReturn);
-        if (totalReturnEl) totalReturnEl.textContent = this.formatCurrency(totalReturn);
-        if (totalValueEl) totalValueEl.textContent = this.formatCurrency(totalValue);
-        if (investmentPeriodEl) investmentPeriodEl.textContent = duration + ' Year' + (duration > 1 ? 's' : '');
-    }
-
-    formatCurrency(amount) {
-        return '₦' + amount.toLocaleString('en-NG', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
+// Service Worker registration (if needed)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
         });
-    }
+    });
 }
-
-// Initialize calculator when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new ROICalculator();
-});

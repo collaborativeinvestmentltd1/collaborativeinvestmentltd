@@ -9,34 +9,48 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Agriculture products data
-    const agricultureProducts = [
+    // Agriculture products data - Using the SAME structure as shop-all.js
+    const agricultureProducts = window.agricultureProducts || [
         // POULTRY PRODUCTS
         {
             id: 'agri-001',
             name: 'Crate of Eggs (30 pieces)',
-            category: 'agriculture',
+            category: 'poultry',
             subcategory: 'poultry',
             price: 2400,
+            basePrice: 2400,
             image: '/img/agriculture/crate-of-eggs.jpg',
             description: 'Fresh farm eggs from our free-range layers. Rich in nutrients and perfect for consumption or hatching.',
             stock: 'In Stock',
             minOrder: '1 Crate',
             unit: 'per crate',
-            tags: ['poultry', 'eggs', 'fresh']
+            tags: ['poultry', 'eggs', 'fresh'],
+            specs: {
+                size: 'Medium to Large',
+                type: 'Fresh farm eggs',
+                packaging: '30 pieces/crate',
+                shelf_life: '21 days'
+            }
         },
         {
             id: 'agri-002',
             name: 'Day Old Broiler Chicks',
-            category: 'agriculture',
+            category: 'poultry',
             subcategory: 'poultry',
             price: 450,
+            basePrice: 450,
             image: '/img/agriculture/day-old-broilers.jpg',
             description: 'High-quality broiler chicks with fast growth rate. Ready for meat production in 6-8 weeks.',
             stock: 'In Stock',
             minOrder: '50 chicks',
             unit: 'each',
-            tags: ['poultry', 'chicks', 'broiler']
+            tags: ['poultry', 'chicks', 'broiler'],
+            specs: {
+                breed: 'Cobb/Arbor Acres',
+                growth: '6-8 weeks to market',
+                vaccination: 'Marek\'s disease',
+                delivery: 'Live delivery available'
+            }
         },
         {
             id: 'agri-003',
@@ -243,6 +257,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
 
+    // Make products available globally for shop-all.js
+    if (!window.agricultureProducts) {
+        window.agricultureProducts = agricultureProducts;
+    }
+
     // DOM Elements with null checks
     const productsGrid = document.getElementById('products-grid');
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -265,6 +284,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setupEventListeners();
         setupMobileMenu();
         updateProductCount();
+        
+        // Initialize cart count if main.js loaded
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        }
     }
 
     // Set up event listeners with null checks
@@ -285,11 +309,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add to cart buttons (delegated)
         document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-to-cart')) {
-                const productId = e.target.dataset.id;
+            const addToCartBtn = e.target.closest('.add-to-cart');
+            if (addToCartBtn) {
+                const productId = addToCartBtn.dataset.id;
                 const product = agricultureProducts.find(p => p.id === productId);
                 if (product) {
                     addToCart(product);
+                    
+                    // Visual feedback
+                    const originalText = addToCartBtn.innerHTML;
+                    addToCartBtn.innerHTML = '✓ Added!';
+                    addToCartBtn.style.background = '#27ae60';
+                    
+                    setTimeout(() => {
+                        addToCartBtn.innerHTML = originalText;
+                        addToCartBtn.style.background = '';
+                    }, 1500);
                 }
             }
         });
@@ -298,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Filter products based on category
     function filterProducts() {
         filteredProducts = agricultureProducts.filter(product => {
-            return currentCategory === 'all' || product.subcategory === currentCategory;
+            return currentCategory === 'all' || product.category === currentCategory;
         });
 
         renderProducts();
@@ -312,20 +347,35 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        productsGrid.innerHTML = filteredProducts.map(product => `
-            <div class="product-card" data-category="${product.subcategory}">
+        productsGrid.innerHTML = filteredProducts.map(product => {
+            const stockClass = getStockClass(product.stock);
+            const categoryName = getCategoryDisplayName(product.category);
+            
+            return `
+            <div class="product-card" data-category="${product.category}">
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}" loading="lazy"
                          onerror="this.src='/img/logo.jpg'">
-                    <span class="stock-badge ${getStockClass(product.stock)}">${product.stock}</span>
-                    <span class="category-tag">${formatCategoryName(product.subcategory)}</span>
+                    <span class="stock-badge ${stockClass}">${product.stock}</span>
+                    <span class="category-tag">${categoryName}</span>
                 </div>
                 
                 <div class="product-info">
                     <h3>${product.name}</h3>
                     <p class="product-description">${product.description}</p>
                     
-                    <div class="product-price">₦${product.price.toLocaleString()} ${product.unit}</div>
+                    ${product.specs ? `
+                    <div class="product-specs">
+                        ${Object.entries(product.specs).slice(0, 2).map(([key, value]) => `
+                            <div class="spec-item">
+                                <span class="spec-label">${key.replace('_', ' ')}:</span>
+                                <span class="spec-value">${value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    <div class="product-price">₦${product.price.toLocaleString()} ${product.unit || ''}</div>
                     
                     <div class="product-meta">
                         <span>Minimum Order: ${product.minOrder}</span>
@@ -342,12 +392,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         </button>
                         <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${product.price.toLocaleString()} ${product.unit}. Min order: ${product.minOrder}" 
                            class="btn btn-whatsapp" target="_blank">
-                            💬 WhatsApp
+                             WhatsApp
                         </a>
                     </div>
                 </div>
             </div>
-        `).join('');
+            `;
+        }).join('');
 
         // Add animation to products
         animateProducts();
@@ -379,48 +430,101 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Get stock class for styling
     function getStockClass(stock) {
-        if (stock === 'In Stock') return '';
-        if (stock === 'Limited Stock') return 'low-stock';
-        if (stock === 'Made to Order') return 'out-of-stock';
+        if (stock === 'In Stock') return 'stock-in';
+        if (stock === 'Limited Stock') return 'stock-low';
+        if (stock === 'Made to Order') return 'stock-out';
         return '';
     }
 
     // Format category name for display
-    function formatCategoryName(category) {
-        const names = {
-            'poultry': '🐔 Poultry',
-            'livestock': '🐖 Livestock',
-            'fish': '🐟 Fish',
-            'feeds': '🌾 Feeds',
-            'supplies': '⚙️ Supplies'
+    function getCategoryDisplayName(category) {
+        const categories = {
+            'poultry': ' Poultry',
+            'livestock': ' Livestock',
+            'fish': ' Fish',
+            'feeds': ' Feeds',
+            'supplies': ' Supplies'
         };
-        return names[category] || category;
+        return categories[category] || category;
     }
 
-    // Add to cart functionality
+    // Add to cart functionality - using global function if available
     function addToCart(product) {
-        // Validate product data
-        if (!product || !product.id || !product.name || !product.price) {
-            console.error('Invalid product data:', product);
-            return;
-        }
-
-        // Create cart product object
-        const cartProduct = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image || '/img/logo.jpg',
-            quantity: 1
-        };
-
-        // Use the global addToCart function if available
+        // Use global function from main.js if available
         if (typeof window.addToCart === 'function') {
-            window.addToCart(cartProduct);
+            window.addToCart(product);
         } else {
-            // Fallback: show alert
-            alert(`Added ${product.name} to cart! Price: ₦${product.price.toLocaleString()}\n\nFor complete order processing, please contact us via WhatsApp or call.`);
+            // Fallback implementation
+            console.log('Adding to cart (fallback):', product.name);
+            
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    image: product.image || '/img/logo.jpg',
+                    quantity: 1,
+                    category: product.category
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart badge
+            updateCartBadge();
+            
+            // Show notification
+            showCartNotification(product.name);
         }
+    }
+
+    // Update cart badge (fallback)
+    function updateCartBadge() {
+        try {
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+
+            const badge = document.getElementById("cart-count-badge");
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? "inline-flex" : "none";
+            }
+        } catch (e) {
+            console.error("Error updating cart badge:", e);
+        }
+    }
+
+    // Show cart notification (fallback)
+    function showCartNotification(productName) {
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        notification.innerHTML = `<span>✓ Added "${productName}" to cart</span>`;
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            font-weight: 600;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
     }
 
     // Mobile menu setup
@@ -439,19 +543,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the page
     initialize();
 });
-
-// Add CSS variables if not defined
-if (!document.querySelector(':root').style.getPropertyValue('--primary')) {
-    document.documentElement.style.setProperty('--primary', '#1a5276');
-    document.documentElement.style.setProperty('--secondary', '#f39c12');
-    document.documentElement.style.setProperty('--accent', '#2980b9');
-    document.documentElement.style.setProperty('--light', '#f8f9fa');
-    document.documentElement.style.setProperty('--dark', '#2c3e50');
-    document.documentElement.style.setProperty('--success', '#27ae60');
-    document.documentElement.style.setProperty('--warning', '#f39c12');
-    document.documentElement.style.setProperty('--danger', '#e74c3c');
-    document.documentElement.style.setProperty('--gray', '#7f8c8d');
-    document.documentElement.style.setProperty('--light-gray', '#ecf0f1');
-}
 
 console.log('Agriculture page JavaScript loaded successfully');

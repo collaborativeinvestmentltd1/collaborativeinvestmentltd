@@ -1,611 +1,905 @@
-// Enhanced Furniture Products Data Management
-class FurnitureStore {
-    constructor() {
-        this.products = [
-            {
-                id: 1,
-                name: "Executive Leather Office Chair",
-                category: "chairs",
-                material: "leather",
-                price: 75000,
-                originalPrice: 89000,
-                description: "Premium executive office chair with high-quality leather upholstery and ergonomic design for maximum comfort during long work hours.",
-                specs: ["Genuine Leather", "Adjustable Height", "Lumbar Support", "Swivel Base", "360° Rotation"],
-                image: "🪑",
-                featured: true,
-                inStock: true,
-                deliveryTime: "3-5 days",
-                warranty: "2 years"
-            },
-            {
-                id: 2,
-                name: "Fabric Lounge Sofa Set",
-                category: "sofas",
-                material: "fabric",
-                price: 185000,
-                originalPrice: 220000,
-                description: "3-seater sofa set with premium fabric upholstery, perfect for modern living rooms and reception areas.",
-                specs: ["3-Piece Set", "Durable Fabric", "Solid Wood Frame", "Comfort Cushions", "Easy Maintenance"],
-                image: "🛋️",
-                featured: true,
-                inStock: true,
-                deliveryTime: "5-7 days",
-                warranty: "3 years"
-            },
-            {
-                id: 3,
-                name: "Solid Wood Dining Table",
-                category: "tables",
-                material: "wood",
-                price: 95000,
-                originalPrice: 115000,
-                description: "Elegant solid wood dining table that comfortably seats 6 people, perfect for family gatherings and dinner parties.",
-                specs: ["Solid Wood", "Seats 6", "Natural Finish", "Sturdy Construction", "Scratch Resistant"],
-                image: "🪵",
-                featured: false,
-                inStock: true,
-                deliveryTime: "4-6 days",
-                warranty: "2 years"
-            },
-            {
-                id: 4,
-                name: "Industrial Metal Bar Stools",
-                category: "chairs",
-                material: "metal",
-                price: 35000,
-                description: "Set of 2 industrial-style bar stools with sturdy metal frames and comfortable padded seats.",
-                specs: ["Set of 2", "Metal Frame", "Adjustable Height", "Modern Design", "Non-slip Base"],
-                image: "🪑",
-                featured: false,
-                inStock: true,
-                deliveryTime: "2-4 days",
-                warranty: "1 year"
-            },
-            {
-                id: 5,
-                name: "Premium Living Room Set",
-                category: "sets",
-                material: "fabric",
-                price: 320000,
-                originalPrice: 380000,
-                description: "Complete 5-piece luxury living room set including sofa, loveseat, armchairs, and coffee table.",
-                specs: ["5-Piece Set", "Premium Fabric", "Coffee Table", "Matching Design", "Professional Assembly"],
-                image: "🏠",
-                featured: true,
-                inStock: true,
-                deliveryTime: "7-10 days",
-                warranty: "5 years"
-            },
-            {
-                id: 6,
-                name: "Leather Recliner Chair",
-                category: "chairs",
-                material: "leather",
-                price: 120000,
-                originalPrice: 145000,
-                description: "Luxurious recliner chair with premium leather and multiple reclining positions for ultimate relaxation.",
-                specs: ["Full Recline", "Premium Leather", "Footrest", "Side Pockets", "Smooth Mechanism"],
-                image: "🪑",
-                featured: true,
-                inStock: false,
-                deliveryTime: "10-14 days",
-                warranty: "3 years"
-            },
-            {
-                id: 7,
-                name: "Modern Coffee Table",
-                category: "tables",
-                material: "wood",
-                price: 45000,
-                description: "Contemporary wooden coffee table with built-in storage shelf and smooth protective finish.",
-                specs: ["Storage Shelf", "Solid Wood", "Smooth Finish", "Modern Design", "Easy Assembly"],
-                image: "🪵",
-                featured: false,
-                inStock: true,
-                deliveryTime: "3-5 days",
-                warranty: "2 years"
-            },
-            {
-                id: 8,
-                name: "Designer Accent Chairs",
-                category: "chairs",
-                material: "fabric",
-                price: 55000,
-                description: "Set of 2 stylish accent chairs with premium patterned fabric and elegant wooden legs.",
-                specs: ["Set of 2", "Patterned Fabric", "Wooden Legs", "Comfortable", "Versatile Design"],
-                image: "🪑",
-                featured: false,
-                inStock: true,
-                deliveryTime: "4-6 days",
-                warranty: "2 years"
-            },
-            {
-                id: 9,
-                name: "L-Shaped Leather Sectional",
-                category: "sofas",
-                material: "leather",
-                price: 280000,
-                originalPrice: 335000,
-                description: "Spacious L-shaped sectional sofa with genuine leather and multiple modular seating positions.",
-                specs: ["L-Shape", "Genuine Leather", "Chaise Lounge", "Modern Design", "Modular"],
-                image: "🛋️",
-                featured: true,
-                inStock: true,
-                deliveryTime: "10-12 days",
-                warranty: "4 years"
-            },
-            {
-                id: 10,
-                name: "Wooden Dining Chair Set",
-                category: "chairs",
-                material: "wood",
-                price: 85000,
-                description: "Set of 4 elegant wooden dining chairs with comfortable padded seats and ergonomic design.",
-                specs: ["Set of 4", "Wooden Frame", "Padded Seats", "Matching Design", "Stackable"],
-                image: "🪑",
-                featured: false,
-                inStock: true,
-                deliveryTime: "3-5 days",
-                warranty: "2 years"
-            },
-            {
-                id: 11,
-                name: "Executive Office Desk",
-                category: "tables",
-                material: "wood",
-                price: 65000,
-                description: "Professional office desk with multiple drawers, cable management system, and spacious work surface.",
-                specs: ["Multiple Drawers", "Cable Management", "Spacious", "Durable", "Lockable"],
-                image: "🪵",
-                featured: false,
-                inStock: true,
-                deliveryTime: "5-7 days",
-                warranty: "3 years"
-            },
-            {
-                id: 12,
-                name: "Complete Bedroom Suite",
-                category: "sets",
-                material: "wood",
-                price: 195000,
-                originalPrice: 235000,
-                description: "Complete bedroom suite including queen bed frame, matching nightstands, and 6-drawer dresser.",
-                specs: ["Queen Bed Frame", "Nightstands", "6-Drawer Dresser", "Matching Design", "Under-bed Storage"],
-                image: "🛏️",
-                featured: true,
-                inStock: true,
-                deliveryTime: "7-9 days",
-                warranty: "5 years"
-            }
-        ];
-
-        this.filters = {
-            category: 'all',
-            material: 'all',
-            price: 'all',
-            sort: 'featured',
-            search: ''
-        };
-
-        this.pagination = {
-            currentPage: 1,
-            itemsPerPage: 8,
-            totalPages: 1
-        };
-
-        this.initialize();
-    }
-
-    initialize() {
-        this.cacheDomElements();
-        this.setupEventListeners();
-        this.renderProducts();
-        this.updateProductCount();
-    }
-
-    cacheDomElements() {
-        this.elements = {
-            furnitureContainer: document.getElementById('furniture-container'),
-            loadMoreBtn: document.getElementById('load-more'),
-            categoryFilter: document.getElementById('category-filter'),
-            materialFilter: document.getElementById('material-filter'),
-            priceFilter: document.getElementById('price-filter'),
-            sortFilter: document.getElementById('sort-filter'),
-            searchInput: document.getElementById('search-input'),
-            productCount: document.getElementById('product-count'),
-            filterReset: document.getElementById('filter-reset'),
-            featuredToggle: document.getElementById('featured-toggle')
-        };
-    }
-
-    setupEventListeners() {
-        this.elements.categoryFilter.addEventListener('change', () => this.handleFilterChange());
-        this.elements.materialFilter.addEventListener('change', () => this.handleFilterChange());
-        this.elements.priceFilter.addEventListener('change', () => this.handleFilterChange());
-        this.elements.sortFilter.addEventListener('change', () => this.handleFilterChange());
-        this.elements.searchInput.addEventListener('input', () => this.handleSearch());
-        this.elements.loadMoreBtn.addEventListener('click', () => this.loadMoreProducts());
-        this.elements.filterReset.addEventListener('click', () => this.resetFilters());
-        this.elements.featuredToggle.addEventListener('change', () => this.handleFilterChange());
-
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', (e) => this.handleKeyboardShortcuts(e));
-    }
-
-    handleFilterChange() {
-        this.filters.category = this.elements.categoryFilter.value;
-        this.filters.material = this.elements.materialFilter.value;
-        this.filters.price = this.elements.priceFilter.value;
-        this.filters.sort = this.elements.sortFilter.value;
-        
-        this.pagination.currentPage = 1;
-        this.renderProducts();
-        this.updateProductCount();
-    }
-
-    handleSearch() {
-        this.filters.search = this.elements.searchInput.value.toLowerCase();
-        this.pagination.currentPage = 1;
-        this.renderProducts();
-        this.updateProductCount();
-    }
-
-    handleKeyboardShortcuts(e) {
-        if (e.ctrlKey && e.key === 'k') {
-            e.preventDefault();
-            this.elements.searchInput.focus();
-        }
-    }
-
-    filterProducts() {
-        let filtered = [...this.products];
-
-        // Apply search filter
-        if (this.filters.search) {
-            filtered = filtered.filter(product => 
-                product.name.toLowerCase().includes(this.filters.search) ||
-                product.description.toLowerCase().includes(this.filters.search) ||
-                product.category.toLowerCase().includes(this.filters.search)
-            );
-        }
-
-        // Apply category filter
-        if (this.filters.category !== 'all') {
-            filtered = filtered.filter(product => product.category === this.filters.category);
-        }
-
-        // Apply material filter
-        if (this.filters.material !== 'all') {
-            filtered = filtered.filter(product => product.material === this.filters.material);
-        }
-
-        // Apply price filter
-        if (this.filters.price !== 'all') {
-            filtered = filtered.filter(product => {
-                switch(this.filters.price) {
-                    case 'budget': return product.price < 50000;
-                    case 'mid': return product.price >= 50000 && product.price <= 150000;
-                    case 'premium': return product.price > 150000;
-                    default: return true;
-                }
-            });
-        }
-
-        // Apply featured filter if enabled
-        if (this.elements.featuredToggle.checked) {
-            filtered = filtered.filter(product => product.featured);
-        }
-
-        // Apply sorting
-        filtered.sort((a, b) => {
-            switch(this.filters.sort) {
-                case 'price-low': return a.price - b.price;
-                case 'price-high': return b.price - a.price;
-                case 'name': return a.name.localeCompare(b.name);
-                case 'newest': return b.id - a.id;
-                case 'featured':
-                default: 
-                    if (a.featured && !b.featured) return -1;
-                    if (!a.featured && b.featured) return 1;
-                    return b.id - a.id;
-            }
-        });
-
-        return filtered;
-    }
-
-    renderProducts() {
-        const filteredProducts = this.filterProducts();
-        const startIndex = 0;
-        const endIndex = this.pagination.currentPage * this.pagination.itemsPerPage;
-        const productsToShow = filteredProducts.slice(startIndex, endIndex);
-
-        this.elements.furnitureContainer.innerHTML = '';
-
-        if (productsToShow.length === 0) {
-            this.showNoProductsMessage();
-            return;
-        }
-
-        productsToShow.forEach(product => {
-            const productElement = this.createProductElement(product);
-            this.elements.furnitureContainer.appendChild(productElement);
-        });
-
-        this.updateLoadMoreButton(filteredProducts.length, endIndex);
-    }
-
-    createProductElement(product) {
-        const productDiv = document.createElement('div');
-        productDiv.className = `furniture-card ${product.featured ? 'featured' : ''} ${!product.inStock ? 'out-of-stock' : ''}`;
-        
-        const discountBadge = product.originalPrice ? 
-            `<div class="discount-badge">Save ₦${(product.originalPrice - product.price).toLocaleString()}</div>` : '';
-        
-        const stockBadge = !product.inStock ? 
-            `<div class="stock-badge out-of-stock-badge">Pre-order</div>` : 
-            `<div class="stock-badge in-stock-badge">In Stock</div>`;
-
-        const featuredBadge = product.featured ? 
-            `<div class="featured-badge">Featured</div>` : '';
-
-        const originalPrice = product.originalPrice ? 
-            `<div class="original-price">₦${product.originalPrice.toLocaleString()}</div>` : '';
-
-        productDiv.innerHTML = `
-            <div class="furniture-card-header">
-                ${featuredBadge}
-                ${discountBadge}
-                ${stockBadge}
-                <div class="furniture-image">
-                    ${product.image}
-                </div>
-            </div>
-            <div class="furniture-details">
-                <div class="furniture-meta">
-                    <span class="furniture-category">${this.formatCategory(product.category)}</span>
-                    <span class="furniture-material">${this.formatMaterial(product.material)}</span>
-                </div>
-                <h3 class="furniture-title">${product.name}</h3>
-                <p class="furniture-description">${product.description}</p>
-                
-                <div class="furniture-specs">
-                    ${product.specs.map(spec => `
-                        <div class="spec-item">
-                            <span class="spec-icon">✓</span>
-                            <span class="spec-text">${spec}</span>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div class="furniture-features">
-                    <div class="feature-item">
-                        <span class="feature-icon">⏱️</span>
-                        <span class="feature-text">${product.deliveryTime}</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🛡️</span>
-                        <span class="feature-text">${product.warranty}</span>
-                    </div>
-                </div>
-
-                <div class="furniture-pricing">
-                    ${originalPrice}
-                    <div class="current-price">₦${product.price.toLocaleString()}</div>
-                </div>
-
-                <div class="furniture-actions">
-                    <a href="https://wa.me/2348129978419?text=${this.generateWhatsAppMessage(product)}" 
-                       class="btn-primary" target="_blank" ${!product.inStock ? 'style="opacity: 0.7;"' : ''}>
-                        ${product.inStock ? '🛒 Inquire Now' : '📅 Pre-order'}
-                    </a>
-                    <button class="btn-secondary wishlist-btn" data-product-id="${product.id}">
-                        ❤️ Save
-                    </button>
-                </div>
-            </div>
-        `;
-
-        // Add wishlist functionality
-        const wishlistBtn = productDiv.querySelector('.wishlist-btn');
-        wishlistBtn.addEventListener('click', () => this.toggleWishlist(product.id));
-
-        return productDiv;
-    }
-
-    generateWhatsAppMessage(product) {
-        const message = `Hello! I'm interested in your ${product.name} priced at ₦${product.price.toLocaleString()}. Could you provide more details?`;
-        return encodeURIComponent(message);
-    }
-
-    showNoProductsMessage() {
-        this.elements.furnitureContainer.innerHTML = `
-            <div class="no-products-message">
-                <div class="no-products-icon">🔍</div>
-                <h3>No Furniture Found</h3>
-                <p>We couldn't find any products matching your current filters.</p>
-                <div class="no-products-actions">
-                    <button class="btn-primary" onclick="furnitureStore.resetFilters()">
-                        Reset Filters
-                    </button>
-                    <a href="/contact" class="btn-secondary">
-                        Request Custom Design
-                    </a>
-                </div>
-            </div>
-        `;
-        this.elements.loadMoreBtn.style.display = 'none';
-    }
-
-    updateLoadMoreButton(totalProducts, endIndex) {
-        this.elements.loadMoreBtn.style.display = endIndex < totalProducts ? 'flex' : 'none';
-        this.elements.loadMoreBtn.innerHTML = endIndex < totalProducts ? 
-            `Load More (${totalProducts - endIndex} remaining)` : 
-            'All Products Loaded';
-    }
-
-    updateProductCount() {
-        const filteredProducts = this.filterProducts();
-        const total = filteredProducts.length;
-        const showing = Math.min(this.pagination.currentPage * this.pagination.itemsPerPage, total);
-        
-        this.elements.productCount.textContent = `Showing ${showing} of ${total} products`;
-    }
-
-    loadMoreProducts() {
-        this.pagination.currentPage++;
-        this.renderProducts();
-        this.updateProductCount();
-        
-        // Smooth scroll to new products
-        setTimeout(() => {
-            this.elements.loadMoreBtn.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center' 
-            });
-        }, 100);
-    }
-
-    resetFilters() {
-        this.elements.categoryFilter.value = 'all';
-        this.elements.materialFilter.value = 'all';
-        this.elements.priceFilter.value = 'all';
-        this.elements.sortFilter.value = 'featured';
-        this.elements.searchInput.value = '';
-        this.elements.featuredToggle.checked = false;
-        
-        this.filters = {
-            category: 'all',
-            material: 'all',
-            price: 'all',
-            sort: 'featured',
-            search: ''
-        };
-        
-        this.pagination.currentPage = 1;
-        this.renderProducts();
-        this.updateProductCount();
-    }
-
-    toggleWishlist(productId) {
-        // Implement wishlist functionality
-        const wishlist = JSON.parse(localStorage.getItem('furnitureWishlist') || '[]');
-        const index = wishlist.indexOf(productId);
-        
-        if (index > -1) {
-            wishlist.splice(index, 1);
-            this.showNotification('Product removed from wishlist', 'info');
-        } else {
-            wishlist.push(productId);
-            this.showNotification('Product added to wishlist', 'success');
-        }
-        
-        localStorage.setItem('furnitureWishlist', JSON.stringify(wishlist));
-        this.updateWishlistButtons();
-    }
-
-    updateWishlistButtons() {
-        const wishlist = JSON.parse(localStorage.getItem('furnitureWishlist') || '[]');
-        document.querySelectorAll('.wishlist-btn').forEach(btn => {
-            const productId = parseInt(btn.dataset.productId);
-            if (wishlist.includes(productId)) {
-                btn.innerHTML = '❤️ Saved';
-                btn.classList.add('in-wishlist');
-            } else {
-                btn.innerHTML = '❤️ Save';
-                btn.classList.remove('in-wishlist');
-            }
-        });
-    }
-
-    showNotification(message, type = 'info') {
-        // Create and show notification
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
-            <span class="notification-message">${message}</span>
-            <button class="notification-close">&times;</button>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.classList.add('show');
-        }, 100);
-        
-        setTimeout(() => {
-            notification.classList.remove('show');
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        }, 3000);
-        
-        notification.querySelector('.notification-close').addEventListener('click', () => {
-            notification.classList.remove('show');
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        });
-    }
-
-    formatCategory(category) {
-        const categories = {
-            'chairs': 'Chairs & Seating',
-            'sofas': 'Sofas & Couches',
-            'tables': 'Tables & Desks',
-            'sets': 'Complete Sets'
-        };
-        return categories[category] || category;
-    }
-
-    formatMaterial(material) {
-        const materials = {
-            'leather': 'Genuine Leather',
-            'fabric': 'Premium Fabric',
-            'wood': 'Solid Wood',
-            'metal': 'Metal Frame'
-        };
-        return materials[material] || material;
-    }
-
-    // Public method to get featured products
-    getFeaturedProducts() {
-        return this.products.filter(product => product.featured);
-    }
-
-    // Public method to search products
-    searchProducts(query) {
-        this.filters.search = query.toLowerCase();
-        this.pagination.currentPage = 1;
-        this.renderProducts();
-        this.updateProductCount();
-    }
-}
-
-// Initialize the furniture store when DOM is loaded
+// shop-furniture.js - Enhanced Furniture Products with Images
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Furniture store initializing...');
+    console.log('Furniture page loaded - initializing...');
     
     // Check if we're on a furniture page
-    const furnitureElements = document.querySelector('.furniture-products, [data-page="furniture"]');
+    const furnitureElements = document.querySelector('.furniture-products, [data-page="furniture"], .category-header');
     if (!furnitureElements) {
         console.log('Not on furniture page, skipping initialization');
         return;
     }
 
-    window.furnitureStore = new FurnitureStore();
+    // Furniture products data with proper image paths
+    const furnitureProducts = [
+        // =========== OFFICE FURNITURE ===========
+        {
+            id: 'furn-office-001',
+            name: "Executive Leather Office Chair",
+            category: "office",
+            subcategory: "chairs",
+            price: 75000,
+            basePrice: 75000,
+            image: '/img/furniture/executive-office-chair.jpg',
+            description: "Premium executive office chair with high-quality leather upholstery and ergonomic design for maximum comfort.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per chair',
+            specs: {
+                material: "Genuine Leather",
+                features: "Adjustable Height, Lumbar Support, Swivel Base",
+                warranty: "2 years",
+                delivery: "3-5 days",
+                color: "Black/Brown"
+            },
+            tags: ['office', 'chair', 'leather', 'executive', 'ergonomic']
+        },
+        {
+            id: 'furn-office-002',
+            name: "Fabric Office Chair",
+            category: "office",
+            subcategory: "chairs",
+            price: 45000,
+            basePrice: 45000,
+            image: '/img/furniture/fabric-office-chair.jpg',
+            description: "Comfortable office chair with breathable mesh back and adjustable features.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per chair',
+            specs: {
+                material: "Premium Fabric & Mesh",
+                features: "Adjustable Armrests, Breathable Back",
+                warranty: "1 year",
+                delivery: "2-4 days",
+                color: "Multiple options"
+            },
+            tags: ['office', 'chair', 'fabric', 'mesh', 'ergonomic']
+        },
+        {
+            id: 'furn-office-003',
+            name: "Executive Desk",
+            category: "office",
+            subcategory: "tables",
+            price: 95000,
+            basePrice: 95000,
+            image: '/img/furniture/executive-desk.jpg',
+            description: "Spacious executive desk with built-in drawers and cable management system.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per desk',
+            specs: {
+                material: "Solid Wood",
+                features: "Built-in Drawers, Cable Management",
+                dimensions: "180cm x 90cm x 75cm",
+                warranty: "3 years",
+                delivery: "5-7 days"
+            },
+            tags: ['office', 'desk', 'wood', 'executive']
+        },
+        {
+            id: 'furn-office-004',
+            name: "Conference Table",
+            category: "office",
+            subcategory: "tables",
+            price: 185000,
+            basePrice: 185000,
+            image: '/img/furniture/conference-table.jpg',
+            description: "Large conference table for 8-10 people with modern design.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per table',
+            specs: {
+                material: "Wood & Glass",
+                capacity: "8-10 people",
+                dimensions: "240cm x 120cm",
+                warranty: "2 years",
+                delivery: "7-10 days"
+            },
+            tags: ['office', 'table', 'conference', 'glass']
+        },
+        {
+            id: 'furn-office-005',
+            name: "Office Storage Cabinet",
+            category: "office",
+            subcategory: "storage",
+            price: 65000,
+            basePrice: 65000,
+            image: '/img/furniture/storage-cabinet.jpg',
+            description: "Multi-drawer storage cabinet for files and office supplies.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per cabinet',
+            specs: {
+                material: "Metal & Wood",
+                drawers: "4 drawers",
+                lock: "Built-in lock",
+                warranty: "2 years",
+                delivery: "3-5 days"
+            },
+            tags: ['office', 'cabinet', 'storage', 'filing']
+        },
+
+        // =========== LIVING ROOM FURNITURE ===========
+        {
+            id: 'furn-living-001',
+            name: "3-Seater Fabric Sofa",
+            category: "living",
+            subcategory: "sofas",
+            price: 125000,
+            basePrice: 125000,
+            image: '/img/furniture/3-seater-sofa.jpg',
+            description: "Comfortable 3-seater sofa with premium fabric upholstery.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per sofa',
+            specs: {
+                material: "Premium Fabric",
+                seats: "3 seats",
+                frame: "Solid wood frame",
+                cushions: "High-density foam",
+                warranty: "3 years"
+            },
+            tags: ['living', 'sofa', 'fabric', '3-seater']
+        },
+        {
+            id: 'furn-living-002',
+            name: "L-Shaped Sectional Sofa",
+            category: "living",
+            subcategory: "sofas",
+            price: 225000,
+            basePrice: 225000,
+            image: '/img/furniture/sectional-sofa.jpg',
+            description: "Spacious L-shaped sectional sofa perfect for family rooms.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per set',
+            specs: {
+                material: "Leather/Fabric options",
+                pieces: "5-piece sectional",
+                color: "Various colors",
+                warranty: "4 years",
+                delivery: "7-10 days"
+            },
+            tags: ['living', 'sofa', 'sectional', 'L-shaped']
+        },
+        {
+            id: 'furn-living-003',
+            name: "Modern Coffee Table",
+            category: "living",
+            subcategory: "tables",
+            price: 45000,
+            basePrice: 45000,
+            image: '/img/furniture/coffee-table.jpg',
+            description: "Contemporary coffee table with tempered glass top.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per table',
+            specs: {
+                material: "Glass & Metal",
+                dimensions: "120cm x 60cm",
+                style: "Modern minimalist",
+                warranty: "2 years",
+                delivery: "3-5 days"
+            },
+            tags: ['living', 'table', 'coffee', 'glass']
+        },
+        {
+            id: 'furn-living-004',
+            name: "TV Stand Entertainment Unit",
+            category: "living",
+            subcategory: "storage",
+            price: 85000,
+            basePrice: 85000,
+            image: '/img/furniture/tv-stand.jpg',
+            description: "TV stand with storage shelves and cable management.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per unit',
+            specs: {
+                material: "Wood composite",
+                capacity: "Up to 65-inch TV",
+                shelves: "Adjustable shelves",
+                warranty: "2 years",
+                delivery: "4-6 days"
+            },
+            tags: ['living', 'TV', 'stand', 'entertainment']
+        },
+        {
+            id: 'furn-living-005',
+            name: "Accent Chair",
+            category: "living",
+            subcategory: "chairs",
+            price: 55000,
+            basePrice: 55000,
+            image: '/img/furniture/accent-chair.jpg',
+            description: "Stylish accent chair for living room decor.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per chair',
+            specs: {
+                material: "Fabric upholstery",
+                style: "Modern accent",
+                legs: "Wooden legs",
+                warranty: "2 years",
+                delivery: "3-5 days"
+            },
+            tags: ['living', 'chair', 'accent', 'decor']
+        },
+
+        // =========== DINING FURNITURE ===========
+        {
+            id: 'furn-dining-001',
+            name: "6-Seater Dining Table Set",
+            category: "dining",
+            subcategory: "sets",
+            price: 185000,
+            basePrice: 185000,
+            image: '/img/furniture/dining-table-set.jpg',
+            description: "Complete dining set with table and 6 chairs.",
+            stock: 'In Stock',
+            minOrder: '1 set',
+            unit: 'per set',
+            specs: {
+                material: "Solid wood",
+                pieces: "Table + 6 chairs",
+                capacity: "6 people",
+                warranty: "3 years",
+                delivery: "5-7 days"
+            },
+            tags: ['dining', 'set', 'table', 'chairs']
+        },
+        {
+            id: 'furn-dining-002',
+            name: "Extendable Dining Table",
+            category: "dining",
+            subcategory: "tables",
+            price: 125000,
+            basePrice: 125000,
+            image: '/img/furniture/extendable-table.jpg',
+            description: "Dining table with extension leaves for extra guests.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per table',
+            specs: {
+                material: "Wood",
+                capacity: "Seats 6-10",
+                feature: "Extendable design",
+                warranty: "2 years",
+                delivery: "4-6 days"
+            },
+            tags: ['dining', 'table', 'extendable', 'wood']
+        },
+        {
+            id: 'furn-dining-003',
+            name: "Upholstered Dining Chairs",
+            category: "dining",
+            subcategory: "chairs",
+            price: 35000,
+            basePrice: 35000,
+            image: '/img/furniture/dining-chairs.jpg',
+            description: "Set of 4 upholstered dining chairs.",
+            stock: 'In Stock',
+            minOrder: '4 chairs',
+            unit: 'per set',
+            specs: {
+                material: "Fabric upholstery",
+                set: "4 chairs",
+                comfort: "Padded seats",
+                warranty: "2 years",
+                delivery: "3-5 days"
+            },
+            tags: ['dining', 'chairs', 'upholstered', 'set']
+        },
+        {
+            id: 'furn-dining-004',
+            name: "Bar Stools Set",
+            category: "dining",
+            subcategory: "chairs",
+            price: 65000,
+            basePrice: 65000,
+            image: '/img/furniture/bar-stools.jpg',
+            description: "Set of 2 adjustable height bar stools.",
+            stock: 'In Stock',
+            minOrder: '2 stools',
+            unit: 'per set',
+            specs: {
+                material: "Metal & fabric",
+                set: "2 stools",
+                feature: "Adjustable height",
+                warranty: "1 year",
+                delivery: "2-4 days"
+            },
+            tags: ['dining', 'stools', 'bar', 'adjustable']
+        },
+        {
+            id: 'furn-dining-005',
+            name: "Kitchen Island",
+            category: "dining",
+            subcategory: "tables",
+            price: 95000,
+            basePrice: 95000,
+            image: '/img/furniture/kitchen-island.jpg',
+            description: "Mobile kitchen island with storage and seating.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per island',
+            specs: {
+                material: "Wood & metal",
+                features: "Storage, seating, workspace",
+                mobility: "Locking casters",
+                warranty: "2 years",
+                delivery: "5-7 days"
+            },
+            tags: ['dining', 'kitchen', 'island', 'mobile']
+        },
+
+        // =========== BEDROOM FURNITURE ===========
+        {
+            id: 'furn-bedroom-001',
+            name: "Queen Bed Frame",
+            category: "bedroom",
+            subcategory: "beds",
+            price: 85000,
+            basePrice: 85000,
+            image: '/img/furniture/queen-bed.jpg',
+            description: "Solid wood queen bed frame with headboard.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per bed',
+            specs: {
+                material: "Solid wood",
+                size: "Queen size",
+                features: "Headboard included",
+                warranty: "3 years",
+                delivery: "4-6 days"
+            },
+            tags: ['bedroom', 'bed', 'queen', 'wood']
+        },
+        {
+            id: 'furn-bedroom-002',
+            name: "Wardrobe Closet",
+            category: "bedroom",
+            subcategory: "storage",
+            price: 125000,
+            basePrice: 125000,
+            image: '/img/furniture/wardrobe.jpg',
+            description: "Spacious wardrobe with hanging space and shelves.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per wardrobe',
+            specs: {
+                material: "Wood composite",
+                doors: "Sliding doors",
+                storage: "Hanging & shelves",
+                warranty: "2 years",
+                delivery: "5-7 days"
+            },
+            tags: ['bedroom', 'wardrobe', 'closet', 'storage']
+        },
+        {
+            id: 'furn-bedroom-003',
+            name: "Dressing Table with Mirror",
+            category: "bedroom",
+            subcategory: "tables",
+            price: 75000,
+            basePrice: 75000,
+            image: '/img/furniture/dressing-table.jpg',
+            description: "Vanity dressing table with mirror and storage.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per set',
+            specs: {
+                material: "Wood & mirror",
+                features: "Mirror, drawers, stool",
+                style: "Vanity dressing table",
+                warranty: "2 years",
+                delivery: "3-5 days"
+            },
+            tags: ['bedroom', 'dressing', 'table', 'vanity']
+        },
+        {
+            id: 'furn-bedroom-004',
+            name: "Nightstand Set",
+            category: "bedroom",
+            subcategory: "tables",
+            price: 45000,
+            basePrice: 45000,
+            image: '/img/furniture/nightstands.jpg',
+            description: "Set of 2 matching nightstands.",
+            stock: 'In Stock',
+            minOrder: '2 units',
+            unit: 'per set',
+            specs: {
+                material: "Wood",
+                set: "2 nightstands",
+                drawers: "1-2 drawers each",
+                warranty: "2 years",
+                delivery: "2-4 days"
+            },
+            tags: ['bedroom', 'nightstand', 'set', 'bedside']
+        },
+        {
+            id: 'furn-bedroom-005',
+            name: "Chest of Drawers",
+            category: "bedroom",
+            subcategory: "storage",
+            price: 85000,
+            basePrice: 85000,
+            image: '/img/furniture/chest-drawers.jpg',
+            description: "Tall chest of drawers for clothing storage.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per chest',
+            specs: {
+                material: "Wood",
+                drawers: "6 drawers",
+                height: "120cm",
+                warranty: "3 years",
+                delivery: "4-6 days"
+            },
+            tags: ['bedroom', 'chest', 'drawers', 'storage']
+        },
+
+        // =========== SPECIALTY FURNITURE ===========
+        {
+            id: 'furn-special-001',
+            name: "Bookshelf Unit",
+            category: "special",
+            subcategory: "storage",
+            price: 65000,
+            basePrice: 65000,
+            image: '/img/furniture/bookshelf.jpg',
+            description: "5-tier bookshelf for books and decor.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per shelf',
+            specs: {
+                material: "Wood composite",
+                tiers: "5 shelves",
+                adjustable: "Adjustable shelves",
+                warranty: "2 years",
+                delivery: "3-5 days"
+            },
+            tags: ['special', 'bookshelf', 'storage', 'shelves']
+        },
+        {
+            id: 'furn-special-002',
+            name: "Console Table",
+            category: "special",
+            subcategory: "tables",
+            price: 55000,
+            basePrice: 55000,
+            image: '/img/furniture/console-table.jpg',
+            description: "Elegant console table for hallway or entryway.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per table',
+            specs: {
+                material: "Wood & metal",
+                length: "120cm",
+                style: "Slim design",
+                warranty: "2 years",
+                delivery: "2-4 days"
+            },
+            tags: ['special', 'console', 'table', 'hallway']
+        },
+        {
+            id: 'furn-special-003',
+            name: "Display Cabinet",
+            category: "special",
+            subcategory: "storage",
+            price: 95000,
+            basePrice: 95000,
+            image: '/img/furniture/display-cabinet.jpg',
+            description: "Glass display cabinet for collectibles.",
+            stock: 'In Stock',
+            minOrder: '1 unit',
+            unit: 'per cabinet',
+            specs: {
+                material: "Wood & glass",
+                lighting: "LED lights included",
+                security: "Locking doors",
+                warranty: "2 years",
+                delivery: "5-7 days"
+            },
+            tags: ['special', 'cabinet', 'display', 'glass']
+        },
+        {
+            id: 'furn-special-004',
+            name: "Folding Chairs Set",
+            category: "special",
+            subcategory: "chairs",
+            price: 25000,
+            basePrice: 25000,
+            image: '/img/furniture/folding-chairs.jpg',
+            description: "Set of 4 folding chairs for events.",
+            stock: 'In Stock',
+            minOrder: '4 chairs',
+            unit: 'per set',
+            specs: {
+                material: "Metal & plastic",
+                set: "4 chairs",
+                feature: "Folding design",
+                warranty: "1 year",
+                delivery: "1-3 days"
+            },
+            tags: ['special', 'chairs', 'folding', 'events']
+        },
+        {
+            id: 'furn-special-005',
+            name: "Outdoor Patio Set",
+            category: "special",
+            subcategory: "sets",
+            price: 185000,
+            basePrice: 185000,
+            image: '/img/furniture/patio-set.jpg',
+            description: "Weather-resistant outdoor patio furniture set.",
+            stock: 'In Stock',
+            minOrder: '1 set',
+            unit: 'per set',
+            specs: {
+                material: "Weather-resistant",
+                pieces: "Table + 4 chairs",
+                use: "Outdoor/patio",
+                warranty: "2 years",
+                delivery: "5-7 days"
+            },
+            tags: ['special', 'outdoor', 'patio', 'set']
+        }
+    ];
+
+    // Make products available globally
+    if (!window.furnitureProducts) {
+        window.furnitureProducts = furnitureProducts;
+    }
+
+    // DOM Elements with null checks
+    const productsGrid = document.getElementById('products-grid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCount = document.getElementById('product-count');
+    const searchInput = document.getElementById('product-search');
+
+    // Filter variables
+    let filteredProducts = [...furnitureProducts];
+    let currentCategory = 'all';
+
+    // Initialize the page
+    function initialize() {
+        console.log('Initializing furniture page...');
+        
+        if (productsGrid) {
+            renderProducts();
+        } else {
+            console.log('Products grid not found on this page');
+        }
+        
+        setupEventListeners();
+        setupMobileMenu();
+        updateProductCount();
+        
+        // Initialize cart count if main.js loaded
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        }
+    }
+
+    // Set up event listeners with null checks
+    function setupEventListeners() {
+        // Filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                currentCategory = this.getAttribute('data-category');
+                filterProducts();
+            });
+        });
+
+        // Search functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                filterProducts();
+            });
+        }
+
+        // Add to cart buttons (delegated)
+        document.addEventListener('click', function(e) {
+            const addToCartBtn = e.target.closest('.add-to-cart');
+            if (addToCartBtn) {
+                const productId = addToCartBtn.dataset.id;
+                const product = furnitureProducts.find(p => p.id === productId);
+                if (product) {
+                    addToCart(product);
+                    
+                    // Visual feedback
+                    const originalText = addToCartBtn.innerHTML;
+                    addToCartBtn.innerHTML = '✓ Added!';
+                    addToCartBtn.style.background = '#27ae60';
+                    
+                    setTimeout(() => {
+                        addToCartBtn.innerHTML = originalText;
+                        addToCartBtn.style.background = '';
+                    }, 1500);
+                }
+            }
+        });
+    }
+
+    // Filter products based on category and search
+    function filterProducts() {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        
+        filteredProducts = furnitureProducts.filter(product => {
+            const matchesSearch = searchTerm === '' || 
+                product.name.toLowerCase().includes(searchTerm) || 
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+            
+            const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
+            
+            return matchesSearch && matchesCategory;
+        });
+
+        renderProducts();
+        updateProductCount();
+    }
+
+    // Render products to the grid
+    function renderProducts() {
+        if (!productsGrid) {
+            console.log('Products grid not available for rendering');
+            return;
+        }
+
+        productsGrid.innerHTML = filteredProducts.map(product => {
+            const stockClass = getStockClass(product.stock);
+            const categoryName = getCategoryDisplayName(product.category);
+            
+            return `
+            <div class="product-card" data-category="${product.category}">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy"
+                         onerror="this.src='/img/logo.jpg'; this.alt='${product.name} - Image not available'">
+                    <span class="stock-badge ${stockClass}">${product.stock}</span>
+                    <span class="category-tag">${categoryName}</span>
+                </div>
+                
+                <div class="product-content">
+                    <div class="product-category">${categoryName}</div>
+                    <h3 class="product-title">${product.name}</h3>
+                    
+                    <p class="product-description">${product.description}</p>
+                    
+                    ${product.specs ? `
+                    <div class="product-specs">
+                        ${Object.entries(product.specs).slice(0, 3).map(([key, value]) => `
+                            <div class="spec-item">
+                                <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1)}:</span>
+                                <span class="spec-value">${value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    <div class="product-meta">
+                        <div class="product-stock">
+                            <span class="stock-dot ${stockClass}"></span>
+                            ${product.stock}
+                        </div>
+                        <div class="min-order">Min: ${product.minOrder}</div>
+                    </div>
+                    
+                    <div class="product-price">₦${product.price.toLocaleString()}</div>
+                    <div class="product-unit">${product.unit}</div>
+                    
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" 
+                                data-id="${product.id}"
+                                data-name="${product.name}"
+                                data-price="${product.price}"
+                                data-image="${product.image}"
+                                ${product.stock === 'Out of Stock' ? 'disabled' : ''}>
+                            ${product.stock === 'Out of Stock' ? 'Out of Stock' : 'Add to Cart'}
+                        </button>
+                        <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${product.price.toLocaleString()} ${product.unit}. Min order: ${product.minOrder}" 
+                           class="btn btn-whatsapp" target="_blank">
+                             WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+            `;
+        }).join('');
+
+        // Add animation to products
+        animateProducts();
+    }
+
+    // Animate product cards
+    function animateProducts() {
+        const productCards = productsGrid.querySelectorAll('.product-card');
+        productCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }
+
+    // Update product count display
+    function updateProductCount() {
+        if (productCount) {
+            const totalProducts = furnitureProducts.length;
+            const showingProducts = filteredProducts.length;
+            productCount.textContent = `Showing ${showingProducts} of ${totalProducts} furniture products`;
+        }
+    }
+
+    // Get stock class for styling
+    function getStockClass(stock) {
+        if (stock === 'In Stock') return 'stock-in';
+        if (stock === 'Limited Stock') return 'stock-low';
+        if (stock === 'Out of Stock') return 'stock-out';
+        return 'stock-in';
+    }
+
+    // Format category name for display
+    function getCategoryDisplayName(category) {
+        const categories = {
+            'office': ' Office Furniture',
+            'living': ' Living Room',
+            'dining': ' Dining Room',
+            'bedroom': ' Bedroom',
+            'special': ' Specialty Furniture'
+        };
+        return categories[category] || category;
+    }
+
+    // Get main category for shop-all.js compatibility
+    function getMainCategory(product) {
+        return 'furniture';
+    }
+
+    // Add to cart functionality
+    function addToCart(product) {
+        // Use global function from main.js if available
+        if (typeof window.addToCart === 'function') {
+            window.addToCart(product);
+        } else {
+            // Fallback implementation
+            console.log('Adding to cart (fallback):', product.name);
+            
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    image: product.image || '/img/logo.jpg',
+                    quantity: 1,
+                    category: product.category
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart badge
+            updateCartBadge();
+            
+            // Show notification
+            showCartNotification(product.name);
+        }
+    }
+
+    // Update cart badge (fallback)
+    function updateCartBadge() {
+        try {
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+
+            const badge = document.getElementById("cart-count-badge");
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? "inline-flex" : "none";
+            }
+        } catch (e) {
+            console.error("Error updating cart badge:", e);
+        }
+    }
+
+    // Show cart notification (fallback)
+    function showCartNotification(productName) {
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.cart-notification');
+        existingNotifications.forEach(notification => notification.remove());
+        
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        notification.innerHTML = `<span>✓ Added "${productName}" to cart</span>`;
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            font-weight: 600;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // Mobile menu setup
+    function setupMobileMenu() {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+        }
+    }
+
+    // Initialize the page
+    initialize();
+
+    // Make functions available globally for shop-all.js
+    window.getMainCategory = window.getMainCategory || getMainCategory;
+    window.getCategoryDisplayName = window.getCategoryDisplayName || getCategoryDisplayName;
+    window.getStockClass = window.getStockClass || getStockClass;
 });
 
-// Utility function for price formatting (can be used elsewhere)
-function formatPrice(price) {
-    return new Intl.NumberFormat('en-NG', {
-        style: 'currency',
-        currency: 'NGN',
-        minimumFractionDigits: 0
-    }).format(price);
+// Add CSS animations if not defined
+if (!document.querySelector('style#cart-animations')) {
+    const style = document.createElement('style');
+    style.id = 'cart-animations';
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
-// Export for module usage if needed
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { FurnitureStore, formatPrice };
-}
+console.log('Furniture page JavaScript loaded successfully');

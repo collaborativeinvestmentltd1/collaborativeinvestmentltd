@@ -13,6 +13,7 @@ const adminAuth = require('./admin-auth');
 const logger = require('./utils/logger');
 
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || 'localhost'; // Added HOST definition
 const DOMAIN = process.env.DOMAIN || 'localhost';
 
 // Validate required environment variables
@@ -1292,75 +1293,27 @@ async function requestHandler(req, res) {
         }
     });
 }
-
-// Main server function
+// ============================================================================
 async function startServer() {
-    try {
-        // Connect to MongoDB
-        await connectDB();
-        logger.info('✅ MongoDB connected successfully');
-        
-        // Create logs directory if it doesn't exist
-        const logsDir = path.join(__dirname, 'logs');
-        if (!fs.existsSync(logsDir)) {
-            fs.mkdirSync(logsDir, { recursive: true });
+    await connectDB();
+
+    const server = http.createServer(requestHandler);
+
+    server.listen(PORT, HOST, () => {
+        logger.info(`🚀 Server running at http://${HOST}:${PORT}`);
+    });
+
+    process.on("SIGINT", async () => {
+        logger.info("📦 Creating final backup...");
+        try {
+            await backupDatabase();
+        } catch (err) {
+            logger.error("Backup failed:", err.message);
         }
-        
-        // Create HTTP server (Render handles HTTPS)
-        const server = http.createServer(requestHandler);
-        
-        // Start server
-        const HOST = '0.0.0.0'; // Required for Render
-        server.listen(PORT, HOST, () => {
-            const protocol = 'http'; // Render handles HTTPS termination
-            const localUrl = `${protocol}://localhost:${PORT}`;
-            const renderUrl = `https://${DOMAIN}`;
-            
-            logger.info('🚀 Collaborative Investment Ltd Website successfully deployed on Render!');
-            logger.info(`📍 Local URL: ${localUrl}`);
-            logger.info(`📍 Render URL: ${renderUrl}`);
-            logger.info(`📧 Email: ${process.env.EMAIL_USER}`);
-            logger.info('💡 Server ready to accept requests');
-            
-        });
-        
-        // Graceful shutdown
-        process.on('SIGINT', async () => {
-            logger.info('\n🛑 Shutting down server gracefully...');
-            
-            try {
-                await backupDatabase();
-                logger.info('✅ Database backup created');
-            } catch (error) {
-                logger.error('❌ Database backup failed:', error.message);
-            }
-            
-            server.close(async () => {
-                await closeDB();
-                logger.info('✅ Server closed successfully');
-                process.exit(0);
-            });
-        });
-        
-        // Database backup schedule
-        if (process.env.NODE_ENV === 'production') {
-            const backupInterval = 24 * 60 * 60 * 1000; // 24 hours
-            setInterval(async () => {
-                try {
-                    logger.info('🔄 Starting scheduled database backup...');
-                    await backupDatabase();
-                    logger.info('✅ Scheduled database backup completed');
-                } catch (error) {
-                    logger.error('❌ Scheduled backup failed:', error.message);
-                }
-            }, backupInterval);
-        }
-        
-    } catch (error) {
-        logger.error('❌ Failed to start server:', error);
-        process.exit(1);
-    }
+
+        await closeDB();
+        process.exit(0);
+    });
 }
 
-// Start the server
 startServer();

@@ -2,13 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Construction page loaded - initializing...');
     
-    // Debug: Check if cart functions are available
-    console.log('Cart functions check:', {
-        addToCart: typeof window.addToCart,
-        showCartNotification: typeof window.showCartNotification,
-        getCart: typeof window.getCart
-    });
-    
     // Check if we're on a construction page
     const constructionElements = document.querySelector('.construction-products, [data-page="construction"], .category-header');
     if (!constructionElements) {
@@ -16,20 +9,28 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Construction products data
-    const constructionProducts = [
+    // Construction products data - Using the SAME structure as shop-all.js
+    const constructionProducts = window.constructionProducts || [
         {
             id: 'con-001',
             name: 'Hollow Sandcrete Blocks',
-            category: 'construction',
+            category: 'blocks',
             subcategory: 'blocks',
             price: 300,
+            basePrice: 300,
             image: '/img/construction/hollow-sandcrete-blocks.jpg',
             description: 'Standard hollow blocks with cavities, ideal for load-bearing walls.',
             stock: 'In Stock',
             minOrder: '100 blocks',
             unit: 'per block',
-            tags: ['blocks', 'construction', 'hollow']
+            tags: ['blocks', 'construction', 'hollow'],
+            specs: {
+                size: '6 inches (450x225x150mm)',
+                type: 'Hollow',
+                strength: '3.5N/mm²',
+                weight: 'Approx 15kg',
+                minOrder: '100 blocks'
+            }
         },
         {
             id: 'con-002',
@@ -189,6 +190,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
 
+    // Make products available globally for shop-all.js
+    if (!window.constructionProducts) {
+        window.constructionProducts = constructionProducts;
+    }
+
     // DOM Elements with null checks
     const productsGrid = document.getElementById('products-grid') || document.querySelector('.products-grid');
     const searchInput = document.getElementById('product-search');
@@ -211,6 +217,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         setupEventListeners();
         setupMobileMenu();
+        
+        // Initialize cart count if main.js loaded
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        }
     }
 
     // Set up event listeners with null checks
@@ -232,11 +243,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add to cart buttons (delegated)
         document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-to-cart')) {
-                const productId = e.target.dataset.id;
+            const addToCartBtn = e.target.closest('.add-to-cart');
+            if (addToCartBtn) {
+                const productId = addToCartBtn.dataset.id;
                 const product = constructionProducts.find(p => p.id === productId);
                 if (product) {
                     addToCart(product);
+                    
+                    // Visual feedback
+                    const originalText = addToCartBtn.innerHTML;
+                    addToCartBtn.innerHTML = '✓ Added!';
+                    addToCartBtn.style.background = '#27ae60';
+                    
+                    setTimeout(() => {
+                        addToCartBtn.innerHTML = originalText;
+                        addToCartBtn.style.background = '';
+                    }, 1500);
                 }
             }
         });
@@ -249,9 +271,9 @@ document.addEventListener('DOMContentLoaded', function() {
         filteredProducts = constructionProducts.filter(product => {
             const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
                                 product.description.toLowerCase().includes(searchTerm) ||
-                                product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                                (product.tags && product.tags.some(tag => tag.toLowerCase().includes(searchTerm)));
             
-            const matchesCategory = currentCategory === 'all' || product.subcategory === currentCategory;
+            const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
             
             return matchesSearch && matchesCategory;
         });
@@ -267,29 +289,44 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        productsGrid.innerHTML = filteredProducts.map(product => `
-            <div class="product-card" data-category="${product.subcategory}">
+        productsGrid.innerHTML = filteredProducts.map(product => {
+            const stockClass = getStockClass(product.stock);
+            const categoryName = getCategoryDisplayName(product.category);
+            
+            return `
+            <div class="product-card" data-category="${product.category}">
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}" loading="lazy"
                          onerror="this.src='/img/logo.jpg'">
-                    <span class="stock-badge ${getStockClass(product.stock)}">${product.stock}</span>
-                    <span class="category-tag">${formatCategoryName(product.subcategory)}</span>
+                    <span class="stock-badge ${stockClass}">${product.stock}</span>
+                    <span class="category-tag">${categoryName}</span>
                 </div>
                 
                 <div class="product-content">
-                    <div class="product-category">${formatCategoryName(product.subcategory)}</div>
+                    <div class="product-category">${categoryName}</div>
                     <h3 class="product-title">${product.name}</h3>
+                    
+                    ${product.specs ? `
+                    <div class="product-specs">
+                        ${Object.entries(product.specs).slice(0, 2).map(([key, value]) => `
+                            <div class="spec-item">
+                                <span class="spec-label">${key.replace('_', ' ')}:</span>
+                                <span class="spec-value">${value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
                     
                     <div class="product-meta">
                         <div class="product-stock">
-                            <span class="stock-dot ${getStockClass(product.stock)}"></span>
+                            <span class="stock-dot ${stockClass}"></span>
                             ${product.stock}
                         </div>
-                        <div class="min-order">Min: ${product.minOrder}</div>
+                        <div class="min-order">Min: ${product.minOrder || 'N/A'}</div>
                     </div>
                     
                     <div class="product-price">₦${product.price.toLocaleString()}</div>
-                    <div class="product-unit">${product.unit}</div>
+                    <div class="product-unit">${product.unit || ''}</div>
                     
                     <p class="product-description">${product.description}</p>
                     
@@ -303,12 +340,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         </button>
                         <a href="https://wa.me/2348129978419?text=I'm interested in ${encodeURIComponent(product.name)} - ₦${product.price.toLocaleString()} ${product.unit}. Min order: ${product.minOrder}" 
                            class="btn btn-whatsapp" target="_blank">
-                            💬 WhatsApp
+                             WhatsApp
                         </a>
                     </div>
                 </div>
             </div>
-        `).join('');
+            `;
+        }).join('');
 
         // Add animation to products
         animateProducts();
@@ -347,40 +385,97 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Format category name for display
-    function formatCategoryName(category) {
-        const names = {
+    function getCategoryDisplayName(category) {
+        const categories = {
             'blocks': 'Blocks',
             'materials': 'Materials',
             'custom': 'Custom',
-            'courts': 'Sports Courts'
+            'courts': 'Sports Courts',
+            'poultry': 'Poultry Equipment',
+            'machines': 'Machinery',
+            'gates': 'Electric Gates',
+            'furniture': 'Metal Furniture'
         };
-        return names[category] || category;
+        return categories[category] || category;
     }
 
-    // Add to cart functionality
+    // Add to cart functionality - using global function if available
     function addToCart(product) {
-        // Validate product data
-        if (!product || !product.id || !product.name || !product.price) {
-            console.error('Invalid product data:', product);
-            return;
-        }
-
-        // Create cart product object
-        const cartProduct = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image || '/img/logo.jpg',
-            quantity: 1
-        };
-
-        // Use the global addToCart function if available
+        // Use global function from main.js if available
         if (typeof window.addToCart === 'function') {
-            window.addToCart(cartProduct);
+            window.addToCart(product);
         } else {
-            // Fallback: show alert
-            alert(`Added ${product.name} to cart! Price: ₦${product.price.toLocaleString()}\n\nFor complete order processing, please contact us via WhatsApp or call.`);
+            // Fallback implementation
+            console.log('Adding to cart (fallback):', product.name);
+            
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    image: product.image || '/img/logo.jpg',
+                    quantity: 1,
+                    category: product.category
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart badge
+            updateCartBadge();
+            
+            // Show notification
+            showCartNotification(product.name);
         }
+    }
+
+    // Update cart badge (fallback)
+    function updateCartBadge() {
+        try {
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+
+            const badge = document.getElementById("cart-count-badge");
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? "inline-flex" : "none";
+            }
+        } catch (e) {
+            console.error("Error updating cart badge:", e);
+        }
+    }
+
+    // Show cart notification (fallback)
+    function showCartNotification(productName) {
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        notification.innerHTML = `<span>✓ Added "${productName}" to cart</span>`;
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            font-weight: 600;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
     }
 
     // Mobile menu setup
@@ -399,40 +494,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the page
     initialize();
 });
-
-function testAddToCart() {
-    const testProduct = {
-        id: 'test-con-001',
-        name: 'Test Construction Product',
-        price: 5000,
-        image: '/img/logo.jpg',
-        quantity: 1
-    };
-    
-    console.log('Testing addToCart with:', testProduct);
-    
-    if (typeof window.addToCart === 'function') {
-        const result = window.addToCart(testProduct);
-        console.log('addToCart result:', result);
-        alert('Test product added to cart! Check cart icon.');
-    } else {
-        console.error('addToCart function not found!');
-        alert('Error: Cart functions not loaded. Check console.');
-    }
-}
-
-// Add CSS variables if not defined
-if (!document.querySelector(':root').style.getPropertyValue('--primary')) {
-    document.documentElement.style.setProperty('--primary', '#1a5276');
-    document.documentElement.style.setProperty('--secondary', '#f39c12');
-    document.documentElement.style.setProperty('--accent', '#2980b9');
-    document.documentElement.style.setProperty('--light', '#f8f9fa');
-    document.documentElement.style.setProperty('--dark', '#2c3e50');
-    document.documentElement.style.setProperty('--success', '#27ae60');
-    document.documentElement.style.setProperty('--warning', '#f39c12');
-    document.documentElement.style.setProperty('--danger', '#e74c3c');
-    document.documentElement.style.setProperty('--gray', '#7f8c8d');
-    document.documentElement.style.setProperty('--light-gray', '#ecf0f1');
-}
 
 console.log('Construction page JavaScript loaded successfully');

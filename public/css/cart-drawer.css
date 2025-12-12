@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 /* Cart Drawer Styles */
 .cart-icon-wrapper {
     position: relative;
