@@ -1,8 +1,3 @@
-/**
- * database.js
- * Enterprise-grade MongoDB connection + data operations
- * Clean, stable, fast — ideal for monolithic servers
- */
 
 const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcryptjs");
