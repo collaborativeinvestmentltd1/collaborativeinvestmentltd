@@ -43,6 +43,75 @@ body {
     overflow-y: auto;
 }
 
+.dashboard-subtitle {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.quick-stats {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.stat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    background: #f3f4f6;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #4b5563;
+}
+
+.stat-badge i {
+    color: #10b981;
+}
+
+.time-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-action {
+    padding: 0.6rem 1rem;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-action:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.btn-export {
+    color: #1f2937;
+}
+
+.btn-refresh {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.btn-refresh:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+}
 .sidebar-header {
     padding: 0 2rem 2rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);

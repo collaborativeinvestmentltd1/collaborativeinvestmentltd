@@ -1,34 +1,71 @@
-// admin-auth.js - Simplified version without jsonwebtoken
+// admin-auth.js (FINAL FIXED VERSION)
 const bcrypt = require('bcryptjs');
+const { db } = require('./database');
+
+async function hashPassword(password) {
+    const salt = await bcrypt.genSalt(12);
+    return bcrypt.hash(password, salt);
+}
+
+async function verifyAdmin(email, password) {
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+
+    if (!adminEmail || !adminPasswordHash) {
+        return {
+            success: false,
+            message: 'Admin not configured'
+        };
+    }
+
+    if (email !== adminEmail) {
+        return {
+            success: false,
+            message: 'Invalid email or password'
+        };
+    }
+
+    const match = await bcrypt.compare(password, adminPasswordHash);
+
+    if (!match) {
+        return {
+            success: false,
+            message: 'Invalid email or password'
+        };
+    }
+
+    return {
+        success: true,
+        admin: {
+            email: adminEmail,
+            role: 'superadmin'
+        }
+    };
+}
 
 module.exports = {
-    // Simple authentication without JWT
     async verifyAdmin(email, password) {
-        // You should have admin credentials in your database or environment variables
-        const adminEmail = process.env.ADMIN_EMAIL || 'admin@collaborativeinvestmentltd.com';
-        const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
-        
-        if (!adminPasswordHash) {
-            return { success: false, message: 'Admin not configured' };
-        }
-        
-        if (email !== adminEmail) {
-            return { success: false, message: 'Invalid credentials' };
-        }
-        
-        const passwordMatch = await bcrypt.compare(password, adminPasswordHash);
-        
-        if (passwordMatch) {
+        try {
+            // Use database authentication
+            const result = await db.verifyAdminCredentials(email, password);
+            
+            if (result.success) {
+                return {
+                    success: true,
+                    admin: result.admin
+                };
+            } else {
+                return {
+                    success: false,
+                    message: result.message
+                };
+            }
+        } catch (error) {
+            console.error('Admin auth error:', error);
             return {
-                success: true,
-                admin: {
-                    email: adminEmail,
-                    name: 'Administrator',
-                    role: 'admin'
-                }
+                success: false,
+                message: 'Authentication failed'
             };
         }
-        
-        return { success: false, message: 'Invalid credentials' };
     }
 };

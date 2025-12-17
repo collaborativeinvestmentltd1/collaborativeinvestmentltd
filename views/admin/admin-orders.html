@@ -40,13 +40,13 @@
             <div class="filters-section">
                 <input type="text" id="orderSearch" placeholder="Search orders..." class="search-input" onkeyup="filterOrders()">
                 <select id="statusFilter" class="filter-select" onchange="filterOrders()">
-                    <option value="All">All Status</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Confirmed">Confirmed</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Cancelled">Cancelled</option>
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
                 </select>
                 <input type="date" id="dateFilter" class="filter-select" onchange="filterOrders()">
             </div>
@@ -423,7 +423,7 @@
                     
                     // Also try to update via API
                     return fetch(`/admin/api/orders/${orderId}/status`, {
-                        method: 'PUT',
+                        method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ status: newStatus })
                     }).catch(err => {
@@ -459,83 +459,31 @@
 
         // Update order status
         async function updateOrderStatus(orderId, newStatus) {
-            const res = await fetch(`/admin/api/orders/${orderId}/status`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status: newStatus })
-            });
-
-            const data = await res.json();
-            if (!data.success) {
-                alert('Failed to update order status');
-                return;
-            }
-
-            // ✅ UI already updates as before (no visual change)
-        }
-
-// In admin-orders.html, add this function:
-function startOrderUpdates() {
-    // Real-time order updates using polling
-    setInterval(async () => {
-        try {
-            const response = await fetch('/admin/api/orders?updatedSince=' + new Date().getTime(), {
-                credentials: 'include',
-                headers: {
-                    'Cache-Control': 'no-cache'
-                }
-            });
-            
-            if (response.ok) {
-                const newOrders = await response.json();
-                if (JSON.stringify(newOrders) !== JSON.stringify(orders)) {
-                    orders = newOrders;
-                    filterOrders();
+            try {
+                // Update locally first for immediate feedback
+                const order = orders.find(o => o.id === orderId || o._id === orderId);
+                if (order) {
+                    order.status = newStatus;
+                    displayOrders(filteredOrders);
                     updateOrderStats();
-                    
-                    // Show notification if new orders
-                    if (newOrders.length > orders.length) {
-                        showNotification(`${newOrders.length - orders.length} new orders`);
-                    }
                 }
-            }
-        } catch (error) {
-            console.error('Real-time update error:', error);
-        }
-    }, 30000); // Update every 30 seconds
-}
 
-// Add notification function
-function showNotification(message) {
-    if (!('Notification' in window)) return;
-    
-    if (Notification.permission === 'granted') {
-        new Notification('New Orders', {
-            body: message,
-            icon: '/img/favicon.ico'
-        });
-    } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission().then(permission => {
-            if (permission === 'granted') {
-                new Notification('New Orders', {
-                    body: message,
-                    icon: '/img/favicon.ico'
+                // Try to update via API
+                const response = await fetch(`/admin/api/orders/${orderId}/status`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
                 });
-            }
-        });
-    }
-}
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    loadOrders();
-    startOrderUpdates();
-    
-    // Request notification permission
-    if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission();
-    }
-});
+                if (!response.ok) {
+                    console.warn('API update failed, using local data');
+                }
+            } catch (error) {
+                console.error('Error updating order status:', error);
+                // Continue with local data
+            }
+        }
+
         // View order details
         async function viewOrderDetails(orderId) {
             const order = orders.find(o => o.id === orderId || o._id === orderId);
@@ -629,7 +577,7 @@ Collaborative Investment Ltd
 
             try {
                 const response = await fetch('/admin/api/send-email', {
-                    method: 'PUT',
+                    method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         to: order.customerEmail,

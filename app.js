@@ -8,12 +8,14 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const { connectDB, db, closeDB, backupDatabase } = require('./database');
 const adminAuth = require('./admin-auth');
+const passwordResetTokens = new Map();
+const MILESTONE_STATUSES = ['Processing', 'Shipped', 'Delivered'];
 
 // Import logging module
 const logger = require('./utils/logger');
 
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || 'localhost'; // Added HOST definition
+const HOST = process.env.HOST || 'localhost';
 const DOMAIN = process.env.DOMAIN || 'localhost';
 
 // Validate required environment variables
@@ -28,7 +30,7 @@ if (missing.length > 0) {
 const emailConfig = {
     host: process.env.EMAIL_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.EMAIL_PORT || '587', 10),
-    secure: (process.env.EMAIL_SECURE === 'true'), // true for 465, false for 587
+    secure: (process.env.EMAIL_SECURE === 'true'),
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -103,7 +105,9 @@ const ROUTES = {
     '/admin/emails': 'admin-emails.html',
     '/admin/analytics': 'admin-analytics.html',
     '/admin/settings': 'admin-settings.html',
-    '/health': null // Special case - handled separately
+    '/admin/change-password': 'admin-change-password.html',
+    '/admin/reset-password': 'admin-reset-password.html',
+    '/health': null
 };
 
 // Static file directories
@@ -129,7 +133,7 @@ function cleanupSessions() {
     const now = new Date();
     for (const [sessionId, session] of sessions.entries()) {
         const inactiveTime = now - session.lastActivity;
-        if (inactiveTime > 24 * 60 * 60 * 1000) { // 24 hours
+        if (inactiveTime > 24 * 60 * 60 * 1000) {
             sessions.delete(sessionId);
             logger.debug(`Cleaned up expired session: ${sessionId}`);
         }
@@ -166,7 +170,10 @@ function checkAdminAuth(req) {
             sessions.set(sessionId, session);
             
             // Log admin access
-            logger.info(`Admin access: ${session.admin.email} - ${req.method} ${req.url}`);
+            const reqPath = url.parse(req.url).pathname;
+            if (reqPath.startsWith('/admin/api') || reqPath === '/admin/dashboard') {
+                logger.info(`Admin access: ${session.admin.email} - ${req.method} ${req.url}`);
+            }
             return session.admin;
         }
     }
@@ -176,14 +183,25 @@ function checkAdminAuth(req) {
 function generateOrderNumber() {
     const timestamp = Date.now().toString();
     const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-    const currentYear = new Date().getFullYear();
-    
-    // New format: CIL-YYYY-TIMESTAMPPART
-    // Use last 6 digits of timestamp for consistency
     const timestampPart = timestamp.slice(-6);
-    return `CIL-${timestampPart}-${random}`; // Keep the old format for backward compatibility
+    return `CIL-${timestampPart}-${random}`;
 }
 
+async function logAdminAction(adminEmail, action, details = {}, req) {
+    try {
+        await db.create('admin_audit_log', {
+            adminEmail,
+            action,
+            details,
+            ipAddress: req?.socket?.remoteAddress || 'unknown',
+            userAgent: req?.headers?.['user-agent'] || 'unknown',
+            timestamp: new Date()
+        });
+        logger.info(`Admin action logged: ${action} by ${adminEmail}`);
+    } catch (error) {
+        logger.error('Failed to log admin action:', error);
+    }
+}
 
 function handleOrderTrack(req, res) {
     return new Promise((resolve) => {
@@ -209,41 +227,28 @@ function handleOrderTrack(req, res) {
                     return resolve();
                 }
                 
-                // Normalize the order number
                 const normalizedOrderNumber = orderNumber.toUpperCase().trim();
-                
                 console.log(`Tracking request for: ${normalizedOrderNumber}`);
                 
-                // Try multiple search strategies
                 let order = null;
                 
                 // Strategy 1: Exact match on orderNumber
-                console.log(`Strategy 1: Exact match for ${normalizedOrderNumber}`);
                 order = await findOrderByNumber(normalizedOrderNumber);
                 
                 // Strategy 2: Search in alternativeOrderNumbers
                 if (!order) {
-                    console.log(`Strategy 2: Search alternativeOrderNumbers for ${normalizedOrderNumber}`);
                     order = await findOrderByAlternativeNumber(normalizedOrderNumber);
                 }
                 
                 // Strategy 3: Try different formats
                 if (!order) {
-                    console.log(`Strategy 3: Generate alternative formats for ${normalizedOrderNumber}`);
                     const alternativeFormats = generateAlternativeFormats(normalizedOrderNumber);
                     for (const format of alternativeFormats) {
-                        console.log(`  Trying format: ${format}`);
                         order = await findOrderByNumber(format);
-                        if (order) {
-                            console.log(`  Found with format: ${format}`);
-                            break;
-                        }
+                        if (order) break;
                         
                         order = await findOrderByAlternativeNumber(format);
-                        if (order) {
-                            console.log(`  Found in alternatives with format: ${format}`);
-                            break;
-                        }
+                        if (order) break;
                     }
                 }
                 
@@ -349,8 +354,6 @@ function handleOrderTrack(req, res) {
     });
 }
 
-// Helper functions - add these after handleOrderTrack function
-
 async function findOrderByNumber(orderNumber) {
     try {
         const orders = await db.getAll('orders', { orderNumber });
@@ -381,17 +384,16 @@ function generateAlternativeFormats(orderNumber) {
     // Original: CIL-367193-944
     if (orderNumber.match(/^CIL-\d{6}-\d{3}$/)) {
         const parts = orderNumber.split('-');
-        const timestamp = parts[1]; // 367193
-        const random = parts[2]; // 944
+        const timestamp = parts[1];
+        const random = parts[2];
         const currentYear = new Date().getFullYear();
         
-        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
-        formats.push(timestamp); // 367193
-        formats.push(`CIL-${timestamp}`); // CIL-367193
-        formats.push(`${timestamp}-${random}`); // 367193-944
-        formats.push(`CIL-${timestamp}-${random}`); // Original format (just in case)
+        formats.push(`CIL-${currentYear}-${timestamp}`);
+        formats.push(timestamp);
+        formats.push(`CIL-${timestamp}`);
+        formats.push(`${timestamp}-${random}`);
+        formats.push(`CIL-${timestamp}-${random}`);
         
-        // Also try without leading zeros in the middle part
         const numericTimestamp = parseInt(timestamp, 10).toString();
         if (numericTimestamp !== timestamp) {
             formats.push(`CIL-${currentYear}-${numericTimestamp}`);
@@ -401,33 +403,33 @@ function generateAlternativeFormats(orderNumber) {
     }
     // Try if it's just numbers
     else if (orderNumber.match(/^\d{6}$/)) {
-        const timestamp = orderNumber; // 367193
+        const timestamp = orderNumber;
         const currentYear = new Date().getFullYear();
         
-        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
-        formats.push(`CIL-${timestamp}`); // CIL-367193
-        formats.push(`CIL-${timestamp}-???`); // Try with placeholder
+        formats.push(`CIL-${currentYear}-${timestamp}`);
+        formats.push(`CIL-${timestamp}`);
+        formats.push(`CIL-${timestamp}-???`);
     }
     // Try if it's numbers with hyphen
     else if (orderNumber.match(/^\d{6}-\d{3}$/)) {
         const parts = orderNumber.split('-');
-        const timestamp = parts[0]; // 367193
-        const random = parts[1]; // 944
+        const timestamp = parts[0];
+        const random = parts[1];
         const currentYear = new Date().getFullYear();
         
-        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
-        formats.push(`CIL-${timestamp}`); // CIL-367193
-        formats.push(`CIL-${timestamp}-${random}`); // CIL-367193-944
-        formats.push(timestamp); // 367193
+        formats.push(`CIL-${currentYear}-${timestamp}`);
+        formats.push(`CIL-${timestamp}`);
+        formats.push(`CIL-${timestamp}-${random}`);
+        formats.push(timestamp);
     }
     // Try if it's CIL- followed by numbers
     else if (orderNumber.match(/^CIL-\d{6}$/)) {
-        const timestamp = orderNumber.replace('CIL-', ''); // 367193
+        const timestamp = orderNumber.replace('CIL-', '');
         const currentYear = new Date().getFullYear();
         
-        formats.push(`CIL-${currentYear}-${timestamp}`); // CIL-2025-367193
-        formats.push(timestamp); // 367193
-        formats.push(`CIL-${timestamp}-???`); // Try with placeholder
+        formats.push(`CIL-${currentYear}-${timestamp}`);
+        formats.push(timestamp);
+        formats.push(`CIL-${timestamp}-???`);
     }
     
     console.log(`Generated formats: ${formats.join(', ')}`);
@@ -649,6 +651,34 @@ async function sendEmail(to, subject, message, type = 'transactional') {
     }
 }
 
+async function handleForgotPassword(req, res) {
+    let body = '';
+    req.on('data', c => body += c);
+    req.on('end', async () => {
+        const { email } = JSON.parse(body);
+
+        if (email !== process.env.ADMIN_EMAIL) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success:true }));
+            return;
+        }
+
+        const token = crypto.randomBytes(20).toString('hex');
+        passwordResetTokens.set(token, Date.now() + 15*60*1000);
+
+        const resetLink = `http://localhost:3000/admin/reset-password?token=${token}`;
+
+        await sendEmail(
+            process.env.ADMIN_EMAIL,
+            'Admin Password Reset',
+            `Click the link to reset password:\n\n${resetLink}\n\nThis expires in 15 minutes.`
+        );
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success:true }));
+    });
+}
+
 // Enhanced email sending function with order templates
 async function sendOrderConfirmation(orderData) {
     try {
@@ -856,71 +886,7 @@ function handleSendEmail(req, res) {
     });
 }
 
-function handleAdminAPI(req, res, pathname) {
-    const admin = checkAdminAuth(req);
-    if (!admin) {
-        res.writeHead(401, { 
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
-            'Access-Control-Allow-Credentials': 'true'
-        });
-        res.end(JSON.stringify({ error: 'Unauthorized - Please login again' }));
-        return;
-    }
-
-    const headers = {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
-        'Access-Control-Allow-Credentials': 'true'
-    };
-
-    if (pathname === '/admin/api/products') {
-        db.getAll('products').then(products => {
-            res.writeHead(200, headers);
-            res.end(JSON.stringify(products));
-        });
-    } 
-    else if (pathname === '/admin/api/orders') {
-        db.getAll('orders', {}, { createdAt: -1 }).then(orders => {
-            res.writeHead(200, headers);
-            res.end(JSON.stringify(orders));
-        });
-    }
-    else if (pathname === '/admin/api/customers') {
-        db.getAll('customers').then(customers => {
-            res.writeHead(200, headers);
-            res.end(JSON.stringify(customers));
-        });
-    }
-    else if (pathname === '/admin/api/stats') {
-        db.getStats().then(stats => {
-            res.writeHead(200, headers);
-            res.end(JSON.stringify(stats));
-        });
-    }
-    else if (pathname === '/admin/api/email-campaigns') {
-        db.getAll('campaigns').then(campaigns => {
-            res.writeHead(200, headers);
-            res.end(JSON.stringify(campaigns));
-        });
-    }
-    else if (pathname === '/admin/api/recent-emails') {
-        db.getRecentEmails(50).then(emails => {
-            res.writeHead(200, headers);
-            res.end(JSON.stringify(emails));
-        });
-    }
-    else if (pathname === '/admin/api/send-email') {
-        handleSendEmail(req, res);
-        return;
-    }
-    else {
-        res.writeHead(404, headers);
-        res.end(JSON.stringify({ error: 'API endpoint not found' }));
-    }
-}
-
-function handleAdminLogin(req, res) {
+async function handleAdminLogin(req, res) {
     return new Promise((resolve) => {
         let body = '';
         
@@ -931,6 +897,8 @@ function handleAdminLogin(req, res) {
         req.on('end', async () => {
             try {
                 const { email, password } = JSON.parse(body);
+                
+                // Use database authentication
                 const authResult = await db.verifyAdminCredentials(email, password);
 
                 if (authResult.success) {
@@ -972,10 +940,213 @@ function handleAdminLogin(req, res) {
                     'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
                     'Access-Control-Allow-Credentials': 'true'
                 });
-                res.end(JSON.stringify({ success: false, message: 'Server error' }));
+                res.end(JSON.stringify({ 
+                    success: false, 
+                    message: 'Server error: ' + error.message 
+                }));
             }
             resolve();
         });
+    });
+}
+
+async function handleAdminUpdateOrderStatus(req, res, orderId) {
+    const admin = checkAdminAuth(req);
+    if (!admin) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Unauthorized' }));
+        return;
+    }
+
+    let body = '';
+    req.on('data', c => body += c);
+    req.on('end', async () => {
+        try {
+            const { status } = JSON.parse(body);
+            if (!status) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Status required' }));
+                return;
+            }
+
+            const order = await db.getById('orders', orderId);
+            if (!order) {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Order not found' }));
+                return;
+            }
+
+            const oldStatus = order.status;
+            const now = new Date();
+
+            // Update with consistent field names
+            await db.updateWithOperators(
+              'orders',
+              { _id: db.toObjectId(orderId) },
+              {
+                $set: {
+                  status
+                },
+                $push: {
+                  statusHistory: {
+                    status,
+                    date: now,
+                    updatedBy: admin.email,
+                    notes: `Status changed by ${admin.email}`
+                  }
+                }
+              }
+            );
+
+            // Also update statusUpdates if it exists
+            if (order.statusUpdates) {
+                await db.updateWithOperators(
+                    'orders',
+                    { _id: db.toObjectId(orderId) },
+                    {
+                        $push: {
+                            statusUpdates: {
+                                status,
+                                title: `Order ${status}`,
+                                description: `Your order has been ${status.toLowerCase()}.`,
+                                date: now,
+                                completed: true
+                            }
+                        }
+                    }
+                );
+            }
+            // Log the admin action
+            await logAdminAction(admin.email, 'UPDATE_ORDER_STATUS', {
+                orderId,
+                orderNumber: order.orderNumber,
+                oldStatus,
+                newStatus: status
+            }, req);
+
+            // Send emails for milestone statuses
+            if (MILESTONE_STATUSES.includes(status)) {
+                const trackingLink = `${process.env.BASE_URL || 'http://localhost:3000'}/order-track?tracking=${order.orderNumber}`;
+
+                // Customer email
+                if (order.customerEmail) {
+                    await sendEmail(
+                        order.customerEmail,
+                        `Your Order Is Now ${status}`,
+                        `Hello ${order.customerName},\n\nYour order (${order.orderNumber}) is now ${status}.\n\nTrack your order here:\n${trackingLink}\n\nThank you for choosing Collaborative Investment Ltd.\n\nBest regards,\nThe CIL Team`,
+                        'order_update'
+                    );
+                }
+
+                // Admin notification
+                await sendEmail(
+                    process.env.ADMIN_EMAIL || 'collaborativeinvestmentltd@gmail.com',
+                    `Order Status Updated – ${order.orderNumber}`,
+                    `Order: ${order.orderNumber}\nCustomer: ${order.customerName}\nPrevious Status: ${oldStatus}\nNew Status: ${status}\nUpdated By: ${admin.email}\nTime: ${now}\n\nOrder Details:\n- Total: ₦${order.total.toLocaleString()}\n- Items: ${order.items.map(item => item.name).join(', ')}`,
+                    'notification'
+                );
+            }
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ 
+                success: true, 
+                message: 'Order status updated',
+                order: await db.getById('orders', orderId)
+            }));
+
+        } catch (err) {
+            logger.error('Order status update error:', err);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ 
+                success: false, 
+                message: 'Server error: ' + err.message 
+            }));
+        }
+    });
+}
+
+async function handleChangePassword(req, res) {
+    const admin = checkAdminAuth(req);
+    if (!admin) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Unauthorized' }));
+        return;
+    }
+
+    let body = '';
+    req.on('data', c => body += c);
+    req.on('end', async () => {
+        const { oldPass, newPass } = JSON.parse(body);
+        const bcrypt = require('bcryptjs');
+        
+        // Verify current password
+        const match = await bcrypt.compare(oldPass, process.env.ADMIN_PASSWORD_HASH);
+        
+        if (!match) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Current password incorrect' }));
+            return;
+        }
+        
+        try {
+            const newHash = await bcrypt.hash(newPass, 12);
+            
+            // Store in database
+            await db.update(
+              'admins',
+              { email: admin.email },
+              { password: newHash }
+            );
+            
+            console.log('\n🔐 NEW ADMIN PASSWORD HASH:\n', newHash);
+            console.log('⚠️ Please update ADMIN_PASSWORD_HASH in your .env file with this value\n');
+            
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                success: true,
+                message: 'Password updated successfully',
+                hash: newHash
+            }));
+            
+        } catch (error) {
+            logger.error('Password update error:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ 
+                success: false, 
+                message: 'Failed to update password' 
+            }));
+        }
+    });
+}
+
+async function handleResetPassword(req, res) {
+    const parsed = url.parse(req.url, true);
+    const token = parsed.query.token;
+
+    if (!passwordResetTokens.has(token) || Date.now() > passwordResetTokens.get(token)) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            success: false,
+            message: 'Invalid or expired token'
+        }));
+        return;
+    }
+
+    let body = '';
+    req.on('data', c => body += c);
+    req.on('end', async () => {
+        const { password } = JSON.parse(body);
+        const bcrypt = require('bcryptjs');
+        const hash = await bcrypt.hash(password, 12);
+
+        console.log('\n🔐 NEW ADMIN PASSWORD HASH:\n', hash);
+        passwordResetTokens.delete(token);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            success: true,
+            message: 'Password reset. Update ADMIN_PASSWORD_HASH in .env and restart server.'
+        }));
     });
 }
 
@@ -1014,8 +1185,8 @@ function handleCreateOrder(req, res) {
                     status: 'pending',
                     items,
                     source: 'website_cart',
-                    alternativeOrderNumbers: generateAlternativeFormats(orderNumber), // Add this line
-                    statusUpdates: [  // Add this field
+                    alternativeOrderNumbers: generateAlternativeFormats(orderNumber),
+                    statusUpdates: [
                         {
                             status: 'pending',
                             title: 'Order Placed',
@@ -1079,20 +1250,63 @@ function handleCreateOrder(req, res) {
 
 function handleAdminLogout(req, res) {
     const cookies = req.headers.cookie || '';
-    const sessionMatch = cookies.match(/sessionId=([^;]+)/);
-    
-    if (sessionMatch) {
-        const sessionId = sessionMatch[1];
-        sessions.delete(sessionId);
+    const match = cookies.match(/sessionId=([^;]+)/);
+
+    if (match) {
+        sessions.delete(match[1]);
     }
 
     res.writeHead(200, {
-        'Content-Type': 'application/json',
-        'Set-Cookie': 'sessionId=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0',
-        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
-        'Access-Control-Allow-Credentials': 'true'
+        'Set-Cookie': 'sessionId=; Path=/; Max-Age=0',
+        'Content-Type': 'application/json'
     });
-    res.end(JSON.stringify({ success: true, message: 'Logged out successfully' }));
+    res.end(JSON.stringify({ success: true }));
+}
+
+function handleAdminForgotPassword(req, res) {
+    return new Promise((resolve) => {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+            try {
+                const { email } = JSON.parse(body);
+                if (!email) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: false, message: 'Email required' }));
+                    return resolve();
+                }
+
+                if (email !== process.env.ADMIN_EMAIL) {
+                    // Silent fail for security
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true }));
+                    return resolve();
+                }
+
+                const token = crypto.randomBytes(32).toString('hex');
+                passwordResetTokens.set(token, {
+                    email,
+                    expires: Date.now() + (15 * 60 * 1000)
+                });
+
+                const resetLink = `https://${DOMAIN}/admin/reset-password?token=${token}`;
+
+                await sendEmail(
+                    email,
+                    'Admin Password Reset',
+                    `Click the link below to reset your admin password:\n\n${resetLink}\n\nThis link expires in 15 minutes.`
+                );
+
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true }));
+            } catch (err) {
+                logger.error('Forgot password error:', err);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Server error' }));
+            }
+            resolve();
+        });
+    });
 }
 
 // Main request handler function
@@ -1100,89 +1314,109 @@ async function requestHandler(req, res) {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
 
-    // Initialize filePath at the beginning
-    let filePath = '';
-
     // Log request
     logger.info(`${req.method} ${pathname} - ${req.socket.remoteAddress}`);
     
-    // Security headers (Render handles HTTPS)
+    // Security headers
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-XSS-Protection', '1; mode=block');
     res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*');
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+    // Handle POST routes first
+    if (req.method === 'POST') {
+        if (pathname === '/admin/login') {
+            return handleAdminLogin(req, res);
+        }
+        if (pathname === '/admin/logout') {
+            return handleAdminLogout(req, res);
+        }
+        if (pathname === '/admin/change-password') {
+            return handleChangePassword(req, res);
+        }
+        if (pathname === '/admin/forgot-password') {
+            return handleAdminForgotPassword(req, res);
+        }
+        if (pathname === '/admin/reset-password') {
+            return handleResetPassword(req, res);
+        }
+        if (pathname === '/api/orders') {
+            return handleCreateOrder(req, res);
+        }
+        if (pathname === '/contact') {
+            return handleContactForm(req, res);
+        }
+        if (pathname === '/api/order/track') {
+            return handleOrderTrack(req, res);
+        }
+        if (pathname === '/admin/api/send-email') {
+            return handleSendEmail(req, res);
+        }
+    }
+
+    // Handle PUT routes
+    if (req.method === 'PUT') {
+        if (pathname.match(/^\/admin\/api\/orders\/([a-fA-F0-9]{24})\/status$/)) {
+            const orderId = pathname.split('/')[4];
+            return handleAdminUpdateOrderStatus(req, res, orderId);
+        }
+    }
+
+    // Check admin authentication for protected routes
+    if (pathname.startsWith('/admin') && 
+        pathname !== '/admin/login' && 
+        pathname !== '/admin/forgot-password' &&
+        pathname !== '/admin/reset-password' &&
+        !pathname.startsWith('/admin/api')) {
+        
+        const admin = checkAdminAuth(req);
+        if (!admin) {
+            res.writeHead(302, { Location: '/admin/login' });
+            res.end();
+            return;
+        }
+    }
+
+    // Handle GET /admin/login with auth check
+    if (req.method === 'GET' && pathname === '/admin/login') {
+        const admin = checkAdminAuth(req);
+        if (admin) {
+            res.writeHead(302, { Location: '/admin/dashboard' });
+            res.end();
+            return;
+        }
+
+        const filePath = path.join(__dirname, 'views', 'admin-login.html');
+        fs.readFile(filePath, (err, content) => {
+            if (err) {
+                res.writeHead(500);
+                res.end('Admin login page missing');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(content);
+        });
+        return;
+    }
+
+    // Handle special routes
+    if (pathname === '/health') {
+        return handleHealthCheck(req, res);
+    }
+    
+    if (pathname.startsWith('/admin/api/')) {
+        return handleAdminAPI(req, res, pathname);
+    }
+
+    // Handle static files and HTML pages
+    let filePath = '';
 
     if (pathname === '/order-tracking') {
         filePath = path.join(__dirname, 'views', 'order-tracking.html');
     }
-    
-    // Handle special routes first
-    if (pathname === '/health') {
-        await handleHealthCheck(req, res);
-        return;
-    }
-    
-    if (pathname.startsWith('/admin/api/')) {
-        handleAdminAPI(req, res, pathname);
-        return;
-    }
 
-    if (req.method === 'POST' && pathname === '/admin/logout') {
-        await handleAdminLogout(req, res);
-        return;
-    }
-
-    if (req.method === 'POST' && pathname === '/api/orders') {
-        await handleCreateOrder(req, res);
-        return;
-    }
-    
-    if (req.method === 'POST' && pathname === '/admin/login') {
-        await handleAdminLogin(req, res);
-        return;
-    }
-    
-    if (req.method === 'POST' && pathname === '/contact') {
-        await handleContactForm(req, res);
-        return;
-    }
-
-    if (req.method === 'POST' && pathname === '/api/order/track') {
-        await handleOrderTrack(req, res);
-        return;
-    }
-
-    if (req.method === 'GET' && pathname.startsWith('/api/order/')) {
-        const orderNumber = pathname.split('/').pop();
-
-        try {
-            const order = await db.getOne('orders', { orderNumber });
-
-            if (!order) {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: false, message: 'Order not found' }));
-                return;
-            }
-
-            res.writeHead(200, { 
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
-            });
-            res.end(JSON.stringify({ success: true, order }));
-
-        } catch (error) {
-            logger.error('Order fetch error:', error);
-            res.writeHead(500, { 
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
-            });
-            res.end(JSON.stringify({ success: false, message: 'Server error' }));
-        }
-        return;
-    }
-    
-    // Handle static files and HTML pages
     const isStaticFile = STATIC_DIRS.some(dir => pathname.startsWith(dir));
     
     if (isStaticFile) {
@@ -1193,7 +1427,6 @@ async function requestHandler(req, res) {
             res.end('Not Found');
             return;
         }
-        // Only set filePath if it hasn't been set by /order-tracking handler
         if (!filePath) {
             filePath = path.join(__dirname, 'views', ROUTES[pathname]);
         }
@@ -1293,6 +1526,151 @@ async function requestHandler(req, res) {
         }
     });
 }
+
+// Enhanced admin API handler
+async function handleAdminAPI(req, res, pathname) {
+    const admin = checkAdminAuth(req);
+    if (!admin) {
+        res.writeHead(401, { 
+            'Content-Type': 'application/json',
+            'WWW-Authenticate': 'Bearer realm="Admin API"'
+        });
+        res.end(JSON.stringify({ 
+            success: false, 
+            message: 'Unauthorized - Please login',
+            code: 'UNAUTHORIZED'
+        }));
+        return;
+    }
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': 'true',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'Surrogate-Control': 'no-store'
+    };
+
+    try {
+        if (pathname === '/admin/api/products') {
+            const products = await db.getAll('products');
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(products));
+        }
+        else if (pathname === '/admin/api/orders') {
+            const orders = await db.getAll('orders', {}, { createdAt: -1 });
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(orders));
+        }
+        else if (pathname === '/admin/api/customers') {
+            const customers = await db.getAll('customers');
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(customers));
+        }
+        else if (pathname === '/admin/api/stats') {
+            const stats = await db.getStats();
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(stats));
+        }
+        else if (pathname === '/admin/api/email-campaigns') {
+            const campaigns = await db.getAll('campaigns');
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(campaigns));
+        }
+        else if (pathname === '/admin/api/recent-emails') {
+            // Check if getRecentEmails exists, otherwise use getAll
+            let emails = [];
+            if (typeof db.getRecentEmails === 'function') {
+                emails = await db.getRecentEmails(50);
+            } else {
+                emails = await db.getAll('emails', {}, { sentAt: -1 }, 50);
+            }
+
+            const formattedEmails = emails.map(email => ({
+                to: email.to,
+                subject: email.subject,
+                message: email.body || email.message || '',
+                type: email.type || 'transactional',
+                status: email.status || 'sent',
+                sentAt: email.sentAt || email.createdAt,
+                createdAt: email.createdAt
+            }));
+
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(formattedEmails));
+        }
+        else if (pathname === '/admin/api/email-stats') {
+            // Calculate email stats
+            let emails = [];
+            if (typeof db.getRecentEmails === 'function') {
+                emails = await db.getRecentEmails(1000);
+            } else {
+                emails = await db.getAll('emails', {}, { sentAt: -1 }, 1000);
+            }
+            
+            const total = emails.length;
+            const sent = emails.filter(e => e.status === 'sent').length;
+            const failed = emails.filter(e => e.status === 'failed').length;
+            const delivered = emails.filter(e => e.status === 'delivered' || e.status === 'sent').length;
+            
+            const stats = {
+                total,
+                sent,
+                failed,
+                delivered,
+                deliveryRate: total > 0 ? Math.round((delivered / total) * 100) : 0,
+                successRate: total > 0 ? Math.round(((total - failed) / total) * 100) : 0
+            };
+            
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(stats));
+        }
+        else if (pathname === '/admin/api/health') {
+            res.writeHead(200, headers);
+            res.end(JSON.stringify({
+                status: 'healthy',
+                timestamp: new Date().toISOString(),
+                admin: {
+                    email: admin.email,
+                    lastActivity: admin.lastActivity || new Date()
+                },
+                services: {
+                    database: true,
+                    email: true
+                }
+            }));
+        }
+        else if (pathname === '/admin/api/send-email') {
+            // Already handled in main request handler
+            res.writeHead(404, headers);
+            res.end(JSON.stringify({ 
+                success: false, 
+                message: 'Use POST /admin/api/send-email directly',
+                code: 'ENDPOINT_NOT_FOUND'
+            }));
+        }
+        else {
+            res.writeHead(404, headers);
+            res.end(JSON.stringify({ 
+                success: false, 
+                message: 'API endpoint not found',
+                code: 'ENDPOINT_NOT_FOUND'
+            }));
+        }
+    } catch (error) {
+        logger.error('Admin API Error:', error);
+        res.writeHead(500, headers);
+        res.end(JSON.stringify({ 
+            success: false, 
+            message: 'Internal server error',
+            code: 'INTERNAL_ERROR',
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        }));
+    }
+}
+
 // ============================================================================
 async function startServer() {
     await connectDB();

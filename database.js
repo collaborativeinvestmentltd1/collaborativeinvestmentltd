@@ -1,10 +1,9 @@
-
 const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcryptjs");
 
-// ========================================================================
-// 🔐 ENVIRONMENT CONFIG
-// ========================================================================
+/* =========================================================
+   ENV CONFIG
+========================================================= */
 
 const MONGODB_URL =
   process.env.MONGODB_URL ||
@@ -12,311 +11,221 @@ const MONGODB_URL =
 
 const DB_NAME = process.env.DB_NAME || "cil_database";
 
-let client = null;
-let db = null;
+let client;
+let database;
 
-// ========================================================================
-// 1️⃣ CONNECT TO MONGODB (Optimized + Auto-Reconnect)
-// ========================================================================
+/* =========================================================
+   CONNECT / CLOSE
+========================================================= */
 
 async function connectDB() {
-  if (db) return db;
+  if (database) return database;
 
-  try {
-    client = new MongoClient(MONGODB_URL, {
-      maxPoolSize: 20,
-      connectTimeoutMS: 15000,
-      serverSelectionTimeoutMS: 15000,
-    });
+  client = new MongoClient(MONGODB_URL, {
+    maxPoolSize: 20,
+    connectTimeoutMS: 15000,
+    serverSelectionTimeoutMS: 15000
+  });
 
-    await client.connect();
+  await client.connect();
+  database = client.db(DB_NAME);
 
-    db = client.db(DB_NAME);
+  console.log(`✅ MongoDB Connected Successfully → DB: ${DB_NAME}`);
+  await initializeCollections();
 
-    console.log(`✅ MongoDB Connected Successfully → DB: ${DB_NAME}`);
-
-    await initializeCollections();
-
-    return db;
-  } catch (err) {
-    console.error("❌ MongoDB Connection Failed:", err.message);
-    throw err;
-  }
+  return database;
 }
 
-// ========================================================================
-// 2️⃣ INITIALIZE COLLECTIONS, INDEXES, DEFAULT ADMIN, SAMPLE DATA
-// ========================================================================
+async function closeDB() {
+  if (client) await client.close();
+  console.log("🔌 MongoDB Connection Closed");
+}
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
 
 async function initializeCollections() {
-  try {
-    // PRODUCTS INDEXES
-    await db.collection("products").createIndex({ category: 1 });
-    await db
-      .collection("products")
-      .createIndex({ name: "text", description: "text" });
+  await database.collection("orders").createIndex({ orderNumber: 1 }, { unique: true });
+  await database.collection("admins").createIndex({ email: 1 }, { unique: true });
+  await database.collection("emails").createIndex({ sentAt: -1 });
 
-    // ORDERS INDEXES
-    await db
-      .collection("orders")
-      .createIndex({ orderNumber: 1 }, { unique: true });
-    await db.collection("orders").createIndex({ status: 1 });
-    await db.collection("orders").createIndex({ customerPhone: 1 });
-
-    // CUSTOMERS INDEXES
-    await db.collection("customers").createIndex({ email: 1 }, { unique: true });
-    await db.collection("customers").createIndex({ phone: 1 });
-
-    // EMAILS INDEXES
-    await db.collection("emails").createIndex({ sentAt: -1 });
-    await db.collection("emails").createIndex({ status: 1 });
-
-    // ============================================================
-    // 👑 CREATE DEFAULT SUPER ADMIN (if none exists)
-    // ============================================================
-    const adminCount = await db.collection("admins").countDocuments();
-    if (adminCount === 0) {
-      const hashedPassword = await bcrypt.hash("Admin@2025", 12);
-
-      await db.collection("admins").insertOne({
-        email: "admin@collaborativeinvestmentltd.com",
-        password: hashedPassword,
-        name: "Super Administrator",
-        role: "super_admin",
-        permissions: ["all"],
-        createdAt: new Date(),
-      });
-
-      console.log("🔐 Default Admin Created → admin@collaborativeinvestmentltd.com");
-    }
-
-    // ============================================================
-    // 📦 INSERT SAMPLE PRODUCTS
-    // ============================================================
-    if ((await db.collection("products").countDocuments()) === 0) {
-      await db.collection("products").insertMany(getSampleProducts());
-      console.log("📦 Sample Products Inserted");
-    }
-
-    // ============================================================
-    // 🧾 INSERT SAMPLE ORDERS
-    // ============================================================
-    if ((await db.collection("orders").countDocuments()) === 0) {
-      await db.collection("orders").insertMany(getSampleOrders());
-      console.log("🧾 Sample Orders Inserted");
-    }
-
-    console.log("📚 Database Initialization Completed Successfully");
-  } catch (err) {
-    console.error("❌ Initialization Error:", err.message);
+  const adminCount = await database.collection("admins").countDocuments();
+  if (adminCount === 0) {
+    const hash = await bcrypt.hash("Admin@123", 12);
+    await database.collection("admins").insertOne({
+      email: "admin@cil.com",
+      password: hash,
+      role: "super_admin",
+      isActive: true,
+      createdAt: new Date()
+    });
+    console.log("🔐 Default Admin Created → admin@cil.com (CHANGE PASSWORD)");
   }
 }
 
-// ========================================================================
-// 3️⃣ GENERIC CRUD OPERATIONS (Optimized / Safe)
-// ========================================================================
+/* =========================================================
+   DATABASE OPERATIONS (ALIGNED WITH app.js)
+========================================================= */
 
-const dbOps = {
-  async getAll(collection, query = {}, sort = {}, limit = 0) {
-    try {
-      let cursor = db.collection(collection).find(query);
+const db = {
+  /* ---------------- CORE ---------------- */
 
-      if (Object.keys(sort).length) cursor = cursor.sort(sort);
-      if (limit > 0) cursor = cursor.limit(limit);
-
-      return await cursor.toArray();
-    } catch (err) {
-      console.error(`[DB ERROR] getAll(${collection}):`, err.message);
-      return [];
-    }
+  collection(name) {
+    return database.collection(name);
   },
 
-  async getById(collection, id) {
-    try {
-      return await db
-        .collection(collection)
-        .findOne({ _id: new ObjectId(id) });
-    } catch (err) {
-      console.error(`[DB ERROR] getById(${collection}):`, err.message);
-      return null;
-    }
+  toObjectId(id) {
+    return new ObjectId(id);
   },
 
-  async create(collection, data) {
-    try {
-      data.createdAt = new Date();
-
-      const result = await db.collection(collection).insertOne(data);
-      return { _id: result.insertedId, ...data };
-    } catch (err) {
-      console.error(`[DB ERROR] create(${collection}):`, err.message);
-      throw err;
-    }
+  async getAll(col, query = {}, sort = {}, limit = 0) {
+    let c = this.collection(col).find(query);
+    if (Object.keys(sort).length) c = c.sort(sort);
+    if (limit) c = c.limit(limit);
+    return c.toArray();
   },
 
-  async update(collection, query, updates) {
-    try {
-      updates.updatedAt = new Date();
-
-      if (query._id && typeof query._id === "string") {
-        query._id = new ObjectId(query._id);
-      }
-
-      const result = await db
-        .collection(collection)
-        .updateOne(query, { $set: updates });
-
-      return result.modifiedCount > 0;
-    } catch (err) {
-      console.error(`[DB ERROR] update(${collection}):`, err.message);
-      throw err;
-    }
+  async getOne(col, query) {
+    return this.collection(col).findOne(query);
   },
 
-  async delete(collection, id) {
-    try {
-      const result = await db
-        .collection(collection)
-        .deleteOne({ _id: new ObjectId(id) });
-
-      return result.deletedCount > 0;
-    } catch (err) {
-      console.error(`[DB ERROR] delete(${collection}):`, err.message);
-      throw err;
-    }
+  async getById(col, id) {
+    if (!ObjectId.isValid(id)) return null;
+    return this.collection(col).findOne({ _id: new ObjectId(id) });
   },
 
-  // ====================================================================
-  // 🔐 ADMIN AUTH
-  // ====================================================================
+  async create(col, data) {
+    data.createdAt = new Date();
+    data.updatedAt = new Date();
+    const r = await this.collection(col).insertOne(data);
+    return { _id: r.insertedId, ...data };
+  },
+
+  async update(col, query, update) {
+    update.updatedAt = new Date();
+    return (
+      await this.collection(col).updateOne(query, { $set: update })
+    ).modifiedCount > 0;
+  },
+
+  async updateWithOperators(col, query, operators) {
+  // Always keep updatedAt in sync
+    if (!operators.$set) operators.$set = {};
+    operators.$set.updatedAt = new Date();
+
+    return (
+      await this.collection(col).updateOne(query, operators)
+    ).modifiedCount > 0;
+  },
+
+  async count(col, query = {}) {
+    return this.collection(col).countDocuments(query);
+  },
+
+  /* ---------------- ADMIN AUTH ---------------- */
 
   async getAdminByEmail(email) {
-    return db.collection("admins").findOne({ email });
+    return this.collection("admins").findOne({
+      email: email.toLowerCase()
+    });
   },
 
   async verifyAdminCredentials(email, password) {
-    try {
-      const admin = await this.getAdminByEmail(email);
-      if (!admin) return { success: false, message: "Invalid email or password" };
-
-      const match = await bcrypt.compare(password, admin.password);
-      if (!match) return { success: false, message: "Invalid email or password" };
-
-      delete admin.password;
-
-      return { success: true, admin };
-    } catch (err) {
-      console.error("Admin Login Error:", err.message);
-      return { success: false, message: "Authentication failed" };
+    const admin = await this.getAdminByEmail(email);
+    if (!admin || !admin.isActive) {
+      return { success: false, message: "Invalid credentials" };
     }
+
+    const ok = await bcrypt.compare(password, admin.password);
+    if (!ok) {
+      return { success: false, message: "Invalid credentials" };
+    }
+
+    await this.collection("admins").updateOne(
+      { _id: admin._id },
+      { $set: { lastLogin: new Date() } }
+    );
+
+    delete admin.password;
+    return { success: true, admin };
   },
 
-  // ====================================================================
-  // 📊 DASHBOARD STATS
-  // ====================================================================
+  /* ---------------- ORDERS ---------------- */
+
+  async getOrderByNumber(orderNumber) {
+    return this.collection("orders").findOne({
+      orderNumber: { $regex: new RegExp(`^${orderNumber}$`, "i") }
+    });
+  },
+
+  async updateOrderStatus(orderId, status, by) {
+    if (!ObjectId.isValid(orderId)) return false;
+
+    return (
+      await this.collection("orders").updateOne(
+        { _id: new ObjectId(orderId) },
+        {
+          $set: { status, updatedAt: new Date() },
+          $push: {
+            statusHistory: {
+              status,
+              date: new Date(),
+              by
+            }
+          }
+        }
+      )
+    ).modifiedCount > 0;
+  },
+
+  /* ---------------- EMAILS ---------------- */
+
+  async logEmail(to, subject, body, status = "sent") {
+    await this.collection("emails").insertOne({
+      to,
+      subject,
+      body,
+      status,
+      sentAt: new Date()
+    });
+  },
+
+  async getRecentEmails(limit = 50) {
+    return this.collection("emails")
+      .find({})
+      .sort({ sentAt: -1 })
+      .limit(limit)
+      .toArray();
+  },
+
+  /* ---------------- STATS ---------------- */
 
   async getStats() {
-    try {
-      const [
-        productCount,
-        orderCount,
-        pending,
-        completed,
-        customerCount,
-      ] = await Promise.all([
-        db.collection("products").countDocuments(),
-        db.collection("orders").countDocuments(),
-        db.collection("orders").countDocuments({ status: "pending" }),
-        db.collection("orders").countDocuments({ status: "completed" }),
-        db.collection("customers").countDocuments(),
-      ]);
+    const [orders, products, customers, emails] = await Promise.all([
+      this.count("orders"),
+      this.count("products"),
+      this.count("customers"),
+      this.count("emails")
+    ]);
 
-      const revenueAgg = await db
-        .collection("orders")
-        .aggregate([
-          { $match: { status: "completed" } },
-          { $group: { _id: null, total: { $sum: "$total" } } },
-        ])
-        .toArray();
-
-      return {
-        totalProducts: productCount,
-        totalOrders: orderCount,
-        pendingOrders: pending,
-        completedOrders: completed,
-        totalCustomers: customerCount,
-        revenue: revenueAgg[0]?.total || 0,
-      };
-    } catch (err) {
-      console.error("Stats Fetch Error:", err.message);
-      return null;
-    }
-  },
+    return {
+      orders,
+      products,
+      customers,
+      emails,
+      generatedAt: new Date()
+    };
+  }
 };
 
-// ========================================================================
-// 4️⃣ CLOSE DATABASE CONNECTION
-// ========================================================================
+/* =========================================================
+   EXPORTS
+========================================================= */
 
-async function closeDB() {
-  try {
-    await client?.close();
-    console.log("🔌 MongoDB Connection Closed");
-  } catch (err) {
-    console.warn("⚠ Error closing MongoDB:", err.message);
-  }
-}
-
-// ========================================================================
-// 5️⃣ SAMPLE DATA (Improved)
-// ========================================================================
-
-function getSampleProducts() {
-  return [
-    {
-      name: "6-inch Concrete Blocks",
-      category: "construction",
-      price: 250,
-      minOrder: 100,
-      unit: "per block",
-      image: "/img/construction/6inch-blocks.jpg",
-      locations: ["Lagos", "Abuja", "Port Harcourt", "Ibadan"],
-      description: "High-quality concrete blocks",
-      stock: "in-stock",
-      createdAt: new Date(),
-    },
-    {
-      name: "Solar Panel 300W Mono",
-      category: "solar",
-      price: 45000,
-      unit: "panel",
-      minOrder: 1,
-      image: "/img/solar/panel.jpg",
-      locations: ["Lagos", "Abuja"],
-      description: "High-efficiency panel",
-      stock: "in-stock",
-      createdAt: new Date(),
-    },
-  ];
-}
-
-function getSampleOrders() {
-  return [
-    {
-      orderNumber: "CIL-00001",
-      customerName: "John Doe",
-      customerPhone: "+2348012345678",
-      customerEmail: "john@example.com",
-      items: [{ name: "Concrete Blocks", quantity: 500, total: 125000 }],
-      total: 125000,
-      status: "completed",
-      createdAt: new Date(),
-    },
-  ];
-}
-
-// ========================================================================
-// EXPORTS
-// ========================================================================
-
-module.exports = { connectDB, closeDB, db: dbOps, ObjectId };
+module.exports = {
+  connectDB,
+  closeDB,
+  db,
+  ObjectId
+};

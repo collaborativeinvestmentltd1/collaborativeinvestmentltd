@@ -595,7 +595,6 @@
         <!-- Footer Bottom -->
         <div class="footer-bottom">
             <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-            <a href="/admin-login.html" class="admin-hidden-link" title="Admin Login">
                 <p style="display: inline;">Building Nigeria's Business Future Through Strategic Investments</p>
             </a>
             <p style="margin-top: 1rem;">
@@ -605,6 +604,14 @@
             </p>
         </div>
     </footer>
+
+    <script>
+document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        window.location.href = '/admin/login';
+    }
+});
+</script>
 
     <!-- JavaScript -->
 

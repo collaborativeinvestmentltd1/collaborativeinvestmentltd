@@ -36,44 +36,26 @@
 
         <!-- Main Content -->
         <main class="admin-main">
-        <header class="admin-header">
-            <div class="header-title">
-                <h1>Dashboard Overview</h1>
-                <p class="dashboard-subtitle">Real-time business performance metrics</p>
-                <div class="quick-stats">
-                    <span class="stat-badge">
-                        <i class="fas fa-database"></i>
-                        <span id="liveDataStatus">Live Data</span>
-                    </span>
-                    <span class="stat-badge">
-                        <i class="fas fa-users"></i>
-                        <span id="activeSessions">0 Active</span>
-                    </span>
+            <header class="admin-header">
+                <div class="header-title">
+                    <h1>Dashboard Overview</h1>
+                    <p>Real-time business performance metrics</p>
                 </div>
-            </div>
-            <div class="header-actions">
-                <div class="time-filter-group">
-                    <label for="timeRange">Time Range:</label>
-                    <select id="timeRange" onchange="loadDashboardData()" class="filter-select">
-                        <option value="today">Today</option>
-                        <option value="week" selected>This Week</option>
-                        <option value="month">This Month</option>
-                        <option value="quarter">This Quarter</option>
-                        <option value="year">This Year</option>
-                        <option value="custom">Custom Range</option>
-                    </select>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn-action btn-export" onclick="exportDashboardData()" title="Export Data">
-                        <i class="fas fa-download"></i>
-                    </button>
-                    <button class="btn-action btn-refresh" onclick="loadDashboardData(true)" title="Refresh Data">
-                        <i class="fas fa-sync-alt"></i>
-                        <span>Refresh</span>
+                <div class="header-actions">
+                    <div class="time-filter">
+                        <select id="timeRange" onchange="loadDashboardData()" class="filter-select">
+                            <option value="today">Today</option>
+                            <option value="week" selected>This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    <button class="btn-refresh" onclick="loadDashboardData()">
+                        <span> Refresh</span>
                     </button>
                 </div>
-            </div>
-        </header>
+            </header>
 
             <!-- Performance Metrics -->
             <div class="metrics-grid">
@@ -349,7 +331,7 @@
             }
         }
 
-        // Update the updateMetrics function in admin-dashboard.html:
+        // Load stats data
         async function loadStats() {
             try {
                 const response = await fetch('/admin/api/stats');
@@ -357,29 +339,12 @@
                     const stats = await response.json();
                     updateMetrics(stats);
                 } else {
-                    // Fallback: generate from available data
-                    await generateStatsFromData();
-                }
-                
-                // Also load email stats if on email page
-                if (window.location.pathname.includes('/admin/emails')) {
-                    const emailResponse = await fetch('/admin/api/email-stats');
-                    if (emailResponse.ok) {
-                        const emailStats = await emailResponse.json();
-                        updateEmailStats(emailStats);
-                    }
+                    generateStatsFromData();
                 }
             } catch (error) {
                 console.error('Error loading stats:', error);
-                await generateStatsFromData();
+                generateStatsFromData();
             }
-        }
-
-        function updateEmailStats(stats) {
-            document.getElementById('sentEmails').textContent = stats.sent || 0;
-            document.getElementById('deliveryRate').textContent = (stats.deliveryRate || 0) + '%';
-            document.getElementById('successRate').textContent = (stats.successRate || 0) + '%';
-            document.getElementById('failedEmails').textContent = stats.failed || 0;
         }
 
         // Load recent activity
