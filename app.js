@@ -15,8 +15,7 @@ const MILESTONE_STATUSES = ['Processing', 'Shipped', 'Delivered'];
 const logger = require('./utils/logger');
 
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || 'localhost';
-const DOMAIN = process.env.DOMAIN || 'localhost';
+const DOMAIN = process.env.DOMAIN || 'collaborativeinvestmentltd.com';
 
 // Validate required environment variables
 const requiredEnvVars = ['EMAIL_USER', 'EMAIL_PASS', 'MONGODB_URI'];
@@ -1677,8 +1676,8 @@ async function startServer() {
 
     const server = http.createServer(requestHandler);
 
-    server.listen(PORT, HOST, () => {
-        logger.info(`🚀 Server running at http://${HOST}:${PORT}`);
+    server.listen(PORT, '0.0.0.0', () => {
+      logger.info(`🚀 Server running on port ${PORT}`);
     });
 
     process.on("SIGINT", async () => {
