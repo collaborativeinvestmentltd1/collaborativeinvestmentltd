@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diaspora Business Management - Collaborative Investment Ltd</title>
-    <meta name="description" content="Professional business management services for diaspora investors in Nigeria. We handle setup, operations, and management across 5 key sectors with complete transparency.">
+    <title>Diaspora, Hotel & Property Management | Collaborative Investment Ltd</title>
+    <meta name="description" content="Professional diaspora business setup, hotel management, and property management services in Nigeria. We build, operate, and protect real assets with transparency and professional oversight.">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     
-    <!-- Diaspora Business Management Page Styles -->
     <style>
         :root {
-            --primary: #1a5276;       /* Primary blue - trust, professionalism */
-            --secondary: #145A32;     /* Green - growth, prosperity */
-            --accent: #D68910;        /* Warm orange - action, energy */
+            --primary: #1a5276;       
+            --secondary: #145A32;     
+            --accent: #D68910;        
             --success: #27ae60;
             --warning: #f39c12;
             --info: #3498db;
@@ -33,7 +31,6 @@
             --border-radius: 12px;
         }
         
-        /* Diaspora Hero Section */
         .diaspora-hero {
             background: linear-gradient(135deg, rgba(26, 82, 118, 0.95) 0%, rgba(41, 128, 185, 0.9) 100%),
                         url('/img/diaspora/diaspora-hero-bg.jpg') center/cover no-repeat;
@@ -45,7 +42,6 @@
             display: flex;
             align-items: center;
         }
-        
         .diaspora-hero::before {
             content: '';
             position: absolute;
@@ -58,7 +54,6 @@
             background-size: 60px 60px;
             opacity: 0.1;
         }
-        
         .hero-content-wrapper {
             position: relative;
             z-index: 2;
@@ -66,22 +61,6 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        @media (max-width: 992px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
-            }
-        }
-        
         .hero-text h1 {
             font-size: 3.8rem;
             font-weight: 800;
@@ -92,26 +71,22 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
         .hero-text .highlight {
             color: var(--accent);
             display: block;
         }
-        
         .hero-text p {
             font-size: 1.3rem;
             line-height: 1.7;
             opacity: 0.95;
             margin-bottom: 2.5rem;
         }
-        
         .hero-badges {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
             margin-bottom: 2.5rem;
         }
-        
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -124,60 +99,16 @@
             border-radius: 50px;
             font-weight: 600;
         }
-        
         .hero-actions {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
         
-        .hero-image-container {
-            position: relative;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-heavy);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .hero-image {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .hero-image-container:hover .hero-image {
-            transform: scale(1.05);
-        }
-        
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            color: white;
-            padding: 2rem;
-        }
-        
-        .image-overlay h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-        
-        .image-overlay p {
-            font-size: 1rem;
-            opacity: 0.95;
-            margin: 0;
-        }
-        
-        /* How It Works Section */
         .how-it-works {
             padding: 6rem 0;
             background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
         }
-        
         .process-steps {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -185,25 +116,6 @@
             margin-top: 4rem;
             position: relative;
         }
-        
-        @media (max-width: 1200px) {
-            .process-steps {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .process-steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
-        }
-        
         .process-step {
             position: relative;
             z-index: 2;
@@ -219,12 +131,10 @@
             flex-direction: column;
             align-items: center;
         }
-        
         .process-step:hover {
-            transform: translateY(-10px) scale(1.05);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-heavy);
         }
-        
         .step-number {
             width: 60px;
             height: 60px;
@@ -241,20 +151,12 @@
             border: 5px solid white;
             box-shadow: 0 0 0 2px var(--secondary);
         }
-        
-        .step-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-        }
-        
         .process-step h3 {
             color: var(--primary);
             margin-bottom: 1rem;
             font-size: 1.3rem;
             min-height: 3.5rem;
         }
-        
         .process-step p {
             color: var(--gray);
             line-height: 1.6;
@@ -262,19 +164,16 @@
             flex-grow: 1;
         }
         
-        /* Business Sectors Grid */
-        .business-sectors {
+        .services-grid {
             padding: 6rem 0;
             background: white;
         }
-        
         .sector-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
             margin-top: 4rem;
         }
-        
         .sector-card {
             background: white;
             border-radius: var(--border-radius);
@@ -286,62 +185,33 @@
             display: flex;
             flex-direction: column;
         }
-        
         .sector-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-heavy);
         }
-        
-        .sector-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin: -40px auto 1.5rem;
-            position: relative;
-            z-index: 2;
-            border: 5px solid white;
-        }
-        
-        .sector-image {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-            border-bottom: 4px solid var(--accent);
-        }
-        
         .sector-content {
             padding: 2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
         .sector-content h3 {
             color: var(--primary);
             margin-bottom: 1rem;
             font-size: 1.5rem;
             text-align: center;
         }
-        
         .sector-content p {
             color: var(--gray);
             line-height: 1.7;
             margin-bottom: 1.5rem;
             flex-grow: 1;
         }
-        
         .sector-features {
             list-style: none;
             padding: 0;
             margin: 0 0 1.5rem 0;
         }
-        
         .sector-features li {
             display: flex;
             align-items: center;
@@ -351,35 +221,29 @@
             padding: 0.5rem 0;
             border-bottom: 1px solid #f1f5f9;
         }
-        
         .sector-features li:last-child {
             border-bottom: none;
         }
-        
         .sector-features li i {
             color: var(--success);
             font-size: 1.1rem;
         }
-        
         .sector-actions {
             display: flex;
             gap: 1rem;
             margin-top: auto;
         }
         
-        /* Investment Packages */
         .investment-packages {
             padding: 6rem 0;
             background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
         }
-        
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
             margin-top: 4rem;
         }
-        
         .package-card {
             background: white;
             border-radius: var(--border-radius);
@@ -391,21 +255,17 @@
             position: relative;
             overflow: hidden;
         }
-        
         .package-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-heavy);
         }
-        
         .package-card.popular {
             border: 2px solid var(--accent);
             transform: scale(1.05);
         }
-        
         .package-card.popular:hover {
             transform: scale(1.05) translateY(-10px);
         }
-        
         .package-badge {
             position: absolute;
             top: 20px;
@@ -417,27 +277,23 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-        
         .package-price {
             font-size: 2.5rem;
             font-weight: 800;
             color: var(--primary);
             margin: 1.5rem 0;
         }
-        
         .package-price span {
             font-size: 1rem;
             color: var(--gray);
             font-weight: normal;
         }
-        
         .package-features {
             list-style: none;
             padding: 0;
             margin: 2rem 0;
             text-align: left;
         }
-        
         .package-features li {
             padding: 0.75rem 0;
             border-bottom: 1px solid #f1f5f9;
@@ -445,77 +301,46 @@
             align-items: center;
             gap: 0.75rem;
         }
-        
         .package-features li:last-child {
             border-bottom: none;
         }
-        
         .package-features li i {
             color: var(--success);
         }
-        
         .package-features li.unavailable {
             color: var(--gray);
         }
-        
         .package-features li.unavailable i {
             color: var(--gray);
         }
         
-        /* Management Benefits */
-        .management-benefits {
-            padding: 6rem 0;
-            background: white;
+        .trust-points {
+            padding: 4rem 0;
+            background: var(--light);
         }
-        
-        .benefits-grid {
+        .trust-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .benefit-card {
+        .trust-point {
+            text-align: center;
+            padding: 2rem;
             background: white;
             border-radius: var(--border-radius);
-            padding: 2.5rem;
             box-shadow: var(--shadow-light);
-            transition: var(--transition);
-            border: 1px solid #e2e8f0;
-            text-align: center;
         }
-        
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-heavy);
-        }
-        
-        .benefit-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1.5rem;
-        }
-        
-        .benefit-card h3 {
-            color: var(--primary);
+        .trust-point i {
+            font-size: 2.5rem;
+            color: var(--secondary);
             margin-bottom: 1rem;
-            font-size: 1.4rem;
+        }
+        .trust-point h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
         
-        .benefit-card p {
-            color: var(--gray);
-            line-height: 1.7;
-            margin: 0;
-        }
-        
-        /* Diaspora CTA */
         .diaspora-cta {
             background: linear-gradient(135deg, var(--primary) 0%, #154360 100%),
                         url('/img/diaspora/diaspora-cta-bg.jpg') center/cover no-repeat;
@@ -524,7 +349,6 @@
             text-align: center;
             position: relative;
         }
-        
         .diaspora-cta::before {
             content: '';
             position: absolute;
@@ -534,7 +358,6 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.8);
         }
-        
         .cta-content {
             position: relative;
             z-index: 2;
@@ -542,7 +365,6 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        
         .cta-content h2 {
             font-size: 2.8rem;
             margin-bottom: 2rem;
@@ -551,14 +373,12 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
         .cta-content p {
             font-size: 1.2rem;
             opacity: 0.95;
             margin-bottom: 3rem;
             line-height: 1.8;
         }
-        
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
@@ -566,106 +386,10 @@
             flex-wrap: wrap;
         }
         
-        /* Success Stories */
-        .success-stories {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
-        }
-        
-        .stories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-        
-        .story-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-light);
-            transition: var(--transition);
-            border: 1px solid #e2e8f0;
-        }
-        
-        .story-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-heavy);
-        }
-        
-        .story-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .story-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-        }
-        
-        .story-info h4 {
-            margin: 0 0 0.5rem;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-        
-        .story-info p {
-            margin: 0;
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        
-        .story-quote {
-            color: var(--gray);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin: 0;
-            position: relative;
-        }
-        
-        .story-quote::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            font-size: 3rem;
-            color: var(--accent);
-            opacity: 0.2;
-            font-family: serif;
-        }
-        
-        /* Animations */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Section Header */
         .section-header {
             text-align: center;
             margin-bottom: 5rem;
         }
-        
         .section-header h2 {
             font-size: 2.8rem;
             color: var(--primary);
@@ -673,7 +397,6 @@
             position: relative;
             display: inline-block;
         }
-        
         .section-header h2::after {
             content: '';
             position: absolute;
@@ -685,7 +408,6 @@
             background: var(--accent);
             border-radius: 2px;
         }
-        
         .section-header p {
             color: var(--gray);
             max-width: 700px;
@@ -693,14 +415,12 @@
             font-size: 1.2rem;
             line-height: 1.7;
         }
-        
         .container {
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
-        /* Button Styles */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -714,127 +434,92 @@
             border: none;
             cursor: pointer;
         }
-        
         .btn-primary {
             background: var(--secondary);
             color: white;
         }
-        
         .btn-primary:hover {
             background: #0e4d27;
-            transform: translateY(-3px) scale(1.05);
+            transform: translateY(-3px);
             box-shadow: 0 15px 30px rgba(20, 90, 50, 0.3);
         }
-        
         .btn-accent {
             background: var(--accent);
             color: white;
         }
-        
         .btn-accent:hover {
             background: #b36d0e;
-            transform: translateY(-3px) scale(1.05);
+            transform: translateY(-3px);
             box-shadow: 0 15px 30px rgba(214, 137, 16, 0.3);
         }
-        
         .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
-        
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-3px);
             border-color: rgba(255, 255, 255, 0.5);
         }
-        
         .btn-outline {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
         }
-        
         .btn-outline:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-3px);
         }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-text h1 {
-                font-size: 3rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-image {
-                height: 350px;
-            }
-            
-            .cta-content h2 {
-                font-size: 2.5rem;
-            }
+        .btn-proposal {
+            background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+            color: white;
+            border: none;
+        }
+        .btn-proposal:hover {
+            background: linear-gradient(135deg, #154360 0%, #1a5276 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(26, 82, 118, 0.3);
         }
         
+        /* === Responsive Styles === */
+        @media (max-width: 1200px) {
+            .process-steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 992px) {
+            .hero-text h1 { font-size: 3rem; }
+            .section-header h2 { font-size: 2.5rem; }
+            .cta-content h2 { font-size: 2.5rem; }
+        }
         @media (max-width: 768px) {
             .diaspora-hero {
                 padding: 4rem 0 3rem;
                 min-height: auto;
             }
-            
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-actions {
-                justify-content: center;
-            }
-            
-            .cta-content h2 {
-                font-size: 2.2rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .package-card.popular {
-                transform: scale(1);
-            }
-            
-            .package-card.popular:hover {
-                transform: translateY(-10px);
-            }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-actions { justify-content: center; }
+            .cta-content h2 { font-size: 2.2rem; }
+            .cta-buttons { flex-direction: column; }
+            .process-steps { grid-template-columns: repeat(2, 1fr); }
+            .btn { width: 100%; justify-content: center; }
+            .package-card.popular { transform: scale(1); }
+            .package-card.popular:hover { transform: translateY(-10px); }
         }
-        
         @media (max-width: 576px) {
-            .hero-text h1 {
-                font-size: 2.2rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2rem;
-            }
-            
+            .hero-text h1 { font-size: 2.2rem; }
+            .section-header h2 { font-size: 2rem; }
+            .process-steps { grid-template-columns: 1fr; }
             .sector-grid,
-            .benefits-grid,
             .packages-grid,
-            .stories-grid {
+            .trust-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-
 <body>
     <!-- Header -->
     <header class="header">
@@ -892,42 +577,40 @@
     <!-- Diaspora Hero Section -->
     <section class="diaspora-hero">
         <div class="hero-content-wrapper">
-            <div class="hero-grid">
-                <div class="hero-text">
-                    <div class="hero-badges">
-                        <div class="hero-badge">
-                            <i class="fas fa-globe-africa"></i>
-                            <span>Global Nigerians</span>
-                        </div>
-                        <div class="hero-badge">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Full Management</span>
-                        </div>
+            <div class="hero-text">
+                <div class="hero-badges">
+                    <div class="hero-badge">
+                        <i class="fas fa-globe-africa"></i>
+                        <span>Local & Diaspora Asset Management</span>
                     </div>
-                    <h1>
-                        Diaspora Business<br>
-                        <span class="highlight">Management Made Easy</span>
-                    </h1>
-                    <p>Start and grow your Nigerian business from anywhere in the world. We handle everything from location survey to daily operations, while you maintain full ownership and control.</p>
-                    
-                    <div class="hero-actions">
-                        <a href="#sectors" class="btn btn-accent">
-                            <i class="fas fa-briefcase"></i>
-                            Explore Business Sectors
-                        </a>
-                        <a href="#consultation" class="btn btn-secondary">
-                            <i class="fas fa-calendar-check"></i>
-                            Free Consultation
-                        </a>
+                    <div class="hero-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Professional Operations & Reporting</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-user-check"></i>
+                        <span>Full Ownership Retained</span>
                     </div>
                 </div>
+                <h1>
+                    Diaspora, Hotel & Property<br>
+                    <span class="highlight">Management</span>
+                </h1>
+                <p>Build, manage, and protect businesses, hotels, and properties in Nigeria — even while you're abroad. We handle operations, reporting, and oversight while you retain full ownership and control.</p>
                 
-                <div class="hero-image-container">
-                    <img src="/img/diaspora/diaspora-investment.jpg" class="hero-image" alt="Professional business management team working on diaspora investments">
-                    <div class="image-overlay">
-                        <h3>Your Business, Our Management</h3>
-                        <p>We setup, operate, and grow your Nigerian business with complete transparency</p>
-                    </div>
+                <p>Collaborative Investment Ltd (CIL) provides end-to-end business setup, hotel management, and property management services for diaspora investors, busy professionals, and asset owners who want results without daily stress.</p>
+                
+                <p>From business operations to hospitality turnaround and property protection, we manage assets professionally — with transparency, discipline, and accountability.</p>
+                
+                <div class="hero-actions">
+                    <a href="#services" class="btn btn-accent">
+                        <i class="fas fa-briefcase"></i>
+                        Explore Management Services
+                    </a>
+                    <a href="#consultation" class="btn btn-secondary">
+                        <i class="fas fa-calendar-check"></i>
+                        Book Free Consultation
+                    </a>
                 </div>
             </div>
         </div>
@@ -937,209 +620,229 @@
     <section class="how-it-works">
         <div class="container">
             <div class="section-header">
-                <h2>How Our Diaspora Business Management Works</h2>
-                <p>A simple 5-step process to start and grow your Nigerian business from anywhere in the world</p>
+                <h2>How Our Management Model Works</h2>
+                <p>A structured, transparent process designed to protect your capital, assets, and peace of mind.</p>
             </div>
             
             <div class="process-steps">
-                <!-- Step 1 -->
                 <div class="process-step">
                     <div class="step-number">1</div>
-                    <div class="step-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>Choose Your Business Sector</h3>
-                    <p>Select from our 5 proven business sectors: Agriculture, Construction, Machinery, Solar Energy, or Furniture</p>
+                    <h3>Select Your Asset or Business Type</h3>
+                    <p>Choose between business setup, hotel management, or property & tenant management.</p>
                 </div>
-                
-                <!-- Step 2 -->
                 <div class="process-step">
                     <div class="step-number">2</div>
-                    <div class="step-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>Location Survey & Setup</h3>
-                    <p>We survey and secure the best location, set up shop/office, and handle all legal registrations in your preferred business name</p>
+                    <h3>Location, Assessment & Setup</h3>
+                    <p>We conduct location surveys, property inspections, or operational audits before setup or takeover.</p>
                 </div>
-                
-                <!-- Step 3 -->
                 <div class="process-step">
                     <div class="step-number">3</div>
-                    <div class="step-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Dedicated Management Team</h3>
-                    <p>Our professional staff handles daily operations, inventory, sales, and customer service on your behalf</p>
+                    <h3>Professional Staffing & Systems</h3>
+                    <p>We recruit trained professionals, replace outdated caretakers or management, and implement SOPs.</p>
                 </div>
-                
-                <!-- Step 4 -->
                 <div class="process-step">
                     <div class="step-number">4</div>
-                    <div class="step-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3>Bank Account Setup</h3>
-                    <p>We establish a domiciliary account in your name with full access and transparency</p>
+                    <h3>Operations, Monitoring & Control</h3>
+                    <p>Daily operations are managed by CIL with financial systems, reporting, and secured camera monitoring where applicable.</p>
                 </div>
-                
-                <!-- Step 5 -->
                 <div class="process-step">
                     <div class="step-number">5</div>
-                    <div class="step-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Collaborative Growth</h3>
-                    <p>All decisions made together with regular updates and complete financial transparency</p>
+                    <h3>Reporting & Collaborative Decisions</h3>
+                    <p>You receive regular reports and participate in major decisions while we execute professionally.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Business Sectors Grid -->
-    <section id="sectors" class="business-sectors">
+    <!-- Trust Points -->
+    <section class="trust-points">
         <div class="container">
             <div class="section-header">
-                <h2>Choose Your Business Sector</h2>
-                <p>Invest in any of our 5 proven business sectors with complete management support</p>
+                <h2>Why Clients Trust CIL</h2>
+                <p>Professional management without compromising your ownership or control</p>
+            </div>
+            <div class="trust-grid">
+                <div class="trust-point">
+                    <i class="fas fa-user-shield"></i>
+                    <h4>100% Ownership Retained</h4>
+                    <p>All assets remain in your name with full legal documentation</p>
+                </div>
+                <div class="trust-point">
+                    <i class="fas fa-users-slash"></i>
+                    <h4>No Family Dependency</h4>
+                    <p>Eliminate caretaker risks and family interference</p>
+                </div>
+                <div class="trust-point">
+                    <i class="fas fa-user-check"></i>
+                    <h4>Verified Professionals Only</h4>
+                    <p>Trained staff and properly screened tenants</p>
+                </div>
+                <div class="trust-point">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>Transparent Reporting</h4>
+                    <p>Regular financial and operational reports</p>
+                </div>
+                <div class="trust-point">
+                    <i class="fas fa-video"></i>
+                    <h4>Camera Monitoring</h4>
+                    <p>On-site supervision with secured camera access</p>
+                </div>
+                <div class="trust-point">
+                    <i class="fas fa-file-contract"></i>
+                    <h4>Clear Documentation</h4>
+                    <p>Complete accountability with proper records</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section id="services" class="services-grid">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Core Management Services</h2>
+                <p>CIL operates across business, hospitality, and real estate assets, ensuring every project is structured, monitored, and professionally managed.</p>
+            </div>
+            <div class="sector-grid">
+                <div class="sector-card">
+                    <div class="sector-content">
+                        <h3>Diaspora Business Management</h3>
+                        <p>Start and operate real businesses in Nigeria from anywhere in the world. Full setup, staffing, and operational management with complete transparency.</p>
+                        <ul class="sector-features">
+                            <li><i class="fas fa-check-circle"></i> Business setup & registration</li>
+                            <li><i class="fas fa-check-circle"></i> Location identification & setup</li>
+                            <li><i class="fas fa-check-circle"></i> Staff recruitment & management</li>
+                            <li><i class="fas fa-check-circle"></i> Daily operations & reporting</li>
+                            <li><i class="fas fa-check-circle"></i> Bank account setup</li>
+                            <li><i class="fas fa-check-circle"></i> Secured camera access & monitoring</li>
+                        </ul>
+                        <div class="sector-actions">
+                            <a href="#consultation" class="btn btn-primary">Start Business</a>
+                            <a href="/services#business-management" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-content">
+                        <h3>Hotel Management & Turnaround</h3>
+                        <p>Transform underperforming hotels into profitable hospitality businesses with professional management, marketing, and operations.</p>
+                        <ul class="sector-features">
+                            <li><i class="fas fa-check-circle"></i> Full hotel operations management</li>
+                            <li><i class="fas fa-check-circle"></i> Staff restructuring & training</li>
+                            <li><i class="fas fa-check-circle"></i> Revenue optimization & pricing</li>
+                            <li><i class="fas fa-check-circle"></i> Bar styling & menu structuring</li>
+                            <li><i class="fas fa-check-circle"></i> Lifestyle activations & promotions</li>
+                            <li><i class="fas fa-check-circle"></i> Financial reporting & cost control</li>
+                        </ul>
+                        <div class="sector-actions">
+                            <a href="#consultation" class="btn btn-primary">Manage Hotel</a>
+                            <a href="/services#hotel-management" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-content">
+                        <h3>Property & Tenant Management</h3>
+                        <p>Protect your property and rental income while you're away. Professional tenant management eliminates unreliable caretakers and family interference.</p>
+                        <ul class="sector-features">
+                            <li><i class="fas fa-check-circle"></i> Professional tenant screening</li>
+                            <li><i class="fas fa-check-circle"></i> Rent collection & tenant relations</li>
+                            <li><i class="fas fa-check-circle"></i> Property maintenance supervision</li>
+                            <li><i class="fas fa-check-circle"></i> Elimination of unreliable caretakers</li>
+                            <li><i class="fas fa-check-circle"></i> Prevention of asset misuse</li>
+                            <li><i class="fas fa-check-circle"></i> Asset protection & reporting</li>
+                        </ul>
+                        <div class="sector-actions">
+                            <a href="#consultation" class="btn btn-primary">Manage Property</a>
+                            <a href="/services#property-management" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-header" style="margin-top: 8rem;">
+                <h2>Business Sectors for Diaspora Investment</h2>
+                <p>Choose from our proven business sectors with complete management support</p>
             </div>
             
             <div class="sector-grid">
-                <!-- Agriculture -->
                 <div class="sector-card">
-                    <img src="/img/diaspora/agriculture-business.jpg" alt="Agriculture Business Setup" class="sector-image">
-                    <div class="sector-icon">
-                        <i class="fas fa-tractor"></i>
-                    </div>
                     <div class="sector-content">
                         <h3>Agriculture & Livestock</h3>
                         <p>Start profitable agricultural ventures including poultry farming, fish farming, crop production, and livestock management with our expert team handling daily operations.</p>
-                        
                         <ul class="sector-features">
                             <li><i class="fas fa-check-circle"></i> Day-old chicks & broiler production</li>
                             <li><i class="fas fa-check-circle"></i> Catfish & fingerlings farming</li>
                             <li><i class="fas fa-check-circle"></i> Layer hens & egg production</li>
                             <li><i class="fas fa-check-circle"></i> Pig farming & livestock</li>
                         </ul>
-                        
                         <div class="sector-actions">
-                            <a href="#consultation" class="btn btn-primary" style="flex: 1;">
-                                Start This Business
-                            </a>
-                            <a href="/shop-agriculture" class="btn btn-outline" style="flex: 1;">
-                                View Products
-                            </a>
+                            <a href="#consultation" class="btn btn-primary">Start This Business</a>
+                            <a href="/shop-agriculture" class="btn btn-outline">View Products</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Construction -->
                 <div class="sector-card">
-                    <img src="/img/diaspora/construction-business.jpg" alt="Construction Business Setup" class="sector-image">
-                    <div class="sector-icon">
-                        <i class="fas fa-hard-hat"></i>
-                    </div>
                     <div class="sector-content">
                         <h3>Construction & Manufacturing</h3>
                         <p>Establish construction material manufacturing, block production, or complete construction services business with our professional management team.</p>
-                        
                         <ul class="sector-features">
                             <li><i class="fas fa-check-circle"></i> Concrete block manufacturing</li>
                             <li><i class="fas fa-check-circle"></i> Building materials supply</li>
                             <li><i class="fas fa-check-circle"></i> Sports court construction</li>
                             <li><i class="fas fa-check-circle"></i> Electric gates installation</li>
                         </ul>
-                        
                         <div class="sector-actions">
-                            <a href="#consultation" class="btn btn-primary" style="flex: 1;">
-                                Start This Business
-                            </a>
-                            <a href="/shop-construction" class="btn btn-outline" style="flex: 1;">
-                                View Products
-                            </a>
+                            <a href="#consultation" class="btn btn-primary">Start This Business</a>
+                            <a href="/shop-construction" class="btn btn-outline">View Products</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Machinery -->
                 <div class="sector-card">
-                    <img src="/img/diaspora/machinery-business.jpg" alt="Machinery Business Setup" class="sector-image">
-                    <div class="sector-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
                     <div class="sector-content">
                         <h3>Machinery & Equipment</h3>
                         <p>Start industrial machinery sales, fabrication, and equipment rental business with our technical team managing operations and maintenance.</p>
-                        
                         <ul class="sector-features">
                             <li><i class="fas fa-check-circle"></i> Block-making machines</li>
                             <li><i class="fas fa-check-circle"></i> Concrete mixers & equipment</li>
                             <li><i class="fas fa-check-circle"></i> Industrial machinery sales</li>
                             <li><i class="fas fa-check-circle"></i> Equipment rental services</li>
                         </ul>
-                        
                         <div class="sector-actions">
-                            <a href="#consultation" class="btn btn-primary" style="flex: 1;">
-                                Start This Business
-                            </a>
-                            <a href="/shop-machinery" class="btn btn-outline" style="flex: 1;">
-                                View Products
-                            </a>
+                            <a href="#consultation" class="btn btn-primary">Start This Business</a>
+                            <a href="/shop-machinery" class="btn btn-outline">View Products</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Solar Energy -->
                 <div class="sector-card">
-                    <img src="/img/diaspora/solar-business.jpg" alt="Solar Energy Business Setup" class="sector-image">
-                    <div class="sector-icon">
-                        <i class="fas fa-solar-panel"></i>
-                    </div>
                     <div class="sector-content">
                         <h3>Solar Energy Solutions</h3>
                         <p>Launch a renewable energy business with solar panel installation, sales, and maintenance services managed by our certified technicians.</p>
-                        
                         <ul class="sector-features">
                             <li><i class="fas fa-check-circle"></i> Solar panel sales & installation</li>
                             <li><i class="fas fa-check-circle"></i> Inverter & battery systems</li>
                             <li><i class="fas fa-check-circle"></i> Commercial solar projects</li>
                             <li><i class="fas fa-check-circle"></i> Maintenance & support</li>
                         </ul>
-                        
                         <div class="sector-actions">
-                            <a href="#consultation" class="btn btn-primary" style="flex: 1;">
-                                Start This Business
-                            </a>
-                            <a href="/shop-solar" class="btn btn-outline" style="flex: 1;">
-                                View Products
-                            </a>
+                            <a href="#consultation" class="btn btn-primary">Start This Business</a>
+                            <a href="/shop-solar" class="btn btn-outline">View Products</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Furniture -->
                 <div class="sector-card">
-                    <img src="/img/diaspora/furniture-business.jpg" alt="Furniture Business Setup" class="sector-image">
-                    <div class="sector-icon">
-                        <i class="fas fa-couch"></i>
-                    </div>
                     <div class="sector-content">
                         <h3>Furniture & Upholstery</h3>
                         <p>Establish a furniture manufacturing and upholstery business with our skilled craftsmen creating custom pieces under your brand name.</p>
-                        
                         <ul class="sector-features">
                             <li><i class="fas fa-check-circle"></i> Custom furniture manufacturing</li>
                             <li><i class="fas fa-check-circle"></i> Leather & cloth upholstery</li>
                             <li><i class="fas fa-check-circle"></i> Office furniture solutions</li>
                             <li><i class="fas fa-check-circle"></i> Interior design services</li>
                         </ul>
-                        
                         <div class="sector-actions">
-                            <a href="#consultation" class="btn btn-primary" style="flex: 1;">
-                                Start This Business
-                            </a>
-                            <a href="/shop-furniture" class="btn btn-outline" style="flex: 1;">
-                                View Products
-                            </a>
+                            <a href="#consultation" class="btn btn-primary">Start This Business</a>
+                            <a href="/shop-furniture" class="btn btn-outline">View Products</a>
                         </div>
                     </div>
                 </div>
@@ -1151,77 +854,16 @@
     <section class="management-benefits">
         <div class="container">
             <div class="section-header">
-                <h2>Why Choose Our Management Services</h2>
-                <p>We provide comprehensive business management tailored for diaspora investors</p>
+                <h2>Structured Management & Investment Packages</h2>
+                <p>Whether you are setting up a business, managing a hotel, or protecting a property, CIL offers structured packages aligned with scale and complexity.</p>
+                <p><strong>₦5m · ₦15m · ₦30m+</strong><br>
+                <em>Asset-backed. Professionally managed. Transparently reported.</em></p>
             </div>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h3>Full Legal Documentation</h3>
-                    <p>All businesses registered in your name with complete legal documentation and compliance</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3>Domiciliary Account Setup</h3>
-                    <p>Bank accounts established in your name with full transparency and access</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Professional Staff Management</h3>
-                    <p>We hire, train, and manage all employees on your behalf</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Regular Financial Reporting</h3>
-                    <p>Monthly financial statements and performance reports sent directly to you</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <h3>Virtual Business Monitoring</h3>
-                    <p>Live camera access and virtual tours of your business operations</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>Collaborative Decision Making</h3>
-                    <p>All major decisions made together with regular consultation</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Investment Packages -->
-    <section class="investment-packages">
-        <div class="container">
-            <div class="section-header">
-                <h2>Business Management Packages</h2>
-                <p>Choose the package that best fits your investment goals and business vision</p>
-            </div>
-            
             <div class="packages-grid">
-                <!-- Starter Package -->
                 <div class="package-card">
                     <div class="package-badge">Starter</div>
                     <h3>Small Business Setup</h3>
                     <div class="package-price">₦5M<span> starting</span></div>
-                    
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Business registration & licensing</li>
                         <li><i class="fas fa-check"></i> Small shop/office setup</li>
@@ -1232,18 +874,12 @@
                         <li class="unavailable"><i class="fas fa-times"></i> Premium location survey</li>
                         <li class="unavailable"><i class="fas fa-times"></i> Marketing & promotion</li>
                     </ul>
-                    
-                    <a href="#consultation" class="btn btn-outline" style="width: 100%;">
-                        Get Started
-                    </a>
+                    <a href="#consultation" class="btn btn-outline">Get Started</a>
                 </div>
-                
-                <!-- Growth Package -->
                 <div class="package-card popular">
                     <div class="package-badge">Most Popular</div>
                     <h3>Growth Business</h3>
                     <div class="package-price">₦15M<span> starting</span></div>
-                    
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Premium business registration</li>
                         <li><i class="fas fa-check"></i> Strategic location survey & setup</li>
@@ -1254,18 +890,12 @@
                         <li><i class="fas fa-check"></i> Basic marketing support</li>
                         <li><i class="fas fa-check"></i> Live camera access</li>
                     </ul>
-                    
-                    <a href="#consultation" class="btn btn-primary" style="width: 100%;">
-                        Choose This Package
-                    </a>
+                    <a href="#consultation" class="btn btn-primary">Choose This Package</a>
                 </div>
-                
-                <!-- Premium Package -->
                 <div class="package-card">
                     <div class="package-badge">Premium</div>
                     <h3>Enterprise Business</h3>
                     <div class="package-price">₦30M<span> starting</span></div>
-                    
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Complete business setup</li>
                         <li><i class="fas fa-check"></i> Premium location survey & negotiation</li>
@@ -1276,64 +906,7 @@
                         <li><i class="fas fa-check"></i> Complete marketing campaign</li>
                         <li><i class="fas fa-check"></i> 24/7 virtual monitoring</li>
                     </ul>
-                    
-                    <a href="#consultation" class="btn btn-outline" style="width: 100%;">
-                        Start Enterprise
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Success Stories -->
-    <section class="success-stories">
-        <div class="container">
-            <div class="section-header">
-                <h2>Diaspora Success Stories</h2>
-                <p>Hear from diaspora investors who successfully started businesses with our management</p>
-            </div>
-            
-            <div class="stories-grid">
-                <!-- Story 1 -->
-                <div class="story-card">
-                    <div class="story-header">
-                        <img src="/img/diaspora/testimonial-1.jpg" alt="Dr. Adebayo" class="story-avatar">
-                        <div class="story-info">
-                            <h4>Dr. Adebayo O.</h4>
-                            <p>Medical Doctor • London, UK</p>
-                        </div>
-                    </div>
-                    <p class="story-quote">
-                        "I wanted to invest in Nigeria but couldn't manage a business from London. CIL set up my poultry farm, hired staff, and manages everything. I get monthly reports and video updates. The domiciliary account in my name gives me complete peace of mind."
-                    </p>
-                </div>
-                
-                <!-- Story 2 -->
-                <div class="story-card">
-                    <div class="story-header">
-                        <img src="/img/diaspora/testimonial-2.jpg" alt="Ms. Bello" class="story-avatar">
-                        <div class="story-info">
-                            <h4>Ms. Bello A.</h4>
-                            <p>Tech Executive • Dubai, UAE</p>
-                        </div>
-                    </div>
-                    <p class="story-quote">
-                        "Starting a furniture business in Lagos seemed impossible from Dubai. CIL handled everything - location survey, shop setup, hiring craftsmen. They even helped design my brand. Now I have a thriving business managed professionally while I focus on my career abroad."
-                    </p>
-                </div>
-                
-                <!-- Story 3 -->
-                <div class="story-card">
-                    <div class="story-header">
-                        <img src="/img/diaspora/testimonial-3.jpg" alt="Mr. Johnson" class="story-avatar">
-                        <div class="story-info">
-                            <h4>Mr. Johnson D.</h4>
-                            <p>Engineer • Texas, USA</p>
-                        </div>
-                    </div>
-                    <p class="story-quote">
-                        "The solar energy business setup was seamless. CIL found the perfect location, handled all permits, and set up the shop. Their technical team manages installations while I monitor everything from the US. The collaborative approach means I'm involved in every decision."
-                    </p>
+                    <a href="#consultation" class="btn btn-outline">Start Enterprise</a>
                 </div>
             </div>
         </div>
@@ -1342,33 +915,30 @@
     <!-- Diaspora CTA -->
     <section id="consultation" class="diaspora-cta">
         <div class="cta-content">
-            <h2>Start Your Nigerian Business Today</h2>
-            <p>Schedule a free consultation to discuss your business idea and how we can help make it a reality with our complete management services.</p>
-            
+            <h2>Build, Manage & Protect Your Assets in Nigeria</h2>
+            <p>Whether you want to start a business, fix an underperforming hotel, or protect your property while you're away — CIL provides the structure, management, and oversight you need.</p>
             <div class="cta-buttons">
+                <a href="mailto:collaborativeinvestmentltd@gmail.com?subject=Management%20Proposal%20Request" class="btn btn-proposal">
+                    <i class="fas fa-file-alt"></i>
+                    Request Management Proposal
+                </a>
                 <a href="https://wa.me/2348129978419" target="_blank" class="btn btn-accent">
                     <i class="fab fa-whatsapp"></i>
-                    WhatsApp Consultation
+                    Book Free Consultation
                 </a>
                 <a href="tel:+2348129978419" class="btn btn-secondary">
                     <i class="fas fa-phone-alt"></i>
                     Call +234 812 997 8419
                 </a>
-                <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: white; border-color: white;">
-                    <i class="fas fa-envelope"></i>
-                    Email Business Plan
-                </a>
             </div>
-            
             <p style="margin-top: 3rem; font-size: 1rem; opacity: 0.9;">
-                <i class="fas fa-lock"></i> All investments fully secured with legal documentation and transparent management
+                <i class="fas fa-lock"></i> All assets remain 100% in your name with full legal documentation and transparent management
             </p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <!-- Same footer as shop-categories.html -->
         <div class="footer-grid">
             <div class="footer-section">
                 <h3>Collaborative Investment Ltd</h3>
@@ -1425,10 +995,10 @@
                 <h3>Services</h3>
                 <ul class="footer-links">
                     <li><a href="/services#business-management">Business Management</a></li>
+                    <li><a href="/services#hotel-management">Hotel Management</a></li>
+                    <li><a href="/services#property-management">Property Management</a></li>
                     <li><a href="/services#agriculture">Agricultural Development</a></li>
                     <li><a href="/services#manufacturing">Block Manufacturing</a></li>
-                    <li><a href="/services#fabrication">Machine Fabrication</a></li>
-                    <li><a href="/services#diaspora">Diaspora Management</a></li>
                     <li><a href="/investment">Investment Opportunities</a></li>
                 </ul>
             </div>
@@ -1464,19 +1034,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Diaspora Business Management page loaded');
+            console.log('Diaspora, Hotel & Property Management page loaded');
             
-            // Header scroll effect
             const header = document.querySelector('.header');
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                header.classList.toggle('scrolled', window.scrollY > 50);
             });
             
-            // Update cart count
             function updateCartCount() {
                 try {
                     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -1491,14 +1055,11 @@
                 }
             }
             
-            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
@@ -1509,17 +1070,13 @@
                 });
             });
             
-            // Initialize cart count
             updateCartCount();
             
-            // Add animation on scroll
             function animateOnScroll() {
-                const elements = document.querySelectorAll('.sector-card, .benefit-card, .package-card, .story-card, .process-step');
-                
+                const elements = document.querySelectorAll('.sector-card, .package-card, .process-step, .trust-point');
                 elements.forEach(element => {
                     const elementTop = element.getBoundingClientRect().top;
                     const elementVisible = 150;
-                    
                     if (elementTop < window.innerHeight - elementVisible) {
                         element.style.opacity = "1";
                         element.style.transform = "translateY(0)";
@@ -1527,18 +1084,15 @@
                 });
             }
             
-            // Set initial animation styles
-            document.querySelectorAll('.sector-card, .benefit-card, .package-card, .story-card, .process-step').forEach(el => {
+            document.querySelectorAll('.sector-card, .package-card, .process-step, .trust-point').forEach(el => {
                 el.style.opacity = "0";
                 el.style.transform = "translateY(30px)";
                 el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
             });
             
             window.addEventListener('scroll', animateOnScroll);
-            // Initial check
             animateOnScroll();
             
-            // Add WhatsApp chat button
             const whatsappButton = document.createElement('a');
             whatsappButton.href = 'https://wa.me/2348129978419';
             whatsappButton.target = '_blank';
@@ -1549,7 +1103,6 @@
             whatsappButton.setAttribute('aria-label', 'Chat with us on WhatsApp');
             document.body.appendChild(whatsappButton);
             
-            // Add WhatsApp button styles
             const whatsappStyles = document.createElement('style');
             whatsappStyles.textContent = `
                 .whatsapp-float {
@@ -1570,13 +1123,11 @@
                     transition: all 0.3s ease;
                     text-decoration: none;
                 }
-                
                 .whatsapp-float:hover {
                     transform: scale(1.1);
                     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
                     background: #128C7E;
                 }
-                
                 @media (max-width: 768px) {
                     .whatsapp-float {
                         width: 50px;
@@ -1589,10 +1140,9 @@
             `;
             document.head.appendChild(whatsappStyles);
             
-        }); // End of DOMContentLoaded
+        });
     </script>
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
-    <script src="/js/cart-drawer.js"></script>
 </body>
 </html>

@@ -35,59 +35,834 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Fix for hero background images */
+        /* Investment Hero Section */
         .investment-hero {
             background: linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%),
                         url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            width: 100%;
         }
         
+        .investment-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(45, 55, 72, 0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(45, 55, 72, 0.1) 25%, transparent 25%);
+            background-size: 60px 60px;
+            opacity: 0.1;
+        }
+        
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+        
+        @media (max-width: 992px) {
+            .hero-grid {
+                gap: 3rem;
+                text-align: center;
+            }
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: 100%;
+        }
+        
+        .hero-text .highlight {
+            color: var(--accent);
+            display: block;
+        }
+        
+        .hero-text p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            margin-bottom: 2.5rem;
+            width: 100%;
+        }
+        
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            width: 100%;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(45, 55, 72, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 55, 72, 0.5);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        /* Investment Models Section */
+        .investment-models {
+            padding: 6rem 0;
+            background: var(--light-gray);
+            width: 100%;
+        }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            width: 100%;
+        }
+        
+        .model-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .model-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            width: 100%;
+        }
+        
+        .model-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .model-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            width: 100%;
+        }
+        
+        .model-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            width: 100%;
+        }
+        
+        .model-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .model-features li i {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+        
+        /* Business Portfolio Section */
+        .business-portfolio {
+            padding: 6rem 0;
+            background: white;
+            width: 100%;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            width: 100%;
+        }
+        
+        .portfolio-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .portfolio-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            width: 100%;
+        }
+        
+        .portfolio-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+        
+        .portfolio-stat {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Why Choose Section */
+        .why-choose {
+            padding: 6rem 0;
+            background: var(--light-gray);
+            width: 100%;
+        }
+        
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            width: 100%;
+        }
+        
+        .reason-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: var(--transition);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .reason-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            width: 100%;
+        }
+        
+        .reason-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin: 0;
+            width: 100%;
+        }
+        
+        /* Products Preview */
+        .products-preview {
+            padding: 6rem 0;
+            background: white;
+            width: 100%;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            width: 100%;
+        }
+        
+        .preview-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .preview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+        }
+        
+        .preview-content {
+            padding: 1.5rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .preview-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .preview-content h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .preview-price {
+            color: var(--accent);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        /* Investment CTA */
         .investment-cta {
             background: linear-gradient(135deg, var(--primary) 0%, #1a202c 100%),
                         url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            width: 100%;
         }
         
-        /* Fix for fallback images */
-        .hero-image,
-        .model-image,
-        .preview-image {
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            width: 100%;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 2rem auto 0;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #b36d0e;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(214, 137, 16, 0.3);
+        }
+        
+        .btn-accent {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background: #0e2a5e;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(26, 54, 93, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
         }
         
         /* Additional mobile fixes */
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                padding: 8px;
+            .hero-text h1 {
+                font-size: 2.5rem;
             }
             
-            .nav-links.active {
-                animation: slideIn 0.3s ease forwards;
+            .section-header h2 {
+                font-size: 2.2rem;
             }
             
-            @keyframes slideIn {
-                from {
-                    transform: translateX(-100%);
-                }
-                to {
-                    transform: translateX(0);
-                }
+            .hero-actions {
+                justify-content: center;
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .models-grid,
+            .portfolio-grid,
+            .reasons-grid,
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.75rem;
+            }
+            
+            .stat-value {
+                font-size: 1rem;
             }
         }
         
-        /* Fix for admin hidden link */
-        .admin-hidden-link {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            cursor: pointer;
-            border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        @media (max-width: 480px) {
+            .portfolio-stats {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .hero-badge {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
         }
         
-        .admin-hidden-link:hover {
-            color: rgba(255, 255, 255, 0.9);
-            border-bottom-style: solid;
+        /* Animation for fade-in-up */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+/* Investment Models Section */
+.investment-models {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+}
+
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.model-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid #e2e8f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.model-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent);
+}
+
+.model-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.model-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    min-height: 3.5rem;
+}
+
+.model-card p {
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.model-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.model-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--gray);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.model-features li:last-child {
+    border-bottom: none;
+}
+
+.model-features li i {
+    color: var(--success);
+    font-size: 1.1rem;
+}
+
+.model-sectors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.sector-tag {
+    background: rgba(26, 82, 118, 0.1);
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(26, 82, 118, 0.2);
+}
+
+/* Animation for model cards */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.fade-in-up:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.fade-in-up:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.fade-in-up:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.fade-in-up:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1200px) {
+    .models-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .models-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .model-card h3 {
+        min-height: auto;
+    }
+}
+
+/* Business Portfolio Section */
+.business-portfolio {
+    padding: 6rem 0;
+    background: white;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.portfolio-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid #e2e8f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent);
+}
+
+.portfolio-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.portfolio-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    min-height: 3.5rem;
+}
+
+.portfolio-card p {
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.portfolio-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-tag {
+    background: rgba(26, 82, 118, 0.1);
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(26, 82, 118, 0.2);
+}
+
+.portfolio-stats {
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: auto;
+}
+
+.portfolio-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.portfolio-stat:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.stat-label {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+@media (max-width: 1200px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-card h3 {
+        min-height: auto;
+    }
+}
     </style>
 </head>
-<body>
 
 <body>
     <!-- Header -->
@@ -152,11 +927,9 @@
                     <div class="hero-text">
                         <div class="hero-badges">
                             <div class="hero-badge">
-                                <i class="fas fa-chart-line"></i>
                                 <span>Strategic Investments</span>
                             </div>
                             <div class="hero-badge">
-                                <i class="fas fa-shield-alt"></i>
                                 <span>Guaranteed Returns</span>
                             </div>
                         </div>
@@ -168,21 +941,11 @@
                         
                         <div class="hero-actions">
                             <a href="/investment" class="btn btn-accent">
-                                <i class="fas fa-handshake"></i>
                                 Invest With Us
                             </a>
                             <a href="/services" class="btn btn-secondary">
-                                <i class="fas fa-cogs"></i>
                                 Our Business Services
                             </a>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-image-container">
-                        <img src="/img/investment-meeting.jpg" class="hero-image" alt="Strategic Investment Meeting">
-                        <div class="image-overlay">
-                            <h3>Building Business Success</h3>
-                            <p>We invest in, develop, and manage profitable ventures across multiple sectors</p>
                         </div>
                     </div>
                 </div>
@@ -193,78 +956,125 @@
         <section class="investment-models">
             <div class="container">
                 <div class="section-header">
-                    <h2>Our Investment Models</h2>
-                    <p>Choose from our proven investment frameworks designed for maximum returns and sustainable growth</p>
+                    <h2>Our Investment & Management Models</h2>
+                    <p>Choose from our proven frameworks for business investment, hotel management, and property management with professional oversight</p>
                 </div>
                 
                 <div class="models-grid">
                     <!-- Model 1: Direct Business Investment -->
                     <div class="model-card fade-in-up">
-                        <img src="/img/models/direct-investment.jpg" alt="Direct Business Investment" class="model-image">
-                        <div class="model-content">
-                            <div class="model-icon">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <h3>Direct Business Investment</h3>
-                            <p>Invest directly in our established businesses across 6 sectors with guaranteed returns and professional management.</p>
-                            
-                            <ul class="model-features">
-                                <li><i class="fas fa-check-circle"></i> 18-30% Annual Returns</li>
-                                <li><i class="fas fa-check-circle"></i> Professional Management</li>
-                                <li><i class="fas fa-check-circle"></i> Monthly Performance Reports</li>
-                                <li><i class="fas fa-check-circle"></i> Asset-Backed Security</li>
-                            </ul>
-                            
-                            <a href="/investment#direct" class="btn btn-primary" style="width: 100%;">
-                                Invest Now
-                            </a>
+                        <h3>Direct Business Investment</h3>
+                        <p>Invest directly in our established businesses across 6 sectors with guaranteed returns and professional management.</p>
+                        
+                        <ul class="model-features">
+                            <li><i class="fas fa-check-circle"></i> 18-30% Annual Returns</li>
+                            <li><i class="fas fa-check-circle"></i> Professional Management</li>
+                            <li><i class="fas fa-check-circle"></i> Monthly Performance Reports</li>
+                            <li><i class="fas fa-check-circle"></i> Asset-Backed Security</li>
+                        </ul>
+                        
+                        <div class="model-sectors">
+                            <span class="sector-tag">Agriculture</span>
+                            <span class="sector-tag">Construction</span>
+                            <span class="sector-tag">Solar Energy</span>
+                            <span class="sector-tag">Furniture</span>
                         </div>
+                        
+                        <a href="/investment#direct" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                            Invest Now
+                        </a>
                     </div>
                     
                     <!-- Model 2: Diaspora Business Management -->
                     <div class="model-card fade-in-up">
-                        <img src="/img/models/diaspora-management.jpg" alt="Diaspora Business Management" class="model-image">
-                        <div class="model-content">
-                            <div class="model-icon">
-                                <i class="fas fa-globe-americas"></i>
-                            </div>
-                            <h3>Diaspora Business Management</h3>
-                            <p>We setup and manage your Nigerian business while you maintain full ownership from anywhere in the world.</p>
-                            
-                            <ul class="model-features">
-                                <li><i class="fas fa-check-circle"></i> Complete Business Setup</li>
-                                <li><i class="fas fa-check-circle"></i> Professional Staff Management</li>
-                                <li><i class="fas fa-check-circle"></i> Domiciliary Account Access</li>
-                                <li><i class="fas fa-check-circle"></i> Virtual Business Monitoring</li>
-                            </ul>
-                            
-                            <a href="/shop-diaspora" class="btn btn-primary" style="width: 100%;">
-                                Start Your Business
-                            </a>
+                        <h3>Diaspora Business Setup</h3>
+                        <p>We setup and manage your Nigerian business while you maintain full ownership from anywhere in the world.</p>
+                        
+                        <ul class="model-features">
+                            <li><i class="fas fa-check-circle"></i> Complete Business Setup</li>
+                            <li><i class="fas fa-check-circle"></i> Professional Staff Management</li>
+                            <li><i class="fas fa-check-circle"></i> Domiciliary Account Access</li>
+                            <li><i class="fas fa-check-circle"></i> Virtual Business Monitoring</li>
+                        </ul>
+                        
+                        <div class="model-sectors">
+                            <span class="sector-tag">All 5 Business Sectors</span>
+                            <span class="sector-tag">Full Management</span>
+                            <span class="sector-tag">Remote Ownership</span>
                         </div>
+                        
+                        <a href="/shop-diaspora" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                            Start Your Business
+                        </a>
                     </div>
                     
-                    <!-- Model 3: Joint Venture Partnerships -->
+                    <!-- Model 3: Hotel Management -->
                     <div class="model-card fade-in-up">
-                        <img src="/img/models/joint-venture.jpg" alt="Joint Venture Partnerships" class="model-image">
-                        <div class="model-content">
-                            <div class="model-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3>Joint Venture Partnerships</h3>
-                            <p>Partner with us to scale your existing business or start new ventures with shared investment and expertise.</p>
-                            
-                            <ul class="model-features">
-                                <li><i class="fas fa-check-circle"></i> Shared Capital Investment</li>
-                                <li><i class="fas fa-check-circle"></i> Professional Management Support</li>
-                                <li><i class="fas fa-check-circle"></i> Market Access & Networks</li>
-                                <li><i class="fas fa-check-circle"></i> Profit Sharing Agreement</li>
-                            </ul>
-                            
-                            <a href="/investment#joint-venture" class="btn btn-primary" style="width: 100%;">
-                                Explore Partnerships
-                            </a>
+                        <h3>Hotel Management & Turnaround</h3>
+                        <p>Professional hotel management services to transform underperforming properties into profitable hospitality businesses.</p>
+                        
+                        <ul class="model-features">
+                            <li><i class="fas fa-check-circle"></i> Full Operations Management</li>
+                            <li><i class="fas fa-check-circle"></i> Staff Restructuring & Training</li>
+                            <li><i class="fas fa-check-circle"></i> Revenue Optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Bar & Menu Styling</li>
+                        </ul>
+                        
+                        <div class="model-sectors">
+                            <span class="sector-tag">Hotels</span>
+                            <span class="sector-tag">Guest Houses</span>
+                            <span class="sector-tag">Hospitality</span>
                         </div>
+                        
+                        <a href="/shop-diaspora#hotel-management" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                            Manage Hotel
+                        </a>
+                    </div>
+                    
+                    <!-- Model 4: Property Management -->
+                    <div class="model-card fade-in-up">
+                        <h3>Property & Tenant Management</h3>
+                        <p>Professional property management to protect your assets and rental income while eliminating unreliable caretakers.</p>
+                        
+                        <ul class="model-features">
+                            <li><i class="fas fa-check-circle"></i> Tenant Screening & Selection</li>
+                            <li><i class="fas fa-check-circle"></i> Rent Collection & Relations</li>
+                            <li><i class="fas fa-check-circle"></i> Property Maintenance</li>
+                            <li><i class="fas fa-check-circle"></i> Asset Protection</li>
+                        </ul>
+                        
+                        <div class="model-sectors">
+                            <span class="sector-tag">Residential</span>
+                            <span class="sector-tag">Commercial</span>
+                            <span class="sector-tag">Diaspora Owners</span>
+                        </div>
+                        
+                        <a href="/shop-diaspora#property-management" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                            Manage Property
+                        </a>
+                    </div>
+                    
+                    <!-- Model 5: Joint Venture Partnerships -->
+                    <div class="model-card fade-in-up">
+                        <h3>Joint Venture Partnerships</h3>
+                        <p>Partner with us to scale your existing business or start new ventures with shared investment and expertise.</p>
+                        
+                        <ul class="model-features">
+                            <li><i class="fas fa-check-circle"></i> Shared Capital Investment</li>
+                            <li><i class="fas fa-check-circle"></i> Professional Management Support</li>
+                            <li><i class="fas fa-check-circle"></i> Market Access & Networks</li>
+                            <li><i class="fas fa-check-circle"></i> Profit Sharing Agreement</li>
+                        </ul>
+                        
+                        <div class="model-sectors">
+                            <span class="sector-tag">Business Expansion</span>
+                            <span class="sector-tag">New Ventures</span>
+                            <span class="sector-tag">Strategic Partnerships</span>
+                        </div>
+                        
+                        <a href="/investment#joint-venture" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                            Explore Partnerships
+                        </a>
                     </div>
                 </div>
             </div>
@@ -281,82 +1091,190 @@
                 <div class="portfolio-grid">
                     <!-- Agriculture -->
                     <div class="portfolio-card fade-in-up">
-                        <div class="portfolio-icon">
-                            <i class="fas fa-tractor"></i>
-                        </div>
                         <h3>Agriculture & Livestock</h3>
                         <p>Poultry farming, fish farming, crop production, and livestock management with modern equipment and techniques.</p>
                         
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Poultry Farming ( Layers and Broilers )</span>
+                            <span class="feature-tag">Bulk Egg Supply</span>
+                            <span class="feature-tag">CatFish Farming</span>
+                            <span class="feature-tag">Pig Farming</span>
+                            <span class="feature-tag">Goat & Livestock Supply</span>
+                            <span class="feature-tag">Livestock Feed Supply</span>
+                        </div>
+                        
                         <div class="portfolio-stats">
-                            <div class="portfolio-stat">
-                                <span class="stat-label">Success Rate:</span>
-                                <span class="stat-value">85-90%</span>
-                            </div>
                             <div class="portfolio-stat">
                                 <span class="stat-label">ROI Period:</span>
-                                <span class="stat-value">3-4 months</span>
-                            </div>
-                            <div class="portfolio-stat">
-                                <span class="stat-label">Annual Growth:</span>
-                                <span class="stat-value">25%+</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Construction -->
-                    <div class="portfolio-card fade-in-up">
-                        <div class="portfolio-icon">
-                            <i class="fas fa-hard-hat"></i>
-                        </div>
-                        <h3>Construction & Manufacturing</h3>
-                        <p>Block manufacturing, building materials, electric gates, and construction services with premium quality standards.</p>
-                        
-                        <div class="portfolio-stats">
-                            <div class="portfolio-stat">
-                                <span class="stat-label">Success Rate:</span>
-                                <span class="stat-value">90%+</span>
-                            </div>
-                            <div class="portfolio-stat">
-                                <span class="stat-label">Market Demand:</span>
-                                <span class="stat-value">Unconditional</span>
-                            </div>
-                            <div class="portfolio-stat">
-                                <span class="stat-label">Annual Growth:</span>
-                                <span class="stat-value">30%+</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Solar Energy -->
-                    <div class="portfolio-card fade-in-up">
-                        <div class="portfolio-icon">
-                            <i class="fas fa-solar-panel"></i>
-                        </div>
-                        <h3>Solar Energy Solutions</h3>
-                        <p>Complete solar systems installation, sales, and maintenance services for homes, businesses, and communities.</p>
-                        
-                        <div class="portfolio-stats">
-                            <div class="portfolio-stat">
-                                <span class="stat-label">Success Rate:</span>
-                                <span class="stat-value">75-80%</span>
-                            </div>
-                            <div class="portfolio-stat">
-                                <span class="stat-label">Market Size:</span>
-                                <span class="stat-value">₦500B+</span>
+                                <span class="stat-value">8-12 months</span>
                             </div>
                             <div class="portfolio-stat">
                                 <span class="stat-label">Annual Growth:</span>
                                 <span class="stat-value">35%+</span>
                             </div>
                         </div>
+                        
+                        <a href="/shop-agriculture" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">
+                            <i class="fas fa-store"></i> View Products
+                        </a>
+                    </div>
+                    
+                    <!-- Construction -->
+                    <div class="portfolio-card fade-in-up">
+                        <h3>Construction & Manufacturing</h3>
+                        <p>Block manufacturing, building materials, electric gates, and construction services with premium quality standards.</p>
+                        
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Manual Block Machine Manufacturing</span>
+                            <span class="feature-tag">Custom Construction Works</span>
+                            <span class="feature-tag">Advanced Poultry Cage Construction</span>
+                            <span class="feature-tag">Electric Gates Construction</span>
+                            <span class="feature-tag">Custom Basketball Court Construction</span>
+                        </div>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Market Demand:</span>
+                                <span class="stat-value">Unconditional</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Annual Growth:</span>
+                                <span class="stat-value">38%+</span>
+                            </div>
+                        </div>
+                        
+                        <a href="/shop-construction" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">
+                            <i class="fas fa-store"></i> View Products
+                        </a>
+                    </div>
+                    
+                    <!-- Machinery -->
+                    <div class="portfolio-card fade-in-up">
+                        <h3>Machinery & Equipment</h3>
+                        <p>Industrial machinery sales, fabrication, block-making machines, concrete mixers, and equipment rental services.</p>
+                        
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Local Block-Mabufacturing and sales</span>
+                            <span class="feature-tag">Concrete Mixers Sales</span>
+                            <span class="feature-tag">Industrial Machinery Importation</span>
+                            <span class="feature-tag">Equipment Rental</span>
+                            <span class="feature-tag">Bulk Cemet Supply</span>
+                            <span class="feature-tag">Bulk Sand & Granite Supply</span>
+                        </div>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">ROI Period:</span>
+                                <span class="stat-value">6-12 months</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Annual Growth:</span>
+                                <span class="stat-value">33%+</span>
+                            </div>
+                        </div>
+                        
+                        <a href="/shop-machinery" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">
+                            <i class="fas fa-store"></i> View Products
+                        </a>
+                    </div>
+                    
+                    <!-- Solar Energy -->
+                    <div class="portfolio-card fade-in-up">
+                        <h3>Solar Energy Solutions</h3>
+                        <p>Complete solar systems installation, sales, and maintenance services for homes, businesses, and communities.</p>
+                        
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Solar Panel Sales & Installation</span>
+                            <span class="feature-tag">Inverter Systems Modification</span>
+                            <span class="feature-tag">Commercial Projects</span>
+                            <span class="feature-tag">Maintenance</span>
+                        </div>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Market Size:</span>
+                                <span class="stat-value">₦500B+</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Annual Growth:</span>
+                                <span class="stat-value">34%+</span>
+                            </div>
+                        </div>
+                        
+                        <a href="/shop-solar" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">
+                            <i class="fas fa-store"></i> View Products
+                        </a>
+                    </div>
+                    
+                    <!-- Furniture -->
+                    <div class="portfolio-card fade-in-up">
+                        <h3>Furniture & Upholstery</h3>
+                        <p>Custom furniture manufacturing, leather upholstery, office furniture solutions, and interior design services.</p>
+                        
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Custom Furniture Manufacturing</span>
+                            <span class="feature-tag">Leather Upholstery</span>
+                            <span class="feature-tag">Office Furniture Construction & Supply</span>
+                            <span class="feature-tag">Interior Design</span>
+                        </div>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">ROI Period:</span>
+                                <span class="stat-value">8-12 months</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Annual Growth:</span>
+                                <span class="stat-value">32%+</span>
+                            </div>
+                        </div>
+                        
+                        <a href="/shop-furniture" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">
+                            <i class="fas fa-store"></i> View Products
+                        </a>
+                    </div>
+                    
+                    <!-- Hotel Management -->
+                    <div class="portfolio-card fade-in-up">
+                        <h3>Hotel Management</h3>
+                        <p>Professional hotel operations management, staff training, revenue optimization, and hospitality turnaround services.</p>
+                        
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Full operational Management</span>
+                            <span class="feature-tag">Staff Training</span>
+                            <span class="feature-tag">Revenue Optimization</span>
+                            <span class="feature-tag">Turnaround Services</span>
+                        </div>
+                        
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Revenue Growth:</span>
+                                <span class="stat-value">40-60%</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="stat-label">Market Size:</span>
+                                <span class="stat-value">₦1.2T+</span>
+                            </div>
+                        </div>
+                        
+                        <a href="/shop-diaspora#hotel-management" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin-top: 4rem;">
-                    <a href="/portfolio" class="btn btn-accent">
-                        <i class="fas fa-chart-bar"></i>
-                        View Full Portfolio
-                    </a>
+                <!-- Call to Action -->
+                <div class="portfolio-cta" style="text-align: center; margin-top: 4rem; padding: 3rem; background: var(--primary); border-radius: var(--border-radius); color: white;">
+                    <h3 style="color: white; margin-bottom: 1rem;">Ready to Invest in Any of These Sectors?</h3>
+                    <p style="opacity: 0.9; margin-bottom: 2rem;">Start with as little as ₦5M and get professional management, regular reports, and guaranteed returns.</p>
+                    <div class="cta-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="#consultation" class="btn btn-accent">
+                            <i class="fas fa-calendar-check"></i> Free Consultation
+                        </a>
+                        <a href="/investment" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i> View Investment Options
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -371,49 +1289,31 @@
                 
                 <div class="reasons-grid">
                     <div class="reason-card fade-in-up">
-                        <div class="reason-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
                         <h3>Proven Track Record</h3>
-                        <p>10+ years of successful business management and investor returns across multiple sectors</p>
+                        <p>3+ years of successful business management and investor returns across multiple sectors</p>
                     </div>
                     
                     <div class="reason-card fade-in-up">
-                        <div class="reason-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
                         <h3>Asset-Backed Security</h3>
                         <p>All investments protected by tangible assets and comprehensive legal documentation</p>
                     </div>
                     
                     <div class="reason-card fade-in-up">
-                        <div class="reason-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
                         <h3>Complete Transparency</h3>
                         <p>Regular financial reporting, live project monitoring, and open communication</p>
                     </div>
                     
                     <div class="reason-card fade-in-up">
-                        <div class="reason-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
                         <h3>Professional Management</h3>
                         <p>Experienced team handling daily operations, staffing, and business development</p>
                     </div>
                     
                     <div class="reason-card fade-in-up">
-                        <div class="reason-icon">
-                            <i class="fas fa-balance-scale"></i>
-                        </div>
                         <h3>Legal Compliance</h3>
                         <p>Full compliance with Nigerian investment laws and international best practices</p>
                     </div>
                     
                     <div class="reason-card fade-in-up">
-                        <div class="reason-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
                         <h3>24/7 Support</h3>
                         <p>Dedicated support for investors across different time zones and locations</p>
                     </div>
@@ -487,48 +1387,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Investment CTA -->
-        <section class="investment-cta">
-            <div class="cta-content">
-                <h2>Start Your Investment Journey Today</h2>
-                <p>Join successful investors who are building wealth through our strategic investment platforms and business management services.</p>
-                
-                <div class="cta-stats">
-                    <div class="cta-stat">
-                        <span class="cta-stat-value">₦105M+</span>
-                        <span class="cta-stat-label">Assets Under Management</span>
-                    </div>
-                    <div class="cta-stat">
-                        <span class="cta-stat-value">98%</span>
-                        <span class="cta-stat-label">Success Rate</span>
-                    </div>
-                    <div class="cta-stat">
-                        <span class="cta-stat-value">25+</span>
-                        <span class="cta-stat-label">Investment Partners</span>
-                    </div>
-                    <div class="cta-stat">
-                        <span class="cta-stat-value">6</span>
-                        <span class="cta-stat-label">Business Sectors</span>
-                    </div>
-                </div>
-                
-                <div class="cta-buttons">
-                    <a href="/investment" class="btn btn-accent">
-                        <i class="fas fa-chart-line"></i>
-                        Explore Investment Options
-                    </a>
-                    <a href="https://wa.me/2348129978419" target="_blank" class="btn btn-secondary">
-                        <i class="fab fa-whatsapp"></i>
-                        WhatsApp Consultation
-                    </a>
-                    <a href="/contact" class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: white; border-color: white;">
-                        <i class="fas fa-calendar"></i>
-                        Schedule Meeting
-                    </a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
@@ -595,8 +1453,7 @@
         <!-- Footer Bottom -->
         <div class="footer-bottom">
             <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-                <p style="display: inline;">Building Nigeria's Business Future Through Strategic Investments</p>
-            </a>
+            <p style="display: inline;">Building Nigeria's Business Future Through Strategic Investments</p>
             <p style="margin-top: 1rem;">
                 <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
                 <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
@@ -606,15 +1463,57 @@
     </footer>
 
     <script>
-document.addEventListener('keydown', function (e) {
-    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-        window.location.href = '/admin/login';
-    }
-});
-</script>
+        document.addEventListener('keydown', function (e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                window.location.href = '/admin/login';
+            }
+        });
+    </script>
+
+    <!-- Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade in animation
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Initial check
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // Cart functionality
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+                    const cartBadge = document.getElementById('cart-count-badge');
+                    if (cartBadge) {
+                        cartBadge.textContent = cartCount;
+                        cartBadge.style.display = cartCount > 0 ? 'flex' : 'none';
+                    }
+                } catch (error) {
+                    console.error('Error updating cart count:', error);
+                }
+            }
+            
+            // Initialize cart count
+            updateCartCount();
+        });
+    </script>
 
     <!-- JavaScript -->
-
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
 </body>

@@ -11,6 +11,7 @@ const adminAuth = require('./admin-auth');
 const passwordResetTokens = new Map();
 const MILESTONE_STATUSES = ['Processing', 'Shipped', 'Delivered'];
 
+
 // Import logging module
 const logger = require('./utils/logger');
 
@@ -110,7 +111,7 @@ const ROUTES = {
 };
 
 // Static file directories
-const STATIC_DIRS = ['/css/', '/js/', '/img/', '/downloads/', '/public/'];
+const STATIC_DIRS = ['/css/', '/js/', '/img/', '/downloads/'];
 
 const MIME_TYPES = {
     '.html': 'text/html; charset=UTF-8',
