@@ -7,36 +7,118 @@
     <meta name="description" content="Browse our products by category - Agriculture, Construction, Solar Energy, Furniture, and Machinery">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
-    <link rel="stylesheet" href="/css/shop-categories.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    
+    <!-- Enhanced Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- Enhanced Styling -->
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --light-color: #f8f9fa;
-            --dark-color: #1a252f;
-            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
-            --shadow-medium: 0 8px 25px rgba(0,0,0,0.12);
-            --shadow-heavy: 0 15px 35px rgba(0,0,0,0.15);
-            --transition: all 0.3s ease;
-            --border-radius: 12px;
+            --primary: #1a5276;
+            --secondary: #145A32;
+            --accent: #D68910;
+            --light: #f8f9fa;
+            --dark: #1a252f;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            
+            /* Typography Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            
+            /* Font Families */
+            --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            
+            /* Shadows */
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-medium: 0 4px 16px rgba(0,0,0,0.1);
+            --shadow-heavy: 0 8px 24px rgba(0,0,0,0.15);
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 300ms ease;
+            --transition-slow: 500ms ease;
+        }
+        
+        /* Base Typography */
+        body {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: var(--space-4);
+        }
+        
+        h1 {
+            font-size: var(--text-4xl);
+            font-weight: 800;
+        }
+        
+        h2 {
+            font-size: var(--text-3xl);
+        }
+        
+        h3 {
+            font-size: var(--text-xl);
+        }
+        
+        p {
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-4);
         }
         
         /* Hero Section */
         .shop-hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 5rem 0;
-            text-align: center;
+            padding: var(--space-16) 0;
             position: relative;
             overflow: hidden;
         }
@@ -48,78 +130,166 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('/img/shop-pattern.png') repeat;
-            opacity: 0.1;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
         }
         
         .hero-content {
             position: relative;
             z-index: 2;
+            text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
         
         .shop-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+            color: white;
+            margin-bottom: var(--space-4);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .shop-hero p {
+            font-size: clampvar(--text-base), 2vw, var(--text-xl);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-8);
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: var(--text-base);
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .btn-primary:hover {
+            background: #b36d0e;
+            border-color: #b36d0e;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border-color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gray-light);
+            transform: translateY(-2px);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: var(--space-12) 0;
+            background: white;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-8);
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: var(--space-6);
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: var(--text-4xl);
             font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            color: var(--primary);
+            margin-bottom: var(--space-2);
+            font-family: var(--font-heading);
         }
         
-        .shop-hero .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            margin-bottom: 2rem;
-            line-height: 1.6;
+        .stat-label {
+            color: var(--gray);
+            font-size: var(--text-base);
+            font-weight: 500;
         }
         
-        /* Categories Section */
-        .categories-section {
-            padding: 5rem 0;
-            background: var(--light-color);
-        }
-        
+        /* Section Header */
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: var(--space-12);
         }
         
         .section-title {
-            font-size: 2.5rem;
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
+            font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+            color: var(--primary);
+            margin-bottom: var(--space-4);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 2px;
         }
         
         .section-subtitle {
-            font-size: 1.2rem;
-            color: #666;
+            font-size: var(--text-lg);
+            color: var(--gray);
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.6;
         }
         
-        /* Enhanced Categories Grid */
+        /* Categories Grid */
+        .categories-section {
+            padding: var(--space-16) 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
         }
         
         .category-card {
             background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
             text-decoration: none;
             color: inherit;
-            transition: var(--transition);
-            box-shadow: var(--shadow-light);
+            transition: all var(--transition-base);
             border: 2px solid transparent;
-            position: relative;
+            box-shadow: var(--shadow-light);
             display: flex;
             flex-direction: column;
             height: 100%;
+            position: relative;
+            overflow: hidden;
         }
         
         .category-card::before {
@@ -128,52 +298,47 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            opacity: 0;
-            transition: var(--transition);
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
         
         .category-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-heavy);
-            border-color: var(--secondary-color);
+            border-color: var(--accent);
         }
         
-        .category-card:hover::before {
-            opacity: 1;
-        }
-        
-        .category-image {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .category-card:hover .category-image {
-            transform: scale(1.05);
-        }
-        
-        .category-content {
-            padding: 2rem;
-            flex: 1;
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: var(--radius-lg);
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-4);
+            transition: var(--transition-base);
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--warning) 100%);
         }
         
         .category-card h3 {
-            font-size: 1.5rem;
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--space-3);
+            font-size: var(--text-xl);
         }
         
         .category-card p {
-            color: #666;
-            margin-bottom: 1.5rem;
+            color: var(--gray);
+            margin-bottom: var(--space-6);
             line-height: 1.6;
-            flex: 1;
+            flex-grow: 1;
         }
         
         .category-footer {
@@ -181,106 +346,148 @@
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--gray-light);
         }
         
         .category-count {
             display: inline-block;
-            background: var(--light-color);
-            color: var(--primary-color);
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            background: var(--gray-light);
+            color: var(--primary);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
             font-weight: 600;
-            transition: var(--transition);
         }
         
-        .category-card:hover .category-count {
-            background: var(--secondary-color);
+        .view-all-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            transform: scale(1.05);
+            border: none;
+        }
+        
+        .view-all-card::before {
+            background: var(--accent);
+        }
+        
+        .view-all-card h3,
+        .view-all-card p,
+        .view-all-card .category-count,
+        .view-all-card .category-btn {
+            color: white;
+        }
+        
+        .view-all-card .category-count {
+            background: rgba(255, 255, 255, 0.2);
         }
         
         .category-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary-color);
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: var(--primary);
             color: white;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            border: 2px solid var(--primary-color);
+            transition: var(--transition-base);
         }
         
         .category-btn:hover {
+            background: #154360;
+            transform: translateX(4px);
+        }
+        
+        /* Featured Products */
+        .featured-section {
+            padding: var(--space-16) 0;
             background: white;
-            color: var(--primary-color);
-            transform: translateY(-2px);
         }
         
-        .category-btn::after {
-            content: '→';
-            font-size: 1.1rem;
-            transition: var(--transition);
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
         }
         
-        .category-btn:hover::after {
-            transform: translateX(5px);
+        .featured-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            border: 1px solid var(--gray-light);
+            transition: var(--transition-base);
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent);
+        }
+        
+        .featured-card h4 {
+            color: var(--primary);
+            margin-bottom: var(--space-2);
+        }
+        
+        .product-category {
+            color: var(--gray);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-2);
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: var(--text-lg);
         }
         
         /* Quick Order Section */
         .quick-order-section {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+            padding: var(--space-16) 0;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
             color: white;
             text-align: center;
         }
         
         .quick-order-section h2 {
             color: white;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: var(--space-4);
         }
         
         .quick-order-section > p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto var(--space-8);
         }
         
         .contact-options {
             display: flex;
-            gap: 1.5rem;
+            gap: var(--space-4);
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2rem;
         }
         
         .contact-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
+            gap: var(--space-3);
+            padding: var(--space-4) var(--space-6);
             background: white;
-            color: var(--dark-color);
+            color: var(--primary);
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: var(--radius-lg);
             font-weight: 600;
-            transition: var(--transition);
+            transition: var(--transition-base);
             min-width: 200px;
             justify-content: center;
         }
         
         .contact-btn:hover {
+            background: var(--gray-light);
             transform: translateY(-3px);
             box-shadow: var(--shadow-medium);
-            background: var(--light-color);
         }
         
         .contact-btn.whatsapp {
@@ -292,110 +499,69 @@
             background: #128C7E;
         }
         
-        /* Stats Section */
-        .stats-section {
-            padding: 4rem 0;
-            background: white;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        
-        .stat-item {
-            padding: 2rem;
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        
-        .stat-label {
-            color: #666;
-            font-size: 1.1rem;
-        }
-        
-        /* Breadcrumb Navigation */
+        /* Breadcrumb */
         .breadcrumb {
-            padding: 1rem 0;
+            padding: var(--space-4) 0;
             background: white;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--gray-light);
         }
         
         .breadcrumb-links {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--space-2);
             flex-wrap: wrap;
         }
         
         .breadcrumb-links a {
-            color: var(--secondary-color);
+            color: var(--primary);
             text-decoration: none;
-            transition: var(--transition);
+            transition: var(--transition-base);
         }
         
         .breadcrumb-links a:hover {
-            color: var(--primary-color);
+            color: var(--accent);
         }
         
         .breadcrumb-separator {
-            color: #999;
+            color: var(--gray);
         }
         
-        /* Featured Products Preview */
-        .featured-preview {
-            padding: 4rem 0;
-            background: var(--light-color);
+        /* Animations */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .preview-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-light);
-            transition: var(--transition);
-        }
-        
-        .preview-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-        }
-        
-        .preview-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
         }
         
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         @media (max-width: 768px) {
-            .shop-hero h1 {
-                font-size: 2.5rem;
+            .shop-hero {
+                padding: var(--space-12) 0;
             }
             
-            .shop-hero .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .categories-grid {
@@ -412,64 +578,29 @@
                 max-width: 300px;
             }
             
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .category-footer {
                 flex-direction: column;
-                gap: 1rem;
+                gap: var(--space-4);
                 align-items: stretch;
             }
             
             .category-btn {
-                text-align: center;
                 justify-content: center;
             }
         }
         
         @media (max-width: 480px) {
-            .shop-hero {
-                padding: 3rem 0;
-            }
-            
-            .shop-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .category-content {
-                padding: 1.5rem;
-            }
-            
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+            
+            .shop-hero h1 {
+                font-size: var(--text-3xl);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .section-title {
+                font-size: var(--text-2xl);
             }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
         }
     </style>
 </head>
@@ -483,9 +614,9 @@
             </a>
             
             <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span>|</span>
+                <span>|</span>
+                <span>|</span>
             </button>
             
             <ul class="nav-links">
@@ -494,9 +625,9 @@
                 <li><a href="/services">Our Services</a></li>
                 <li><a href="/shop-categories" class="active">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
-                <li><a href="/investment">Investment</a></li>
+                <li><a href="/investment" >Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
-                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/order-track" >Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
             
@@ -544,9 +675,9 @@
         <div class="container">
             <div class="hero-content fade-in-up">
                 <h1>Discover Our Products</h1>
-                <p class="subtitle">Premium quality products across agriculture, construction, solar energy, furniture, and machinery</p>
-                <a href="#categories" class="btn btn-primary" style="background: white; color: var(--primary-color);">
-                    Explore Categories 
+                <p>Premium quality products across agriculture, construction, solar energy, furniture, and machinery. Everything you need for your business and home.</p>
+                <a href="#categories" class="btn btn-secondary">
+                    Explore All Categories
                 </a>
             </div>
         </div>
@@ -557,7 +688,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number" data-count="250">0</span>
+                    <span class="stat-number" data-count="180">0</span>
                     <span class="stat-label">Products Available</span>
                 </div>
                 <div class="stat-item">
@@ -586,9 +717,8 @@
             
             <div class="categories-grid">
                 <!-- Agriculture -->
-                <a href="/shop-agriculture" class="category-card fade-in-up" data-delay="100">
-                    <img src="/img/categories/agriculture.jpg" alt="Agriculture & Livestock" class="category-image" onerror="this.src='/img/categories/default-agriculture.jpg'">
-                    <div class="category-content">
+                <a href="/shop-agriculture" class="category-card fade-in-up">
+                    <div>
                         <h3>Agriculture & Livestock</h3>
                         <p>Comprehensive range of agricultural products including day-old chicks, broilers, layers, eggs, pigs, catfish, fingerlings, and essential farming supplies</p>
                         <div class="category-footer">
@@ -599,11 +729,10 @@
                 </a>
 
                 <!-- Construction -->
-                <a href="/shop-construction" class="category-card fade-in-up" data-delay="200">
-                    <img src="/img/categories/construction.jpg" alt="Construction & Manufacturing" class="category-image" onerror="this.src='/img/categories/default-construction.jpg'">
-                    <div class="category-content">
+                <a href="/shop-construction" class="category-card fade-in-up">
+                    <div>
                         <h3>Construction & Manufacturing</h3>
-                        <p>Building materials, concrete blocks, sports court construction, electric gates, and complete construction solutions</p>
+                        <p>Building Construction Works, Manual concrete block machines, sports court construction, electric gates, and complete diaspora construction solutions</p>
                         <div class="category-footer">
                             <span class="category-count">45+ products</span>
                             <span class="category-btn">View Products</span>
@@ -612,11 +741,10 @@
                 </a>
 
                 <!-- Machinery -->
-                <a href="/shop-machinery" class="category-card fade-in-up" data-delay="300">
-                    <img src="/img/categories/machinery.jpg" alt="Machinery & Equipment" class="category-image" onerror="this.src='/img/categories/default-machinery.jpg'">
-                    <div class="category-content">
+                <a href="/shop-machinery" class="category-card fade-in-up">
+                    <div>
                         <h3>Machinery & Equipment</h3>
-                        <p>Industrial machinery including block-making machines, concrete mixers, and production equipment</p>
+                        <p>Industrial machinery including concrete mixers, bulk cement supply, sand & granite supplies, machinery rentage and production equipment</p>
                         <div class="category-footer">
                             <span class="category-count">15+ products</span>
                             <span class="category-btn">View Products</span>
@@ -625,9 +753,8 @@
                 </a>
 
                 <!-- Solar -->
-                <a href="/shop-solar" class="category-card fade-in-up" data-delay="400">
-                    <img src="/img/categories/solar.jpg" alt="Solar Energy Solutions" class="category-image" onerror="this.src='/img/categories/default-solar.jpg'">
-                    <div class="category-content">
+                <a href="/shop-solar" class="category-card fade-in-up">
+                    <div>
                         <h3>Solar Energy Solutions</h3>
                         <p>Complete solar power systems, panels, batteries, inverters, and professional installation services</p>
                         <div class="category-footer">
@@ -638,11 +765,10 @@
                 </a>
 
                 <!-- Furniture -->
-                <a href="/shop-furniture" class="category-card fade-in-up" data-delay="500">
-                    <img src="/img/categories/furniture.jpg" alt="Furniture & Upholstery" class="category-image" onerror="this.src='/img/categories/default-furniture.jpg'">
-                    <div class="category-content">
+                <a href="/shop-furniture" class="category-card fade-in-up">
+                    <div>
                         <h3>Furniture & Upholstery</h3>
-                        <p>Custom-made furniture, leather and cloth upholstery, office furniture, and complete interior solutions</p>
+                        <p>Custom-made furniture, leather and cloth upholstery, office furniture, and complete interior solutions for individuals and businesses</p>
                         <div class="category-footer">
                             <span class="category-count">75+ products</span>
                             <span class="category-btn">View Products</span>
@@ -651,10 +777,9 @@
                 </a>
 
                 <!-- Diaspora -->
-                <a href="/shop-diaspora" class="category-card fade-in-up" data-delay="500">
-                    <img src="/img/categories/diaspora.jpg" alt="Diaspora Business & Project Management" class="category-image" onerror="this.src='/img/categories/default-diaspora.jpg'">
-                    <div class="category-content">
-                        <h3>Diaspora Business & Project Management</h3>
+                <a href="/shop-diaspora" class="category-card fade-in-up">
+                    <div>
+                        <h3>Diaspora Business Management</h3>
                         <p>Custom-made plans and investment strategies for people in or outside the country who need reputable project handling and business management in Nigeria</p>
                         <div class="category-footer">
                             <span class="category-count">5 Opportunities</span>
@@ -664,9 +789,8 @@
                 </a>
 
                 <!-- View All -->
-                <a href="/shop-all" class="category-card view-all fade-in-up pulse" data-delay="600">
-                    <img src="/img/categories/all-products.jpg" alt="All Products" class="category-image" onerror="this.src='/img/categories/default-all.jpg'">
-                    <div class="category-content">
+                <a href="/shop-all" class="category-card view-all-card fade-in-up">
+                    <div>
                         <h3>View All Products</h3>
                         <p>Browse our complete product catalog with advanced search and filtering options</p>
                         <div class="category-footer">
@@ -679,14 +803,14 @@
         </div>
     </section>
 
-    <!-- Featured Products Preview -->
-    <section class="featured-preview">
+    <!-- Featured Products -->
+    <section class="featured-section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Featured Products</h2>
                 <p class="section-subtitle">Check out some of our most popular products</p>
             </div>
-            <div class="preview-grid" id="featured-products">
+            <div class="featured-grid" id="featured-products">
                 <!-- JavaScript will populate this -->
             </div>
         </div>
@@ -699,13 +823,13 @@
             <p>Our product specialists are ready to assist you with bulk orders, custom requirements, or any questions</p>
             <div class="contact-options">
                 <a href="tel:+2348129978419" class="contact-btn">
-                    📞 Call +234 812 997 8419
+                     Call +234 812 997 8419
                 </a>
                 <a href="https://wa.me/2348129978419" class="contact-btn whatsapp" target="_blank">
-                    💬 WhatsApp Consultation
+                     WhatsApp Consultation
                 </a>
                 <a href="mailto:collaborativeinvestmentltd@gmail.com" class="contact-btn">
-                    ✉️ Email Inquiry
+                     Email Inquiry
                 </a>
             </div>
         </div>
@@ -713,32 +837,28 @@
 
     <!-- Footer -->
     <footer class="footer">
+        <!-- Same footer as other pages -->
         <div class="footer-grid">
-            <!-- About Section -->
             <div class="footer-section">
                 <h3>Collaborative Investment Ltd</h3>
                 <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
                 <div class="social-links">
-                    <!-- Facebook -->
                     <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
                             <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
                         </svg>
                     </a>
-                    <!-- X / Twitter -->
                     <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
                         </svg>
                     </a>
-                    <!-- WhatsApp -->
                     <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
                         <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
                             <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
                         </svg>
                     </a>
-                    <!-- Instagram -->
                     <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
                         <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -756,7 +876,6 @@
                 </div>
             </div>
 
-            <!-- Quick Links -->
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
@@ -771,7 +890,6 @@
                 </ul>
             </div>
 
-            <!-- Services -->
             <div class="footer-section">
                 <h3>Services</h3>
                 <ul class="footer-links">
@@ -784,7 +902,6 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
             <div class="footer-section">
                 <h3>Contact Info</h3>
                 <p>212 Ijegun Road, Ikotun, Lagos</p>
@@ -795,7 +912,6 @@
             </div>
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer-bottom">
             <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
             <p>Building Nigeria's Business Future</p>
@@ -813,85 +929,20 @@
                 </p>
             </div>
         </div>
-
-        <!-- Cookie Consent -->
-        <div id="cookieConsent" class="cookie-consent">
-            <div class="cookie-content">
-                <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-                <div class="cookie-buttons">
-                    <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
-                    <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
-                </div>
-            </div>
-        </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="/js/shop-categories.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/cart-drawer.js"></script>
-    
-    <!-- Enhanced Shop Categories JavaScript -->
     <script>
-        // Enhanced shop-categories.js
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Enhanced Shop Categories loaded');
-            
-            // Initialize counters
-            initCounters();
-            
-            // Setup category cards
-            setupCategoryCards();
-            
-            // Load featured products
-            loadFeaturedProducts();
-            
-            // Setup animations
-            setupAnimations();
-            
-            // Cart initialization
-            updateCartCount();
-            
-            // Preload category images
-            preloadCategoryImages();
-        });
-        
-        function preloadCategoryImages() {
-            const imagePaths = [
-                '/img/categories/agriculture.jpg',
-                '/img/categories/construction.jpg',
-                '/img/categories/machinery.jpg',
-                '/img/categories/solar.jpg',
-                '/img/categories/furniture.jpg',
-                '/img/categories/diaspora.jpg',
-                '/img/categories/all-products.jpg',
-                '/img/categories/default-agriculture.jpg',
-                '/img/categories/default-construction.jpg',
-                '/img/categories/default-machinery.jpg',
-                '/img/categories/default-solar.jpg',
-                '/img/categories/default-furniture.jpg',
-                '/img/categories/default-diaspora.jpg',
-                '/img/categories/default-all.jpg'
-            ];
-            
-            imagePaths.forEach(path => {
-                const img = new Image();
-                img.src = path;
-            });
-        }
-        
-        function initCounters() {
             // Animate counter numbers
             const counters = document.querySelectorAll('.stat-number');
             counters.forEach(counter => {
                 const target = parseInt(counter.getAttribute('data-count'));
                 const duration = 2000;
-                const step = target / (duration / 16);
+                const increment = target / (duration / 16);
                 let current = 0;
                 
                 const updateCounter = () => {
-                    current += step;
+                    current += increment;
                     if (current < target) {
                         counter.textContent = Math.floor(current);
                         requestAnimationFrame(updateCounter);
@@ -900,7 +951,7 @@
                     }
                 };
                 
-                // Start counter when in viewport
+                // Start when in viewport
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -908,194 +959,112 @@
                             observer.unobserve(entry.target);
                         }
                     });
-                });
+                }, { threshold: 0.5 });
                 
                 observer.observe(counter);
             });
-        }
-        
-        function setupCategoryCards() {
-            const categoryCards = document.querySelectorAll('.category-card');
             
-            categoryCards.forEach(card => {
-                // Add hover effect
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-                
-                // Add click animation
-                card.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Add ripple effect
-                    const ripple = document.createElement('span');
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(52, 152, 219, 0.3);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        width: ${size}px;
-                        height: ${size}px;
-                        top: ${y}px;
-                        left: ${x}px;
-                        pointer-events: none;
-                        z-index: 1;
-                    `;
-                    
-                    this.style.position = 'relative';
-                    this.appendChild(ripple);
-                    
-                    // Navigate after animation
-                    setTimeout(() => {
-                        window.location.href = this.href;
-                    }, 300);
-                });
-                
-                // Add image error handling
-                const img = card.querySelector('.category-image');
-                if (img) {
-                    img.addEventListener('error', function() {
-                        // Set fallback image based on category
-                        const alt = this.alt.toLowerCase();
-                        if (alt.includes('agriculture')) {
-                            this.src = '/img/categories/default-agriculture.jpg';
-                        } else if (alt.includes('construction')) {
-                            this.src = '/img/categories/default-construction.jpg';
-                        } else if (alt.includes('machinery')) {
-                            this.src = '/img/categories/default-machinery.jpg';
-                        } else if (alt.includes('solar')) {
-                            this.src = '/img/categories/default-solar.jpg';
-                        } else if (alt.includes('furniture')) {
-                            this.src = '/img/categories/default-furniture.jpg';
-                        } else if (alt.includes('diaspora')) {
-                            this.src = '/img/categories/default-diaspora.jpg';
-                        } else {
-                            this.src = '/img/categories/default-all.jpg';
-                        }
-                    });
-                }
-            });
-        }
-        
-        function loadFeaturedProducts() {
-            const featuredContainer = document.getElementById('featured-products');
-            if (!featuredContainer) return;
-            
-            // Sample featured products
+            // Load featured products
             const featuredProducts = [
                 {
                     name: 'Monocrystalline Solar Panel 330W',
-                    category: 'Solar',
-                    price: '₦45,000',
-                    image: '/img/solar/monocrystalline-330w.jpg'
+                    category: 'Solar Energy',
+                    price: '₦45,000'
                 },
                 {
                     name: 'Day Old Broiler Chicks',
                     category: 'Agriculture',
-                    price: '₦450',
-                    image: '/img/agriculture/day-old-broilers.jpg'
+                    price: '₦450 each'
                 },
                 {
                     name: 'Automatic Block Machine',
                     category: 'Machinery',
-                    price: '₦2,500,000',
-                    image: '/img/machinery/auto-5-block.jpg'
+                    price: '₦2,500,000'
                 },
                 {
                     name: 'Executive Office Chair',
                     category: 'Furniture',
-                    price: '₦185,000',
-                    image: '/img/furniture/ergonomic-office-chair.jpg'
+                    price: '₦185,000'
+                },
+                {
+                    name: 'Concrete Blocks (9 inches)',
+                    category: 'Construction',
+                    price: '₦250 each'
+                },
+                {
+                    name: 'Diaspora Business Setup',
+                    category: 'Business Services',
+                    price: 'Custom Quote'
                 }
             ];
             
-            featuredProducts.forEach(product => {
-                const item = document.createElement('div');
-                item.className = 'preview-item';
-                item.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" onerror="this.src='/img/logo.jpg'">
-                    <h4>${product.name}</h4>
-                    <p class="product-category">${product.category}</p>
-                    <p class="product-price">${product.price}</p>
-                `;
-                featuredContainer.appendChild(item);
+            const featuredContainer = document.getElementById('featured-products');
+            if (featuredContainer) {
+                featuredProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'featured-card';
+                    card.innerHTML = `
+                        <h4>${product.name}</h4>
+                        <div class="product-category">${product.category}</div>
+                        <div class="product-price">${product.price}</div>
+                    `;
+                    featuredContainer.appendChild(card);
+                });
+            }
+            
+            // Update cart count
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+                    const badge = document.getElementById('cart-count-badge');
+                    if (badge) {
+                        badge.textContent = totalItems;
+                        badge.style.display = totalItems > 0 ? 'inline' : 'none';
+                    }
+                } catch (error) {
+                    console.error('Error updating cart count:', error);
+                }
+            }
+            
+            updateCartCount();
+            
+            // Category card hover effects
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+                
+                // Add click effect
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Add loading state
+                    const originalText = this.querySelector('.category-btn').textContent;
+                    this.querySelector('.category-btn').textContent = 'Loading...';
+                    this.style.cursor = 'wait';
+                    
+                    // Simulate navigation
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 500);
+                });
             });
-        }
-        
-        function setupAnimations() {
-            // Stagger fade-in animations
+            
+            // Stagger animations
             const fadeElements = document.querySelectorAll('.fade-in-up');
             fadeElements.forEach((element, index) => {
-                const delay = element.getAttribute('data-delay') || 0;
-                setTimeout(() => {
-                    element.style.animationDelay = `${index * 100 + parseInt(delay)}ms`;
-                    element.classList.add('fade-in-up');
-                }, 50);
+                element.style.animationDelay = `${index * 100}ms`;
             });
-            
-            // Intersection Observer for scroll animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animated');
-                    }
-                });
-            }, observerOptions);
-            
-            document.querySelectorAll('.category-card, .stat-item, .preview-item').forEach(el => {
-                observer.observe(el);
-            });
-        }
-        
-        function updateCartCount() {
-            try {
-                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                const badge = document.getElementById('cart-count-badge');
-                if (badge) {
-                    badge.textContent = totalItems;
-                    badge.style.display = totalItems > 0 ? 'flex' : 'none';
-                }
-            } catch (error) {
-                console.error('Error updating cart count:', error);
-            }
-        }
-        
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            .animated {
-                animation: fadeIn 0.6s ease forwards;
-            }
-        `;
-        document.head.appendChild(style);
+        });
     </script>
+    
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
 </body>
 </html>

@@ -11,65 +11,87 @@
     <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Blog-specific styles */
+        /* Clean, text-only blog styles */
+        :root {
+            --primary: #1a5276;
+            --secondary: #145A32;
+            --accent: #D68910;
+            --light: #f8f9fa;
+            --dark: #1a252f;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --transition: all 0.3s ease;
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 24px rgba(0,0,0,0.12);
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Blog Hero */
         .blog-hero {
             background: linear-gradient(135deg, var(--primary) 0%, #2c5530 100%);
             color: white;
             padding: 5rem 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .blog-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,50 1000,100 0,100"/></svg>');
-            background-size: cover;
         }
         
         .blog-hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            position: relative;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
         }
         
         .blog-hero p {
-            font-size: 1.3rem;
-            max-width: 600px;
+            font-size: 1.2rem;
+            max-width: 700px;
             margin: 0 auto;
             opacity: 0.9;
-            position: relative;
         }
         
+        /* Categories Navigation */
         .categories-nav {
             background: var(--light);
             padding: 2rem 0;
-            border-bottom: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--gray-light);
         }
         
         .categories-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.75rem;
         }
         
         .category-btn {
             background: white;
-            border: 2px solid var(--light-gray);
-            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--gray-light);
+            padding: 0.75rem 1.5rem;
             border-radius: 25px;
             font-weight: 600;
             color: var(--gray);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
         }
         
         .category-btn:hover,
@@ -80,51 +102,48 @@
             transform: translateY(-2px);
         }
         
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Featured Articles */
         .featured-articles {
             padding: 4rem 0;
+            background: var(--light);
         }
         
         .featured-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
         
         .featured-card {
             background: white;
-            border-radius: 16px;
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
         }
         
         .featured-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        
-        .card-image {
-            height: 200px;
-            background: var(--light);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-        
-        .card-badge {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            background: var(--secondary);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.8rem;
+            box-shadow: var(--shadow-medium);
         }
         
         .card-content {
@@ -133,17 +152,60 @@
         
         .card-meta {
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
             font-size: 0.9rem;
             color: var(--gray);
         }
         
+        .category {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .agriculture-category {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .manufacturing-category {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .solar-category {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .furniture-category {
+            background: #fbe9e7;
+            color: #d84315;
+        }
+        
+        .business-category {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .diaspora-category {
+            background: #f3e5f5;
+            color: #6a1b9a;
+        }
+        
+        .investment-category {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
         .card-title {
             font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: var(--dark);
             line-height: 1.4;
+            color: var(--primary);
         }
         
         .card-excerpt {
@@ -152,36 +214,17 @@
             line-height: 1.6;
         }
         
-        .card-features {
-            margin: 1.5rem 0;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .feature-item::before {
-            content: '✓';
-            color: var(--success);
-            font-weight: bold;
-        }
-        
         .investment-highlight {
-            background: var(--light);
+            background: #fff8e1;
             padding: 1rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            border-left: 4px solid var(--secondary);
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
         }
         
         .roi-badge {
             display: inline-block;
-            background: var(--success);
+            background: #2e7d32;
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
@@ -190,32 +233,46 @@
             margin-left: 0.5rem;
         }
         
+        .card-features {
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        .feature-item::before {
+            content: "✓";
+            color: #2e7d32;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        /* All Articles Grid */
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
         
         .article-card {
             background: white;
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
         }
         
         .article-card:hover {
             transform: translateY(-3px);
-        }
-        
-        .article-image {
-            height: 160px;
-            background: var(--light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+            box-shadow: var(--shadow-medium);
         }
         
         .article-content {
@@ -224,95 +281,178 @@
         
         .article-category {
             display: inline-block;
-            background: var(--light);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
             font-weight: 600;
-            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
         }
         
         .article-title {
             font-size: 1.1rem;
             margin-bottom: 0.8rem;
-            color: var(--dark);
+            color: var(--primary);
             line-height: 1.4;
+        }
+        
+        .article-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
         
         .article-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--gray);
             margin-top: 1rem;
         }
         
-        .newsletter-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
             color: white;
-            padding: 4rem 0;
-            text-align: center;
-            border-radius: 20px;
-            margin: 4rem auto;
-            max-width: 1200px;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
         }
         
-        .newsletter-content {
-            max-width: 600px;
-            margin: 0 auto;
+        .btn:hover {
+            background: #154360;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        /* Investment Models Section */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5276 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: 3rem auto;
         }
         
         .newsletter-form {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .newsletter-input {
             flex: 1;
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             font-size: 1rem;
         }
         
+        /* Topics Grid */
         .topics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
         
         .topic-card {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            color: inherit;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 2px solid transparent;
         }
         
         .topic-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary);
         }
         
-        .topic-icon {
-            font-size: 2.5rem;
+        .topic-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+        
+        .topic-content p {
+            color: var(--gray);
             margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .topic-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .topic-count,
+        .topic-roi {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-weight: 600;
         }
         
         .topic-count {
-            display: inline-block;
-            background: var(--light);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 1rem;
+            background: #e3f2fd;
+            color: #1565c0;
         }
         
+        .topic-roi {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
             .blog-hero h1 {
                 font-size: 2.2rem;
@@ -322,11 +462,10 @@
                 font-size: 1.1rem;
             }
             
-            .featured-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .articles-grid {
+            .featured-grid,
+            .articles-grid,
+            .services-grid,
+            .topics-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -339,870 +478,33 @@
                 overflow-x: auto;
                 padding-bottom: 1rem;
             }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
         }
-
-.featured-articles {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.featured-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
-    margin-top: 3rem;
-}
-
-.featured-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.featured-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-
-.card-image {
-    position: relative;
-    height: 250px;
-    overflow: hidden;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.featured-card:hover .card-image img {
-    transform: scale(1.05);
-}
-
-.image-overlay {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-
-.card-content {
-    padding: 2rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: var(--gray);
-}
-
-.card-meta span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.category {
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.8rem;
-}
-
-.agriculture-category {
-    background: rgba(144, 238, 144, 0.2);
-    color: #228B22;
-}
-
-.manufacturing-category {
-    background: rgba(192, 192, 192, 0.2);
-    color: #696969;
-}
-
-.solar-category {
-    background: rgba(255, 228, 181, 0.2);
-    color: #FF8C00;
-}
-
-.card-title {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-    line-height: 1.3;
-}
-
-.card-excerpt {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    flex-grow: 1;
-}
-
-.investment-highlight {
-    background: var(--light);
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    border-left: 4px solid var(--secondary);
-}
-
-.investment-highlight strong {
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.roi-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--secondary);
-    color: var(--primary);
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-left: 0.5rem;
-}
-
-.card-features {
-    margin-bottom: 1.5rem;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    color: var(--dark);
-    font-size: 0.95rem;
-}
-
-.featured-card .btn {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-/* All Articles Grid */
-.articles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.article-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.article-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.article-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.article-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.article-card:hover .article-image img {
-    transform: scale(1.05);
-}
-
-.article-category {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.furniture-category {
-    background: rgba(222, 184, 135, 0.2);
-    color: #8B4513;
-}
-
-.business-category {
-    background: rgba(65, 105, 225, 0.2);
-    color: #000080;
-}
-
-.diaspora-category {
-    background: rgba(147, 112, 219, 0.2);
-    color: #4B0082;
-}
-
-.investment-category {
-    background: rgba(50, 205, 50, 0.2);
-    color: #006400;
-}
-
-.article-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.article-title {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    line-height: 1.3;
-}
-
-.article-content p {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    flex-grow: 1;
-}
-
-.article-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    color: var(--gray);
-}
-
-.article-meta span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-/* FontAwesome Icon Styles */
-.fas {
-    width: 16px;
-    height: 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 6px;
-}
-
-/* Remove old icon-small class */
-.icon-small {
-    display: none;
-}
-
-/* Featured Articles Styles */
-.featured-articles {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.featured-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
-    margin-top: 3rem;
-}
-
-.featured-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.featured-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-
-.card-image {
-    position: relative;
-    height: 250px;
-    overflow: hidden;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.featured-card:hover .card-image img {
-    transform: scale(1.05);
-}
-
-.image-overlay {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-
-.image-overlay i {
-    margin-right: 5px;
-}
-
-.card-content {
-    padding: 2rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: var(--gray);
-}
-
-.card-meta span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.category {
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.agriculture-category {
-    background: rgba(144, 238, 144, 0.2);
-    color: #228B22;
-}
-
-.manufacturing-category {
-    background: rgba(192, 192, 192, 0.2);
-    color: #696969;
-}
-
-.solar-category {
-    background: rgba(255, 228, 181, 0.2);
-    color: #FF8C00;
-}
-
-.furniture-category {
-    background: rgba(222, 184, 135, 0.2);
-    color: #8B4513;
-}
-
-.business-category {
-    background: rgba(65, 105, 225, 0.2);
-    color: #000080;
-}
-
-.diaspora-category {
-    background: rgba(147, 112, 219, 0.2);
-    color: #4B0082;
-}
-
-.investment-category {
-    background: rgba(50, 205, 50, 0.2);
-    color: #006400;
-}
-
-.card-title {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-    line-height: 1.3;
-}
-
-.card-excerpt {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    flex-grow: 1;
-}
-
-.investment-highlight {
-    background: var(--light);
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    border-left: 4px solid var(--secondary);
-}
-
-.investment-highlight strong {
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.roi-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--secondary);
-    color: var(--primary);
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-left: 0.5rem;
-}
-
-.card-features {
-    margin-bottom: 1.5rem;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    color: var(--dark);
-    font-size: 0.95rem;
-}
-
-.feature-item i {
-    color: var(--success);
-}
-
-.featured-card .btn {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-/* All Articles Grid */
-.articles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.article-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.article-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.article-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.article-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.article-card:hover .article-image img {
-    transform: scale(1.05);
-}
-
-.article-category {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.article-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.article-title {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    line-height: 1.3;
-}
-
-.article-content p {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    flex-grow: 1;
-}
-
-.article-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    color: var(--gray);
-}
-
-.article-meta span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.article-card .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .featured-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .articles-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-    
-    .card-image {
-        height: 200px;
-    }
-    
-    .article-image {
-        height: 180px;
-    }
-    
-    .category, .article-category {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .featured-articles,
-    .section {
-        padding: 3rem 0;
-    }
-    
-    .featured-grid,
-    .articles-grid {
-        gap: 1.5rem;
-    }
-    
-    .card-content,
-    .article-content {
-        padding: 1.5rem;
-    }
-    
-    .card-title {
-        font-size: 1.2rem;
-    }
-    
-    .article-title {
-        font-size: 1.1rem;
-    }
-}
-
-/* Popular Topics Styles */
-.topics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.topic-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid transparent;
-    position: relative;
-}
-
-.topic-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    border-color: var(--primary);
-}
-
-.topic-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.topic-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.topic-card:hover .topic-image img {
-    transform: scale(1.05);
-}
-
-.topic-icon {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--primary);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-.topic-card:hover .topic-icon {
-    background: var(--secondary);
-    color: white;
-    transform: scale(1.1);
-}
-
-.topic-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.topic-content h3 {
-    color: var(--primary);
-    margin-bottom: 0.75rem;
-    font-size: 1.3rem;
-    line-height: 1.3;
-}
-
-.topic-content p {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    flex-grow: 1;
-    font-size: 0.95rem;
-}
-
-.topic-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--light-gray);
-}
-
-.topic-count,
-.topic-roi {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.topic-count {
-    color: var(--accent);
-    background: rgba(41, 128, 185, 0.1);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-}
-
-.topic-count i {
-    color: var(--accent);
-}
-
-.topic-roi {
-    color: var(--success);
-    background: rgba(39, 174, 96, 0.1);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-}
-
-.topic-roi i {
-    color: var(--success);
-}
-
-/* Category-specific icon colors */
-.topic-card:nth-child(1) .topic-icon {
-    color: #228B22;
-    background: rgba(144, 238, 144, 0.9);
-}
-
-.topic-card:nth-child(2) .topic-icon {
-    color: #696969;
-    background: rgba(192, 192, 192, 0.9);
-}
-
-.topic-card:nth-child(3) .topic-icon {
-    color: #FF8C00;
-    background: rgba(255, 228, 181, 0.9);
-}
-
-.topic-card:nth-child(4) .topic-icon {
-    color: #8B4513;
-    background: rgba(222, 184, 135, 0.9);
-}
-
-.topic-card:nth-child(5) .topic-icon {
-    color: #4B0082;
-    background: rgba(147, 112, 219, 0.9);
-}
-
-.topic-card:nth-child(6) .topic-icon {
-    color: #000080;
-    background: rgba(65, 105, 225, 0.9);
-}
-
-.topic-card:nth-child(7) .topic-icon {
-    color: #2C3E50;
-    background: rgba(149, 165, 166, 0.9);
-}
-
-.topic-card:nth-child(8) .topic-icon {
-    color: #1A5276;
-    background: rgba(52, 152, 219, 0.9);
-}
-
-.topic-card:hover .topic-icon {
-    background: var(--secondary) !important;
-    color: white !important;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .topics-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .topics-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .topic-image {
-        height: 180px;
-    }
-    
-    .topic-content {
-        padding: 1.25rem;
-    }
-    
-    .topic-content h3 {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .topics-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .topic-stats {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-    
-    .topic-count,
-    .topic-roi {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-/* Animation */
-.topic-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-}
-
-.topic-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+        
+        @media (max-width: 480px) {
+            .blog-hero {
+                padding: 3rem 0;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .featured-articles {
+                padding: 3rem 0;
+            }
+            
+            .newsletter-section {
+                padding: 2rem;
+            }
+        }
     </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -1210,38 +512,43 @@
                 <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
             
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span>|</span>
+                <span>|</span>
+                <span>|</span>
+            </button>
+            
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
-                <li><a href="/investment">Investment</a></li>
-                <li><a href="/blog">Blog</a></li>
+                <li><a href="/investment" >Investment</a></li>
+                <li><a href="/blog" class="active">Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -1250,7 +557,6 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
     <!-- Blog Hero -->
     <section class="blog-hero">
@@ -1265,460 +571,229 @@
         <div class="container">
             <div class="categories-container">
                 <button class="category-btn active" data-category="all">All Articles</button>
-                <button class="category-btn" data-category="investment"> Investment</button>
-                <button class="category-btn" data-category="agriculture"> Agriculture</button>
-                <button class="category-btn" data-category="business"> Business</button>
-                <button class="category-btn" data-category="manufacturing"> Manufacturing</button>
-                <button class="category-btn" data-category="solar"> Solar Energy</button>
-                <button class="category-btn" data-category="furniture"> Furniture</button>
-                <button class="category-btn" data-category="diaspora"> Diaspora</button>
+                <button class="category-btn" data-category="investment">Investment</button>
+                <button class="category-btn" data-category="agriculture">Agriculture</button>
+                <button class="category-btn" data-category="business">Business</button>
+                <button class="category-btn" data-category="manufacturing">Manufacturing</button>
+                <button class="category-btn" data-category="solar">Solar Energy</button>
+                <button class="category-btn" data-category="furniture">Furniture</button>
+                <button class="category-btn" data-category="diaspora">Diaspora</button>
             </div>
         </div>
     </section>
 
-<!-- Featured Articles -->
-<section class="featured-articles">
-    <div class="container">
-        <div class="section-title">
-            <h2>Featured Investment Opportunities</h2>
-            <p>High-return ventures with professional management and proven track records</p>
-        </div>
-
-        <div class="featured-grid">
-            <!-- Featured Article 1 -->
-            <div class="featured-card" data-category="investment agriculture">
-                <div class="card-image">
-                    <img src="/img/blog/featured-poultry-farming.jpg" alt="Poultry Farming Investment" loading="lazy">
-                    <div class="image-overlay">
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            5 min read
-                        </span>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Dec 15, 2024
-                        </span>
-                        <span class="category agriculture-category">
-                            <i class="fas fa-tractor"></i>
-                            AGRICULTURE
-                        </span>
-                    </div>
-                    <h3 class="card-title">Why Poultry Farming Delivers 35% ROI in Nigeria</h3>
-                    <p class="card-excerpt">Discover how structured poultry operations with professional management can yield consistent 35% annual returns, even in challenging economic conditions.</p>
-                    
-                    <div class="investment-highlight">
-                        <strong>
-                            <i class="fas fa-chart-line"></i>
-                            Investment Opportunity:
-                        </strong> 
-                        ₦15M Poultry Expansion
-                        <span class="roi-badge">
-                            <i class="fas fa-money-bill-trend-up"></i>
-                            35% ROI
-                        </span>
-                    </div>
-                    
-                    <div class="card-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Market demand analysis for eggs and poultry
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Cost-effective feeding strategies
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Disease prevention and management
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Scale optimization for maximum profit
-                        </div>
-                    </div>
-                    
-                    <a href="/blog/poultry-farming-investment-guide" class="btn btn-primary">
-                        <i class="fas fa-book-open"></i>
-                        Read Full Analysis
-                    </a>
-                </div>
+    <!-- Featured Articles -->
+    <section class="featured-articles">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Investment Opportunities</h2>
+                <p>High-return ventures with professional management and proven track records</p>
             </div>
 
-            <!-- Featured Article 2 -->
-            <div class="featured-card" data-category="investment manufacturing">
-                <div class="card-image">
-                    <img src="/img/blog/featured-block-manufacturing.jpg" alt="Block Manufacturing Investment" loading="lazy">
-                    <div class="image-overlay">
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            7 min read
-                        </span>
+            <div class="featured-grid">
+                <!-- Featured Article 1 -->
+                <div class="featured-card" data-category="investment agriculture">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="date">Dec 15, 2024</span>
+                            <span class="category agriculture-category">AGRICULTURE</span>
+                        </div>
+                        <h3 class="card-title">Why Poultry Farming Delivers 35% ROI in Nigeria</h3>
+                        <p class="card-excerpt">Discover how structured poultry operations with professional management can yield consistent 35% annual returns, even in challenging economic conditions.</p>
+                        
+                        <div class="investment-highlight">
+                            <strong>Investment Opportunity:</strong> ₦15M Poultry Expansion
+                            <span class="roi-badge">35% ROI</span>
+                        </div>
+                        
+                        <div class="card-features">
+                            <div class="feature-item">Market demand analysis for eggs and poultry</div>
+                            <div class="feature-item">Cost-effective feeding strategies</div>
+                            <div class="feature-item">Disease prevention and management</div>
+                            <div class="feature-item">Scale optimization for maximum profit</div>
+                        </div>
+                        
+                        <a href="/blog/poultry-farming-investment-guide" class="btn btn-primary">Read Full Analysis</a>
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Dec 10, 2024
-                        </span>
-                        <span class="category manufacturing-category">
-                            <i class="fas fa-industry"></i>
-                            MANUFACTURING
-                        </span>
-                    </div>
-                    <h3 class="card-title">Block Manufacturing: The ₦8M Investment Generating 45% Returns</h3>
-                    <p class="card-excerpt">Learn how the construction boom in Nigeria makes block manufacturing one of the most profitable manufacturing investments with proper management.</p>
-                    
-                    <div class="investment-highlight">
-                        <strong>
-                            <i class="fas fa-chart-line"></i>
-                            Investment Opportunity:
-                        </strong> 
-                        ₦8M Block Plant
-                        <span class="roi-badge">
-                            <i class="fas fa-money-bill-trend-up"></i>
-                            45% ROI
-                        </span>
-                    </div>
-                    
-                    <div class="card-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Equipment selection and setup costs
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Quality control for premium products
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Market positioning and pricing strategy
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Daily production optimization
-                        </div>
-                    </div>
-                    
-                    <a href="/blog/block-manufacturing-investment" class="btn btn-primary">
-                        <i class="fas fa-book-open"></i>
-                        Read Full Analysis
-                    </a>
-                </div>
-            </div>
 
-            <!-- Featured Article 3 -->
-            <div class="featured-card" data-category="investment solar">
-                <div class="card-image">
-                    <img src="/img/blog/featured-solar-energy.jpg" alt="Solar Energy Investment" loading="lazy">
-                    <div class="image-overlay">
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            6 min read
-                        </span>
+                <!-- Featured Article 2 -->
+                <div class="featured-card" data-category="investment manufacturing">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="date">Dec 10, 2024</span>
+                            <span class="category manufacturing-category">MANUFACTURING</span>
+                        </div>
+                        <h3 class="card-title">Block Manufacturing: The ₦8M Investment Generating 45% Returns</h3>
+                        <p class="card-excerpt">Learn how the construction boom in Nigeria makes block manufacturing one of the most profitable manufacturing investments with proper management.</p>
+                        
+                        <div class="investment-highlight">
+                            <strong>Investment Opportunity:</strong> ₦8M Block Plant
+                            <span class="roi-badge">45% ROI</span>
+                        </div>
+                        
+                        <div class="card-features">
+                            <div class="feature-item">Equipment selection and setup costs</div>
+                            <div class="feature-item">Quality control for premium products</div>
+                            <div class="feature-item">Market positioning and pricing strategy</div>
+                            <div class="feature-item">Daily production optimization</div>
+                        </div>
+                        
+                        <a href="/blog/block-manufacturing-investment" class="btn btn-primary">Read Full Analysis</a>
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Dec 5, 2024
-                        </span>
-                        <span class="category solar-category">
-                            <i class="fas fa-sun"></i>
-                            SOLAR ENERGY
-                        </span>
+
+                <!-- Featured Article 3 -->
+                <div class="featured-card" data-category="investment solar">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="date">Dec 5, 2024</span>
+                            <span class="category solar-category">SOLAR ENERGY</span>
+                        </div>
+                        <h3 class="card-title">Solar Energy Investments: 40% ROI in Nigeria's Renewable Market</h3>
+                        <p class="card-excerpt">Capitalize on Nigeria's energy transition with strategic investments in solar equipment production and installation services.</p>
+                        
+                        <div class="investment-highlight">
+                            <strong>Investment Opportunity:</strong> ₦12M Solar Expansion
+                            <span class="roi-badge">40% ROI</span>
+                        </div>
+                        
+                        <div class="card-features">
+                            <div class="feature-item">Growing demand for renewable energy</div>
+                            <div class="feature-item">Government incentives and policies</div>
+                            <div class="feature-item">Equipment production and installation</div>
+                            <div class="feature-item">Commercial and residential markets</div>
+                        </div>
+                        
+                        <a href="/blog/solar-energy-investment" class="btn btn-primary">Read Full Analysis</a>
                     </div>
-                    <h3 class="card-title">Solar Energy Investments: 40% ROI in Nigeria's Renewable Market</h3>
-                    <p class="card-excerpt">Capitalize on Nigeria's energy transition with strategic investments in solar equipment production and installation services.</p>
-                    
-                    <div class="investment-highlight">
-                        <strong>
-                            <i class="fas fa-chart-line"></i>
-                            Investment Opportunity:
-                        </strong> 
-                        ₦12M Solar Expansion
-                        <span class="roi-badge">
-                            <i class="fas fa-money-bill-trend-up"></i>
-                            40% ROI
-                        </span>
-                    </div>
-                    
-                    <div class="card-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Growing demand for renewable energy
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Government incentives and policies
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Equipment production and installation
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            Commercial and residential markets
-                        </div>
-                    </div>
-                    
-                    <a href="/blog/solar-energy-investment" class="btn btn-primary">
-                        <i class="fas fa-book-open"></i>
-                        Read Full Analysis
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- All Articles Grid -->
-<section class="section" style="background: var(--light);">
-    <div class="container">
-        <div class="section-title">
-            <h2>Complete Business & Investment Library</h2>
-            <p>Comprehensive insights across all our focus areas</p>
-        </div>
-
-        <div class="articles-grid">
-            <!-- Agriculture Articles -->
-            <div class="article-card" data-category="agriculture investment">
-                <div class="article-image">
-                    <img src="/img/blog/catfish-farming.jpg" alt="Catfish Farming Investment" loading="lazy">
-                    <div class="article-category agriculture-category">
-                        <i class="fas fa-tractor"></i>
-                        AGRICULTURE
-                    </div>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">Catfish Farming: 30% Returns in 8 Months</h3>
-                    <p>Complete guide to setting up profitable catfish farming operations with modern aquaculture methods and market strategies.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Nov 22, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            5 min read
-                        </span>
-                    </div>
-                    <a href="/blog/catfish-farming-investment" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
-                </div>
+    <!-- All Articles Grid -->
+    <section class="section" style="background: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Complete Business & Investment Library</h2>
+                <p>Comprehensive insights across all our focus areas</p>
             </div>
 
-            <div class="article-card" data-category="agriculture business">
-                <div class="article-image">
-                    <img src="/img/blog/piggery-business.jpg" alt="Piggery Business Expansion" loading="lazy">
-                    <div class="article-category agriculture-category">
-                        <i class="fas fa-tractor"></i>
-                        AGRICULTURE
+            <div class="articles-grid">
+                <!-- Agriculture Articles -->
+                <div class="article-card" data-category="agriculture investment">
+                    <div class="article-content">
+                        <span class="article-category agriculture-category">AGRICULTURE</span>
+                        <h3 class="article-title">Catfish Farming: 30% Returns in 8 Months</h3>
+                        <p>Complete guide to setting up profitable catfish farming operations with modern aquaculture methods and market strategies.</p>
+                        <div class="article-meta">
+                            <span class="date">Nov 22, 2024</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                        <a href="/blog/catfish-farming-investment" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title">Piggery Business: From 10 to 100+ Pigs</h3>
-                    <p>Scalable pig farming strategies that deliver consistent returns through proper breeding, feeding, and market access.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Nov 18, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            6 min read
-                        </span>
-                    </div>
-                    <a href="/blog/piggery-business-expansion" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
-                </div>
-            </div>
 
-            <!-- Manufacturing Articles -->
-            <div class="article-card" data-category="manufacturing investment">
-                <div class="article-image">
-                    <img src="/img/blog/block-machines.jpg" alt="Block Making Machines" loading="lazy">
-                    <div class="article-category manufacturing-category">
-                        <i class="fas fa-industry"></i>
-                        MANUFACTURING
+                <div class="article-card" data-category="agriculture business">
+                    <div class="article-content">
+                        <span class="article-category agriculture-category">AGRICULTURE</span>
+                        <h3 class="article-title">Piggery Business: From 10 to 100+ Pigs</h3>
+                        <p>Scalable pig farming strategies that deliver consistent returns through proper breeding, feeding, and market access.</p>
+                        <div class="article-meta">
+                            <span class="date">Nov 18, 2024</span>
+                            <span class="read-time">6 min read</span>
+                        </div>
+                        <a href="/blog/piggery-business-expansion" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title">Block Making Machines: Local Fabrication Success</h3>
-                    <p>How Nigerian fabricators are creating world-class industrial equipment at 40% lower costs than imports.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Nov 15, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            7 min read
-                        </span>
-                    </div>
-                    <a href="/blog/block-machine-fabrication" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
-                </div>
-            </div>
 
-            <!-- Solar Energy Articles -->
-            <div class="article-card" data-category="solar investment">
-                <div class="article-image">
-                    <img src="/img/blog/solar-installation.jpg" alt="Solar Installation Services" loading="lazy">
-                    <div class="article-category solar-category">
-                        <i class="fas fa-sun"></i>
-                        SOLAR ENERGY
+                <!-- Manufacturing Articles -->
+                <div class="article-card" data-category="manufacturing investment">
+                    <div class="article-content">
+                        <span class="article-category manufacturing-category">MANUFACTURING</span>
+                        <h3 class="article-title">Block Making Machines: Local Fabrication Success</h3>
+                        <p>How Nigerian fabricators are creating world-class industrial equipment at 40% lower costs than imports.</p>
+                        <div class="article-meta">
+                            <span class="date">Nov 15, 2024</span>
+                            <span class="read-time">7 min read</span>
+                        </div>
+                        <a href="/blog/block-machine-fabrication" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title">Complete Solar Systems: Installation & Maintenance</h3>
-                    <p>Professional solar installation services for residential and commercial applications with maintenance contracts.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Nov 12, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            5 min read
-                        </span>
-                    </div>
-                    <a href="/blog/solar-installation-services" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
-                </div>
-            </div>
 
-            <!-- Furniture Articles -->
-            <div class="article-card" data-category="furniture business">
-                <div class="article-image">
-                    <img src="/img/blog/custom-furniture.jpg" alt="Custom Furniture Manufacturing" loading="lazy">
-                    <div class="article-category furniture-category">
-                        <i class="fas fa-chair"></i>
-                        FURNITURE
+                <!-- Solar Energy Articles -->
+                <div class="article-card" data-category="solar investment">
+                    <div class="article-content">
+                        <span class="article-category solar-category">SOLAR ENERGY</span>
+                        <h3 class="article-title">Complete Solar Systems: Installation & Maintenance</h3>
+                        <p>Professional solar installation services for residential and commercial applications with maintenance contracts.</p>
+                        <div class="article-meta">
+                            <span class="date">Nov 12, 2024</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                        <a href="/blog/solar-installation-services" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title">Custom Furniture Manufacturing: Premium Market</h3>
-                    <p>Tapping into Nigeria's growing interior design market with custom-made chairs and complete furniture sets.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Nov 8, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            6 min read
-                        </span>
-                    </div>
-                    <a href="/blog/custom-furniture-manufacturing" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
-                </div>
-            </div>
 
-            <!-- Business Management Articles -->
-            <div class="article-card" data-category="business">
-                <div class="article-image">
-                    <img src="/img/blog/financial-management.jpg" alt="SME Financial Management" loading="lazy">
-                    <div class="article-category business-category">
-                        <i class="fas fa-building"></i>
-                        BUSINESS
+                <!-- Furniture Articles -->
+                <div class="article-card" data-category="furniture business">
+                    <div class="article-content">
+                        <span class="article-category furniture-category">FURNITURE</span>
+                        <h3 class="article-title">Custom Furniture Manufacturing: Premium Market</h3>
+                        <p>Tapping into Nigeria's growing interior design market with custom-made chairs and complete furniture sets.</p>
+                        <div class="article-meta">
+                            <span class="date">Nov 8, 2024</span>
+                            <span class="read-time">6 min read</span>
+                        </div>
+                        <a href="/blog/custom-furniture-manufacturing" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title">SME Financial Management: Essential Controls</h3>
-                    <p>Learn the 5 critical financial systems that prevent 80% of business failures in Nigeria's SME sector.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Nov 5, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            8 min read
-                        </span>
-                    </div>
-                    <a href="/blog/sme-financial-management" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
-                </div>
-            </div>
 
-            <!-- Diaspora Articles -->
-            <div class="article-card" data-category="diaspora investment">
-                <div class="article-image">
-                    <img src="/img/blog/diaspora-investment.jpg" alt="Diaspora Investment Guide" loading="lazy">
-                    <div class="article-category diaspora-category">
-                        <i class="fas fa-globe-africa"></i>
-                        DIASPORA
+                <!-- Business Management Articles -->
+                <div class="article-card" data-category="business">
+                    <div class="article-content">
+                        <span class="article-category business-category">BUSINESS</span>
+                        <h3 class="article-title">SME Financial Management: Essential Controls</h3>
+                        <p>Learn the 5 critical financial systems that prevent 80% of business failures in Nigeria's SME sector.</p>
+                        <div class="article-meta">
+                            <span class="date">Nov 5, 2024</span>
+                            <span class="read-time">8 min read</span>
+                        </div>
+                        <a href="/blog/sme-financial-management" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title">Secure Nigerian Investments for Diaspora</h3>
-                    <p>Complete guide for Nigerians abroad seeking secure, profitable investments with transparent management.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Nov 1, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            10 min read
-                        </span>
-                    </div>
-                    <a href="/blog/diaspora-investment-guide" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
-                </div>
-            </div>
 
-            <!-- Investment Strategy Articles -->
-            <div class="article-card" data-category="investment">
-                <div class="article-image">
-                    <img src="/img/blog/asset-backed-investments.jpg" alt="Asset-Backed Investments" loading="lazy">
-                    <div class="article-category investment-category">
-                        <i class="fas fa-chart-line"></i>
-                        INVESTMENT
+                <!-- Diaspora Articles -->
+                <div class="article-card" data-category="diaspora investment">
+                    <div class="article-content">
+                        <span class="article-category diaspora-category">DIASPORA</span>
+                        <h3 class="article-title">Secure Nigerian Investments for Diaspora</h3>
+                        <p>Complete guide for Nigerians abroad seeking secure, profitable investments with transparent management.</p>
+                        <div class="article-meta">
+                            <span class="date">Nov 1, 2024</span>
+                            <span class="read-time">10 min read</span>
+                        </div>
+                        <a href="/blog/diaspora-investment-guide" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title">Asset-Backed Investments: Secure Your Capital</h3>
-                    <p>Understanding how asset-backed financing provides security while delivering 15-25% annual returns.</p>
-                    <div class="article-meta">
-                        <span class="date">
-                            <i class="fas fa-calendar"></i>
-                            Oct 28, 2024
-                        </span>
-                        <span class="read-time">
-                            <i class="fas fa-clock"></i>
-                            5 min read
-                        </span>
+
+                <!-- Investment Strategy Articles -->
+                <div class="article-card" data-category="investment">
+                    <div class="article-content">
+                        <span class="article-category investment-category">INVESTMENT</span>
+                        <h3 class="article-title">Asset-Backed Investments: Secure Your Capital</h3>
+                        <p>Understanding how asset-backed financing provides security while delivering 15-25% annual returns.</p>
+                        <div class="article-meta">
+                            <span class="date">Oct 28, 2024</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                        <a href="/blog/asset-backed-investments" class="btn btn-primary" style="width: 100%;">Read Article</a>
                     </div>
-                    <a href="/blog/asset-backed-investments" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
-                        <i class="fas fa-book-open"></i>
-                        Read Article
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Investment Models Section -->
     <section class="section">
@@ -1730,7 +805,6 @@
 
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon"></div>
                     <h3>Asset-Backed Financing</h3>
                     <p><strong>Secure investments backed by tangible business assets</strong></p>
                     <p>Perfect for risk-averse investors who want guaranteed protection with 15-25% annual returns.</p>
@@ -1741,7 +815,6 @@
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon"></div>
                     <h3>Profit-Sharing Partnerships</h3>
                     <p><strong>Become a strategic partner in operating ventures</strong></p>
                     <p>Earn percentage of real monthly profits with full financial transparency and detailed reporting.</p>
@@ -1752,7 +825,6 @@
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon"></div>
                     <h3>Project-Specific Funding</h3>
                     <p><strong>Targeted expansion projects with clear timelines</strong></p>
                     <p>Invest in specific ventures with defined costs, monitoring structures, and exit plans.</p>
@@ -1774,7 +846,7 @@
                 
                 <form class="newsletter-form" id="newsletterForm">
                     <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
-                    <button type="submit" class="btn btn-primary" style="background: white; color: #667eea;">Subscribe to Updates</button>
+                    <button type="submit" class="btn btn-secondary">Subscribe to Updates</button>
                 </form>
                 
                 <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-top: 1rem;">
@@ -1794,186 +866,90 @@
 
             <div class="topics-grid">
                 <a href="/blog/category/agriculture" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/agriculture-investment.jpg" alt="Agriculture & Livestock Investment" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-tractor"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Agriculture & Livestock</h3>
                         <p>Poultry, fish farming, piggery, and modern farming techniques with 25-40% ROI potential</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                8 Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                25-40% ROI
-                            </span>
+                            <span class="topic-count">8 Articles</span>
+                            <span class="topic-roi">25-40% ROI</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="/blog/category/manufacturing" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/manufacturing-investment.jpg" alt="Construction & Manufacturing Investment" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-industry"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Construction & Manufacturing</h3>
                         <p>Block production, machine fabrication, and industrial development with 35-45% returns</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                6 Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                35-45% ROI
-                            </span>
+                            <span class="topic-count">6 Articles</span>
+                            <span class="topic-roi">35-45% ROI</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="/blog/category/solar" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/solar-investment.jpg" alt="Solar Energy Investment" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Solar Energy Solutions</h3>
                         <p>Renewable energy investments, equipment production, and installation services</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                5 Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                30-40% ROI
-                            </span>
+                            <span class="topic-count">5 Articles</span>
+                            <span class="topic-roi">30-40% ROI</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="/blog/category/furniture" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/furniture-investment.jpg" alt="Furniture & Upholstery Investment" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-chair"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Furniture & Upholstery</h3>
                         <p>Custom furniture manufacturing, premium materials, and interior design market</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                4 Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                20-35% ROI
-                            </span>
+                            <span class="topic-count">4 Articles</span>
+                            <span class="topic-roi">20-35% ROI</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- Additional Investment Categories -->
                 <a href="/investment#diaspora" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/diaspora-investment.jpg" alt="Diaspora Investment Management" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-globe-africa"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Diaspora Investment</h3>
                         <p>Secure investment management for Nigerians abroad with transparent reporting</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                7 Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                25-50% ROI
-                            </span>
+                            <span class="topic-count">7 Articles</span>
+                            <span class="topic-roi">25-50% ROI</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="/services#business-management" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/business-management.jpg" alt="Business Management & Consulting" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Business Management</h3>
                         <p>Professional oversight, financial controls, and growth strategies for SMEs</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                9 Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                30-60% Growth
-                            </span>
+                            <span class="topic-count">9 Articles</span>
+                            <span class="topic-roi">30-60% Growth</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="/shop-machinery" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/machinery-investment.jpg" alt="Machinery & Equipment Investment" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Machinery & Equipment</h3>
                         <p>Industrial machines, block-making equipment, and manufacturing tools</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                5 Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                40-55% ROI
-                            </span>
+                            <span class="topic-count">5 Articles</span>
+                            <span class="topic-roi">40-55% ROI</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="/portfolio" class="topic-card">
-                    <div class="topic-image">
-                        <img src="/img/categories/portfolio-investment.jpg" alt="Complete Investment Portfolio" loading="lazy">
-                        <div class="topic-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                    </div>
                     <div class="topic-content">
                         <h3>Complete Portfolio</h3>
                         <p>Diversified investments across all sectors for balanced risk and maximum returns</p>
                         <div class="topic-stats">
-                            <span class="topic-count">
-                                <i class="fas fa-newspaper"></i>
-                                12+ Articles
-                            </span>
-                            <span class="topic-roi">
-                                <i class="fas fa-money-bill-trend-up"></i>
-                                35%+ Average ROI
-                            </span>
+                            <span class="topic-count">12+ Articles</span>
+                            <span class="topic-roi">35%+ Average ROI</span>
                         </div>
                     </div>
                 </a>
@@ -1984,53 +960,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-grid">
-
             <!-- About Section -->
             <div class="footer-section">
                 <h3>Collaborative Investment Ltd</h3>
                 <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
-
-                <div class="social-links">
-
-                    <!-- Facebook -->
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
-                        </svg>
-                    </a>
-
-                    <!-- X / Twitter -->
-                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
-                        </svg>
-                    </a>
-
-                    <!-- WhatsApp -->
-                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                            <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
-                        </svg>
-                    </a>
-
-                    <!-- Instagram -->
-                    <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
-                                    <stop offset="0%" stop-color="#feda75"/>
-                                    <stop offset="25%" stop-color="#fa7e1e"/>
-                                    <stop offset="50%" stop-color="#d62976"/>
-                                    <stop offset="75%" stop-color="#962fbf"/>
-                                    <stop offset="100%" stop-color="#4f5bd5"/>
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-
-                </div>
             </div>
 
             <!-- Quick Links -->
@@ -2074,36 +1007,16 @@
 
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-                    <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-                    <p>Building Nigeria's Business Future</p>
+            <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+            <p>Building Nigeria's Business Future</p>
 
             <p style="margin-top: 1rem;">
                 <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
                 <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
                 <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
             </p>
-
-            <!-- Social media text links -->
-            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                    Follow us:
-                    <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
-                    <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
-                </p>
-            </div>
         </div>
-
-        <!-- Cookie Consent -->
-        <div id="cookieConsent" class="cookie-consent">
-            <div class="cookie-content">
-                <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-                <div class="cookie-buttons">
-                    <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
-                    <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
-                </div>
-            </div>
-        </div>
+    </footer>
 
     <script>
         // Category filtering functionality
@@ -2138,6 +1051,12 @@
                 const button = this.querySelector('button');
                 const originalText = button.textContent;
                 
+                // Simple validation
+                if (!email || !email.includes('@')) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                
                 // Simulate subscription
                 button.textContent = 'Subscribing...';
                 button.disabled = true;
@@ -2151,29 +1070,25 @@
                         button.disabled = false;
                     }, 2000);
                 }, 1000);
+                
+                // You can add actual newsletter subscription logic here
+                console.log('Newsletter subscription:', email);
             });
+            
+            // Simple cart count update (example)
+            function updateCartCount() {
+                const cartCount = 0; // This would come from your cart system
+                const cartBadge = document.getElementById('cart-count-badge');
+                if (cartBadge) {
+                    cartBadge.textContent = cartCount;
+                    cartBadge.style.display = cartCount > 0 ? 'inline' : 'none';
+                }
+            }
+            
+            updateCartCount();
         });
     </script>
-
-<script>
-// Animation for topic cards
-document.addEventListener('DOMContentLoaded', function() {
-    const topicCards = document.querySelectorAll('.topic-card');
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, index * 100); // Staggered animation
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    
-    topicCards.forEach(card => observer.observe(card));
-});
-</script>
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/cart-drawer.js"></script>

@@ -3,41 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Portfolio - Collaborative Investment Ltd</title>
-    <meta name="description" content="Explore our managed ventures including poultry farming, block manufacturing, machine fabrication, furniture production, solar energy, and diaspora asset management projects across Nigeria.">
+    <title>Investment Portfolio | Collaborative Investment Ltd</title>
+    <meta name="description" content="Professional investment portfolio showcasing our diversified ventures across agriculture, construction, manufacturing, renewable energy, hospitality, and asset management in Nigeria.">
+    <meta name="keywords" content="investment portfolio, Nigeria investment, agriculture investment, construction business, solar energy Nigeria, hotel management, diaspora investment">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/colors.css">
+    <!-- CSS LINKS -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
-    <!-- Enhanced Portfolio Styles -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --portfolio-primary: #1a237e;
-            --portfolio-secondary: #283593;
-            --portfolio-accent: #3949ab;
-            --portfolio-success: #4caf50;
-            --portfolio-warning: #ff9800;
-            --portfolio-info: #2196f3;
-            --portfolio-light: #f5f7fa;
-            --portfolio-dark: #0d1b2a;
-            --portfolio-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            --portfolio-radius: 16px;
-            --portfolio-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #d69e2e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --gray: #718096;
+            --light-gray: #edf2f7;
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 24px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 12px 32px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Portfolio Hero */
+        /* Portfolio Hero Section */
         .portfolio-hero {
-            background: linear-gradient(135deg, var(--portfolio-primary) 0%, var(--portfolio-secondary) 100%);
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%);
             color: white;
             padding: 6rem 0 4rem;
-            text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            width: 100%;
         }
         
         .portfolio-hero::before {
@@ -47,591 +54,959 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background: linear-gradient(45deg, rgba(45, 55, 72, 0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(45, 55, 72, 0.1) 25%, transparent 25%);
+            background-size: 60px 60px;
             opacity: 0.1;
         }
         
-        .portfolio-hero .container {
+        .hero-content-wrapper {
             position: relative;
             z-index: 2;
-            max-width: 900px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
         }
         
-        .portfolio-hero h1 {
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .hero-text h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            line-height: 1.2;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: 100%;
         }
         
-        .portfolio-hero p {
-            font-size: 1.3rem;
+        .hero-text .subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            display: block;
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            line-height: 1.8;
             opacity: 0.95;
-            margin-bottom: 2rem;
-            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
         }
         
-        .portfolio-hero-badges {
+        .hero-badges {
             display: flex;
             gap: 1rem;
-            justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-bottom: 2.5rem;
+            width: 100%;
         }
         
         .hero-badge {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 600;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-        
-        /* Portfolio Filter */
-        .portfolio-filter-section {
-            background: var(--portfolio-light);
-            padding: 2rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .portfolio-categories {
-            display: flex;
-            flex-wrap: wrap;
             gap: 0.75rem;
-            justify-content: center;
-            align-items: center;
+            background: rgba(45, 55, 72, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 55, 72, 0.5);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
         }
         
-        .category-filter {
-            padding: 0.8rem 1.8rem;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--portfolio-transition);
-            font-weight: 600;
-            color: var(--portfolio-dark);
+        .hero-badge i {
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            width: 100%;
+        }
+        
+        .hero-trust-signals {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            font-weight: 500;
         }
         
-        .category-filter:hover {
-            transform: translateY(-2px);
-            border-color: var(--portfolio-accent);
-            box-shadow: 0 5px 15px rgba(57, 73, 171, 0.1);
-        }
-        
-        .category-filter.active {
-            background: var(--portfolio-accent);
-            color: white;
-            border-color: var(--portfolio-accent);
-        }
-        
-        .category-filter i {
+        .trust-item i {
+            color: var(--accent);
             font-size: 1.1rem;
         }
         
-        /* Portfolio Grid */
-        .portfolio-grid-container {
-            padding: 4rem 0;
-            background: white;
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
-        
-        .portfolio-item {
-            background: white;
-            border-radius: var(--portfolio-radius);
-            overflow: hidden;
-            box-shadow: var(--portfolio-shadow);
-            transition: var(--portfolio-transition);
-            border: 1px solid #f0f0f0;
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .portfolio-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .portfolio-image-container {
-            height: 260px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .portfolio-image {
+        /* Portfolio Summary */
+        .portfolio-summary {
+            padding: 6rem 0;
+            background: var(--light-gray);
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s ease;
         }
         
-        .portfolio-item:hover .portfolio-image {
-            transform: scale(1.08);
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+            width: 100%;
         }
         
-        .portfolio-badges {
+        .summary-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            background: white;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--accent);
+        }
+        
+        .summary-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .summary-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .summary-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        /* Investment Philosophy */
+        .philosophy-section {
+            padding: 6rem 0;
+            background: white;
+            width: 100%;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            width: 100%;
+        }
+        
+        .philosophy-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .philosophy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--accent);
+        }
+        
+        .philosophy-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .philosophy-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .philosophy-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        /* Portfolio Projects */
+        .projects-section {
+            padding: 6rem 0;
+            background: var(--light-gray);
+            width: 100%;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            width: 100%;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 2rem auto 0;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .project-tabs {
             display: flex;
-            gap: 0.75rem;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
         
-        .portfolio-status {
-            padding: 0.5rem 1rem;
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--accent);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f4f8;
+        }
+        
+        .project-category {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.25rem;
             border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        .status-operational {
-            background: var(--portfolio-success);
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
-        }
-        
-        .status-development {
-            background: var(--portfolio-warning);
-            color: var(--portfolio-dark);
-        }
-        
-        .status-planning {
-            background: var(--portfolio-info);
-            color: white;
-        }
-        
-        .roi-badge {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 0.9rem;
-        }
-        
-        .portfolio-content {
-            padding: 2rem;
-            flex: 1;
+            border-radius: 12px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
         }
         
-        .portfolio-content h3 {
-            color: var(--portfolio-primary);
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
+        .project-title {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
             font-weight: 700;
             line-height: 1.3;
         }
         
-        .portfolio-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+        .project-description {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
         
-        .meta-item {
+        .project-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .highlight {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #666;
-            font-size: 0.95rem;
+            gap: 0.75rem;
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 500;
         }
         
-        .meta-item i {
-            color: var(--portfolio-accent);
+        .highlight i {
+            color: var(--accent);
+            font-size: 1rem;
+            width: 20px;
         }
         
-        .portfolio-description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+        .project-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+            border-radius: 10px;
+            border: 1px solid #dbeafe;
+        }
+        
+        .stat {
+            text-align: center;
             flex: 1;
         }
         
-        .portfolio-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+        .stat-value {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
         }
         
-        .portfolio-tag {
-            background: var(--portfolio-light);
-            color: var(--portfolio-primary);
-            padding: 0.4rem 0.9rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
+        .stat-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--gray);
             font-weight: 600;
-            transition: var(--portfolio-transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.25rem;
         }
         
-        .portfolio-tag:hover {
-            background: var(--portfolio-accent);
-            color: white;
+        /* Performance Metrics */
+        .metrics-section {
+            padding: 6rem 0;
+            background: white;
+            width: 100%;
         }
         
-        .portfolio-highlights {
-            background: var(--portfolio-light);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            width: 100%;
         }
         
-        .portfolio-highlights h4 {
-            color: var(--portfolio-primary);
-            margin-bottom: 0.75rem;
+        .metric-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--accent);
+        }
+        
+        .metric-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .metric-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        /* Management Team */
+        .team-section {
+            padding: 6rem 0;
+            background: var(--light-gray);
+            width: 100%;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            width: 100%;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            padding: 3rem 2rem;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--accent);
+        }
+        
+        .team-name {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .team-role {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .team-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        /* Testimonials */
+        .testimonials-section {
+            padding: 6rem 0;
+            background: white;
+            width: 100%;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            width: 100%;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            position: relative;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .testimonial-text {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.7;
             font-size: 1.1rem;
         }
         
-        .portfolio-highlights ul {
-            margin: 0;
-            padding-left: 1.2rem;
-        }
-        
-        .portfolio-highlights li {
-            margin-bottom: 0.5rem;
-            color: #555;
-            line-height: 1.5;
-        }
-        
-        .portfolio-investment {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .investment-amount {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--portfolio-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .investment-note {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .portfolio-actions {
+        .testimonial-author {
             display: flex;
+            align-items: center;
             gap: 1rem;
-            margin-top: auto;
         }
         
-        .portfolio-btn {
-            flex: 1;
-            padding: 0.9rem 1.5rem;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: var(--portfolio-transition);
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         
-        .btn-primary {
-            background: var(--portfolio-primary);
+        .author-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-size: 1.2rem;
+        }
+        
+        .author-role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a202c 100%);
             color: white;
-            border: 2px solid var(--portfolio-primary);
-        }
-        
-        .btn-primary:hover {
-            background: var(--portfolio-secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.2);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--portfolio-primary);
-            border: 2px solid var(--portfolio-accent);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--portfolio-accent);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* Portfolio Stats */
-        .portfolio-stats {
-            background: linear-gradient(135deg, var(--portfolio-dark) 0%, var(--portfolio-primary) 100%);
-            color: white;
-            padding: 5rem 0;
+            padding: 6rem 0;
+            text-align: center;
             position: relative;
-            overflow: hidden;
+            width: 100%;
         }
         
-        .portfolio-stats::before {
+        .cta-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.1) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 20%, rgba(33, 150, 243, 0.1) 0%, transparent 40%);
+            background: rgba(0, 0, 0, 0.7);
         }
         
-        .stats-container {
+        .cta-content {
             position: relative;
-            z-index: 2;
-        }
-        
-        .stats-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .stats-header h2 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .stats-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
             max-width: 700px;
             margin: 0 auto;
         }
         
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-        }
-        
-        .stat-item {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: var(--portfolio-transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-5px);
-        }
-        
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--portfolio-accent), var(--portfolio-success));
-            transform: scaleX(0);
-            transition: transform 0.5s ease;
-        }
-        
-        .stat-item:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .stat-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-        
-        .stat-number {
-            font-size: 3.2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            display: block;
-            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 600;
-        }
-        
-        /* Empty State */
-        .portfolio-empty {
-            text-align: center;
-            padding: 5rem 0;
-            grid-column: 1 / -1;
-        }
-        
-        .portfolio-empty-icon {
-            font-size: 4rem;
+        .cta-title {
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
-            opacity: 0.3;
+            font-weight: 800;
         }
         
-        .portfolio-empty h3 {
-            color: var(--portfolio-primary);
-            margin-bottom: 1rem;
+        .cta-description {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 3rem;
+            line-height: 1.7;
         }
         
-        .portfolio-empty p {
-            color: #666;
-            margin-bottom: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #b36d0e;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(214, 137, 16, 0.3);
+        }
+        
+        .btn-accent {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background: #0e2a5e;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(26, 54, 93, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Animation for fade-in-up */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+        
         @media (max-width: 992px) {
-            .portfolio-hero h1 {
+            .hero-text h1 {
                 font-size: 2.8rem;
             }
             
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-                gap: 2rem;
+            .hero-text .subtitle {
+                font-size: 1.5rem;
             }
             
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .section-header h2 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .hero-stats {
+                gap: 1rem;
+                justify-content: center;
+            }
+            
+            .hero-stat {
+                min-width: 120px;
+                padding: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .trust-item {
+                font-size: 0.9rem;
             }
         }
         
         @media (max-width: 768px) {
             .portfolio-hero {
                 padding: 4rem 0 3rem;
+                min-height: 50vh;
             }
             
-            .portfolio-hero h1 {
+            .hero-text h1 {
                 font-size: 2.2rem;
             }
             
-            .portfolio-hero p {
-                font-size: 1.1rem;
+            .hero-text .subtitle {
+                font-size: 1.2rem;
             }
             
-            .portfolio-categories {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 0.5rem;
+            .hero-description {
+                font-size: 1rem;
             }
             
-            .category-filter {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.95rem;
-                white-space: nowrap;
+            .section-header h2 {
+                font-size: 2rem;
             }
             
-            .portfolio-grid {
-                grid-template-columns: 1fr;
+            .section-header p {
+                font-size: 1rem;
             }
             
-            .portfolio-actions {
+            .hero-stats {
                 flex-direction: column;
+                align-items: center;
             }
             
-            .stats-grid {
+            .hero-stat {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .hero-actions {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-actions .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .hero-trust-signals {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .trust-item {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .projects-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
             
-            .stat-number {
-                font-size: 2.8rem;
+            .summary-grid,
+            .philosophy-grid,
+            .metrics-grid,
+            .team-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .hero-badge {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .project-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .stat {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            
+            .stat:last-child {
+                border-bottom: none;
+            }
+            
+            .stat-value {
+                font-size: 1.4rem;
+            }
+            
+            .project-highlights {
+                padding: 1rem;
             }
         }
         
         @media (max-width: 480px) {
-            .portfolio-hero h1 {
-                font-size: 1.9rem;
+            .hero-text h1 {
+                font-size: 1.8rem;
             }
             
-            .portfolio-content {
+            .hero-text .subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-description {
+                font-size: 1rem;
+            }
+            
+            .metric-value {
+                font-size: 2.8rem;
+            }
+            
+            .summary-number {
+                font-size: 2.5rem;
+            }
+            
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-badge {
+                width: 100%;
+                justify-content: center;
+                max-width: 250px;
+            }
+            
+            .stat-number {
+                font-size: 1.6rem;
+            }
+            
+            .project-card {
                 padding: 1.5rem;
             }
             
-            .portfolio-image-container {
-                height: 220px;
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
             
-            .stat-item {
-                padding: 2rem 1.5rem;
+            .project-icon {
+                align-self: flex-end;
             }
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+            
+            .project-title {
+                font-size: 1.2rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .highlight {
+                font-size: 0.85rem;
             }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(57, 73, 171, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(57, 73, 171, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(57, 73, 171, 0);
-            }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* Scroll Animations */
-        .portfolio-item {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .portfolio-item.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
@@ -645,9 +1020,9 @@
             </a>
             
             <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span>|</span>
+                <span>|</span>
+                <span>|</span>
             </button>
             
             <ul class="nav-links">
@@ -690,149 +1065,578 @@
         </div>
     </div>
 
-    <!-- Portfolio Hero -->
-    <section class="portfolio-hero">
-        <div class="container">
-            <h1 class="fade-in">Our Portfolio</h1>
-            <p class="fade-in">Showcasing sustainable businesses we've built, managed, and scaled across Nigeria</p>
-            <div class="portfolio-hero-badges fade-in">
-                <div class="hero-badge">
-                    5+ Successful Projects
-                </div>
-                <div class="hero-badge">
-                    ₦50M+ Total Value
-                </div>
-                <div class="hero-badge">
-                    90% Client Satisfaction
+    <!-- Main Content -->
+    <main>
+        <!-- Portfolio Hero Section -->
+        <section class="portfolio-hero">
+            <div class="hero-content-wrapper">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <div class="hero-badges">
+                            <div class="hero-badge">
+                                <i class="fas fa-chart-line"></i>
+                                <span>35% Average ROI</span>
+                            </div>
+                            <div class="hero-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Asset-Backed Security</span>
+                            </div>
+                            <div class="hero-badge">
+                                <i class="fas fa-users"></i>
+                                <span>8+ Active Ventures</span>
+                            </div>
+                        </div>
+                        <h1>
+                            <span class="highlight">Strategic Investment Portfolio</span>
+                            <br>
+                            <span class="subtitle">Proven Ventures • Guaranteed Returns • Professional Management</span>
+                        </h1>
+                        <p class="hero-description">Explore our diversified portfolio of professionally managed businesses across Nigeria's most promising sectors. From agriculture and construction to renewable energy and hospitality, each venture is backed by strategic oversight, transparent operations, and consistent returns.</p>
+                        
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="stat-number">₦50M+</span>
+                                <span class="stat-label">Total Asset Value</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="stat-number">25+</span>
+                                <span class="stat-label">Jobs Created</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Investor Satisfaction</span>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-actions">
+                            <a href="#portfolio-projects" class="btn btn-accent">
+                                <i class="fas fa-briefcase"></i> Explore Our Projects
+                            </a>
+                            <a href="/investment" class="btn btn-secondary">
+                                <i class="fas fa-chart-pie"></i> Invest With Us
+                            </a>
+                            <a href="/contact" class="btn btn-outline" style="background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3);">
+                                <i class="fas fa-calendar-check"></i> Free Consultation
+                            </a>
+                        </div>
+                        
+                        <div class="hero-trust-signals">
+                            <div class="trust-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Fully Transparent Reporting</span>
+                            </div>
+                            <div class="trust-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Legal Documentation</span>
+                            </div>
+                            <div class="trust-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Monthly Performance Updates</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Portfolio Filter -->
-    <section class="portfolio-filter-section">
-        <div class="container">
-            <div class="portfolio-categories" id="portfolioCategories">
-                <button class="category-filter active" data-category="all">
-                    <i></i> All Ventures
-                </button>
-                <button class="category-filter" data-category="agriculture">
-                    <i></i> Agriculture
-                </button>
-                <button class="category-filter" data-category="construction">
-                    <i></i> Construction
-                </button>
-                <button class="category-filter" data-category="manufacturing">
-                    <i></i> Manufacturing
-                </button>
-                <button class="category-filter" data-category="furniture">
-                    <i></i> Furniture
-                </button>
-                <button class="category-filter" data-category="solar">
-                    <i></i> Solar Energy
-                </button>
-                <button class="category-filter" data-category="diaspora">
-                    <i></i> Diaspora Services
-                </button>
+        <!-- Portfolio Summary -->
+        <section class="portfolio-summary">
+            <div class="container">
+                <div class="summary-grid">
+                    <div class="summary-card fade-in-up">
+                        <div class="summary-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="summary-number">35%</div>
+                        <div class="summary-label">Average Annual ROI</div>
+                    </div>
+                    <div class="summary-card fade-in-up">
+                        <div class="summary-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="summary-number">8+</div>
+                        <div class="summary-label">Active Ventures</div>
+                    </div>
+                    <div class="summary-card fade-in-up">
+                        <div class="summary-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="summary-number">25+</div>
+                        <div class="summary-label">Jobs Created</div>
+                    </div>
+                    <div class="summary-card fade-in-up">
+                        <div class="summary-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="summary-number">₦50M+</div>
+                        <div class="summary-label">Asset Value</div>
+                    </div>
+                </div>
+                
+                <div class="philosophy-section">
+                    <div class="section-header">
+                        <h2>Our Investment Philosophy</h2>
+                        <p>Driving sustainable growth through strategic investments and professional management</p>
+                    </div>
+                    
+                    <div class="philosophy-grid">
+                        <div class="philosophy-card fade-in-up">
+                            <h3>Risk Management</h3>
+                            <p>Diversified portfolio across multiple sectors to minimize risk while maximizing returns through strategic allocation</p>
+                        </div>
+                        <div class="philosophy-card fade-in-up">
+                            <h3>Sustainability</h3>
+                            <p>Focus on environmentally responsible and socially beneficial investments that create lasting value</p>
+                        </div>
+                        <div class="philosophy-card fade-in-up">
+                            <h3>Transparency</h3>
+                            <p>Clear reporting and open communication with all stakeholders through regular updates and access</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Portfolio Grid -->
-    <section class="portfolio-grid-container">
-        <div class="container">
-            <div class="portfolio-grid" id="portfolioGrid">
-                <!-- Portfolio items will be loaded here -->
-                <!-- The JavaScript will populate this dynamically -->
+        <!-- Portfolio Projects -->
+        <section class="projects-section" id="portfolio-projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Investment Projects</h2>
+                    <p>Professionally managed ventures delivering consistent returns across multiple sectors</p>
+                </div>
+                
+                <div class="project-tabs">
+                    <button class="tab-btn active" data-filter="all">All Projects</button>
+                    <button class="tab-btn" data-filter="agriculture">Agriculture</button>
+                    <button class="tab-btn" data-filter="construction">Construction</button>
+                    <button class="tab-btn" data-filter="energy">Energy</button>
+                    <button class="tab-btn" data-filter="hospitality">Hospitality</button>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- Agriculture Project -->
+                    <div class="project-card fade-in-up" data-category="agriculture">
+                        <div class="project-header">
+                            <div class="project-category">Agriculture</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Ogun State Poultry Farm</h3>
+                            <p class="project-description">Commercial poultry operation with 3,000-layer capacity, producing 2,700 eggs daily for Lagos market with established distribution network.</p>
+                            
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Established Market Access</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-users"></i>
+                                    <span>Full-Time Professional Staff</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-truck"></i>
+                                    <span>Daily Distribution Network</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">35%</span>
+                                    <span class="stat-label">ROI</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">18</span>
+                                    <span class="stat-label">Months</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">₦15M</span>
+                                    <span class="stat-label">Investment</span>
+                                </div>
+                            </div>
+                            
+                            <a href="/investment#poultry" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-chart-line"></i> View Performance Details
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Construction Project -->
+                    <div class="project-card fade-in-up" data-category="construction">
+                        <div class="project-header">
+                            <div class="project-category">Construction</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Manual Block Manufacturing Plant</h3>
+                            <p class="project-description">Automated block production facility serving Lagos-Ogun construction corridor with 10,000 blocks weekly capacity and established client base.</p>
+                            
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Automated Production Line</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Prime Industrial Location</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-building"></i>
+                                    <span>Government Contractor Status</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">45%</span>
+                                    <span class="stat-label">ROI</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">12</span>
+                                    <span class="stat-label">Months</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">₦8M</span>
+                                    <span class="stat-label">Investment</span>
+                                </div>
+                            </div>
+                            
+                            <a href="/investment#block" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-chart-line"></i> View Performance Details
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Solar Energy Project -->
+                    <div class="project-card fade-in-up" data-category="energy">
+                        <div class="project-header">
+                            <div class="project-category">Renewable Energy</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Solar Solutions Division</h3>
+                            <p class="project-description">Complete solar power solutions for residential and commercial clients across Lagos and Ogun States with growing demand and government incentives.</p>
+                            
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Government Incentives Available</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-certificate"></i>
+                                    <span>Certified Installations</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-wrench"></i>
+                                    <span>Maintenance Contracts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">40%</span>
+                                    <span class="stat-label">ROI</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">24</span>
+                                    <span class="stat-label">Months</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">₦12M</span>
+                                    <span class="stat-label">Investment</span>
+                                </div>
+                            </div>
+                            
+                            <a href="/investment#solar" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-chart-line"></i> View Performance Details
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Furniture Manufacturing -->
+                    <div class="project-card fade-in-up" data-category="construction">
+                        <div class="project-header">
+                            <div class="project-category">Manufacturing</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Premium Furniture Workshop</h3>
+                            <p class="project-description">Custom furniture manufacturing serving corporate clients, hotels, and luxury residences in Lagos with premium craftsmanship and design.</p>
+                            
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <i class="fas fa-star"></i>
+                                    <span>Premium Quality Standards</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-hotel"></i>
+                                    <span>Hotel & Corporate Clientele</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-palette"></i>
+                                    <span>Custom Design Services</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">35%</span>
+                                    <span class="stat-label">ROI</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">15</span>
+                                    <span class="stat-label">Months</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">₦10M</span>
+                                    <span class="stat-label">Investment</span>
+                                </div>
+                            </div>
+                            
+                            <a href="/investment#furniture" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-chart-line"></i> View Performance Details
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Hotel Management -->
+                    <div class="project-card fade-in-up" data-category="hospitality">
+                        <div class="project-header">
+                            <div class="project-category">Hospitality</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Hotel Turnaround Project</h3>
+                            <p class="project-description">Professional management of 145-room hotel property with comprehensive operational restructuring and revenue optimization strategies.</p>
+                            
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Revenue Optimization</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-user-tie"></i>
+                                    <span>Staff Restructuring</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Operational Efficiency</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">60%</span>
+                                    <span class="stat-label">Rev. Growth</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">6</span>
+                                    <span class="stat-label">Months</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">Management</span>
+                                    <span class="stat-label">Partnership</span>
+                                </div>
+                            </div>
+                            
+                            <a href="/services#hotel-management" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-chart-line"></i> View Case Study
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Diaspora Services -->
+                    <div class="project-card fade-in-up" data-category="all">
+                        <div class="project-header">
+                            <div class="project-category">Asset Management</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Diaspora Asset Management</h3>
+                            <p class="project-description">Professional management services for Nigerian diaspora with construction oversight, investment management, and regular transparent reporting.</p>
+                            
+                            <div class="project-highlights">
+                                <div class="highlight">
+                                    <i class="fas fa-file-contract"></i>
+                                    <span>Legal Documentation</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>Regular Progress Updates</span>
+                                </div>
+                                <div class="highlight">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Asset Protection</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">10+</span>
+                                    <span class="stat-label">Clients</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">2</span>
+                                    <span class="stat-label">Countries</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">100%</span>
+                                    <span class="stat-label">Satisfaction</span>
+                                </div>
+                            </div>
+                            
+                            <a href="/services#diaspora" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-globe"></i> Learn More About Services
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Empty State -->
-            <div class="portfolio-empty" id="portfolioEmpty" style="display: none;">
-                <h3>No Projects Found</h3>
-                <p>No projects match your selected filters. Try selecting a different category or browse all ventures.</p>
-                <button class="btn btn-primary" id="resetFilterBtn">Show All Ventures</button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Portfolio Stats -->
-    <section class="portfolio-stats">
-        <div class="container">
-            <div class="stats-header fade-in">
-                <h2>Our Impact in Numbers</h2>
-                <p>Quantifying our success across various business sectors</p>
+        <!-- Performance Metrics -->
+        <section class="metrics-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Performance Metrics</h2>
+                    <p>Quantifiable results demonstrating our investment success and commitment to excellence</p>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card fade-in-up">
+                        <div class="metric-value">₦2.1M</div>
+                        <div class="metric-label">Monthly Revenue Generated</div>
+                    </div>
+                    <div class="metric-card fade-in-up">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Project Success Rate</div>
+                    </div>
+                    <div class="metric-card fade-in-up">
+                        <div class="metric-value">14</div>
+                        <div class="metric-label">Months Average Payback Period</div>
+                    </div>
+                    <div class="metric-card fade-in-up">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Investor Satisfaction</div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="stats-grid" id="statsGrid">
-                <div class="stat-item fade-in">
-                    <span class="stat-number" data-count="6">0</span>
-                    <span class="stat-label">Operational Ventures</span>
+        </section>
+
+        <!-- Management Team -->
+        <section class="team-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Management Team</h2>
+                    <p>Experienced professionals driving our investment success and operational excellence</p>
                 </div>
-                <div class="stat-item fade-in" data-delay="100">
-                    <span class="stat-number" data-count="45">0</span>
-                    <span class="stat-label">% Average ROI</span>
-                </div>
-                <div class="stat-item fade-in" data-delay="100">
-                    <span class="stat-number" data-count="20">0</span>
-                    <span class="stat-label">Jobs Created</span>
-                </div>
-                <div class="stat-item fade-in" data-delay="100">
-                    <span class="stat-number" data-count="50">0</span>
-                    <span class="stat-label">M+ Total Value</span>
+                
+                <div class="team-grid">
+                    <div class="team-card fade-in-up">
+                        <div class="team-info">
+                            <h3 class="team-name">Aliu Ibrahim Garuba</h3>
+                            <p class="team-role">Chief Executive Officer</p>
+                            <p>7+ years experience in business development and investment management across multiple sectors in Nigeria.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card fade-in-up">
+                        <div class="team-info">
+                            <h3 class="team-name">Adeshipe Adedayo Adeyinka</h3>
+                            <p class="team-role">Head of Operations</p>
+                            <p>Specialized in agricultural and manufacturing project management with proven track record in operational efficiency.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card fade-in-up">
+                        <div class="team-info">
+                            <h3 class="team-name">Okwuoha Emmanuel Sunday</h3>
+                            <p class="team-role">Administrative Secretary</p>
+                            <p>5 years experience in investment analysis, financial management, and regulatory compliance.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Investor Testimonials</h2>
+                    <p>What our partners and investors say about working with us and their investment experience</p>
+                </div>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card fade-in-up">
+                        <p class="testimonial-text">"Our investment in the poultry farm has consistently delivered 35% ROI. The professional management and transparent reporting give us confidence in expanding our partnership with CIL."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AO</div>
+                            <div class="author-info">
+                                <h4>Abdul Oladejo</h4>
+                                <p class="author-role">Investor, Lagos</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card fade-in-up">
+                        <p class="testimonial-text">"As a diaspora investor, CIL's management of my construction project in Nigeria has been exceptional. Regular updates and professional oversight made the process seamless from the UK."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MB</div>
+                            <div class="author-info">
+                                <h4>Micheal Brown</h4>
+                                <p class="author-role">Diaspora Investor, UK</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card fade-in-up">
+                        <p class="testimonial-text">"The solar energy investment has outperformed projections. CIL's expertise in renewable energy and their commitment to sustainability makes them a trusted partner for my portfolio."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">CA</div>
+                            <div class="author-info">
+                                <h4>Chioma Adebayo</h4>
+                                <p class="author-role">Corporate Investor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Invest With Us?</h2>
+                    <p class="cta-description">Join our growing portfolio of successful investors and benefit from professionally managed ventures with transparent operations and competitive returns across multiple sectors.</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="/investment" class="btn btn-primary">
+                            <i class="fas fa-chart-line"></i> View Investment Opportunities
+                        </a>
+                        <a href="/contact" class="btn btn-secondary">
+                            <i class="fas fa-calendar-alt"></i> Schedule Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-grid">
-
             <!-- About Section -->
             <div class="footer-section">
                 <h3>Collaborative Investment Ltd</h3>
                 <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
-
                 <div class="social-links">
-
-                    <!-- Facebook -->
                     <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
-                        </svg>
+                        <i class="fab fa-facebook-f"></i>
                     </a>
-
-                    <!-- X / Twitter -->
                     <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
-                        </svg>
+                        <i class="fab fa-twitter"></i>
                     </a>
-
-                    <!-- WhatsApp -->
                     <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                            <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
-                        </svg>
+                        <i class="fab fa-whatsapp"></i>
                     </a>
-
-                    <!-- Instagram -->
                     <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
-                                    <stop offset="0%" stop-color="#feda75"/>
-                                    <stop offset="25%" stop-color="#fa7e1e"/>
-                                    <stop offset="50%" stop-color="#d62976"/>
-                                    <stop offset="75%" stop-color="#962fbf"/>
-                                    <stop offset="100%" stop-color="#4f5bd5"/>
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
+                        <i class="fab fa-instagram"></i>
                     </a>
-
                 </div>
             </div>
 
@@ -867,461 +1671,117 @@
             <!-- Contact -->
             <div class="footer-section">
                 <h3>Contact Info</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
-                <p>collaborativeinvestmentltd@gmail.com</p>
-                <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
-                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+                <p><i ></i> 212 Ijegun Road, Ikotun, Lagos</p>
+                <p><i ></i> collaborativeinvestmentltd@gmail.com</p>
+                <p><i ></i> <a href="tel:+2348129978419">+234 812 997 8419</a></p>
+                <p><i ></i> <a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                <p><i ></i> Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
             </div>
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer-bottom">
-                    <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-                    <p>Building Nigeria's Business Future</p>
-
+            <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+            <p>Building Nigeria's Business Future</p>
             <p style="margin-top: 1rem;">
-                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">
+                    <i class="fas fa-shield-alt"></i> Privacy Policy
+                </a>
+                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">
+                    <i class="fas fa-file-contract"></i> Terms of Service
+                </a>
+                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">
+                    <i class="fas fa-sitemap"></i> Sitemap
+                </a>
             </p>
-
-            <!-- Social media text links -->
-            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                    Follow us:
-                    <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
-                    <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
-                </p>
-            </div>
         </div>
-
-        <!-- Cookie Consent -->
-        <div id="cookieConsent" class="cookie-consent">
-            <div class="cookie-content">
-                <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-                <div class="cookie-buttons">
-                    <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
-                    <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
-                </div>
-            </div>
-        </div>
+    </footer>
 
     <!-- JavaScript -->
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/cart-drawer.js"></script>
-    
-    <!-- Enhanced Portfolio JavaScript -->
     <script>
-        // Portfolio Data
-        const portfolioData = [
-            {
-                id: 1,
-                title: "CIL Poultry Enterprise",
-                category: ["agriculture"],
-                status: "operational",
-                roi: "35%",
-                location: "Ogun State",
-                specialty: "Commercial Egg Production",
-                capacity: "3,000+ Birds",
-                image: "/img/poultry-farm.jpg",
-                description: "Commercial egg production facility with daily distribution network and stable buyer relationships.",
-                highlights: [
-                    "Daily egg production & regional distribution",
-                    "Stable buyer network and recurring demand",
-                    "Expansion-ready facility layout",
-                    "Modern feeding and healthcare systems"
-                ],
-                investment: "₦15,000,000",
-                investmentNote: "Expansion target: 7,000 bird capacity",
-                tags: ["Agriculture", "Livestock", "Food Production"],
-                actionLink: "/investment#poultry"
-            },
-            {
-                id: 2,
-                title: "CIL Blockworks",
-                category: ["construction", "manufacturing"],
-                status: "operational",
-                roi: "45%",
-                location: "Lagos / Ogun Corridor",
-                specialty: "Concrete Blocks & Materials",
-                capacity: "3,000+ Blocks Daily",
-                image: "/img/block-manufacturing.jpg",
-                description: "Concrete block production plant supplying construction materials with high demand and low competition.",
-                highlights: [
-                    "Block production (solid & hollow)",
-                    "Material supply & logistics",
-                    "Custom equipment fabrication",
-                    "Construction project support"
-                ],
-                investment: "₦8,000,000",
-                investmentNote: "High demand, low competition market",
-                tags: ["Construction", "Manufacturing", "Building Materials"],
-                actionLink: "/investment#block"
-            },
-            {
-                id: 3,
-                title: "CIL Engineering & Fabrication",
-                category: ["manufacturing"],
-                status: "operational",
-                location: "Lagos",
-                specialty: "Industrial Machine Fabrication",
-                capacity: "Custom Projects",
-                image: "/img/machine-fabrication.jpg",
-                description: "Industrial machine fabrication workshop serving domestic and international clients with custom engineering solutions.",
-                highlights: [
-                    "Block-making machine fabrication",
-                    "Custom engineering solutions",
-                    "Repairs, maintenance & upgrades",
-                    "Industrial equipment manufacturing"
-                ],
-                investmentNote: "4-6 weeks lead time with 12-month warranty",
-                tags: ["Manufacturing", "Engineering", "Fabrication", "Industrial Equipment"],
-                actionLink: "/contact"
-            },
-            {
-                id: 4,
-                title: "CIL Furniture Works",
-                category: ["manufacturing", "furniture"],
-                status: "operational",
-                roi: "30%",
-                location: "Lagos",
-                specialty: "Custom Furniture & Woodworking",
-                capacity: "50+ Pieces Monthly",
-                image: "/img/furniture-workshop.jpg",
-                description: "Custom furniture manufacturing serving corporate, residential, and hospitality sectors with high-quality craftsmanship.",
-                highlights: [
-                    "Custom office furniture",
-                    "Residential furniture sets",
-                    "Hotel & restaurant furnishings",
-                    "Wood carving & finishing"
-                ],
-                investment: "₦6,000,000",
-                investmentNote: "Target market: Corporate, Residential, Hospitality",
-                tags: ["Furniture", "Manufacturing", "Woodworking", "Interior Design"],
-                actionLink: "/investment#furniture"
-            },
-            {
-                id: 5,
-                title: "CIL Solar Solutions",
-                category: ["solar", "manufacturing"],
-                status: "operational",
-                roi: "25%",
-                location: "Lagos & Ogun States",
-                specialty: "Complete Solar Energy Systems",
-                capacity: "Residential & Commercial",
-                image: "/img/solar-installation.jpg",
-                description: "Complete solar power system installations serving growing demand for reliable energy solutions.",
-                highlights: [
-                    "Solar panel installation",
-                    "Battery storage systems",
-                    "Inverters & charge controllers",
-                    "Complete solar power systems"
-                ],
-                investment: "₦12,000,000",
-                investmentNote: "Growing demand for reliable power",
-                tags: ["Solar Energy", "Renewable Energy", "Installation", "Manufacturing"],
-                actionLink: "/investment#solar"
-            },
-            {
-                id: 6,
-                title: "CIL Sports Facilities",
-                category: ["construction"],
-                status: "operational",
-                roi: "30%",
-                location: "Lagos & Ogun States",
-                specialty: "Basketball Court Construction",
-                capacity: "Schools & Communities",
-                image: "/img/basketball-court.jpg",
-                description: "Professional sports facility construction serving growing demand for quality recreational infrastructure.",
-                highlights: [
-                    "Professional basketball court construction",
-                    "Multi-purpose sports surfaces",
-                    "Court markings & equipment installation",
-                    "Maintenance & refurbishment"
-                ],
-                investment: "₦5,000,000",
-                investmentNote: "Growing sports infrastructure demand",
-                tags: ["Construction", "Sports Facilities", "Recreation"],
-                actionLink: "/investment#sports"
-            },
-            {
-                id: 7,
-                title: "CIL Aquaculture",
-                category: ["agriculture"],
-                status: "development",
-                roi: "30%",
-                location: "Ogun State",
-                specialty: "Catfish Production",
-                capacity: "10,000+ Juveniles",
-                image: "/img/fish-farming.jpg",
-                description: "Modern aquaculture facility with integrated systems for high-yield fish production.",
-                highlights: [
-                    "High-yield fish breeds",
-                    "Modern pond system",
-                    "Integrated water recycling",
-                    "Automated feeding systems"
-                ],
-                investment: "₦7,000,000",
-                investmentNote: "Project duration: 24 months",
-                tags: ["Agriculture", "Aquaculture", "Fish Farming"],
-                actionLink: "/investment#aquaculture"
-            },
-            {
-                id: 8,
-                title: "Diaspora Asset Management",
-                category: ["diaspora"],
-                status: "operational",
-                location: "Lagos",
-                specialty: "Asset Management & Oversight",
-                capacity: "Multiple Projects",
-                image: "/img/diaspora-management.jpg",
-                description: "Professional management services for Nigerians abroad, handling construction, retail, and agricultural projects.",
-                highlights: [
-                    "Business setup & full management",
-                    "Property development oversight",
-                    "Operations & monthly reporting",
-                    "Financial transparency & accountability"
-                ],
-                investmentNote: "Serving clients in UK, USA, Canada, Europe",
-                tags: ["Diaspora Services", "Asset Management", "Project Management"],
-                actionLink: "/contact"
-            }
-        ];
-
-        // Initialize Portfolio
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Portfolio page initialized');
+            // Fade in animation
+            const fadeElements = document.querySelectorAll('.fade-in-up');
             
-            // Initialize portfolio display
-            initPortfolio();
-            
-            // Initialize stats counter
-            initStatsCounter();
-            
-            // Initialize scroll animations
-            initScrollAnimations();
-            
-            // Update cart count
-            updateCartCount();
-        });
-
-        function initPortfolio() {
-            const portfolioGrid = document.getElementById('portfolioGrid');
-            const filterButtons = document.querySelectorAll('.category-filter');
-            const resetFilterBtn = document.getElementById('resetFilterBtn');
-            const portfolioEmpty = document.getElementById('portfolioEmpty');
-            
-            // Render all portfolio items initially
-            renderPortfolioItems(portfolioData);
-            
-            // Add filter functionality
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Update active button
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
                     
-                    // Get selected category
-                    const category = this.dataset.category;
-                    
-                    // Filter and render items
-                    const filteredItems = category === 'all' 
-                        ? portfolioData 
-                        : portfolioData.filter(item => item.category.includes(category));
-                    
-                    renderPortfolioItems(filteredItems);
-                    
-                    // Show/hide empty state
-                    portfolioEmpty.style.display = filteredItems.length === 0 ? 'block' : 'none';
-                });
-            });
-            
-            // Reset filter functionality
-            if (resetFilterBtn) {
-                resetFilterBtn.addEventListener('click', function() {
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        if (btn.dataset.category === 'all') {
-                            btn.classList.add('active');
-                        }
-                    });
-                    renderPortfolioItems(portfolioData);
-                    portfolioEmpty.style.display = 'none';
-                });
-            }
-            
-            // Function to render portfolio items
-            function renderPortfolioItems(items) {
-                portfolioGrid.innerHTML = '';
-                
-                items.forEach(item => {
-                    const portfolioItem = createPortfolioItem(item);
-                    portfolioGrid.appendChild(portfolioItem);
-                });
-                
-                // Add visible class for animation
-                setTimeout(() => {
-                    document.querySelectorAll('.portfolio-item').forEach((item, index) => {
-                        setTimeout(() => {
-                            item.classList.add('visible');
-                        }, index * 100);
-                    });
-                }, 100);
-            }
-            
-            // Function to create portfolio item HTML
-            function createPortfolioItem(item) {
-                const div = document.createElement('div');
-                div.className = 'portfolio-item';
-                div.dataset.category = item.category.join(' ');
-                
-                // Status badge
-                const statusBadge = item.status === 'operational' ? 'status-operational' :
-                                   item.status === 'development' ? 'status-development' : 'status-planning';
-                
-                // ROI badge if available
-                const roiBadge = item.roi ? `<span class="roi-badge">${item.roi} ROI</span>` : '';
-                
-                // Investment section if available
-                const investmentSection = item.investment ? `
-                    <div class="portfolio-investment">
-                        <div class="investment-amount">${item.investment}</div>
-                        <div class="investment-note">${item.investmentNote}</div>
-                    </div>
-                ` : `<div class="investment-note">${item.investmentNote}</div>`;
-                
-                div.innerHTML = `
-                    <div class="portfolio-image-container">
-                        <img src="${item.image}" alt="${item.title}" class="portfolio-image" onerror="this.src='/img/logo.jpg'">
-                        <div class="portfolio-badges">
-                            <span class="portfolio-status ${statusBadge}">${item.status}</span>
-                            ${roiBadge}
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>${item.title}</h3>
-                        <div class="portfolio-meta">
-                            <div class="meta-item">
-                                <i></i>
-                                <span>${item.location}</span>
-                            </div>
-                            <div class="meta-item">
-                                <i></i>
-                                <span>${item.specialty}</span>
-                            </div>
-                            <div class="meta-item">
-                                <i></i>
-                                <span>${item.capacity}</span>
-                            </div>
-                        </div>
-                        <p class="portfolio-description">${item.description}</p>
-                        <div class="portfolio-tags">
-                            ${item.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('')}
-                        </div>
-                        <div class="portfolio-highlights">
-                            <h4>Key Features</h4>
-                            <ul>
-                                ${item.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
-                            </ul>
-                        </div>
-                        ${investmentSection}
-                        <div class="portfolio-actions">
-                            <a href="${item.actionLink}" class="portfolio-btn btn-primary">
-                                <i></i> ${item.roi ? 'Invest Now' : 'Learn More'}
-                            </a>
-                            <a href="/contact" class="portfolio-btn btn-secondary">
-                                <i></i> Contact Us
-                            </a>
-                        </div>
-                    </div>
-                `;
-                
-                return div;
-            }
-        }
-
-        function initStatsCounter() {
-            const statItems = document.querySelectorAll('.stat-item');
-            
-            // Check if element is in viewport
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
-            }
-            
-            // Animate counter
-            function animateCounter(element, target, duration = 2000) {
-                const start = 0;
-                const increment = target / (duration / 16);
-                let current = start;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        element.textContent = target;
-                        clearInterval(timer);
-                    } else {
-                        element.textContent = Math.floor(current);
-                    }
-                }, 16);
-            }
-            
-            // Start counters when in view
-            function startCounters() {
-                statItems.forEach(item => {
-                    if (isInViewport(item) && !item.classList.contains('animated')) {
-                        item.classList.add('animated');
-                        const numberElement = item.querySelector('.stat-number');
-                        const target = parseInt(numberElement.dataset.count);
-                        animateCounter(numberElement, target);
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
                     }
                 });
-            }
-            
-            // Listen for scroll
-            window.addEventListener('scroll', startCounters);
+            };
             
             // Initial check
-            setTimeout(startCounters, 500);
-        }
-
-        function initScrollAnimations() {
-            // Intersection Observer for scroll animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+            fadeInOnScroll();
             
-            // Observe portfolio items
-            document.querySelectorAll('.portfolio-item').forEach(item => {
-                observer.observe(item);
-            });
-        }
-
-        function updateCartCount() {
-            try {
-                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                const badge = document.getElementById('cart-count-badge');
-                if (badge) {
-                    badge.textContent = totalItems;
-                    badge.style.display = totalItems > 0 ? 'flex' : 'none';
-                }
-            } catch (error) {
-                console.error('Error updating cart count:', error);
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // Project filtering
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            if (tabButtons.length > 0) {
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove active class from all buttons
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        
+                        // Add active class to clicked button
+                        this.classList.add('active');
+                        
+                        const filter = this.dataset.filter;
+                        
+                        // Filter projects
+                        projectCards.forEach(card => {
+                            if (filter === 'all' || card.dataset.category === filter) {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'translateY(0)';
+                                }, 10);
+                            } else {
+                                card.style.opacity = '0';
+                                card.style.transform = 'translateY(20px)';
+                                setTimeout(() => {
+                                    card.style.display = 'none';
+                                }, 300);
+                            }
+                        });
+                    });
+                });
             }
-        }
+            
+            // Cart functionality
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const cartCount = cart.reduce((total, item) => total + (item.quantity || 0), 0);
+                    const cartBadge = document.getElementById('cart-count-badge');
+                    if (cartBadge) {
+                        cartBadge.textContent = cartCount;
+                        cartBadge.style.display = cartCount > 0 ? 'inline-flex' : 'none';
+                    }
+                } catch (error) {
+                    console.error('Error updating cart count:', error);
+                }
+            }
+            
+            // Initialize cart count
+            updateCartCount();
+            
+            // Admin access
+            document.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                    window.location.href = '/admin/login';
+                }
+            });
+        });
     </script>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
 </body>
 </html>

@@ -3,38 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Business Management Services - Collaborative Investment Ltd</title>
-    <meta name="description" content="Professional business management solutions across agriculture, construction, solar energy, machinery, and furniture sectors. We transform investments into profitable enterprises.">
+    <title>Complete Business Management Services - Collaborative Investment Ltd</title>
+    <meta name="description" content="Professional business management solutions across 7 key sectors: Agriculture, Construction, Solar Energy, Machinery, Furniture, Hotel Management, and Property Management.">
+    
+    <!-- CSS Links -->
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* Enhanced Typography Variables */
         :root {
+            /* Color Palette */
             --primary: #1a5276;
+            --primary-light: #21638f;
+            --primary-dark: #13405e;
             --secondary: #145A32;
+            --secondary-light: #196F3D;
+            --secondary-dark: #0E4626;
             --accent: #D68910;
-            --light: #f8f9fa;
-            --dark: #1a252f;
-            --gray: #6c757d;
-            --transition: all 0.3s ease;
-            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
-            --shadow-medium: 0 10px 30px rgba(0,0,0,0.12);
-            --border-radius: 12px;
+            --accent-light: #e6a033;
+            --accent-dark: #b36d0e;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            /* Typography Scale */
+            --text-xs: 0.75rem;     /* 12px */
+            --text-sm: 0.875rem;    /* 14px */
+            --text-base: 1rem;      /* 16px */
+            --text-lg: 1.125rem;    /* 18px */
+            --text-xl: 1.25rem;     /* 20px */
+            --text-2xl: 1.5rem;     /* 24px */
+            --text-3xl: 1.875rem;   /* 30px */
+            --text-4xl: 2.25rem;    /* 36px */
+            --text-5xl: 3rem;       /* 48px */
+            --text-6xl: 3.75rem;    /* 60px */
+            
+            /* Font Families */
+            --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-accent: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Font Weights */
+            --font-light: 300;
+            --font-regular: 400;
+            --font-medium: 500;
+            --font-semibold: 600;
+            --font-bold: 700;
+            --font-extrabold: 800;
+            
+            /* Line Heights */
+            --leading-tight: 1.25;
+            --leading-snug: 1.375;
+            --leading-normal: 1.5;
+            --leading-relaxed: 1.625;
+            --leading-loose: 2;
+            
+            /* Letter Spacing */
+            --tracking-tight: -0.025em;
+            --tracking-normal: 0;
+            --tracking-wide: 0.025em;
+            --tracking-wider: 0.05em;
+            
+            /* Spacing */
+            --space-unit: 0.25rem;
+            --space-1: calc(var(--space-unit) * 1);
+            --space-2: calc(var(--space-unit) * 2);
+            --space-3: calc(var(--space-unit) * 3);
+            --space-4: calc(var(--space-unit) * 4);
+            --space-6: calc(var(--space-unit) * 6);
+            --space-8: calc(var(--space-unit) * 8);
+            --space-12: calc(var(--space-unit) * 12);
+            --space-16: calc(var(--space-unit) * 16);
+            
+            /* Shadows */
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 24px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 12px 32px rgba(0,0,0,0.15);
+            --shadow-elevated: 0 20px 40px rgba(0,0,0,0.1);
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Hero Section */
+        /* Base Typography */
+        body {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+            color: var(--gray-800);
+            font-weight: var(--font-regular);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: var(--font-bold);
+            line-height: var(--leading-tight);
+            color: var(--gray-900);
+            margin-bottom: var(--space-4);
+            letter-spacing: var(--tracking-tight);
+        }
+        
+        h1 {
+            font-size: var(--text-5xl);
+            font-weight: var(--font-extrabold);
+            line-height: 1.1;
+            margin-bottom: var(--space-6);
+        }
+        
+        h2 {
+            font-size: var(--text-4xl);
+            font-weight: var(--font-bold);
+            line-height: 1.2;
+            margin-bottom: var(--space-4);
+        }
+        
+        h3 {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-semibold);
+            line-height: var(--leading-snug);
+        }
+        
+        /* Paragraphs */
+        p {
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+            margin-bottom: var(--space-4);
+            color: var(--gray-700);
+        }
+        
+        .lead {
+            font-size: var(--text-xl);
+            line-height: var(--leading-relaxed);
+            color: var(--gray-600);
+            font-weight: var(--font-regular);
+        }
+        
+        /* Enhanced Hero Section */
         .services-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #154360 100%),
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%),
                         url('/img/services/hero-bg.jpg') center/cover no-repeat;
             color: white;
-            padding: 8rem 0 4rem;
+            padding: 8rem 0 6rem;
             position: relative;
             overflow: hidden;
             text-align: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
         }
         
         .services-hero::before {
@@ -44,7 +184,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, rgba(26, 82, 118, 0.9) 0%, rgba(19, 64, 94, 0.95) 100%);
         }
         
         .hero-content {
@@ -52,368 +192,529 @@
             z-index: 2;
             max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 var(--space-6);
         }
         
         .services-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl));
+            margin-bottom: var(--space-6);
+            font-weight: var(--font-extrabold);
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .services-hero p {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
+            font-size: clamp(var(--text-lg), 2vw, var(--text-2xl));
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-8);
+            line-height: var(--leading-relaxed);
+            font-weight: var(--font-regular);
         }
         
         .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-6);
+            margin: var(--space-8) auto;
+            max-width: 800px;
         }
         
         .hero-stat {
             text-align: center;
+            padding: var(--space-4);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-base);
+        }
+        
+        .hero-stat:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent);
         }
         
         .hero-stat-value {
             display: block;
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: var(--text-4xl);
+            font-weight: var(--font-extrabold);
             color: var(--accent);
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--space-2);
+            font-family: var(--font-heading);
         }
         
         .hero-stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-wide);
+            font-weight: var(--font-semibold);
         }
         
-        /* Business Model Section */
-        .business-model {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+            padding: 0 var(--space-4);
         }
         
-        .model-cards {
+        .section-header h2 {
+            font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
+            font-weight: var(--font-extrabold);
+            color: var(--primary);
+            margin-bottom: var(--space-4);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: var(--space-6) auto 0;
+            line-height: var(--leading-relaxed);
+        }
+        
+        /* Complete Services Section */
+        .complete-services {
+            padding: var(--space-16) 0;
+            background: linear-gradient(135deg, var(--gray-50) 0%, #e8f4fd 100%);
+        }
+        
+        .services-categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
+            gap: var(--space-6);
+            margin-top: var(--space-8);
         }
         
-        .model-card {
+        .service-category {
             background: white;
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
             box-shadow: var(--shadow-light);
-            transition: var(--transition);
-            border: 1px solid #e2e8f0;
+            transition: var(--transition-base);
+            border: 1px solid var(--gray-200);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
-        .model-card:hover {
-            transform: translateY(-10px);
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        
+        .service-category:hover {
+            transform: translateY(-8px);
             box-shadow: var(--shadow-medium);
+            border-color: var(--accent-light);
         }
         
-        .model-icon {
+        .category-icon {
             width: 80px;
             height: 80px;
-            background: var(--secondary);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
             color: white;
-            border-radius: 50%;
+            border-radius: var(--radius-xl);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto var(--space-4);
+            transition: var(--transition-base);
+        }
+        
+        .service-category:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+        }
+        
+        .service-category h3 {
+            color: var(--primary);
+            margin-bottom: var(--space-3);
+            font-size: var(--text-xl);
+            font-weight: var(--font-bold);
+            line-height: var(--leading-snug);
+        }
+        
+        .service-category > p {
+            color: var(--gray-600);
+            margin-bottom: var(--space-4);
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+        }
+        
+        .category-features {
+            list-style: none;
+            padding: 0;
+            margin: var(--space-4) 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+        
+        .category-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+            color: var(--gray-700);
+            font-size: var(--text-sm);
+            line-height: var(--leading-normal);
+        }
+        
+        .category-features i {
+            color: var(--secondary);
+            font-size: 0.875rem;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+        
+        /* Management Models Section */
+        .management-models {
+            padding: var(--space-16) 0;
+            background: white;
+        }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-8);
+        }
+        
+        .model-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-base);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-light);
+        }
+        
+        .model-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: var(--space-4);
+            transition: var(--transition-base);
+        }
+        
+        .model-card:hover .model-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
         }
         
         .model-card h3 {
             color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
+            margin-bottom: var(--space-3);
+            font-size: var(--text-xl);
+            font-weight: var(--font-bold);
+            line-height: var(--leading-snug);
         }
         
-        .model-card p {
-            color: var(--gray);
-            line-height: 1.7;
-            margin: 0;
+        .model-card > p {
+            color: var(--gray-600);
+            margin-bottom: var(--space-4);
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
         }
         
-        /* Services Grid */
-        .services-grid-section {
-            padding: 6rem 0;
-            background: white;
+        .model-features {
+            list-style: none;
+            padding: 0;
+            margin: var(--space-4) 0;
+            flex-grow: 1;
         }
         
-        .services-nav {
+        .model-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+            color: var(--gray-700);
+            font-size: var(--text-sm);
+            line-height: var(--leading-normal);
+        }
+        
+        .model-features i {
+            color: var(--secondary);
+            font-size: 0.875rem;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+        
+        /* Sector Details Tabs */
+        .sector-details {
+            padding: var(--space-16) 0;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+        }
+        
+        .sector-tabs {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 4rem;
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
             flex-wrap: wrap;
         }
         
-        .service-nav-btn {
-            padding: 1rem 2rem;
+        .sector-tab {
+            padding: var(--space-4) var(--space-6);
             background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            color: var(--gray);
-            font-weight: 600;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            color: var(--gray-600);
+            font-family: var(--font-heading);
+            font-weight: var(--font-semibold);
+            font-size: var(--text-base);
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-base);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: var(--space-3);
+            letter-spacing: var(--tracking-wide);
         }
         
-        .service-nav-btn:hover {
+        .sector-tab:hover {
             border-color: var(--primary);
             color: var(--primary);
             transform: translateY(-2px);
         }
         
-        .service-nav-btn.active {
+        .sector-tab.active {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
+            box-shadow: var(--shadow-light);
         }
         
-        .service-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .service-detail {
-            display: none;
+        .sector-content {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            box-shadow: var(--shadow-light);
             animation: fadeIn 0.5s ease;
+            border: 1px solid var(--gray-200);
         }
         
-        .service-detail.active {
+        .sector-pane {
+            display: none;
+        }
+        
+        .sector-pane.active {
             display: block;
         }
         
-        .service-header {
+        .sector-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: var(--space-6);
         }
         
-        .service-header h2 {
+        .sector-header h2 {
             color: var(--primary);
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
+            font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+            margin-bottom: var(--space-3);
         }
         
-        .service-header p {
-            color: var(--gray);
-            font-size: 1.2rem;
-            max-width: 700px;
+        .sector-header p {
+            color: var(--gray-600);
+            font-size: var(--text-lg);
+            max-width: 600px;
             margin: 0 auto;
         }
         
-        .service-features-grid {
+        .service-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
         }
         
-        .service-feature {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-light);
-            border: 1px solid #e2e8f0;
-            transition: var(--transition);
-        }
-        
-        .service-feature:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-        }
-        
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .service-feature h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        
-        .service-feature p {
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-        
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .feature-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            color: var(--gray);
-        }
-        
-        .feature-list li i {
-            color: var(--success);
-            margin-top: 0.25rem;
-        }
-        
-        /* Management Process */
-        .management-process {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fd 100%);
-        }
-        
-        .process-timeline {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
-            position: relative;
-        }
-        
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 10%;
-            right: 10%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            z-index: 1;
-        }
-        
-        .process-step {
-            position: relative;
-            z-index: 2;
+        .service-stat {
             text-align: center;
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: var(--border-radius);
+            padding: var(--space-4);
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--accent);
+            transition: var(--transition-base);
+        }
+        
+        .service-stat:hover {
+            transform: translateY(-4px);
             box-shadow: var(--shadow-light);
-            border: 1px solid #e2e8f0;
         }
         
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 1.5rem;
-            position: relative;
-            border: 5px solid white;
-            box-shadow: 0 0 0 2px var(--secondary);
-        }
-        
-        .process-step h3 {
+        .stat-value {
+            display: block;
+            font-size: var(--text-3xl);
+            font-weight: var(--font-extrabold);
             color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            margin-bottom: var(--space-2);
+            font-family: var(--font-heading);
         }
         
-        .process-step p {
-            color: var(--gray);
-            line-height: 1.6;
-            margin: 0;
+        .service-stat span:last-child {
+            font-size: var(--text-sm);
+            color: var(--gray-600);
+            font-weight: var(--font-medium);
+        }
+        
+        .sector-features {
+            margin-top: var(--space-8);
+        }
+        
+        .sector-features h3 {
+            color: var(--primary);
+            margin-bottom: var(--space-4);
+            text-align: center;
+            font-size: var(--text-2xl);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: var(--space-6);
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition-base);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-light);
+            border-color: var(--accent-light);
+        }
+        
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: var(--space-4);
+        }
+        
+        .feature-item h4 {
+            color: var(--primary);
+            margin-bottom: var(--space-3);
+            font-size: var(--text-lg);
+        }
+        
+        .feature-item p {
+            color: var(--gray-600);
+            font-size: var(--text-sm);
+            margin-bottom: 0;
         }
         
         /* Benefits Section */
         .benefits-section {
-            padding: 6rem 0;
+            padding: var(--space-16) 0;
             background: white;
         }
         
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
+            gap: var(--space-6);
+            margin-top: var(--space-8);
         }
         
         .benefit-card {
             background: white;
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
             box-shadow: var(--shadow-light);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--gray-200);
             text-align: center;
-            transition: var(--transition);
+            transition: var(--transition-base);
+            height: 100%;
         }
         
         .benefit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-medium);
-            border-color: var(--accent);
-        }
-        
-        .benefit-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 1.5rem;
+            border-color: var(--accent-light);
         }
         
         .benefit-card h3 {
             color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            margin-bottom: var(--space-3);
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
         }
         
         .benefit-card p {
-            color: var(--gray);
-            line-height: 1.7;
-            margin: 0;
+            color: var(--gray-600);
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+            margin-bottom: 0;
         }
         
         /* CTA Section */
         .services-cta {
-            background: linear-gradient(135deg, var(--primary) 0%, #154360 100%),
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%),
                         url('/img/services/cta-bg.jpg') center/cover no-repeat;
             color: white;
-            padding: 6rem 0;
+            padding: var(--space-16) 0;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
         
         .services-cta::before {
@@ -423,36 +724,33 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(135deg, rgba(26, 82, 118, 0.9) 0%, rgba(19, 64, 94, 0.95) 100%);
         }
         
         .cta-content {
             position: relative;
             z-index: 2;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 var(--space-6);
         }
         
-        .services-cta h2 {
-            font-size: 2.8rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .cta-content h2 {
+            color: white;
+            font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
+            margin-bottom: var(--space-4);
         }
         
-        .services-cta p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            margin-bottom: 3rem;
-            line-height: 1.8;
+        .cta-content p {
+            font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-8);
+            line-height: var(--leading-relaxed);
         }
         
         .cta-buttons {
             display: flex;
-            gap: 1.5rem;
+            gap: var(--space-4);
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -461,190 +759,132 @@
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 1.2rem 2.5rem;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            gap: var(--space-3);
+            padding: var(--space-4) var(--space-6);
+            border-radius: var(--radius-lg);
+            font-family: var(--font-heading);
+            font-weight: var(--font-semibold);
+            font-size: var(--text-base);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all var(--transition-base);
             border: none;
             cursor: pointer;
+            letter-spacing: var(--tracking-wide);
         }
         
         .btn-primary {
-            background: var(--secondary);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(214, 137, 16, 0.3);
         }
         
         .btn-primary:hover {
-            background: #0e4d27;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(20, 90, 50, 0.3);
-        }
-        
-        .btn-accent {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .btn-accent:hover {
-            background: #b36d0e;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(214, 137, 16, 0.3);
+            box-shadow: 0 8px 25px rgba(214, 137, 16, 0.4);
         }
         
         .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
         
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
             border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
             transform: translateY(-3px);
         }
         
-        /* Section Header */
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
+        .btn-accent {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(20, 90, 50, 0.3);
         }
         
-        .section-header h2 {
-            font-size: 2.8rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-        
-        .section-header p {
-            color: var(--gray);
-            max-width: 700px;
-            margin: 2rem auto 0;
-            font-size: 1.2rem;
-            line-height: 1.7;
+        .btn-accent:hover {
+            background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(20, 90, 50, 0.4);
         }
         
         .container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding: 0 var(--space-6);
         }
         
         /* Responsive Design */
         @media (max-width: 992px) {
-            .services-hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2.3rem;
-            }
-            
-            .process-timeline {
+            .hero-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .process-timeline::before {
-                display: none;
-            }
-            
-            .hero-stats {
-                gap: 2rem;
+            .sector-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: var(--space-4);
+                scrollbar-width: thin;
             }
         }
         
         @media (max-width: 768px) {
-            .services-hero {
-                padding: 6rem 0 3rem;
+            .services-categories,
+            .models-grid,
+            .benefits-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
             }
             
-            .services-hero h1 {
-                font-size: 2.3rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2rem;
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
             }
             
             .cta-buttons {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
             }
             
             .btn {
-                width: 100%;
-                max-width: 300px;
                 justify-content: center;
+                width: 100%;
             }
             
-            .services-nav {
+            .sector-tabs {
                 flex-direction: column;
-                align-items: center;
-            }
-            
-            .service-nav-btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-            
-            .process-timeline {
-                grid-template-columns: 1fr;
+                align-items: stretch;
             }
         }
         
-        @media (max-width: 576px) {
-            .services-hero h1 {
-                font-size: 2rem;
+        @media (max-width: 480px) {
+            .services-hero {
+                padding: 6rem 0 4rem;
+                min-height: auto;
+            }
+            
+            .hero-content,
+            .container {
+                padding: 0 var(--space-4);
             }
             
             .section-header h2 {
-                font-size: 1.8rem;
+                font-size: var(--text-3xl);
             }
             
-            .service-features-grid {
-                grid-template-columns: 1fr;
+            .section-header p {
+                font-size: var(--text-base);
             }
+            
+            .sector-content {
+                padding: var(--space-6);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -658,16 +898,17 @@
             </a>
             
             <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span>|</span>
+                <span>|</span>
+                <span>|</span>
+            </button>
             </button>
             
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
-                <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories" class="active">Shop Products</a></li>
+                <li><a href="/services" class="active">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
                 <li><a href="/investment">Investment</a></li>
                 <li><a href="/blog">Blog</a></li>
@@ -706,16 +947,16 @@
     <!-- Hero Section -->
     <section class="services-hero">
         <div class="hero-content">
-            <h1>Professional Business Management Services</h1>
-            <p>We transform investments into profitable enterprises through comprehensive management across Nigeria's most promising sectors. From setup to daily operations, we handle everything while you maintain ownership and control.</p>
+            <h1>Complete Business Management Services</h1>
+            <p class="lead">We provide professional business management across 7 key sectors in Nigeria. From setup to daily operations, we handle everything while you maintain ownership and control.</p>
             
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-value">5</span>
+                    <span class="hero-stat-value">6</span>
                     <span class="hero-stat-label">Business Sectors</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-value">250+</span>
+                    <span class="hero-stat-value">3+</span>
                     <span class="hero-stat-label">Managed Businesses</span>
                 </div>
                 <div class="hero-stat">
@@ -723,352 +964,357 @@
                     <span class="hero-stat-label">Success Rate</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-value">10+</span>
+                    <span class="hero-stat-value">5+</span>
                     <span class="hero-stat-label">Years Experience</span>
                 </div>
             </div>
-            
-            <a href="#services" class="btn btn-accent">
-                <i class="fas fa-briefcase"></i>
-                Explore Our Services
-            </a>
         </div>
     </section>
 
-    <!-- Business Model -->
-    <section class="business-model">
+    <!-- Complete Services Section -->
+    <section class="complete-services">
         <div class="container">
             <div class="section-header">
-                <h2>Our Business Management Model</h2>
-                <p>We provide complete business setup and management services across five key sectors. Your investment, our expertise - working together for success.</p>
+                <h2>Our Complete Service Categories</h2>
+                <p>Professional management across Nigeria's most profitable business sectors</p>
             </div>
             
-            <div class="model-cards">
-                <div class="model-card">
-                    <div class="model-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>Complete Setup</h3>
-                    <p>We handle everything from location survey, business registration, shop setup, to inventory management - all under your brand name.</p>
+            <div class="services-categories">
+                <!-- Agriculture -->
+                <div class="service-category">
+                    <h3>Agriculture & Livestock</h3>
+                    <p>Complete management of poultry, fish farming, piggery, and livestock operations.</p>
+                    <ul class="category-features">
+                        <li><i class="fas fa-check"></i> Poultry farm management</li>
+                        <li><i class="fas fa-check"></i> Fish farming operations</li>
+                        <li><i class="fas fa-check"></i> Pig farming management</li>
+                        <li><i class="fas fa-check"></i> Livestock care & sales</li>
+                    </ul>
                 </div>
                 
-                <div class="model-card">
-                    <div class="model-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Professional Management</h3>
-                    <p>Our experienced staff manage daily operations, sales, customer service, and inventory control on your behalf.</p>
+                <!-- Construction -->
+                <div class="service-category">
+                    <h3>Construction & Manufacturing</h3>
+                    <p>Professional management of block manufacturing and construction services.</p>
+                    <ul class="category-features">
+                        <li><i class="fas fa-check"></i> Block plant operations</li>
+                        <li><i class="fas fa-check"></i> Construction projects</li>
+                        <li><i class="fas fa-check"></i> Quality control systems</li>
+                        <li><i class="fas fa-check"></i> Material procurement</li>
+                    </ul>
                 </div>
                 
-                <div class="model-card">
-                    <div class="model-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3>Financial Transparency</h3>
-                    <p>We establish domiciliary accounts in your name and provide monthly financial reports with complete transparency.</p>
+                <!-- Solar Energy -->
+                <div class="service-category">
+                    <h3>Solar Energy Solutions</h3>
+                    <p>Complete solar business management including sales and installation.</p>
+                    <ul class="category-features">
+                        <li><i class="fas fa-check"></i> Solar sales management</li>
+                        <li><i class="fas fa-check"></i> Installation project management</li>
+                        <li><i class="fas fa-check"></i> Maintenance services</li>
+                        <li><i class="fas fa-check"></i> Technical support</li>
+                    </ul>
                 </div>
                 
-                <div class="model-card">
-                    <div class="model-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Collaborative Growth</h3>
-                    <p>All major decisions made together. Regular consultations ensure your vision guides business growth and strategy.</p>
+                <!-- Machinery -->
+                <div class="service-category">
+                    <h3>Machinery & Equipment</h3>
+                    <p>Management of industrial machinery sales, fabrication, and rental.</p>
+                    <ul class="category-features">
+                        <li><i class="fas fa-check"></i> Machinery sales</li>
+                        <li><i class="fas fa-check"></i> Fabrication workshop</li>
+                        <li><i class="fas fa-check"></i> Equipment rental</li>
+                        <li><i class="fas fa-check"></i> Importation services</li>
+                    </ul>
+                </div>
+                
+                <!-- Furniture -->
+                <div class="service-category">
+                    <h3>Furniture & Upholstery</h3>
+                    <p>Custom furniture manufacturing and upholstery business management.</p>
+                    <ul class="category-features">
+                        <li><i class="fas fa-check"></i> Furniture production</li>
+                        <li><i class="fas fa-check"></i> Upholstery services</li>
+                        <li><i class="fas fa-check"></i> Showroom management</li>
+                        <li><i class="fas fa-check"></i> Interior design</li>
+                    </ul>
+                </div>
+                
+                <!-- Hotel Management -->
+                <div class="service-category">
+                    <h3>Hotel Management</h3>
+                    <p>Professional hotel operations management and turnaround services.</p>
+                    <ul class="category-features">
+                        <li><i class="fas fa-check"></i> Full hotel operations</li>
+                        <li><i class="fas fa-check"></i> Staff training</li>
+                        <li><i class="fas fa-check"></i> Revenue optimization</li>
+                        <li><i class="fas fa-check"></i> Bar & menu styling</li>
+                    </ul>
+                </div>
+                
+                <!-- Property Management -->
+                <div class="service-category">
+                    <h3>Property Management</h3>
+                    <p>Complete property and tenant management for diaspora investors.</p>
+                    <ul class="category-features">
+                        <li><i class="fas fa-check"></i> Tenant management</li>
+                        <li><i class="fas fa-check"></i> Rent collection</li>
+                        <li><i class="fas fa-check"></i> Property maintenance</li>
+                        <li><i class="fas fa-check"></i> Asset protection</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Grid -->
-    <section id="services" class="services-grid-section">
+    <!-- Management Models Section -->
+    <section class="management-models">
         <div class="container">
             <div class="section-header">
-                <h2>Our Business Management Services</h2>
-                <p>Choose from our five proven business sectors with complete management support</p>
+                <h2>Our Management Models</h2>
+                <p>Choose the service model that fits your needs and investment goals</p>
             </div>
             
-            <!-- Services Navigation -->
-            <div class="services-nav">
-                <button class="service-nav-btn active" data-service="agriculture">
-                    <i class="fas fa-tractor"></i>
-                    Agriculture & Livestock
+            <div class="models-grid">
+                <!-- Model 1: Complete Setup & Management -->
+                <div class="model-card">
+                    <h3>Complete Setup & Management</h3>
+                    <p>We handle everything from business registration to daily operations for diaspora investors.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Business registration</li>
+                        <li><i class="fas fa-check"></i> Location setup</li>
+                        <li><i class="fas fa-check"></i> Staff recruitment</li>
+                        <li><i class="fas fa-check"></i> Daily operations</li>
+                        <li><i class="fas fa-check"></i> Financial management</li>
+                    </ul>
+                </div>
+                
+                <!-- Model 2: Operational Management -->
+                <div class="model-card">
+                    <h3>Operational Management</h3>
+                    <p>Manage your existing business with professional oversight and optimization.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Staff management</li>
+                        <li><i class="fas fa-check"></i> Process optimization</li>
+                        <li><i class="fas fa-check"></i> Quality control</li>
+                        <li><i class="fas fa-check"></i> Cost reduction</li>
+                        <li><i class="fas fa-check"></i> Performance monitoring</li>
+                    </ul>
+                </div>
+                
+                <!-- Model 3: Hotel Turnaround -->
+                <div class="model-card">
+                    <h3>Hotel Turnaround Services</h3>
+                    <p>Transform underperforming hotels into profitable businesses.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Operations restructuring</li>
+                        <li><i class="fas fa-check"></i> Revenue optimization</li>
+                        <li><i class="fas fa-check"></i> Staff retraining</li>
+                        <li><i class="fas fa-check"></i> Marketing strategy</li>
+                        <li><i class="fas fa-check"></i> Cost management</li>
+                    </ul>
+                </div>
+                
+                <!-- Model 4: Property Management -->
+                <div class="model-card">
+                    <h3>Property Management</h3>
+                    <p>Professional property management for absentee owners and diaspora investors.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Tenant screening</li>
+                        <li><i class="fas fa-check"></i> Rent collection</li>
+                        <li><i class="fas fa-check"></i> Maintenance coordination</li>
+                        <li><i class="fas fa-check"></i> Legal compliance</li>
+                        <li><i class="fas fa-check"></i> Property inspections</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sector Details Section -->
+    <section class="sector-details">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sector-Specific Management</h2>
+                <p>Detailed management services for each business sector</p>
+            </div>
+            
+            <div class="sector-tabs">
+                <button class="sector-tab active" data-sector="agriculture">
+                    <i ></i> Agriculture
                 </button>
-                <button class="service-nav-btn" data-service="construction">
-                    <i class="fas fa-hard-hat"></i>
-                    Construction & Manufacturing
+                <button class="sector-tab" data-sector="construction">
+                    <i ></i> Construction
                 </button>
-                <button class="service-nav-btn" data-service="solar">
-                    <i class="fas fa-solar-panel"></i>
-                    Solar Energy Solutions
+                <button class="sector-tab" data-sector="solar">
+                    <i ></i> Solar Energy
                 </button>
-                <button class="service-nav-btn" data-service="machinery">
-                    <i class="fas fa-cogs"></i>
-                    Machinery & Equipment
-                </button>
-                <button class="service-nav-btn" data-service="furniture">
-                    <i class="fas fa-couch"></i>
-                    Furniture & Upholstery
+                <button class="sector-tab" data-sector="hotel">
+                    <i ></i> Hotel Management
                 </button>
             </div>
             
-            <!-- Service Content -->
-            <div class="service-content">
-                <!-- Agriculture Service -->
-                <div id="agriculture" class="service-detail active">
-                    <div class="service-header">
+            <div class="sector-content">
+                <!-- Agriculture Sector -->
+                <div id="agriculture" class="sector-pane active">
+                    <div class="sector-header">
                         <h2>Agriculture & Livestock Management</h2>
-                        <p>Complete poultry, fish farming, and livestock business management with professional oversight and guaranteed results.</p>
+                        <p>Complete agricultural business management with proven results</p>
                     </div>
                     
-                    <div class="service-features-grid">
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-egg"></i>
-                            </div>
-                            <h4>Poultry Management</h4>
-                            <p>Full-scale broiler and layer production management from day-old chicks to market-ready birds.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Day-old chick procurement & care</li>
-                                <li><i class="fas fa-check"></i> Feed management & optimization</li>
-                                <li><i class="fas fa-check"></i> Health monitoring & veterinary care</li>
-                                <li><i class="fas fa-check"></i> Market sales & distribution</li>
-                            </ul>
+                    <div class="service-stats">
+                        <div class="service-stat">
+                            <span class="stat-value">35%+</span>
+                            <span>Average ROI</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-fish"></i>
-                            </div>
-                            <h4>Fish Farming Management</h4>
-                            <p>Professional catfish and tilapia farming management with optimal growth strategies.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Fingerling procurement & rearing</li>
-                                <li><i class="fas fa-check"></i> Pond management & water quality</li>
-                                <li><i class="fas fa-check"></i> Feeding optimization</li>
-                                <li><i class="fas fa-check"></i> Harvesting & market sales</li>
-                            </ul>
+                        <div class="service-stat">
+                            <span class="stat-value">24/7</span>
+                            <span>Livestock Monitoring</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-piggy-bank"></i>
+                        <div class="service-stat">
+                            <span class="stat-value">98%</span>
+                            <span>Success Rate</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sector-features">
+                        <h3>Management Services Include:</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <h4>Poultry Farm Management</h4>
+                                <p>Complete layer and broiler operations with veterinary care and market sales.</p>
                             </div>
-                            <h4>Livestock Management</h4>
-                            <p>Professional pig farming and other livestock management with veterinary oversight.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Pig breeding & care management</li>
-                                <li><i class="fas fa-check"></i> Animal health monitoring</li>
-                                <li><i class="fas fa-check"></i> Feed formulation & management</li>
-                                <li><i class="fas fa-check"></i> Market linkage & sales</li>
-                            </ul>
+                            <div class="feature-item">
+                                <h4>Fish Farming</h4>
+                                <p>Professional aquaculture management with optimal growth strategies.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h4>Pig Farming</h4>
+                                <p>Modern piggery operations with breeding and market distribution.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Construction Service -->
-                <div id="construction" class="service-detail">
-                    <div class="service-header">
+                <!-- Construction Sector -->
+                <div id="construction" class="sector-pane">
+                    <div class="sector-header">
                         <h2>Construction & Manufacturing Management</h2>
-                        <p>Professional management of block manufacturing, building materials, and construction services.</p>
+                        <p>Professional oversight of construction businesses and manufacturing plants</p>
                     </div>
                     
-                    <div class="service-features-grid">
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-cubes"></i>
-                            </div>
-                            <h4>Block Manufacturing Management</h4>
-                            <p>Complete management of concrete block production with quality control and market expansion.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Production process management</li>
-                                <li><i class="fas fa-check"></i> Quality control systems</li>
-                                <li><i class="fas fa-check"></i> Raw material procurement</li>
-                                <li><i class="fas fa-check"></i> Sales & distribution network</li>
-                            </ul>
+                    <div class="service-stats">
+                        <div class="service-stat">
+                            <span class="stat-value">40%+</span>
+                            <span>Average ROI</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <h4>Construction Services Management</h4>
-                            <p>Professional oversight of construction projects and specialized services.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Project planning & execution</li>
-                                <li><i class="fas fa-check"></i> Sports court construction</li>
-                                <li><i class="fas fa-check"></i> Electric gate installation</li>
-                                <li><i class="fas fa-check"></i> Quality assurance systems</li>
-                            </ul>
+                        <div class="service-stat">
+                            <span class="stat-value">5,000+</span>
+                            <span>Daily Block Capacity</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-industry"></i>
+                        <div class="service-stat">
+                            <span class="stat-value">95%</span>
+                            <span>Quality Assurance</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sector-features">
+                        <h3>Management Services Include:</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <h4>Block Manufacturing</h4>
+                                <p>Professional block plant operations with quality control and distribution.</p>
                             </div>
-                            <h4>Manufacturing Management</h4>
-                            <p>Complete oversight of production facilities and manufacturing operations.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Production line management</li>
-                                <li><i class="fas fa-check"></i> Inventory control systems</li>
-                                <li><i class="fas fa-check"></i> Staff supervision & training</li>
-                                <li><i class="fas fa-check"></i> Quality certification management</li>
-                            </ul>
+                            <div class="feature-item">
+                                <h4>Construction Projects</h4>
+                                <p>Complete project management for residential and commercial construction.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h4>Equipment Management</h4>
+                                <p>Maintenance and operation of construction machinery and equipment.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Solar Energy Service -->
-                <div id="solar" class="service-detail">
-                    <div class="service-header">
-                        <h2>Solar Energy Solutions Management</h2>
-                        <p>Professional management of solar energy businesses including sales, installation, and maintenance.</p>
+                <!-- Solar Sector -->
+                <div id="solar" class="sector-pane">
+                    <div class="sector-header">
+                        <h2>Solar Energy Business Management</h2>
+                        <p>Complete solar solutions business management</p>
                     </div>
                     
-                    <div class="service-features-grid">
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-solar-panel"></i>
-                            </div>
-                            <h4>Solar Sales Management</h4>
-                            <p>Complete management of solar equipment sales business with technical expertise.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Product sourcing & inventory</li>
-                                <li><i class="fas fa-check"></i> Technical sales support</li>
-                                <li><i class="fas fa-check"></i> Customer consultation services</li>
-                                <li><i class="fas fa-check"></i> After-sales support systems</li>
-                            </ul>
+                    <div class="service-stats">
+                        <div class="service-stat">
+                            <span class="stat-value">35%+</span>
+                            <span>Average ROI</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <h4>Installation Management</h4>
-                            <p>Professional oversight of solar installation projects and technical teams.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Project assessment & quoting</li>
-                                <li><i class="fas fa-check"></i> Technical team management</li>
-                                <li><i class="fas fa-check"></i> Quality installation standards</li>
-                                <li><i class="fas fa-check"></i> Safety compliance systems</li>
-                            </ul>
+                        <div class="service-stat">
+                            <span class="stat-value">24/7</span>
+                            <span>Technical Support</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-tools"></i>
+                        <div class="service-stat">
+                            <span class="stat-value">100%</span>
+                            <span>Client Satisfaction</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sector-features">
+                        <h3>Management Services Include:</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <h4>Solar Sales Management</h4>
+                                <p>Professional sales team management and customer acquisition.</p>
                             </div>
-                            <h4>Maintenance Management</h4>
-                            <p>Complete management of maintenance services and customer support systems.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Preventive maintenance scheduling</li>
-                                <li><i class="fas fa-check"></i> Emergency repair services</li>
-                                <li><i class="fas fa-check"></i> Performance monitoring</li>
-                                <li><i class="fas fa-check"></i> Customer service management</li>
-                            </ul>
+                            <div class="feature-item">
+                                <h4>Installation Services</h4>
+                                <p>Project management for solar system installations.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h4>Maintenance Support</h4>
+                                <p>24/7 technical support and maintenance services.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Machinery Service -->
-                <div id="machinery" class="service-detail">
-                    <div class="service-header">
-                        <h2>Machinery & Equipment Management</h2>
-                        <p>Professional management of industrial machinery sales, fabrication, and equipment rental businesses.</p>
+                <!-- Hotel Sector -->
+                <div id="hotel" class="sector-pane">
+                    <div class="sector-header">
+                        <h2>Hotel Management Services</h2>
+                        <p>Professional hotel operations and turnaround management</p>
                     </div>
                     
-                    <div class="service-features-grid">
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-industry"></i>
-                            </div>
-                            <h4>Machinery Sales Management</h4>
-                            <p>Complete management of industrial machinery sales with technical expertise.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Product sourcing & importation</li>
-                                <li><i class="fas fa-check"></i> Technical specifications management</li>
-                                <li><i class="fas fa-check"></i> Sales team supervision</li>
-                                <li><i class="fas fa-check"></i> Installation & commissioning</li>
-                            </ul>
+                    <div class="service-stats">
+                        <div class="service-stat">
+                            <span class="stat-value">50%+</span>
+                            <span>Revenue Increase</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-hammer"></i>
-                            </div>
-                            <h4>Fabrication Management</h4>
-                            <p>Professional oversight of metal fabrication and custom machinery production.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Workshop management</li>
-                                <li><i class="fas fa-check"></i> Quality control systems</li>
-                                <li><i class="fas fa-check"></i> Technical team supervision</li>
-                                <li><i class="fas fa-check"></i> Custom design implementation</li>
-                            </ul>
+                        <div class="service-stat">
+                            <span class="stat-value">95%</span>
+                            <span>Occupancy Rate</span>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-truck"></i>
-                            </div>
-                            <h4>Equipment Rental Management</h4>
-                            <p>Complete management of equipment rental business with maintenance oversight.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Rental fleet management</li>
-                                <li><i class="fas fa-check"></i> Maintenance scheduling</li>
-                                <li><i class="fas fa-check"></i> Rental agreements & documentation</li>
-                                <li><i class="fas fa-check"></i> Customer service systems</li>
-                            </ul>
+                        <div class="service-stat">
+                            <span class="stat-value">100%</span>
+                            <span>Staff Trained</span>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- Furniture Service -->
-                <div id="furniture" class="service-detail">
-                    <div class="service-header">
-                        <h2>Furniture & Upholstery Management</h2>
-                        <p>Professional management of custom furniture manufacturing and upholstery businesses.</p>
                     </div>
                     
-                    <div class="service-features-grid">
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-chair"></i>
+                    <div class="sector-features">
+                        <h3>Management Services Include:</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <h4>Full Operations</h4>
+                                <p>Complete hotel operations management from front desk to housekeeping.</p>
                             </div>
-                            <h4>Furniture Manufacturing Management</h4>
-                            <p>Complete management of custom furniture production workshop and operations.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Workshop production management</li>
-                                <li><i class="fas fa-check"></i> Quality craftsmanship standards</li>
-                                <li><i class="fas fa-check"></i> Material sourcing & inventory</li>
-                                <li><i class="fas fa-check"></i> Custom design implementation</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-couch"></i>
+                            <div class="feature-item">
+                                <h4>Revenue Optimization</h4>
+                                <p>Strategic pricing and marketing to maximize hotel revenue.</p>
                             </div>
-                            <h4>Upholstery Management</h4>
-                            <p>Professional oversight of upholstery services with quality material management.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Material selection & procurement</li>
-                                <li><i class="fas fa-check"></i> Upholstery team supervision</li>
-                                <li><i class="fas fa-check"></i> Quality control systems</li>
-                                <li><i class="fas fa-check"></i> Customer consultation services</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="service-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-store"></i>
+                            <div class="feature-item">
+                                <h4>Staff Training</h4>
+                                <p>Professional training programs for hotel staff at all levels.</p>
                             </div>
-                            <h4>Retail Management</h4>
-                            <p>Complete management of furniture showroom and retail operations.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> Showroom display management</li>
-                                <li><i class="fas fa-check"></i> Sales team supervision</li>
-                                <li><i class="fas fa-check"></i> Customer service systems</li>
-                                <li><i class="fas fa-check"></i> Delivery & installation coordination</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1076,109 +1322,43 @@
         </div>
     </section>
 
-    <!-- Management Process -->
-    <section class="management-process">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Management Process</h2>
-                <p>A structured approach that ensures business success and investor satisfaction</p>
-            </div>
-            
-            <div class="process-timeline">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h3>Business Assessment</h3>
-                    <p>Comprehensive analysis of market opportunities, feasibility, and setup requirements</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3>Setup & Registration</h3>
-                    <p>Complete business setup including location, legal registration, and initial inventory</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3>Staff Recruitment</h3>
-                    <p>Hiring and training professional staff to manage daily operations</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <h3>Ongoing Management</h3>
-                    <p>Daily operations, quality control, sales management, and customer service</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">5</div>
-                    <h3>Financial Reporting</h3>
-                    <p>Monthly financial statements, performance analysis, and strategic planning</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">6</div>
-                    <h3>Collaborative Growth</h3>
-                    <p>Regular consultations and strategic decisions for business expansion</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits -->
+    <!-- Benefits Section -->
     <section class="benefits-section">
         <div class="container">
             <div class="section-header">
-                <h2>Benefits of Our Management Services</h2>
-                <p>Why businesses and investors choose our professional management approach</p>
+                <h2>Benefits of Professional Business Management</h2>
+                <p>Why businesses choose our management services</p>
             </div>
             
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
                     <h3>Risk Reduction</h3>
-                    <p>Professional oversight eliminates common business risks and ensures sustainable operations</p>
+                    <p>Professional oversight eliminates common business risks and ensures sustainable operations.</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
                     <h3>Increased Profitability</h3>
-                    <p>Optimized operations and cost controls typically increase profits by 30-50%</p>
+                    <p>Optimized operations typically increase profits by 30-50%.</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Time Efficiency</h3>
-                    <p>Focus on your core activities while we handle day-to-day business operations</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h3>Legal Compliance</h3>
-                    <p>Full compliance with Nigerian business laws and regulatory requirements</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3>Financial Transparency</h3>
-                    <p>Complete financial visibility with monthly reports and bank account access</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
                     <h3>Professional Staff</h3>
-                    <p>Access to trained, experienced staff managed by our professional supervisors</p>
+                    <p>Access to trained, experienced staff managed by professional supervisors.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Time Efficiency</h3>
+                    <p>Free up your time while we handle daily operations and management.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Market Expertise</h3>
+                    <p>Benefit from our deep understanding of Nigerian business markets.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Scalable Growth</h3>
+                    <p>Structured systems that support business growth and expansion.</p>
                 </div>
             </div>
         </div>
@@ -1187,21 +1367,21 @@
     <!-- CTA Section -->
     <section class="services-cta">
         <div class="cta-content">
-            <h2>Ready to Start Your Business?</h2>
-            <p>Let's discuss how we can help you establish and grow a profitable business in Nigeria with our complete management services.</p>
+            <h2>Ready to Professionalize Your Business?</h2>
+            <p>Let's discuss how we can manage your business for optimal performance and growth.</p>
             
             <div class="cta-buttons">
                 <a href="https://wa.me/2348129978419" target="_blank" class="btn btn-accent">
                     <i class="fab fa-whatsapp"></i>
                     WhatsApp Consultation
                 </a>
-                <a href="tel:+2348129978419" class="btn btn-secondary">
-                    <i class="fas fa-phone-alt"></i>
-                    Call +234 812 997 8419
+                <a href="/contact" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i>
+                    Request Proposal
                 </a>
                 <a href="/investment" class="btn btn-primary">
                     <i class="fas fa-chart-line"></i>
-                    View Investment Packages
+                    View Investment Options
                 </a>
             </div>
         </div>
@@ -1307,30 +1487,24 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Services page loaded');
             
-            // Service navigation
-            const serviceBtns = document.querySelectorAll('.service-nav-btn');
-            const serviceDetails = document.querySelectorAll('.service-detail');
+            // Sector tabs functionality
+            const sectorTabs = document.querySelectorAll('.sector-tab');
+            const sectorPanes = document.querySelectorAll('.sector-pane');
             
-            serviceBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const serviceId = this.dataset.service;
+            sectorTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const sectorId = this.dataset.sector;
                     
-                    // Update active button
-                    serviceBtns.forEach(b => b.classList.remove('active'));
+                    // Update active tab
+                    sectorTabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Show selected service
-                    serviceDetails.forEach(detail => {
-                        detail.classList.remove('active');
-                        if (detail.id === serviceId) {
-                            detail.classList.add('active');
+                    // Show selected sector pane
+                    sectorPanes.forEach(pane => {
+                        pane.classList.remove('active');
+                        if (pane.id === sectorId) {
+                            pane.classList.add('active');
                         }
-                    });
-                    
-                    // Smooth scroll to service section
-                    document.querySelector('#services').scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
                     });
                 });
             });
@@ -1353,29 +1527,27 @@
             updateCartCount();
             
             // Add animation on scroll
-            function animateOnScroll() {
-                const elements = document.querySelectorAll('.model-card, .service-feature, .process-step, .benefit-card');
-                
-                elements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
-                    
-                    if (elementTop < window.innerHeight - elementVisible) {
-                        element.style.opacity = "1";
-                        element.style.transform = "translateY(0)";
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
                     }
                 });
-            }
+            }, observerOptions);
             
-            // Set initial animation styles
-            document.querySelectorAll('.model-card, .service-feature, .process-step, .benefit-card').forEach(el => {
+            // Observe elements for animation
+            document.querySelectorAll('.model-card, .service-category, .feature-item, .benefit-card').forEach(el => {
                 el.style.opacity = "0";
                 el.style.transform = "translateY(30px)";
                 el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                observer.observe(el);
             });
-            
-            window.addEventListener('scroll', animateOnScroll);
-            animateOnScroll();
             
             // Add WhatsApp chat button
             const whatsappButton = document.createElement('a');
@@ -1427,12 +1599,10 @@
                 }
             `;
             document.head.appendChild(whatsappStyles);
-            
-        }); // End of DOMContentLoaded
+        });
     </script>
     
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
-    <script src="/js/cart-drawer.js"></script>
 </body>
 </html>

@@ -11,10 +11,445 @@
     <link rel="stylesheet" href="/css/cart-drawer.css">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Contact Page Styles */
+        :root {
+            --primary: #1a5276;
+            --secondary: #145A32;
+            --accent: #D68910;
+            --light: #f8f9fa;
+            --dark: #1a252f;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --transition: all 0.3s ease;
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 24px rgba(0,0,0,0.12);
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--light);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .breadcrumb-links {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .breadcrumb-links a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-links span:last-child {
+            color: var(--gray);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5530 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        /* Contact Information */
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-item p {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            background: var(--light);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        
+        .quick-link:hover {
+            background: white;
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius-md);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Form Messages */
+        .form-messages {
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .form-messages.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .form-messages.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: #154360;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 576px) {
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+            }
+        }
+        
+        /* FAQ Styles */
+        .faq-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-light);
+            transition: var(--transition);
+        }
+        
+        .faq-item:hover {
+            box-shadow: var(--shadow-light);
+            transform: translateY(-2px);
+        }
+        
+        .faq-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .faq-item p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Map/Directions Styles */
+        .directions-box {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .directions-box h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .directions-box h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .directions-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .directions-box li {
+            padding: 0.5rem 0;
+            color: var(--gray);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .directions-box li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        /* Emergency Contact Grid */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .emergency-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .emergency-item h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .emergency-item p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 2rem 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* Form Checkbox */
+        .form-group label[for] {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -22,38 +457,43 @@
                 <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
             </a>
             
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span>|</span>
+                <span>|</span>
+                <span>|</span>
+            </button>
+            
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li> <!-- Updated to shop-categories -->
+                <li><a href="/shop-categories">Shop Products</a></li>
                 <li><a href="/portfolio">Portfolio</a></li>
-                <li><a href="/investment">Investment</a></li>
-                <li><a href="/blog">Blog</a></li>
+                <li><a href="/investment" >Investment</a></li>
+                <li><a href="/blog" >Blog</a></li>
                 <li><a href="/order-track">Track Order</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
             </ul>
-                    <!-- Cart Icon in Header -->
-        <div class="cart-icon-wrapper">
-            <button id="open-cart-drawer" class="cart-icon-btn">
-                🛒 Cart <span id="cart-count-badge">0</span>
-            </button>
-        </div>
+            
+            <!-- Cart Icon -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
         </nav>
     </header>
-    <div id="cart-drawer-overlay"></div>
 
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
             <h2>Your Cart</h2>
             <button id="close-cart-drawer" class="close-btn">×</button>
         </div>
-
         <div id="cart-drawer-items" class="cart-drawer-items">
             <p>Loading cart...</p>
         </div>
-
         <div class="cart-drawer-footer">
             <div class="drawer-total-row">
                 <span>Total:</span>
@@ -62,7 +502,6 @@
             <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
         </div>
     </div>
-</div>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
@@ -75,21 +514,21 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Contact Us</h1>
-        <p>Connect with our team to discuss business management, investment opportunities, and strategic partnerships.</p>
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Connect with our team to discuss business management, investment opportunities, and strategic partnerships.</p>
+        </div>
     </section>
 
     <!-- Contact Section -->
     <section class="section">
         <div class="contact-grid">
-
             <!-- Contact Information -->
             <div class="contact-info">
                 <h2>Get in Touch</h2>
                 <p>We are available to answer your inquiries and provide guidance on how CIL can support your goals.</p>
 
                 <div class="info-item">
-                    <div class="info-icon"></div>
                     <div>
                         <h3>Office Address</h3>
                         <p>212 Ijegun Road, Ikotun, Lagos, Nigeria</p>
@@ -97,7 +536,6 @@
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon"></div>
                     <div>
                         <h3>Email</h3>
                         <p>collaborativeinvestmentltd@gmail.com</p>
@@ -105,25 +543,22 @@
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon"></div>
                     <div>
                         <h3>Contact Numbers</h3>
-                        <p><a href="tel:+2348129978419" style="color: var(--secondary);">+234 812 997 8419</a></p>
-                        <p><a href="tel:+2347078269765" style="color: var(--secondary);">+234 707 826 9765</a></p>
-                        <p><a href="tel:+2349071379319" style="color: var(--secondary);">+234 907 137 9319</a></p>
+                        <p><a href="tel:+2348129978419" style="color: var(--secondary); text-decoration: none;">+234 812 997 8419</a></p>
+                        <p><a href="tel:+2347078269765" style="color: var(--secondary); text-decoration: none;">+234 707 826 9765</a></p>
+                        <p><a href="tel:+2349071379319" style="color: var(--secondary); text-decoration: none;">+234 907 137 9319</a></p>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon"></div>
                     <div>
                         <h3>WhatsApp</h3>
-                        <p><a href="https://wa.me/2348129978419" style="color: var(--secondary);">+234 812 997 8419</a></p>
+                        <p><a href="https://wa.me/2348129978419" style="color: var(--secondary); text-decoration: none;">+234 812 997 8419</a></p>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon"></div>
                     <div>
                         <h3>Business Hours</h3>
                         <p>Monday – Friday: 9:00 AM – 5:00 PM</p>
@@ -135,133 +570,102 @@
                 <div style="margin-top: 2rem;">
                     <h3>Quick Links</h3>
                     <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 1rem;">
-                        <a href="/investment" class="quick-link"> Investment Opportunities</a>
-                        <a href="/services" class="quick-link"> Business Management Services</a>
-                        <a href="/portfolio" class="quick-link"> Our Portfolio</a>
-                        <a href="/downloads/cil-investment-prospectus.pdf" class="quick-link" download> Download Prospectus</a>
+                        <a href="/investment" class="quick-link">Investment Opportunities</a>
+                        <a href="/services" class="quick-link">Business Management Services</a>
+                        <a href="/portfolio" class="quick-link">Our Portfolio</a>
+                        <a href="/downloads/cil-investment-prospectus.pdf" class="quick-link" download>Download Prospectus</a>
                     </div>
                 </div>
             </div>
 
             <!-- Contact Form -->
-<div>
-    <h2>Send Us a Message</h2>
-    <p style="margin-bottom: 1.5rem;">Fill out the form and our team will respond within 24 hours.</p>
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+                <p style="margin-bottom: 1.5rem;">Fill out the form and our team will respond within 24 hours.</p>
 
-    <!-- Form Messages -->
-    <div id="form-messages" class="form-messages"></div>
+                <!-- Form Messages -->
+                <div id="form-messages" class="form-messages"></div>
 
-    <form id="contactForm" class="contact-form" method="POST" action="/contact">
-        <!-- ... rest of form fields remain the same ... -->
-        <div class="form-group">
-            <label for="name">Full Name *</label>
-            <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your full name">
-        </div>
+                <form id="contactForm" class="contact-form" method="POST" action="/contact">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your full name">
+                    </div>
 
-        <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email address">
-        </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email address">
+                    </div>
 
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number">
-        </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number">
+                    </div>
 
-        <div class="form-group">
-            <label for="service">Service Interest *</label>
-            <select id="service" name="service" class="form-control" required>
-                <option value="">Select an option...</option>
-                <option value="business-management">Business Management</option>
-                <option value="investment">Investment Inquiry</option>
-                <option value="poultry-investment">Poultry Farm Investment</option>
-                <option value="block-investment">Block Manufacturing Investment</option>
-                <option value="aquaculture-investment">Aquaculture Investment</option>
-                <option value="partnership">Strategic Partnership</option>
-                <option value="agriculture">Agricultural Ventures</option>
-                <option value="manufacturing">Manufacturing & Fabrication</option>
-                <option value="diaspora-management">Diaspora Business Management</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
+                    <div class="form-group">
+                        <label for="service">Service Interest *</label>
+                        <select id="service" name="service" class="form-control" required>
+                            <option value="">Select an option...</option>
+                            <option value="business-management">Business Management</option>
+                            <option value="investment">Investment Inquiry</option>
+                            <option value="poultry-investment">Poultry Farm Investment</option>
+                            <option value="block-investment">Block Manufacturing Investment</option>
+                            <option value="aquaculture-investment">Aquaculture Investment</option>
+                            <option value="partnership">Strategic Partnership</option>
+                            <option value="agriculture">Agricultural Ventures</option>
+                            <option value="manufacturing">Manufacturing & Fabrication</option>
+                            <option value="diaspora-management">Diaspora Business Management</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
 
-        <div class="form-group">
-            <label for="investment-amount">Investment Amount (if applicable)</label>
-            <select id="investment-amount" name="investment_amount" class="form-control">
-                <option value="">Select amount range...</option>
-                <option value="1-5m">₦1M - ₦5M</option>
-                <option value="5-10m">₦5M - ₦10M</option>
-                <option value="10-20m">₦10M - ₦20M</option>
-                <option value="20-50m">₦20M - ₦50M</option>
-                <option value="50m+">₦50M+</option>
-                <option value="not-applicable">Not Applicable</option>
-            </select>
-        </div>
+                    <div class="form-group">
+                        <label for="investment-amount">Investment Amount (if applicable)</label>
+                        <select id="investment-amount" name="investment_amount" class="form-control">
+                            <option value="">Select amount range...</option>
+                            <option value="1-5m">₦1M - ₦5M</option>
+                            <option value="5-10m">₦5M - ₦10M</option>
+                            <option value="10-20m">₦10M - ₦20M</option>
+                            <option value="20-50m">₦20M - ₦50M</option>
+                            <option value="50m+">₦50M+</option>
+                            <option value="not-applicable">Not Applicable</option>
+                        </select>
+                    </div>
 
-        <div class="form-group">
-            <label for="message">Your Message *</label>
-            <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Tell us about your inquiry, business, investment goals, or partnership proposal..."></textarea>
-        </div>
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Tell us about your inquiry, business, investment goals, or partnership proposal..."></textarea>
+                    </div>
 
-        <div class="form-group">
-            <label>
-                <input type="checkbox" name="newsletter" value="true" checked>
-                Subscribe to our investment opportunities newsletter
-            </label>
-        </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="newsletter" value="true" checked>
+                            Subscribe to our investment opportunities newsletter
+                        </label>
+                    </div>
 
-        <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
-    </form>
-</div>
-
-        </div>
-    </section>
-
-    <!-- Emergency Contact -->
-    <section class="section" style="background: var(--light); text-align: center;">
-        <div class="section-title">
-            <h2>Need Immediate Assistance?</h2>
-            <p>For urgent inquiries or emergency business support</p>
-        </div>
-
-        <div style="max-width: 800px; margin: 0 auto;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                <div>
-                    <h3 style="color: var(--secondary);"> Emergency Line</h3>
-                    <p><a href="tel:+2348129978419" class="btn btn-primary" style="margin-top: 1rem;">+234 812 997 8419</a></p>
-                    <p>Available 24/7 for urgent matters</p>
-                </div>
-
-                <div>
-                    <h3 style="color: var(--secondary);"> WhatsApp Business</h3>
-                    <p><a href="https://wa.me/2348129978419" class="btn btn-whatsapp" style="margin-top: 1rem;">Chat on WhatsApp</a></p>
-                    <p>Quick responses during business hours</p>
-                </div>
-
-                <div>
-                    <h3 style="color: var(--secondary);"> Priority Email</h3>
-                    <p><a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary" style="margin-top: 1rem;">Send Priority Email</a></p>
-                    <p>Response within 2 hours</p>
-                </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
 
+
     <!-- Map Section -->
     <section class="section" style="background:#f8f9fa;">
-        <div class="section-title">
-            <h2>Our Location</h2>
-            <p>Visit our Lagos office for physical consultations</p>
-        </div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Location</h2>
+                <p>Visit our Lagos office for physical consultations</p>
+            </div>
 
-        <div style="max-width:1000px; margin:0 auto; background:white; padding:2rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-            <div style="background:#e9ecef; padding:3rem; text-align:center; border-radius:5px;">
-                <h3 style="color:var(--primary); margin-bottom:1rem;"> 212 Ijegun Road, Ikotun, Lagos</h3>
-                <p style="color:var(--gray); margin-bottom: 2rem;">Find us easily using Google Maps or any navigation app</p>
+            <div class="directions-box">
+                <h3>212 Ijegun Road, Ikotun, Lagos</h3>
+                <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">Find us easily using Google Maps or any navigation app</p>
                 
-                <div style="background: white; padding: 2rem; border-radius: 8px; margin-bottom: 2rem;">
+                <div style="background: var(--light); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
                     <h4 style="color: var(--primary); margin-bottom: 1rem;">Office Directions</h4>
-                    <ul style="text-align: left; color: var(--gray);">
+                    <ul>
                         <li>From Ikotun Roundabout: Take Ijegun Road</li>
                         <li>Landmark: Stop at Barber Bus Stop</li>
                         <li>Building: You will see Next Barber Shop</li>
@@ -279,111 +683,72 @@
 
     <!-- FAQ Section -->
     <section class="section">
-        <div class="section-title">
-            <h2>Frequently Asked Questions</h2>
-            <p>Quick answers to common questions</p>
-        </div>
-
-        <div style="max-width:800px; margin:0 auto;">
-            <div class="faq-item">
-                <h3 style="color:var(--primary);"> How soon can CIL begin managing a business?</h3>
-                <p>Assessment can begin within 1–2 weeks. Full management typically starts in 4–6 weeks after thorough due diligence and planning.</p>
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions</p>
             </div>
 
-            <div class="faq-item">
-                <h3 style="color:var(--primary);"> Do you work with diaspora clients?</h3>
-                <p>Yes. We specialize in business & asset management for Nigerians abroad, with full transparency, monthly reporting, and secure communication channels.</p>
-            </div>
+            <div style="max-width:800px; margin:0 auto;">
+                <div class="faq-item">
+                    <h3>How soon can CIL begin managing a business?</h3>
+                    <p>Assessment can begin within 1–2 weeks. Full management typically starts in 4–6 weeks after thorough due diligence and planning.</p>
+                </div>
 
-            <div class="faq-item">
-                <h3 style="color:var(--primary);"> What is the minimum investment?</h3>
-                <p>Entry-level investments begin at ₦5,000,000 depending on the venture. Custom partnerships and smaller investments are also available for specific projects.</p>
-            </div>
+                <div class="faq-item">
+                    <h3>Do you work with diaspora clients?</h3>
+                    <p>Yes. We specialize in business & asset management for Nigerians abroad, with full transparency, monthly reporting, and secure communication channels.</p>
+                </div>
 
-            <div class="faq-item">
-                <h3 style="color:var(--primary);"> How often do investors receive reports?</h3>
-                <p>Monthly financial reports + quarterly performance reviews + annual comprehensive audits. Diaspora clients receive additional video conference updates.</p>
-            </div>
+                <div class="faq-item">
+                    <h3>What is the minimum investment?</h3>
+                    <p>Entry-level investments begin at ₦5,000,000 depending on the venture. Custom partnerships and smaller investments are also available for specific projects.</p>
+                </div>
 
-            <div class="faq-item">
-                <h3 style="color:var(--primary);"> Do you operate outside Lagos and Ogun?</h3>
-                <p>Yes. We are expanding and can manage businesses nationwide depending on project scope. Currently operating in Lagos, Ogun, and planning expansion to Oyo State.</p>
-            </div>
+                <div class="faq-item">
+                    <h3>How often do investors receive reports?</h3>
+                    <p>Monthly financial reports + quarterly performance reviews + annual comprehensive audits. Diaspora clients receive additional video conference updates.</p>
+                </div>
 
-            <div class="faq-item">
-                <h3 style="color:var(--primary);"> What's the typical response time?</h3>
-                <p>Initial response within 2 hours during business hours. Comprehensive proposal within 24-48 hours for investment inquiries.</p>
+                <div class="faq-item">
+                    <h3>Do you operate outside Lagos and Ogun?</h3>
+                    <p>Yes. We are expanding and can manage businesses nationwide depending on project scope. Currently operating in Lagos, Ogun, and planning expansion to Oyo State.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What's the typical response time?</h3>
+                    <p>Initial response within 2 hours during business hours. Comprehensive proposal within 24-48 hours for investment inquiries.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
     <section class="section" style="background:var(--primary); color:white; text-align:center;">
-        <h2 style="margin-bottom:1rem; color: white;">Ready to Work With Us?</h2>
-        <p style="margin-bottom:2rem; font-size:1.2rem;">Book a consultation today and let's discuss your goals.</p>
+        <div class="container">
+            <h2 style="margin-bottom:1rem; color: white;">Ready to Work With Us?</h2>
+            <p style="margin-bottom:2rem; font-size:1.2rem;">Book a consultation today and let's discuss your goals.</p>
 
-        <div class="cta-buttons">
-            <a href="tel:+2348129978419" class="btn btn-primary" style="background:var(--secondary); color: var(--primary);">Call Now: +234 812 997 8419</a>
-            <a href="https://wa.me/2348129978419" class="btn btn-whatsapp">WhatsApp Us</a>
-            <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary">Email Us</a>
-        </div>
+            <div class="cta-buttons">
+                <a href="tel:+2348129978419" class="btn btn-primary" style="background:var(--secondary); color: white;">Call Now: +234 812 997 8419</a>
+                <a href="https://wa.me/2348129978419" class="btn btn-whatsapp">WhatsApp Us</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary">Email Us</a>
+            </div>
 
-        <div style="margin-top: 2rem;">
-            <p> <strong>Prefer to schedule a meeting?</strong></p>
-            <a href="/contact#contactForm" class="btn btn-secondary">Schedule Consultation</a>
+            <div style="margin-top: 2rem;">
+                <p><strong>Prefer to schedule a meeting?</strong></p>
+                <a href="#contactForm" class="btn btn-secondary">Schedule Consultation</a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-grid">
-
             <!-- About Section -->
             <div class="footer-section">
                 <h3>Collaborative Investment Ltd</h3>
                 <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
-
-                <div class="social-links">
-
-                    <!-- Facebook -->
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
-                        </svg>
-                    </a>
-
-                    <!-- X / Twitter -->
-                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
-                        </svg>
-                    </a>
-
-                    <!-- WhatsApp -->
-                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
-                            <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
-                        </svg>
-                    </a>
-
-                    <!-- Instagram -->
-                    <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
-                        <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
-                                    <stop offset="0%" stop-color="#feda75"/>
-                                    <stop offset="25%" stop-color="#fa7e1e"/>
-                                    <stop offset="50%" stop-color="#d62976"/>
-                                    <stop offset="75%" stop-color="#962fbf"/>
-                                    <stop offset="100%" stop-color="#4f5bd5"/>
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-
-                </div>
             </div>
 
             <!-- Quick Links -->
@@ -427,37 +792,103 @@
 
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-                    <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
-                    <p>Building Nigeria's Business Future</p>
+            <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+            <p>Building Nigeria's Business Future</p>
 
             <p style="margin-top: 1rem;">
                 <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
                 <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
                 <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
             </p>
-
-            <!-- Social media text links -->
-            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                    Follow us:
-                    <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
-                    <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
-                </p>
-            </div>
         </div>
+    </footer>
 
-        <!-- Cookie Consent -->
-        <div id="cookieConsent" class="cookie-consent">
-            <div class="cookie-content">
-                <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-                <div class="cookie-buttons">
-                    <button onclick="acceptCookies()" class="btn btn-primary">Accept</button>
-                    <button onclick="rejectCookies()" class="btn btn-secondary">Reject</button>
-                </div>
-            </div>
-        </div>
-
+    <script>
+        // Contact Form Handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const formMessages = document.getElementById('form-messages');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const service = formData.get('service');
+                    const message = formData.get('message');
+                    
+                    // Simple validation
+                    if (!name || !email || !service || !message) {
+                        showFormMessage('error', 'Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    if (!isValidEmail(email)) {
+                        showFormMessage('error', 'Please enter a valid email address.');
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const originalText = submitButton.textContent;
+                    submitButton.textContent = 'Sending...';
+                    submitButton.disabled = true;
+                    
+                    // Simulate form submission (replace with actual API call)
+                    setTimeout(() => {
+                        showFormMessage('success', 'Thank you! Your message has been sent. We will respond within 24 hours.');
+                        contactForm.reset();
+                        
+                        // Reset button
+                        setTimeout(() => {
+                            submitButton.textContent = originalText;
+                            submitButton.disabled = false;
+                        }, 2000);
+                    }, 1500);
+                    
+                    // Log form data (for testing)
+                    console.log('Form submitted:', {
+                        name,
+                        email,
+                        service,
+                        message
+                    });
+                });
+            }
+            
+            function showFormMessage(type, message) {
+                formMessages.className = 'form-messages ' + type;
+                formMessages.textContent = message;
+                formMessages.style.display = 'block';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessages.style.display = 'none';
+                }, 5000);
+            }
+            
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Cart count update
+            function updateCartCount() {
+                const cartCount = 0; // This would come from your cart system
+                const cartBadge = document.getElementById('cart-count-badge');
+                if (cartBadge) {
+                    cartBadge.textContent = cartCount;
+                    cartBadge.style.display = cartCount > 0 ? 'inline' : 'none';
+                }
+            }
+            
+            updateCartCount();
+        });
+    </script>
+    
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/cart-drawer.js"></script>
