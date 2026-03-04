@@ -6,10 +6,13 @@ const url = require('url');
 const querystring = require('querystring');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-const { connectDB, db, closeDB, backupDatabase } = require('./database');
+const bcrypt = require('bcryptjs'); // Added bcrypt
+const jwt = require('jsonwebtoken'); // Added JWT
+const { connectDB, db, closeDB, backupDatabase, authenticateUser } = require('./database');
 const adminAuth = require('./admin-auth');
 const passwordResetTokens = new Map();
 const MILESTONE_STATUSES = ['Processing', 'Shipped', 'Delivered'];
+const userSessions = new Map();
 
 
 // Import logging module
@@ -17,6 +20,7 @@ const logger = require('./utils/logger');
 
 const PORT = process.env.PORT || 3000;
 const DOMAIN = process.env.DOMAIN || 'collaborativeinvestmentltd.com';
+const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
 
 // Validate required environment variables
 const requiredEnvVars = ['EMAIL_USER', 'EMAIL_PASS', 'MONGODB_URI'];
@@ -72,6 +76,11 @@ const ROUTES = {
     '/shop-all': 'shop-all.html',
     '/shop-diaspora': 'shop-diaspora.html',
     '/shop-furniture': 'shop-furniture.html',
+    '/register': 'register.html',
+    '/login': 'login.html',
+    '/register.html': 'register.html', // Add this line
+    '/investor-dashboard': 'investor-dashboard.html',
+    '/customer-dashboard': 'customer-dashboard.html', // Added customer dashboard
     '/portfolio': 'portfolio.html',
     '/cart': 'cart.html',
     '/investment': 'investment.html',
@@ -200,6 +209,1017 @@ async function logAdminAction(adminEmail, action, details = {}, req) {
         logger.info(`Admin action logged: ${action} by ${adminEmail}`);
     } catch (error) {
         logger.error('Failed to log admin action:', error);
+    }
+}
+
+// Handle user registration
+async function handleUserRegistration(req, res) {
+    return new Promise((resolve) => {
+        let body = '';
+        
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        
+        req.on('end', async () => {
+            try {
+                const data = JSON.parse(body);
+                const {
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    password,
+                    accountType,
+                    role,
+                    country,
+                    referral,
+                    verificationMethod,
+                    acceptsTerms,
+                    acceptsCommunications,
+                    preferences,
+                    investmentPreferences,
+                    payment
+                } = data;
+
+                // Validate required fields
+                if (!firstName || !lastName || !email || !phone || !password || !accountType) {
+                    res.writeHead(400, { 
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                    });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: 'All required fields must be provided'
+                    }));
+                    return resolve();
+                }
+
+                // Validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    res.writeHead(400, { 
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                    });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: 'Invalid email format'
+                    }));
+                    return resolve();
+                }
+
+                // Check if user already exists
+                const existingUser = await db.collection('users').findOne({ email });
+                if (existingUser) {
+                    res.writeHead(400, { 
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                    });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: 'Email already registered'
+                    }));
+                    return resolve();
+                }
+
+                // Hash password
+                const hashedPassword = await bcrypt.hash(password, 10);
+
+                // Generate user ID based on account type
+                const userId = `CIL-${accountType.toUpperCase()}-${Date.now().toString().slice(-8)}`;
+
+                // Prepare user data
+                const userData = {
+                    userId,
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    password: hashedPassword,
+                    accountType,
+                    role: role || accountType,
+                    country: country || 'nigeria',
+                    referralCode: referral || '',
+                    verificationMethod: verificationMethod || 'email',
+                    isVerified: false,
+                    verificationToken: generateVerificationToken(),
+                    acceptsTerms: acceptsTerms || false,
+                    acceptsCommunications: acceptsCommunications || false,
+                    status: 'active',
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+
+                // Add account-specific data
+                if (accountType === 'customer') {
+                    userData.customerData = {
+                        preferences: preferences?.interests || [],
+                        shippingAddress: preferences?.shippingAddress || '',
+                        totalOrders: 0,
+                        totalSpent: 0,
+                        wishlist: []
+                    };
+                } else if (accountType === 'investor') {
+                    userData.investorData = {
+                        investorId: `CIL-INV-${Date.now().toString().slice(-6)}`,
+                        investmentPreferences: investmentPreferences || {},
+                        totalInvestments: 0,
+                        totalReturns: 0,
+                        activeInvestments: 0,
+                        preferredSectors: investmentPreferences?.sectors || [],
+                        riskProfile: 'moderate',
+                        accreditationStatus: 'pending',
+                        kycStatus: 'pending'
+                    };
+                }
+
+                // Insert user into database
+                const result = await db.collection('users').insertOne(userData);
+
+                // Create separate record in customer/investor collections
+                if (accountType === 'customer') {
+                    await db.collection('customers').insertOne({
+                        userId: userData.userId,
+                        ...userData.customerData,
+                        email,
+                        phone,
+                        name: `${firstName} ${lastName}`,
+                        createdAt: new Date()
+                    });
+                } else if (accountType === 'investor') {
+                    await db.collection('investors').insertOne({
+                        userId: userData.userId,
+                        ...userData.investorData,
+                        email,
+                        phone,
+                        name: `${firstName} ${lastName}`,
+                        createdAt: new Date()
+                    });
+                }
+
+                // Handle payment if applicable
+                if (payment && payment.depositAmount > 0) {
+                    await handleInitialDeposit(userData, payment);
+                }
+
+                // Send verification email
+                await sendVerificationEmail(email, userData.verificationToken, accountType);
+
+                // Send welcome notification
+                await sendWelcomeNotification(email, firstName, accountType, payment?.depositAmount || 0);
+
+                // Generate JWT token
+                const token = jwt.sign(
+                    {
+                        userId: userData.userId,
+                        email,
+                        accountType,
+                        role: userData.role
+                    },
+                    JWT_SECRET,
+                    { expiresIn: '7d' }
+                );
+
+                // Return success response
+                res.writeHead(200, { 
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                });
+                res.end(JSON.stringify({
+                    success: true,
+                    message: 'Registration successful',
+                    token,
+                    user: {
+                        id: userData.userId,
+                        email,
+                        name: `${firstName} ${lastName}`,
+                        accountType,
+                        role: userData.role,
+                        investorId: userData.investorData?.investorId || null
+                    }
+                }));
+
+            } catch (error) {
+                console.error('Registration error:', error);
+                res.writeHead(500, { 
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: 'Server error during registration'
+                }));
+            }
+            resolve();
+        });
+    });
+}
+
+// Helper function to generate verification token
+function generateVerificationToken() {
+    return crypto.randomBytes(32).toString('hex');
+}
+
+// Helper function to send verification email
+async function sendVerificationEmail(email, token, accountType) {
+    const verificationLink = `${process.env.BASE_URL || 'http://localhost:3000'}/verify-email?token=${token}&type=${accountType}`;
+    
+    const mailOptions = {
+        from: `"Collaborative Investment Ltd" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: accountType === 'customer' 
+            ? 'Verify Your CIL Customer Account' 
+            : 'Verify Your CIL Investor Account',
+        html: `
+            <h2>Welcome to Collaborative Investment Ltd!</h2>
+            <p>Thank you for registering as a ${accountType}.</p>
+            <p>Please click the link below to verify your email address:</p>
+            <a href="${verificationLink}" style="display: inline-block; padding: 12px 24px; background-color: #1a365d; color: white; text-decoration: none; border-radius: 4px;">
+                Verify Email Address
+            </a>
+            <p>If you didn't create an account, please ignore this email.</p>
+        `
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log(`Verification email sent to ${email}`);
+    } catch (error) {
+        console.error('Error sending verification email:', error);
+        throw error;
+    }
+}
+
+// Handle initial deposit
+async function handleInitialDeposit(userData, payment) {
+    try {
+        const paymentRecord = {
+            userId: userData.userId,
+            userEmail: userData.email,
+            userName: `${userData.firstName} ${userData.lastName}`,
+            amount: payment.depositAmount,
+            paymentMethod: payment.paymentMethod || 'bank_transfer',
+            paymentReference: payment.paymentReference || generatePaymentReference(),
+            status: payment.skipDeposit ? 'skipped' : 'pending',
+            purpose: 'initial_deposit',
+            accountType: userData.accountType,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+
+        // Save payment record
+        await db.collection('payments').insertOne(paymentRecord);
+
+        // If it's an investor and deposit meets minimum, update investor status
+        if (userData.accountType === 'investor' && payment.depositAmount >= 5000000) {
+            await db.collection('investors').updateOne(
+                { userId: userData.userId },
+                { 
+                    $set: { 
+                        initialDeposit: payment.depositAmount,
+                        depositDate: new Date(),
+                        investmentStatus: 'pending_approval'
+                    }
+                }
+            );
+        }
+
+        // Send payment confirmation email
+        if (!payment.skipDeposit) {
+            await sendPaymentConfirmationEmail(userData.email, userData.firstName, paymentRecord);
+        }
+
+    } catch (error) {
+        console.error('Error handling initial deposit:', error);
+        throw error;
+    }
+}
+
+// Generate payment reference
+function generatePaymentReference() {
+    return `PAY-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+}
+
+// Send payment confirmation email
+async function sendPaymentConfirmationEmail(email, firstName, payment) {
+    const mailOptions = {
+        from: `"Collaborative Investment Ltd" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: 'Payment Confirmation - CIL Account',
+        html: `
+            <h2>Payment Received</h2>
+            <p>Dear ${firstName},</p>
+            <p>Your initial deposit has been received successfully!</p>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                <p><strong>Amount:</strong> ₦${payment.amount.toLocaleString()}</p>
+                <p><strong>Reference:</strong> ${payment.paymentReference}</p>
+                <p><strong>Payment Method:</strong> ${payment.paymentMethod}</p>
+                <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+            </div>
+            <p>Thank you for choosing Collaborative Investment Ltd!</p>
+        `
+    };
+
+    await transporter.sendMail(mailOptions);
+}
+
+// Send welcome notification
+async function sendWelcomeNotification(email, firstName, accountType, depositAmount) {
+    const subject = accountType === 'customer' 
+        ? 'Welcome to CIL - Customer Account Activated' 
+        : 'Welcome to CIL - Investor Account Activated';
+    
+    const depositInfo = depositAmount > 0 
+        ? `<p>Your initial deposit of <strong>₦${depositAmount.toLocaleString()}</strong> has been received and is being processed.</p>` 
+        : '';
+    
+    const mailOptions = {
+        from: `"CIL CEO/Management" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: subject,
+        html: `
+            <h2>Welcome to Collaborative Investment Ltd!</h2>
+            <p>Dear ${firstName},</p>
+            <p>On behalf of the entire CIL team, I'd like to welcome you to our community!</p>
+            ${depositInfo}
+            <p>As a ${accountType}, you now have access to:</p>
+            <ul>
+                ${accountType === 'customer' ? 
+                    '<li>Thousands of quality products across 8 business sectors</li>' +
+                    '<li>Fast and reliable nationwide delivery</li>' +
+                    '<li>24/7 customer support</li>' +
+                    '<li>Exclusive deals and discounts</li>' 
+                    : 
+                    '<li>Asset-backed investment opportunities</li>' +
+                    '<li>Professional portfolio management</li>' +
+                    '<li>Monthly performance reports</li>' +
+                    '<li>Direct access to our investment team</li>'
+                }
+            </ul>
+            <p>Our team is committed to providing you with the best experience possible.</p>
+            <p>Best regards,<br>
+            CIL Management Team</p>
+        `
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log(`Welcome email sent to ${email}`);
+    } catch (error) {
+        console.error('Error sending welcome email:', error);
+    }
+}
+
+// Investor Dashboard API
+async function handleInvestorDashboardAPI(req, res, pathname) {
+    const user = checkUserAuth(req);
+    if (!user) {
+        res.writeHead(401, { 
+            'Content-Type': 'application/json',
+            'WWW-Authenticate': 'Bearer realm="Investor API"'
+        });
+        res.end(JSON.stringify({ 
+            success: false, 
+            message: 'Unauthorized - Please login',
+            code: 'UNAUTHORIZED'
+        }));
+        return;
+    }
+    
+    const headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': 'true'
+    };
+    
+    try {
+        if (pathname === '/api/investor/dashboard-data') {
+            // Get investor dashboard data
+            const investor = await db.collection('investors').findOne({ userId: user.userId });
+            
+            const dashboardData = {
+                user: {
+                    name: user.firstName + ' ' + user.lastName,
+                    email: user.email,
+                    investorId: investor?.investorId || `INV-${user.userId.slice(-6).toUpperCase()}`,
+                    tier: investor?.tier || 'Premium',
+                    avatarInitials: (user.firstName[0] + user.lastName[0]).toUpperCase(),
+                    kycStatus: investor?.kycStatus || 'pending'
+                },
+                stats: {
+                    totalInvestment: investor?.totalInvestments || 0,
+                    totalReturns: investor?.totalReturns || 0,
+                    activeInvestments: investor?.activeInvestments || 0,
+                    avgROI: investor?.avgROI || 0,
+                    portfolioHealth: investor?.portfolioHealth || 92
+                },
+                recentActivity: [],
+                investments: [],
+                notifications: []
+            };
+            
+            // Get user's investments from database
+            const investments = await db.collection('investments').find({ userId: user.userId }).sort({ createdAt: -1 }).limit(10).toArray();
+            dashboardData.investments = investments;
+            
+            // Get recent activity
+            const activity = await db.collection('user_activity').find({ userId: user.userId }).sort({ timestamp: -1 }).limit(5).toArray();
+            dashboardData.recentActivity = activity;
+            
+            // Get notifications
+            const notifications = await db.collection('notifications').find({ userId: user.userId, read: false }).sort({ createdAt: -1 }).limit(10).toArray();
+            dashboardData.notifications = notifications;
+            
+            res.writeHead(200, headers);
+            res.end(JSON.stringify({ 
+                success: true, 
+                data: dashboardData 
+            }));
+        }
+        else if (pathname === '/api/investor/invest') {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+                const investmentData = JSON.parse(body);
+                
+                // Create investment record
+                const investment = await db.collection('investments').insertOne({
+                    userId: user.userId,
+                    userEmail: user.email,
+                    userName: user.firstName + ' ' + user.lastName,
+                    ...investmentData,
+                    status: 'pending',
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                });
+                
+                // Create activity log
+                await db.collection('user_activity').insertOne({
+                    userId: user.userId,
+                    type: 'investment',
+                    title: 'New Investment Made',
+                    description: `Invested ₦${investmentData.amount.toLocaleString()} in ${investmentData.sector}`,
+                    timestamp: new Date()
+                });
+                
+                // Send confirmation email
+                const investmentMessage = `
+Dear ${user.firstName},
+
+Your investment request has been received successfully!
+
+Investment Details:
+- Amount: ₦${investmentData.amount.toLocaleString()}
+- Sector: ${investmentData.sector}
+- Duration: ${investmentData.duration} months
+- Expected ROI: ${investmentData.expectedROI}%
+
+Next Steps:
+1. Our investment team will review your request within 24 hours
+2. We'll contact you to complete necessary documentation
+3. Once approved, your investment will be activated
+
+You can track your investment status from your dashboard.
+
+Best regards,
+Collaborative Investment Ltd Team
+📧 collaborativeinvestmentltd@gmail.com
+📞 +234 812 997 8419
+                `;
+                
+                await sendEmail(
+                    user.email,
+                    'Investment Request Confirmation',
+                    investmentMessage,
+                    'investment_confirmation'
+                );
+                
+                res.writeHead(201, headers);
+                res.end(JSON.stringify({ 
+                    success: true, 
+                    message: 'Investment request submitted successfully',
+                    investment 
+                }));
+            });
+        }
+        else if (pathname === '/api/investor/emergency') {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+                const emergencyData = JSON.parse(body);
+                
+                // Log emergency
+                const emergencyLog = await db.collection('emergency_logs').insertOne({
+                    userId: user.userId,
+                    userName: user.firstName + ' ' + user.lastName,
+                    userPhone: user.phone,
+                    userLocation: emergencyData.location,
+                    emergencyType: emergencyData.type,
+                    status: 'dispatched',
+                    timestamp: new Date()
+                });
+                
+                // Send emergency alert to admin
+                const emergencyMessage = `
+🚨 EMERGENCY ALERT - ${emergencyData.type.toUpperCase()}
+
+Investor Details:
+- Name: ${user.firstName} ${user.lastName}
+- Email: ${user.email}
+- Phone: ${user.phone}
+- Investor ID: ${user.investorId || 'N/A'}
+
+Emergency Type: ${emergencyData.type}
+Location: ${emergencyData.location}
+Time: ${new Date().toLocaleString()}
+
+ACTION REQUIRED:
+1. Contact investor immediately
+2. Dispatch appropriate response team
+3. Update emergency status
+
+Contact Investor: ${user.phone}
+                `;
+                
+                await sendEmail(
+                    'collaborativeinvestmentltd@gmail.com',
+                    `🚨 EMERGENCY - ${emergencyData.type.toUpperCase()} - ${user.firstName} ${user.lastName}`,
+                    emergencyMessage,
+                    'emergency'
+                );
+                
+                // Also notify security team if phone numbers are configured
+                if (process.env.SECURITY_PHONE) {
+                    // In real app, you'd integrate with SMS service
+                    console.log(`Emergency SMS would be sent to: ${process.env.SECURITY_PHONE}`);
+                }
+                
+                res.writeHead(200, headers);
+                res.end(JSON.stringify({ 
+                    success: true, 
+                    message: 'Emergency alert sent successfully',
+                    logId: emergencyLog.insertedId 
+                }));
+            });
+        }
+        else if (pathname === '/api/investor/notifications') {
+            const notifications = await db.collection('notifications').find({ userId: user.userId }).sort({ createdAt: -1 }).limit(50).toArray();
+            
+            res.writeHead(200, headers);
+            res.end(JSON.stringify({ 
+                success: true, 
+                notifications 
+            }));
+        }
+        else if (pathname === '/api/investor/mark-notification-read') {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+                const { notificationId } = JSON.parse(body);
+                
+                await db.collection('notifications').updateOne(
+                    { _id: db.toObjectId(notificationId), userId: user.userId },
+                    { $set: { read: true, readAt: new Date() } }
+                );
+                
+                res.writeHead(200, headers);
+                res.end(JSON.stringify({ 
+                    success: true, 
+                    message: 'Notification marked as read' 
+                }));
+            });
+        }
+        else if (pathname === '/api/investor/payment') {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+                const paymentData = JSON.parse(body);
+                
+                // Create payment record
+                const payment = await db.collection('payments').insertOne({
+                    userId: user.userId,
+                    userEmail: user.email,
+                    ...paymentData,
+                    status: 'pending',
+                    paymentMethod: paymentData.method || 'bank_transfer',
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                });
+                
+                // Create activity log
+                await db.collection('user_activity').insertOne({
+                    userId: user.userId,
+                    type: 'payment',
+                    title: 'Payment Initiated',
+                    description: `Payment of ₦${paymentData.amount.toLocaleString()} for ${paymentData.purpose}`,
+                    timestamp: new Date()
+                });
+                
+                // In real app, integrate with payment gateway
+                // For now, simulate payment processing
+                setTimeout(async () => {
+                    await db.collection('payments').updateOne(
+                        { _id: payment.insertedId },
+                        { 
+                            $set: { 
+                                status: 'completed',
+                                completedAt: new Date(),
+                                reference: `PAY-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+                            }
+                        }
+                    );
+                    
+                    // If it's an investment payment, update investment
+                    if (paymentData.purpose === 'investment') {
+                        await db.collection('investments').updateOne(
+                            { _id: db.toObjectId(paymentData.investmentId) },
+                            { 
+                                $set: { 
+                                    status: 'active',
+                                    paymentId: payment.insertedId,
+                                    startDate: new Date()
+                                }
+                            }
+                        );
+                    }
+                    
+                    // Send payment confirmation
+                    const paymentMessage = `
+Dear ${user.firstName},
+
+Your payment has been successfully processed!
+
+Payment Details:
+- Amount: ₦${paymentData.amount.toLocaleString()}
+- Purpose: ${paymentData.purpose}
+- Reference: ${payment.reference || 'Processing...'}
+- Date: ${new Date().toLocaleString()}
+- Status: Completed
+
+You can view this transaction in your dashboard under "Transaction History".
+
+Best regards,
+Collaborative Investment Ltd Team
+                    `;
+                    
+                    await sendEmail(
+                        user.email,
+                        'Payment Confirmation',
+                        paymentMessage,
+                        'payment_confirmation'
+                    );
+                }, 2000);
+                
+                res.writeHead(200, headers);
+                res.end(JSON.stringify({ 
+                    success: true, 
+                    message: 'Payment processing initiated',
+                    paymentId: payment.insertedId,
+                    reference: payment.reference 
+                }));
+            });
+        }
+        else if (pathname === '/api/investor/kyc/start') {
+            // Start KYC process
+            await db.collection('investors').updateOne(
+                { userId: user.userId },
+                { $set: { kycStatus: 'in_progress', kycStartedAt: new Date() } }
+            );
+            
+            // Create KYC request
+            const kycRequest = await db.collection('kyc_requests').insertOne({
+                userId: user.userId,
+                userEmail: user.email,
+                userName: `${user.firstName} ${user.lastName}`,
+                status: 'pending',
+                requestedAt: new Date(),
+                documentsRequired: ['id_card', 'proof_of_address', 'bank_statement']
+            });
+            
+            // Send KYC instructions email
+            const kycMessage = `
+Dear ${user.firstName},
+
+Your KYC verification process has been started.
+
+Required Documents:
+1. Government-issued ID (Passport, Driver's License, National ID)
+2. Proof of Address (Utility bill, Bank statement)
+3. Bank Statement (last 3 months)
+
+Please upload these documents through your dashboard or email them to collaborativeinvestmentltd@gmail.com
+
+Once verified, you'll get full access to all investment features.
+
+Best regards,
+CIL Compliance Team
+            `;
+            
+            await sendEmail(user.email, 'KYC Verification Started', kycMessage, 'kyc_notification');
+            
+            res.writeHead(200, headers);
+            res.end(JSON.stringify({ 
+                success: true, 
+                message: 'KYC process started. Please check your email for instructions.',
+                kycRequestId: kycRequest.insertedId
+            }));
+        }
+        else {
+            res.writeHead(404, headers);
+            res.end(JSON.stringify({ 
+                success: false, 
+                message: 'API endpoint not found',
+                code: 'ENDPOINT_NOT_FOUND'
+            }));
+        }
+    } catch (error) {
+        logger.error('Investor API Error:', error);
+        res.writeHead(500, headers);
+        res.end(JSON.stringify({ 
+            success: false, 
+            message: 'Internal server error',
+            code: 'INTERNAL_ERROR'
+        }));
+    }
+}
+
+async function handleUserLogin(req, res) {
+    return new Promise((resolve) => {
+        let body = '';
+        
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        
+        req.on('end', async () => {
+            try {
+                const { email, password, accountType } = JSON.parse(body);
+                
+                if (!email || !password || !accountType) {
+                    res.writeHead(400, { 
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                    });
+                    res.end(JSON.stringify({ 
+                        success: false, 
+                        message: 'Email, password and account type are required' 
+                    }));
+                    return resolve();
+                }
+                
+                // Determine collection based on account type
+                const collectionName = accountType === 'investor' ? 'investors' : 'customers';
+                const user = await db.collection(collectionName).findOne({ email });
+                
+                if (!user) {
+                    res.writeHead(401, { 
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                    });
+                    res.end(JSON.stringify({ 
+                        success: false, 
+                        message: 'Invalid credentials' 
+                    }));
+                    return resolve();
+                }
+                
+                // Verify password
+                const isValidPassword = await bcrypt.compare(password, user.password);
+                
+                if (!isValidPassword) {
+                    res.writeHead(401, { 
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                    });
+                    res.end(JSON.stringify({ 
+                        success: false, 
+                        message: 'Invalid credentials' 
+                    }));
+                    return resolve();
+                }
+                
+                // Create session
+                const sessionId = crypto.randomBytes(16).toString('hex');
+                userSessions.set(sessionId, {
+                    sessionId,
+                    user: {
+                        userId: user.userId,
+                        email: user.email,
+                        firstName: user.name ? user.name.split(' ')[0] : 'User',
+                        lastName: user.name ? user.name.split(' ').slice(1).join(' ') : '',
+                        accountType: accountType,
+                        investorId: user.investorId || null
+                    },
+                    loginTime: new Date(),
+                    lastActivity: new Date()
+                });
+                
+                // Generate JWT token
+                const token = jwt.sign(
+                    {
+                        userId: user.userId,
+                        email: user.email,
+                        accountType: accountType,
+                        name: user.name
+                    },
+                    JWT_SECRET,
+                    { expiresIn: '7d' }
+                );
+                
+                res.writeHead(200, { 
+                    'Content-Type': 'application/json',
+                    'Set-Cookie': `userSessionId=${sessionId}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`,
+                    'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
+                    'Access-Control-Allow-Credentials': 'true'
+                });
+                res.end(JSON.stringify({ 
+                    success: true, 
+                    message: 'Login successful',
+                    token,
+                    user: {
+                        id: user.userId,
+                        email: user.email,
+                        name: user.name,
+                        accountType: accountType,
+                        investorId: user.investorId || null
+                    },
+                    redirect: accountType === 'customer' ? '/customer-dashboard' : '/investor-dashboard'
+                }));
+                
+            } catch (error) {
+                logger.error('User login error:', error);
+                res.writeHead(500, { 
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000'
+                });
+                res.end(JSON.stringify({ 
+                    success: false, 
+                    message: 'Server error during login' 
+                }));
+            }
+            resolve();
+        });
+    });
+}
+
+function checkUserAuth(req) {
+    const cookies = req.headers.cookie || '';
+    const sessionMatch = cookies.match(/userSessionId=([^;]+)/);
+    
+    if (sessionMatch) {
+        const sessionId = sessionMatch[1];
+        const session = userSessions.get(sessionId);
+        
+        if (session && session.user) {
+            // Update last activity
+            session.lastActivity = new Date();
+            userSessions.set(sessionId, session);
+            
+            return session.user;
+        }
+    }
+    
+    // Also check JWT token in Authorization header
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.split(' ')[1];
+        try {
+            const decoded = jwt.verify(token, JWT_SECRET);
+            return decoded;
+        } catch (error) {
+            return null;
+        }
+    }
+    
+    return null;
+}
+
+function handleUserLogout(req, res) {
+    const cookies = req.headers.cookie || '';
+    const match = cookies.match(/userSessionId=([^;]+)/);
+    
+    if (match) {
+        userSessions.delete(match[1]);
+    }
+    
+    res.writeHead(200, {
+        'Set-Cookie': 'userSessionId=; Path=/; Max-Age=0',
+        'Content-Type': 'application/json'
+    });
+    res.end(JSON.stringify({ success: true }));
+}
+
+async function handleUserAPI(req, res, pathname) {
+    const user = checkUserAuth(req);
+    if (!user) {
+        res.writeHead(401, { 
+            'Content-Type': 'application/json',
+            'WWW-Authenticate': 'Bearer realm="User API"'
+        });
+        res.end(JSON.stringify({ 
+            success: false, 
+            message: 'Unauthorized - Please login',
+            code: 'UNAUTHORIZED'
+        }));
+        return;
+    }
+    
+    const headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': 'true'
+    };
+    
+    try {
+        if (pathname === '/api/user/profile') {
+            const collectionName = user.accountType === 'investor' ? 'investors' : 'customers';
+            const userData = await db.collection(collectionName).findOne({ userId: user.userId });
+            
+            res.writeHead(200, headers);
+            res.end(JSON.stringify({ 
+                success: true, 
+                user: {
+                    ...user,
+                    ...userData
+                }
+            }));
+        }
+        else if (pathname === '/api/user/orders') {
+            // Get user's orders
+            const orders = await db.collection('orders').find({ 
+                $or: [
+                    { customerEmail: user.email },
+                    { customerPhone: user.phone }
+                ]
+            }).sort({ createdAt: -1 }).toArray();
+            
+            res.writeHead(200, headers);
+            res.end(JSON.stringify({ 
+                success: true, 
+                orders 
+            }));
+        }
+        else if (pathname === '/api/user/update-profile') {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+                const updateData = JSON.parse(body);
+                
+                // Remove fields that shouldn't be updated
+                delete updateData.password;
+                delete updateData.email;
+                delete updateData.role;
+                
+                const collectionName = user.accountType === 'investor' ? 'investors' : 'customers';
+                
+                // Update user in database
+                await db.collection(collectionName).updateOne(
+                    { userId: user.userId },
+                    { 
+                        $set: {
+                            ...updateData,
+                            updatedAt: new Date()
+                        }
+                    }
+                );
+                
+                // Update session
+                const cookies = req.headers.cookie || '';
+                const sessionMatch = cookies.match(/userSessionId=([^;]+)/);
+                if (sessionMatch) {
+                    const sessionId = sessionMatch[1];
+                    const session = userSessions.get(sessionId);
+                    if (session) {
+                        session.user = { ...session.user, ...updateData };
+                        userSessions.set(sessionId, session);
+                    }
+                }
+                
+                res.writeHead(200, headers);
+                res.end(JSON.stringify({ 
+                    success: true, 
+                    message: 'Profile updated successfully',
+                    user: { ...user, ...updateData }
+                }));
+            });
+        }
+        else {
+            res.writeHead(404, headers);
+            res.end(JSON.stringify({ 
+                success: false, 
+                message: 'API endpoint not found',
+                code: 'ENDPOINT_NOT_FOUND'
+            }));
+        }
+    } catch (error) {
+        logger.error('User API Error:', error);
+        res.writeHead(500, headers);
+        res.end(JSON.stringify({ 
+            success: false, 
+            message: 'Internal server error',
+            code: 'INTERNAL_ERROR'
+        }));
     }
 }
 
@@ -356,7 +1376,7 @@ function handleOrderTrack(req, res) {
 
 async function findOrderByNumber(orderNumber) {
     try {
-        const orders = await db.getAll('orders', { orderNumber });
+        const orders = await db.collection('orders').find({ orderNumber }).toArray();
         return orders.length > 0 ? orders[0] : null;
     } catch (error) {
         console.error('Error in findOrderByNumber:', error);
@@ -366,9 +1386,9 @@ async function findOrderByNumber(orderNumber) {
 
 async function findOrderByAlternativeNumber(orderNumber) {
     try {
-        const orders = await db.getAll('orders', { 
+        const orders = await db.collection('orders').find({ 
             alternativeOrderNumbers: orderNumber 
-        });
+        }).toArray();
         return orders.length > 0 ? orders[0] : null;
     } catch (error) {
         console.error('Error in findOrderByAlternativeNumber:', error);
@@ -620,7 +1640,7 @@ async function sendEmail(to, subject, message, type = 'transactional') {
         const info = await transporter.sendMail(mailOptions);
         
         // Save email record to MongoDB
-        const emailRecord = await db.create('emails', {
+        const emailRecord = await db.collection('emails').insertOne({
             to,
             subject,
             message,
@@ -631,13 +1651,13 @@ async function sendEmail(to, subject, message, type = 'transactional') {
         });
 
         logger.info(`✅ Email sent to ${to}: ${info.messageId}`);
-        return { success: true, emailId: emailRecord._id, messageId: info.messageId };
+        return { success: true, emailId: emailRecord.insertedId, messageId: info.messageId };
         
     } catch (error) {
         logger.error('❌ Email sending failed:', error);
         
         // Save failed email record to MongoDB
-        await db.create('emails', {
+        await db.collection('emails').insertOne({
             to,
             subject,
             message,
@@ -726,7 +1746,7 @@ async function sendOrderConfirmation(orderData) {
 async function checkDatabaseHealth() {
     try {
         // Try a simple query
-        const result = await db.getStats();
+        const result = await db.collection('users').findOne({});
         return true;
     } catch (error) {
         logger.error('Database health check failed:', error.message);
@@ -969,7 +1989,7 @@ async function handleAdminUpdateOrderStatus(req, res, orderId) {
                 return;
             }
 
-            const order = await db.getById('orders', orderId);
+            const order = await db.collection('orders').findOne({ _id: db.toObjectId(orderId) });
             if (!order) {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, message: 'Order not found' }));
@@ -980,8 +2000,7 @@ async function handleAdminUpdateOrderStatus(req, res, orderId) {
             const now = new Date();
 
             // Update with consistent field names
-            await db.updateWithOperators(
-              'orders',
+            await db.collection('orders').updateOne(
               { _id: db.toObjectId(orderId) },
               {
                 $set: {
@@ -1000,8 +2019,7 @@ async function handleAdminUpdateOrderStatus(req, res, orderId) {
 
             // Also update statusUpdates if it exists
             if (order.statusUpdates) {
-                await db.updateWithOperators(
-                    'orders',
+                await db.collection('orders').updateOne(
                     { _id: db.toObjectId(orderId) },
                     {
                         $push: {
@@ -1051,7 +2069,7 @@ async function handleAdminUpdateOrderStatus(req, res, orderId) {
             res.end(JSON.stringify({ 
                 success: true, 
                 message: 'Order status updated',
-                order: await db.getById('orders', orderId)
+                order: await db.collection('orders').findOne({ _id: db.toObjectId(orderId) })
             }));
 
         } catch (err) {
@@ -1092,10 +2110,9 @@ async function handleChangePassword(req, res) {
             const newHash = await bcrypt.hash(newPass, 12);
             
             // Store in database
-            await db.update(
-              'admins',
+            await db.collection('admins').updateOne(
               { email: admin.email },
-              { password: newHash }
+              { $set: { password: newHash } }
             );
             
             console.log('\n🔐 NEW ADMIN PASSWORD HASH:\n', newHash);
@@ -1174,7 +2191,7 @@ function handleCreateOrder(req, res) {
 
                 const orderNumber = generateOrderNumber();
                 
-                const newOrder = await db.create('orders', {
+                const newOrder = await db.collection('orders').insertOne({
                     orderNumber,
                     customerName,
                     customerPhone,
@@ -1225,7 +2242,7 @@ function handleCreateOrder(req, res) {
                 });
                 res.end(JSON.stringify({ 
                     success: true, 
-                    order: newOrder,
+                    order: newOrder.ops ? newOrder.ops[0] : newOrder,
                     emails: {
                         customer: emailResult.customer ? 'sent' : 'skipped',
                         admin: emailResult.admin ? 'sent' : 'failed'
@@ -1314,6 +2331,27 @@ async function requestHandler(req, res) {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
 
+    // Handle user dashboard authentication
+    if (req.method === 'GET' && (pathname === '/customer-dashboard' || pathname === '/investor-dashboard')) {
+        const user = checkUserAuth(req);
+        if (!user) {
+            res.writeHead(302, { Location: '/register' });
+            res.end();
+            return;
+        }
+        // Continue to serve the dashboard page below
+    }
+
+    // Handle user API routes
+    if (pathname.startsWith('/api/user/')) {
+        return handleUserAPI(req, res, pathname);
+    }
+
+    // Handle investor API routes
+    if (pathname.startsWith('/api/investor/')) {
+        return handleInvestorDashboardAPI(req, res, pathname);
+    }
+
     // Log request
     logger.info(`${req.method} ${pathname} - ${req.socket.remoteAddress}`);
     
@@ -1353,6 +2391,30 @@ async function requestHandler(req, res) {
         }
         if (pathname === '/admin/api/send-email') {
             return handleSendEmail(req, res);
+        }
+        if (pathname === '/api/register') {
+            return handleUserRegistration(req, res);
+        }
+        if (pathname === '/api/user/login') {
+            return handleUserLogin(req, res);
+        }
+        if (pathname === '/api/user/logout') {
+            return handleUserLogout(req, res);
+        }
+        if (pathname === '/api/investor/invest') {
+            return handleInvestorDashboardAPI(req, res, pathname);
+        }
+        if (pathname === '/api/investor/emergency') {
+            return handleInvestorDashboardAPI(req, res, pathname);
+        }
+        if (pathname === '/api/investor/payment') {
+            return handleInvestorDashboardAPI(req, res, pathname);
+        }
+        if (pathname === '/api/investor/mark-notification-read') {
+            return handleInvestorDashboardAPI(req, res, pathname);
+        }
+        if (pathname === '/api/investor/kyc/start') {
+            return handleInvestorDashboardAPI(req, res, pathname);
         }
     }
 
@@ -1401,6 +2463,12 @@ async function requestHandler(req, res) {
         return;
     }
 
+    if (req.method === 'GET') {
+        if (pathname.startsWith('/api/investor/')) {
+            return handleInvestorDashboardAPI(req, res, pathname);
+        }
+    }
+    
     // Handle special routes
     if (pathname === '/health') {
         return handleHealthCheck(req, res);
@@ -1555,17 +2623,17 @@ async function handleAdminAPI(req, res, pathname) {
 
     try {
         if (pathname === '/admin/api/products') {
-            const products = await db.getAll('products');
+            const products = await db.collection('products').find({}).toArray();
             res.writeHead(200, headers);
             res.end(JSON.stringify(products));
         }
         else if (pathname === '/admin/api/orders') {
-            const orders = await db.getAll('orders', {}, { createdAt: -1 });
+            const orders = await db.collection('orders').find({}).sort({ createdAt: -1 }).toArray();
             res.writeHead(200, headers);
             res.end(JSON.stringify(orders));
         }
         else if (pathname === '/admin/api/customers') {
-            const customers = await db.getAll('customers');
+            const customers = await db.collection('customers').find({}).toArray();
             res.writeHead(200, headers);
             res.end(JSON.stringify(customers));
         }
@@ -1575,18 +2643,12 @@ async function handleAdminAPI(req, res, pathname) {
             res.end(JSON.stringify(stats));
         }
         else if (pathname === '/admin/api/email-campaigns') {
-            const campaigns = await db.getAll('campaigns');
+            const campaigns = await db.collection('campaigns').find({}).toArray();
             res.writeHead(200, headers);
             res.end(JSON.stringify(campaigns));
         }
         else if (pathname === '/admin/api/recent-emails') {
-            // Check if getRecentEmails exists, otherwise use getAll
-            let emails = [];
-            if (typeof db.getRecentEmails === 'function') {
-                emails = await db.getRecentEmails(50);
-            } else {
-                emails = await db.getAll('emails', {}, { sentAt: -1 }, 50);
-            }
+            const emails = await db.collection('emails').find({}).sort({ sentAt: -1 }).limit(50).toArray();
 
             const formattedEmails = emails.map(email => ({
                 to: email.to,
@@ -1603,12 +2665,7 @@ async function handleAdminAPI(req, res, pathname) {
         }
         else if (pathname === '/admin/api/email-stats') {
             // Calculate email stats
-            let emails = [];
-            if (typeof db.getRecentEmails === 'function') {
-                emails = await db.getRecentEmails(1000);
-            } else {
-                emails = await db.getAll('emails', {}, { sentAt: -1 }, 1000);
-            }
+            const emails = await db.collection('emails').find({}).sort({ sentAt: -1 }).limit(1000).toArray();
             
             const total = emails.length;
             const sent = emails.filter(e => e.status === 'sent').length;
@@ -1650,6 +2707,26 @@ async function handleAdminAPI(req, res, pathname) {
                 message: 'Use POST /admin/api/send-email directly',
                 code: 'ENDPOINT_NOT_FOUND'
             }));
+        }
+        else if (pathname === '/admin/api/users') {
+            const users = await db.collection('users').find({}).sort({ createdAt: -1 }).toArray();
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(users));
+        }
+        else if (pathname === '/admin/api/investors') {
+            const investors = await db.collection('investors').find({}).sort({ createdAt: -1 }).toArray();
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(investors));
+        }
+        else if (pathname === '/admin/api/payments') {
+            const payments = await db.collection('payments').find({}).sort({ createdAt: -1 }).toArray();
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(payments));
+        }
+        else if (pathname === '/admin/api/kyc-requests') {
+            const kycRequests = await db.collection('kyc_requests').find({}).sort({ requestedAt: -1 }).toArray();
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(kycRequests));
         }
         else {
             res.writeHead(404, headers);
