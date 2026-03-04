@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Analytics Dashboard - CIL Admin</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>CIL Analytics</h2>
+                <p>Data-Driven Insights</p>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="/admin/dashboard"> Dashboard</a></li>
+                <li><a href="/admin/products"> Products</a></li>
+                <li><a href="/admin/orders"> Orders</a></li>
+                <li><a href="/admin/customers"> Customers</a></li>
+                <li><a href="/admin/emails"> Email System</a></li>
+                <li><a href="/admin/analytics" class="active"> Advanced Analytics</a></li>
+                <li><a href="/admin/settings"> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="last-updated">
+                    <small>Last updated: <span id="lastUpdated">Loading...</span></small>
+                </div>
+                <button onclick="logout()" class="btn-logout"> Logout</button>
+            </div>
+        </nav>
+
+        <main class="admin-main">
+            <!-- Header with Controls -->
+            <header class="admin-header">
+                <div class="header-title">
+                    <h1>Advanced Analytics Dashboard</h1>
+                    <p class="subtitle">Real-time business intelligence and performance metrics</p>
+                </div>
+                <div class="header-actions">
+                    <div class="filter-group">
+                        <select id="dateRange" onchange="updateAnalytics()" class="filter-select">
+                            <option value="7d">Last 7 Days</option>
+                            <option value="30d" selected>Last 30 Days</option>
+                            <option value="90d">Last 90 Days</option>
+                            <option value="1y">Last Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                        <select id="metricType" onchange="updateAnalytics()" class="filter-select">
+                            <option value="overview">Overview</option>
+                            <option value="sales">Sales Focus</option>
+                            <option value="customers">Customer Focus</option>
+                            <option value="products">Product Focus</option>
+                        </select>
+                    </div>
+                    <div class="action-buttons">
+                        <button onclick="refreshAnalytics()" class="btn-refresh" id="refreshBtn"> Refresh</button>
+                        <button onclick="exportAnalytics()" class="btn-export"> Export</button>
+                        <button onclick="toggleFullscreen()" class="btn-fullscreen"> Fullscreen</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Custom Date Range Modal -->
+            <div id="dateRangeModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Custom Date Range</h3>
+                        <span class="close" onclick="closeModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="date-inputs">
+                            <div class="form-group">
+                                <label>From Date</label>
+                                <input type="date" id="fromDate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>To Date</label>
+                                <input type="date" id="toDate" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button onclick="applyCustomDateRange()" class="btn-save">Apply</button>
+                            <button onclick="closeModal()" class="btn-cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Dashboard -->
+            <div class="kpi-dashboard">
+                <div class="kpi-grid">
+                    <div class="kpi-card primary">
+                        <div class="kpi-icon"></div>
+                        <div class="kpi-content">
+                            <h3 id="totalRevenue">₦0</h3>
+                            <p>Total Revenue</p>
+                            <div class="kpi-trend">
+                                <span id="revenueTrend" class="trend-indicator">0%</span>
+                                <span class="trend-label">vs previous period</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card success">
+                        <div class="kpi-icon"></div>
+                        <div class="kpi-content">
+                            <h3 id="totalOrders">0</h3>
+                            <p>Total Orders</p>
+                            <div class="kpi-trend">
+                                <span id="ordersTrend" class="trend-indicator">0%</span>
+                                <span class="trend-label">order growth</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card info">
+                        <div class="kpi-icon"></div>
+                        <div class="kpi-content">
+                            <h3 id="newCustomers">0</h3>
+                            <p>New Customers</p>
+                            <div class="kpi-trend">
+                                <span id="customersTrend" class="trend-indicator">0%</span>
+                                <span class="trend-label">customer acquisition</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card warning">
+                        <div class="kpi-icon"></div>
+                        <div class="kpi-content">
+                            <h3 id="conversionRate">0%</h3>
+                            <p>Conversion Rate</p>
+                            <div class="kpi-trend">
+                                <span id="conversionTrend" class="trend-indicator">0%</span>
+                                <span class="trend-label">conversion trend</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Charts Grid -->
+            <div class="charts-container">
+                <div class="chart-row">
+                    <div class="chart-card large">
+                        <div class="chart-header">
+                            <h3>Revenue Analytics</h3>
+                            <div class="chart-actions">
+                                <button onclick="toggleChartType('revenue')" class="btn-chart-action"></button>
+                                <button onclick="downloadChart('revenueChart')" class="btn-chart-action"></button>
+                            </div>
+                        </div>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Sales Funnel</h3>
+                            <div class="chart-actions">
+                                <button onclick="toggleChartType('funnel')" class="btn-chart-action"></button>
+                            </div>
+                        </div>
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Product Performance</h3>
+                            <div class="chart-actions">
+                                <button onclick="toggleChartType('products')" class="btn-chart-action"></button>
+                            </div>
+                        </div>
+                        <canvas id="productsChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Customer Segmentation</h3>
+                            <div class="chart-actions">
+                                <button onclick="toggleChartType('customers')" class="btn-chart-action"></button>
+                            </div>
+                        </div>
+                        <canvas id="customersChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Geographic Distribution</h3>
+                            <div class="chart-actions">
+                                <button onclick="toggleChartType('geo')" class="btn-chart-action"></button>
+                            </div>
+                        </div>
+                        <div id="geoChart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Analytics Sections -->
+            <div class="analytics-sections">
+                <!-- Real-time Activity -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h3>Real-time Activity</h3>
+                        <div class="live-indicator">
+                            <span class="pulse"></span>
+                            Live
+                        </div>
+                    </div>
+                    <div class="activity-grid">
+                        <div class="activity-card">
+                            <h4>Current Hour</h4>
+                            <div class="activity-stats">
+                                <div class="stat">
+                                    <span class="value" id="currentHourOrders">0</span>
+                                    <span class="label">Orders</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="value" id="currentHourRevenue">₦0</span>
+                                    <span class="label">Revenue</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-card">
+                            <h4>Today's Performance</h4>
+                            <div class="activity-stats">
+                                <div class="stat">
+                                    <span class="value" id="todayOrders">0</span>
+                                    <span class="label">Orders</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="value" id="todayRevenue">₦0</span>
+                                    <span class="label">Revenue</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-card">
+                            <h4>Active Now</h4>
+                            <div class="activity-stats">
+                                <div class="stat">
+                                    <span class="value" id="activeUsers">0</span>
+                                    <span class="label">Users</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="value" id="activeCarts">0</span>
+                                    <span class="label">Carts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Performers -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h3>Top Performers</h3>
+                        <div class="section-tabs">
+                            <button class="tab-btn active" onclick="switchTab('products')">Products</button>
+                            <button class="tab-btn" onclick="switchTab('categories')">Categories</button>
+                            <button class="tab-btn" onclick="switchTab('locations')">Locations</button>
+                        </div>
+                    </div>
+                    <div class="tab-content active" id="products-tab">
+                        <div class="performers-grid">
+                            <div class="performer-card">
+                                <h4> Best Selling</h4>
+                                <div id="bestSellingProducts">
+                                    <!-- Products will be loaded here -->
+                                </div>
+                            </div>
+                            <div class="performer-card">
+                                <h4> Fastest Growing</h4>
+                                <div id="fastestGrowingProducts">
+                                    <!-- Products will be loaded here -->
+                                </div>
+                            </div>
+                            <div class="performer-card">
+                                <h4> Highest Revenue</h4>
+                                <div id="highestRevenueProducts">
+                                    <!-- Products will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Predictive Analytics -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h3>Predictive Insights</h3>
+                        <button onclick="generatePredictions()" class="btn-predict"> Generate Forecast</button>
+                    </div>
+                    <div class="predictive-grid">
+                        <div class="predictive-card">
+                            <h4>Next 30 Days Forecast</h4>
+                            <div class="prediction-metrics">
+                                <div class="prediction">
+                                    <span class="prediction-value" id="forecastRevenue">₦0</span>
+                                    <span class="prediction-label">Expected Revenue</span>
+                                    <span class="prediction-confidence">85% confidence</span>
+                                </div>
+                                <div class="prediction">
+                                    <span class="prediction-value" id="forecastOrders">0</span>
+                                    <span class="prediction-label">Expected Orders</span>
+                                    <span class="prediction-confidence">82% confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="predictive-card">
+                            <h4>Inventory Recommendations</h4>
+                            <div id="inventoryAlerts">
+                                <!-- Alerts will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
