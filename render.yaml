@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # render.yaml
 services:
   - type: web
@@ -11,4 +12,19 @@ services:
       - key: PORT
         value: 10000  # Or let Render assign dynamically
     healthCheckPath: /health
+=======
+# render.yaml
+services:
+  - type: web
+    name: collaborative-investment-ltd
+    env: node
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000  # Or let Render assign dynamically
+    healthCheckPath: /health
+>>>>>>> e051c01554491361149ba5c6046c620a72341c42
     autoDeploy: true

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Shopping Cart - Collaborative Investment Ltd</title>
 
-    <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/cart-drawer.css">
@@ -16,29 +15,11 @@
 <body>
     <div class="marquee-container">
         <div class="marquee">
-            <span><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</span>
             <span><i class="fas fa-info-circle"></i> Our Website is currently under development, For accurate product info, please contact us directly</span>
             <span><i class="fas fa-envelope"></i> Email: collaborativeinvestmentltd@gmail.com</span>
-            <span><i class="fab fa-whatsapp"></i> WhatsApp: +234 812 997 8419</span>
-            <span><i class="fas fa-clock"></i> Mon-Fri: 9AM-5PM | Sat: 10AM-2PM</span>
-           
             <span><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</span>
-            <span><i class="fas fa-info-circle"></i> Our Website is currently under development, For accurate product info, please contact us directly</span>
-            <span><i class="fas fa-envelope"></i> Email: collaborativeinvestmentltd@gmail.com</span>
         </div>
     </div>
-    <div class="contact-float-bar">
-        <div class="contact-float-content">
-            <div class="contact-float-left">
-                <a href="tel:+2347078269765" class="contact-float-item"><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</a>
-                <a href="Our Website is currently under development" class="contact-float-item"><i class="fas fa-envelope"></i> Our Website is currently under development.</a>
-                <a href="mailto:collaborativeinvestmentltd@gmail.com" class="contact-float-item"><i class="fas fa-envelope"></i> collaborativeinvestmentltd@gmail.com</a>
-                <a href="https://wa.me/2348129978419" target="_blank" class="contact-float-item"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            </div>
-            <div class="contact-float-right"><span class="rc-badge">RC: 8918603</span></div>
-        </div>
-    </div>
-
 </head>
 
 <body>
@@ -55,7 +36,7 @@
             </button>
             
             <ul class="nav-links">
-                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/services">Our Services</a></li>
                 <li><a href="/shop-categories">Shop Products</a></li>
@@ -72,7 +53,6 @@
         </nav>
     </header>
 
-    <!-- Cart Drawer -->
     <div id="cart-drawer-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-drawer-header">
@@ -121,11 +101,8 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-grid">
-            <!-- About Section -->
             <div class="footer-section">
                 <h3>Collaborative Investment Ltd</h3>
                 <p>Nigeria Businesses Development & Investment Management Company Operating Across Multi-Sector. We Provide Professional Management, L2O Financing, and Long-term Wealth Creation Across Our Eco-system.</p>
@@ -145,7 +122,6 @@
                 </div>
             </div>
 
-            <!-- Quick Links -->
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
@@ -160,7 +136,6 @@
                 </ul>
             </div>
 
-            <!-- Services -->
             <div class="footer-section">
                 <h3>Our Sectors</h3>
                 <ul class="footer-links">
@@ -177,7 +152,6 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p>212 Ijegun Road, Ikotun, Lagos</p>
@@ -188,7 +162,6 @@
             </div>
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer-bottom">
             <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved</p>
             <p style="display: inline;">Building Nigeria's Business Future Through Integrated Business Development</p>
@@ -200,10 +173,29 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/2348129978419" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <div class="quick-contact-card" id="quickContactCard">
+        <button class="close-quick-contact" onclick="document.getElementById('quickContactCard').classList.remove('show')">×</button>
+        <div class="quick-contact-header">
+            <i class="fas fa-info-circle"></i>
+            <h4>Need accurate information?</h4>
+        </div>
+        <a href="https://wa.me/2348129978419" target="_blank" class="quick-contact-item">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a href="tel:+2348129978419" class="quick-contact-item">
+            <i class="fas fa-phone-alt"></i> Call +234 812 997 8419
+        </a>
+        <a href="mailto:collaborativeinvestmentltd@gmail.com" class="quick-contact-item">
+            <i class="fas fa-envelope"></i> Email
+        </a>
+        <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--gray); text-align: center;">
+            RC: 8918603 | Website Under Development
+        </div>
+    </div>
 
     <!-- Load main.js last -->
     <script src="/js/main.js"></script>
