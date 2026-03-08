@@ -6,25 +6,31 @@ const url = require('url');
 const querystring = require('querystring');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-const bcrypt = require('bcryptjs'); // Added bcrypt
-const jwt = require('jsonwebtoken'); // Added JWT
-const { connectDB, db, closeDB, backupDatabase, authenticateUser } = require('./database');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+// Import database first
+const { connectDB, db, closeDB, backupDatabase } = require('./database-local');
+
+// Then import admin auth
 const adminAuth = require('./admin-auth');
+
+// Now use adminAuth
+global.sessions = adminAuth.sessions || new Map();
+
+// Import logger
+const logger = require('./utils/logger');
+
 const passwordResetTokens = new Map();
 const MILESTONE_STATUSES = ['Processing', 'Shipped', 'Delivered'];
 const userSessions = new Map();
-
-global.sessions = adminAuth.sessions || new Map();
-
-// Import logging module
-const logger = require('./utils/logger');
 
 const PORT = process.env.PORT || 3000;
 const DOMAIN = process.env.DOMAIN || 'collaborativeinvestmentltd.com';
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
 
 // Validate required environment variables
-const requiredEnvVars = ['EMAIL_USER', 'EMAIL_PASS', 'MONGODB_URI'];
+const requiredEnvVars = ['EMAIL_USER', 'EMAIL_PASS'];
 const missing = requiredEnvVars.filter(env => !process.env[env]);
 if (missing.length > 0) {
     logger.error(`Missing required environment variables: ${missing.join(', ')}`);
