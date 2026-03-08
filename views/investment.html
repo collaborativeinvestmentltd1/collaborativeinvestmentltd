@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Opportunities - Collaborative Investment Ltd</title>
+    <meta name="description" content="Invest in professionally managed ventures with structured growth, transparent reporting, and 15-50% annual returns. Asset-backed investments in agriculture, construction, solar energy, and furniture.">
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span>|</span>
+                <span>|</span>
+                <span>|</span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories">Shop Products</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/investment" class="active">Investment</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            
+            <!-- Cart Icon -->
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay"></div>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="investment-hero">
+        <div class="hero-content">
+            <h1>Strategic Investment Opportunities in Nigeria</h1>
+            <p class="lead">Invest in professionally managed ventures with structured growth, transparent reporting, and 15-50% annual returns across Nigeria's most promising sectors.</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-value">25-50%</span>
+                    <span class="hero-stat-label">Annual Returns</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">7</span>
+                    <span class="hero-stat-label">Business Sectors</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">100%</span>
+                    <span class="hero-stat-label">Asset-Backed</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">24/7</span>
+                    <span class="hero-stat-label">Monitoring</span>
+                </div>
+            </div>
+            
+            <div class="hero-actions">
+                <a href="#opportunities" class="btn btn-primary">
+                    <i class="fas fa-briefcase"></i>
+                    View Opportunities
+                </a>
+                <a href="#calculator" class="btn btn-secondary">
+                    <i class="fas fa-calculator"></i>
+                    Calculate Returns
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Models Section -->
+    <section class="investment-models">
+        <div class="container">
+            <div class="section-header">
+                <h2>Investment & Management Models</h2>
+                <p>Choose from our proven frameworks for business investment and professional management</p>
+            </div>
+            
+            <div class="models-grid">
+                <!-- Model 1: Direct Business Investment -->
+                <div class="model-card">
+                    <h3>Direct Business Investment</h3>
+                    <p>Invest directly in our established businesses with guaranteed returns and professional management.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> 18-30% Annual Returns</li>
+                        <li><i class="fas fa-check"></i> Professional Management</li>
+                        <li><i class="fas fa-check"></i> Monthly Performance Reports</li>
+                        <li><i class="fas fa-check"></i> Asset-Backed Security</li>
+                    </ul>
+                    <a href="#direct-investment" class="btn btn-primary" style="width: 100%; margin-top: auto;">
+                        Invest Now
+                    </a>
+                </div>
+                
+                <!-- Model 2: Diaspora Business Management -->
+                <div class="model-card">
+                    <h3>Diaspora Business Setup</h3>
+                    <p>We setup and manage your Nigerian business while you maintain full ownership from anywhere.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Complete Business Setup</li>
+                        <li><i class="fas fa-check"></i> Professional Staff Management</li>
+                        <li><i class="fas fa-check"></i> Domiciliary Account Access</li>
+                        <li><i class="fas fa-check"></i> Virtual Business Monitoring</li>
+                    </ul>
+                    <a href="/services#diaspora" class="btn btn-primary" style="width: 100%; margin-top: auto;">
+                        Start Your Business
+                    </a>
+                </div>
+                
+                <!-- Model 3: Hotel Management -->
+                <div class="model-card">
+                    <h3>Hotel Management & Turnaround</h3>
+                    <p>Professional hotel management to transform properties into profitable hospitality businesses.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Full Operations Management</li>
+                        <li><i class="fas fa-check"></i> Staff Restructuring & Training</li>
+                        <li><i class="fas fa-check"></i> Revenue Optimization</li>
+                        <li><i class="fas fa-check"></i> Bar & Menu Styling</li>
+                    </ul>
+                    <a href="/services#hotel-management" class="btn btn-primary" style="width: 100%; margin-top: auto;">
+                        Manage Hotel
+                    </a>
+                </div>
+                
+                <!-- Model 4: Property Management -->
+                <div class="model-card">
+                    <h3>Property & Tenant Management</h3>
+                    <p>Professional property management to protect your assets and rental income.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Tenant Screening & Selection</li>
+                        <li><i class="fas fa-check"></i> Rent Collection & Relations</li>
+                        <li><i class="fas fa-check"></i> Property Maintenance</li>
+                        <li><i class="fas fa-check"></i> Asset Protection</li>
+                    </ul>
+                    <a href="/services#property-management" class="btn btn-primary" style="width: 100%; margin-top: auto;">
+                        Manage Property
+                    </a>
+                </div>
+                
+                <!-- Model 5: Joint Venture Partnerships -->
+                <div class="model-card">
+                    <h3>Joint Venture Partnerships</h3>
+                    <p>Partner with us to scale your business or start new ventures with shared investment.</p>
+                    <ul class="model-features">
+                        <li><i class="fas fa-check"></i> Shared Capital Investment</li>
+                        <li><i class="fas fa-check"></i> Professional Management Support</li>
+                        <li><i class="fas fa-check"></i> Market Access & Networks</li>
+                        <li><i class="fas fa-check"></i> Profit Sharing Agreement</li>
+                    </ul>
+                    <a href="#joint-venture" class="btn btn-primary" style="width: 100%; margin-top: auto;">
+                        Explore Partnerships
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Opportunities Section -->
+    <section id="opportunities" class="current-opportunities">
+        <div class="container">
+            <div class="section-header">
+                <h2>Current Investment Opportunities</h2>
+                <p>Actively managed ventures with proven track records and immediate investment potential</p>
+            </div>
+            
+            <div class="opportunities-grid">
+                <!-- Poultry Farm Expansion -->
+                <div class="opportunity-card">
+                    <div class="opportunity-header" style="padding: var(--space-6) var(--space-6) 0;">
+                        <h3 style="margin: 0 0 var(--space-3) 0; font-size: var(--text-xl);">Poultry Farm Expansion</h3>
+                        <div class="opportunity-meta" style="display: flex; gap: var(--space-3); margin-bottom: var(--space-4);">
+                            <span style="background: #38a169; color: white; padding: var(--space-1) var(--space-3); border-radius: var(--radius-md); font-size: var(--text-xs); font-weight: var(--font-semibold);">Agriculture</span>
+                            <span style="background: #d69e2e; color: white; padding: var(--space-1) var(--space-3); border-radius: var(--radius-md); font-size: var(--text-xs); font-weight: var(--font-semibold);">Active & Profitable</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content" style="padding: 0 var(--space-6) var(--space-6);">
+                        <p style="margin-bottom: var(--space-4); color: var(--gray-600); font-size: var(--text-base);">Scale operational poultry farm from 7,000 to 10,000 bird capacity.</p>
+                        <div class="opportunity-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);">
+                            <div class="stat" style="text-align: center;">
+                                <span class="stat-label" style="display: block; font-size: var(--text-xs); color: var(--gray-500); margin-bottom: var(--space-1);">Investment:</span>
+                                <span class="stat-value" style="display: block; font-size: var(--text-base); font-weight: var(--font-bold); color: var(--primary);">₦35M</span>
+                            </div>
+                            <div class="stat" style="text-align: center;">
+                                <span class="stat-label" style="display: block; font-size: var(--text-xs); color: var(--gray-500); margin-bottom: var(--space-1);">ROI:</span>
+                                <span class="stat-value" style="display: block; font-size: var(--text-base); font-weight: var(--font-bold); color: #38a169;">28-40%</span>
+                            </div>
+                            <div class="stat" style="text-align: center;">
+                                <span class="stat-label" style="display: block; font-size: var(--text-xs); color: var(--gray-500); margin-bottom: var(--space-1);">Duration:</span>
+                                <span class="stat-value" style="display: block; font-size: var(--text-base); font-weight: var(--font-bold); color: var(--primary);">18 Months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Block Manufacturing -->
+                <div class="opportunity-card">
+                    <div class="opportunity-header" style="padding: var(--space-6) var(--space-6) 0;">
+                        <h3 style="margin: 0 0 var(--space-3) 0; font-size: var(--text-xl);">Block Manufacturing Plant</h3>
+                        <div class="opportunity-meta" style="display: flex; gap: var(--space-3); margin-bottom: var(--space-4);">
+                            <span style="background: #3182ce; color: white; padding: var(--space-1) var(--space-3); border-radius: var(--radius-md); font-size: var(--text-xs); font-weight: var(--font-semibold);">Manufacturing</span>
+                            <span style="background: #38a169; color: white; padding: var(--space-1) var(--space-3); border-radius: var(--radius-md); font-size: var(--text-xs); font-weight: var(--font-semibold);">Operational</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content" style="padding: 0 var(--space-6) var(--space-6);">
+                        <p style="margin-bottom: var(--space-4); color: var(--gray-600); font-size: var(--text-base);">Commercial block production with daily cash flow and high demand.</p>
+                        <div class="opportunity-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);">
+                            <div class="stat" style="text-align: center;">
+                                <span class="stat-label" style="display: block; font-size: var(--text-xs); color: var(--gray-500); margin-bottom: var(--space-1);">Investment:</span>
+                                <span class="stat-value" style="display: block; font-size: var(--text-base); font-weight: var(--font-bold); color: var(--primary);">₦28M</span>
+                            </div>
+                            <div class="stat" style="text-align: center;">
+                                <span class="stat-label" style="display: block; font-size: var(--text-xs); color: var(--gray-500); margin-bottom: var(--space-1);">ROI:</span>
+                                <span class="stat-value" style="display: block; font-size: var(--text-base); font-weight: var(--font-bold); color: #38a169;">40-45%</span>
+                            </div>
+                            <div class="stat" style="text-align: center;">
+                                <span class="stat-label" style="display: block; font-size: var(--text-xs); color: var(--gray-500); margin-bottom: var(--space-1);">Duration:</span>
+                                <span class="stat-value" style="display: block; font-size: var(--text-base); font-weight: var(--font-bold); color: var(--primary);">12 Months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Portfolio Section -->
+    <section class="business-portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Business Investment Portfolio</h2>
+                <p>We operate and invest in 7 high-growth sectors with proven track records</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Agriculture -->
+                <div class="portfolio-card">
+                    <h3>Agriculture & Livestock</h3>
+                    <p>Poultry farming, fish farming, crop production, and livestock management.</p>
+                    <div class="portfolio-features">
+                        <span class="feature-tag">Poultry Farming</span>
+                        <span class="feature-tag">CatFish Farming</span>
+                        <span class="feature-tag">Pig Farming</span>
+                        <span class="feature-tag">Livestock Supply</span>
+                    </div>
+                    <div class="portfolio-stats">
+                        <div class="portfolio-stat">
+                            <span class="stat-label">ROI Period:</span>
+                            <span class="stat-value">8-12 months</span>
+                        </div>
+                        <div class="portfolio-stat">
+                            <span class="stat-label">Annual Growth:</span>
+                            <span class="stat-value">35%+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Construction -->
+                <div class="portfolio-card">
+                    <h3>Construction & Manufacturing</h3>
+                    <p>Block manufacturing, building materials, and construction services.</p>
+                    <div class="portfolio-features">
+                        <span class="feature-tag">Block Manufacturing</span>
+                        <span class="feature-tag">Construction Works</span>
+                        <span class="feature-tag">Electric Gates</span>
+                    </div>
+                    <div class="portfolio-stats">
+                        <div class="portfolio-stat">
+                            <span class="stat-label">Market Demand:</span>
+                            <span class="stat-value">Unconditional</span>
+                        </div>
+                        <div class="portfolio-stat">
+                            <span class="stat-label">Annual Growth:</span>
+                            <span class="stat-value">38%+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Process Section -->
+    <section class="investment-process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Investment Process</h2>
+                <p>A structured, transparent approach to profitable investment partnerships</p>
+            </div>
+            
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Initial Consultation</h3>
+                    <p>Discuss your investment goals and preferences with our expert advisors</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Due Diligence</h3>
+                    <p>Comprehensive review of business plans and risk management</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Agreement & Documentation</h3>
+                    <p>Clear contractual terms with transparent profit structure</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Funding & Implementation</h3>
+                    <p>Project commencement with structured oversight</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>Monitoring & Reporting</h3>
+                    <p>Regular progress updates and financial reporting</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h3>Returns Distribution</h3>
+                    <p>Timely profit distribution according to agreement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Invest Section -->
+    <section class="why-invest">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Invest With CIL?</h2>
+                <p>Professional investment management with proven results and transparent operations</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Proven Track Record</h3>
+                    <p>3+ years of successful investment returns across multiple sectors with documented performance.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Asset-Backed Security</h3>
+                    <p>All investments protected by tangible assets and comprehensive legal documentation.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Complete Transparency</h3>
+                    <p>Regular financial reporting, live project monitoring, and open communication channels.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Professional Management</h3>
+                    <p>Experienced team handling daily operations, staffing, and business development.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>Legal Compliance</h3>
+                    <p>Full compliance with Nigerian investment laws and international best practices.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <h3>24/7 Investor Support</h3>
+                    <p>Dedicated support for investors across different time zones and locations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Investment Returns Calculator</h2>
+                <p>Estimate your potential returns with our proven investment models</p>
+            </div>
+            
+            <div class="calculator-container">
+                <div class="calculator-card">
+                    <div class="calculator-header" style="margin-bottom: var(--space-6);">
+                        <h3 style="font-size: var(--text-2xl); margin-bottom: var(--space-3);">Calculate Your Returns</h3>
+                        <p style="color: var(--gray-600); font-size: var(--text-base);">Adjust the sliders to see how your investment could grow</p>
+                    </div>
+                    
+                    <div class="calculator-inputs">
+                        <div class="input-group" style="margin-bottom: var(--space-6);">
+                            <label for="investmentAmount" style="display: block; font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--gray-700); margin-bottom: var(--space-3);">Investment Amount (₦)</label>
+                            <div class="input-with-icon" style="display: flex; align-items: center; gap: var(--space-3);">
+                                <span class="currency-symbol" style="font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--primary);">₦</span>
+                                <input type="range" id="investmentAmount" min="5000000" max="100000000" step="5000000" value="10000000" style="flex: 1; height: 6px; border-radius: 3px; background: var(--gray-300); outline: none; appearance: none;">
+                                <span id="amountValue" style="font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--primary); min-width: 120px; text-align: right;">₦10,000,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group" style="margin-bottom: var(--space-6);">
+                            <label for="investmentDuration" style="display: block; font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--gray-700); margin-bottom: var(--space-3);">Investment Duration</label>
+                            <div class="input-with-icon" style="display: flex; align-items: center; gap: var(--space-3);">
+                                <input type="range" id="investmentDuration" min="6" max="36" step="6" value="12" style="flex: 1; height: 6px; border-radius: 3px; background: var(--gray-300); outline: none; appearance: none;">
+                                <span id="durationValue" style="font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--primary); min-width: 120px; text-align: right;">12 Months</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label style="display: block; font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--gray-700); margin-bottom: var(--space-3);">Select Business Sector</label>
+                            <div class="project-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);">
+                                <div class="project-card selected" data-type="poultry" data-roi="35" style="background: var(--primary); color: white; padding: var(--space-4); border-radius: var(--radius-lg); text-align: center; cursor: pointer; transition: var(--transition-base);">
+                                    <div class="project-name" style="font-size: var(--text-base); font-weight: var(--font-semibold); margin-bottom: var(--space-2);">Poultry</div>
+                                    <div class="project-roi" style="font-size: var(--text-sm); opacity: 0.9;">35% ROI</div>
+                                </div>
+                                <div class="project-card" data-type="construction" data-roi="40" style="background: var(--gray-100); padding: var(--space-4); border-radius: var(--radius-lg); text-align: center; cursor: pointer; transition: var(--transition-base); border: 2px solid transparent;">
+                                    <div class="project-name" style="font-size: var(--text-base); font-weight: var(--font-semibold); margin-bottom: var(--space-2); color: var(--gray-800);">Construction</div>
+                                    <div class="project-roi" style="font-size: var(--text-sm); color: var(--gray-600);">40% ROI</div>
+                                </div>
+                                <div class="project-card" data-type="solar" data-roi="35" style="background: var(--gray-100); padding: var(--space-4); border-radius: var(--radius-lg); text-align: center; cursor: pointer; transition: var(--transition-base); border: 2px solid transparent;">
+                                    <div class="project-name" style="font-size: var(--text-base); font-weight: var(--font-semibold); margin-bottom: var(--space-2); color: var(--gray-800);">Solar</div>
+                                    <div class="project-roi" style="font-size: var(--text-sm); color: var(--gray-600);">35% ROI</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculator-results">
+                    <div class="results-header" style="margin-bottom: var(--space-6); text-align: center;">
+                        <h3 style="font-size: var(--text-2xl); margin-bottom: var(--space-3); color: white;">Projected Returns</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-size: var(--text-base);">Based on your investment parameters</p>
+                    </div>
+                    
+                    <div class="results-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <div class="result-item" style="background: rgba(255, 255, 255, 0.1); padding: var(--space-4); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
+                            <div class="result-label" style="font-size: var(--text-sm); color: rgba(255, 255, 255, 0.8); margin-bottom: var(--space-2);">Annual Return</div>
+                            <div class="result-value" id="annualReturn" style="font-size: var(--text-xl); font-weight: var(--font-bold); color: white;">₦3,500,000</div>
+                        </div>
+                        <div class="result-item" style="background: rgba(255, 255, 255, 0.1); padding: var(--space-4); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
+                            <div class="result-label" style="font-size: var(--text-sm); color: rgba(255, 255, 255, 0.8); margin-bottom: var(--space-2);">Total Return</div>
+                            <div class="result-value" id="totalReturn" style="font-size: var(--text-xl); font-weight: var(--font-bold); color: white;">₦3,500,000</div>
+                        </div>
+                        <div class="result-item" style="background: rgba(255, 255, 255, 0.1); padding: var(--space-4); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
+                            <div class="result-label" style="font-size: var(--text-sm); color: rgba(255, 255, 255, 0.8); margin-bottom: var(--space-2);">Total Value</div>
+                            <div class="result-value" id="totalValue" style="font-size: var(--text-xl); font-weight: var(--font-bold); color: white;">₦13,500,000</div>
+                        </div>
+                        <div class="result-item" style="background: rgba(255, 255, 255, 0.1); padding: var(--space-4); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
+                            <div class="result-label" style="font-size: var(--text-sm); color: rgba(255, 255, 255, 0.8); margin-bottom: var(--space-2);">ROI Percentage</div>
+                            <div class="result-value" id="roiPercentage" style="font-size: var(--text-xl); font-weight: var(--font-bold); color: white;">35%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons" style="display: flex; gap: var(--space-3);">
+                        <a href="/contact" class="btn" style="background: white; color: var(--primary); flex: 1; justify-content: center;">
+                            <i class="fas fa-file-signature"></i>
+                            Invest Now
+                        </a>
+                        <a href="#consultation" class="btn" style="background: transparent; color: white; border: 2px solid white; flex: 1; justify-content: center;">
+                            <i class="fas fa-calendar-check"></i>
+                            Book Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment CTA -->
+    <section class="investment-cta">
+        <div class="cta-content">
+            <h2>Ready to Start Your Investment Journey?</h2>
+            <p>Start with as little as ₦5M and get professional management, regular reports, and guaranteed returns.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://wa.me/2348129978419" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp Consultation
+                </a>
+                <a href="tel:+2348129978419" class="btn btn-secondary">
+                    <i class="fas fa-phone-alt"></i>
+                    Call +234 812 997 8419
+                </a>
+                <a href="/contact" class="btn btn-secondary">
+                    <i class="fas fa-calendar-check"></i>
+                    Schedule Meeting
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Same footer as other pages -->
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>Collaborative Investment Ltd</h3>
+                <p>Building sustainable enterprises across Nigeria through strategic management and professional oversight.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325V22.68c0 .732.593 1.32 1.325 1.32H12.82v-9.83H9.692v-3.83h3.128V7.548c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.92.001c-1.506 0-1.797.717-1.797 1.77v2.32h3.587l-.467 3.83h-3.12V24h6.116c.73 0 1.32-.588 1.32-1.32V1.325C24 .593 23.408 0 22.675 0z"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.244 2H21.5l-7.51 8.568L23.5 22h-7.258l-5.44-6.494L3.5 22H.243l8.15-9.29L.5 2h7.344l4.928 5.883L18.244 2z"/>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                        <svg width="28" height="28" viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 .063C7.27.063.063 7.27.063 16S7.27 31.937 16 31.937 31.937 24.73 31.937 16 24.73.063 16 .063zm0 29.32c-7.315 0-13.318-6.002-13.318-13.318S8.686 2.748 16 2.748s13.318 6.002 13.318 13.318S23.315 29.383 16 29.383z"/>
+                            <path d="M23.53 19.473c-.395-.198-2.34-1.157-2.703-1.288-.364-.132-.63-.198-.895.198-.264.395-1.025 1.288-1.255 1.553-.231.264-.462.297-.857.099-.395-.198-1.667-.613-3.177-1.953-1.173-1.045-1.966-2.336-2.197-2.732-.231-.395-.024-.608.173-.805.178-.177.395-.462.593-.693.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.895-2.157-1.226-2.953-.322-.774-.65-.67-.895-.684-.231-.012-.495-.015-.76-.015-.263 0-.693.099-1.056.495-.363.396-1.386 1.354-1.386 3.302s1.42 3.832 1.618 4.098c.198.264 2.79 4.263 6.76 5.98.944.407 1.678.65 2.25.832.945.3 1.806.257 2.484.156.758-.112 2.34-.957 2.674-1.88.33-.924.33-1.715.23-1.88-.099-.165-.363-.264-.758-.462z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/Collaborativeinvestmentltd" aria-label="Instagram" target="_blank">
+                        <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="insta-gradient" x1="2" y1="2" x2="22" y2="22">
+                                    <stop offset="0%" stop-color="#feda75"/>
+                                    <stop offset="25%" stop-color="#fa7e1e"/>
+                                    <stop offset="50%" stop-color="#d62976"/>
+                                    <stop offset="75%" stop-color="#962fbf"/>
+                                    <stop offset="100%" stop-color="#4f5bd5"/>
+                                </linearGradient>
+                            </defs>
+                            <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/services">Our Services</a></li>
+                    <li><a href="/shop-categories">Shop Products</a></li>
+                    <li><a href="/portfolio">Portfolio</a></li>
+                    <li><a href="/investment">Investment</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="/services#business-management">Business Management</a></li>
+                    <li><a href="/services#agriculture">Agricultural Development</a></li>
+                    <li><a href="/services#manufacturing">Block Manufacturing</a></li>
+                    <li><a href="/services#fabrication">Machine Fabrication</a></li>
+                    <li><a href="/services#diaspora">Diaspora Management</a></li>
+                    <li><a href="/investment">Investment Opportunities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>collaborativeinvestmentltd@gmail.com</p>
+                <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Collaborative Investment Ltd. All rights reserved.</p>
+            <p>Building Nigeria's Business Future</p>
+            <p style="margin-top: 1rem;">
+                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+            </p>
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                    Follow us:
+                    <a href="https://x.com/Colainveltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">X</a> •
+                    <a href="https://instagram.com/Collaborativeinvestmentltd" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Instagram</a> •
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank" style="color: rgba(255,255,255,0.7); margin: 0 0.5rem;">Facebook</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+</body>
+</html>

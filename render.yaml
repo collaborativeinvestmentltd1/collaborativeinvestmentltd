@@ -1,0 +1,14 @@
+# render.yaml
+services:
+  - type: web
+    name: collaborative-investment-ltd
+    env: node
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000  # Or let Render assign dynamically
+    healthCheckPath: /health
+    autoDeploy: true

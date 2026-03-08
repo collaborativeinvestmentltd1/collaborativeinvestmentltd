@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Collaborative Investment Ltd</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>CIL Dashboard</h2>
+                <p>Performance Overview</p>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li><a href="/admin/dashboard" class="active"> Dashboard</a></li>
+                <li><a href="/admin/products"> Products</a></li>
+                <li><a href="/admin/orders"> Orders</a></li>
+                <li><a href="/admin/customers"> Customers</a></li>
+                <li><a href="/admin/emails"> Email System</a></li>
+                <li><a href="/admin/analytics"> Advanced Analytics</a></li>
+                <li><a href="/admin/settings"> Settings</a></li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="last-updated">
+                    <small>Last updated: <span id="lastUpdated">Just now</span></small>
+                </div>
+                <button onclick="logout()" class="btn-logout"> Logout</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+        <header class="admin-header">
+            <div class="header-title">
+                <h1>Dashboard Overview</h1>
+                <p class="dashboard-subtitle">Real-time business performance metrics</p>
+                <div class="quick-stats">
+                    <span class="stat-badge">
+                        <i class="fas fa-database"></i>
+                        <span id="liveDataStatus">Live Data</span>
+                    </span>
+                    <span class="stat-badge">
+                        <i class="fas fa-users"></i>
+                        <span id="activeSessions">0 Active</span>
+                    </span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="time-filter-group">
+                    <label for="timeRange">Time Range:</label>
+                    <select id="timeRange" onchange="loadDashboardData()" class="filter-select">
+                        <option value="today">Today</option>
+                        <option value="week" selected>This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="quarter">This Quarter</option>
+                        <option value="year">This Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-action btn-export" onclick="exportDashboardData()" title="Export Data">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="btn-action btn-refresh" onclick="loadDashboardData(true)" title="Refresh Data">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Refresh</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+            <!-- Performance Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card revenue">
+                    <div class="metric-icon">
+                        <div class="icon-wrapper"></div>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">₦0</div>
+                        <div class="metric-label">Total Revenue</div>
+                        <div class="metric-change positive">
+                            <span class="change-arrow"></span>
+                            <span class="change-value">0%</span>
+                            <span class="change-label">vs last period</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card orders">
+                    <div class="metric-icon">
+                        <div class="icon-wrapper"></div>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">0</div>
+                        <div class="metric-label">Total Orders</div>
+                        <div class="metric-change positive">
+                            <span class="change-arrow"></span>
+                            <span class="change-value">0%</span>
+                            <span class="change-label">vs last period</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card customers">
+                    <div class="metric-icon">
+                        <div class="icon-wrapper"></div>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">0</div>
+                        <div class="metric-label">Active Customers</div>
+                        <div class="metric-change positive">
+                            <span class="change-arrow"></span>
+                            <span class="change-value">0%</span>
+                            <span class="change-label">vs last period</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card conversion">
+                    <div class="metric-icon">
+                        <div class="icon-wrapper"></div>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">0%</div>
+                        <div class="metric-label">Conversion Rate</div>
+                        <div class="metric-change negative">
+                            <span class="change-arrow"></span>
+                            <span class="change-value">0%</span>
+                            <span class="change-label">vs last period</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-row">
+                    <div class="chart-container large">
+                        <div class="chart-header">
+                            <h3>Revenue Trend</h3>
+                            <div class="chart-actions">
+                                <button class="chart-action-btn active" data-period="week">Week</button>
+                                <button class="chart-action-btn" data-period="month">Month</button>
+                                <button class="chart-action-btn" data-period="quarter">Quarter</button>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Order Status Distribution</h3>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="ordersChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Top Product Categories</h3>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity & Quick Stats -->
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Recent Orders</h3>
+                        <a href="/admin/orders" class="view-all">View All →</a>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentOrders" class="activity-list">
+                            <div class="activity-item loading">
+                                <div class="activity-content">
+                                    <div class="activity-title">Loading recent orders...</div>
+                                    <div class="activity-description">Please wait while we fetch the latest data</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Quick Stats</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-list">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="totalProducts">0</div>
+                                    <div class="stat-label">Total Products</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="pendingOrders">0</div>
+                                    <div class="stat-label">Pending Orders</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="lowStock">0</div>
+                                    <div class="stat-label">Low Stock Items</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="unreadEmails">0</div>
+                                    <div class="stat-label">Unread Messages</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Indicators -->
+            <div class="performance-section">
+                <div class="section-header">
+                    <h3>Performance Indicators</h3>
+                    <div class="section-actions">
+                        <button class="btn-outline" onclick="exportDashboardData()">Export Report</button>
+                    </div>
+                </div>
+                <div class="indicators-grid">
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <span class="indicator-title">Average Order Value</span>
+                            <span class="indicator-trend positive">+12%</span>
+                        </div>
+                        <div class="indicator-value">₦0</div>
+                        <div class="indicator-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <span class="indicator-title">Customer Satisfaction</span>
+                            <span class="indicator-trend positive">+5%</span>
+                        </div>
+                        <div class="indicator-value">0%</div>
+                        <div class="indicator-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <span class="indicator-title">Inventory Turnover</span>
+                            <span class="indicator-trend negative">-3%</span>
+                        </div>
+                        <div class="indicator-value">0</div>
+                        <div class="indicator-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
