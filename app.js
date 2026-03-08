@@ -2770,3 +2770,7 @@ async function startServer() {
         process.exit(0);
     });
 }
+
+console.log('🔍 Debug: PORT =', process.env.PORT, '| Will listen on 0.0.0.0:', process.env.PORT);
+
+startServer();
