@@ -1,0 +1,155 @@
+[
+  {
+    "_id": "69adb21e4dd68a5b674b2958",
+    "tierName": "basic",
+    "level": 1,
+    "name": "Basic Tier",
+    "description": "Limited access for unverified users",
+    "features": [
+      "View basic dashboard",
+      "Browse products (limited)",
+      "Basic profile management",
+      "Email notifications only"
+    ],
+    "restrictions": [
+      "No investments",
+      "No withdrawals",
+      "No KYC access",
+      "Limited transaction history"
+    ],
+    "kycRequired": false,
+    "minVerification": "email",
+    "maxDailyDeposit": 0,
+    "maxDailyWithdrawal": 0,
+    "maxInvestmentAmount": 0,
+    "createdAt": "2026-03-08T17:30:06.420Z"
+  },
+  {
+    "_id": "69adb21e1a3a67a8fd8e8787",
+    "tierName": "email_verified",
+    "level": 2,
+    "name": "Email Verified",
+    "description": "Access for email-verified users",
+    "features": [
+      "Full dashboard access",
+      "Browse all products",
+      "Complete profile management",
+      "Email & SMS notifications",
+      "Basic investment browsing",
+      "View transaction history"
+    ],
+    "restrictions": [
+      "No investment transactions",
+      "No withdrawals",
+      "KYC required for full access"
+    ],
+    "kycRequired": false,
+    "minVerification": "email",
+    "maxDailyDeposit": 50000,
+    "maxDailyWithdrawal": 0,
+    "maxInvestmentAmount": 0,
+    "createdAt": "2026-03-08T17:30:06.422Z"
+  },
+  {
+    "_id": "69adb21e63eb25e239ec7bda",
+    "tierName": "phone_verified",
+    "level": 3,
+    "name": "Phone Verified",
+    "description": "Access for phone-verified users",
+    "features": [
+      "Full dashboard access",
+      "Browse all products",
+      "Complete profile management",
+      "Email & SMS notifications",
+      "Basic investment browsing",
+      "View transaction history",
+      "Basic deposit capabilities"
+    ],
+    "restrictions": [
+      "Limited investment transactions",
+      "No withdrawals",
+      "KYC required for full access"
+    ],
+    "kycRequired": false,
+    "minVerification": "phone",
+    "maxDailyDeposit": 100000,
+    "maxDailyWithdrawal": 0,
+    "maxInvestmentAmount": 1000000,
+    "createdAt": "2026-03-08T17:30:06.422Z"
+  },
+  {
+    "_id": "69adb21eae0d151d39b5038d",
+    "tierName": "fully_verified",
+    "level": 4,
+    "name": "Fully Verified",
+    "description": "Full access for email & phone verified users",
+    "features": [
+      "Full dashboard access",
+      "Complete profile management",
+      "Email & SMS notifications",
+      "Complete investment access",
+      "Transaction capabilities",
+      "Withdrawal capabilities",
+      "Priority support",
+      "Advanced analytics"
+    ],
+    "restrictions": [
+      "KYC required for large transactions",
+      "Enhanced verification for high amounts"
+    ],
+    "kycRequired": false,
+    "minVerification": "both",
+    "maxDailyDeposit": 500000,
+    "maxDailyWithdrawal": 200000,
+    "maxInvestmentAmount": 5000000,
+    "createdAt": "2026-03-08T17:30:06.422Z"
+  },
+  {
+    "_id": "69adb21e01fb990665fbd217",
+    "tierName": "kyc_verified",
+    "level": 5,
+    "name": "KYC Verified",
+    "description": "Full access with KYC verification",
+    "features": [
+      "All features from Fully Verified tier",
+      "Unlimited investment access",
+      "Full transaction history",
+      "Advanced reporting",
+      "Dedicated account manager (for investors)",
+      "Priority customer support",
+      "Early access to new features"
+    ],
+    "restrictions": [],
+    "kycRequired": true,
+    "minVerification": "both",
+    "maxDailyDeposit": 10000000,
+    "maxDailyWithdrawal": 5000000,
+    "maxInvestmentAmount": 50000000,
+    "createdAt": "2026-03-08T17:30:06.422Z"
+  },
+  {
+    "_id": "69adb21e26aa0ca1e6c4325d",
+    "tierName": "investor_premium",
+    "level": 6,
+    "name": "Investor Premium",
+    "description": "Premium access for verified investors",
+    "features": [
+      "All features from KYC Verified tier",
+      "Minimum ₦5,000,000 investment access",
+      "Personal investment advisor",
+      "Monthly portfolio reviews",
+      "Exclusive investment opportunities",
+      "Priority deal flow",
+      "VIP events access",
+      "24/7 dedicated support"
+    ],
+    "restrictions": [],
+    "kycRequired": true,
+    "minVerification": "both",
+    "minInvestment": 5000000,
+    "maxDailyDeposit": 50000000,
+    "maxDailyWithdrawal": 20000000,
+    "maxInvestmentAmount": 100000000,
+    "createdAt": "2026-03-08T17:30:06.422Z"
+  }
+]

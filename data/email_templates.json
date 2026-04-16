@@ -1,0 +1,33 @@
+[
+  {
+    "_id": "69adb21ee990cc3fcb505376",
+    "templateName": "welcome_customer",
+    "templateType": "welcome",
+    "subject": "Welcome to CIL - Your Customer Account is Ready!",
+    "html": "<!DOCTYPE html>...",
+    "text": "Welcome to CIL...",
+    "variables": [
+      "firstName",
+      "email",
+      "dashboardLink"
+    ],
+    "createdAt": "2026-03-08T17:30:06.431Z",
+    "updatedAt": "2026-03-08T17:30:06.431Z"
+  },
+  {
+    "_id": "69adb21e71284b915e3deab7",
+    "templateName": "welcome_investor",
+    "templateType": "welcome",
+    "subject": "Welcome to CIL - Your Investor Journey Begins!",
+    "html": "<!DOCTYPE html>...",
+    "text": "Welcome to CIL...",
+    "variables": [
+      "firstName",
+      "investorId",
+      "email",
+      "dashboardLink"
+    ],
+    "createdAt": "2026-03-08T17:30:06.431Z",
+    "updatedAt": "2026-03-08T17:30:06.431Z"
+  }
+]

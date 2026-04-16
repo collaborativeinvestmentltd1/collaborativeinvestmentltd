@@ -1,0 +1,15 @@
+[
+  {
+    "_id": "69adb2a94a5c33afd4c492db",
+    "email": "admin@cil.com",
+    "password": "$2a$12$jYq0BLx1MqLUrOdTdmnklOGyIsCIXfFWBkvdjpaeaNBbhWoWirfUS",
+    "role": "super_admin",
+    "isActive": true,
+    "name": "System Administrator",
+    "permissions": [
+      "all"
+    ],
+    "createdAt": "2026-03-08T17:32:25.614Z",
+    "updatedAt": "2026-03-08T17:32:25.614Z"
+  }
+]
