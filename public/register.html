@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register · Collaborative Investment Ltd</title>
+    <meta name="description" content="Create your CIL account – simple signup process." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- REGISTER CONTAINER (pushed down by header) ----- */
+        .register-wrapper {
+            width: 100%;
+            max-width: 480px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .register-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 45px 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .register-header .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .register-header .logo-text span {
+            color: var(--gold);
+        }
+
+        .register-header p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* ----- SOCIAL BUTTON ----- */
+        .social-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .social-btn:hover {
+            background: var(--light);
+            border-color: var(--gold);
+        }
+
+        .social-btn i {
+            font-size: 20px;
+        }
+
+        .social-btn .fa-google {
+            color: #DB4437;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ----- FORM ----- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            transition: .3s;
+            color: var(--text);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 164, 65, .1);
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 12px;
+        }
+
+        .form-row .form-group:first-child {
+            flex: 0 0 120px;
+        }
+
+        .form-row .form-group:last-child {
+            flex: 1;
+        }
+
+        .form-row select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .form-group .hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .btn-submit:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(217, 164, 65, .3);
+        }
+
+        .register-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .register-footer a {
+            color: var(--gold);
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .register-footer a:hover {
+            color: #c4913a;
+        }
+
+        .terms {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.6;
+        }
+
+        .terms a {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .terms a:hover {
+            color: #c4913a;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .register-card {
+                padding: 30px 20px;
+            }
+
+            .register-header .logo-text {
+                font-size: 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-row .form-group:first-child {
+                flex: 1;
+            }
+
+            .social-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .register-wrapper {
+                margin-top: 100px;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- REGISTER FORM -->
+    <div class="register-wrapper">
+        <div class="register-card">
+
+            <!-- Header -->
+            <div class="register-header">
+                <div class="logo-text">CIL<span>.</span></div>
+                <p>Create your account to get started</p>
+            </div>
+
+            <!-- Google Signup -->
+            <button class="social-btn" id="googleSignupBtn">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+
+            <!-- Divider -->
+            <div class="divider">or sign up with email</div>
+
+            <!-- Registration Form -->
+            <form id="registerForm" onsubmit="event.preventDefault(); handleRegistration();">
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required />
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email address" required />
+                </div>
+
+                <!-- Phone with Country Code -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <select id="countryCode">
+                                <option value="+234">🇳🇬 +234</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+91">🇮🇳 +91</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+55">🇧🇷 +55</option>
+                                <option value="+27">🇿🇦 +27</option>
+                                <option value="+254">🇰🇪 +254</option>
+                                <option value="+233">🇬🇭 +233</option>
+                                <option value="+1">🇨🇦 +1</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+64">🇳🇿 +64</option>
+                                <option value="+7">🇷🇺 +7</option>
+                                <option value="+82">🇰🇷 +82</option>
+                                <option value="+52">🇲🇽 +52</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+65">🇸🇬 +65</option>
+                                <option value="+60">🇲🇾 +60</option>
+                                <option value="+63">🇵🇭 +63</option>
+                                <option value="+66">🇹🇭 +66</option>
+                                <option value="+84">🇻🇳 +84</option>
+                                <option value="+62">🇮🇩 +62</option>
+                                <option value="+971">🇦🇪 +971</option>
+                                <option value="+966">🇸🇦 +966</option>
+                                <option value="+962">🇯🇴 +962</option>
+                                <option value="+20">🇪🇬 +20</option>
+                                <option value="+212">🇲🇦 +212</option>
+                                <option value="+216">🇹🇳 +216</option>
+                                <option value="+234">🇳🇬 +234</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder="Enter phone number" required />
+                        </div>
+                    </div>
+                    <div class="hint">We'll send a verification code to this number.</div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" required />
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a strong password" required />
+                    <div class="hint">Must be at least 8 characters.</div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+
+            </form>
+
+            <!-- Footer -->
+            <div class="register-footer">
+                Already have an account? <a href="login.html">Log in</a>
+            </div>
+
+            <div class="terms">
+                By creating an account, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ----- MOBILE MENU TOGGLE -----
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+
+        // ----- GOOGLE SIGNUP (Real-time OAuth) -----
+        document.getElementById('googleSignupBtn').addEventListener('click', function() {
+            // For production, replace with your actual Google OAuth client ID
+            const clientId = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+            const redirectUri = window.location.origin + '/auth/google/callback';
+            const scope = 'email profile';
+            const responseType = 'token';
+            
+            // Build the Google OAuth URL
+            const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+                'client_id=' + encodeURIComponent(clientId) +
+                '&redirect_uri=' + encodeURIComponent(redirectUri) +
+                '&response_type=' + responseType +
+                '&scope=' + encodeURIComponent(scope) +
+                '&prompt=select_account';
+            
+            // Open Google signup popup
+            const width = 500;
+            const height = 600;
+            const left = (window.screen.width - width) / 2;
+            const top = (window.screen.height - height) / 2;
+            
+            const popup = window.open(
+                authUrl,
+                'Google Signup',
+                'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top
+            );
+            
+            // Listen for the callback from the popup
+            window.addEventListener('message', function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'google_signup_success') {
+                        popup.close();
+                        alert('Google signup successful! Welcome ' + data.name + '!');
+                        // Redirect to dashboard or complete profile
+                        // window.location.href = '/dashboard';
+                    }
+                } catch (e) {
+                    // Handle errors
+                }
+            });
+            
+            // Fallback: if popup is blocked or user closes it
+            console.log('Google OAuth is configured. Replace YOUR_GOOGLE_CLIENT_ID with your actual client ID.');
+        });
+
+        // ----- REGISTRATION HANDLER -----
+        function handleRegistration() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const countryCode = document.getElementById('countryCode').value;
+            const dob = document.getElementById('dob').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation
+            if (!fullName) {
+                alert('Please enter your full name.');
+                return;
+            }
+
+            if (!email) {
+                alert('Please enter your email address.');
+                return;
+            }
+
+            if (!phone) {
+                alert('Please enter your phone number.');
+                return;
+            }
+
+            if (!dob) {
+                alert('Please enter your date of birth.');
+                return;
+            }
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            // Construct full phone number
+            const fullPhone = countryCode + phone;
+
+            // In production, send this data to your backend API
+            console.log('Registration data:', {
+                fullName,
+                email,
+                phone: fullPhone,
+                dob,
+                password
+            });
+
+            // Simulate successful registration
+            alert('Account created successfully! Please check your email to verify.');
+            
+            // Optionally redirect to login
+            // window.location.href = 'login.html';
+        }
+    </script>
+
+</body>
+</html>

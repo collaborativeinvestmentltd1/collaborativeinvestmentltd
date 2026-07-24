@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIL Partners · Collaborative Investment Ltd</title>
+    <meta name="description" content="Collaborative Investment Ltd partners with financial institutions, solar installers, manufacturers, agriculture, construction and more across Nigeria." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- PAGE HERO (partners) ----- */
+        .page-hero {
+            padding: 140px 0 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero h1 span {
+            color: var(--gold);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 620px;
+            line-height: 1.7;
+            opacity: .85;
+        }
+
+        /* ----- PARTNERS SECTION ----- */
+        .partners-section {
+            padding: 80px 0 60px;
+            background: white;
+        }
+
+        .partners-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .partners-intro h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .partners-intro h2 span {
+            color: var(--gold);
+        }
+
+        .partners-intro p {
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .partners-intro .highlight-box {
+            background: var(--light);
+            border-left: 4px solid var(--gold);
+            padding: 20px 28px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .partners-intro .highlight-box p {
+            font-size: 16px;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .partners-intro .highlight-box strong {
+            color: var(--primary);
+        }
+
+        /* ----- PARTNERS CATEGORIES ----- */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .partner-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: .35s;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--gold);
+            text-align: center;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .partner-card .card-icon {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 16px;
+        }
+
+        .partner-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .partner-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .partner-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.6rem;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .partner-tag {
+            background: var(--light);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .partner-status {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #e8f5e9;
+            color: #2e7d32;
+            margin-top: 8px;
+        }
+
+        .partner-status.active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .partner-status.pending {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        /* ----- WHY PARTNER SECTION ----- */
+        .why-partner {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .why-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: .3s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .why-card .why-icon {
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .why-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .why-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 70px 50px;
+            margin-bottom: 0;
+        }
+
+        .cta-wrap h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .page-hero h1 {
+                font-size: 42px;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 0 50px;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .partners-intro h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .actions .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html" class="active">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Our <span>Partners</span></h1>
+                <p>We are actively building strategic partnerships across all our sectors — from financial institutions and solar manufacturers to agriculture, construction, and beyond.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERS SECTION -->
+    <section class="partners-section">
+        <div class="container">
+            <div class="partners-intro">
+                <h2>Building <span>Partnerships</span> Across Sectors</h2>
+                <p>Collaborative Investment Ltd is actively expanding its partner network. We work with trusted organizations that share our commitment to quality, transparency, and sustainable growth.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Current Partnerships Include:</strong> Multiple Financial Institutions, Solar Installation Companies &amp; Manufacturers, Agriculture &amp; Agribusiness Firms, Construction &amp; Fabrication Companies, Equipment Manufacturers, Hotel Management Groups, Property Developers, and more.</p>
+                </div>
+            </div>
+
+            <div class="partners-grid">
+                <!-- Financial Institutions -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-university"></i></div>
+                    <h3>Financial Institutions</h3>
+                    <p>Partner banks, microfinance banks, and investment firms providing capital solutions for our ecosystem.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Banking</span>
+                        <span class="partner-tag">Investment</span>
+                        <span class="partner-tag">Capital</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Solar & Renewable Energy -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-solar-panel"></i></div>
+                    <h3>Solar &amp; Renewable Energy</h3>
+                    <p>Manufacturers, installers, and distributors of solar panels, inverters, batteries, and renewable energy solutions.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Manufacturers</span>
+                        <span class="partner-tag">Installers</span>
+                        <span class="partner-tag">PPA</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Agriculture & Agribusiness -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Agriculture &amp; Agribusiness</h3>
+                    <p>Farm equipment suppliers, feed manufacturers, veterinary services, and agri-tech providers.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Equipment</span>
+                        <span class="partner-tag">Suppliers</span>
+                        <span class="partner-tag">Agri-Tech</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Construction & Fabrication -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
+                    <h3>Construction &amp; Fabrication</h3>
+                    <p>Building material suppliers, fabrication workshops, and construction service providers.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Materials</span>
+                        <span class="partner-tag">Fabrication</span>
+                        <span class="partner-tag">Services</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Machinery & Equipment -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Machinery &amp; Equipment</h3>
+                    <p>Manufacturers and suppliers of industrial machinery, generators, and heavy equipment.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Generators</span>
+                        <span class="partner-tag">Industrial</span>
+                        <span class="partner-tag">Rental</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Furniture & Interior -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-chair"></i></div>
+                    <h3>Furniture &amp; Interior</h3>
+                    <p>Furniture manufacturers, upholsterers, and interior design partners for our hotels and properties.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Manufacturing</span>
+                        <span class="partner-tag">Upholstery</span>
+                        <span class="partner-tag">Design</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Hospitality & Hotels -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-hotel"></i></div>
+                    <h3>Hospitality &amp; Hotels</h3>
+                    <p>Hotel management groups, hospitality consultants, and service providers for our hotel portfolio.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Management</span>
+                        <span class="partner-tag">Consulting</span>
+                        <span class="partner-tag">Services</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Facility Management -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Facility Management</h3>
+                    <p>Cleaning services, security firms, HVAC specialists, and maintenance contractors.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Cleaning</span>
+                        <span class="partner-tag">Security</span>
+                        <span class="partner-tag">Maintenance</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+
+                <!-- Property & Real Estate -->
+                <div class="partner-card">
+                    <div class="card-icon"><i class="fas fa-building"></i></div>
+                    <h3>Property &amp; Real Estate</h3>
+                    <p>Real estate developers, property agents, and valuation firms for our property management division.</p>
+                    <div class="partner-tags">
+                        <span class="partner-tag">Developers</span>
+                        <span class="partner-tag">Agents</span>
+                        <span class="partner-tag">Valuation</span>
+                    </div>
+                    <span class="partner-status active">Active Partnership</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY PARTNER WITH CIL -->
+    <section class="why-partner">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why <span style="color:var(--gold);">Partner With CIL</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">We offer a unique ecosystem that creates value for all partners.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h4>Ecosystem Access</h4>
+                    <p>Gain access to 12+ integrated business divisions with built-in demand for your products and services.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-handshake"></i></div>
+                    <h4>Trusted Partnership</h4>
+                    <p>Work with a professionally managed organization committed to transparency, quality, and long-term relationships.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
+                    <h4>Growth Opportunities</h4>
+                    <p>Scale your business alongside CIL's expanding ecosystem across Nigeria and beyond.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:0 0 80px;">
+        <div class="container">
+            <div class="cta-wrap">
+                <h2>Ready to Partner With Us?</h2>
+                <p>We are actively seeking partners across all sectors. Let's build something great together.</p>
+                <a href="contact.html" class="btn btn-gold">Contact Our Partnership Team</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

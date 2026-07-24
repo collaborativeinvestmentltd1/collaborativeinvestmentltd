@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers at CIL · Collaborative Investment Ltd</title>
+    <meta name="description" content="Join the CIL team – explore career opportunities at Collaborative Investment Ltd across multiple sectors and locations in Nigeria." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- PAGE HERO (careers) ----- */
+        .page-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero h1 span {
+            color: var(--gold);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 620px;
+            line-height: 1.7;
+            opacity: .85;
+        }
+
+        /* ----- WHY WORK WITH US ----- */
+        .why-work {
+            padding: 80px 0 60px;
+            background: white;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .why-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: .3s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .why-card .why-icon {
+            font-size: 36px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .why-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .why-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ----- OPEN POSITIONS ----- */
+        .positions-section {
+            padding: 60px 0 80px;
+            background: var(--light);
+        }
+
+        .positions-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .positions-intro h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .positions-intro h2 span {
+            color: var(--gold);
+        }
+
+        .positions-intro p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .positions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .position-card {
+            padding: 28px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .position-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: var(--gold);
+        }
+
+        .position-card .pos-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #e3f2fd;
+            color: #0d47a1;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .position-card .pos-badge.hot {
+            background: #ffebee;
+            color: #b71c1c;
+        }
+
+        .position-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+
+        .position-card .pos-department {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .position-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 16px;
+        }
+
+        .position-card .pos-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.6rem;
+            margin-bottom: 16px;
+        }
+
+        .position-card .pos-tag {
+            background: var(--light);
+            padding: 0.15rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .position-card .pos-location {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .position-card .pos-location i {
+            margin-right: 6px;
+            color: var(--gold);
+        }
+
+        .position-card a {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: .2s;
+            margin-top: auto;
+        }
+
+        .position-card a:hover {
+            gap: 12px;
+            color: #c4913a;
+        }
+
+        /* ----- APPLICATION PROCESS ----- */
+        .process-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            background: var(--light);
+            border: 1px solid var(--border);
+            transition: .3s;
+        }
+
+        .process-step:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .process-step .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .process-step h4 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .process-step p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 70px 50px;
+            margin-bottom: 0;
+        }
+
+        .cta-wrap h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .page-hero h1 {
+                font-size: 42px;
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .positions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 0 50px;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .actions .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Careers at <span>CIL</span></h1>
+                <p>Join the team that's building Nigeria's economic infrastructure. Explore career opportunities across our 12+ business divisions and multiple locations nationwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY WORK WITH US -->
+    <section class="why-work">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why Work <span style="color:var(--gold);">With Us</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Be part of a growing ecosystem that's transforming Nigeria's economy.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
+                    <h4>Growth &amp; Impact</h4>
+                    <p>Work on meaningful projects that create jobs, build infrastructure, and drive economic transformation across Nigeria.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h4>Integrated Ecosystem</h4>
+                    <p>Gain exposure to 12+ sectors — from agribusiness and construction to solar, property, and workforce development.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-users"></i></div>
+                    <h4>Collaborative Culture</h4>
+                    <p>Join a team of passionate professionals committed to transparency, excellence, and building something bigger.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OPEN POSITIONS -->
+    <section class="positions-section">
+        <div class="container">
+            <div class="positions-intro">
+                <h2>Open <span>Positions</span></h2>
+                <p>We're always looking for talented individuals to join our growing team. Check out our current openings across Nigeria.</p>
+            </div>
+            <div class="positions-grid">
+                <!-- Position 1 -->
+                <div class="position-card">
+                    <span class="pos-badge hot">Hot</span>
+                    <h3>Project Manager – Construction</h3>
+                    <div class="pos-department">CIL Construction &amp; Fabrication</div>
+                    <p>Lead end-to-end construction projects, ensuring quality, timeline, and budget adherence across multiple sites.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Construction</span>
+                        <span class="pos-tag">Project Management</span>
+                        <span class="pos-tag">On-site</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 2 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Solar Installation Lead</h3>
+                    <div class="pos-department">CIL Solar Energy Solutions</div>
+                    <p>Lead solar installation teams, oversee project quality, and ensure customer satisfaction across residential and commercial projects.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Solar</span>
+                        <span class="pos-tag">Installation</span>
+                        <span class="pos-tag">Renewable Energy</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ibadan, Enugu</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 3 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Farm Operations Manager</h3>
+                    <div class="pos-department">CIL Agribusiness Management</div>
+                    <p>Manage day-to-day farm operations, coordinate with field teams, and ensure optimal production across poultry and aquaculture.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Agriculture</span>
+                        <span class="pos-tag">Farm Management</span>
+                        <span class="pos-tag">Operations</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Ogun, Oyo, Kaduna</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 4 -->
+                <div class="position-card">
+                    <span class="pos-badge hot">Hot</span>
+                    <h3>Property Manager</h3>
+                    <div class="pos-department">CIL Property &amp; Tenant Management</div>
+                    <p>Oversee residential and commercial properties, manage tenant relations, and coordinate maintenance and upgrades.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Property</span>
+                        <span class="pos-tag">Tenant Management</span>
+                        <span class="pos-tag">Maintenance</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Kano</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 5 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Business Development Officer</h3>
+                    <div class="pos-department">CIL Private Investors Network</div>
+                    <p>Identify and develop new business opportunities, build relationships with investors, and drive ecosystem growth.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Business Development</span>
+                        <span class="pos-tag">Investor Relations</span>
+                        <span class="pos-tag">Sales</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 6 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Facility Maintenance Technician</h3>
+                    <div class="pos-department">CIL Business Facility Management</div>
+                    <p>Perform maintenance, repairs, and inspections across commercial facilities, ensuring optimal functionality.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Maintenance</span>
+                        <span class="pos-tag">HVAC</span>
+                        <span class="pos-tag">Facility Management</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ibadan, Enugu</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 7 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Furniture Production Supervisor</h3>
+                    <div class="pos-department">CIL Furniture Production &amp; Supply</div>
+                    <p>Supervise furniture production, manage quality control, and ensure timely delivery of orders.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Furniture</span>
+                        <span class="pos-tag">Production</span>
+                        <span class="pos-tag">Quality Control</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ogun, Kaduna</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 8 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Human Resources Officer</h3>
+                    <div class="pos-department">CIL Corporate Services</div>
+                    <p>Manage recruitment, employee relations, and HR operations across the entire CIL ecosystem.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">HR</span>
+                        <span class="pos-tag">Recruitment</span>
+                        <span class="pos-tag">Employee Relations</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Kano</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 9 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Hotel Operations Manager</h3>
+                    <div class="pos-department">CIL Hotel Turnaround Services</div>
+                    <p>Oversee hotel operations, manage staff, optimize revenue, and ensure guest satisfaction across our hospitality portfolio.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Hospitality</span>
+                        <span class="pos-tag">Hotel Management</span>
+                        <span class="pos-tag">Operations</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Position 10 -->
+                <div class="position-card">
+                    <span class="pos-badge">New</span>
+                    <h3>Diaspora Investment Advisor</h3>
+                    <div class="pos-department">CIL Diaspora Asset Management</div>
+                    <p>Advise diaspora clients on investment opportunities, manage portfolios, and build lasting relationships.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Investment</span>
+                        <span class="pos-tag">Diaspora</span>
+                        <span class="pos-tag">Advisory</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Remote</div>
+                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPLICATION PROCESS -->
+    <section class="process-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Application <span style="color:var(--gold);">Process</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Our simple, transparent hiring process.</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Submit Application</h4>
+                    <p>Apply online through our careers portal. Include your CV and a cover letter.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Initial Screening</h4>
+                    <p>Our HR team reviews applications and reaches out to qualified candidates.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Interview</h4>
+                    <p>Meet with our team to discuss your experience, skills, and fit with our culture.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Offer &amp; Onboarding</h4>
+                    <p>Welcome to CIL! We'll guide you through onboarding and integrate you into the team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:0 0 80px;">
+        <div class="container">
+            <div class="cta-wrap">
+                <h2>Ready to Join the Team?</h2>
+                <p>Be part of the ecosystem that's transforming Nigeria's economic infrastructure.</p>
+                <a href="contact.html" class="btn btn-gold">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

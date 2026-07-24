@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIL Partners with JOBBERMAN · CIL News</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0,0,0,.06);
+        }
+        body { font-family: 'Inter', sans-serif; background: #fff; color: var(--text); line-height: 1.5; }
+        a { text-decoration: none; color: inherit; }
+        .container { width: min(1280px, 92%); margin: 0 auto; }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 16px 0; background: rgba(8,27,51,.92);
+            backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .logo span { color: var(--gold); }
+        nav { display: flex; gap: 32px; }
+        nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
+        nav a:hover { color: var(--gold); }
+        .actions { display: flex; gap: 10px; }
+        .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
+        .btn-dark { background: white; color: var(--primary); }
+        .btn-dark:hover { background: #eef2f6; transform: translateY(-2px); }
+        .btn-gold { background: var(--gold); color: white; }
+        .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+        .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
+
+        /* Page Hero */
+        .page-hero { padding: 140px 0 50px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; background: #D9A44115; border-radius: 50%; right: -100px; top: -100px; filter: blur(80px); pointer-events: none; }
+        .page-hero-content { max-width: 780px; position: relative; z-index: 2; }
+        .page-hero h1 { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 12px; letter-spacing: -1px; }
+        .page-hero h1 span { color: var(--gold); }
+        .page-hero .back-link { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px; transition: .2s; }
+        .page-hero .back-link:hover { color: var(--gold); }
+
+        /* Content */
+        .content-section { padding: 60px 0 80px; background: white; }
+        .content-wrapper { max-width: 900px; margin: 0 auto; }
+        .content-wrapper .meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; color: var(--muted); font-size: 14px; }
+        .content-wrapper .meta .badge { padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; background: #e8f5e9; color: #1b5e20; }
+        .content-wrapper h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-top: 32px; margin-bottom: 16px; }
+        .content-wrapper p { color: var(--muted); font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
+        .content-wrapper ul { list-style: none; padding: 0; margin-bottom: 20px; }
+        .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
+        .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 70px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
+        .footer-grid h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+        .footer-grid h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+        .footer-grid a, .footer-grid p { display: block; margin-bottom: 12px; opacity: .7; transition: .2s; font-size: 0.95rem; }
+        .footer-grid a:hover { opacity: 1; color: var(--gold); }
+        .footer-grid p { opacity: .6; }
+        .social-links { display: flex; gap: 12px; margin-top: 16px; }
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255,255,255,.06); border-radius: 50%; transition: .3s; font-size: 1.1rem; }
+        .social-links a:hover { background: var(--gold); color: var(--primary); opacity: 1; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 2rem; margin-top: 2.5rem; text-align: center; font-size: 0.85rem; color: rgba(255,255,255,.4); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+            nav { display: none; }
+            .menu-toggle { display: flex; }
+            .actions .btn-dark { display: none; }
+            nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+            nav.open a { font-size: 1rem; padding: 6px 0; }
+        }
+        @media (max-width: 768px) {
+            .page-hero { padding: 120px 0 40px; }
+            .page-hero h1 { font-size: 34px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .content-wrapper h2 { font-size: 24px; }
+        }
+        @media (max-width: 480px) {
+            .page-hero h1 { font-size: 28px; }
+            .logo { font-size: 20px; }
+            .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html" class="active">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <a href="news.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to News</a>
+                <h1>Partnership with <span>JOBBERMAN NIGERIA</span></h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="meta">
+                    <span>March 2026</span>
+                    <span class="badge">Partnership</span>
+                    <span>3 min read</span>
+                </div>
+
+                <p><strong>Collaborative Investment Ltd (CIL) has entered into a strategic partnership with JOBBERMAN NIGERIA, one of the country's leading recruitment and HR platforms.</strong></p>
+
+                <p>This collaboration represents a significant step forward in CIL's mission to build Nigeria's workforce ecosystem. By combining JOBBERMAN's extensive talent pool and recruitment technology with CIL's integrated business divisions, the partnership will create new employment opportunities across multiple sectors.</p>
+
+                <h2>About JOBBERMAN NIGERIA</h2>
+                <p>JOBBERMAN NIGERIA is a leading recruitment and HR platform connecting employers with qualified candidates. With a vast database of job seekers and innovative recruitment technology, JOBBERMAN has helped thousands of Nigerians find meaningful employment across various industries.</p>
+
+                <h2>What This Partnership Means</h2>
+                <ul>
+                    <li>CIL gains access to JOBBERMAN's extensive talent pool</li>
+                    <li>JOBBERMAN gains exclusive access to CIL's employment opportunities</li>
+                    <li>Joint recruitment drives across Nigeria</li>
+                    <li>Enhanced job matching technology</li>
+                    <li>Skills development and placement programs</li>
+                </ul>
+
+                <h2>Opportunities for Job Seekers</h2>
+                <p>Through this partnership, job seekers can access:</p>
+                <ul>
+                    <li>Career opportunities across CIL's 12+ business divisions</li>
+                    <li>Jobs in property, solar, construction, agribusiness, and more</li>
+                    <li>Positions across multiple locations in Nigeria</li>
+                    <li>Skills training and certification programs</li>
+                    <li>Career development support</li>
+                </ul>
+
+                <p>"Partnering with JOBBERMAN NIGERIA strengthens our workforce division significantly," said the Managing Director of CIL. "Together, we will connect talented Nigerians with meaningful employment opportunities across our growing ecosystem."</p>
+
+                <p><em>To explore job opportunities, visit our <a href="workforce.html" style="color: var(--gold); font-weight: 600;">Workforce page</a> or <a href="https://cilworkforce.com" target="_blank" style="color: var(--gold); font-weight: 600;">CIL Workforce Platform</a>.</em></p>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+        toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+    </script>
+
+</body>
+</html>

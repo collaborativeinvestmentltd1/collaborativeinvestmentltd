@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIL Workforce · Collaborative Investment Ltd</title>
+    <meta name="description" content="CIL Workforce – job matching, recruitment, skills training, and workforce development services in Nigeria." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- PAGE HERO ----- */
+        .page-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero h1 span {
+            color: var(--gold);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 620px;
+            line-height: 1.7;
+            opacity: .85;
+        }
+
+        /* ----- SERVICES SECTION ----- */
+        .services-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: .35s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: var(--gold);
+        }
+
+        .service-card .service-icon {
+            font-size: 42px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ----- DIVISIONS SECTION ----- */
+        .divisions-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .divisions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .division-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: .35s;
+        }
+
+        .division-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .division-card .division-icon {
+            font-size: 36px;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        .division-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .division-card .division-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #e3f2fd;
+            color: #0d47a1;
+            margin-bottom: 12px;
+        }
+
+        .division-card .division-badge.jobs {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .division-card .division-badge.academy {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .division-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .division-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .division-card ul li {
+            color: var(--muted);
+            font-size: 0.9rem;
+            padding: 4px 0 4px 24px;
+            position: relative;
+        }
+
+        .division-card ul li::before {
+            content: '•';
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* ----- FEATURES SECTION ----- */
+        .features-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 30px 28px;
+            border-radius: var(--radius);
+            background: var(--light);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: .3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card .feature-icon {
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 70px 50px;
+            margin-bottom: 0;
+        }
+
+        .cta-wrap h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        .cta-wrap .btn-gold {
+            font-size: 1.1rem;
+            padding: 16px 40px;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .divisions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 0 50px;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .actions .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>CIL <span>Workforce</span></h1>
+                <p>Connecting skilled workers with businesses — job matching, recruitment, skills training, and workforce development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Our <span style="color:var(--gold);">Workforce Services</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Comprehensive workforce solutions for job seekers and businesses.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-search"></i></div>
+                    <h3>Job Matching Platform</h3>
+                    <p>Connect qualified candidates with job opportunities across multiple industries. Smart matching technology finds the right fit.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-user-check"></i></div>
+                    <h3>Worker Verification</h3>
+                    <p>Levels 1-4 verification system to ensure workers are qualified, certified, and reliable. Replacement guarantee for employers.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Skills Training &amp; Certification</h3>
+                    <p>Professional training programs across construction, solar installation, agribusiness, facility management, and more.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Recruitment Services</h3>
+                    <p>End-to-end recruitment solutions for businesses. We find, screen, and place qualified candidates for your team.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>Workforce Guarantee</h3>
+                    <p>Replacement guarantee for employers. If a worker doesn't meet expectations, we provide a qualified replacement.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3>Ecosystem Integration</h3>
+                    <p>Trained workers are deployed across all CIL divisions — property, construction, solar, hotels, agribusiness, and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIVISIONS -->
+    <section class="divisions-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Our <span style="color:var(--gold);">Workforce Divisions</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Two divisions working together to build Nigeria's workforce.</p>
+            </div>
+            <div class="divisions-grid">
+                <div class="division-card">
+                    <div class="division-icon"><i class="fas fa-users"></i></div>
+                    <span class="division-badge jobs">CIL Jobs</span>
+                    <h3>CIL Jobs Platform</h3>
+                    <p>Nigeria's trusted job matching platform connecting skilled workers with businesses. Daily job postings across multiple sectors.</p>
+                    <ul>
+                        <li>Job postings and applications</li>
+                        <li>Worker verification (Levels 1-4)</li>
+                        <li>Smart matching technology</li>
+                        <li>Replacement guarantee</li>
+                        <li>Direct employer connections</li>
+                    </ul>
+                </div>
+                <div class="division-card">
+                    <div class="division-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <span class="division-badge academy">CIL Academy</span>
+                    <h3>CIL Workforce Academy</h3>
+                    <p>Skills training and certification programs designed to build a qualified workforce for Nigeria's growing economy.</p>
+                    <ul>
+                        <li>Construction skills training</li>
+                        <li>Solar installation certification</li>
+                        <li>Agribusiness and farming</li>
+                        <li>Facility management</li>
+                        <li>Furniture production</li>
+                        <li>Job placement support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why Choose <span style="color:var(--gold);">CIL Workforce</span></h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                    <h4>Verified Workers</h4>
+                    <p>All workers are verified, vetted, and certified. Levels 1-4 system ensures quality and reliability.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Replacement Guarantee</h4>
+                    <p>We guarantee the quality of our workers. If they don't meet your expectations, we provide a replacement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h4>Ecosystem Access</h4>
+                    <p>Trained workers are placed across all CIL divisions — property, construction, solar, hotels, and agribusiness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:0 0 80px;">
+        <div class="container">
+            <div class="cta-wrap">
+                <h2>Find Work or Hire Workers</h2>
+                <p>Whether you're looking for a job or need skilled workers for your business — CIL Workforce has you covered.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+                    <a href="https://cilworkforce.com" target="_blank" class="btn btn-gold" style="font-size:1.1rem; padding:16px 40px;">
+                        <i class="fas fa-briefcase"></i> Visit Workforce Platform
+                    </a>
+                    <a href="contact.html" class="btn btn-outline-light" style="font-size:1.1rem; padding:16px 40px; border:1px solid rgba(255,255,255,0.3);">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

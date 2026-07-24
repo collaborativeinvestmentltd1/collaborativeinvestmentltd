@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIL Solar · Collaborative Investment Ltd</title>
+    <meta name="description" content="CIL Solar Energy Solutions – renewable energy, solar installation, PPA financing, and maintenance services in Nigeria." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- PAGE HERO ----- */
+        .page-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero h1 span {
+            color: var(--gold);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 620px;
+            line-height: 1.7;
+            opacity: .85;
+        }
+
+        /* ----- SERVICES SECTION ----- */
+        .services-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: .35s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: var(--gold);
+        }
+
+        .service-card .service-icon {
+            font-size: 42px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ----- FEATURES SECTION ----- */
+        .features-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 30px 28px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 18px;
+            transition: .3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card .feature-icon {
+            font-size: 28px;
+            color: var(--gold);
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .feature-card .feature-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+
+        .feature-card .feature-content p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ----- PARTNERSHIP SECTION ----- */
+        .partnership-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .partnership-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .partnership-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: var(--light);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: .3s;
+        }
+
+        .partnership-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .partnership-card .partner-icon {
+            font-size: 36px;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        .partnership-card h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .partnership-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 70px 50px;
+            margin-bottom: 0;
+        }
+
+        .cta-wrap h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        .cta-wrap .btn-gold {
+            font-size: 1.1rem;
+            padding: 16px 40px;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .partnership-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 0 50px;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partnership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+
+            .feature-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .actions .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>CIL Solar Energy Solutions Ltd</h1>
+                <p>Affordable, reliable solar energy solutions for homes and businesses — with flexible payment options and professional maintenance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Our <span style="color:var(--gold);">Solar Solutions</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Comprehensive renewable energy services for every need.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-solar-panel"></i></div>
+                    <h3>Solar Installation</h3>
+                    <p>Full solar panel installation for homes and businesses, including design, permitting, and professional installation.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-signature"></i></div>
+                    <h3>PPA Financing</h3>
+                    <p>Power Purchase Agreements — pay for energy generated, not equipment. No upfront costs, just monthly payments.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Maintenance &amp; Monitoring</h3>
+                    <p>24/7 system monitoring, regular inspections, and professional maintenance to keep your solar running optimally.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Solar Security Systems</h3>
+                    <p>Solar-powered security solutions including cameras, lighting, and alarm systems for homes and businesses.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Investor Solar Branches</h3>
+                    <p>Invest in a CIL-certified solar branch with guaranteed orders, professional management, and attractive returns.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Artisan Development</h3>
+                    <p>Training and certification programs for solar installers and technicians to build a skilled workforce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERSHIP -->
+    <section class="partnership-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Investment <span style="color:var(--gold);">Opportunities</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Partner with us to build Nigeria's renewable energy future.</p>
+            </div>
+            <div class="partnership-grid">
+                <div class="partnership-card">
+                    <div class="partner-icon"><i class="fas fa-store"></i></div>
+                    <h4>Solar Branch Investment</h4>
+                    <p>Invest in a CIL-certified solar branch. We provide the model, training, guaranteed orders, and professional management.</p>
+                </div>
+                <div class="partnership-card">
+                    <div class="partner-icon"><i class="fas fa-users"></i></div>
+                    <h4>Manufacturer Partnerships</h4>
+                    <p>Strategic partnerships with solar manufacturers for bulk pricing, quality assurance, and reliable supply.</p>
+                </div>
+                <div class="partnership-card">
+                    <div class="partner-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h4>Artisan Training Program</h4>
+                    <p>Join our artisan development program to build a skilled solar workforce across Nigeria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why Choose <span style="color:var(--gold);">CIL Solar</span></h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-wallet"></i></div>
+                    <div class="feature-content">
+                        <h4>Affordable Financing</h4>
+                        <p>Flexible payment options including PPA, lease, and purchase plans to suit every budget.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="feature-content">
+                        <h4>Reliable Energy</h4>
+                        <p>High-quality solar systems designed for Nigeria's conditions, backed by professional installation and maintenance.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="feature-content">
+                        <h4>Quality Assurance</h4>
+                        <p>All equipment is sourced from trusted manufacturers and installed by certified professionals.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                    <div class="feature-content">
+                        <h4>Integrated Ecosystem</h4>
+                        <p>Our solar solutions integrate seamlessly with other CIL services — property, hotels, and agribusiness.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:0 0 80px;">
+        <div class="container">
+            <div class="cta-wrap">
+                <h2>Ready to Go Solar?</h2>
+                <p>Power your home or business with clean, reliable energy. Contact us today for a free consultation.</p>
+                <a href="contact.html" class="btn btn-gold">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIL News · Collaborative Investment Ltd</title>
+    <meta name="description" content="Latest news and announcements from Collaborative Investment Ltd – partnerships, program launches, and company updates." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- PAGE HERO (news) ----- */
+        .page-hero {
+            padding: 140px 0 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero h1 span {
+            color: var(--gold);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 620px;
+            line-height: 1.7;
+            opacity: .85;
+        }
+
+        /* ----- NEWS SECTION ----- */
+        .news-section {
+            padding: 80px 0 60px;
+            background: white;
+        }
+
+        .news-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .news-intro h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .news-intro h2 span {
+            color: var(--gold);
+        }
+
+        .news-intro p {
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* ----- NEWS GRID ----- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .news-card {
+            padding: 30px 28px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: .35s;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--gold);
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .news-card .news-date {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .news-card .news-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #e3f2fd;
+            color: #0d47a1;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .news-card .news-badge.partnership {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .news-card .news-badge.launch {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .news-card .news-badge.update {
+            background: #f3e5f5;
+            color: #4a148c;
+        }
+
+        .news-card .news-icon {
+            font-size: 32px;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .news-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        .news-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .news-card .news-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.6rem;
+            margin-bottom: 12px;
+        }
+
+        .news-card .news-tag {
+            background: var(--light);
+            padding: 0.15rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .news-card a {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: .2s;
+            margin-top: auto;
+        }
+
+        .news-card a:hover {
+            gap: 12px;
+            color: #c4913a;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 70px 50px;
+            margin-bottom: 0;
+        }
+
+        .cta-wrap h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .page-hero h1 {
+                font-size: 42px;
+            }
+
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 0 50px;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .news-intro h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .actions .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html" class="active">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Latest <span>News</span></h1>
+                <p>Stay updated with the latest announcements, partnerships, and program launches from Collaborative Investment Ltd.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS SECTION -->
+    <section class="news-section">
+        <div class="container">
+            <div class="news-intro">
+                <h2>Announcements &amp; <span>Updates</span></h2>
+                <p>Keep up with our growing ecosystem — from new partnerships to program launches and company milestones.</p>
+            </div>
+
+            <div class="news-grid">
+                <!-- News 1: Sponktech Energy Partnership -->
+                <div class="news-card">
+                    <div class="news-date">April 2026</div>
+                    <span class="news-badge partnership">Partnership</span>
+                    <div class="news-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Strategic Partnership with Sponktech Energy Limited</h3>
+                    <p>CIL is proud to announce a strategic partnership with Sponktech Energy Limited, a leading renewable energy solutions provider...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Solar</span>
+                        <span class="news-tag">Renewable Energy</span>
+                        <span class="news-tag">Partnership</span>
+                    </div>
+                    <a href="news-sponktech.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- News 2: Land to Agriculture Program -->
+                <div class="news-card">
+                    <div class="news-date">July 2025</div>
+                    <span class="news-badge launch">Program Launch</span>
+                    <div class="news-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Launch of Land to Agriculture Program</h3>
+                    <p>We are excited to announce the launch of our Land to Agriculture Program, designed to help landowners transform idle land into productive agricultural assets...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Agriculture</span>
+                        <span class="news-tag">Farm Management</span>
+                        <span class="news-tag">Land</span>
+                    </div>
+                    <a href="news-land-to-agriculture.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- News 3: Jobberman Nigeria Partnership -->
+                <div class="news-card">
+                    <div class="news-date">March 2026</div>
+                    <span class="news-badge partnership">Partnership</span>
+                    <div class="news-icon"><i class="fas fa-users"></i></div>
+                    <h3>Partnership with JOBBERMAN NIGERIA</h3>
+                    <p>CIL has entered into a strategic partnership with JOBBERMAN NIGERIA, one of the country's leading recruitment and HR platforms...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Workforce</span>
+                        <span class="news-tag">Recruitment</span>
+                        <span class="news-tag">Partnership</span>
+                    </div>
+                    <a href="news-jobberman.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- News 4: CIL Workforce Academy Launch -->
+                <div class="news-card">
+                    <div class="news-date">November 2025</div>
+                    <span class="news-badge launch">Program Launch</span>
+                    <div class="news-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>CIL Workforce Academy Launches Skills Training Program</h3>
+                    <p>We are proud to announce the launch of the CIL Workforce Academy, a comprehensive skills training and certification program...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Training</span>
+                        <span class="news-tag">Workforce</span>
+                        <span class="news-tag">Certification</span>
+                    </div>
+                    <a href="news-workforce-academy.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- News 5: CIL Property CAPP Program -->
+                <div class="news-card">
+                    <div class="news-date">October 2025</div>
+                    <span class="news-badge update">Company Update</span>
+                    <div class="news-icon"><i class="fas fa-building"></i></div>
+                    <h3>CIL Property Launches Annual Asset Preservation Program</h3>
+                    <p>CIL Property Management has launched the CAPP (CIL Annual Preservation Program), a comprehensive property maintenance and upgrade service...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Property</span>
+                        <span class="news-tag">Maintenance</span>
+                        <span class="news-tag">CAPP</span>
+                    </div>
+                    <a href="news-capp.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- News 6: CIL MFB Digital Banking Launch -->
+                <div class="news-card">
+                    <div class="news-date">June 2026</div>
+                    <span class="news-badge launch">Program Launch</span>
+                    <div class="news-icon"><i class="fas fa-piggy-bank"></i></div>
+                    <h3>CIL Microfinance Bank Launches Digital Banking Platform</h3>
+                    <p>CIL MFB has launched its new digital banking platform, offering individuals and businesses seamless access to savings, loans, and asset financing...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Banking</span>
+                        <span class="news-tag">Digital</span>
+                        <span class="news-tag">Finance</span>
+                    </div>
+                    <a href="news-mfb-digital.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- News 7: Diaspora Investment Console -->
+                <div class="news-card">
+                    <div class="news-date">February 2026</div>
+                    <span class="news-badge update">Company Update</span>
+                    <div class="news-icon"><i class="fas fa-globe-africa"></i></div>
+                    <h3>Diaspora Asset Management Console Now Live</h3>
+                    <p>CIL Diaspora has launched its unified investment console, providing diaspora Nigerians with real‑time portfolio views across all CIL divisions...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Diaspora</span>
+                        <span class="news-tag">Investment</span>
+                        <span class="news-tag">Dashboard</span>
+                    </div>
+                    <a href="news-diaspora-console.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- News 8: CIL Certified Branch Expansion -->
+                <div class="news-card">
+                    <div class="news-date">March 2025</div>
+                    <span class="news-badge update">Company Update</span>
+                    <div class="news-icon"><i class="fas fa-store"></i></div>
+                    <h3>CIL Certified Branch Model Expands to 5 New Locations</h3>
+                    <p>We are excited to announce the expansion of our CIL Certified Branch model to 5 new locations across Nigeria...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Expansion</span>
+                        <span class="news-tag">Branches</span>
+                        <span class="news-tag">Growth</span>
+                    </div>
+                    <a href="news-branch-expansion.html">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:0 0 80px;">
+        <div class="container">
+            <div class="cta-wrap">
+                <h2>Stay Connected With CIL</h2>
+                <p>Follow us for the latest updates, announcements, and opportunities across our ecosystem.</p>
+                <a href="contact.html" class="btn btn-gold">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

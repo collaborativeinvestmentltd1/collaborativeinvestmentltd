@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collaborative Investment Ltd · Integrated Business Ecosystem</title>
+    <meta name="description" content="Collaborative Investment Ltd (CIL) – Integrated Business Development & Investment Management across 10 sectors. Asset assurance, operational transparency." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- HERO (redesigned, no search) ----- */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(8, 27, 51, .88), rgba(8, 27, 51, .94)),
+                url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding-top: 90px;
+            padding-bottom: 60px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -150px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: #D9A44110;
+            border-radius: 50%;
+            left: -100px;
+            bottom: -100px;
+            filter: blur(70px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+            padding: 20px 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 8px 20px;
+            background: #ffffff12;
+            border: 1px solid #ffffff20;
+            border-radius: 100px;
+            backdrop-filter: blur(20px);
+            margin-bottom: 24px;
+            font-size: 13px;
+            letter-spacing: 0.4px;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: 68px;
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--gold);
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            max-width: 600px;
+            line-height: 1.7;
+            opacity: .9;
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .hero .description {
+            font-size: 17px;
+            max-width: 580px;
+            line-height: 1.7;
+            opacity: .7;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .hero-actions .btn {
+            padding: 14px 32px;
+            font-size: 1rem;
+        }
+
+        .hero-actions .btn-outline-light {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .hero-actions .btn-outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .quick-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 32px;
+        }
+
+        .quick-tags span {
+            background: #ffffff10;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            backdrop-filter: blur(20px);
+            border: 1px solid #ffffff10;
+            transition: .3s;
+            cursor: default;
+        }
+
+        .quick-tags span:hover {
+            background: #ffffff20;
+        }
+
+        /* ----- SECTIONS ----- */
+        section {
+            padding: 100px 0;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .title h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .title p {
+            color: var(--muted);
+            font-size: 18px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* ----- ECOSYSTEM GRID ----- */
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .ecosystem-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: .35s;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--gold);
+        }
+
+        .ecosystem-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow);
+        }
+
+        .ecosystem-card .company-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .ecosystem-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .ecosystem-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .ecosystem-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.6rem;
+            margin-bottom: 16px;
+        }
+
+        .ecosystem-tag {
+            background: var(--light);
+            padding: 0.15rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .ecosystem-card a {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: .2s;
+            margin-top: auto;
+        }
+
+        .ecosystem-card a:hover {
+            gap: 12px;
+            color: #c4913a;
+        }
+
+        /* ----- NUMBERS ----- */
+        .numbers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .metric {
+            background: var(--light);
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .metric h3 {
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .metric p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 80px 50px;
+        }
+
+        .cta-wrap h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        .cta-wrap .btn-gold {
+            font-size: 1.1rem;
+            padding: 16px 40px;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            .ecosystem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .numbers {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            /* Mobile nav */
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 100px;
+                min-height: auto;
+                padding-bottom: 60px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero .subtitle {
+                font-size: 17px;
+            }
+
+            .hero .description {
+                font-size: 15px;
+            }
+
+            .hero-actions .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            .ecosystem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .numbers {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .title h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 28px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .quick-tags {
+                justify-content: center;
+            }
+
+            .badge {
+                font-size: 12px;
+                padding: 6px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero .subtitle {
+                font-size: 15px;
+            }
+
+            .metric h3 {
+                font-size: 40px;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html" class="active">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Get Started</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO (redesigned, no search) -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">Africa's Connected Business Ecosystem</div>
+                <h1>Collaborative <span class="highlight">Investment Ltd</span></h1>
+                <p class="subtitle">Integrated Business Development &amp; Investment Management</p>
+                <p class="description">We start, manage, and scale businesses across multiple sectors — creating a self‑reinforcing ecosystem that builds jobs and sustainable value.</p>
+                <div class="hero-actions">
+                    <a href="register.html" class="btn btn-gold"><i class="fas fa-rocket"></i> Get Started</a>
+                    <a href="login.html" class="btn btn-outline-light"><i class="fas fa-building"></i> Sign In</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ECOSYSTEM / BUSINESS DIVISIONS -->
+    <section>
+        <div class="container">
+            <div class="title">
+                <h2>Our <span style="color:var(--gold);">Business Ecosystem</span></h2>
+                <p>Each company solves a specific market gap, generates sustainable revenue, and feeds into the others — creating a 25–40% margin advantage.</p>
+            </div>
+            <div class="ecosystem-grid">
+                <!-- Division 1 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Agribusiness</div>
+                    <h3>Agribusiness Management</h3>
+                    <p>Full‑service farm management for absentee landowners. Specialized production: poultry, aquaculture, crop mastery.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Poultry</span>
+                        <span class="ecosystem-tag">Fish</span>
+                        <span class="ecosystem-tag">Crop</span>
+                    </div>
+                    <a href="https://cilagribusiness.com" target="_blank">Visit Agribusiness <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 2 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Construction</div>
+                    <h3>Construction &amp; Fabrication</h3>
+                    <p>End‑to‑end project assurance with biometric check‑in, stage‑gate approvals, and third‑party inspection.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Building</span>
+                        <span class="ecosystem-tag">Cages</span>
+                        <span class="ecosystem-tag">Gates</span>
+                    </div>
+                    <a href="https://cilconstruction.com" target="_blank">Visit Construction <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 3 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Machinery</div>
+                    <h3>Machinery &amp; Industrial</h3>
+                    <p>Equipment optimization: idle machinery is booked, operated, and maintained via GPS/IoT.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Generators</span>
+                        <span class="ecosystem-tag">Rental</span>
+                        <span class="ecosystem-tag">Training</span>
+                    </div>
+                    <a href="https://cilmachinery.com" target="_blank">Visit Machinery <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 4 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Solar</div>
+                    <h3>Solar Energy Solutions</h3>
+                    <p>Comprehensive renewable energy platform. Manufacturer partnerships, investor‑funded solar branches, and artisan development.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Solar</span>
+                        <span class="ecosystem-tag">PPA</span>
+                        <span class="ecosystem-tag">Maintenance</span>
+                    </div>
+                    <a href="https://cilsolar.com" target="_blank">Visit Solar <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 5 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Furniture</div>
+                    <h3>Furniture Production &amp; Supply</h3>
+                    <p>Furniture‑entrepreneurship ecosystem. CIL Certified Partners access standardized designs and guaranteed order flow.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Custom</span>
+                        <span class="ecosystem-tag">Office</span>
+                        <span class="ecosystem-tag">Upholstery</span>
+                    </div>
+                    <a href="https://cilfurniture.com" target="_blank">Visit Furniture <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 6 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Hotels</div>
+                    <h3>Hotel Turnaround Services</h3>
+                    <p>Transform underperforming hotels. Full operational takeover, integrated supply chain, and revenue flow management.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Management</span>
+                        <span class="ecosystem-tag">Revenue</span>
+                        <span class="ecosystem-tag">Staff</span>
+                    </div>
+                    <a href="https://cilhotels.com" target="_blank">Visit Hotels <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 7 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Facility</div>
+                    <h3>Business Facility Management</h3>
+                    <p>Integrated facility management: cleaning, security, technical maintenance, space management with digital tracking.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Cleaning</span>
+                        <span class="ecosystem-tag">Security</span>
+                        <span class="ecosystem-tag">HVAC</span>
+                    </div>
+                    <a href="https://cilfacility.com" target="_blank">Visit Facility Mgmt <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 8 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Property</div>
+                    <h3>Property &amp; Tenant Management</h3>
+                    <p>Nigeria's property‑ecosystem gateway. Tenant screening, rent collection, annual asset preservation (CAPP).</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Tenant</span>
+                        <span class="ecosystem-tag">Maintenance</span>
+                        <span class="ecosystem-tag">CAPP</span>
+                    </div>
+                    <a href="https://cilproperty.com" target="_blank">Visit Property <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 9 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Diaspora</div>
+                    <h3>Diaspora Asset Management</h3>
+                    <p>Single gateway for diaspora wealth deployment. Unified investment console with real‑time portfolio views.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Dashboard</span>
+                        <span class="ecosystem-tag">3D Scans</span>
+                        <span class="ecosystem-tag">Remittance</span>
+                    </div>
+                    <a href="https://cildiaspora.com" target="_blank">Visit Diaspora <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 10 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Workforce</div>
+                    <h3>Employment &amp; Workforce</h3>
+                    <p>Trusted intermediary for labor. Job matching platform, CIL Workforce Academy, worker verification (Levels 1‑4).</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Jobs</span>
+                        <span class="ecosystem-tag">Training</span>
+                        <span class="ecosystem-tag">Verification</span>
+                    </div>
+                    <a href="https://cilworkforce.com" target="_blank">Visit Workforce <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 11 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL MFB</div>
+                    <h3>Microfinance Bank</h3>
+                    <p>Digital banking and financial services for individuals and businesses. Savings, loans, and asset financing.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Savings</span>
+                        <span class="ecosystem-tag">Loans</span>
+                        <span class="ecosystem-tag">Banking</span>
+                    </div>
+                    <a href="https://cilmfb.com" target="_blank">Visit MFB <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Division 12 -->
+                <div class="ecosystem-card">
+                    <div class="company-badge">CIL Private</div>
+                    <h3>Private Investors Network</h3>
+                    <p>Private wealth and institutional finance. Connecting capital with vetted opportunities across the ecosystem.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Wealth</span>
+                        <span class="ecosystem-tag">Institutional</span>
+                        <span class="ecosystem-tag">Capital</span>
+                    </div>
+                    <a href="https://cilprivate.com" target="_blank">Visit CILPIN <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUMBERS -->
+    <section>
+        <div class="container">
+            <div class="title">
+                <h2>Growing Together</h2>
+            </div>
+            <div class="numbers">
+                <div class="metric">
+                    <h3>12+</h3>
+                    <p>Business Divisions</p>
+                </div>
+                <div class="metric">
+                    <h3>1</h3>
+                    <p>Connected Ecosystem</p>
+                </div>
+                <div class="metric">
+                    <h3>∞</h3>
+                    <p>Growth Opportunities</p>
+                </div>
+                <div class="metric">
+                    <h3>24/7</h3>
+                    <p>Digital Access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding-top:0;">
+        <div class="container">
+            <div class="cta-wrap">
+                <h2>Build Bigger With CIL</h2>
+                <p>One account. Multiple opportunities. Endless possibilities.</p>
+                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        // Close menu on link click (mobile)
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

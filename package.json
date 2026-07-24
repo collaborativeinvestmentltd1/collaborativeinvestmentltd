@@ -1,0 +1,27 @@
+{
+  "name": "cil-website",
+  "version": "1.0.0",
+  "description": "Collaborative Investment Ltd - Official Website",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "cil",
+    "collaborative investment",
+    "business development",
+    "investment management"
+  ],
+  "author": "Collaborative Investment Ltd",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "nodemailer": "^9.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
