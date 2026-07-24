@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machinery & Construction Materials - Collaborative Investment Ltd</title>
+    <meta name="description" content="Buy block-making machines, construction blocks, cement, and industrial equipment">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/shop-machinery.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/cart-drawer.css">
+</head>
+<body>
+    <div class="marquee-container">
+        <div class="marquee">
+            <span><i class="fas fa-info-circle"></i> Our Website is currently under development, For accurate product info, please contact us directly</span>
+            <span><i class="fas fa-envelope"></i> Email: collaborativeinvestmentltd@gmail.com</span>
+            <span><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</span>
+        </div>
+    </div>
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Our Services</a></li>
+                <li><a href="/shop-categories" class="active">Shop Products</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/order-track">Track Order</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            
+            <div class="cart-icon-wrapper">
+                <button id="open-cart-drawer" class="cart-icon-btn">
+                    🛒 Cart <span id="cart-count-badge">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div id="cart-drawer-overlay"></div>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-drawer" class="close-btn">×</button>
+        </div>
+        <div id="cart-drawer-items" class="cart-drawer-items">
+            <p>Loading cart...</p>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="drawer-total-row">
+                <span>Total:</span>
+                <span id="drawer-total">₦0</span>
+            </div>
+            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- Machinery Hero -->
+        <section class="machinery-hero">
+            <div class="container">
+                <a href="/shop-categories" class="back-link"><i class="fas fa-arrow-left"></i> Back to Categories</a>
+                <h1>Complete <span class="highlight">Machinery & Industrial</span><br>Services for Every Sector</h1>
+                <p>Power generation, construction, agriculture, vehicles, engines, and spare parts – all available for direct import or lease-to-own.</p>
+                <div class="hero-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#sector-nav" class="btn-accent">Browse by Sector</a>
+                    <a href="/consultation" class="btn-secondary">Free Consultation</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sector Navigation -->
+        <div class="sector-nav" id="sector-nav">
+            <div class="sector-nav-container">
+                <a href="#power" class="sector-nav-item active">Power Generation</a>
+                <a href="#construction" class="sector-nav-item">Construction & Earthmoving</a>
+                <a href="#agriculture" class="sector-nav-item">Agricultural Machinery</a>
+                <a href="#material-handling" class="sector-nav-item">Material Handling</a>
+                <a href="#vehicles" class="sector-nav-item">Vehicles & Mobile</a>
+                <a href="#engines" class="sector-nav-item">Engines & Power Units</a>
+                <a href="#mining" class="sector-nav-item">Mining & Quarrying</a>
+                <a href="#processing" class="sector-nav-item">Industrial Processing</a>
+                <a href="#compressors" class="sector-nav-item">Compressors & Pumps</a>
+                <a href="#maintenance" class="sector-nav-item">Maintenance & Tools</a>
+                <a href="#renewable" class="sector-nav-item">Renewable Energy</a>
+            </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="container" style="margin-top: 2rem;">
+            <div class="filter-controls">
+                <div class="search-box"><i class="fas fa-search search-icon"></i><input type="text" id="product-search" placeholder="Search machinery products..."></div>
+                <select class="category-filter" id="category-filter">
+                    <option value="all">All Machinery</option>
+                    <option value="generators">Generators & Power</option>
+                    <option value="earthmoving">Earthmoving</option>
+                    <option value="tractors">Tractors & Agri</option>
+                    <option value="forklifts">Forklifts & Cranes</option>
+                    <option value="vehicles">Vehicles & Trucks</option>
+                    <option value="engines">Engines</option>
+                    <option value="crushers">Crushers & Screens</option>
+                    <option value="compressors">Compressors & Pumps</option>
+                    <option value="tools">Tools & Spares</option>
+                </select>
+            </div>
+            <div class="product-count" id="product-count">Loading machinery products...</div>
+        </div>
+
+        <!-- 1. POWER GENERATION & ENERGY EQUIPMENT -->
+        <section id="power" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="sector-title"><h2>Power Generation & Energy Equipment</h2><p>Generators, turbines, transformers, and control systems for every industrial need.</p></div>
+                    <div class="sector-badge">Direct Import</div>
+                </div>
+                <div class="machinery-products-grid" id="power-products"></div>
+            </div>
+        </section>
+
+        <!-- 2. CONSTRUCTION & EARTHMOVING MACHINERY -->
+        <section id="construction" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-tractor"></i></div>
+                    <div class="sector-title"><h2>Construction & Earthmoving Machinery</h2><p>Excavators, bulldozers, graders, dump trucks, and paving equipment.</p></div>
+                    <div class="sector-badge">Heavy Duty</div>
+                </div>
+                <div class="machinery-products-grid" id="construction-products"></div>
+            </div>
+        </section>
+
+        <!-- 3. AGRICULTURAL MACHINERY -->
+        <section id="agriculture" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-seedling"></i></div>
+                    <div class="sector-title"><h2>Agricultural Machinery</h2><p>Tractors, harvesters, irrigation, and post-harvest processing equipment.</p></div>
+                    <div class="sector-badge">Farm Ready</div>
+                </div>
+                <div class="machinery-products-grid" id="agriculture-products"></div>
+            </div>
+        </section>
+
+        <!-- 4. MATERIAL HANDLING & LOGISTICS EQUIPMENT -->
+        <section id="material-handling" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-warehouse"></i></div>
+                    <div class="sector-title"><h2>Material Handling & Logistics</h2><p>Forklifts, cranes, conveyors, and warehouse storage solutions.</p></div>
+                    <div class="sector-badge">Efficiency</div>
+                </div>
+                <div class="machinery-products-grid" id="material-handling-products"></div>
+            </div>
+        </section>
+
+        <!-- 5. VEHICLES & MOBILE EQUIPMENT -->
+        <section id="vehicles" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-truck"></i></div>
+                    <div class="sector-title"><h2>Vehicles & Mobile Equipment</h2><p>Pickups, cargo trucks, tankers, buses, ambulances, and specialized vehicles.</p></div>
+                    <div class="sector-badge">Fleet</div>
+                </div>
+                <div class="machinery-products-grid" id="vehicles-products"></div>
+            </div>
+        </section>
+
+        <!-- 6. ENGINES & INDUSTRIAL POWER UNITS -->
+        <section id="engines" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-engine"></i></div>
+                    <div class="sector-title"><h2>Engines & Industrial Power Units</h2><p>Diesel/gas engines, marine motors, turbochargers, and engine parts – direct import.</p></div>
+                    <div class="sector-badge">OEM</div>
+                </div>
+                <div class="machinery-products-grid" id="engines-products"></div>
+            </div>
+        </section>
+
+        <!-- 7. MINING & QUARRYING MACHINERY -->
+        <section id="mining" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-hard-hat"></i></div>
+                    <div class="sector-title"><h2>Mining & Quarrying Machinery</h2><p>Crushers, screens, drill rigs, and mineral processing equipment.</p></div>
+                    <div class="sector-badge">Rock Solid</div>
+                </div>
+                <div class="machinery-products-grid" id="mining-products"></div>
+            </div>
+        </section>
+
+        <!-- 8. INDUSTRIAL PROCESSING & MANUFACTURING MACHINERY -->
+        <section id="processing" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-industry"></i></div>
+                    <div class="sector-title"><h2>Industrial Processing & Manufacturing</h2><p>Food processing, plastics, woodworking, and metal fabrication machinery.</p></div>
+                    <div class="sector-badge">Production</div>
+                </div>
+                <div class="machinery-products-grid" id="processing-products"></div>
+            </div>
+        </section>
+
+        <!-- 9. COMPRESSORS, PUMPS & HVAC -->
+        <section id="compressors" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-wind"></i></div>
+                    <div class="sector-title"><h2>Compressors, Pumps & HVAC</h2><p>Air compressors, industrial pumps, chillers, and ventilation systems.</p></div>
+                    <div class="sector-badge">Utility</div>
+                </div>
+                <div class="machinery-products-grid" id="compressors-products"></div>
+            </div>
+        </section>
+
+        <!-- 10. MAINTENANCE, TOOLS & TEST EQUIPMENT -->
+        <section id="maintenance" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-tools"></i></div>
+                    <div class="sector-title"><h2>Maintenance, Tools & Test Equipment</h2><p>Workshop lifts, diagnostic scanners, power tools, and spare parts.</p></div>
+                    <div class="sector-badge">Service</div>
+                </div>
+                <div class="machinery-products-grid" id="maintenance-products"></div>
+            </div>
+        </section>
+
+        <!-- 11. RENEWABLE ENERGY & ENVIRONMENTAL -->
+        <section id="renewable" class="sector-section">
+            <div class="container">
+                <div class="sector-header">
+                    <div class="sector-icon"><i class="fas fa-solar-panel"></i></div>
+                    <div class="sector-title"><h2>Renewable Energy & Environmental</h2><p>Solar mounting, wind turbines, biomass boilers, and waste management systems.</p></div>
+                    <div class="sector-badge">Green</div>
+                </div>
+                <div class="machinery-products-grid" id="renewable-products"></div>
+            </div>
+        </section>
+
+        <!-- IMPORT ESTIMATOR SECTION -->
+        <section class="import-estimator">
+            <div class="estimator-container">
+                <div class="estimator-form">
+                    <h3><i class="fas fa-ship"></i> Direct Import Estimator</h3>
+                    <p>Tell us what you need, and we'll give you an instant landed cost estimate (CIF Lagos).</p>
+                    <select id="import-category">
+                        <option value="generator">Diesel Generator (500kVA)</option>
+                        <option value="excavator">Excavator (20-ton)</option>
+                        <option value="tractor">Farm Tractor (75HP)</option>
+                        <option value="forklift">Diesel Forklift (3-ton)</option>
+                        <option value="truck">Cargo Truck (10-ton)</option>
+                        <option value="engine">Industrial Diesel Engine (200HP)</option>
+                        <option value="crusher">Jaw Crusher (30x42)</option>
+                    </select>
+                    <input type="number" id="import-qty" placeholder="Quantity" value="1" min="1">
+                    <button class="btn-accent" id="estimate-import-btn"><i class="fas fa-calculator"></i> Estimate Cost</button>
+                </div>
+                <div class="estimator-result" id="import-result">
+                    <h3>Estimated Landed Cost</h3>
+                    <div class="estimate-price" id="import-price">₦0</div>
+                    <p>Includes shipping, insurance, and clearing. Delivery 6–10 weeks.</p>
+                    <div class="lease-note" style="margin-top:1.5rem; background: rgba(214,158,46,0.2); padding:1rem; border-radius:8px;">
+                        <i class="fas fa-hand-holding-usd"></i> Lease-to-own from just <span id="import-lease">₦0</span>/month.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="solar-cta" style="background: linear-gradient(135deg, var(--primary) 0%, #1a202c 100%);">
+            <div class="container">
+                <h2>Ready to Power Your Operations?</h2>
+                <p>Get a free consultation and equipment sourcing quote tailored to your industry.</p>
+                <div class="solar-cta-buttons">
+                    <a href="/consultation" class="btn-accent"><i class="fas fa-calendar-check"></i> Free Consultation</a>
+                    <a href="/investment" class="btn-secondary"><i class="fas fa-chart-line"></i> Investor Opportunities</a>
+                    <a href="https://cilworkforce.com" target="_blank" class="btn-outline-light"><i class="fas fa-briefcase"></i> Hire Operators</a>
+                </div>
+                <p style="margin-top: 2rem; opacity: 0.8;">Lease-to-own and direct import financing available for qualified businesses.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>Collaborative Investment Ltd</h3>
+                <p>Nigeria Businesses Development & Investment Management Company Operating Across Multi-Sector. We Provide Professional Management, L2O Financing, and Long-term Wealth Creation Across Our Eco-system.</p>
+                <div class="social-links" style="margin-top: 1rem;">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
+                        <i class="fab fa-facebook" style="font-size: 1.5rem; color: #1877F2;"></i>
+                    </a>
+                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
+                        <i class="fab fa-twitter" style="font-size: 1.5rem; color: #ffffff;"></i>
+                    </a>
+                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
+                        <i class="fab fa-whatsapp" style="font-size: 1.5rem; color: #25D366;"></i>
+                    </a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" aria-label="Instagram" target="_blank">
+                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: #E4405F;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/services">Our Services</a></li>
+                    <li><a href="/shop-categories">Shop Products</a></li>
+                    <li><a href="/portfolio">Portfolio</a></li>
+                    <li><a href="/investment">Investment</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Our Sectors</h3>
+                <ul class="footer-links">
+                    <li><a href="/services#agribusiness">Agribusiness Management</a></li>
+                    <li><a href="/services#construction">Construction, Fabrication & Project Management</a></li>
+                    <li><a href="/services#machinery">Machinery & Industrial Services</a></li>
+                    <li><a href="/services#solar">Solar Energy Solutions</a></li>
+                    <li><a href="/services#furniture">Furniture Production & Supply</a></li>
+                    <li><a href="/services#hotel">Hotel Turnaround Services</a></li>
+                    <li><a href="/services#businessfacility">Business Facility Management</a></li>
+                    <li><a href="/services#property">Property & Tenant Management</a></li>
+                    <li><a href="/services#diaspora">Diaspora Asset Management</a></li>
+                    <li><a href="https://cilworkforce.com">Find Work/Hire Professional Workers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>collaborativeinvestmentltd@gmail.com</p>
+                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                <p><a href="https://wa.me/2348129978419" target="_blank">+234 812 997 8419</a></p>
+                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved</p>
+            <p style="display: inline;">Building Nigeria's Business Future Through Integrated Business Development</p>
+            <p style="margin-top: 1rem;">
+                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
+                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
+                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/2348129978419" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="quick-contact-card" id="quickContactCard">
+        <button class="close-quick-contact" onclick="document.getElementById('quickContactCard').classList.remove('show')">×</button>
+        <div class="quick-contact-header">
+            <i class="fas fa-info-circle"></i>
+            <h4>Need accurate information?</h4>
+        </div>
+        <a href="https://wa.me/2348129978419" target="_blank" class="quick-contact-item">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a href="tel:+2348129978419" class="quick-contact-item">
+            <i class="fas fa-phone-alt"></i> Call +234 812 997 8419
+        </a>
+        <a href="mailto:collaborativeinvestmentltd@gmail.com" class="quick-contact-item">
+            <i class="fas fa-envelope"></i> Email
+        </a>
+        <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--gray); text-align: center;">
+            RC: 8918603 | Website Under Development
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/shop-machinery.js"></script>
+</body>
+</html>
