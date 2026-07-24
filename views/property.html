@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CIL Partners · Collaborative Investment Ltd</title>
-    <meta name="description" content="Collaborative Investment Ltd partners with financial institutions, solar installers, manufacturers, agriculture, construction and more across Nigeria." />
+    <title>CIL Property · Collaborative Investment Ltd</title>
+    <meta name="description" content="CIL Property Management – professional property management, tenant screening, rent collection, and asset preservation services in Nigeria." />
 
     <!-- Google Font & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -34,8 +34,9 @@
             font-family: 'Inter', sans-serif;
             background: #fff;
             color: var(--text);
-            overflow-x: hidden;
-            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         a {
@@ -146,6 +147,16 @@
             transform: translateY(-2px);
         }
 
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -165,9 +176,9 @@
             transition: .3s;
         }
 
-        /* ----- PAGE HERO (partners) ----- */
+        /* ----- PAGE HERO ----- */
         .page-hero {
-            padding: 140px 0 70px;
+            padding: 140px 0 60px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             position: relative;
@@ -194,7 +205,7 @@
         }
 
         .page-hero h1 {
-            font-size: 52px;
+            font-size: 48px;
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 16px;
@@ -212,178 +223,95 @@
             opacity: .85;
         }
 
-        /* ----- PARTNERS SECTION ----- */
-        .partners-section {
-            padding: 80px 0 60px;
+        /* ----- SERVICES SECTION ----- */
+        .services-section {
+            padding: 80px 0;
             background: white;
         }
 
-        .partners-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
-        }
-
-        .partners-intro h2 {
-            font-size: 40px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-
-        .partners-intro h2 span {
-            color: var(--gold);
-        }
-
-        .partners-intro p {
-            color: var(--muted);
-            font-size: 18px;
-            line-height: 1.7;
-        }
-
-        .partners-intro .highlight-box {
-            background: var(--light);
-            border-left: 4px solid var(--gold);
-            padding: 20px 28px;
-            border-radius: 12px;
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .partners-intro .highlight-box p {
-            font-size: 16px;
-            color: var(--text);
-            margin: 0;
-        }
-
-        .partners-intro .highlight-box strong {
-            color: var(--primary);
-        }
-
-        /* ----- PARTNERS CATEGORIES ----- */
-        .partners-grid {
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
-        .partner-card {
+        .service-card {
             padding: 35px 30px;
             border-radius: var(--radius);
             background: white;
             border: 1px solid var(--border);
             transition: .35s;
-            display: flex;
-            flex-direction: column;
-            border-top: 4px solid var(--gold);
             text-align: center;
         }
 
-        .partner-card:hover {
-            transform: translateY(-10px);
+        .service-card:hover {
+            transform: translateY(-8px);
             box-shadow: var(--shadow);
+            border-color: var(--gold);
         }
 
-        .partner-card .card-icon {
-            font-size: 40px;
-            color: var(--secondary);
+        .service-card .service-icon {
+            font-size: 42px;
+            color: var(--gold);
             margin-bottom: 16px;
         }
 
-        .partner-card h3 {
+        .service-card h3 {
             font-size: 1.3rem;
             margin-bottom: 10px;
             color: var(--primary);
         }
 
-        .partner-card p {
+        .service-card p {
             color: var(--muted);
             line-height: 1.7;
-            margin-bottom: 16px;
             font-size: 0.95rem;
-            flex: 1;
         }
 
-        .partner-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem 0.6rem;
-            justify-content: center;
-            margin-bottom: 12px;
-        }
-
-        .partner-tag {
-            background: var(--light);
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--muted);
-        }
-
-        .partner-status {
-            display: inline-block;
-            padding: 4px 16px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: #e8f5e9;
-            color: #2e7d32;
-            margin-top: 8px;
-        }
-
-        .partner-status.active {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .partner-status.pending {
-            background: #fff3e0;
-            color: #e65100;
-        }
-
-        /* ----- WHY PARTNER SECTION ----- */
-        .why-partner {
+        /* ----- FEATURES SECTION ----- */
+        .features-section {
             padding: 80px 0;
             background: var(--light);
         }
 
-        .why-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
         }
 
-        .why-card {
-            padding: 35px 30px;
+        .feature-card {
+            padding: 30px 28px;
             border-radius: var(--radius);
             background: white;
             border: 1px solid var(--border);
-            text-align: center;
+            display: flex;
+            gap: 18px;
             transition: .3s;
         }
 
-        .why-card:hover {
-            transform: translateY(-6px);
+        .feature-card:hover {
+            transform: translateY(-4px);
             box-shadow: var(--shadow);
         }
 
-        .why-card .why-icon {
-            font-size: 32px;
+        .feature-card .feature-icon {
+            font-size: 28px;
             color: var(--gold);
-            margin-bottom: 16px;
+            min-width: 48px;
+            text-align: center;
         }
 
-        .why-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .feature-card .feature-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
             color: var(--primary);
         }
 
-        .why-card p {
+        .feature-card .feature-content p {
             color: var(--muted);
-            line-height: 1.7;
             font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         /* ----- CTA ----- */
@@ -407,6 +335,11 @@
             max-width: 700px;
             margin: 0 auto 35px;
             opacity: .85;
+        }
+
+        .cta-wrap .btn-gold {
+            font-size: 1.1rem;
+            padding: 16px 40px;
         }
 
         /* ----- FOOTER ----- */
@@ -488,16 +421,12 @@
 
         /* ----- RESPONSIVE ----- */
         @media (max-width: 1024px) {
-            .page-hero h1 {
-                font-size: 42px;
-            }
-
-            .partners-grid {
+            .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .why-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .features-grid {
+                grid-template-columns: 1fr;
             }
 
             .footer-grid {
@@ -549,21 +478,13 @@
                 font-size: 17px;
             }
 
-            .partners-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .why-grid {
+            .services-grid {
                 grid-template-columns: 1fr;
             }
 
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
-            }
-
-            .partners-intro h2 {
-                font-size: 30px;
             }
 
             .cta-wrap {
@@ -576,6 +497,11 @@
 
             .cta-wrap p {
                 font-size: 16px;
+            }
+
+            .feature-card {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
@@ -607,25 +533,24 @@
         }
     </style>
 </head>
-
 <body>
 
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="About.html">About Us</a>
                 <a href="companies.html">Companies</a>
-                <a href="partners.html" class="active">Partners</a>
+                <a href="partners.html">Partners</a>
                 <a href="news.html">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
                 <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -637,167 +562,88 @@
     <section class="page-hero">
         <div class="container">
             <div class="page-hero-content">
-                <h1>Our <span>Partners</span></h1>
-                <p>We are actively building strategic partnerships across all our sectors — from financial institutions and solar manufacturers to agriculture, construction, and beyond.</p>
+                <h1>CIL Property & Tenant Management Ltd</h1>
+                <p>Professional property management, tenant screening, rent collection, and asset preservation — all in one place.</p>
             </div>
         </div>
     </section>
 
-    <!-- PARTNERS SECTION -->
-    <section class="partners-section">
-        <div class="container">
-            <div class="partners-intro">
-                <h2>Building <span>Partnerships</span> Across Sectors</h2>
-                <p>Collaborative Investment Ltd is actively expanding its partner network. We work with trusted organizations that share our commitment to quality, transparency, and sustainable growth.</p>
-
-                <div class="highlight-box">
-                    <p><strong>Current Partnerships Include:</strong> Multiple Financial Institutions, Solar Installation Companies &amp; Manufacturers, Agriculture &amp; Agribusiness Firms, Construction &amp; Fabrication Companies, Equipment Manufacturers, Hotel Management Groups, Property Developers, and more.</p>
-                </div>
-            </div>
-
-            <div class="partners-grid">
-                <!-- Financial Institutions -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-university"></i></div>
-                    <h3>Financial Institutions</h3>
-                    <p>Partner banks, microfinance banks, and investment firms providing capital solutions for our ecosystem.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Banking</span>
-                        <span class="partner-tag">Investment</span>
-                        <span class="partner-tag">Capital</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Solar & Renewable Energy -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-solar-panel"></i></div>
-                    <h3>Solar &amp; Renewable Energy</h3>
-                    <p>Manufacturers, installers, and distributors of solar panels, inverters, batteries, and renewable energy solutions.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Manufacturers</span>
-                        <span class="partner-tag">Installers</span>
-                        <span class="partner-tag">PPA</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Agriculture & Agribusiness -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-seedling"></i></div>
-                    <h3>Agriculture &amp; Agribusiness</h3>
-                    <p>Farm equipment suppliers, feed manufacturers, veterinary services, and agri-tech providers.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Equipment</span>
-                        <span class="partner-tag">Suppliers</span>
-                        <span class="partner-tag">Agri-Tech</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Construction & Fabrication -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
-                    <h3>Construction &amp; Fabrication</h3>
-                    <p>Building material suppliers, fabrication workshops, and construction service providers.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Materials</span>
-                        <span class="partner-tag">Fabrication</span>
-                        <span class="partner-tag">Services</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Machinery & Equipment -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Machinery &amp; Equipment</h3>
-                    <p>Manufacturers and suppliers of industrial machinery, generators, and heavy equipment.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Generators</span>
-                        <span class="partner-tag">Industrial</span>
-                        <span class="partner-tag">Rental</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Furniture & Interior -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-chair"></i></div>
-                    <h3>Furniture &amp; Interior</h3>
-                    <p>Furniture manufacturers, upholsterers, and interior design partners for our hotels and properties.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Manufacturing</span>
-                        <span class="partner-tag">Upholstery</span>
-                        <span class="partner-tag">Design</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Hospitality & Hotels -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-hotel"></i></div>
-                    <h3>Hospitality &amp; Hotels</h3>
-                    <p>Hotel management groups, hospitality consultants, and service providers for our hotel portfolio.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Management</span>
-                        <span class="partner-tag">Consulting</span>
-                        <span class="partner-tag">Services</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Facility Management -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
-                    <h3>Facility Management</h3>
-                    <p>Cleaning services, security firms, HVAC specialists, and maintenance contractors.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Cleaning</span>
-                        <span class="partner-tag">Security</span>
-                        <span class="partner-tag">Maintenance</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Property & Real Estate -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-building"></i></div>
-                    <h3>Property &amp; Real Estate</h3>
-                    <p>Real estate developers, property agents, and valuation firms for our property management division.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Developers</span>
-                        <span class="partner-tag">Agents</span>
-                        <span class="partner-tag">Valuation</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY PARTNER WITH CIL -->
-    <section class="why-partner">
+    <!-- SERVICES -->
+    <section class="services-section">
         <div class="container">
             <div style="text-align:center; margin-bottom:50px;">
-                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why <span style="color:var(--gold);">Partner With CIL</span></h2>
-                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">We offer a unique ecosystem that creates value for all partners.</p>
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">What We <span style="color:var(--gold);">Offer</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Comprehensive property solutions for owners, investors, and tenants.</p>
             </div>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-                    <h4>Ecosystem Access</h4>
-                    <p>Gain access to 12+ integrated business divisions with built-in demand for your products and services.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-user-check"></i></div>
+                    <h3>Tenant Management</h3>
+                    <p>Full tenant screening, lease agreements, rent collection, and dispute resolution — we handle everything.</p>
                 </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-handshake"></i></div>
-                    <h4>Trusted Partnership</h4>
-                    <p>Work with a professionally managed organization committed to transparency, quality, and long-term relationships.</p>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Property Maintenance</h3>
+                    <p>24/7 maintenance and repairs, from plumbing and electrical to landscaping and structural work.</p>
                 </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
-                    <h4>Growth Opportunities</h4>
-                    <p>Scale your business alongside CIL's expanding ecosystem across Nigeria and beyond.</p>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>CAPP Program</h3>
+                    <p>Our Annual Asset Preservation Program keeps your property in top condition with scheduled inspections and upgrades.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3>Upgrade Financing</h3>
+                    <p>Access structured financing to upgrade your property, repaid from rental income.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-signature"></i></div>
+                    <h3>Tenant Screening</h3>
+                    <p>Rigorous background checks and credit verification to ensure you get reliable tenants.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-globe-africa"></i></div>
+                    <h3>Diaspora Property</h3>
+                    <p>Complete property management for diaspora owners — we handle everything so you don't have to.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why Choose <span style="color:var(--gold);">CIL Property</span></h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="feature-content">
+                        <h4>Asset Protection</h4>
+                        <p>We protect your property value through professional management and regular maintenance.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="feature-content">
+                        <h4>Guaranteed Yields</h4>
+                        <p>Enjoy consistent rental income with our professional tenant management and rent collection services.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="feature-content">
+                        <h4>Digital Transparency</h4>
+                        <p>Real-time dashboard to track property performance, maintenance requests, and financials.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <div class="feature-content">
+                        <h4>24/7 Support</h4>
+                        <p>Our dedicated team is available around the clock for emergencies and property needs.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -807,9 +653,9 @@
     <section style="padding:0 0 80px;">
         <div class="container">
             <div class="cta-wrap">
-                <h2>Ready to Partner With Us?</h2>
-                <p>We are actively seeking partners across all sectors. Let's build something great together.</p>
-                <a href="contact.html" class="btn btn-gold">Contact Our Partnership Team</a>
+                <h2>Ready to Get Started?</h2>
+                <p>Whether you're a property owner or looking for a place to call home, CIL Property has you covered.</p>
+                <a href="contact.html" class="btn btn-gold">Contact Us</a>
             </div>
         </div>
     </section>

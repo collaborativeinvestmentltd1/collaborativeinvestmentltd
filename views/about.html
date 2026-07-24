@@ -1,283 +1,906 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us – Collaborative Investment Ltd</title>
-    <meta name="description" content="CIL solves Nigeria's #1 business problem: professional management. We turn struggling businesses into profitable enterprises, creating wealth for investors while building sustainable Nigerian businesses.">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About CIL · Collaborative Investment Ltd</title>
+    <meta name="description" content="Learn about Collaborative Investment Ltd – an integrated business development & investment management company operating across 12+ sectors in Nigeria." />
 
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/cart.css">
-    <link rel="stylesheet" href="/css/cart-drawer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <div class="marquee-container">
-        <div class="marquee">
-            <span><i class="fas fa-info-circle"></i> Our Website is currently under development, For accurate product info, please contact us directly</span>
-            <span><i class="fas fa-envelope"></i> Email: collaborativeinvestmentltd@gmail.com</span>
-            <span><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</span>
-        </div>
-    </div>
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- PAGE HERO (about) ----- */
+        .page-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero h1 span {
+            color: var(--gold);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 620px;
+            line-height: 1.7;
+            opacity: .85;
+        }
+
+        /* ----- ABOUT SECTION ----- */
+        .about-section {
+            padding: 80px 0 60px;
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .about-text h2 span {
+            color: var(--gold);
+        }
+
+        .about-text p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .about-text .highlight-box {
+            background: var(--light);
+            border-left: 4px solid var(--gold);
+            padding: 20px 28px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .about-text .highlight-box p {
+            font-size: 16px;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .about-text .highlight-box strong {
+            color: var(--primary);
+        }
+
+        .about-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--light);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 300px;
+        }
+
+        .about-image .placeholder {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+        }
+
+        .about-image .placeholder i {
+            font-size: 64px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        /* ----- MISSION & VALUES ----- */
+        .values-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .value-card {
+            padding: 35px 30px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: .3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .value-card .value-icon {
+            font-size: 36px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .value-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .value-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ----- ECOSYSTEM SNAPSHOT ----- */
+        .snapshot-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .snapshot-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .snapshot-card {
+            background: var(--light);
+            padding: 35px 20px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: .3s;
+        }
+
+        .snapshot-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .snapshot-card h3 {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .snapshot-card p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        /* ----- LEADERSHIP ----- */
+        .leadership-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .leader-card {
+            padding: 30px 25px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: .3s;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .leader-card .leader-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 auto 16px;
+        }
+
+        .leader-card .leader-avatar.gold {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .leader-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .leader-card .title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .leader-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 70px 50px;
+            margin-bottom: 0;
+        }
+
+        .cta-wrap h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .page-hero h1 {
+                font-size: 42px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .leadership-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .snapshot-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 0 50px;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .about-text h2 {
+                font-size: 28px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .snapshot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .actions .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <a href="/" class="logo">
-                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
-            
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <ul class="nav-links">
-                <li><a href="/" >Home</a></li>
-                <li><a href="/about" class="active">About Us</a></li>
-                <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/order-track">Track Order</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-            
-            <div class="cart-icon-wrapper">
-                <button id="open-cart-drawer" class="cart-icon-btn">
-                    🛒 Cart <span id="cart-count-badge">0</span>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html" class="active">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <div id="cart-drawer-overlay"></div>
-    <div id="cart-drawer" class="cart-drawer">
-        <div class="cart-drawer-header">
-            <h2>Your Cart</h2>
-            <button id="close-cart-drawer" class="close-btn">×</button>
-        </div>
-        <div id="cart-drawer-items" class="cart-drawer-items">
-            <p>Loading cart...</p>
-        </div>
-        <div class="cart-drawer-footer">
-            <div class="drawer-total-row">
-                <span>Total:</span>
-                <span id="drawer-total">₦0</span>
-            </div>
-            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
-        </div>
-    </div>
-
-    <main>
-        <section class="about-hero-simple">
-            <div class="container">
-                <h1>We Solve Nigeria's #1 Business Problem:<br><span>Professional Management</span></h1>
-                <p>Collaborative Investment Ltd (CIL) is a multi‑sector business development and asset management company operating in Nigeria. We build businesses, manage operations, and protect investments on behalf of owners and investors.</p>
-            </div>
-        </section>
-
+    <!-- PAGE HERO -->
+    <section class="page-hero">
         <div class="container">
-            <div class="grid-2" style="align-items: center;">
-                <div class="card">
-                    <h3>Who we are</h3>
-                    <p>CIL is a Business Development & Investment Management Company, we operate across Nigerias Key Sectors .</p>
-                    <p><strong>Our core responsibility:</strong> build, manage, supervise and report, while owners retain full ownership.</p>
-                </div>
-                <div class="card">
-                    <h3>The problem we solve</h3>
-                    <ul class="list-check">
-                        <li><i class="fas fa-check-circle" style="color:#38a169;"></i> Poor supervision & caretaker fraud</li>
-                        <li><i class="fas fa-check-circle" style="color:#38a169;"></i> Weak systems & misuse of funds</li>
-                        <li><i class="fas fa-check-circle" style="color:#38a169;"></i> Absentee ownership</li>
-                        <li><i class="fas fa-check-circle" style="color:#38a169;"></i> We install professional structure, discipline & reporting</li>
-                        <li><i class="fas fa-check-circle" style="color:#38a169;"></i> Protection From Family Interferance</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card" style="margin: 2rem 0;">
-                <h3>How CIL operates</h3>
-                <div class="grid-3" style="margin-top:1.5rem;">
-                    <div><i class="fas fa-file-signature" style="color:var(--accent);"></i> <strong>Investor/owner</strong> retains full control</div>
-                    <div><i class="fas fa-tasks" style="color:var(--accent);"></i> <strong>CIL engaged</strong> to build, manage & report</div>
-                    <div><i class="fas fa-chart-line" style="color:var(--accent);"></i> <strong>Focus:</strong> revenue, cost control, long‑term sustainability</div>
-                </div>
-            </div>
-
-            <div class="section-header">
-                <h2>Our sectors of operation</h2>
-                <p>Dedicated management systems across multiple strategic areas</p>
-            </div>
-            <div class="sectors-grid">
-                <div class="sector-item"><h4> Agribusiness Management</h4><p>Poultry, Catfish, Crop, Integrated Farm Management, Farm Loans Available.</p></div>
-                <div class="sector-item"><h4> Construction, Fabrication & Project Management</h4><p>Equipment Fabrication (Poultry Cages, Sports Facilities), Block Production, Construction loans available.</p></div>
-                <div class="sector-item"><h4> Business Facility Management</h4><p>Workplace Management, Yearly Repainting, Scheduled Maintenance, Integrated In-house Workforce.</p></div>
-                <div class="sector-item"><h4> Diaspora Asset Management</h4><p>Complete Business setup, Project Supervision & Handover, Run Your Business From anywhere, Diaspora Loans Available.</p></div>
-                <div class="sector-item"><h4> Employment & Workforce Development</h4><p>Find Workers, Get Hired, Verified Staffs & Employers.</p></div>
-                <div class="sector-item"><h4> Furniture Production & Supply</h4><p>Production Unit Setup, Artisan Management, Quality Control & Bulk Supply, Furniture Setup Loan Available.</p></div>
-                <div class="sector-item"><h4> Hotel Turnaround Services</h4><p>Full Operational Management, Staffing, Occupancy & Expense control, Hotel Optimization & Promotion, Hospitality Loan Available.</p></div>
-                <div class="sector-item"><h4> Machinery & Industrial Services</h4><p>Heavy Farm/Construction Equipment, Generators, Maintenance, Rental Services Available, Equipment Loans Available.</p></div>
-                <div class="sector-item"><h4> Tenant Placement & Management</h4><p>Stay In A Well Managed CIL Property, Access To Tenant Loans, Access To CIL Workforce On Discount Rate, Quick Response To Issues.</p></div>
-                <div class="sector-item"><h4> Property & Tenant Management</h4><p>Tenant Screening, Rent collection, Property Maintenance, Transparent Reporting, Property Loans Available.</p></div>
-                <div class="sector-item"><h4> Solar Energy Solutions</h4><p>Bulk Supply, Equipment Installation, Solar Retail & Project management, Partnerships & Lease-2-Own Available.</p></div>
-            </div>
-
-            <div class="problem-solution-grid">
-                <div class="card problem-card">
-                    <h3>The Nigerian business problem</h3>
-                    <p><strong>95% of businesses fail within 5 years</strong> – not because of bad ideas, but poor management.</p>
-                    <ul class="list-check">
-                        <li><i class="fas fa-times"></i> No professional accounting</li>
-                        <li><i class="fas fa-times"></i> No strategic growth plans</li>
-                        <li><i class="fas fa-times"></i> Weak financial controls</li>
-                        <li><i class="fas fa-times"></i> Emotional decisions</li>
-                    </ul>
-                </div>
-                <div class="card solution-card">
-                    <h3>Our professional solution</h3>
-                    <p>We install professional management systems that transform businesses.</p>
-                    <ul class="list-check">
-                        <li><i class="fas fa-check"></i> Accounting & reporting</li>
-                        <li><i class="fas fa-check"></i> Growth roadmap</li>
-                        <li><i class="fas fa-check"></i> Quality control systems</li>
-                        <li><i class="fas fa-check"></i> Data‑driven decisions</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="grid-3" style="margin:2rem 0;">
-                <div class="card"><i class="fas fa-user-tie fa-2x" style="color:var(--accent); margin-bottom:1rem;"></i><h4>Professional teams</h4><p>Youth‑driven, disciplined management.</p></div>
-                <div class="card"><i class="fas fa-shield-alt fa-2x" style="color:var(--accent); margin-bottom:1rem;"></i><h4>Asset protection</h4><p>Revenue‑first, cost control, transparent reporting.</p></div>
-                <div class="card"><i class="fas fa-hand-holding-heart fa-2x" style="color:var(--accent); margin-bottom:1rem;"></i><h4>You retain ownership</h4><p>We manage, you own.</p></div>
-            </div>
-
-            <div class="section-header">
-                <h2>Meet Our Leadership Team</h2>
-                <p>Experienced professionals driving business transformation</p>
-            </div>
-
-            <div class="team-grid">
-                <div class="team-card"><h4>Aliu Ibrahim Garuba</h4><div class="role">CEO</div><p>5+ years enterprise development, strategic planning, investment analysis.</p><div class="expertise"><span>Strategy</span><span>Investment</span><span>Growth</span></div></div>
-                <div class="team-card"><h4>Okwoha Emmanuel Sunday</h4><div class="role">Managing Director</div><p>Diaspora asset management, operational expert, SME management.</p><div class="expertise"><span>Operations</span><span>Diaspora</span><span>SME</span></div></div>
-                <div class="team-card"><h4>Prince Iyere Joseph</h4><div class="role">Admin Secretary</div><p>Corporate governance, compliance.</p><div class="expertise"><span>Governance</span><span>Management</span><span>Compliance</span></div></div>
-            </div>
-
-            <div class="grid-2">
-                <div class="card"><h3>Our philosophy</h3><p><strong>You invest. We build. We manage. You earn.</strong><br>Good management is the difference between profit and loss.</p></div>
-                <div class="card"><h3>Who CIL is for</h3><ul class="list-check"><li><i class="fas fa-check"></i> Asset owners wanting peace of mind</li><li><i class="fas fa-check"></i> Diaspora clients needing trusted local operators</li><li><i class="fas fa-check"></i> Investors seeking structured management</li><li><i class="fas fa-check"></i> Business owners tired of daily supervision</li></ul></div>
-            </div>
-
-            <div class="cta-box">
-                <h3>Join Nigeria's business transformation movement</h3>
-                <p>Your capital combined with our professional management creates exponential value.</p>
-                <div class="btn-group">
-                    <a href="/investment" class="btn btn-accent"><i class="fas fa-chart-line"></i> Investment opportunities</a>
-                    <a href="/contact" class="btn btn-outline-light"><i class="fas fa-calendar-check"></i> Free consultation</a>
-                </div>
-                <p style="opacity:0.8; font-size:0.95rem;"><i class="fas fa-lock"></i> All investments protected with professional systems & transparent reporting</p>
+            <div class="page-hero-content">
+                <h1>About <span>CIL</span></h1>
+                <p>Collaborative Investment Ltd (CIL) is an integrated business development &amp; investment management company operating across 12+ sectors in Nigeria.</p>
             </div>
         </div>
-    </main>
+    </section>
 
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>Collaborative Investment Ltd</h3>
-                <p>Nigeria Businesses Development & Investment Management Company Operating Across Multi-Sector. We Provide Professional Management, L2O Financing, and Long-term Wealth Creation Across Our Eco-system.</p>
-                <div class="social-links" style="margin-top: 1rem;">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                        <i class="fab fa-facebook" style="font-size: 1.5rem; color: #1877F2;"></i>
-                    </a>
-                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                        <i class="fab fa-twitter" style="font-size: 1.5rem; color: #ffffff;"></i>
-                    </a>
-                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                        <i class="fab fa-whatsapp" style="font-size: 1.5rem; color: #25D366;"></i>
-                    </a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" aria-label="Instagram" target="_blank">
-                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: #E4405F;"></i>
-                    </a>
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Who We <span>Are</span></h2>
+                    <p>Collaborative Investment Ltd (CIL) is Nigeria's first vertically integrated business development and investment management platform. We start, manage, and scale businesses across multiple sectors — creating a self‑reinforcing ecosystem that builds jobs and sustainable value.</p>
+                    <p>Our model solves the trust and operational deficit that plagues Nigeria's economy. By integrating 12+ divisions under one roof, we recapture value, guarantee performance, and formalize economic infrastructure.</p>
+                    <div class="highlight-box">
+                        <p><strong>RC Number:</strong> 8918603 &nbsp;|&nbsp; <strong>Founded:</strong> 2024 &nbsp;|&nbsp; <strong>Headquarters:</strong> Lagos, Nigeria</p>
+                    </div>
+                    <p>From agribusiness and construction to solar energy, property management, and workforce development — CIL is building the blueprint for Nigeria's economic transformation.</p>
+                </div>
+                <div class="about-image">
+                    <div class="placeholder">
+                        <i class="fas fa-building"></i>
+                        <p>Collaborative Investment Ltd<br />Headquarters</p>
+                        <p style="font-size:14px; margin-top:8px;">212 Ijegun Road, Ikotun, Lagos</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/services">Our Services</a></li>
-                    <li><a href="/shop-categories">Shop Products</a></li>
-                    <li><a href="/portfolio">Portfolio</a></li>
-                    <li><a href="/investment">Investment</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
+    <!-- MISSION & VALUES -->
+    <section class="values-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Our <span style="color:var(--gold);">Mission &amp; Values</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Guiding principles that drive everything we do.</p>
             </div>
-
-            <div class="footer-section">
-                <h3>Our Sectors</h3>
-                <ul class="footer-links">
-                    <li><a href="/services#agribusiness">Agribusiness Management</a></li>
-                    <li><a href="/services#construction">Construction, Fabrication & Project Management</a></li>
-                    <li><a href="/services#machinery">Machinery & Industrial Services</a></li>
-                    <li><a href="/services#solar">Solar Energy Solutions</a></li>
-                    <li><a href="/services#furniture">Furniture Production & Supply</a></li>
-                    <li><a href="/services#hotel">Hotel Turnaround Services</a></li>
-                    <li><a href="/services#businessfacility">Business Facility Management</a></li>
-                    <li><a href="/services#property">Property & Tenant Management</a></li>
-                    <li><a href="/services#diaspora">Diaspora Asset Management</a></li>
-                    <li><a href="https://cilworkforce.com">Find Work/Hire Professional Workers</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
-                <p>collaborativeinvestmentltd@gmail.com</p>
-                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                <p><a href="https://wa.me/2348129978419" target="_blank">+234 812 997 8419</a></p>
-                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Asset Assurance</h4>
+                    <p>We protect and grow our clients' assets through professional management, transparency, and guaranteed performance.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                    <h4>Trust &amp; Transparency</h4>
+                    <p>We build trust through operational transparency, digital tracking, and real‑time reporting across all divisions.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h4>Integrated Ecosystem</h4>
+                    <p>Our 12+ divisions work together to create a self‑reinforcing engine that captures value at every step.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="footer-bottom">
-            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved</p>
-            <p style="display: inline;">Building Nigeria's Business Future Through Integrated Business Development</p>
-            <p style="margin-top: 1rem;">
-                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
-            </p>
+    <!-- ECOSYSTEM SNAPSHOT -->
+    <section class="snapshot-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Ecosystem <span style="color:var(--gold);">Snapshot</span></h2>
+            </div>
+            <div class="snapshot-grid">
+                <div class="snapshot-card">
+                    <h3>12+</h3>
+                    <p>Business Divisions</p>
+                </div>
+                <div class="snapshot-card">
+                    <h3>1</h3>
+                    <p>Connected Ecosystem</p>
+                </div>
+                <div class="snapshot-card">
+                    <h3>∞</h3>
+                    <p>Growth Opportunities</p>
+                </div>
+                <div class="snapshot-card">
+                    <h3>24/7</h3>
+                    <p>Digital Access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEADERSHIP -->
+    <section class="leadership-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Our <span style="color:var(--gold);">Leadership</span></h2>
+                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">Experienced professionals driving Nigeria's economic transformation.</p>
+            </div>
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <div class="leader-avatar">MD</div>
+                    <h4>Managing Director / CEO</h4>
+                    <div class="title">10+ Years in Nigerian Asset Management</div>
+                    <p>Visionary leader with deep expertise in investment management, business development, and ecosystem building.</p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar gold">CO</div>
+                    <h4>Chief Operations Officer</h4>
+                    <div class="title">Multi-Sector Field Operations Expert</div>
+                    <p>Seasoned operations professional with extensive experience managing complex, multi‑sector projects across Nigeria.</p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">CT</div>
+                    <h4>Chief Technology Officer</h4>
+                    <div class="title">Platform Development Leader</div>
+                    <p>Technology architect behind CIL's unified digital platform, connecting all 12 divisions with real‑time data and transparency.</p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar gold">CF</div>
+                    <h4>Chief Finance Officer</h4>
+                    <div class="title">CPA with Institutional Finance Experience</div>
+                    <p>Financial steward ensuring robust controls, transparency, and sustainable growth across the ecosystem.</p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">SH</div>
+                    <h4>Sector Heads (10+)</h4>
+                    <div class="title">Experienced Professionals</div>
+                    <p>Industry experts leading each division — from Agribusiness and Construction to Solar, Property, and Workforce.</p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar gold">BO</div>
+                    <h4>Board of Directors</h4>
+                    <div class="title">Founders + Independent Members</div>
+                    <p>Strategic oversight and governance, ensuring CIL remains committed to its mission of economic transformation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:0 0 80px;">
+        <div class="container">
+            <div class="cta-wrap">
+                <h2>Build Bigger With CIL</h2>
+                <p>Join the ecosystem that's transforming Nigeria's economic infrastructure. One account, multiple opportunities.</p>
+                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/2348129978419" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
 
-    <div class="quick-contact-card" id="quickContactCard">
-        <button class="close-quick-contact" onclick="document.getElementById('quickContactCard').classList.remove('show')">×</button>
-        <div class="quick-contact-header">
-            <i class="fas fa-info-circle"></i>
-            <h4>Need accurate information?</h4>
-        </div>
-        <a href="https://wa.me/2348129978419" target="_blank" class="quick-contact-item">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="tel:+2348129978419" class="quick-contact-item">
-            <i class="fas fa-phone-alt"></i> Call +234 812 997 8419
-        </a>
-        <a href="mailto:collaborativeinvestmentltd@gmail.com" class="quick-contact-item">
-            <i class="fas fa-envelope"></i> Email
-        </a>
-        <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--gray); text-align: center;">
-            RC: 8918603 | Website Under Development
-        </div>
-    </div>
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
 
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
 </body>
 </html>

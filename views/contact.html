@@ -1,412 +1,992 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Collaborative Investment Ltd</title>
-    <meta name="description" content="Get in touch with Collaborative Investment Ltd for business management, investment opportunities, and strategic partnerships. Lagos office: +234 812 997 8419">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/cart.css">
-    <link rel="stylesheet" href="/css/cart-drawer.css">
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="marquee-container">
-        <div class="marquee">
-            <span><i class="fas fa-info-circle"></i> Our Website is currently under development, For accurate product info, please contact us directly</span>
-            <span><i class="fas fa-envelope"></i> Email: collaborativeinvestmentltd@gmail.com</span>
-            <span><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</span>
-        </div>
-    </div>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact CIL · Collaborative Investment Ltd</title>
+    <meta name="description" content="Get in touch with Collaborative Investment Ltd – contact our team for partnerships, investments, or inquiries about our ecosystem." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- PAGE HERO (contact) ----- */
+        .page-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #D9A44115;
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            max-width: 780px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero h1 span {
+            color: var(--gold);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 620px;
+            line-height: 1.7;
+            opacity: .85;
+        }
+
+        /* ----- CONTACT SECTION ----- */
+        .contact-section {
+            padding: 80px 0 60px;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        /* Contact Info */
+        .contact-info h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .contact-info p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--light);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: .3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-item .icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .contact-item .icon.gold {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .contact-item .content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 2px;
+        }
+
+        .contact-item .content p {
+            font-size: 16px;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .contact-item .content a {
+            color: var(--text);
+            transition: .2s;
+        }
+
+        .contact-item .content a:hover {
+            color: var(--gold);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--light);
+            padding: 40px 35px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .contact-form h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .contact-form .subtitle {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            transition: .3s;
+            color: var(--text);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 164, 65, .1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(217, 164, 65, .3);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            border: 1px solid #a5d6a7;
+        }
+
+        .success-message i {
+            font-size: 48px;
+            color: #2e7d32;
+            margin-bottom: 12px;
+        }
+
+        .success-message h4 {
+            font-size: 20px;
+            color: #1b5e20;
+            margin-bottom: 6px;
+        }
+
+        .success-message p {
+            color: #2e7d32;
+            margin: 0;
+        }
+
+        .error-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #ffebee;
+            border-radius: 12px;
+            border: 1px solid #ef9a9a;
+            color: #c62828;
+            margin-bottom: 16px;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ----- MAP SECTION ----- */
+        .map-section {
+            padding: 0 0 80px;
+            background: white;
+        }
+
+        .map-container {
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: 350px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ----- CTA ----- */
+        .cta-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            padding: 70px 50px;
+            margin-bottom: 0;
+        }
+
+        .cta-wrap h2 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrap p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: .85;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .page-hero h1 {
+                font-size: 42px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 0 50px;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .contact-form {
+                padding: 28px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .cta-wrap {
+                padding: 40px 24px;
+            }
+
+            .cta-wrap h2 {
+                font-size: 30px;
+            }
+
+            .cta-wrap p {
+                font-size: 16px;
+            }
+
+            .map-container {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .actions .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .contact-item {
+                padding: 14px 16px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <a href="/" class="logo">
-                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
-            
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/order-track">Track Order</a></li>
-                <li><a href="/contact" class="active">Contact</a></li>
-            </ul>
-            
-            <div class="cart-icon-wrapper">
-                <button id="open-cart-drawer" class="cart-icon-btn">
-                    🛒 Cart <span id="cart-count-badge">0</span>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <div id="cart-drawer-overlay"></div>
-    <div id="cart-drawer" class="cart-drawer">
-        <div class="cart-drawer-header">
-            <h2>Your Cart</h2>
-            <button id="close-cart-drawer" class="close-btn">×</button>
-        </div>
-        <div id="cart-drawer-items" class="cart-drawer-items">
-            <p>Loading cart...</p>
-        </div>
-        <div class="cart-drawer-footer">
-            <div class="drawer-total-row">
-                <span>Total:</span>
-                <span id="drawer-total">₦0</span>
-            </div>
-            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
-        </div>
-    </div>
-
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-        <div class="breadcrumb-links">
-            <a href="/">Home</a>
-            <span>></span>
-            <span>Contact Us</span>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- PAGE HERO -->
+    <section class="page-hero">
         <div class="container">
-            <h1>Contact Us</h1>
-            <p>Connect with our team to discuss business management, investment opportunities, and strategic partnerships.</p>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section">
-        <div class="contact-grid">
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <h2>Get in Touch</h2>
-                <p>We are available to answer your inquiries and provide guidance on how CIL can support your goals.</p>
-
-                <div class="info-item">
-                    <div>
-                        <h3>Office Address</h3>
-                        <p>212 Ijegun Road, Ikotun, Lagos, Nigeria</p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div>
-                        <h3>Email</h3>
-                        <p>collaborativeinvestmentltd@gmail.com</p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div>
-                        <h3>Contact Numbers</h3>
-                        <p><a href="tel:+2348129978419" style="color: var(--secondary); text-decoration: none;">+234 812 997 8419</a></p>
-                        <p><a href="tel:+2347078269765" style="color: var(--secondary); text-decoration: none;">+234 707 826 9765</a></p>
-                        <p><a href="tel:+2349071379319" style="color: var(--secondary); text-decoration: none;">+234 907 137 9319</a></p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div>
-                        <h3>WhatsApp</h3>
-                        <p><a href="https://wa.me/2348129978419" style="color: var(--secondary); text-decoration: none;">+234 812 997 8419</a></p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div>
-                        <h3>Business Hours</h3>
-                        <p>Monday – Friday: 9:00 AM – 5:00 PM</p>
-                        <p>Saturday: 10:00 AM – 2:00 PM</p>
-                        <p>Sunday: Closed</p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem;">
-                    <h3>Quick Links</h3>
-                    <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 1rem;">
-                        <a href="/investment" class="quick-link">Investment Opportunities</a>
-                        <a href="/services" class="quick-link">Business Management Services</a>
-                        <a href="/portfolio" class="quick-link">Our Portfolio</a>
-                        <a href="/downloads/cil-investment-prospectus.pdf" class="quick-link" download>Download Prospectus</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <h2>Send Us a Message</h2>
-                <p style="margin-bottom: 1.5rem;">Fill out the form and our team will respond within 24 hours.</p>
-
-                <!-- Form Messages -->
-                <div id="form-messages" class="form-messages"></div>
-
-                <form id="contactForm" class="contact-form" method="POST" action="/contact">
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your full name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email address">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="service">Service Interest *</label>
-                        <select id="service" name="service" class="form-control" required>
-                            <option value="">Select an option...</option>
-                            <option value="business-management">Business Management</option>
-                            <option value="investment">Investment Inquiry</option>
-                            <option value="poultry-investment">Poultry Farm Investment</option>
-                            <option value="block-investment">Block Manufacturing Investment</option>
-                            <option value="aquaculture-investment">Aquaculture Investment</option>
-                            <option value="partnership">Strategic Partnership</option>
-                            <option value="agriculture">Agricultural Ventures</option>
-                            <option value="manufacturing">Manufacturing & Fabrication</option>
-                            <option value="diaspora-management">Diaspora Business Management</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="investment-amount">Investment Amount (if applicable)</label>
-                        <select id="investment-amount" name="investment_amount" class="form-control">
-                            <option value="">Select amount range...</option>
-                            <option value="1-5m">₦1M - ₦5M</option>
-                            <option value="5-10m">₦5M - ₦10M</option>
-                            <option value="10-20m">₦10M - ₦20M</option>
-                            <option value="20-50m">₦20M - ₦50M</option>
-                            <option value="50m+">₦50M+</option>
-                            <option value="not-applicable">Not Applicable</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Your Message *</label>
-                        <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Tell us about your inquiry, business, investment goals, or partnership proposal..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="newsletter" value="true" checked>
-                            Subscribe to our investment opportunities newsletter
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
-                </form>
+            <div class="page-hero-content">
+                <h1>Get In <span>Touch</span></h1>
+                <p>Have questions about our ecosystem, partnerships, or investment opportunities? Reach out to our team — we'd love to hear from you.</p>
             </div>
         </div>
     </section>
 
-
-    <!-- Map Section -->
-    <section class="section" style="background:#f8f9fa;">
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
         <div class="container">
-            <div class="section-title">
-                <h2>Our Location</h2>
-                <p>Visit our Lagos office for physical consultations</p>
-            </div>
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2>Contact Information</h2>
+                    <p>We're here to help. Whether you're a potential partner, investor, client, or just curious about our ecosystem, don't hesitate to reach out.</p>
 
-            <div class="directions-box">
-                <h3>212 Ijegun Road, Ikotun, Lagos</h3>
-                <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">Find us easily using Google Maps or any navigation app</p>
-                
-                <div style="background: var(--light); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
-                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Office Directions</h4>
-                    <ul>
-                        <li>From Ikotun Roundabout: Take Ijegun Road</li>
-                        <li>Landmark: Stop at Barber Bus Stop</li>
-                        <li>Building: You will see Next Barber Shop</li>
-                        <li>Parking: Secure parking available</li>
-                    </ul>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="content">
+                                <h4>Address</h4>
+                                <p>212 Ijegun Road, Ikotun, Lagos State, Nigeria</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon gold"><i class="fas fa-phone-alt"></i></div>
+                            <div class="content">
+                                <h4>Phone</h4>
+                                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
+                                <p><a href="tel:+2348129978419">+234 812 997 8419</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon"><i class="fas fa-envelope"></i></div>
+                            <div class="content">
+                                <h4>Email</h4>
+                                <p><a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon gold"><i class="fas fa-clock"></i></div>
+                            <div class="content">
+                                <h4>Working Hours</h4>
+                                <p>Monday – Friday: 9:00 AM – 5:00 PM</p>
+                                <p>Saturday: 10:00 AM – 2:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon"><i class="fas fa-globe-africa"></i></div>
+                            <div class="content">
+                                <h4>RC Number</h4>
+                                <p>RC: 8918603</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="cta-buttons">
-                    <a href="https://maps.google.com/?q=212+Ijegun+Road,+Ikotun,+Lagos" target="_blank" class="btn btn-primary">Get Directions on Google Maps</a>
-                    <a href="tel:+2348129978419" class="btn btn-secondary">Call for Directions</a>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <p class="subtitle">Fill in the form below and our team will get back to you within 24 hours.</p>
+
+                    <!-- Error Message -->
+                    <div class="error-message" id="errorMessage">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p id="errorText">Something went wrong. Please try again.</p>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Message Sent Successfully!</h4>
+                        <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                        <p style="margin-top:8px; font-size:14px;">A confirmation email has been sent to your inbox.</p>
+                    </div>
+
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" placeholder="Enter your full name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" placeholder="Enter your email" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject">
+                                <option value="">Select a subject</option>
+                                <option value="Partnership Inquiry">Partnership Inquiry</option>
+                                <option value="Investment Opportunity">Investment Opportunity</option>
+                                <option value="Property Management">Property Management</option>
+                                <option value="Solar Solutions">Solar Solutions</option>
+                                <option value="Agriculture / Land Program">Agriculture / Land Program</option>
+                                <option value="Workforce / Recruitment">Workforce / Recruitment</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <span id="btnText"><i class="fas fa-paper-plane"></i> Send Message</span>
+                            <span class="spinner" id="btnSpinner"></span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="section">
+    <!-- MAP SECTION -->
+    <section class="map-section">
         <div class="container">
-            <div class="section-title">
-                <h2>Frequently Asked Questions</h2>
-                <p>Quick answers to common questions</p>
+            <div style="margin-bottom:24px;">
+                <h2 style="font-size:28px; font-weight:700; color:var(--primary);">Find Us</h2>
+                <p style="color:var(--muted);">Visit our headquarters in Ikotun, Lagos.</p>
             </div>
-
-            <div style="max-width:800px; margin:0 auto;">
-                <div class="faq-item">
-                    <h3>How soon can CIL begin managing a business?</h3>
-                    <p>Assessment can begin within 1–2 weeks. Full management typically starts in 4–6 weeks after thorough due diligence and planning.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Do you work with diaspora clients?</h3>
-                    <p>Yes. We specialize in business & asset management for Nigerians abroad, with full transparency, monthly reporting, and secure communication channels.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>What is the minimum investment?</h3>
-                    <p>Entry-level investments begin at ₦5,000,000 depending on the venture. Custom partnerships and smaller investments are also available for specific projects.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>How often do investors receive reports?</h3>
-                    <p>Monthly financial reports + quarterly performance reviews + annual comprehensive audits. Diaspora clients receive additional video conference updates.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Do you operate outside Lagos and Ogun?</h3>
-                    <p>Yes. We are expanding and can manage businesses nationwide depending on project scope. Currently operating in Lagos, Ogun, and planning expansion to Oyo State.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>What's the typical response time?</h3>
-                    <p>Initial response within 2 hours during business hours. Comprehensive proposal within 24-48 hours for investment inquiries.</p>
-                </div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.7652382337577!2d3.294393!3d6.548295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b905fa7b7b3b7%3A0x7a7a7a7a7a7a7a7a!2sIkotun%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section class="section" style="background:var(--primary); color:white; text-align:center;">
+    <section style="padding:0 0 80px;">
         <div class="container">
-            <h2 style="margin-bottom:1rem; color: white;">Ready to Work With Us?</h2>
-            <p style="margin-bottom:2rem; font-size:1.2rem;">Book a consultation today and let's discuss your goals.</p>
-
-            <div class="cta-buttons">
-                <a href="tel:+2348129978419" class="btn btn-primary" style="background:var(--secondary); color: white;">Call Now: +234 812 997 8419</a>
-                <a href="https://wa.me/2348129978419" class="btn btn-whatsapp">WhatsApp Us</a>
-                <a href="mailto:collaborativeinvestmentltd@gmail.com" class="btn btn-secondary">Email Us</a>
-            </div>
-
-            <div style="margin-top: 2rem;">
-                <p><strong>Prefer to schedule a meeting?</strong></p>
-                <a href="#contactForm" class="btn btn-secondary">Schedule Consultation</a>
+            <div class="cta-wrap">
+                <h2>Ready to Build Bigger?</h2>
+                <p>Join the ecosystem that's transforming Nigeria's economic infrastructure. One account, multiple opportunities.</p>
+                <a href="register.html" class="btn btn-gold">Get Started</a>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>Collaborative Investment Ltd</h3>
-                <p>Nigeria Businesses Development & Investment Management Company Operating Across Multi-Sector. We Provide Professional Management, L2O Financing, and Long-term Wealth Creation Across Our Eco-system.</p>
-                <div class="social-links" style="margin-top: 1rem;">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                        <i class="fab fa-facebook" style="font-size: 1.5rem; color: #1877F2;"></i>
-                    </a>
-                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                        <i class="fab fa-twitter" style="font-size: 1.5rem; color: #ffffff;"></i>
-                    </a>
-                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                        <i class="fab fa-whatsapp" style="font-size: 1.5rem; color: #25D366;"></i>
-                    </a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" aria-label="Instagram" target="_blank">
-                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: #E4405F;"></i>
-                    </a>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/services">Our Services</a></li>
-                    <li><a href="/shop-categories">Shop Products</a></li>
-                    <li><a href="/portfolio">Portfolio</a></li>
-                    <li><a href="/investment">Investment</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
             </div>
-
-            <div class="footer-section">
-                <h3>Our Sectors</h3>
-                <ul class="footer-links">
-                    <li><a href="/services#agribusiness">Agribusiness Management</a></li>
-                    <li><a href="/services#construction">Construction, Fabrication & Project Management</a></li>
-                    <li><a href="/services#machinery">Machinery & Industrial Services</a></li>
-                    <li><a href="/services#solar">Solar Energy Solutions</a></li>
-                    <li><a href="/services#furniture">Furniture Production & Supply</a></li>
-                    <li><a href="/services#hotel">Hotel Turnaround Services</a></li>
-                    <li><a href="/services#businessfacility">Business Facility Management</a></li>
-                    <li><a href="/services#property">Property & Tenant Management</a></li>
-                    <li><a href="/services#diaspora">Diaspora Asset Management</a></li>
-                    <li><a href="https://cilworkforce.com">Find Work/Hire Professional Workers</a></li>
-                </ul>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
             </div>
-
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
-                <p>collaborativeinvestmentltd@gmail.com</p>
-                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                <p><a href="https://wa.me/2348129978419" target="_blank">+234 812 997 8419</a></p>
-                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved</p>
-            <p style="display: inline;">Building Nigeria's Business Future Through Integrated Business Development</p>
-            <p style="margin-top: 1rem;">
-                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
-            </p>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/2348129978419" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Mobile menu toggle script -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
 
-    <div class="quick-contact-card" id="quickContactCard">
-        <button class="close-quick-contact" onclick="document.getElementById('quickContactCard').classList.remove('show')">×</button>
-        <div class="quick-contact-header">
-            <i class="fas fa-info-circle"></i>
-            <h4>Need accurate information?</h4>
-        </div>
-        <a href="https://wa.me/2348129978419" target="_blank" class="quick-contact-item">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="tel:+2348129978419" class="quick-contact-item">
-            <i class="fas fa-phone-alt"></i> Call +234 812 997 8419
-        </a>
-        <a href="mailto:collaborativeinvestmentltd@gmail.com" class="quick-contact-item">
-            <i class="fas fa-envelope"></i> Email
-        </a>
-        <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--gray); text-align: center;">
-            RC: 8918603 | Website Under Development
-        </div>
-    </div>
-    
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/cart-drawer.js"></script>
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+
+    <!-- Contact Form Handler -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+
+            // Reset messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            // Get form data
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+
+            // Validate
+            if (!fullName || !email || !message) {
+                errorMessage.style.display = 'block';
+                document.getElementById('errorText').textContent = 'Please fill in all required fields.';
+                return;
+            }
+
+            // Show loading state
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'block';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        fullName,
+                        email,
+                        phone,
+                        subject: subject || 'General Inquiry',
+                        message
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    successMessage.style.display = 'block';
+                    document.getElementById('contactForm').reset();
+                } else {
+                    errorMessage.style.display = 'block';
+                    document.getElementById('errorText').textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                errorMessage.style.display = 'block';
+                document.getElementById('errorText').textContent = 'Network error. Please check your connection and try again.';
+                console.error('Error:', error);
+            } finally {
+                // Reset button state
+                btnText.style.display = 'inline-flex';
+                btnSpinner.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
 </body>
 </html>

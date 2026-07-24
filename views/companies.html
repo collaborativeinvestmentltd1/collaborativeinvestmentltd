@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CIL Partners · Collaborative Investment Ltd</title>
-    <meta name="description" content="Collaborative Investment Ltd partners with financial institutions, solar installers, manufacturers, agriculture, construction and more across Nigeria." />
+    <title>CIL Companies · Collaborative Investment Ltd</title>
+    <meta name="description" content="Explore all CIL companies – 12+ integrated business divisions across Agribusiness, Construction, Solar, Property, Workforce and more." />
 
     <!-- Google Font & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -165,7 +165,7 @@
             transition: .3s;
         }
 
-        /* ----- PAGE HERO (partners) ----- */
+        /* ----- PAGE HERO (companies) ----- */
         .page-hero {
             padding: 140px 0 70px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -212,62 +212,42 @@
             opacity: .85;
         }
 
-        /* ----- PARTNERS SECTION ----- */
-        .partners-section {
+        /* ----- COMPANIES GRID ----- */
+        .companies-section {
             padding: 80px 0 60px;
             background: white;
         }
 
-        .partners-intro {
+        .companies-intro {
             text-align: center;
             max-width: 800px;
             margin: 0 auto 60px;
         }
 
-        .partners-intro h2 {
+        .companies-intro h2 {
             font-size: 40px;
             font-weight: 800;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
         }
 
-        .partners-intro h2 span {
+        .companies-intro h2 span {
             color: var(--gold);
         }
 
-        .partners-intro p {
+        .companies-intro p {
             color: var(--muted);
             font-size: 18px;
             line-height: 1.7;
         }
 
-        .partners-intro .highlight-box {
-            background: var(--light);
-            border-left: 4px solid var(--gold);
-            padding: 20px 28px;
-            border-radius: 12px;
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .partners-intro .highlight-box p {
-            font-size: 16px;
-            color: var(--text);
-            margin: 0;
-        }
-
-        .partners-intro .highlight-box strong {
-            color: var(--primary);
-        }
-
-        /* ----- PARTNERS CATEGORIES ----- */
-        .partners-grid {
+        .companies-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
-        .partner-card {
+        .company-card {
             padding: 35px 30px;
             border-radius: var(--radius);
             background: white;
@@ -276,27 +256,35 @@
             display: flex;
             flex-direction: column;
             border-top: 4px solid var(--gold);
-            text-align: center;
         }
 
-        .partner-card:hover {
+        .company-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow);
         }
 
-        .partner-card .card-icon {
-            font-size: 40px;
-            color: var(--secondary);
-            margin-bottom: 16px;
+        .company-card .company-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
-        .partner-card h3 {
+        .company-card .card-icon {
+            font-size: 28px;
+            color: var(--secondary);
+            margin-bottom: 14px;
+        }
+
+        .company-card h3 {
             font-size: 1.3rem;
             margin-bottom: 10px;
             color: var(--primary);
         }
 
-        .partner-card p {
+        .company-card p {
             color: var(--muted);
             line-height: 1.7;
             margin-bottom: 16px;
@@ -304,86 +292,69 @@
             flex: 1;
         }
 
-        .partner-tags {
+        .company-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.3rem 0.6rem;
-            justify-content: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
-        .partner-tag {
+        .company-tag {
             background: var(--light);
-            padding: 0.2rem 1rem;
+            padding: 0.15rem 0.9rem;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 500;
             color: var(--muted);
         }
 
-        .partner-status {
-            display: inline-block;
-            padding: 4px 16px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: #e8f5e9;
-            color: #2e7d32;
-            margin-top: 8px;
+        .company-card a {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: .2s;
+            margin-top: auto;
         }
 
-        .partner-status.active {
-            background: #e8f5e9;
-            color: #2e7d32;
+        .company-card a:hover {
+            gap: 12px;
+            color: #c4913a;
         }
 
-        .partner-status.pending {
-            background: #fff3e0;
-            color: #e65100;
-        }
-
-        /* ----- WHY PARTNER SECTION ----- */
-        .why-partner {
+        /* ----- STATS ----- */
+        .stats-section {
             padding: 80px 0;
             background: var(--light);
         }
 
-        .why-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
         }
 
-        .why-card {
-            padding: 35px 30px;
-            border-radius: var(--radius);
+        .stat-card {
             background: white;
-            border: 1px solid var(--border);
+            padding: 40px 20px;
+            border-radius: 20px;
             text-align: center;
-            transition: .3s;
+            border: 1px solid var(--border);
         }
 
-        .why-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-        }
-
-        .why-card .why-icon {
-            font-size: 32px;
-            color: var(--gold);
-            margin-bottom: 16px;
-        }
-
-        .why-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .stat-card h3 {
+            font-size: 52px;
+            font-weight: 800;
             color: var(--primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
         }
 
-        .why-card p {
+        .stat-card p {
             color: var(--muted);
-            line-height: 1.7;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         /* ----- CTA ----- */
@@ -492,11 +463,11 @@
                 font-size: 42px;
             }
 
-            .partners-grid {
+            .companies-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .why-grid {
+            .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -549,11 +520,11 @@
                 font-size: 17px;
             }
 
-            .partners-grid {
+            .companies-grid {
                 grid-template-columns: 1fr;
             }
 
-            .why-grid {
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -562,7 +533,7 @@
                 gap: 30px;
             }
 
-            .partners-intro h2 {
+            .companies-intro h2 {
                 font-size: 30px;
             }
 
@@ -578,21 +549,9 @@
                 font-size: 16px;
             }
         }
-
-        @media (max-width: 480px) {
-            .page-hero h1 {
-                font-size: 28px;
+            .stat-card h3 {
+                font-size: 40px;
             }
-
-            .logo {
-                font-size: 20px;
-            }
-
-            .actions .btn {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-        }
 
         .logo img {
             height: 40px;
@@ -613,13 +572,13 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="About.html">About Us</a>
-                <a href="companies.html">Companies</a>
-                <a href="partners.html" class="active">Partners</a>
+                <a href="companies.html" class="active">Companies</a>
+                <a href="partners.html">Partners</a>
                 <a href="news.html">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
@@ -637,167 +596,214 @@
     <section class="page-hero">
         <div class="container">
             <div class="page-hero-content">
-                <h1>Our <span>Partners</span></h1>
-                <p>We are actively building strategic partnerships across all our sectors — from financial institutions and solar manufacturers to agriculture, construction, and beyond.</p>
+                <h1>Our <span>Companies</span></h1>
+                <p>12+ integrated business divisions working as one self‑reinforcing engine. Each company strengthens the others, creating a 25–40% margin advantage and building sustainable economic infrastructure.</p>
             </div>
         </div>
     </section>
 
-    <!-- PARTNERS SECTION -->
-    <section class="partners-section">
+    <!-- COMPANIES GRID -->
+    <section class="companies-section">
         <div class="container">
-            <div class="partners-intro">
-                <h2>Building <span>Partnerships</span> Across Sectors</h2>
-                <p>Collaborative Investment Ltd is actively expanding its partner network. We work with trusted organizations that share our commitment to quality, transparency, and sustainable growth.</p>
-
-                <div class="highlight-box">
-                    <p><strong>Current Partnerships Include:</strong> Multiple Financial Institutions, Solar Installation Companies &amp; Manufacturers, Agriculture &amp; Agribusiness Firms, Construction &amp; Fabrication Companies, Equipment Manufacturers, Hotel Management Groups, Property Developers, and more.</p>
-                </div>
+            <div class="companies-intro">
+                <h2>Explore <span>All Companies</span></h2>
+                <p>Every division solves a specific market gap, generates sustainable revenue, and feeds into the others — creating a connected platform for growth.</p>
             </div>
 
-            <div class="partners-grid">
-                <!-- Financial Institutions -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-university"></i></div>
-                    <h3>Financial Institutions</h3>
-                    <p>Partner banks, microfinance banks, and investment firms providing capital solutions for our ecosystem.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Banking</span>
-                        <span class="partner-tag">Investment</span>
-                        <span class="partner-tag">Capital</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Solar & Renewable Energy -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-solar-panel"></i></div>
-                    <h3>Solar &amp; Renewable Energy</h3>
-                    <p>Manufacturers, installers, and distributors of solar panels, inverters, batteries, and renewable energy solutions.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Manufacturers</span>
-                        <span class="partner-tag">Installers</span>
-                        <span class="partner-tag">PPA</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Agriculture & Agribusiness -->
-                <div class="partner-card">
+            <div class="companies-grid">
+                <!-- 1. Agribusiness -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Agribusiness</div>
                     <div class="card-icon"><i class="fas fa-seedling"></i></div>
-                    <h3>Agriculture &amp; Agribusiness</h3>
-                    <p>Farm equipment suppliers, feed manufacturers, veterinary services, and agri-tech providers.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Equipment</span>
-                        <span class="partner-tag">Suppliers</span>
-                        <span class="partner-tag">Agri-Tech</span>
+                    <h3>Agribusiness Management</h3>
+                    <p>Full‑service farm management for absentee landowners. Specialized production: poultry, aquaculture, crop mastery. Digital transparency from input to harvest.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Poultry</span>
+                        <span class="company-tag">Fish</span>
+                        <span class="company-tag">Crop</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="https://cilagribusiness.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Construction & Fabrication -->
-                <div class="partner-card">
+                <!-- 2. Construction -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Construction</div>
                     <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
                     <h3>Construction &amp; Fabrication</h3>
-                    <p>Building material suppliers, fabrication workshops, and construction service providers.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Materials</span>
-                        <span class="partner-tag">Fabrication</span>
-                        <span class="partner-tag">Services</span>
+                    <p>End‑to‑end project assurance with biometric check‑in, stage‑gate approvals, and third‑party inspection. Fabrication of poultry cages, block machines, security gates.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Building</span>
+                        <span class="company-tag">Cages</span>
+                        <span class="company-tag">Gates</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="https://cilconstruction.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Machinery & Equipment -->
-                <div class="partner-card">
+                <!-- 3. Machinery -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Machinery</div>
                     <div class="card-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Machinery &amp; Equipment</h3>
-                    <p>Manufacturers and suppliers of industrial machinery, generators, and heavy equipment.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Generators</span>
-                        <span class="partner-tag">Industrial</span>
-                        <span class="partner-tag">Rental</span>
+                    <h3>Machinery &amp; Industrial</h3>
+                    <p>Equipment optimization: idle machinery is booked, operated, and maintained via GPS/IoT. Also equipment financing and a national technician academy.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Generators</span>
+                        <span class="company-tag">Rental</span>
+                        <span class="company-tag">Training</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="https://cilmachinery.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Furniture & Interior -->
-                <div class="partner-card">
+                <!-- 4. Solar -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Solar</div>
+                    <div class="card-icon"><i class="fas fa-solar-panel"></i></div>
+                    <h3>Solar Energy Solutions</h3>
+                    <p>Comprehensive renewable energy platform. Manufacturer partnerships, investor‑funded solar branches, and artisan development for installation &amp; maintenance.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Solar</span>
+                        <span class="company-tag">PPA</span>
+                        <span class="company-tag">Maintenance</span>
+                    </div>
+                    <a href="https://cilsolar.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 5. Furniture -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Furniture</div>
                     <div class="card-icon"><i class="fas fa-chair"></i></div>
-                    <h3>Furniture &amp; Interior</h3>
-                    <p>Furniture manufacturers, upholsterers, and interior design partners for our hotels and properties.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Manufacturing</span>
-                        <span class="partner-tag">Upholstery</span>
-                        <span class="partner-tag">Design</span>
+                    <h3>Furniture Production &amp; Supply</h3>
+                    <p>Furniture‑entrepreneurship ecosystem. CIL Certified Partners access standardized designs, bulk materials, and guaranteed order flow from internal demand.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Custom</span>
+                        <span class="company-tag">Office</span>
+                        <span class="company-tag">Upholstery</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="https://cilfurniture.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Hospitality & Hotels -->
-                <div class="partner-card">
+                <!-- 6. Hotels -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Hotels</div>
                     <div class="card-icon"><i class="fas fa-hotel"></i></div>
-                    <h3>Hospitality &amp; Hotels</h3>
-                    <p>Hotel management groups, hospitality consultants, and service providers for our hotel portfolio.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Management</span>
-                        <span class="partner-tag">Consulting</span>
-                        <span class="partner-tag">Services</span>
+                    <h3>Hotel Turnaround Services</h3>
+                    <p>Transform underperforming hotels. Full operational takeover, integrated supply chain (furniture, food, solar), and revenue flow management.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Management</span>
+                        <span class="company-tag">Revenue</span>
+                        <span class="company-tag">Staff</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="https://cilhotels.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Facility Management -->
-                <div class="partner-card">
+                <!-- 7. Facility Management -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Facility</div>
                     <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
-                    <h3>Facility Management</h3>
-                    <p>Cleaning services, security firms, HVAC specialists, and maintenance contractors.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Cleaning</span>
-                        <span class="partner-tag">Security</span>
-                        <span class="partner-tag">Maintenance</span>
+                    <h3>Business Facility Management</h3>
+                    <p>Integrated facility management: cleaning, security, technical maintenance (HVAC, electrical), space management. Tiered service levels with digital tracking.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Cleaning</span>
+                        <span class="company-tag">Security</span>
+                        <span class="company-tag">HVAC</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="https://cilfacility.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Property & Real Estate -->
-                <div class="partner-card">
+                <!-- 8. Property -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Property</div>
                     <div class="card-icon"><i class="fas fa-building"></i></div>
-                    <h3>Property &amp; Real Estate</h3>
-                    <p>Real estate developers, property agents, and valuation firms for our property management division.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Developers</span>
-                        <span class="partner-tag">Agents</span>
-                        <span class="partner-tag">Valuation</span>
+                    <h3>Property &amp; Tenant Management</h3>
+                    <p>Nigeria's property‑ecosystem gateway. Tenant screening, rent collection, annual asset preservation (CAPP), and upgrade programs — all professionally managed.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Tenant</span>
+                        <span class="company-tag">Maintenance</span>
+                        <span class="company-tag">CAPP</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="https://cilproperty.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 9. Diaspora -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Diaspora</div>
+                    <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
+                    <h3>Diaspora Asset Management</h3>
+                    <p>Single gateway for diaspora wealth deployment. Unified investment console with real‑time portfolio views across all 12 divisions. Complete transparency.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Dashboard</span>
+                        <span class="company-tag">3D Scans</span>
+                        <span class="company-tag">Remittance</span>
+                    </div>
+                    <a href="https://cildiaspora.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 10. Workforce -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Workforce</div>
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>Employment &amp; Workforce</h3>
+                    <p>Trusted intermediary for labor. Job matching platform, CIL Workforce Academy (certification), worker verification (Levels 1‑4), and replacement guarantee.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Jobs</span>
+                        <span class="company-tag">Training</span>
+                        <span class="company-tag">Verification</span>
+                    </div>
+                    <a href="https://cilworkforce.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 11. MFB -->
+                <div class="company-card">
+                    <div class="company-badge">CIL MFB</div>
+                    <div class="card-icon"><i class="fas fa-piggy-bank"></i></div>
+                    <h3>Microfinance Bank</h3>
+                    <p>Digital banking and financial services for individuals and businesses. Savings, loans, asset financing, and business banking.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Savings</span>
+                        <span class="company-tag">Loans</span>
+                        <span class="company-tag">Banking</span>
+                    </div>
+                    <a href="https://cilmfb.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 12. Private -->
+                <div class="company-card">
+                    <div class="company-badge">CIL Private</div>
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Private Investors Network</h3>
+                    <p>Private wealth and institutional finance. Connecting capital with vetted opportunities across the ecosystem. Portfolio management and advisory.</p>
+                    <div class="company-tags">
+                        <span class="company-tag">Wealth</span>
+                        <span class="company-tag">Institutional</span>
+                        <span class="company-tag">Capital</span>
+                    </div>
+                    <a href="https://cilprivate.com" target="_blank">Visit Company <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- WHY PARTNER WITH CIL -->
-    <section class="why-partner">
+    <!-- STATS -->
+    <section class="stats-section">
         <div class="container">
             <div style="text-align:center; margin-bottom:50px;">
-                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why <span style="color:var(--gold);">Partner With CIL</span></h2>
-                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">We offer a unique ecosystem that creates value for all partners.</p>
+                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Companies <span style="color:var(--gold);">By the Numbers</span></h2>
             </div>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-                    <h4>Ecosystem Access</h4>
-                    <p>Gain access to 12+ integrated business divisions with built-in demand for your products and services.</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>12+</h3>
+                    <p>Business Divisions</p>
                 </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-handshake"></i></div>
-                    <h4>Trusted Partnership</h4>
-                    <p>Work with a professionally managed organization committed to transparency, quality, and long-term relationships.</p>
+                <div class="stat-card">
+                    <h3>1</h3>
+                    <p>Connected Ecosystem</p>
                 </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
-                    <h4>Growth Opportunities</h4>
-                    <p>Scale your business alongside CIL's expanding ecosystem across Nigeria and beyond.</p>
+                <div class="stat-card">
+                    <h3>∞</h3>
+                    <p>Growth Opportunities</p>
+                </div>
+                <div class="stat-card">
+                    <h3>24/7</h3>
+                    <p>Digital Access</p>
                 </div>
             </div>
         </div>
@@ -807,9 +813,9 @@
     <section style="padding:0 0 80px;">
         <div class="container">
             <div class="cta-wrap">
-                <h2>Ready to Partner With Us?</h2>
-                <p>We are actively seeking partners across all sectors. Let's build something great together.</p>
-                <a href="contact.html" class="btn btn-gold">Contact Our Partnership Team</a>
+                <h2>Ready to Build Bigger?</h2>
+                <p>Join the ecosystem that's transforming Nigeria's economic infrastructure. One account, multiple opportunities.</p>
+                <a href="get-started.html" class="btn btn-gold">Get Started</a>
             </div>
         </div>
     </section>

@@ -1,747 +1,861 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIL Nigeria - Registration</title>
-    <meta name="description" content="Register as a customer or investor with Collaborative Investment Ltd.">
-    
-    <!-- FIXED CSS LINKS -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/cart.css">
-    <link rel="stylesheet" href="/css/cart-drawer.css">
-    <link rel="stylesheet" href="/css/register.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register · Collaborative Investment Ltd</title>
+    <meta name="description" content="Create your CIL account – simple signup process." />
 
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- REGISTER CONTAINER (pushed down by header) ----- */
+        .register-wrapper {
+            width: 100%;
+            max-width: 480px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .register-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 45px 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .register-header .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .register-header .logo-text span {
+            color: var(--gold);
+        }
+
+        .register-header p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* ----- SOCIAL BUTTON ----- */
+        .social-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .social-btn:hover {
+            background: var(--light);
+            border-color: var(--gold);
+        }
+
+        .social-btn i {
+            font-size: 20px;
+        }
+
+        .social-btn .fa-google {
+            color: #DB4437;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ----- FORM ----- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            transition: .3s;
+            color: var(--text);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 164, 65, .1);
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 12px;
+        }
+
+        .form-row .form-group:first-child {
+            flex: 0 0 120px;
+        }
+
+        .form-row .form-group:last-child {
+            flex: 1;
+        }
+
+        .form-row select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .form-group .hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .btn-submit:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(217, 164, 65, .3);
+        }
+
+        .register-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .register-footer a {
+            color: var(--gold);
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .register-footer a:hover {
+            color: #c4913a;
+        }
+
+        .terms {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.6;
+        }
+
+        .terms a {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .terms a:hover {
+            color: #c4913a;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .register-card {
+                padding: 30px 20px;
+            }
+
+            .register-header .logo-text {
+                font-size: 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-row .form-group:first-child {
+                flex: 1;
+            }
+
+            .social-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .register-wrapper {
+                margin-top: 100px;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="marquee-container">
-        <div class="marquee">
-            <span><i class="fas fa-info-circle"></i> Our Website is currently under development, For accurate product info, please contact us directly</span>
-            <span><i class="fas fa-envelope"></i> Email: collaborativeinvestmentltd@gmail.com</span>
-            <span><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</span>
-        </div>
-    </div>
-</head>
 
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <a href="/" class="logo">
-                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
-            
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/order-track">Track Order</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-            
-            <div class="cart-icon-wrapper">
-                <button id="open-cart-drawer" class="cart-icon-btn">
-                    🛒 Cart <span id="cart-count-badge">0</span>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-dark">Login</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <div id="cart-drawer-overlay"></div>
-    <div id="cart-drawer" class="cart-drawer">
-        <div class="cart-drawer-header">
-            <h2>Your Cart</h2>
-            <button id="close-cart-drawer" class="close-btn">×</button>
-        </div>
-        <div id="cart-drawer-items" class="cart-drawer-items">
-            <p>Loading cart...</p>
-        </div>
-        <div class="cart-drawer-footer">
-            <div class="drawer-total-row">
-                <span>Total:</span>
-                <span id="drawer-total">₦0</span>
-            </div>
-            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
-        </div>
-    </div>
+    <!-- REGISTER FORM -->
+    <div class="register-wrapper">
+        <div class="register-card">
 
-    <!-- Registration Type Selector -->
-    <div class="registration-type-selector">
-        <div class="registration-type-card customer selected" onclick="selectRegistrationType('customer')">
-            <h3>Customer Account</h3>
-            <p>Shop products, track orders, and manage purchases</p>
-            <div style="font-size: 0.9rem; color: var(--customer-color); font-weight: 600;">
-                Free Registration
-            </div>
-        </div>
-        
-        <div class="registration-type-card investor" onclick="selectRegistrationType('investor')">
-            <h3>Investor Account</h3>
-            <p>Access investment opportunities and manage portfolio</p>
-            <div style="font-size: 0.9rem; color: var(--investor-color); font-weight: 600;">
-                Minimum: ₦5M
-                <span class="payment-required-badge">Payment Required</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Registration Hero -->
-    <section class="register-hero">
-        <div class="register-hero-content">
-            <h1 id="registration-title">Create Your Customer Account</h1>
-            <p id="registration-subtitle">Shop quality products, track orders, and enjoy exclusive deals</p>
-            
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-value" id="stat1-value">1,000+</span>
-                    <span class="hero-stat-label" id="stat1-label">Products</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value" id="stat2-value">24/7</span>
-                    <span class="hero-stat-label" id="stat2-label">Support</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value" id="stat3-value">₦0</span>
-                    <span class="hero-stat-label" id="stat3-label">Min. Order</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value" id="stat4-value">8</span>
-                    <span class="hero-stat-label" id="stat4-label">Sectors</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Registration Form -->
-    <div class="registration-container">
-        <!-- Left Column: Registration Form -->
-        <div class="registration-form-container customer-form" id="registration-form">
-            <!-- Progress Steps -->
-            <div class="form-progress customer-progress" id="form-progress">
-                <div class="progress-step active" data-step="1">
-                    <div class="step-number">1</div>
-                    <div class="step-label">Personal Info</div>
-                </div>
-                <div class="progress-step" data-step="2">
-                    <div class="step-number">2</div>
-                    <div class="step-label" id="step2-label">Preferences</div>
-                </div>
-                <div class="progress-step" data-step="3">
-                    <div class="step-number">3</div>
-                    <div class="step-label">Payment</div>
-                </div>
-                <div class="progress-step" data-step="4">
-                    <div class="step-number">4</div>
-                    <div class="step-label">Security</div>
-                </div>
-                <div class="progress-step" data-step="5">
-                    <div class="step-number">5</div>
-                    <div class="step-label">Terms</div>
-                </div>
+            <!-- Header -->
+            <div class="register-header">
+                <div class="logo-text">CIL<span>.</span></div>
+                <p>Create your account to get started</p>
             </div>
 
-            <!-- Step 1: Personal Information -->
-            <div class="form-step active" id="step-1">
-                <h3>Personal Information</h3>
-                <p class="form-step-description">Tell us about yourself to create your account</p>
-                
-                <form id="personalInfoForm">
+            <!-- Google Signup -->
+            <button class="social-btn" id="googleSignupBtn">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+
+            <!-- Divider -->
+            <div class="divider">or sign up with email</div>
+
+            <!-- Registration Form -->
+            <form id="registerForm" onsubmit="event.preventDefault(); handleRegistration();">
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required />
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email address" required />
+                </div>
+
+                <!-- Phone with Country Code -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="firstName">First Name <span class="label-helper">(Required)</span></label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
+                            <select id="countryCode">
+                                <option value="+234">🇳🇬 +234</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+91">🇮🇳 +91</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+55">🇧🇷 +55</option>
+                                <option value="+27">🇿🇦 +27</option>
+                                <option value="+254">🇰🇪 +254</option>
+                                <option value="+233">🇬🇭 +233</option>
+                                <option value="+1">🇨🇦 +1</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+64">🇳🇿 +64</option>
+                                <option value="+7">🇷🇺 +7</option>
+                                <option value="+82">🇰🇷 +82</option>
+                                <option value="+52">🇲🇽 +52</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+65">🇸🇬 +65</option>
+                                <option value="+60">🇲🇾 +60</option>
+                                <option value="+63">🇵🇭 +63</option>
+                                <option value="+66">🇹🇭 +66</option>
+                                <option value="+84">🇻🇳 +84</option>
+                                <option value="+62">🇮🇩 +62</option>
+                                <option value="+971">🇦🇪 +971</option>
+                                <option value="+966">🇸🇦 +966</option>
+                                <option value="+962">🇯🇴 +962</option>
+                                <option value="+20">🇪🇬 +20</option>
+                                <option value="+212">🇲🇦 +212</option>
+                                <option value="+216">🇹🇳 +216</option>
+                                <option value="+234">🇳🇬 +234</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="lastName">Last Name <span class="label-helper">(Required)</span></label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
+                            <input type="tel" id="phone" placeholder="Enter phone number" required />
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address <span class="label-helper">(Required)</span></label>
-                        <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Phone Number <span class="label-helper">(With country code)</span></label>
-                        <input type="tel" id="phone" class="form-control" placeholder="+234 812 345 6789" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="country">Country of Residence</label>
-                        <select id="country" class="form-control">
-                            <option value="">Select your country</option>
-                            <option value="nigeria">Nigeria</option>
-                            <option value="usa">United States</option>
-                            <option value="uk">United Kingdom</option>
-                            <option value="canada">Canada</option>
-                            <option value="germany">Germany</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="referral">Referral Code <span class="label-helper">(Optional)</span></label>
-                        <input type="text" id="referral" class="form-control" placeholder="Enter referral code if any">
-                    </div>
-                </form>
-                
-                <div class="form-navigation">
-                    <div></div> <!-- Empty div for spacing -->
-                    <button class="btn btn-primary" onclick="nextStep(2)">Continue <i class="fas fa-arrow-right"></i></button>
+                    <div class="hint">We'll send a verification code to this number.</div>
                 </div>
-            </div>
 
-            <!-- Step 2: Customer Preferences / Investor Preferences -->
-            <div class="form-step" id="step-2">
-                <h3 id="step2-title">Customer Preferences</h3>
-                <p class="form-step-description" id="step2-description">Select your shopping preferences</p>
-                
-                <!-- Customer Preferences -->
-                <div id="customer-preferences-section">
-                    <div class="form-group">
-                        <label>Shopping Interests <span class="label-helper">(Select one or more)</span></label>
-                        <div class="customer-preferences">
-                            <div class="preference-option" onclick="toggleCustomerPreference(this)" data-value="construction">
-                                <h4>Construction</h4>
-                                <p>Building materials & equipment</p>
-                            </div>
-                            
-                            <div class="preference-option" onclick="toggleCustomerPreference(this)" data-value="agriculture">
-                                <h4>Agriculture</h4>
-                                <p>Farm equipment & supplies</p>
-                            </div>
-                            
-                            <div class="preference-option" onclick="toggleCustomerPreference(this)" data-value="solar">
-                                <h4>Solar Energy</h4>
-                                <p>Solar systems & components</p>
-                            </div>
-                            
-                            <div class="preference-option" onclick="toggleCustomerPreference(this)" data-value="furniture">
-                                <h4>Furniture</h4>
-                                <p>Home & office furniture</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="shippingAddress">Default Shipping Address <span class="label-helper">(Optional)</span></label>
-                        <textarea id="shippingAddress" class="form-control" placeholder="Enter your default shipping address" rows="3"></textarea>
-                    </div>
-                </div>
-                
-                <!-- Investor Preferences -->
-                <div id="investor-preferences-section" style="display: none;">
-                    <div class="form-group">
-                        <label>Investment Interests <span class="label-helper">(Select one or more)</span></label>
-                        <div class="investment-options">
-                            <div class="investment-option" onclick="toggleInvestmentOption(this)" data-value="direct">
-                                <div class="investment-icon">
-                                    <i class="fas fa-handshake"></i>
-                                </div>
-                                <h4>Direct Investment</h4>
-                                <p>Invest in established businesses</p>
-                                <div class="investment-roi">18-30% ROI</div>
-                            </div>
-                            
-                            <div class="investment-option" onclick="toggleInvestmentOption(this)" data-value="diaspora">
-                                <div class="investment-icon">
-                                    <i class="fas fa-globe"></i>
-                                </div>
-                                <h4>Diaspora Setup</h4>
-                                <p>Setup & manage business remotely</p>
-                                <div class="investment-roi">Custom ROI</div>
-                            </div>
-                            
-                            <div class="investment-option" onclick="toggleInvestmentOption(this)" data-value="hotel">
-                                <div class="investment-icon">
-                                    <i class="fas fa-hotel"></i>
-                                </div>
-                                <h4>Hotel Management</h4>
-                                <p>Professional hotel operations</p>
-                                <div class="investment-roi">25-40% ROI</div>
-                            </div>
-                            
-                            <div class="investment-option" onclick="toggleInvestmentOption(this)" data-value="property">
-                                <div class="investment-icon">
-                                    <i class="fas fa-home"></i>
-                                </div>
-                                <h4>Property Management</h4>
-                                <p>Rental property management</p>
-                                <div class="investment-roi">12-18% ROI</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="investmentAmount">Investment Range <span class="label-helper">(In Naira)</span></label>
-                        <select id="investmentAmount" class="form-control">
-                            <option value="">Select investment range</option>
-                            <option value="5m-10m">₦5M - ₦10M</option>
-                            <option value="10m-25m">₦10M - ₦25M</option>
-                            <option value="25m-50m">₦25M - ₦50M</option>
-                            <option value="50m+">₦50M+</option>
-                            <option value="custom">Custom Amount</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="investmentDuration">Preferred Investment Duration</label>
-                        <select id="investmentDuration" class="form-control">
-                            <option value="">Select duration</option>
-                            <option value="6-12">6-12 Months</option>
-                            <option value="12-24">1-2 Years</option>
-                            <option value="24-36">2-3 Years</option>
-                            <option value="36+">3+ Years</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="sectorInterest">Sector Preferences</label>
-                        <select id="sectorInterest" class="form-control" multiple>
-                            <option value="agriculture">Agriculture & Livestock</option>
-                            <option value="construction">Construction & Manufacturing</option>
-                            <option value="machinery">Machinery & Equipment</option>
-                            <option value="solar">Solar Energy Solutions</option>
-                            <option value="furniture">Furniture & Upholstery</option>
-                            <option value="hospitality">Hotel Management</option>
-                        </select>
-                        <span class="label-helper">Hold Ctrl/Cmd to select multiple sectors</span>
-                    </div>
-                </div>
-                
-                <div class="form-navigation">
-                    <button class="btn btn-secondary" onclick="prevStep(1)">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </button>
-                    <button class="btn btn-primary" onclick="nextStep(3)">
-                        Continue to Payment <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Step 3: Payment Step -->
-            <div class="form-step" id="step-3">
-                <h3 id="payment-step-title">Initial Deposit</h3>
-                <p class="form-step-description" id="payment-step-description">
-                    Make your initial deposit to complete registration
-                </p>
-                
-                <!-- Investor Requirement Notice -->
-                <div id="investor-requirement-notice" style="display: none;" class="investor-requirement-notice">
-                    <h4><i class="fas fa-exclamation-circle"></i> Investor Requirement</h4>
-                    <p>Investment account registration requires a minimum initial deposit of <span class="minimum-amount">₦5,000,000</span>.</p>
-                    <p>This deposit will be allocated to your chosen investment portfolio after account activation and KYC completion.</p>
-                </div>
-                
-                <!-- Customer Optional Deposit -->
-                <div id="customer-deposit-section" style="display: block;">
-                    <div class="form-group">
-                        <div class="terms-checkbox">
-                            <input type="checkbox" id="skipDeposit" onchange="toggleDepositSection()">
-                            <label for="skipDeposit">
-                                <strong>Skip initial deposit for now.</strong> I'll fund my account later through the dashboard.
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div id="deposit-section">
-                        <div class="form-group">
-                            <label for="depositAmount">Deposit Amount <span class="label-helper">(Minimum: ₦5,000)</span></label>
-                            <input type="number" id="depositAmount" class="form-control" placeholder="Enter amount in Naira" min="5000" step="1000">
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Investor Mandatory Deposit -->
-                <div id="investor-deposit-section" style="display: none;">
-                    <div class="form-group">
-                        <label for="investorDepositAmount">Initial Investment Deposit <span class="label-helper">(Minimum: ₦5,000,000)</span></label>
-                        <input type="number" id="investorDepositAmount" class="form-control" placeholder="Enter amount in Naira" min="5000000" step="100000" required>
-                        <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">
-                            This deposit is required to activate your investor account. Funds will be held securely until KYC verification is complete.
-                        </p>
-                    </div>
-                </div>
-                
+                <!-- Date of Birth -->
                 <div class="form-group">
-                    <label>Payment Method</label>
-                    <div class="payment-options">
-                        <div class="payment-option" onclick="selectPaymentMethod('paystack')">
-                            <div class="payment-icon">
-                                <i class="fas fa-credit-card"></i>
-                            </div>
-                            <h4>Paystack</h4>
-                            <p>Card, Bank Transfer, USSD</p>
-                        </div>
-                        
-                        <div class="payment-option" onclick="selectPaymentMethod('flutterwave')">
-                            <div class="payment-icon">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <h4>Flutterwave</h4>
-                            <p>Card, Mobile Money, Bank</p>
-                        </div>
-                        
-                        <div class="payment-option" onclick="selectPaymentMethod('bank')">
-                            <div class="payment-icon">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <h4>Bank Transfer</h4>
-                            <p>Manual bank transfer</p>
-                        </div>
-                    </div>
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" required />
                 </div>
-                
-                <!-- Bank Transfer Details (Hidden by default) -->
-                <div id="bank-transfer-details" class="bank-transfer-details">
-                    <h4>Bank Transfer Instructions</h4>
-                    <p>Transfer to the account details below and upload proof of payment:</p>
-                    
-                    <div class="bank-detail-item">
-                        <span class="bank-detail-label">Bank Name:</span>
-                        <span class="bank-detail-value">Zenith Bank Nigeria</span>
-                    </div>
-                    <div class="bank-detail-item">
-                        <span class="bank-detail-label">Account Name:</span>
-                        <span class="bank-detail-value">Collaborative Investment Ltd</span>
-                    </div>
-                    <div class="bank-detail-item">
-                        <span class="bank-detail-label">Account Number:</span>
-                        <span class="bank-detail-value">1310998058</span>
-                        <button class="copy-btn" onclick="copyToClipboard('1310998058')">Copy</button>
-                    </div>
-                    <div class="bank-detail-item">
-                        <span class="bank-detail-label">Reference:</span>
-                        <span class="bank-detail-value" id="payment-reference">CIL-REG-<span id="ref-number">123456</span></span>
-                        <button class="copy-btn" onclick="copyToClipboard('CIL-REG-123456')">Copy</button>
-                    </div>
-                    
-                    <div class="form-group" style="margin-top: 1.5rem;">
-                        <label for="paymentProof">Upload Proof of Payment</label>
-                        <input type="file" id="paymentProof" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
-                        <span class="label-helper">Upload screenshot or receipt of bank transfer (JPG, PNG, PDF)</span>
-                    </div>
-                </div>
-                
-                <div class="form-navigation">
-                    <button class="btn btn-secondary" onclick="prevStep(2)">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </button>
-                    <button class="btn btn-primary" onclick="nextStep(4)">
-                        Continue to Security <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
 
-            <!-- Step 4: Account Security -->
-            <div class="form-step" id="step-4">
-                <h3>Account Security</h3>
-                <p class="form-step-description">Create secure login credentials for your account dashboard</p>
-                
+                <!-- Password -->
                 <div class="form-group">
-                    <label for="password">Create Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Create a strong password" required onkeyup="checkPasswordStrength()">
-                    <div class="password-strength">
-                        <div class="strength-bar">
-                            <div class="strength-fill" id="strengthFill"></div>
-                        </div>
-                        <div class="strength-text" id="strengthText">Password strength</div>
-                    </div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a strong password" required />
+                    <div class="hint">Must be at least 8 characters.</div>
                 </div>
-                
+
+                <!-- Confirm Password -->
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" class="form-control" placeholder="Re-enter your password" required onkeyup="checkPasswordMatch()">
-                    <div class="strength-text" id="passwordMatchText"></div>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
                 </div>
-                
-                <div class="form-group">
-                    <label for="securityQuestion">Security Question</label>
-                    <select id="securityQuestion" class="form-control">
-                        <option value="">Select a security question</option>
-                        <option value="pet">What was your first pet's name?</option>
-                        <option value="school">What elementary school did you attend?</option>
-                        <option value="city">In what city were you born?</option>
-                        <option value="mother">What is your mother's maiden name?</option>
-                        <option value="car">What was your first car?</option>
-                    </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="securityAnswer">Security Answer</label>
-                        <input type="text" id="securityAnswer" class="form-control" placeholder="Enter your answer">
-                    </div>
-                    
-                    <div class="form-navigation">
-                        <button class="btn btn-secondary" onclick="prevStep(3)">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </button>
-                        <button class="btn btn-primary" onclick="nextStep(5)">
-                            Continue to Terms <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+
+            </form>
+
+            <!-- Footer -->
+            <div class="register-footer">
+                Already have an account? <a href="login.html">Log in</a>
             </div>
 
-            <!-- Step 5: Terms & Verification -->
-            <div class="form-step" id="step-5">
-                <h3>Terms & Verification</h3>
-                <p class="form-step-description">Review and accept terms to complete your registration</p>
-                
-                <div class="tier-indicator" id="tier-indicator">
-                    <h4><i class="fas fa-layer-group"></i> Account Tier: <span id="tier-name">Basic</span></h4>
-                    <p>Your account access level based on verification status:</p>
-                    <ul class="tier-features" id="tier-features">
-                        <!-- Tier features will be dynamically populated -->
-                    </ul>
-                </div>
-                
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">
-                        I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>. 
-                        I understand that all investments carry risks and past performance does not guarantee future results.
-                        <span style="display: block; margin-top: 0.5rem; font-weight: 600; color: var(--primary);">
-                            For Investors: Minimum investment commitment is ₦5,000,000 for 12 months.
-                            <strong style="color: var(--danger);">This amount must be paid during registration.</strong>
-                        </span>
-                    </label>
-                </div>
-                
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="communications" checked>
-                    <label for="communications">
-                        I agree to receive updates, reports, and marketing communications from CIL via email and SMS.
-                        I consent to receive welcome messages from CIL CEO/Management.
-                    </label>
-                </div>
-                
-                <div class="form-group">
-                    <label for="verificationMethod">Auto-Verification Setup <span class="label-helper">(Fast sign-up process)</span></label>
-                    <select id="verificationMethod" class="form-control" required onchange="updateTierFeatures()">
-                        <option value="">Select verification method</option>
-                        <option value="email">Email Auto-Verification</option>
-                        <option value="phone">Phone Auto-Verification (SMS)</option>
-                        <option value="both">Both Email & Phone (Recommended)</option>
-                    </select>
-                    <span class="label-helper">Note: KYC verification will be required after account setup for full access</span>
-                </div>
-                
-                <div class="form-navigation">
-                    <button class="btn btn-secondary" onclick="prevStep(4)">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </button>
-                    <button class="btn btn-primary" onclick="submitRegistration()">
-                        Complete Registration <i class="fas fa-check"></i>
-                    </button>
-                </div>
+            <div class="terms">
+                By creating an account, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
             </div>
 
-            <!-- Success Message -->
-            <div class="form-step" id="step-success">
-                <div class="success-message">
-                    <div class="success-icon">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <h3 id="success-title">Registration Successful!</h3>
-                    <p id="successMessage">Your account has been created successfully. Please check your email for verification instructions.</p>
-                    
-                    <!-- KYC Reminder -->
-                    <div class="tier-indicator" style="max-width: 400px; margin: 2rem auto; background: #e8f4fd; border-left-color: var(--investor-color);">
-                        <h4><i class="fas fa-id-card"></i> Complete KYC for Full Access</h4>
-                        <p>To access all features, complete your KYC verification in your dashboard.</p>
-                        <div class="kyc-status kyc-pending">
-                            <i class="fas fa-clock"></i> KYC: Pending
-                        </div>
-                    </div>
-                    
-                    <p id="redirect-message">You will be redirected to your dashboard shortly.</p>
-                    <div style="margin-top: 2rem;">
-                        <button class="btn btn-primary" onclick="redirectToDashboard()">
-                            Go to Dashboard <i class="fas fa-arrow-right"></i>
-                        </button>
-                        <button class="btn btn-outline" onclick="startKYC()" style="margin-left: 1rem;">
-                            <i class="fas fa-id-card"></i> Start KYC Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Column: Benefits & Information -->
-        <div class="registration-benefits">
-            <h2 id="benefits-title" style="color: var(--primary); margin-bottom: 2rem;">Why Register with CIL?</h2>
-            
-            <ul class="benefits-list" id="benefits-list">
-                <!-- Customer Benefits -->
-                <li id="benefit-customer-1">
-                    <div class="benefit-content">
-                        <h4>Wide Product Selection</h4>
-                        <p>Access thousands of quality products across 8 business sectors from construction to agriculture.</p>
-                    </div>
-                </li>
-                
-                <li id="benefit-customer-2">
-                    <div class="benefit-content">
-                        <h4>Fast Delivery</h4>
-                        <p>Reliable nationwide delivery with real-time tracking and flexible delivery options.</p>
-                    </div>
-                </li>
-                
-                <li id="benefit-customer-3">
-                    <div class="benefit-content">
-                        <h4>Customer Support</h4>
-                        <p>24/7 customer support via phone, email, and WhatsApp for all your shopping needs.</p>
-                    </div>
-                </li>
-                
-                <!-- Investor Benefits (Hidden by default) -->
-                <li id="benefit-investor-1" style="display: none;">
-                    <div class="benefit-content">
-                        <h4>Asset-Backed Security</h4>
-                        <p>All investments are protected by tangible assets with comprehensive legal documentation and insurance coverage.</p>
-                    </div>
-                </li>
-                
-                <li id="benefit-investor-2" style="display: none;">
-                    <div class="benefit-content">
-                        <h4>Professional Management</h4>
-                        <p>Our experienced team handles daily operations, staffing, and business development so you can focus on returns.</p>
-                    </div>
-                </li>
-                
-                <li id="benefit-investor-3" style="display: none;">
-                    <div class="benefit-content">
-                        <h4>Monthly Performance Reports</h4>
-                        <p>Receive detailed monthly reports with financial statements, performance metrics, and growth projections.</p>
-                    </div>
-                </li>
-            </ul>
-
-            <!-- Already Have Account -->
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--light-gray); border-radius: var(--border-radius);">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Already Have an Account?</h3>
-                <p style="color: var(--gray); margin-bottom: 1.5rem;">Sign in to access your dashboard</p>
-                <a href="/login" class="btn btn-outline">
-                    <i class="fas fa-sign-in-alt"></i> Sign In
-                </a>
-            </div>
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>Collaborative Investment Ltd</h3>
-                <p>Nigeria Businesses Development & Investment Management Company Operating Across Multi-Sector. We Provide Professional Management, L2O Financing, and Long-term Wealth Creation Across Our Eco-system.</p>
-                <div class="social-links" style="margin-top: 1rem;">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                        <i class="fab fa-facebook" style="font-size: 1.5rem; color: #1877F2;"></i>
-                    </a>
-                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                        <i class="fab fa-twitter" style="font-size: 1.5rem; color: #ffffff;"></i>
-                    </a>
-                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                        <i class="fab fa-whatsapp" style="font-size: 1.5rem; color: #25D366;"></i>
-                    </a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" aria-label="Instagram" target="_blank">
-                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: #E4405F;"></i>
-                    </a>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/services">Our Services</a></li>
-                    <li><a href="/shop-categories">Shop Products</a></li>
-                    <li><a href="/portfolio">Portfolio</a></li>
-                    <li><a href="/investment">Investment</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
             </div>
-
-            <div class="footer-section">
-                <h3>Our Sectors</h3>
-                <ul class="footer-links">
-                    <li><a href="/services#agribusiness">Agribusiness Management</a></li>
-                    <li><a href="/services#construction">Construction, Fabrication & Project Management</a></li>
-                    <li><a href="/services#machinery">Machinery & Industrial Services</a></li>
-                    <li><a href="/services#solar">Solar Energy Solutions</a></li>
-                    <li><a href="/services#furniture">Furniture Production & Supply</a></li>
-                    <li><a href="/services#hotel">Hotel Turnaround Services</a></li>
-                    <li><a href="/services#businessfacility">Business Facility Management</a></li>
-                    <li><a href="/services#property">Property & Tenant Management</a></li>
-                    <li><a href="/services#diaspora">Diaspora Asset Management</a></li>
-                    <li><a href="https://cilworkforce.com">Find Work/Hire Professional Workers</a></li>
-                </ul>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
             </div>
-
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
-                <p>collaborativeinvestmentltd@gmail.com</p>
-                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                <p><a href="https://wa.me/2348129978419" target="_blank">+234 812 997 8419</a></p>
-                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved</p>
-            <p style="display: inline;">Building Nigeria's Business Future Through Integrated Business Development</p>
-            <p style="margin-top: 1rem;">
-                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
-            </p>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/2348129978419" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <div class="quick-contact-card" id="quickContactCard">
-        <button class="close-quick-contact" onclick="document.getElementById('quickContactCard').classList.remove('show')">×</button>
-        <div class="quick-contact-header">
-            <i class="fas fa-info-circle"></i>
-            <h4>Need accurate information?</h4>
-        </div>
-        <a href="https://wa.me/2348129978419" target="_blank" class="quick-contact-item">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="tel:+2348129978419" class="quick-contact-item">
-            <i class="fas fa-phone-alt"></i> Call +234 812 997 8419
-        </a>
-        <a href="mailto:collaborativeinvestmentltd@gmail.com" class="quick-contact-item">
-            <i class="fas fa-envelope"></i> Email
-        </a>
-        <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--gray); text-align: center;">
-            RC: 8918603 | Website Under Development
-        </div>
-    </div>
-
     <!-- JavaScript -->
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/register.js"></script>
-    <!-- Payment Gateway SDKs -->
-    <script src="https://js.paystack.co/v1/inline.js"></script>
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script>
+        // ----- MOBILE MENU TOGGLE -----
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+
+        // ----- GOOGLE SIGNUP (Real-time OAuth) -----
+        document.getElementById('googleSignupBtn').addEventListener('click', function() {
+            // For production, replace with your actual Google OAuth client ID
+            const clientId = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+            const redirectUri = window.location.origin + '/auth/google/callback';
+            const scope = 'email profile';
+            const responseType = 'token';
+            
+            // Build the Google OAuth URL
+            const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+                'client_id=' + encodeURIComponent(clientId) +
+                '&redirect_uri=' + encodeURIComponent(redirectUri) +
+                '&response_type=' + responseType +
+                '&scope=' + encodeURIComponent(scope) +
+                '&prompt=select_account';
+            
+            // Open Google signup popup
+            const width = 500;
+            const height = 600;
+            const left = (window.screen.width - width) / 2;
+            const top = (window.screen.height - height) / 2;
+            
+            const popup = window.open(
+                authUrl,
+                'Google Signup',
+                'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top
+            );
+            
+            // Listen for the callback from the popup
+            window.addEventListener('message', function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'google_signup_success') {
+                        popup.close();
+                        alert('Google signup successful! Welcome ' + data.name + '!');
+                        // Redirect to dashboard or complete profile
+                        // window.location.href = '/dashboard';
+                    }
+                } catch (e) {
+                    // Handle errors
+                }
+            });
+            
+            // Fallback: if popup is blocked or user closes it
+            console.log('Google OAuth is configured. Replace YOUR_GOOGLE_CLIENT_ID with your actual client ID.');
+        });
+
+        // ----- REGISTRATION HANDLER -----
+        function handleRegistration() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const countryCode = document.getElementById('countryCode').value;
+            const dob = document.getElementById('dob').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation
+            if (!fullName) {
+                alert('Please enter your full name.');
+                return;
+            }
+
+            if (!email) {
+                alert('Please enter your email address.');
+                return;
+            }
+
+            if (!phone) {
+                alert('Please enter your phone number.');
+                return;
+            }
+
+            if (!dob) {
+                alert('Please enter your date of birth.');
+                return;
+            }
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            // Construct full phone number
+            const fullPhone = countryCode + phone;
+
+            // In production, send this data to your backend API
+            console.log('Registration data:', {
+                fullName,
+                email,
+                phone: fullPhone,
+                dob,
+                password
+            });
+
+            // Simulate successful registration
+            alert('Account created successfully! Please check your email to verify.');
+            
+            // Optionally redirect to login
+            // window.location.href = 'login.html';
+        }
+    </script>
+
 </body>
 </html>

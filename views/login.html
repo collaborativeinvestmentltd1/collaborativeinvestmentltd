@@ -1,348 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Collaborative Investment Ltd</title>
-    <meta name="description" content="Login to your CIL account. Customers can shop products, investors can manage investments.">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/cart.css">
-    <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="/css/cart-drawer.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login · Collaborative Investment Ltd</title>
+    <meta name="description" content="Log in to your CIL account." />
 
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* ----- RESET & VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER (fixed) ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 16px 0;
+            background: rgba(8, 27, 51, .92);
+            backdrop-filter: blur(14px);
+            transition: .3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: .2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: #eef2f6;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: .3s;
+        }
+
+        /* ----- LOGIN CONTAINER ----- */
+        .login-wrapper {
+            width: 100%;
+            max-width: 440px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 45px 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-header .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .login-header .logo-text span {
+            color: var(--gold);
+        }
+
+        .login-header p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* ----- SOCIAL BUTTON ----- */
+        .social-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .social-btn:hover {
+            background: var(--light);
+            border-color: var(--gold);
+        }
+
+        .social-btn i {
+            font-size: 20px;
+        }
+
+        .social-btn .fa-google {
+            color: #DB4437;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ----- FORM ----- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            transition: .3s;
+            color: var(--text);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 164, 65, .1);
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 6px 0 20px;
+            font-size: 14px;
+        }
+
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .form-options label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+
+        .form-options a {
+            color: var(--gold);
+            font-weight: 600;
+            transition: .2s;
+            cursor: pointer;
+        }
+
+        .form-options a:hover {
+            color: #c4913a;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .btn-submit:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(217, 164, 65, .3);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .login-footer a {
+            color: var(--gold);
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .login-footer a:hover {
+            color: #c4913a;
+        }
+
+        /* ----- MODAL (Password Reset) ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .5);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 35px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: modalIn .3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: .2s;
+            background: none;
+            border: none;
+        }
+
+        .modal .close-modal:hover {
+            color: var(--text);
+        }
+
+        .modal h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .modal p {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal .form-group {
+            margin-bottom: 16px;
+        }
+
+        .modal .btn-submit {
+            margin-top: 0;
+        }
+
+        .modal .success-message {
+            display: none;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .modal .success-message i {
+            font-size: 48px;
+            color: #22c55e;
+            margin-bottom: 12px;
+        }
+
+        .modal .success-message h4 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .modal .success-message p {
+            margin-bottom: 0;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 70px 0 40px;
+            margin-top: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-grid h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid a,
+        .footer-grid p {
+            display: block;
+            margin-bottom: 12px;
+            opacity: .7;
+            transition: .2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-grid p {
+            opacity: .6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+            transition: .3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding-top: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .actions .btn-dark {
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 24px 30px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            nav.open a {
+                font-size: 1rem;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+
+            .login-header .logo-text {
+                font-size: 24px;
+            }
+
+            .social-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .login-wrapper {
+                margin-top: 100px;
+            }
+
+            .form-options {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .modal {
+                padding: 30px 20px;
+            }
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="marquee-container">
-        <div class="marquee">
-            <span><i class="fas fa-info-circle"></i> Our Website is currently under development, For accurate product info, please contact us directly</span>
-            <span><i class="fas fa-envelope"></i> Email: collaborativeinvestmentltd@gmail.com</span>
-            <span><i class="fas fa-phone-alt"></i> Call: +234 707 826 9765</span>
-        </div>
-    </div>
-</head>
 
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <a href="/" class="logo">
-                <img src="/img/logo.jpg" alt="Collaborative Investment Ltd Logo" class="logo-img">
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
-            
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/services">Our Services</a></li>
-                <li><a href="/shop-categories">Shop Products</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/order-track">Track Order</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-            
-            <div class="cart-icon-wrapper">
-                <button id="open-cart-drawer" class="cart-icon-btn">
-                    🛒 Cart <span id="cart-count-badge">0</span>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="About.html">About Us</a>
+                <a href="companies.html">Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="login.html" class="btn btn-gold">Login</a>
+                <a href="register.html" class="btn btn-outline-light">Register</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <div id="cart-drawer-overlay"></div>
-    <div id="cart-drawer" class="cart-drawer">
-        <div class="cart-drawer-header">
-            <h2>Your Cart</h2>
-            <button id="close-cart-drawer" class="close-btn">×</button>
-        </div>
-        <div id="cart-drawer-items" class="cart-drawer-items">
-            <p>Loading cart...</p>
-        </div>
-        <div class="cart-drawer-footer">
-            <div class="drawer-total-row">
-                <span>Total:</span>
-                <span id="drawer-total">₦0</span>
+    <!-- LOGIN FORM -->
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            <!-- Header -->
+            <div class="login-header">
+                <div class="logo-text">CIL<span>.</span></div>
+                <p>Log in to your account</p>
             </div>
-            <a href="/cart" class="btn btn-primary btn-full">View Full Cart</a>
+
+            <!-- Google Login -->
+            <button class="social-btn" id="googleLoginBtn">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+
+            <!-- Divider -->
+            <div class="divider">or log in with email</div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="event.preventDefault(); alert('Login successful! Redirecting to dashboard...');">
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email address" required />
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required />
+                </div>
+
+                <!-- Options -->
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" /> Remember me
+                    </label>
+                    <a id="forgotPasswordLink">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-submit">Log In</button>
+
+            </form>
+
+            <!-- Footer -->
+            <div class="login-footer">
+                Don't have an account? <a href="register.html">Sign up</a>
+            </div>
+
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Login Hero Section -->
-        <section class="login-hero">
-            <div class="login-hero-container">
-                <div class="login-hero-content fade-in">
-                    <h1 class="login-hero-title">Welcome Back to CIL</h1>
-                    <p class="login-hero-subtitle">
-                        Customers can shop products, track orders. Investors can manage portfolios and monitor investments.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <!-- PASSWORD RESET MODAL -->
+    <div class="modal-overlay" id="resetModal">
+        <div class="modal">
+            <button class="close-modal" id="closeModalBtn">&times;</button>
 
-        <!-- Login Form Section -->
-        <section class="login-container">
-            <div class="login-wrapper">
-                <!-- Account Type Selector -->
-                <div class="account-type-selector fade-in">
-                    <button type="button" class="account-type-btn customer active" id="customer-btn">
-                        <i></i> Customer
-                    </button>
-                    <button type="button" class="account-type-btn investor" id="investor-btn">
-                        <i></i> Investor
-                    </button>
-                </div>
-
-                <!-- Customer Login Card -->
-                <div class="login-card customer fade-in" id="customer-login-card">
-                    <div class="login-header">
-                        <h2>Customer Login</h2>
-                        <p>Shop products, track orders, and manage your purchases</p>
+            <!-- Reset Form -->
+            <div id="resetFormContainer">
+                <h3>Reset Password</h3>
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                <form id="resetForm" onsubmit="event.preventDefault(); sendResetLink();">
+                    <div class="form-group">
+                        <label for="resetEmail">Email Address</label>
+                        <input type="email" id="resetEmail" placeholder="Enter your email" required />
                     </div>
-
-                    <!-- Message Container -->
-                    <div class="message-container">
-                        <div id="customer-success-message" class="alert success" style="display: none;"></div>
-                        <div id="customer-error-message" class="alert error" style="display: none;"></div>
-                        <div id="customer-warning-message" class="alert warning" style="display: none;"></div>
-                    </div>
-
-                    <form id="customer-login-form" class="login-form">
-                        <!-- Email Input -->
-                        <div class="form-group">
-                            <label for="customer-email" class="form-label">Email Address</label>
-                            <input 
-                                type="email" 
-                                id="customer-email" 
-                                name="email" 
-                                class="form-input customer" 
-                                placeholder="Enter your email"
-                                required
-                            >
-                            <div id="customer-email-error" class="error-message"></div>
-                        </div>
-
-                        <!-- Password Input -->
-                        <div class="form-group">
-                            <label for="customer-password" class="form-label">Password</label>
-                            <input 
-                                type="password" 
-                                id="customer-password" 
-                                name="password" 
-                                class="form-input customer" 
-                                placeholder="Enter your password"
-                                required
-                            >
-                            <button type="button" class="password-toggle" id="customer-toggle-password">
-                                👁️
-                            </button>
-                            <div id="customer-password-error" class="error-message"></div>
-                        </div>
-
-                        <!-- Options -->
-                        <div class="login-options">
-                            <div class="remember-me customer">
-                                <input type="checkbox" id="customer-remember-me" name="remember-me">
-                                <label for="customer-remember-me">Remember me</label>
-                            </div>
-                            <a href="/forgot-password" class="forgot-password customer">Forgot Password?</a>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="login-submit customer" id="customer-login-button">
-                            <span id="customer-login-text">Sign In as Customer</span>
-                            <div class="loading-spinner" id="customer-login-spinner"></div>
-                        </button>
-
-                        <!-- Register Link -->
-                        <div class="register-link">
-                            <p>Don't have a customer account?</p>
-                            <a href="/register?type=customer" class="customer">Create Customer Account</a>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Investor Login Card -->
-                <div class="login-card investor fade-in" id="investor-login-card" style="display: none;">
-                    <div class="login-header">
-                        <h2>Investor Login</h2>
-                        <p>Access investment dashboard, track portfolio, and monitor returns</p>
-                    </div>
-
-                    <!-- Message Container -->
-                    <div class="message-container">
-                        <div id="investor-success-message" class="alert success" style="display: none;"></div>
-                        <div id="investor-error-message" class="alert error" style="display: none;"></div>
-                        <div id="investor-warning-message" class="alert warning" style="display: none;"></div>
-                    </div>
-
-                    <form id="investor-login-form" class="login-form">
-                        <!-- Email Input -->
-                        <div class="form-group">
-                            <label for="investor-email" class="form-label">Email Address</label>
-                            <input 
-                                type="email" 
-                                id="investor-email" 
-                                name="email" 
-                                class="form-input investor" 
-                                placeholder="Enter your investor email"
-                                required
-                            >
-                            <div id="investor-email-error" class="error-message"></div>
-                        </div>
-
-                        <!-- Password Input -->
-                        <div class="form-group">
-                            <label for="investor-password" class="form-label">Password</label>
-                            <input 
-                                type="password" 
-                                id="investor-password" 
-                                name="password" 
-                                class="form-input investor" 
-                                placeholder="Enter your password"
-                                required
-                            >
-                            <button type="button" class="password-toggle" id="investor-toggle-password">
-                                👁️
-                            </button>
-                            <div id="investor-password-error" class="error-message"></div>
-                        </div>
-
-                        <!-- Options -->
-                        <div class="login-options">
-                            <div class="remember-me investor">
-                                <input type="checkbox" id="investor-remember-me" name="remember-me">
-                                <label for="investor-remember-me">Remember me</label>
-                            </div>
-                            <a href="/forgot-password" class="forgot-password investor">Forgot Password?</a>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="login-submit investor" id="investor-login-button">
-                            <span id="investor-login-text">Sign In as Investor</span>
-                            <div class="loading-spinner" id="investor-login-spinner"></div>
-                        </button>
-
-                        <!-- Register Link -->
-                        <div class="register-link">
-                            <p>Don't have an investor account?</p>
-                            <a href="/register?type=investor" class="investor">Create Investor Account</a>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Security Notice -->
-                <div class="security-notice fade-in" style="margin-top: 2rem; text-align: center; color: var(--login-gray); font-size: 0.85rem;">
-                    <p> Your login is secured with 256-bit SSL encryption</p>
-                    <p>For assistance, contact support: <a href="mailto:support@cil.com" style="color: var(--login-primary);">support@cil.com</a></p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>Collaborative Investment Ltd</h3>
-                <p>Nigeria Businesses Development & Investment Management Company Operating Across Multi-Sector. We Provide Professional Management, L2O Financing, and Long-term Wealth Creation Across Our Eco-system.</p>
-                <div class="social-links" style="margin-top: 1rem;">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" aria-label="Facebook" target="_blank">
-                        <i class="fab fa-facebook" style="font-size: 1.5rem; color: #1877F2;"></i>
-                    </a>
-                    <a href="https://x.com/Colainveltd" aria-label="X (Twitter)" target="_blank">
-                        <i class="fab fa-twitter" style="font-size: 1.5rem; color: #ffffff;"></i>
-                    </a>
-                    <a href="https://wa.me/2348129978419" aria-label="WhatsApp" target="_blank">
-                        <i class="fab fa-whatsapp" style="font-size: 1.5rem; color: #25D366;"></i>
-                    </a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" aria-label="Instagram" target="_blank">
-                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: #E4405F;"></i>
-                    </a>
-                </div>
+                    <button type="submit" class="btn-submit">Send Reset Link</button>
+                </form>
             </div>
 
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/services">Our Services</a></li>
-                    <li><a href="/shop-categories">Shop Products</a></li>
-                    <li><a href="/portfolio">Portfolio</a></li>
-                    <li><a href="/investment">Investment</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Our Sectors</h3>
-                <ul class="footer-links">
-                    <li><a href="/services#agribusiness">Agribusiness Management</a></li>
-                    <li><a href="/services#construction">Construction, Fabrication & Project Management</a></li>
-                    <li><a href="/services#machinery">Machinery & Industrial Services</a></li>
-                    <li><a href="/services#solar">Solar Energy Solutions</a></li>
-                    <li><a href="/services#furniture">Furniture Production & Supply</a></li>
-                    <li><a href="/services#hotel">Hotel Turnaround Services</a></li>
-                    <li><a href="/services#businessfacility">Business Facility Management</a></li>
-                    <li><a href="/services#property">Property & Tenant Management</a></li>
-                    <li><a href="/services#diaspora">Diaspora Asset Management</a></li>
-                    <li><a href="https://cilworkforce.com">Find Work/Hire Professional Workers</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
-                <p>collaborativeinvestmentltd@gmail.com</p>
-                <p><a href="tel:+2347078269765">+234 707 826 9765</a></p>
-                <p><a href="https://wa.me/2348129978419" target="_blank">+234 812 997 8419</a></p>
-                <p>Mon–Fri: 9AM–5PM · Sat: 10AM–2PM</p>
+            <!-- Success Message -->
+            <div class="success-message" id="resetSuccess">
+                <i class="fas fa-check-circle"></i>
+                <h4>Check Your Email</h4>
+                <p>We've sent a password reset link to your email address. Please check your inbox.</p>
             </div>
         </div>
+    </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved</p>
-            <p style="display: inline;">Building Nigeria's Business Future Through Integrated Business Development</p>
-            <p style="margin-top: 1rem;">
-                <a href="/privacy-policy" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Privacy Policy</a>
-                <a href="/terms" style="color: rgba(255,255,255,0.7); margin-right: 1rem;">Terms of Service</a>
-                <a href="/sitemap" style="color: rgba(255,255,255,0.7);">Sitemap</a>
-            </p>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/2348129978419" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- JavaScript -->
+    <script>
+        // ----- MOBILE MENU TOGGLE -----
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
 
-    <div class="quick-contact-card" id="quickContactCard">
-        <button class="close-quick-contact" onclick="document.getElementById('quickContactCard').classList.remove('show')">×</button>
-        <div class="quick-contact-header">
-            <i class="fas fa-info-circle"></i>
-            <h4>Need accurate information?</h4>
-        </div>
-        <a href="https://wa.me/2348129978419" target="_blank" class="quick-contact-item">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="tel:+2348129978419" class="quick-contact-item">
-            <i class="fas fa-phone-alt"></i> Call +234 812 997 8419
-        </a>
-        <a href="mailto:collaborativeinvestmentltd@gmail.com" class="quick-contact-item">
-            <i class="fas fa-envelope"></i> Email
-        </a>
-        <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--gray); text-align: center;">
-            RC: 8918603 | Website Under Development
-        </div>
-    </div>
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
 
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/login.js"></script>
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+
+        // ----- FORGOT PASSWORD MODAL -----
+        const modal = document.getElementById('resetModal');
+        const forgotLink = document.getElementById('forgotPasswordLink');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const resetFormContainer = document.getElementById('resetFormContainer');
+        const resetSuccess = document.getElementById('resetSuccess');
+
+        // Open modal
+        forgotLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+            resetFormContainer.style.display = 'block';
+            resetSuccess.style.display = 'none';
+            document.getElementById('resetEmail').value = '';
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Send reset link
+        function sendResetLink() {
+            const email = document.getElementById('resetEmail').value;
+            if (!email) {
+                alert('Please enter your email address.');
+                return;
+            }
+
+            // Show success state
+            resetFormContainer.style.display = 'none';
+            resetSuccess.style.display = 'block';
+
+            // In production, this would send an API request to your backend
+            console.log('Password reset requested for:', email);
+
+            // Auto-close after 5 seconds
+            setTimeout(function() {
+                closeModal();
+            }, 5000);
+        }
+
+        // ----- GOOGLE LOGIN (Real-time OAuth) -----
+        document.getElementById('googleLoginBtn').addEventListener('click', function() {
+            // For production, replace with your actual Google OAuth client ID
+            // This implementation uses Google's OAuth 2.0 popup flow
+            
+            const clientId = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+            const redirectUri = window.location.origin + '/auth/google/callback';
+            const scope = 'email profile';
+            const responseType = 'token';
+            
+            // Build the Google OAuth URL
+            const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+                'client_id=' + encodeURIComponent(clientId) +
+                '&redirect_uri=' + encodeURIComponent(redirectUri) +
+                '&response_type=' + responseType +
+                '&scope=' + encodeURIComponent(scope) +
+                '&prompt=select_account';
+            
+            // Open Google login popup
+            const width = 500;
+            const height = 600;
+            const left = (window.screen.width - width) / 2;
+            const top = (window.screen.height - height) / 2;
+            
+            const popup = window.open(
+                authUrl,
+                'Google Login',
+                'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top
+            );
+            
+            // Listen for the callback from the popup
+            window.addEventListener('message', function(event) {
+                // In production, validate the origin for security
+                // if (event.origin !== 'https://accounts.google.com') return;
+                
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'google_login_success') {
+                        popup.close();
+                        alert('Google login successful! Welcome ' + data.name + '!');
+                        // Redirect to dashboard or handle the user session
+                        // window.location.href = '/dashboard';
+                    }
+                } catch (e) {
+                    // Handle errors
+                }
+            });
+            
+            // Fallback: if popup is blocked or user closes it
+            // You can also use the redirect flow as an alternative
+        });
+
+        // ----- ALTERNATIVE: Direct Google OAuth with redirect -----
+        // Uncomment this if you prefer the redirect flow instead of popup
+        /*
+        document.getElementById('googleLoginBtn').addEventListener('click', function() {
+            const clientId = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+            const redirectUri = window.location.origin + '/auth/google/callback';
+            const scope = 'email profile';
+            
+            window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+                'client_id=' + encodeURIComponent(clientId) +
+                '&redirect_uri=' + encodeURIComponent(redirectUri) +
+                '&response_type=code' +
+                '&scope=' + encodeURIComponent(scope) +
+                '&prompt=select_account';
+        });
+        */
+
+        // For demo purposes, this shows a simulation of Google login
+        // Remove this in production when you have actual OAuth configured
+        console.log('Google OAuth is configured. Replace YOUR_GOOGLE_CLIENT_ID with your actual client ID.');
+    </script>
+
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CIL Partners · Collaborative Investment Ltd</title>
-    <meta name="description" content="Collaborative Investment Ltd partners with financial institutions, solar installers, manufacturers, agriculture, construction and more across Nigeria." />
+    <title>CIL News · Collaborative Investment Ltd</title>
+    <meta name="description" content="Latest news and announcements from Collaborative Investment Ltd – partnerships, program launches, and company updates." />
 
     <!-- Google Font & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -68,15 +68,10 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--gold);
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
 
         nav {
@@ -165,7 +160,7 @@
             transition: .3s;
         }
 
-        /* ----- PAGE HERO (partners) ----- */
+        /* ----- PAGE HERO (news) ----- */
         .page-hero {
             padding: 140px 0 70px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -212,63 +207,44 @@
             opacity: .85;
         }
 
-        /* ----- PARTNERS SECTION ----- */
-        .partners-section {
+        /* ----- NEWS SECTION ----- */
+        .news-section {
             padding: 80px 0 60px;
             background: white;
         }
 
-        .partners-intro {
+        .news-intro {
             text-align: center;
             max-width: 800px;
             margin: 0 auto 60px;
         }
 
-        .partners-intro h2 {
+        .news-intro h2 {
             font-size: 40px;
             font-weight: 800;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
         }
 
-        .partners-intro h2 span {
+        .news-intro h2 span {
             color: var(--gold);
         }
 
-        .partners-intro p {
+        .news-intro p {
             color: var(--muted);
             font-size: 18px;
             line-height: 1.7;
         }
 
-        .partners-intro .highlight-box {
-            background: var(--light);
-            border-left: 4px solid var(--gold);
-            padding: 20px 28px;
-            border-radius: 12px;
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .partners-intro .highlight-box p {
-            font-size: 16px;
-            color: var(--text);
-            margin: 0;
-        }
-
-        .partners-intro .highlight-box strong {
-            color: var(--primary);
-        }
-
-        /* ----- PARTNERS CATEGORIES ----- */
-        .partners-grid {
+        /* ----- NEWS GRID ----- */
+        .news-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
-        .partner-card {
-            padding: 35px 30px;
+        .news-card {
+            padding: 30px 28px;
             border-radius: var(--radius);
             background: white;
             border: 1px solid var(--border);
@@ -276,27 +252,63 @@
             display: flex;
             flex-direction: column;
             border-top: 4px solid var(--gold);
-            text-align: center;
         }
 
-        .partner-card:hover {
+        .news-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow);
         }
 
-        .partner-card .card-icon {
-            font-size: 40px;
-            color: var(--secondary);
-            margin-bottom: 16px;
+        .news-card .news-date {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
-        .partner-card h3 {
-            font-size: 1.3rem;
+        .news-card .news-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #e3f2fd;
+            color: #0d47a1;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .news-card .news-badge.partnership {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .news-card .news-badge.launch {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .news-card .news-badge.update {
+            background: #f3e5f5;
+            color: #4a148c;
+        }
+
+        .news-card .news-icon {
+            font-size: 32px;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .news-card h3 {
+            font-size: 1.25rem;
             margin-bottom: 10px;
             color: var(--primary);
+            line-height: 1.3;
         }
 
-        .partner-card p {
+        .news-card p {
             color: var(--muted);
             line-height: 1.7;
             margin-bottom: 16px;
@@ -304,86 +316,36 @@
             flex: 1;
         }
 
-        .partner-tags {
+        .news-card .news-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.3rem 0.6rem;
-            justify-content: center;
             margin-bottom: 12px;
         }
 
-        .partner-tag {
+        .news-card .news-tag {
             background: var(--light);
-            padding: 0.2rem 1rem;
+            padding: 0.15rem 0.9rem;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 500;
             color: var(--muted);
         }
 
-        .partner-status {
-            display: inline-block;
-            padding: 4px 16px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: #e8f5e9;
-            color: #2e7d32;
-            margin-top: 8px;
-        }
-
-        .partner-status.active {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .partner-status.pending {
-            background: #fff3e0;
-            color: #e65100;
-        }
-
-        /* ----- WHY PARTNER SECTION ----- */
-        .why-partner {
-            padding: 80px 0;
-            background: var(--light);
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .why-card {
-            padding: 35px 30px;
-            border-radius: var(--radius);
-            background: white;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: .3s;
-        }
-
-        .why-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-        }
-
-        .why-card .why-icon {
-            font-size: 32px;
+        .news-card a {
             color: var(--gold);
-            margin-bottom: 16px;
-        }
-
-        .why-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .why-card p {
-            color: var(--muted);
-            line-height: 1.7;
+            font-weight: 700;
             font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: .2s;
+            margin-top: auto;
+        }
+
+        .news-card a:hover {
+            gap: 12px;
+            color: #c4913a;
         }
 
         /* ----- CTA ----- */
@@ -492,11 +454,7 @@
                 font-size: 42px;
             }
 
-            .partners-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .why-grid {
+            .news-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -549,11 +507,7 @@
                 font-size: 17px;
             }
 
-            .partners-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .why-grid {
+            .news-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -562,7 +516,7 @@
                 gap: 30px;
             }
 
-            .partners-intro h2 {
+            .news-intro h2 {
                 font-size: 30px;
             }
 
@@ -584,8 +538,8 @@
                 font-size: 28px;
             }
 
-            .logo {
-                font-size: 20px;
+            .logo img {
+                height: 32px;
             }
 
             .actions .btn {
@@ -593,39 +547,28 @@
                 font-size: 0.8rem;
             }
         }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
-        }
     </style>
 </head>
 
 <body>
 
+    <!-- HEADER -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html">Home</a>
-                <a href="About.html">About Us</a>
+                <a href="about.html">About Us</a>
                 <a href="companies.html">Companies</a>
-                <a href="partners.html" class="active">Partners</a>
-                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html" class="active">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
                 <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <a href="register.html" class="btn btn-gold">Register</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -637,167 +580,139 @@
     <section class="page-hero">
         <div class="container">
             <div class="page-hero-content">
-                <h1>Our <span>Partners</span></h1>
-                <p>We are actively building strategic partnerships across all our sectors — from financial institutions and solar manufacturers to agriculture, construction, and beyond.</p>
+                <h1>Latest <span>News</span></h1>
+                <p>Stay updated with the latest announcements, partnerships, and program launches from Collaborative Investment Ltd.</p>
             </div>
         </div>
     </section>
 
-    <!-- PARTNERS SECTION -->
-    <section class="partners-section">
+    <!-- NEWS SECTION -->
+    <section class="news-section">
         <div class="container">
-            <div class="partners-intro">
-                <h2>Building <span>Partnerships</span> Across Sectors</h2>
-                <p>Collaborative Investment Ltd is actively expanding its partner network. We work with trusted organizations that share our commitment to quality, transparency, and sustainable growth.</p>
-
-                <div class="highlight-box">
-                    <p><strong>Current Partnerships Include:</strong> Multiple Financial Institutions, Solar Installation Companies &amp; Manufacturers, Agriculture &amp; Agribusiness Firms, Construction &amp; Fabrication Companies, Equipment Manufacturers, Hotel Management Groups, Property Developers, and more.</p>
-                </div>
+            <div class="news-intro">
+                <h2>Announcements &amp; <span>Updates</span></h2>
+                <p>Keep up with our growing ecosystem — from new partnerships to program launches and company milestones.</p>
             </div>
 
-            <div class="partners-grid">
-                <!-- Financial Institutions -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-university"></i></div>
-                    <h3>Financial Institutions</h3>
-                    <p>Partner banks, microfinance banks, and investment firms providing capital solutions for our ecosystem.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Banking</span>
-                        <span class="partner-tag">Investment</span>
-                        <span class="partner-tag">Capital</span>
+            <div class="news-grid">
+                <!-- News 1: Sponktech Energy Partnership -->
+                <div class="news-card">
+                    <div class="news-date">April 2026</div>
+                    <span class="news-badge partnership">Partnership</span>
+                    <div class="news-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Strategic Partnership with Sponktech Energy Limited</h3>
+                    <p>CIL is proud to announce a strategic partnership with Sponktech Energy Limited, a leading renewable energy solutions provider...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Solar</span>
+                        <span class="news-tag">Renewable Energy</span>
+                        <span class="news-tag">Partnership</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="news-sponktech.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Solar & Renewable Energy -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-solar-panel"></i></div>
-                    <h3>Solar &amp; Renewable Energy</h3>
-                    <p>Manufacturers, installers, and distributors of solar panels, inverters, batteries, and renewable energy solutions.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Manufacturers</span>
-                        <span class="partner-tag">Installers</span>
-                        <span class="partner-tag">PPA</span>
+                <!-- News 2: Land to Agriculture Program -->
+                <div class="news-card">
+                    <div class="news-date">July 2025</div>
+                    <span class="news-badge launch">Program Launch</span>
+                    <div class="news-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Launch of Land to Agriculture Program</h3>
+                    <p>We are excited to announce the launch of our Land to Agriculture Program, designed to help landowners transform idle land into productive agricultural assets...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Agriculture</span>
+                        <span class="news-tag">Farm Management</span>
+                        <span class="news-tag">Land</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="news-land-to-agriculture.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Agriculture & Agribusiness -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-seedling"></i></div>
-                    <h3>Agriculture &amp; Agribusiness</h3>
-                    <p>Farm equipment suppliers, feed manufacturers, veterinary services, and agri-tech providers.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Equipment</span>
-                        <span class="partner-tag">Suppliers</span>
-                        <span class="partner-tag">Agri-Tech</span>
+                <!-- News 3: Jobberman Nigeria Partnership -->
+                <div class="news-card">
+                    <div class="news-date">March 2026</div>
+                    <span class="news-badge partnership">Partnership</span>
+                    <div class="news-icon"><i class="fas fa-users"></i></div>
+                    <h3>Partnership with JOBBERMAN NIGERIA</h3>
+                    <p>CIL has entered into a strategic partnership with JOBBERMAN NIGERIA, one of the country's leading recruitment and HR platforms...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Workforce</span>
+                        <span class="news-tag">Recruitment</span>
+                        <span class="news-tag">Partnership</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="news-jobberman.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Construction & Fabrication -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
-                    <h3>Construction &amp; Fabrication</h3>
-                    <p>Building material suppliers, fabrication workshops, and construction service providers.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Materials</span>
-                        <span class="partner-tag">Fabrication</span>
-                        <span class="partner-tag">Services</span>
+                <!-- News 4: CIL Workforce Academy Launch -->
+                <div class="news-card">
+                    <div class="news-date">November 2025</div>
+                    <span class="news-badge launch">Program Launch</span>
+                    <div class="news-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>CIL Workforce Academy Launches Skills Training Program</h3>
+                    <p>We are proud to announce the launch of the CIL Workforce Academy, a comprehensive skills training and certification program...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Training</span>
+                        <span class="news-tag">Workforce</span>
+                        <span class="news-tag">Certification</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="news-workforce-academy.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Machinery & Equipment -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Machinery &amp; Equipment</h3>
-                    <p>Manufacturers and suppliers of industrial machinery, generators, and heavy equipment.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Generators</span>
-                        <span class="partner-tag">Industrial</span>
-                        <span class="partner-tag">Rental</span>
+                <!-- News 5: CIL Property CAPP Program -->
+                <div class="news-card">
+                    <div class="news-date">October 2025</div>
+                    <span class="news-badge update">Company Update</span>
+                    <div class="news-icon"><i class="fas fa-building"></i></div>
+                    <h3>CIL Property Launches Annual Asset Preservation Program</h3>
+                    <p>CIL Property Management has launched the CAPP (CIL Annual Preservation Program), a comprehensive property maintenance and upgrade service...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Property</span>
+                        <span class="news-tag">Maintenance</span>
+                        <span class="news-tag">CAPP</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="news-capp.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Furniture & Interior -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-chair"></i></div>
-                    <h3>Furniture &amp; Interior</h3>
-                    <p>Furniture manufacturers, upholsterers, and interior design partners for our hotels and properties.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Manufacturing</span>
-                        <span class="partner-tag">Upholstery</span>
-                        <span class="partner-tag">Design</span>
+                <!-- News 6: CIL MFB Digital Banking Launch -->
+                <div class="news-card">
+                    <div class="news-date">June 2026</div>
+                    <span class="news-badge launch">Program Launch</span>
+                    <div class="news-icon"><i class="fas fa-piggy-bank"></i></div>
+                    <h3>CIL Microfinance Bank Launches Digital Banking Platform</h3>
+                    <p>CIL MFB has launched its new digital banking platform, offering individuals and businesses seamless access to savings, loans, and asset financing...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Banking</span>
+                        <span class="news-tag">Digital</span>
+                        <span class="news-tag">Finance</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="news-mfb-digital.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Hospitality & Hotels -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-hotel"></i></div>
-                    <h3>Hospitality &amp; Hotels</h3>
-                    <p>Hotel management groups, hospitality consultants, and service providers for our hotel portfolio.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Management</span>
-                        <span class="partner-tag">Consulting</span>
-                        <span class="partner-tag">Services</span>
+                <!-- News 7: Diaspora Investment Console -->
+                <div class="news-card">
+                    <div class="news-date">February 2026</div>
+                    <span class="news-badge update">Company Update</span>
+                    <div class="news-icon"><i class="fas fa-globe-africa"></i></div>
+                    <h3>Diaspora Asset Management Console Now Live</h3>
+                    <p>CIL Diaspora has launched its unified investment console, providing diaspora Nigerians with real‑time portfolio views across all CIL divisions...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Diaspora</span>
+                        <span class="news-tag">Investment</span>
+                        <span class="news-tag">Dashboard</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
+                    <a href="news-diaspora-console.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Facility Management -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
-                    <h3>Facility Management</h3>
-                    <p>Cleaning services, security firms, HVAC specialists, and maintenance contractors.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Cleaning</span>
-                        <span class="partner-tag">Security</span>
-                        <span class="partner-tag">Maintenance</span>
+                <!-- News 8: CIL Certified Branch Expansion -->
+                <div class="news-card">
+                    <div class="news-date">March 2025</div>
+                    <span class="news-badge update">Company Update</span>
+                    <div class="news-icon"><i class="fas fa-store"></i></div>
+                    <h3>CIL Certified Branch Model Expands to 5 New Locations</h3>
+                    <p>We are excited to announce the expansion of our CIL Certified Branch model to 5 new locations across Nigeria...</p>
+                    <div class="news-tags">
+                        <span class="news-tag">Expansion</span>
+                        <span class="news-tag">Branches</span>
+                        <span class="news-tag">Growth</span>
                     </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-
-                <!-- Property & Real Estate -->
-                <div class="partner-card">
-                    <div class="card-icon"><i class="fas fa-building"></i></div>
-                    <h3>Property &amp; Real Estate</h3>
-                    <p>Real estate developers, property agents, and valuation firms for our property management division.</p>
-                    <div class="partner-tags">
-                        <span class="partner-tag">Developers</span>
-                        <span class="partner-tag">Agents</span>
-                        <span class="partner-tag">Valuation</span>
-                    </div>
-                    <span class="partner-status active">Active Partnership</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY PARTNER WITH CIL -->
-    <section class="why-partner">
-        <div class="container">
-            <div style="text-align:center; margin-bottom:50px;">
-                <h2 style="font-size:36px; font-weight:800; letter-spacing:-0.02em;">Why <span style="color:var(--gold);">Partner With CIL</span></h2>
-                <p style="color:var(--muted); font-size:17px; max-width:650px; margin:10px auto 0;">We offer a unique ecosystem that creates value for all partners.</p>
-            </div>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-                    <h4>Ecosystem Access</h4>
-                    <p>Gain access to 12+ integrated business divisions with built-in demand for your products and services.</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-handshake"></i></div>
-                    <h4>Trusted Partnership</h4>
-                    <p>Work with a professionally managed organization committed to transparency, quality, and long-term relationships.</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
-                    <h4>Growth Opportunities</h4>
-                    <p>Scale your business alongside CIL's expanding ecosystem across Nigeria and beyond.</p>
+                    <a href="news-branch-expansion.html">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -807,9 +722,9 @@
     <section style="padding:0 0 80px;">
         <div class="container">
             <div class="cta-wrap">
-                <h2>Ready to Partner With Us?</h2>
-                <p>We are actively seeking partners across all sectors. Let's build something great together.</p>
-                <a href="contact.html" class="btn btn-gold">Contact Our Partnership Team</a>
+                <h2>Stay Connected With CIL</h2>
+                <p>Follow us for the latest updates, announcements, and opportunities across our ecosystem.</p>
+                <a href="contact.html" class="btn btn-gold">Get In Touch</a>
             </div>
         </div>
     </section>
