@@ -68,15 +68,10 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--gold);
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
 
         nav {
@@ -126,16 +121,6 @@
             font-size: 0.9rem;
         }
 
-        .btn-dark {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-dark:hover {
-            background: #eef2f6;
-            transform: translateY(-2px);
-        }
-
         .btn-gold {
             background: var(--gold);
             color: white;
@@ -144,6 +129,16 @@
         .btn-gold:hover {
             background: #c4913a;
             transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
         }
 
         .menu-toggle {
@@ -324,6 +319,11 @@
             color: #b71c1c;
         }
 
+        .position-card .pos-badge.new {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
         .position-card h3 {
             font-size: 1.2rem;
             margin-bottom: 6px;
@@ -372,7 +372,7 @@
             color: var(--gold);
         }
 
-        .position-card a {
+        .position-card .apply-btn {
             color: var(--gold);
             font-weight: 700;
             font-size: 0.95rem;
@@ -381,11 +381,313 @@
             gap: 6px;
             transition: .2s;
             margin-top: auto;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
         }
 
-        .position-card a:hover {
+        .position-card .apply-btn:hover {
             gap: 12px;
             color: #c4913a;
+        }
+
+        /* ----- APPLICATION MODAL ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .5);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 35px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: modalIn .3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: .2s;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .modal .close-modal:hover {
+            color: var(--text);
+        }
+
+        .modal h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+
+        .modal .modal-job-title {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .modal .form-group {
+            margin-bottom: 18px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .modal .form-group input,
+        .modal .form-group select,
+        .modal .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            transition: .3s;
+            color: var(--text);
+        }
+
+        .modal .form-group input:focus,
+        .modal .form-group select:focus,
+        .modal .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 164, 65, .1);
+        }
+
+        .modal .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal .form-group input[type="file"] {
+            padding: 10px;
+            border: 2px dashed var(--border);
+            cursor: pointer;
+        }
+
+        .modal .form-group input[type="file"]:hover {
+            border-color: var(--gold);
+        }
+
+        .modal .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .modal .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .modal .btn-submit:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(217, 164, 65, .3);
+        }
+
+        .modal .error-message {
+            display: none;
+            color: #c62828;
+            background: #ffebee;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .modal .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .modal .success-message i {
+            font-size: 48px;
+            color: #22c55e;
+            margin-bottom: 12px;
+        }
+
+        .modal .success-message h4 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .modal .success-message p {
+            margin-bottom: 0;
+        }
+
+        .modal .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ----- NEWSLETTER SECTION ----- */
+        .newsletter-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+
+        .newsletter-wrap {
+            background: white;
+            border-radius: var(--radius);
+            padding: 50px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .newsletter-content h3 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .newsletter-content p {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 550px;
+            margin: 0 auto 24px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 12px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .newsletter-note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 16px;
+        }
+
+        .newsletter-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .newsletter-message.success {
+            display: block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1px solid #a5d6a7;
+        }
+
+        .newsletter-message.error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .spinner-small {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
         }
 
         /* ----- APPLICATION PROCESS ----- */
@@ -461,6 +763,11 @@
             max-width: 700px;
             margin: 0 auto 35px;
             opacity: .85;
+        }
+
+        .cta-wrap .btn-gold {
+            font-size: 1.1rem;
+            padding: 16px 40px;
         }
 
         /* ----- FOOTER ----- */
@@ -571,10 +878,6 @@
                 display: flex;
             }
 
-            .actions .btn-dark {
-                display: none;
-            }
-
             nav.open {
                 display: flex;
                 flex-direction: column;
@@ -585,7 +888,7 @@
                 background: var(--primary);
                 padding: 24px 30px;
                 gap: 16px;
-                border-top: 1px solid rgba(255,255,255,0.06);
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
             }
 
             nav.open a {
@@ -631,6 +934,26 @@
             .cta-wrap p {
                 font-size: 16px;
             }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-wrap {
+                padding: 30px 20px;
+            }
+
+            .modal {
+                padding: 30px 20px;
+            }
+
+            .modal .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -638,8 +961,8 @@
                 font-size: 28px;
             }
 
-            .logo {
-                font-size: 20px;
+            .logo img {
+                height: 32px;
             }
 
             .actions .btn {
@@ -647,23 +970,12 @@
                 font-size: 0.8rem;
             }
         }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
-        }
     </style>
 </head>
 
 <body>
 
+    <!-- HEADER -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">
@@ -672,14 +984,14 @@
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -732,7 +1044,51 @@
                 <p>We're always looking for talented individuals to join our growing team. Check out our current openings across Nigeria.</p>
             </div>
             <div class="positions-grid">
-                <!-- Position 1 -->
+
+                <!-- ===== AGRICULTURE & AGRIBUSINESS ===== -->
+                <div class="position-card">
+                    <span class="pos-badge hot">Hot</span>
+                    <h3>Farm Operations Manager</h3>
+                    <div class="pos-department">CIL Agriculture &amp; Agribusiness</div>
+                    <p>Manage day-to-day farm operations, coordinate with field teams, and ensure optimal production across poultry, aquaculture, and crop farming.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Agriculture</span>
+                        <span class="pos-tag">Farm Management</span>
+                        <span class="pos-tag">Operations</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Ogun, Oyo, Kaduna, Kano</div>
+                    <button class="apply-btn" onclick="openModal('Farm Operations Manager', 'CIL Agriculture &amp; Agribusiness')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Agronomist</h3>
+                    <div class="pos-department">CIL Agriculture &amp; Agribusiness</div>
+                    <p>Provide expert advice on crop production, soil management, and sustainable farming practices to maximize yields and quality.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Crop Science</span>
+                        <span class="pos-tag">Soil Management</span>
+                        <span class="pos-tag">Research</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Ogun, Oyo, Kaduna, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Agronomist', 'CIL Agriculture &amp; Agribusiness')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Poultry Farm Supervisor</h3>
+                    <div class="pos-department">CIL Agriculture &amp; Agribusiness</div>
+                    <p>Supervise poultry operations including feeding, health management, egg collection, and biosecurity protocols.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Poultry</span>
+                        <span class="pos-tag">Animal Health</span>
+                        <span class="pos-tag">Supervision</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Ogun, Oyo, Lagos</div>
+                    <button class="apply-btn" onclick="openModal('Poultry Farm Supervisor', 'CIL Agriculture &amp; Agribusiness')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== CONSTRUCTION & FABRICATION ===== -->
                 <div class="position-card">
                     <span class="pos-badge hot">Hot</span>
                     <h3>Project Manager – Construction</h3>
@@ -743,13 +1099,41 @@
                         <span class="pos-tag">Project Management</span>
                         <span class="pos-tag">On-site</span>
                     </div>
-                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt, Kano</div>
+                    <button class="apply-btn" onclick="openModal('Project Manager – Construction', 'CIL Construction &amp; Fabrication')">Apply Now <i class="fas fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Position 2 -->
                 <div class="position-card">
-                    <span class="pos-badge">New</span>
+                    <span class="pos-badge new">New</span>
+                    <h3>Site Supervisor</h3>
+                    <div class="pos-department">CIL Construction &amp; Fabrication</div>
+                    <p>Supervise daily construction activities, coordinate workers, ensure safety compliance, and report on project progress.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Construction</span>
+                        <span class="pos-tag">Supervision</span>
+                        <span class="pos-tag">Safety</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt, Ibadan</div>
+                    <button class="apply-btn" onclick="openModal('Site Supervisor', 'CIL Construction &amp; Fabrication')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Quantity Surveyor</h3>
+                    <div class="pos-department">CIL Construction &amp; Fabrication</div>
+                    <p>Manage project costs, prepare estimates, and ensure value for money across construction projects.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Quantity Surveying</span>
+                        <span class="pos-tag">Cost Management</span>
+                        <span class="pos-tag">Estimating</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <button class="apply-btn" onclick="openModal('Quantity Surveyor', 'CIL Construction &amp; Fabrication')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== SOLAR ENERGY ===== -->
+                <div class="position-card">
+                    <span class="pos-badge hot">Hot</span>
                     <h3>Solar Installation Lead</h3>
                     <div class="pos-department">CIL Solar Energy Solutions</div>
                     <p>Lead solar installation teams, oversee project quality, and ensure customer satisfaction across residential and commercial projects.</p>
@@ -758,26 +1142,39 @@
                         <span class="pos-tag">Installation</span>
                         <span class="pos-tag">Renewable Energy</span>
                     </div>
-                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ibadan, Enugu</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ibadan, Enugu, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Solar Installation Lead', 'CIL Solar Energy Solutions')">Apply Now <i class="fas fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Position 3 -->
                 <div class="position-card">
-                    <span class="pos-badge">New</span>
-                    <h3>Farm Operations Manager</h3>
-                    <div class="pos-department">CIL Agribusiness Management</div>
-                    <p>Manage day-to-day farm operations, coordinate with field teams, and ensure optimal production across poultry and aquaculture.</p>
+                    <span class="pos-badge new">New</span>
+                    <h3>Solar Design Engineer</h3>
+                    <div class="pos-department">CIL Solar Energy Solutions</div>
+                    <p>Design solar PV systems, prepare technical specifications, and provide engineering support for installation teams.</p>
                     <div class="pos-tags">
-                        <span class="pos-tag">Agriculture</span>
-                        <span class="pos-tag">Farm Management</span>
-                        <span class="pos-tag">Operations</span>
+                        <span class="pos-tag">Solar</span>
+                        <span class="pos-tag">Engineering</span>
+                        <span class="pos-tag">Design</span>
                     </div>
-                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Ogun, Oyo, Kaduna</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <button class="apply-btn" onclick="openModal('Solar Design Engineer', 'CIL Solar Energy Solutions')">Apply Now <i class="fas fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Position 4 -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Solar Maintenance Technician</h3>
+                    <div class="pos-department">CIL Solar Energy Solutions</div>
+                    <p>Perform maintenance, troubleshooting, and repairs on solar systems to ensure optimal performance.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Solar</span>
+                        <span class="pos-tag">Maintenance</span>
+                        <span class="pos-tag">Troubleshooting</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ibadan, Enugu, Kano</div>
+                    <button class="apply-btn" onclick="openModal('Solar Maintenance Technician', 'CIL Solar Energy Solutions')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== PROPERTY & TENANT MANAGEMENT ===== -->
                 <div class="position-card">
                     <span class="pos-badge hot">Hot</span>
                     <h3>Property Manager</h3>
@@ -788,11 +1185,255 @@
                         <span class="pos-tag">Tenant Management</span>
                         <span class="pos-tag">Maintenance</span>
                     </div>
-                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Kano</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Kano, Port Harcourt</div>
+                    <button class="apply-btn" onclick="openModal('Property Manager', 'CIL Property &amp; Tenant Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Position 5 -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Tenant Relations Officer</h3>
+                    <div class="pos-department">CIL Property &amp; Tenant Management</div>
+                    <p>Manage tenant communications, resolve disputes, coordinate move-ins and move-outs, and ensure tenant satisfaction.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Tenant Relations</span>
+                        <span class="pos-tag">Customer Service</span>
+                        <span class="pos-tag">Property</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Ibadan</div>
+                    <button class="apply-btn" onclick="openModal('Tenant Relations Officer', 'CIL Property &amp; Tenant Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Property Maintenance Supervisor</h3>
+                    <div class="pos-department">CIL Property &amp; Tenant Management</div>
+                    <p>Supervise maintenance teams, coordinate repairs, and ensure properties are well-maintained.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Maintenance</span>
+                        <span class="pos-tag">Supervision</span>
+                        <span class="pos-tag">Property</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Kano</div>
+                    <button class="apply-btn" onclick="openModal('Property Maintenance Supervisor', 'CIL Property &amp; Tenant Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== FURNITURE PRODUCTION ===== -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Furniture Production Supervisor</h3>
+                    <div class="pos-department">CIL Furniture Production &amp; Supply</div>
+                    <p>Supervise furniture production, manage quality control, and ensure timely delivery of orders.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Furniture</span>
+                        <span class="pos-tag">Production</span>
+                        <span class="pos-tag">Quality Control</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ogun, Kaduna, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Furniture Production Supervisor', 'CIL Furniture Production &amp; Supply')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Furniture Designer</h3>
+                    <div class="pos-department">CIL Furniture Production &amp; Supply</div>
+                    <p>Design innovative furniture products, create technical drawings, and collaborate with production teams.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Design</span>
+                        <span class="pos-tag">Furniture</span>
+                        <span class="pos-tag">CAD</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Furniture Designer', 'CIL Furniture Production &amp; Supply')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Upholstery Specialist</h3>
+                    <div class="pos-department">CIL Furniture Production &amp; Supply</div>
+                    <p>Perform high-quality upholstery work on furniture pieces, ensuring durability and aesthetic appeal.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Upholstery</span>
+                        <span class="pos-tag">Furniture</span>
+                        <span class="pos-tag">Craftsmanship</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ogun, Ibadan</div>
+                    <button class="apply-btn" onclick="openModal('Upholstery Specialist', 'CIL Furniture Production &amp; Supply')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== HOTEL TURNAROUND SERVICES ===== -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Hotel Operations Manager</h3>
+                    <div class="pos-department">CIL Hotel Turnaround Services</div>
+                    <p>Oversee hotel operations, manage staff, optimize revenue, and ensure guest satisfaction across our hospitality portfolio.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Hospitality</span>
+                        <span class="pos-tag">Hotel Management</span>
+                        <span class="pos-tag">Operations</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt, Enugu</div>
+                    <button class="apply-btn" onclick="openModal('Hotel Operations Manager', 'CIL Hotel Turnaround Services')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Hotel Revenue Manager</h3>
+                    <div class="pos-department">CIL Hotel Turnaround Services</div>
+                    <p>Optimize hotel revenue through strategic pricing, distribution management, and market analysis.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Revenue Management</span>
+                        <span class="pos-tag">Hospitality</span>
+                        <span class="pos-tag">Analytics</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Hotel Revenue Manager', 'CIL Hotel Turnaround Services')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Hotel Front Office Manager</h3>
+                    <div class="pos-department">CIL Hotel Turnaround Services</div>
+                    <p>Manage front desk operations, supervise staff, ensure excellent guest service, and handle reservations.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Front Office</span>
+                        <span class="pos-tag">Hospitality</span>
+                        <span class="pos-tag">Customer Service</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <button class="apply-btn" onclick="openModal('Hotel Front Office Manager', 'CIL Hotel Turnaround Services')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== FACILITY MANAGEMENT ===== -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Facility Maintenance Technician</h3>
+                    <div class="pos-department">CIL Business &amp; Facility Management</div>
+                    <p>Perform maintenance, repairs, and inspections across commercial facilities, ensuring optimal functionality.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Maintenance</span>
+                        <span class="pos-tag">HVAC</span>
+                        <span class="pos-tag">Facility Management</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ibadan, Enugu, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Facility Maintenance Technician', 'CIL Business &amp; Facility Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Facility Manager</h3>
+                    <div class="pos-department">CIL Business &amp; Facility Management</div>
+                    <p>Oversee facility operations, manage service providers, coordinate maintenance, and ensure facility standards.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Facility Management</span>
+                        <span class="pos-tag">Operations</span>
+                        <span class="pos-tag">Vendor Management</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <button class="apply-btn" onclick="openModal('Facility Manager', 'CIL Business &amp; Facility Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Cleaning &amp; Hygiene Supervisor</h3>
+                    <div class="pos-department">CIL Business &amp; Facility Management</div>
+                    <p>Supervise cleaning teams, ensure hygiene standards are met, and manage cleaning schedules.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Cleaning</span>
+                        <span class="pos-tag">Hygiene</span>
+                        <span class="pos-tag">Supervision</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Ibadan</div>
+                    <button class="apply-btn" onclick="openModal('Cleaning &amp; Hygiene Supervisor', 'CIL Business &amp; Facility Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== MACHINERY & INDUSTRIAL ===== -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Industrial Machinery Technician</h3>
+                    <div class="pos-department">CIL Machinery &amp; Industrial Services</div>
+                    <p>Install, maintain, and repair industrial machinery, generators, and heavy equipment.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Machinery</span>
+                        <span class="pos-tag">Industrial</span>
+                        <span class="pos-tag">Maintenance</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Port Harcourt, Kano, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Industrial Machinery Technician', 'CIL Machinery &amp; Industrial Services')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Generator Specialist</h3>
+                    <div class="pos-department">CIL Machinery &amp; Industrial Services</div>
+                    <p>Install, service, and repair generators, ensure optimal performance, and provide emergency support.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Generators</span>
+                        <span class="pos-tag">Mechanical</span>
+                        <span class="pos-tag">Repair</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt, Ibadan</div>
+                    <button class="apply-btn" onclick="openModal('Generator Specialist', 'CIL Machinery &amp; Industrial Services')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== DIASPORA ASSET MANAGEMENT ===== -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Diaspora Investment Advisor</h3>
+                    <div class="pos-department">CIL Diaspora Asset Management</div>
+                    <p>Advise diaspora clients on investment opportunities, manage portfolios, and build lasting relationships.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Investment</span>
+                        <span class="pos-tag">Diaspora</span>
+                        <span class="pos-tag">Advisory</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Remote</div>
+                    <button class="apply-btn" onclick="openModal('Diaspora Investment Advisor', 'CIL Diaspora Asset Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Portfolio Manager</h3>
+                    <div class="pos-department">CIL Diaspora Asset Management</div>
+                    <p>Manage client investment portfolios, monitor performance, and provide regular reports.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Portfolio Management</span>
+                        <span class="pos-tag">Investment</span>
+                        <span class="pos-tag">Finance</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Remote</div>
+                    <button class="apply-btn" onclick="openModal('Portfolio Manager', 'CIL Diaspora Asset Management')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== WORKFORCE DEVELOPMENT ===== -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Training Coordinator</h3>
+                    <div class="pos-department">CIL Employment &amp; Workforce Dev</div>
+                    <p>Coordinate training programs, manage trainers, and ensure effective delivery of workforce development initiatives.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Training</span>
+                        <span class="pos-tag">Workforce</span>
+                        <span class="pos-tag">Coordination</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
+                    <button class="apply-btn" onclick="openModal('Training Coordinator', 'CIL Employment &amp; Workforce Dev')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Recruitment Specialist</h3>
+                    <div class="pos-department">CIL Employment &amp; Workforce Dev</div>
+                    <p>Manage end-to-end recruitment processes, source candidates, and build talent pipelines.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Recruitment</span>
+                        <span class="pos-tag">HR</span>
+                        <span class="pos-tag">Talent Acquisition</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Ibadan</div>
+                    <button class="apply-btn" onclick="openModal('Recruitment Specialist', 'CIL Employment &amp; Workforce Dev')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== CORPORATE & FINANCE ===== -->
                 <div class="position-card">
                     <span class="pos-badge">New</span>
                     <h3>Business Development Officer</h3>
@@ -804,42 +1445,11 @@
                         <span class="pos-tag">Sales</span>
                     </div>
                     <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <button class="apply-btn" onclick="openModal('Business Development Officer', 'CIL Private Investors Network')">Apply Now <i class="fas fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Position 6 -->
                 <div class="position-card">
-                    <span class="pos-badge">New</span>
-                    <h3>Facility Maintenance Technician</h3>
-                    <div class="pos-department">CIL Business Facility Management</div>
-                    <p>Perform maintenance, repairs, and inspections across commercial facilities, ensuring optimal functionality.</p>
-                    <div class="pos-tags">
-                        <span class="pos-tag">Maintenance</span>
-                        <span class="pos-tag">HVAC</span>
-                        <span class="pos-tag">Facility Management</span>
-                    </div>
-                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ibadan, Enugu</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <!-- Position 7 -->
-                <div class="position-card">
-                    <span class="pos-badge">New</span>
-                    <h3>Furniture Production Supervisor</h3>
-                    <div class="pos-department">CIL Furniture Production &amp; Supply</div>
-                    <p>Supervise furniture production, manage quality control, and ensure timely delivery of orders.</p>
-                    <div class="pos-tags">
-                        <span class="pos-tag">Furniture</span>
-                        <span class="pos-tag">Production</span>
-                        <span class="pos-tag">Quality Control</span>
-                    </div>
-                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Ogun, Kaduna</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <!-- Position 8 -->
-                <div class="position-card">
-                    <span class="pos-badge">New</span>
+                    <span class="pos-badge new">New</span>
                     <h3>Human Resources Officer</h3>
                     <div class="pos-department">CIL Corporate Services</div>
                     <p>Manage recruitment, employee relations, and HR operations across the entire CIL ecosystem.</p>
@@ -849,38 +1459,52 @@
                         <span class="pos-tag">Employee Relations</span>
                     </div>
                     <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Kano</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <button class="apply-btn" onclick="openModal('Human Resources Officer', 'CIL Corporate Services')">Apply Now <i class="fas fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Position 9 -->
                 <div class="position-card">
-                    <span class="pos-badge">New</span>
-                    <h3>Hotel Operations Manager</h3>
-                    <div class="pos-department">CIL Hotel Turnaround Services</div>
-                    <p>Oversee hotel operations, manage staff, optimize revenue, and ensure guest satisfaction across our hospitality portfolio.</p>
+                    <span class="pos-badge new">New</span>
+                    <h3>Accountant</h3>
+                    <div class="pos-department">CIL Corporate Services</div>
+                    <p>Manage financial records, prepare reports, and ensure compliance with accounting standards.</p>
                     <div class="pos-tags">
-                        <span class="pos-tag">Hospitality</span>
-                        <span class="pos-tag">Hotel Management</span>
-                        <span class="pos-tag">Operations</span>
+                        <span class="pos-tag">Accounting</span>
+                        <span class="pos-tag">Finance</span>
+                        <span class="pos-tag">Reporting</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja</div>
+                    <button class="apply-btn" onclick="openModal('Accountant', 'CIL Corporate Services')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- ===== MICROFINANCE BANK ===== -->
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Loan Officer</h3>
+                    <div class="pos-department">CIL Microfinance Bank</div>
+                    <p>Evaluate loan applications, assess creditworthiness, and manage loan portfolios.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Banking</span>
+                        <span class="pos-tag">Loans</span>
+                        <span class="pos-tag">Credit</span>
+                    </div>
+                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Ibadan, Kano</div>
+                    <button class="apply-btn" onclick="openModal('Loan Officer', 'CIL Microfinance Bank')">Apply Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="position-card">
+                    <span class="pos-badge new">New</span>
+                    <h3>Customer Service Representative</h3>
+                    <div class="pos-department">CIL Microfinance Bank</div>
+                    <p>Assist customers with banking inquiries, account management, and financial product information.</p>
+                    <div class="pos-tags">
+                        <span class="pos-tag">Customer Service</span>
+                        <span class="pos-tag">Banking</span>
+                        <span class="pos-tag">Support</span>
                     </div>
                     <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Port Harcourt</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <button class="apply-btn" onclick="openModal('Customer Service Representative', 'CIL Microfinance Bank')">Apply Now <i class="fas fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Position 10 -->
-                <div class="position-card">
-                    <span class="pos-badge">New</span>
-                    <h3>Diaspora Investment Advisor</h3>
-                    <div class="pos-department">CIL Diaspora Asset Management</div>
-                    <p>Advise diaspora clients on investment opportunities, manage portfolios, and build lasting relationships.</p>
-                    <div class="pos-tags">
-                        <span class="pos-tag">Investment</span>
-                        <span class="pos-tag">Diaspora</span>
-                        <span class="pos-tag">Advisory</span>
-                    </div>
-                    <div class="pos-location"><i class="fas fa-map-marker-alt"></i> Lagos, Abuja, Remote</div>
-                    <a href="contact.html">Apply Now <i class="fas fa-arrow-right"></i></a>
-                </div>
             </div>
         </div>
     </section>
@@ -917,6 +1541,27 @@
         </div>
     </section>
 
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section style="padding:0 0 80px;">
         <div class="container">
@@ -928,17 +1573,152 @@
         </div>
     </section>
 
+<!-- APPLICATION MODAL -->
+<div class="modal-overlay" id="applicationModal">
+    <div class="modal">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+
+        <div id="modalForm">
+            <h3>Apply for this Position</h3>
+            <div class="modal-job-title" id="modalDepartment"></div>
+            <p><strong id="modalJobTitle">Job Title</strong></p>
+            <p>Fill in the form below to apply for this position. Our HR team will review your application and get back to you within 5-7 working days.</p>
+
+            <form id="applicationForm">
+                <div class="form-group">
+                    <label for="applicantName">Full Name *</label>
+                    <input type="text" id="applicantName" placeholder="Enter your full name" required />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="applicantEmail">Email Address *</label>
+                        <input type="email" id="applicantEmail" placeholder="Enter your email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="applicantPhone">Phone Number *</label>
+                        <input type="tel" id="applicantPhone" placeholder="Enter your phone number" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="applicantCountry">Country</label>
+                    <select id="applicantCountry" onchange="updateStates()">
+                        <option value="">Select your country</option>
+                        <optgroup label="Nigeria">
+                            <option value="Nigeria">Nigeria</option>
+                        </optgroup>
+                        <optgroup label="West Africa">
+                            <option value="Ghana">Ghana</option>
+                            <option value="Ivory Coast">Ivory Coast</option>
+                            <option value="Senegal">Senegal</option>
+                            <option value="Benin">Benin</option>
+                            <option value="Togo">Togo</option>
+                            <option value="Mali">Mali</option>
+                            <option value="Burkina Faso">Burkina Faso</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Sierra Leone">Sierra Leone</option>
+                            <option value="Liberia">Liberia</option>
+                            <option value="Guinea">Guinea</option>
+                            <option value="Gambia">Gambia</option>
+                            <option value="Guinea-Bissau">Guinea-Bissau</option>
+                            <option value="Cabo Verde">Cabo Verde</option>
+                        </optgroup>
+                        <optgroup label="East Africa">
+                            <option value="Kenya">Kenya</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Somalia">Somalia</option>
+                            <option value="Sudan">Sudan</option>
+                            <option value="South Sudan">South Sudan</option>
+                            <option value="Eritrea">Eritrea</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Seychelles">Seychelles</option>
+                            <option value="Comoros">Comoros</option>
+                            <option value="Mauritius">Mauritius</option>
+                        </optgroup>
+                        <optgroup label="Southern Africa">
+                            <option value="South Africa">South Africa</option>
+                            <option value="Namibia">Namibia</option>
+                            <option value="Botswana">Botswana</option>
+                            <option value="Zimbabwe">Zimbabwe</option>
+                            <option value="Zambia">Zambia</option>
+                            <option value="Mozambique">Mozambique</option>
+                            <option value="Angola">Angola</option>
+                            <option value="Malawi">Malawi</option>
+                            <option value="Madagascar">Madagascar</option>
+                            <option value="Eswatini">Eswatini</option>
+                            <option value="Lesotho">Lesotho</option>
+                        </optgroup>
+                        <optgroup label="Central Africa">
+                            <option value="DR Congo">DR Congo</option>
+                            <option value="Cameroon">Cameroon</option>
+                            <option value="Chad">Chad</option>
+                            <option value="Central African Republic">Central African Republic</option>
+                            <option value="Equatorial Guinea">Equatorial Guinea</option>
+                            <option value="Gabon">Gabon</option>
+                            <option value="Congo">Congo</option>
+                            <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                        </optgroup>
+                        <optgroup label="North Africa">
+                            <option value="Egypt">Egypt</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Algeria">Algeria</option>
+                            <option value="Tunisia">Tunisia</option>
+                            <option value="Libya">Libya</option>
+                            <option value="Mauritania">Mauritania</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="applicantState">State/Province</label>
+                    <select id="applicantState">
+                        <option value="">Select your state/province</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cvUpload">Upload CV (PDF or Word) *</label>
+                    <input type="file" id="cvUpload" accept=".pdf,.doc,.docx" required />
+                    <small style="color: var(--muted); font-size: 12px;">Max file size: 5MB</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="coverLetter">Cover Letter (Optional)</label>
+                    <textarea id="coverLetter" placeholder="Tell us why you're a great fit for this role..."></textarea>
+                </div>
+
+                <div class="error-message" id="applicationError"></div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+                <div class="spinner" id="modalSpinner"></div>
+            </form>
+        </div>
+
+        <div class="success-message" id="modalSuccess">
+            <i class="fas fa-check-circle"></i>
+            <h4>Application Submitted!</h4>
+            <p>Thank you for applying to <strong id="successJobTitle">CIL</strong>. Our HR team will review your application and contact you if you're shortlisted.</p>
+            <p style="margin-top: 8px; font-size: 14px; color: var(--muted);">A confirmation email has been sent to your inbox.</p>
+        </div>
+    </div>
+</div>
+
     <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
                     <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -949,11 +1729,12 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
@@ -969,21 +1750,326 @@
         </div>
     </footer>
 
-    <!-- Mobile menu toggle script -->
-    <script>
-        const toggle = document.getElementById('menuToggle');
-        const nav = document.getElementById('mainNav');
+<!-- Mobile menu toggle script -->
+<script>
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('mainNav');
 
-        toggle.addEventListener('click', function() {
-            nav.classList.toggle('open');
+    toggle.addEventListener('click', function() {
+        nav.classList.toggle('open');
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('open');
         });
+    });
+</script>
 
-        nav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('open');
+<!-- Newsletter Script -->
+<script>
+    document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const emailInput = document.getElementById('newsletterEmail');
+        const email = emailInput.value.trim();
+        const btn = document.getElementById('newsletterBtn');
+        const btnText = document.getElementById('newsletterBtnText');
+        const spinner = document.getElementById('newsletterSpinner');
+        const messageDiv = document.getElementById('newsletterMessage');
+
+        if (!email) {
+            messageDiv.className = 'newsletter-message error';
+            messageDiv.textContent = 'Please enter your email address.';
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            messageDiv.className = 'newsletter-message error';
+            messageDiv.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        btnText.style.display = 'none';
+        spinner.style.display = 'inline-block';
+        btn.disabled = true;
+        messageDiv.className = 'newsletter-message';
+        messageDiv.textContent = '';
+
+        try {
+            const response = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email })
             });
-        });
-    </script>
+
+            const data = await response.json();
+
+            if (response.ok) {
+                messageDiv.className = 'newsletter-message success';
+                messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                emailInput.value = '';
+            } else {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+            }
+        } catch (error) {
+            messageDiv.className = 'newsletter-message error';
+            messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            console.error('Newsletter error:', error);
+        } finally {
+            btnText.style.display = 'inline';
+            spinner.style.display = 'none';
+            btn.disabled = false;
+        }
+    });
+</script>
+
+<!-- Application Modal Script -->
+<script>
+    // States data for all 36 Nigerian states
+    const nigerianStates = [
+        'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue',
+        'Borno', 'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu',
+        'FCT (Abuja)', 'Gombe', 'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina',
+        'Kebbi', 'Kogi', 'Kwara', 'Lagos', 'Nasarawa', 'Niger', 'Ogun', 'Ondo',
+        'Osun', 'Oyo', 'Plateau', 'Rivers', 'Sokoto', 'Taraba', 'Yobe', 'Zamfara'
+    ];
+
+    // Other African countries with their major cities/states
+    const africanStates = {
+        'Ghana': ['Greater Accra', 'Ashanti', 'Western', 'Eastern', 'Central', 'Volta', 'Northern', 'Upper East', 'Upper West'],
+        'Kenya': ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale'],
+        'South Africa': ['Gauteng', 'Western Cape', 'KwaZulu-Natal', 'Eastern Cape', 'Mpumalanga', 'Limpopo', 'North West', 'Free State', 'Northern Cape'],
+        'Egypt': ['Cairo', 'Alexandria', 'Giza', 'Port Said', 'Suez', 'Luxor', 'Aswan'],
+        'Morocco': ['Casablanca-Settat', 'Rabat-Salé', 'Marrakech-Safi', 'Tangier-Tetouan', 'Fez-Meknes'],
+        'Ethiopia': ['Addis Ababa', 'Oromia', 'Amhara', 'Tigray', 'Somali', 'Afar', 'Benishangul-Gumuz'],
+        'Tanzania': ['Dar es Salaam', 'Arusha', 'Mwanza', 'Dodoma', 'Zanzibar', 'Tanga', 'Mbeya'],
+        'Uganda': ['Kampala', 'Wakiso', 'Jinja', 'Mbarara', 'Gulu', 'Entebbe', 'Mbale'],
+        'Angola': ['Luanda', 'Huíla', 'Benguela', 'Cuanza Sul', 'Malanje', 'Lunda Sul'],
+        'Cameroon': ['Littoral', 'Centre', 'West', 'North West', 'South West', 'Adamawa', 'East'],
+        'Ivory Coast': ['Abidjan', 'Yamoussoukro', 'Bouaké', 'Daloa', 'Korhogo', 'San-Pédro'],
+        'Senegal': ['Dakar', 'Thiès', 'Saint-Louis', 'Kaolack', 'Ziguinchor', 'Diourbel'],
+        'Zimbabwe': ['Harare', 'Bulawayo', 'Manicaland', 'Mashonaland', 'Matabeleland', 'Midlands'],
+        'Zambia': ['Lusaka', 'Copperbelt', 'Southern', 'Eastern', 'Western', 'Northern', 'Central'],
+        'Mozambique': ['Maputo', 'Nampula', 'Beira', 'Tete', 'Inhambane', 'Zambézia'],
+        'Botswana': ['Gaborone', 'Francistown', 'Molepolole', 'Maun', 'Serowe', 'Kanye'],
+        'Namibia': ['Windhoek', 'Swakopmund', 'Walvis Bay', 'Oshakati', 'Rundu', 'Keetmanshoop'],
+        'Malawi': ['Lilongwe', 'Blantyre', 'Mzuzu', 'Zomba', 'Mangochi'],
+        'Benin': ['Cotonou', 'Porto-Novo', 'Parakou', 'Djougou', 'Abomey-Calavi'],
+        'Mali': ['Bamako', 'Sikasso', 'Mopti', 'Koulikoro', 'Ségou', 'Gao'],
+        'Burkina Faso': ['Ouagadougou', 'Bobo-Dioulasso', 'Koudougou', 'Ouahigouya', 'Banfora'],
+        'Niger': ['Niamey', 'Zinder', 'Maradi', 'Tahoua', 'Agadez'],
+        'Sierra Leone': ['Freetown', 'Bo', 'Kenema', 'Makeni', 'Port Loko'],
+        'Liberia': ['Monrovia', 'Gbarnga', 'Kakata', 'Buchanan', 'Zwedru'],
+        'Guinea': ['Conakry', 'N\'Zérékoré', 'Kankan', 'Labé', 'Kindia', 'Mamou'],
+        'Togo': ['Lomé', 'Sokodé', 'Kara', 'Atakpamé', 'Dapaong'],
+        'Rwanda': ['Kigali', 'Rubavu', 'Musanze', 'Muhanga', 'Huye', 'Nyagatare'],
+        'DR Congo': ['Kinshasa', 'Lubumbashi', 'Mbuji-Mayi', 'Kisangani', 'Kananga', 'Goma'],
+        'Sudan': ['Khartoum', 'Omdurman', 'Port Sudan', 'Kassala', 'Al-Obeid', 'Wad Madani'],
+        'Tunisia': ['Tunis', 'Sfax', 'Sousse', 'Ettadhamen', 'Kairouan', 'Bizerte'],
+        'Algeria': ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Blida', 'Batna'],
+        'Libya': ['Tripoli', 'Benghazi', 'Misrata', 'Al-Bayda', 'Derna', 'Sebha'],
+        'Mauritania': ['Nouakchott', 'Nouadhibou', 'Rosso', 'Kiffa', 'Aleg', 'Zouérate'],
+        'Gabon': ['Libreville', 'Port-Gentil', 'Franceville', 'Oyem', 'Moanda'],
+        'Chad': ['N\'Djamena', 'Moundou', 'Sarh', 'Abeché', 'Kélo'],
+        'Central African Republic': ['Bangui', 'Bimbo', 'Berbérati', 'Carnot', 'Bambari'],
+        'Equatorial Guinea': ['Malabo', 'Bata', 'Ebebiyín', 'Aconibe', 'Luba'],
+        'Congo': ['Brazzaville', 'Pointe-Noire', 'Dolisie', 'Nkayi', 'Oyo'],
+        'Somalia': ['Mogadishu', 'Hargeisa', 'Kismayo', 'Merca', 'Galkayo'],
+        'Eritrea': ['Asmara', 'Keren', 'Massawa', 'Mendefera', 'Assab'],
+        'Djibouti': ['Djibouti City', 'Ali Sabieh', 'Tadjoura', 'Obock'],
+        'Seychelles': ['Victoria', 'Anse Royale', 'Baie Sainte Anne', 'Beau Vallon'],
+        'Comoros': ['Moroni', 'Mutsamudu', 'Fomboni', 'Domoni'],
+        'Mauritius': ['Port Louis', 'Curepipe', 'Quatre Bornes', 'Vacoas-Phoenix', 'Beau Bassin-Rose Hill'],
+        'Madagascar': ['Antananarivo', 'Toamasina', 'Antsirabe', 'Mahajanga', 'Fianarantsoa'],
+        'Eswatini': ['Mbabane', 'Manzini', 'Big Bend', 'Mhlume', 'Hlatikulu'],
+        'Lesotho': ['Maseru', 'Teyateyaneng', 'Mafeteng', 'Hlotse', 'Mohale\'s Hoek'],
+        'Cabo Verde': ['Praia', 'Mindelo', 'Santa Maria', 'Pedra Badejo', 'Assomada'],
+        'Guinea-Bissau': ['Bissau', 'Bafatá', 'Gabú', 'Bissorã', 'Bolama'],
+        'Gambia': ['Banjul', 'Serrekunda', 'Brikama', 'Bakau', 'Farafenni'],
+        'Sao Tome and Principe': ['São Tomé', 'Santo António', 'Neves', 'Santana']
+    };
+
+    let currentJob = { title: '', department: '' };
+
+    function openModal(title, department) {
+        currentJob = { title, department };
+        document.getElementById('modalJobTitle').textContent = title;
+        document.getElementById('modalDepartment').textContent = department;
+        document.getElementById('applicationModal').classList.add('active');
+        document.getElementById('modalForm').style.display = 'block';
+        document.getElementById('modalSuccess').style.display = 'none';
+        document.getElementById('applicationForm').reset();
+        document.getElementById('submitBtn').style.display = 'block';
+        document.getElementById('modalSpinner').style.display = 'none';
+        document.getElementById('applicationError').style.display = 'none';
+        // Reset country and state selects
+        document.getElementById('applicantCountry').value = '';
+        document.getElementById('applicantState').innerHTML = '<option value="">Select your state/province</option>';
+    }
+
+    function closeModal() {
+        document.getElementById('applicationModal').classList.remove('active');
+    }
+
+    function updateStates() {
+        const country = document.getElementById('applicantCountry').value;
+        const stateSelect = document.getElementById('applicantState');
+
+        // Clear current options
+        stateSelect.innerHTML = '<option value="">Select your state/province</option>';
+
+        if (country === 'Nigeria') {
+            // Add all 36 Nigerian states
+            nigerianStates.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateSelect.appendChild(option);
+            });
+        } else if (country && africanStates[country]) {
+            // Add states/cities for the selected country
+            africanStates[country].forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateSelect.appendChild(option);
+            });
+        }
+    }
+
+    // Close modal on overlay click
+    document.getElementById('applicationModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // Initialize country select change event
+    document.addEventListener('DOMContentLoaded', function() {
+        const countrySelect = document.getElementById('applicantCountry');
+        if (countrySelect) {
+            countrySelect.addEventListener('change', updateStates);
+        }
+    });
+
+    // Handle form submission with API call
+    document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('modalSpinner');
+        const errorDiv = document.getElementById('applicationError');
+        const form = document.getElementById('applicationForm');
+
+        // Get form data
+        const fullName = document.getElementById('applicantName').value.trim();
+        const email = document.getElementById('applicantEmail').value.trim();
+        const phone = document.getElementById('applicantPhone').value.trim();
+        const country = document.getElementById('applicantCountry').value;
+        const state = document.getElementById('applicantState').value;
+        const coverLetter = document.getElementById('coverLetter').value.trim();
+        const cvFile = document.getElementById('cvUpload').files[0];
+
+        // Reset error
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+
+        // Validate required fields
+        if (!fullName || !email || !phone) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Please fill in all required fields.';
+            return;
+        }
+
+        if (!cvFile) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Please upload your CV.';
+            return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        // Validate country and state
+        if (!country) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Please select your country.';
+            return;
+        }
+
+        if (!state) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Please select your state/province.';
+            return;
+        }
+
+        // Show loading state
+        submitBtn.style.display = 'none';
+        spinner.style.display = 'block';
+
+        try {
+            const response = await fetch('/api/apply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    phone,
+                    country,
+                    state,
+                    jobTitle: currentJob.title,
+                    department: currentJob.department,
+                    coverLetter,
+                    cvFilename: cvFile.name
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Show success
+                document.getElementById('modalForm').style.display = 'none';
+                document.getElementById('modalSuccess').style.display = 'block';
+                document.getElementById('successJobTitle').textContent = currentJob.title;
+
+                // Reset form after 5 seconds and close modal
+                setTimeout(() => {
+                    form.reset();
+                    // Reset selects
+                    document.getElementById('applicantCountry').value = '';
+                    document.getElementById('applicantState').innerHTML = '<option value="">Select your state/province</option>';
+                    closeModal();
+                }, 5000);
+            } else {
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                submitBtn.style.display = 'block';
+                spinner.style.display = 'none';
+            }
+        } catch (error) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Network error. Please check your connection and try again.';
+            console.error('Application error:', error);
+            submitBtn.style.display = 'block';
+            spinner.style.display = 'none';
+        }
+    });
+</script>
 
 </body>
 </html>

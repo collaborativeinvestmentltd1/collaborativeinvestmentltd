@@ -6,8 +6,15 @@ const PORT = process.env.PORT || 3000;
 // Load environment variables
 require('dotenv').config();
 
-// Import email utilities
-const { sendContactEmail, sendUserConfirmation } = require('./utils/email');
+// Import email utilities (all functions)
+const { 
+    sendContactEmail, 
+    sendUserConfirmation,
+    sendNewsletterConfirmation,
+    sendNewsletterNotification,
+    sendJobApplication,
+    sendApplicationConfirmation
+} = require('./utils/email');
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -170,12 +177,146 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
+// ----- NEWSLETTER API -----
+app.post('/api/newsletter', async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        // Validate email
+        if (!email) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Email is required.' 
+            });
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please enter a valid email address.' 
+            });
+        }
+
+        // Save to database (if you have one)
+        // const subscriber = new Subscriber({ email, subscribedAt: new Date() });
+        // await subscriber.save();
+
+        // Send notification email to admin
+        await sendNewsletterNotification(email);
+
+        // Send confirmation email to subscriber
+        await sendNewsletterConfirmation(email);
+
+        res.status(200).json({ 
+            success: true, 
+            message: 'Subscribed successfully!' 
+        });
+
+    } catch (error) {
+        console.error('Newsletter error:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Failed to subscribe. Please try again later.' 
+        });
+    }
+});
+
+// ----- JOB APPLICATION API -----
+app.post('/api/apply', async (req, res) => {
+    try {
+        const { fullName, email, phone, country, state, jobTitle, department, coverLetter, cvFilename } = req.body;
+
+        // Validate required fields
+        if (!fullName || !email || !phone || !jobTitle || !department) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please fill in all required fields.' 
+            });
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please enter a valid email address.' 
+            });
+        }
+
+        // Validate country and state
+        if (!country) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please select your country.' 
+            });
+        }
+
+        if (!state) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please select your state/province.' 
+            });
+        }
+
+        // Prepare data
+        const applicationData = {
+            fullName,
+            email,
+            phone,
+            country,
+            state,
+            jobTitle,
+            department,
+            coverLetter: coverLetter || '',
+            cvFilename: cvFilename || 'Uploaded via form'
+        };
+
+        // Send email to HR team
+        await sendJobApplication(applicationData);
+
+        // Send confirmation email to applicant
+        await sendApplicationConfirmation(applicationData);
+
+        res.status(200).json({ 
+            success: true, 
+            message: 'Application submitted successfully!' 
+        });
+
+    } catch (error) {
+        console.error('Job application error:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Failed to submit application. Please try again later.' 
+        });
+    }
+});
+
+// Health check endpoint (for monitoring)
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
+
 // 404 - Not Found
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error('Server error:', err);
+    res.status(500).sendFile(path.join(__dirname, 'views', '404.html'));
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`🚀 CIL Website running on http://localhost:${PORT}`);
+    console.log(`📧 Email configured with: ${process.env.EMAIL_USER}`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`✅ Server is ready to accept connections`);
 });

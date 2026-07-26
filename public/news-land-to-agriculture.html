@@ -32,17 +32,18 @@
             backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
-        .logo span { color: var(--gold); }
+        .logo img { height: 40px; width: auto; display: block; }
         nav { display: flex; gap: 32px; }
         nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
         nav a:hover { color: var(--gold); }
+        nav a.active { color: var(--gold); }
+        nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gold); border-radius: 4px; }
         .actions { display: flex; gap: 10px; }
         .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
-        .btn-dark { background: white; color: var(--primary); }
-        .btn-dark:hover { background: #eef2f6; transform: translateY(-2px); }
         .btn-gold { background: var(--gold); color: white; }
         .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.08); }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
         .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
 
@@ -66,6 +67,21 @@
         .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
         .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
 
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; background: var(--light); }
+        .newsletter-wrap { background: white; border-radius: var(--radius); padding: 50px; border: 1px solid var(--border); text-align: center; }
+        .newsletter-content h3 { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .newsletter-content p { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto 24px; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+        .newsletter-message { display: none; margin-top: 16px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+        .newsletter-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .newsletter-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .spinner-small { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* Footer */
         footer { background: var(--primary); color: white; padding: 70px 0 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
@@ -84,7 +100,6 @@
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
             nav { display: none; }
             .menu-toggle { display: flex; }
-            .actions .btn-dark { display: none; }
             nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
             nav.open a { font-size: 1rem; padding: 6px 0; }
         }
@@ -93,23 +108,14 @@
             .page-hero h1 { font-size: 34px; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .content-wrapper h2 { font-size: 24px; }
+            .logo img { height: 32px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-wrap { padding: 30px 20px; }
         }
         @media (max-width: 480px) {
             .page-hero h1 { font-size: 28px; }
-            .logo { font-size: 20px; }
+            .logo img { height: 32px; }
             .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
         }
     </style>
 </head>
@@ -123,14 +129,14 @@
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html" class="active">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Register</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -153,44 +159,64 @@
                 <div class="meta">
                     <span>July 2025</span>
                     <span class="badge">Program Launch</span>
-                    <span>4 min read</span>
+                    <span>5 min read</span>
                 </div>
 
-                <p><strong>Collaborative Investment Ltd (CIL) is excited to announce the launch of our Land to Agriculture Program, designed to help landowners transform idle land into productive agricultural assets.</strong></p>
+                <p><strong>Collaborative Investment Ltd (CIL) is excited to announce the launch of our Land to Agriculture Program, designed to help landowners transform idle land into productive agricultural assets. This innovative program addresses one of Nigeria's most pressing challenges — underutilized land.</strong></p>
 
-                <p>This innovative program addresses one of Nigeria's most pressing challenges — underutilized land. By providing end-to-end farm management, from setup to harvest, CIL enables landowners to generate sustainable income from their property while contributing to Nigeria's food security.</p>
+                <p>By providing end-to-end farm management, from setup to harvest, CIL enables landowners to generate sustainable income from their property while contributing to Nigeria's food security. The program is part of CIL's broader commitment to agricultural development and economic transformation in Nigeria.</p>
+
+                <h2>The Challenge: Nigeria's Underutilized Land</h2>
+                <p>Nigeria has vast agricultural potential, yet a significant portion of arable land remains underutilized. According to the Food and Agriculture Organization (FAO), Nigeria has over 70 million hectares of agricultural land, but only about 40% is currently being cultivated. This underutilization represents a massive missed opportunity for economic growth, food security, and job creation.</p>
+                <p>Many landowners lack the capital, expertise, or time to develop their land for agriculture. The Land to Agriculture Program addresses this gap by providing professional farm management services, making it easy for landowners to benefit from their property without the hassle of day-to-day farm operations.</p>
 
                 <h2>How the Program Works</h2>
                 <p>The Land to Agriculture Program is designed to be accessible and hassle-free for landowners:</p>
                 <ul>
-                    <li><strong>Land Assessment:</strong> CIL experts evaluate your land's potential for agriculture</li>
-                    <li><strong>Farm Setup:</strong> We handle all setup including clearing, preparation, and planting</li>
-                    <li><strong>Professional Management:</strong> Full farm management from planting to harvest</li>
-                    <li><strong>Guaranteed Offtake:</strong> CIL hotels and properties purchase the harvest</li>
-                    <li><strong>Transparent Reporting:</strong> Real-time updates on farm performance</li>
+                    <li><strong>Land Assessment:</strong> CIL experts evaluate your land's potential for agriculture, including soil quality, water availability, and climate conditions</li>
+                    <li><strong>Farm Setup:</strong> We handle all setup including clearing, preparation, and planting, using modern agricultural techniques and quality inputs</li>
+                    <li><strong>Professional Management:</strong> Full farm management from planting to harvest, including pest control, irrigation, and fertilization</li>
+                    <li><strong>Guaranteed Offtake:</strong> CIL hotels and properties purchase the harvest, ensuring a guaranteed market for produce</li>
+                    <li><strong>Transparent Reporting:</strong> Real-time updates on farm performance through our digital platform</li>
+                    <li><strong>Profit Distribution:</strong> Regular profit distribution to landowners based on farm performance</li>
                 </ul>
 
                 <h2>Who Can Participate</h2>
-                <p>The program is open to:</p>
+                <p>The program is open to a wide range of participants:</p>
                 <ul>
-                    <li>Landowners with idle or underutilized land</li>
-                    <li>Absentee landowners</li>
-                    <li>Diaspora Nigerians with land in Nigeria</li>
-                    <li>Investors looking for agricultural opportunities</li>
-                    <li>Cooperative societies and community groups</li>
+                    <li><strong>Landowners:</strong> Individuals with idle or underutilized land looking to generate income</li>
+                    <li><strong>Absentee Landowners:</strong> Landowners who live away from their property and need professional management</li>
+                    <li><strong>Diaspora Nigerians:</strong> Nigerians living abroad with land in Nigeria who want to benefit from agricultural investment</li>
+                    <li><strong>Investors:</strong> Investors looking for agricultural opportunities with predictable returns</li>
+                    <li><strong>Cooperative Societies:</strong> Community groups looking to develop agricultural projects</li>
+                    <li><strong>Family Estates:</strong> Families looking to preserve and generate income from inherited land</li>
                 </ul>
 
                 <h2>Benefits of the Program</h2>
-                <p>Participants in the Land to Agriculture Program enjoy:</p>
+                <p>Participants in the Land to Agriculture Program enjoy numerous benefits:</p>
                 <ul>
-                    <li>Professional farm management by CIL experts</li>
-                    <li>Guaranteed market for produce through CIL's integrated ecosystem</li>
-                    <li>Complete transparency with digital monitoring</li>
-                    <li>Competitive returns on their land investment</li>
-                    <li>Contribution to Nigeria's food security</li>
+                    <li><strong>Professional Management:</strong> Expert farm management by CIL's experienced agricultural team</li>
+                    <li><strong>Guaranteed Market:</strong> Reliable offtake through CIL's integrated ecosystem, including hotels, restaurants, and other properties</li>
+                    <li><strong>Complete Transparency:</strong> Digital monitoring and regular reporting on farm performance</li>
+                    <li><strong>Competitive Returns:</strong> Attractive returns on land investment through agricultural production</li>
+                    <li><strong>Food Security Contribution:</strong> Help build a more food-secure Nigeria</li>
+                    <li><strong>Job Creation:</strong> Create employment opportunities in rural communities</li>
+                    <li><strong>Environmental Benefits:</strong> Sustainable farming practices that protect the environment</li>
                 </ul>
 
-                <p>"The Land to Agriculture Program is a game-changer for landowners across Nigeria," said the Chief Operations Officer at CIL. "We're turning idle land into wealth-creating assets while building a more food-secure Nigeria."</p>
+                <h2>Success Stories</h2>
+                <p>Since its soft launch, the Land to Agriculture Program has already seen promising results. Several landowners across Ogun, Oyo, and Kaduna states have enrolled in the program, with farms now producing poultry, fish, and various crops. The program has created over 50 jobs in rural communities and contributed to local economic development.</p>
+                <p>"The Land to Agriculture Program is a game-changer for landowners across Nigeria," said the Chief Operations Officer at CIL. "We're turning idle land into wealth-creating assets while building a more food-secure Nigeria. This program demonstrates our commitment to agricultural development and economic transformation."</p>
+
+                <h2>Future Plans</h2>
+                <p>CIL plans to expand the Land to Agriculture Program to more states across Nigeria, targeting areas with high agricultural potential. Future plans include:</p>
+                <ul>
+                    <li>Expanding to 10+ states by 2027</li>
+                    <li>Increasing program capacity to 10,000+ hectares</li>
+                    <li>Developing specialized programs for different agricultural sectors</li>
+                    <li>Partnering with financial institutions for agricultural financing</li>
+                    <li>Building a network of agricultural experts and trainers</li>
+                </ul>
 
                 <p><em>To learn more about the Land to Agriculture Program, please <a href="contact.html" style="color: var(--gold); font-weight: 600;">contact our team</a> or visit our <a href="ecosystem.html" style="color: var(--gold); font-weight: 600;">Ecosystem page</a>.</em></p>
 
@@ -198,16 +224,39 @@
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
                     <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -218,21 +267,24 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
                 <a href="tel:+2347078269765">+234 707 826 9765</a>
                 <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
         <div class="container footer-bottom">
             <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
@@ -242,6 +294,52 @@
         toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+
+        // Newsletter Script
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 

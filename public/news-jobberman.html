@@ -32,17 +32,18 @@
             backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
-        .logo span { color: var(--gold); }
+        .logo img { height: 40px; width: auto; display: block; }
         nav { display: flex; gap: 32px; }
         nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
         nav a:hover { color: var(--gold); }
+        nav a.active { color: var(--gold); }
+        nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gold); border-radius: 4px; }
         .actions { display: flex; gap: 10px; }
         .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
-        .btn-dark { background: white; color: var(--primary); }
-        .btn-dark:hover { background: #eef2f6; transform: translateY(-2px); }
         .btn-gold { background: var(--gold); color: white; }
         .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.08); }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
         .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
 
@@ -66,6 +67,21 @@
         .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
         .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
 
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; background: var(--light); }
+        .newsletter-wrap { background: white; border-radius: var(--radius); padding: 50px; border: 1px solid var(--border); text-align: center; }
+        .newsletter-content h3 { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .newsletter-content p { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto 24px; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+        .newsletter-message { display: none; margin-top: 16px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+        .newsletter-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .newsletter-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .spinner-small { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* Footer */
         footer { background: var(--primary); color: white; padding: 70px 0 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
@@ -84,7 +100,6 @@
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
             nav { display: none; }
             .menu-toggle { display: flex; }
-            .actions .btn-dark { display: none; }
             nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
             nav.open a { font-size: 1rem; padding: 6px 0; }
         }
@@ -93,23 +108,14 @@
             .page-hero h1 { font-size: 34px; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .content-wrapper h2 { font-size: 24px; }
+            .logo img { height: 32px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-wrap { padding: 30px 20px; }
         }
         @media (max-width: 480px) {
             .page-hero h1 { font-size: 28px; }
-            .logo { font-size: 20px; }
+            .logo img { height: 32px; }
             .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
         }
     </style>
 </head>
@@ -123,14 +129,14 @@
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html" class="active">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Register</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -153,36 +159,65 @@
                 <div class="meta">
                     <span>March 2026</span>
                     <span class="badge">Partnership</span>
-                    <span>3 min read</span>
+                    <span>5 min read</span>
                 </div>
 
-                <p><strong>Collaborative Investment Ltd (CIL) has entered into a strategic partnership with JOBBERMAN NIGERIA, one of the country's leading recruitment and HR platforms.</strong></p>
+                <p><strong>Collaborative Investment Ltd (CIL) has entered into a strategic partnership with JOBBERMAN NIGERIA, one of the country's leading recruitment and HR platforms. This collaboration represents a significant step forward in CIL's mission to build Nigeria's workforce ecosystem.</strong></p>
 
-                <p>This collaboration represents a significant step forward in CIL's mission to build Nigeria's workforce ecosystem. By combining JOBBERMAN's extensive talent pool and recruitment technology with CIL's integrated business divisions, the partnership will create new employment opportunities across multiple sectors.</p>
+                <p>By combining JOBBERMAN's extensive talent pool and recruitment technology with CIL's integrated business divisions, the partnership will create new employment opportunities across multiple sectors. This strategic alliance is expected to transform the recruitment landscape in Nigeria, making it easier for both employers and job seekers to find the perfect match.</p>
+
+                <h2>The Challenge: Nigeria's Employment Gap</h2>
+                <p>Nigeria faces a significant employment challenge, with millions of young people entering the workforce each year. Despite the availability of job opportunities, there is often a disconnect between employers and qualified candidates. This skills gap and mismatch has led to high unemployment rates, particularly among youth and recent graduates.</p>
+                <p>The partnership between CIL and JOBBERMAN NIGERIA directly addresses this challenge by creating a more efficient and effective recruitment ecosystem. By leveraging technology and expertise from both organizations, the partnership aims to connect more Nigerians with meaningful employment opportunities.</p>
 
                 <h2>About JOBBERMAN NIGERIA</h2>
                 <p>JOBBERMAN NIGERIA is a leading recruitment and HR platform connecting employers with qualified candidates. With a vast database of job seekers and innovative recruitment technology, JOBBERMAN has helped thousands of Nigerians find meaningful employment across various industries.</p>
+                <p>The platform offers a range of services including job posting, resume searching, candidate screening, and employer branding. JOBBERMAN's technology-driven approach ensures that employers find the right candidates quickly and efficiently, while job seekers have access to a wide range of opportunities.</p>
 
                 <h2>What This Partnership Means</h2>
                 <ul>
-                    <li>CIL gains access to JOBBERMAN's extensive talent pool</li>
-                    <li>JOBBERMAN gains exclusive access to CIL's employment opportunities</li>
-                    <li>Joint recruitment drives across Nigeria</li>
-                    <li>Enhanced job matching technology</li>
-                    <li>Skills development and placement programs</li>
+                    <li><strong>Access to Talent:</strong> CIL gains access to JOBBERMAN's extensive talent pool, with thousands of qualified candidates across various sectors</li>
+                    <li><strong>Employment Access:</strong> JOBBERMAN gains exclusive access to CIL's employment opportunities, providing their users with unique job openings</li>
+                    <li><strong>Joint Recruitment Drives:</strong> Collaborative recruitment drives across Nigeria, reaching more communities and candidates</li>
+                    <li><strong>Enhanced Technology:</strong> Improved job matching technology that better connects employers with qualified candidates</li>
+                    <li><strong>Skills Development:</strong> Joint skills development and placement programs to address the skills gap</li>
+                    <li><strong>Data Insights:</strong> Shared data and insights to better understand the Nigerian job market</li>
                 </ul>
 
                 <h2>Opportunities for Job Seekers</h2>
-                <p>Through this partnership, job seekers can access:</p>
+                <p>Through this partnership, job seekers will have access to:</p>
                 <ul>
-                    <li>Career opportunities across CIL's 12+ business divisions</li>
-                    <li>Jobs in property, solar, construction, agribusiness, and more</li>
-                    <li>Positions across multiple locations in Nigeria</li>
-                    <li>Skills training and certification programs</li>
-                    <li>Career development support</li>
+                    <li><strong>Diverse Career Opportunities:</strong> Positions across CIL's 12+ business divisions, including property, solar, construction, agribusiness, and more</li>
+                    <li><strong>Multiple Locations:</strong> Jobs across various locations in Nigeria, including Lagos, Abuja, Port Harcourt, Ibadan, and Kano</li>
+                    <li><strong>Skills Training:</strong> Access to training and certification programs through the CIL Workforce Academy</li>
+                    <li><strong>Career Development:</strong> Ongoing career development support and guidance</li>
+                    <li><strong>Competitive Compensation:</strong> Competitive salaries and benefits packages</li>
+                    <li><strong>Growth Opportunities:</strong> Opportunities for career advancement within the CIL ecosystem</li>
                 </ul>
 
-                <p>"Partnering with JOBBERMAN NIGERIA strengthens our workforce division significantly," said the Managing Director of CIL. "Together, we will connect talented Nigerians with meaningful employment opportunities across our growing ecosystem."</p>
+                <h2>Benefits for Employers</h2>
+                <p>Employers partnering with CIL and JOBBERMAN can expect:</p>
+                <ul>
+                    <li><strong>Access to Qualified Candidates:</strong> A wider pool of pre-screened, qualified candidates</li>
+                    <li><strong>Efficient Recruitment:</strong> Faster and more efficient recruitment processes</li>
+                    <li><strong>Reduced Hiring Costs:</strong> Cost-effective recruitment solutions</li>
+                    <li><strong>Skills Assessment:</strong> Access to skills assessment and verification tools</li>
+                    <li><strong>Workforce Planning:</strong> Support for workforce planning and development</li>
+                </ul>
+
+                <h2>Impact on Nigeria's Workforce</h2>
+                <p>This partnership is expected to have a significant impact on Nigeria's workforce development:</p>
+                <ul>
+                    <li><strong>Job Creation:</strong> Creating thousands of new job opportunities across multiple sectors</li>
+                    <li><strong>Skills Development:</strong> Addressing the skills gap through training and certification programs</li>
+                    <li><strong>Youth Employment:</strong> Creating employment opportunities for young Nigerians entering the workforce</li>
+                    <li><strong>Economic Growth:</strong> Contributing to economic growth through increased employment and productivity</li>
+                    <li><strong>Formalization:</strong> Formalizing the recruitment process and creating more structured employment pathways</li>
+                </ul>
+
+                <p>"Partnering with JOBBERMAN NIGERIA strengthens our workforce division significantly," said the Managing Director of CIL. "Together, we will connect talented Nigerians with meaningful employment opportunities across our growing ecosystem. This partnership is a testament to our commitment to building a more prosperous Nigeria through job creation and skills development."</p>
+
+                <p>The partnership has already begun to yield results, with several successful recruitment drives already conducted. Plans are in place to expand the partnership to cover more sectors and regions, reaching more Nigerians with employment opportunities.</p>
 
                 <p><em>To explore job opportunities, visit our <a href="workforce.html" style="color: var(--gold); font-weight: 600;">Workforce page</a> or <a href="https://cilworkforce.com" target="_blank" style="color: var(--gold); font-weight: 600;">CIL Workforce Platform</a>.</em></p>
 
@@ -190,16 +225,39 @@
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
                     <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -210,21 +268,24 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
                 <a href="tel:+2347078269765">+234 707 826 9765</a>
                 <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
         <div class="container footer-bottom">
             <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
@@ -234,6 +295,52 @@
         toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+
+        // Newsletter Script
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 

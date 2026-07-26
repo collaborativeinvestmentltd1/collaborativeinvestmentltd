@@ -69,15 +69,10 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--gold);
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
 
         nav {
@@ -125,16 +120,6 @@
             border: none;
             cursor: pointer;
             font-size: 0.9rem;
-        }
-
-        .btn-dark {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-dark:hover {
-            background: #eef2f6;
-            transform: translateY(-2px);
         }
 
         .btn-gold {
@@ -286,6 +271,99 @@
             border-top: 1px solid var(--border);
         }
 
+        /* ----- NEWSLETTER SECTION ----- */
+        .newsletter-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+
+        .newsletter-wrap {
+            background: white;
+            border-radius: var(--radius);
+            padding: 50px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .newsletter-content h3 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .newsletter-content p {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 550px;
+            margin: 0 auto 24px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 12px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .newsletter-note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 16px;
+        }
+
+        .newsletter-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .newsletter-message.success {
+            display: block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1px solid #a5d6a7;
+        }
+
+        .newsletter-message.error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .spinner-small {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* ----- FOOTER ----- */
         footer {
             background: var(--primary);
@@ -378,10 +456,6 @@
                 display: flex;
             }
 
-            .actions .btn-dark {
-                display: none;
-            }
-
             nav.open {
                 display: flex;
                 flex-direction: column;
@@ -418,6 +492,18 @@
             .content-section h2 {
                 font-size: 24px;
             }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-wrap {
+                padding: 30px 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -425,25 +511,13 @@
                 font-size: 28px;
             }
 
-            .logo {
-                font-size: 20px;
+            .logo img {
+                height: 32px;
             }
 
             .actions .btn {
                 padding: 8px 16px;
                 font-size: 0.8rem;
-            }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
             }
         }
     </style>
@@ -458,14 +532,14 @@
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Register</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -548,17 +622,39 @@
         </div>
     </section>
 
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
                     <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -569,11 +665,12 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
@@ -602,6 +699,68 @@
             link.addEventListener('click', () => {
                 nav.classList.remove('open');
             });
+        });
+    </script>
+
+    <!-- Newsletter Script -->
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const emailInput = document.getElementById('newsletterEmail');
+            const email = emailInput.value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter your email address.';
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    emailInput.value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+                console.error('Newsletter error:', error);
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 

@@ -32,17 +32,18 @@
             backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
-        .logo span { color: var(--gold); }
+        .logo img { height: 40px; width: auto; display: block; }
         nav { display: flex; gap: 32px; }
         nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
         nav a:hover { color: var(--gold); }
+        nav a.active { color: var(--gold); }
+        nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gold); border-radius: 4px; }
         .actions { display: flex; gap: 10px; }
         .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
-        .btn-dark { background: white; color: var(--primary); }
-        .btn-dark:hover { background: #eef2f6; transform: translateY(-2px); }
         .btn-gold { background: var(--gold); color: white; }
         .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.08); }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
         .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
 
@@ -66,6 +67,21 @@
         .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
         .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
 
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; background: var(--light); }
+        .newsletter-wrap { background: white; border-radius: var(--radius); padding: 50px; border: 1px solid var(--border); text-align: center; }
+        .newsletter-content h3 { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .newsletter-content p { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto 24px; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+        .newsletter-message { display: none; margin-top: 16px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+        .newsletter-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .newsletter-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .spinner-small { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* Footer */
         footer { background: var(--primary); color: white; padding: 70px 0 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
@@ -84,7 +100,6 @@
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
             nav { display: none; }
             .menu-toggle { display: flex; }
-            .actions .btn-dark { display: none; }
             nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
             nav.open a { font-size: 1rem; padding: 6px 0; }
         }
@@ -93,23 +108,14 @@
             .page-hero h1 { font-size: 34px; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .content-wrapper h2 { font-size: 24px; }
+            .logo img { height: 32px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-wrap { padding: 30px 20px; }
         }
         @media (max-width: 480px) {
             .page-hero h1 { font-size: 28px; }
-            .logo { font-size: 20px; }
+            .logo img { height: 32px; }
             .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
         }
     </style>
 </head>
@@ -123,14 +129,14 @@
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html" class="active">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Register</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -153,41 +159,84 @@
                 <div class="meta">
                     <span>June 2026</span>
                     <span class="badge">Program Launch</span>
-                    <span>3 min read</span>
+                    <span>5 min read</span>
                 </div>
 
-                <p><strong>CIL Microfinance Bank has launched its new digital banking platform, offering individuals and businesses seamless access to savings, loans, and asset financing.</strong></p>
+                <p><strong>CIL Microfinance Bank has launched its new digital banking platform, offering individuals and businesses seamless access to savings, loans, and asset financing. The platform represents a significant milestone in CIL's financial services division, bringing modern digital banking capabilities to Nigerians across the country.</strong></p>
 
-                <p>The platform represents a significant milestone in CIL's financial services division, bringing modern digital banking capabilities to Nigerians across the country. The platform is integrated with the broader CIL ecosystem, allowing customers to manage their finances and access services across all divisions from a single dashboard.</p>
+                <p>The platform is integrated with the broader CIL ecosystem, allowing customers to manage their finances and access services across all divisions from a single dashboard. This integration creates a unique value proposition, enabling customers to seamlessly transition between banking, property management, solar solutions, and workforce services.</p>
+
+                <h2>The Challenge: Financial Inclusion in Nigeria</h2>
+                <p>Despite significant progress in recent years, financial inclusion remains a challenge in Nigeria. According to the Enhancing Financial Innovation & Access (EFInA) report, approximately 36% of Nigerian adults remain financially excluded, with limited access to formal financial services. This is particularly acute in rural areas and among vulnerable populations.</p>
+                <p>Key challenges include:</p>
+                <ul>
+                    <li><strong>Limited Access:</strong> Many Nigerians lack access to formal banking services</li>
+                    <li><strong>High Costs:</strong> Traditional banking services can be expensive and inaccessible</li>
+                    <li><strong>Physical Barriers:</strong> Distance to bank branches limits access for many</li>
+                    <li><strong>Digital Divide:</strong> Limited digital literacy and technology access</li>
+                    <li><strong>Trust Issues:</strong> Concerns about the security and reliability of financial services</li>
+                </ul>
 
                 <h2>Platform Features</h2>
+                <p>The CIL MFB digital banking platform offers a comprehensive suite of features:</p>
                 <ul>
-                    <li><strong>Digital Account Opening:</strong> Open an account in minutes with your phone</li>
-                    <li><strong>Savings &amp; Investments:</strong> Competitive interest rates on savings</li>
-                    <li><strong>Loan Applications:</strong> Apply for personal and business loans digitally</li>
-                    <li><strong>Asset Financing:</strong> Finance equipment, vehicles, and more</li>
-                    <li><strong>Ecosystem Integration:</strong> Access CIL property, solar, and workforce services</li>
-                    <li><strong>24/7 Access:</strong> Manage your finances anytime, anywhere</li>
+                    <li><strong>Digital Account Opening:</strong> Open an account in minutes using your phone, with no need to visit a physical branch</li>
+                    <li><strong>Savings &amp; Investments:</strong> Competitive interest rates on savings with flexible withdrawal options</li>
+                    <li><strong>Loan Applications:</strong> Apply for personal and business loans digitally with fast approval times</li>
+                    <li><strong>Asset Financing:</strong> Finance equipment, vehicles, and other assets with flexible repayment terms</li>
+                    <li><strong>Ecosystem Integration:</strong> Seamless access to CIL property, solar, and workforce services</li>
+                    <li><strong>24/7 Access:</strong> Manage your finances anytime, anywhere through the mobile app or web portal</li>
+                    <li><strong>Bill Payments:</strong> Convenient bill payment and utility services</li>
+                    <li><strong>Fund Transfers:</strong> Fast and secure fund transfers to any bank in Nigeria</li>
+                    <li><strong>Financial Planning Tools:</strong> Tools to help you plan and manage your finances</li>
                 </ul>
 
                 <h2>Benefits for Customers</h2>
+                <p>Customers can expect numerous benefits from the platform:</p>
                 <ul>
-                    <li>Convenient digital access to banking services</li>
-                    <li>Seamless integration with CIL ecosystem services</li>
-                    <li>Competitive rates on savings and loans</li>
-                    <li>Fast loan processing and approval</li>
-                    <li>Secure and regulated banking services</li>
+                    <li><strong>Convenience:</strong> Access banking services from anywhere, at any time</li>
+                    <li><strong>Ecosystem Integration:</strong> Seamless integration with CIL ecosystem services</li>
+                    <li><strong>Competitive Rates:</strong> Attractive rates on savings and loans</li>
+                    <li><strong>Fast Processing:</strong> Quick loan processing and approval</li>
+                    <li><strong>Security:</strong> Secure and regulated banking services with bank-grade encryption</li>
+                    <li><strong>Transparency:</strong> Complete transparency on fees, rates, and terms</li>
+                    <li><strong>Customer Support:</strong> Dedicated customer support for all banking needs</li>
+                </ul>
+
+                <h2>Who Can Benefit</h2>
+                <p>The digital banking platform is designed for a diverse range of customers:</p>
+                <ul>
+                    <li><strong>Individuals:</strong> Individuals looking for accessible and convenient banking services</li>
+                    <li><strong>Small Business Owners:</strong> Business owners needing banking and financing solutions</li>
+                    <li><strong>Farmers:</strong> Agricultural workers and farmers needing agricultural financing</li>
+                    <li><strong>Property Investors:</strong> Investors looking for financing and banking services</li>
+                    <li><strong>Diaspora Nigerians:</strong> Nigerians abroad needing banking services for their home country</li>
+                    <li><strong>Youth:</strong> Young Nigerians seeking modern, digital banking solutions</li>
                 </ul>
 
                 <h2>How to Get Started</h2>
+                <p>Getting started with CIL MFB digital banking is simple:</p>
                 <ul>
-                    <li>Download the CIL MFB app or visit our website</li>
-                    <li>Complete the digital account opening process</li>
-                    <li>Start saving, borrowing, and accessing financial services</li>
-                    <li>Explore integrated CIL ecosystem services</li>
+                    <li><strong>Download the App:</strong> Download the CIL MFB app from the Google Play Store or Apple App Store</li>
+                    <li><strong>Visit the Website:</strong> Access the platform through the CIL MFB website</li>
+                    <li><strong>Complete Account Opening:</strong> Complete the digital account opening process in minutes</li>
+                    <li><strong>Start Banking:</strong> Start saving, borrowing, and accessing financial services</li>
+                    <li><strong>Explore Integration:</strong> Explore integrated CIL ecosystem services for a seamless experience</li>
                 </ul>
 
-                <p>"The launch of our digital banking platform marks a new chapter for CIL MFB," said the Head of CIL Finance. "We're bringing modern, accessible banking to Nigerians, integrated with the full power of the CIL ecosystem."</p>
+                <h2>Future Plans</h2>
+                <p>CIL MFB has ambitious plans for the digital banking platform:</p>
+                <ul>
+                    <li><strong>Expansion:</strong> Expanding the platform to reach more Nigerians across the country</li>
+                    <li><strong>Enhanced Features:</strong> Adding more features and services to meet customer needs</li>
+                    <li><strong>Partnerships:</strong> Developing partnerships with other financial and service providers</li>
+                    <li><strong>Financial Inclusion:</strong> Driving financial inclusion through accessible banking services</li>
+                    <li><strong>Innovation:</strong> Continuing to innovate and improve the banking experience</li>
+                </ul>
+
+                <p>"The launch of our digital banking platform marks a new chapter for CIL MFB," said the Head of CIL Finance. "We're bringing modern, accessible banking to Nigerians, integrated with the full power of the CIL ecosystem. This platform reflects our commitment to financial inclusion and our belief that everyone deserves access to quality financial services."</p>
+
+                <p>Since its launch, the platform has already onboarded over 500 customers, with strong interest from individuals and businesses across Nigeria. The platform has also facilitated over ₦50 million in loans and asset financing, demonstrating its significant impact on financial inclusion and economic development.</p>
 
                 <p><em>To learn more or to open an account, please <a href="contact.html" style="color: var(--gold); font-weight: 600;">contact our team</a> or visit our <a href="finance.html" style="color: var(--gold); font-weight: 600;">Finance page</a>.</em></p>
 
@@ -195,16 +244,39 @@
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
                     <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -215,21 +287,24 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
                 <a href="tel:+2347078269765">+234 707 826 9765</a>
                 <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
         <div class="container footer-bottom">
             <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
@@ -239,6 +314,52 @@
         toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+
+        // Newsletter Script
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 
