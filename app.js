@@ -2,6 +2,47 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
+// Add near the top after imports
+const cors = require('cors');
+app.use(cors());
+
+// Import transporter for testing
+const { transporter } = require('./utils/email');
+
+// Add test endpoint
+app.get('/api/test-email', async (req, res) => {
+    try {
+        console.log('🔧 Testing email configuration...');
+        
+        // Test the transporter
+        await transporter.verify();
+        console.log('✅ Transporter verification successful');
+        
+        // Send a test email
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER,
+            subject: 'Test Email from Render',
+            text: 'This is a test email to verify email configuration on Render.',
+            html: '<h1>Test Email</h1><p>This is a test email to verify email configuration on Render.</p>'
+        });
+        console.log('✅ Test email sent successfully');
+        
+        res.json({ 
+            success: true, 
+            message: 'Email configuration is working!',
+            emailUser: process.env.EMAIL_USER,
+            environment: process.env.NODE_ENV
+        });
+    } catch (error) {
+        console.error('❌ Test email failed:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: error.message,
+            details: error.stack
+        });
+    }
+});
 
 // Load environment variables
 require('dotenv').config();
@@ -126,13 +167,14 @@ app.get('/workforce', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'workforce.html'));
 });
 
-// ----- CONTACT FORM API -----
 app.post('/api/contact', async (req, res) => {
+    console.log('📨 Contact form submission received:', req.body.email);
     try {
         const { fullName, email, phone, subject, message } = req.body;
 
         // Validate required fields
         if (!fullName || !email || !message) {
+            console.log('❌ Validation failed: Missing required fields');
             return res.status(400).json({ 
                 success: false, 
                 error: 'Please fill in all required fields.' 
@@ -142,6 +184,7 @@ app.post('/api/contact', async (req, res) => {
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
+            console.log('❌ Validation failed: Invalid email format');
             return res.status(400).json({ 
                 success: false, 
                 error: 'Please enter a valid email address.' 
@@ -157,11 +200,15 @@ app.post('/api/contact', async (req, res) => {
             message
         };
 
+        console.log('📧 Sending contact email to admin...');
         // Send email to CIL team
         await sendContactEmail(contactData);
+        console.log('✅ Admin email sent successfully');
 
+        console.log('📧 Sending confirmation email to user...');
         // Send confirmation email to user
         await sendUserConfirmation(contactData);
+        console.log('✅ User confirmation sent successfully');
 
         res.status(200).json({ 
             success: true, 
@@ -169,7 +216,8 @@ app.post('/api/contact', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Contact form error:', error);
+        console.error('❌ Contact form error:', error);
+        console.error('Error details:', error.message);
         res.status(500).json({ 
             success: false, 
             error: 'Failed to send message. Please try again later.' 
@@ -177,12 +225,11 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
-// ----- NEWSLETTER API -----
 app.post('/api/newsletter', async (req, res) => {
+    console.log('📨 Newsletter subscription received:', req.body.email);
     try {
         const { email } = req.body;
 
-        // Validate email
         if (!email) {
             return res.status(400).json({ 
                 success: false, 
@@ -198,15 +245,13 @@ app.post('/api/newsletter', async (req, res) => {
             });
         }
 
-        // Save to database (if you have one)
-        // const subscriber = new Subscriber({ email, subscribedAt: new Date() });
-        // await subscriber.save();
-
-        // Send notification email to admin
-        await sendNewsletterNotification(email);
-
-        // Send confirmation email to subscriber
+        console.log('📧 Sending newsletter confirmation to user...');
         await sendNewsletterConfirmation(email);
+        console.log('✅ Newsletter confirmation sent to user');
+
+        console.log('📧 Sending newsletter notification to admin...');
+        await sendNewsletterNotification(email);
+        console.log('✅ Newsletter notification sent to admin');
 
         res.status(200).json({ 
             success: true, 
@@ -214,10 +259,47 @@ app.post('/api/newsletter', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Newsletter error:', error);
+        console.error('❌ Newsletter error:', error);
+        console.error('Error details:', error.message);
         res.status(500).json({ 
             success: false, 
             error: 'Failed to subscribe. Please try again later.' 
+        });
+    }
+});
+
+// Test email configuration
+app.get('/api/test-email', async (req, res) => {
+    try {
+        console.log('🔧 Testing email configuration...');
+        console.log('📧 EMAIL_USER:', process.env.EMAIL_USER);
+        console.log('📧 EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Set' : '❌ Not set');
+        
+        // Test the transporter
+        await transporter.verify();
+        console.log('✅ Transporter verification successful');
+        
+        // Send a test email
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER,
+            subject: 'Test Email from Render',
+            text: 'This is a test email to verify email configuration on Render.',
+            html: '<h1>Test Email</h1><p>This is a test email to verify email configuration on Render.</p>'
+        });
+        console.log('✅ Test email sent successfully');
+        
+        res.json({ 
+            success: true, 
+            message: 'Email configuration is working!',
+            emailUser: process.env.EMAIL_USER
+        });
+    } catch (error) {
+        console.error('❌ Test email failed:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: error.message,
+            details: error.stack
         });
     }
 });

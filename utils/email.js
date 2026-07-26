@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-// Create transporter using Google SMTP
+// Create transporter using Google SMTP with better configuration
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -9,13 +9,19 @@ const transporter = nodemailer.createTransport({
     },
     tls: {
         rejectUnauthorized: false
-    }
+    },
+    // Add these options for better reliability
+    pool: true,
+    maxConnections: 1,
+    rateDelta: 1000,
+    rateLimit: 5
 });
 
-// Verify transporter connection
+// Verify transporter connection with better error handling
 transporter.verify((error, success) => {
     if (error) {
         console.error('❌ Email transporter error:', error);
+        console.error('Please check EMAIL_USER and EMAIL_PASS environment variables');
     } else {
         console.log('✅ Email server is ready to send messages');
     }
