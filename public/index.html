@@ -545,6 +545,213 @@
             color: #c4913a;
         }
 
+        .btn-register-now {
+            background: var(--gold);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px 24px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(217, 164, 65, 0.25);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-register-now:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(217, 164, 65, 0.35);
+            color: var(--primary);
+        }
+
+        .event-blog-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ----- EVENT REGISTRATION MODAL ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 35px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: modalIn .3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: .2s;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .modal .close-modal:hover {
+            color: var(--text);
+        }
+
+        .modal h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .modal .form-group {
+            margin-bottom: 16px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .modal .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            transition: .3s;
+            color: var(--text);
+        }
+
+        .modal .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 164, 65, .1);
+        }
+
+        .modal .btn-submit-event {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .modal .btn-submit-event:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(217, 164, 65, 0.3);
+        }
+
+        .modal .spinner-event {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(8, 27, 51, 0.3);
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        .modal .event-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .modal .event-message.success {
+            display: block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1px solid #a5d6a7;
+        }
+
+        .modal .event-message.error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .modal .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .modal .success-message i {
+            font-size: 48px;
+            color: #22c55e;
+            margin-bottom: 12px;
+        }
+
+        .modal .success-message h4 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .modal .success-message p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
         /* ----- NEWSLETTER SECTION ----- */
         .newsletter-section {
             padding: 60px 0;
@@ -835,6 +1042,17 @@
                 align-items: flex-start;
             }
 
+            .event-blog-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-read-more,
+            .btn-register-now {
+                width: 100%;
+                justify-content: center;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -879,6 +1097,10 @@
 
             .logo img {
                 height: 32px;
+            }
+
+            .modal {
+                padding: 30px 20px;
             }
         }
 
@@ -1133,7 +1355,10 @@
                             <span class="partner-tag">CILPIN</span>
                             <span class="partner-tag">ClickTech Quantum Edge</span>
                         </div>
-                        <a href="news-cilconnect.html" class="btn-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <div class="event-blog-actions">
+                            <a href="news-cilconnect.html" class="btn-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            <button class="btn-register-now" id="openEventModalBtn">Register Now <i class="fas fa-check-circle"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1292,6 +1517,150 @@
             }
         });
     </script>
+
+    <!-- Event Registration Modal Script -->
+<!-- Event Registration Modal Script -->
+<script>
+    // ----- EVENT REGISTRATION MODAL -----
+    const eventModal = document.getElementById('eventModal');
+    const openEventModalBtn = document.getElementById('openEventModalBtn');
+    const closeEventModal = document.getElementById('closeEventModal');
+
+    // Open modal
+    openEventModalBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        eventModal.classList.add('active');
+        document.getElementById('eventModalForm').style.display = 'block';
+        document.getElementById('eventModalSuccess').style.display = 'none';
+        document.getElementById('eventModalFormSubmit').reset();
+        document.getElementById('eventModalBtn').style.display = 'block';
+        document.getElementById('eventModalSpinner').style.display = 'none';
+        document.getElementById('eventModalMessage').className = 'event-message';
+        document.getElementById('eventModalMessage').textContent = '';
+    });
+
+    // Close modal
+    function closeEventModalFunc() {
+        eventModal.classList.remove('active');
+    }
+
+    closeEventModal.addEventListener('click', closeEventModalFunc);
+    eventModal.addEventListener('click', function(e) {
+        if (e.target === this) closeEventModalFunc();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeEventModalFunc();
+    });
+
+    // Event Modal Form Submission
+    document.getElementById('eventModalFormSubmit').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const fullName = document.getElementById('eventModalFullName').value.trim();
+        const email = document.getElementById('eventModalEmail').value.trim();
+        const phone = document.getElementById('eventModalPhone').value.trim();
+        const btn = document.getElementById('eventModalBtn');
+        const btnText = document.getElementById('eventModalBtnText');
+        const spinner = document.getElementById('eventModalSpinner');
+        const messageDiv = document.getElementById('eventModalMessage');
+
+        if (!fullName || !email) {
+            messageDiv.className = 'event-message error';
+            messageDiv.textContent = 'Please enter your full name and email address.';
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            messageDiv.className = 'event-message error';
+            messageDiv.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        btnText.style.display = 'none';
+        spinner.style.display = 'inline-block';
+        btn.disabled = true;
+        messageDiv.className = 'event-message';
+        messageDiv.textContent = '';
+
+        try {
+            const response = await fetch('/api/event-signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ fullName, email, phone })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                document.getElementById('eventModalForm').style.display = 'none';
+                document.getElementById('eventModalSuccess').style.display = 'block';
+                
+                // Reset form after 5 seconds and close modal
+                setTimeout(() => {
+                    document.getElementById('eventModalFormSubmit').reset();
+                    closeEventModalFunc();
+                }, 5000);
+            } else {
+                messageDiv.className = 'event-message error';
+                messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
+        } catch (error) {
+            messageDiv.className = 'event-message error';
+            messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            console.error('Event signup error:', error);
+            btnText.style.display = 'inline';
+            spinner.style.display = 'none';
+            btn.disabled = false;
+        }
+    });
+</script>
+
+<!-- Event Registration Modal -->
+<div class="modal-overlay" id="eventModal">
+    <div class="modal">
+        <button class="close-modal" id="closeEventModal">&times;</button>
+
+        <div id="eventModalForm">
+            <h3>Register for CIL Business Connect</h3>
+            <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 20px;">Stay updated on event dates and exclusive opportunities.</p>
+
+            <form id="eventModalFormSubmit">
+                <div class="form-group">
+                    <label for="eventModalFullName">Full Name *</label>
+                    <input type="text" id="eventModalFullName" placeholder="Enter your full name" required />
+                </div>
+                <div class="form-group">
+                    <label for="eventModalEmail">Email Address *</label>
+                    <input type="email" id="eventModalEmail" placeholder="Enter your email address" required />
+                </div>
+                <div class="form-group">
+                    <label for="eventModalPhone">Phone Number</label>
+                    <input type="tel" id="eventModalPhone" placeholder="Enter your phone number" />
+                </div>
+                <button type="submit" class="btn-submit-event" id="eventModalBtn">
+                    <span id="eventModalBtnText">Register Now</span>
+                    <span class="spinner-event" id="eventModalSpinner" style="display:none;"></span>
+                </button>
+                <div class="event-message" id="eventModalMessage"></div>
+            </form>
+        </div>
+
+        <div class="success-message" id="eventModalSuccess">
+            <i class="fas fa-check-circle"></i>
+            <h4>Registration Successful!</h4>
+            <p>Thank you for registering for CIL Business Connect. We'll keep you updated on event details.</p>
+            <p style="margin-top: 8px; font-size: 14px; color: var(--muted);">A confirmation email has been sent to your inbox.</p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

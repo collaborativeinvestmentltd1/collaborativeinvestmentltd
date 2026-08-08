@@ -1,48 +1,8 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
-// Add near the top after imports
-const cors = require('cors');
-app.use(cors());
-
-// Import transporter for testing
-const { transporter } = require('./utils/email');
-
-// Add test endpoint
-app.get('/api/test-email', async (req, res) => {
-    try {
-        console.log('🔧 Testing email configuration...');
-        
-        // Test the transporter
-        await transporter.verify();
-        console.log('✅ Transporter verification successful');
-        
-        // Send a test email
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER,
-            subject: 'Test Email from Render',
-            text: 'This is a test email to verify email configuration on Render.',
-            html: '<h1>Test Email</h1><p>This is a test email to verify email configuration on Render.</p>'
-        });
-        console.log('✅ Test email sent successfully');
-        
-        res.json({ 
-            success: true, 
-            message: 'Email configuration is working!',
-            emailUser: process.env.EMAIL_USER,
-            environment: process.env.NODE_ENV
-        });
-    } catch (error) {
-        console.error('❌ Test email failed:', error);
-        res.status(500).json({ 
-            success: false, 
-            error: error.message,
-            details: error.stack
-        });
-    }
-});
 
 // Load environment variables
 require('dotenv').config();
@@ -57,7 +17,11 @@ const {
     sendApplicationConfirmation
 } = require('./utils/email');
 
+// Import transporter for testing
+const { transporter } = require('./utils/email');
+
 // Middleware
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -99,7 +63,7 @@ app.get('/news', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'news.html'));
 });
 
-// News Articles (all 8 articles)
+// News Articles
 app.get('/news-sponktech', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'news-sponktech.html'));
 });
@@ -124,10 +88,10 @@ app.get('/news-diaspora-console', (req, res) => {
 app.get('/news-branch-expansion', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'news-branch-expansion.html'));
 });
-
 app.get('/news-cilconnect', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'news-cilconnect.html'));
 });
+
 // Contact
 app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'contact.html'));
@@ -170,6 +134,7 @@ app.get('/workforce', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'workforce.html'));
 });
 
+// ----- CONTACT FORM API -----
 app.post('/api/contact', async (req, res) => {
     console.log('📨 Contact form submission received:', req.body.email);
     try {
@@ -204,12 +169,10 @@ app.post('/api/contact', async (req, res) => {
         };
 
         console.log('📧 Sending contact email to admin...');
-        // Send email to CIL team
         await sendContactEmail(contactData);
         console.log('✅ Admin email sent successfully');
 
         console.log('📧 Sending confirmation email to user...');
-        // Send confirmation email to user
         await sendUserConfirmation(contactData);
         console.log('✅ User confirmation sent successfully');
 
@@ -228,6 +191,7 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
+// ----- NEWSLETTER API -----
 app.post('/api/newsletter', async (req, res) => {
     console.log('📨 Newsletter subscription received:', req.body.email);
     try {
@@ -271,44 +235,9 @@ app.post('/api/newsletter', async (req, res) => {
     }
 });
 
-// Test email configuration
-app.get('/api/test-email', async (req, res) => {
-    try {
-        console.log('🔧 Testing email configuration...');
-        console.log('📧 EMAIL_USER:', process.env.EMAIL_USER);
-        console.log('📧 EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Set' : '❌ Not set');
-        
-        // Test the transporter
-        await transporter.verify();
-        console.log('✅ Transporter verification successful');
-        
-        // Send a test email
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER,
-            subject: 'Test Email from Render',
-            text: 'This is a test email to verify email configuration on Render.',
-            html: '<h1>Test Email</h1><p>This is a test email to verify email configuration on Render.</p>'
-        });
-        console.log('✅ Test email sent successfully');
-        
-        res.json({ 
-            success: true, 
-            message: 'Email configuration is working!',
-            emailUser: process.env.EMAIL_USER
-        });
-    } catch (error) {
-        console.error('❌ Test email failed:', error);
-        res.status(500).json({ 
-            success: false, 
-            error: error.message,
-            details: error.stack
-        });
-    }
-});
-
 // ----- JOB APPLICATION API -----
 app.post('/api/apply', async (req, res) => {
+    console.log('📨 Job application received for:', req.body.jobTitle);
     try {
         const { fullName, email, phone, country, state, jobTitle, department, coverLetter, cvFilename } = req.body;
 
@@ -359,9 +288,11 @@ app.post('/api/apply', async (req, res) => {
 
         // Send email to HR team
         await sendJobApplication(applicationData);
+        console.log('✅ Job application sent to admin');
 
         // Send confirmation email to applicant
         await sendApplicationConfirmation(applicationData);
+        console.log('✅ Application confirmation sent to user');
 
         res.status(200).json({ 
             success: true, 
@@ -369,7 +300,8 @@ app.post('/api/apply', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Job application error:', error);
+        console.error('❌ Job application error:', error);
+        console.error('Error details:', error.message);
         res.status(500).json({ 
             success: false, 
             error: 'Failed to submit application. Please try again later.' 
@@ -377,8 +309,9 @@ app.post('/api/apply', async (req, res) => {
     }
 });
 
-// Event Signup API
+// ----- EVENT SIGNUP API -----
 app.post('/api/event-signup', async (req, res) => {
+    console.log('📨 Event registration received:', req.body.email);
     try {
         const { fullName, email, phone } = req.body;
 
@@ -397,11 +330,14 @@ app.post('/api/event-signup', async (req, res) => {
             });
         }
 
-        // Save to database or send email notification
+        // Log registration
         console.log('Event registration:', { fullName, email, phone });
 
-        // Send notification email
+        // TODO: Send notification email to admin
         // await sendEventSignupNotification({ fullName, email, phone });
+
+        // TODO: Send confirmation email to user
+        // await sendEventSignupConfirmation({ fullName, email });
 
         res.status(200).json({ 
             success: true, 
@@ -409,7 +345,8 @@ app.post('/api/event-signup', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Event signup error:', error);
+        console.error('❌ Event signup error:', error);
+        console.error('Error details:', error.message);
         res.status(500).json({ 
             success: false, 
             error: 'Failed to register. Please try again later.' 
@@ -417,28 +354,66 @@ app.post('/api/event-signup', async (req, res) => {
     }
 });
 
-// Health check endpoint (for monitoring)
+// ----- TEST EMAIL API -----
+app.get('/api/test-email', async (req, res) => {
+    try {
+        console.log('🔧 Testing email configuration...');
+        console.log('📧 EMAIL_USER:', process.env.EMAIL_USER);
+        console.log('📧 EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Set' : '❌ Not set');
+        
+        // Test the transporter
+        await transporter.verify();
+        console.log('✅ Transporter verification successful');
+        
+        // Send a test email
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER,
+            subject: 'Test Email from CIL Website',
+            text: 'This is a test email to verify email configuration.',
+            html: '<h1>Test Email</h1><p>This is a test email to verify email configuration.</p>'
+        });
+        console.log('✅ Test email sent successfully');
+        
+        res.json({ 
+            success: true, 
+            message: 'Email configuration is working!',
+            emailUser: process.env.EMAIL_USER,
+            environment: process.env.NODE_ENV || 'development'
+        });
+    } catch (error) {
+        console.error('❌ Test email failed:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: error.message,
+            details: error.stack
+        });
+    }
+});
+
+// ----- HEALTH CHECK -----
 app.get('/health', (req, res) => {
     res.status(200).json({
         status: 'ok',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
-        environment: process.env.NODE_ENV || 'development'
+        environment: process.env.NODE_ENV || 'development',
+        emailConfigured: !!process.env.EMAIL_USER
     });
 });
 
-// 404 - Not Found
+// ----- 404 - Not Found -----
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
-// Global error handler
+// ----- Global Error Handler -----
 app.use((err, req, res, next) => {
-    console.error('Server error:', err);
+    console.error('❌ Server error:', err);
     res.status(500).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
-// Start server
+// ----- Start Server -----
 app.listen(PORT, () => {
     console.log(`🚀 CIL Website running on http://localhost:${PORT}`);
     console.log(`📧 Email configured with: ${process.env.EMAIL_USER}`);

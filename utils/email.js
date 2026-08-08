@@ -437,11 +437,57 @@ async function sendApplicationConfirmation(data) {
     return transporter.sendMail(mailOptions);
 }
 
+/**
+ * Send event signup notification to admin
+ */
+async function sendEventSignupNotification(data) {
+    const { fullName, email, phone } = data;
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: `[CIL Event] New Registration: ${fullName}`,
+        html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f8fafc; border-radius: 12px;">
+                <div style="text-align: center; padding: 20px 0; border-bottom: 2px solid #D9A441;">
+                    <h1 style="color: #081B33; margin: 0;">Collaborative Investment Ltd</h1>
+                    <p style="color: #64748B; margin: 4px 0 0;">New Event Registration</p>
+                </div>
+                <div style="padding: 24px 0;">
+                    <h3 style="color: #081B33; margin-top: 0;">Registration Details</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
+                        <tr>
+                            <td style="padding: 8px 12px; background: #f1f5f9; font-weight: 600; width: 120px;">Name</td>
+                            <td style="padding: 8px 12px; background: white;">${fullName}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 12px; background: #f1f5f9; font-weight: 600;">Email</td>
+                            <td style="padding: 8px 12px; background: white;">${email}</td>
+                        </tr>
+                        ${phone ? `
+                        <tr>
+                            <td style="padding: 8px 12px; background: #f1f5f9; font-weight: 600;">Phone</td>
+                            <td style="padding: 8px 12px; background: white;">${phone}</td>
+                        </tr>
+                        ` : ''}
+                    </table>
+                </div>
+                <div style="padding: 16px 0; border-top: 1px solid #E2E8F0; text-align: center; font-size: 12px; color: #94A3B8;">
+                    <p style="margin: 0;">© ${new Date().getFullYear()} Collaborative Investment Ltd. All rights reserved.</p>
+                </div>
+            </div>
+        `
+    };
+
+    return transporter.sendMail(mailOptions);
+}
+
 // Export all functions
 module.exports = {
     sendContactEmail,
     sendUserConfirmation,
     sendNewsletterConfirmation,
+    sendEventSignupNotification,
     sendNewsletterNotification,
     sendJobApplication,
     sendApplicationConfirmation
