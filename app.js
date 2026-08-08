@@ -125,6 +125,9 @@ app.get('/news-branch-expansion', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'news-branch-expansion.html'));
 });
 
+app.get('/news-cilconnect', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'news-cilconnect.html'));
+});
 // Contact
 app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'contact.html'));
@@ -370,6 +373,46 @@ app.post('/api/apply', async (req, res) => {
         res.status(500).json({ 
             success: false, 
             error: 'Failed to submit application. Please try again later.' 
+        });
+    }
+});
+
+// Event Signup API
+app.post('/api/event-signup', async (req, res) => {
+    try {
+        const { fullName, email, phone } = req.body;
+
+        if (!fullName || !email) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please fill in all required fields.' 
+            });
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please enter a valid email address.' 
+            });
+        }
+
+        // Save to database or send email notification
+        console.log('Event registration:', { fullName, email, phone });
+
+        // Send notification email
+        // await sendEventSignupNotification({ fullName, email, phone });
+
+        res.status(200).json({ 
+            success: true, 
+            message: 'Registration successful!' 
+        });
+
+    } catch (error) {
+        console.error('Event signup error:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Failed to register. Please try again later.' 
         });
     }
 });

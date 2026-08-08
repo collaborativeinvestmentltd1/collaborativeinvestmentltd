@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIL Business Connect · CIL News</title>
+    <meta name="description" content="CIL Business Connect – a webinar series by Collaborative Investment Ltd connecting ideas to opportunities." />
+
+    <!-- Google Font & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #081B33;
+            --secondary: #0F2F5A;
+            --gold: #D9A441;
+            --light: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 22px;
+            --shadow: 0 20px 50px rgba(0,0,0,.06);
+        }
+        body { font-family: 'Inter', sans-serif; background: #fff; color: var(--text); line-height: 1.5; }
+        a { text-decoration: none; color: inherit; }
+        .container { width: min(1280px, 92%); margin: 0 auto; }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 16px 0; background: rgba(8,27,51,.92);
+            backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 40px; width: auto; display: block; }
+        nav { display: flex; gap: 32px; }
+        nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
+        nav a:hover { color: var(--gold); }
+        nav a.active { color: var(--gold); }
+        nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gold); border-radius: 4px; }
+        .actions { display: flex; gap: 10px; }
+        .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
+        .btn-gold { background: var(--gold); color: white; }
+        .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.08); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+        .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 140px 0 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; background: #D9A44115; border-radius: 50%; right: -100px; top: -100px; filter: blur(80px); pointer-events: none; }
+        .page-hero-content { max-width: 780px; position: relative; z-index: 2; }
+        .page-hero h1 { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 12px; letter-spacing: -1px; }
+        .page-hero h1 span { color: var(--gold); }
+        .page-hero .back-link { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px; transition: .2s; }
+        .page-hero .back-link:hover { color: var(--gold); }
+
+        /* Content */
+        .content-section { padding: 60px 0 80px; background: white; }
+        .content-wrapper { max-width: 900px; margin: 0 auto; }
+        .content-wrapper .meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; color: var(--muted); font-size: 14px; }
+        .content-wrapper .meta .badge { padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; background: #fff3e0; color: #e65100; }
+        .content-wrapper .featured-image { width: 100%; border-radius: var(--radius); overflow: hidden; margin-bottom: 30px; }
+        .content-wrapper .featured-image img { width: 100%; height: auto; display: block; }
+        .content-wrapper h2 { font-size: 28px; font-weight: 700; color: var(--primary); margin-top: 32px; margin-bottom: 16px; }
+        .content-wrapper p { color: var(--muted); font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
+        .content-wrapper ul { list-style: none; padding: 0; margin-bottom: 20px; }
+        .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
+        .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
+
+        /* Event Signup Form in Article */
+        .event-signup-box {
+            background: var(--light);
+            padding: 35px 40px;
+            border-radius: var(--radius);
+            margin-top: 30px;
+            border: 1px solid var(--border);
+        }
+        .event-signup-box h3 { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+        .event-signup-box p { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
+        .event-signup-box .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .event-signup-box .form-group { margin-bottom: 14px; }
+        .event-signup-box .form-group label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px; color: var(--text); }
+        .event-signup-box .form-group input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 0.95rem; font-family: 'Inter', sans-serif; transition: .3s; }
+        .event-signup-box .form-group input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(217, 164, 65, .1); }
+        .event-signup-box .btn-submit-event { width: 100%; padding: 14px; background: var(--gold); color: var(--primary); border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: .3s; font-family: 'Inter', sans-serif; }
+        .event-signup-box .btn-submit-event:hover { background: #c4913a; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(217, 164, 65, 0.3); }
+        .event-signup-box .event-message { display: none; margin-top: 16px; padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; }
+        .event-signup-box .event-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .event-signup-box .event-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .event-signup-box .spinner-event { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(8, 27, 51, 0.3); border-top: 2px solid var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; background: var(--light); }
+        .newsletter-wrap { background: white; border-radius: var(--radius); padding: 50px; border: 1px solid var(--border); text-align: center; }
+        .newsletter-content h3 { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .newsletter-content p { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto 24px; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+        .newsletter-message { display: none; margin-top: 16px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+        .newsletter-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .newsletter-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .spinner-small { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 70px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
+        .footer-grid h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+        .footer-grid h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+        .footer-grid a, .footer-grid p { display: block; margin-bottom: 12px; opacity: .7; transition: .2s; font-size: 0.95rem; }
+        .footer-grid a:hover { opacity: 1; color: var(--gold); }
+        .footer-grid p { opacity: .6; }
+        .social-links { display: flex; gap: 12px; margin-top: 16px; }
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255,255,255,.06); border-radius: 50%; transition: .3s; font-size: 1.1rem; }
+        .social-links a:hover { background: var(--gold); color: var(--primary); opacity: 1; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 2rem; margin-top: 2.5rem; text-align: center; font-size: 0.85rem; color: rgba(255,255,255,.4); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+            nav { display: none; }
+            .menu-toggle { display: flex; }
+            nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+            nav.open a { font-size: 1rem; padding: 6px 0; }
+            .event-signup-box .form-row { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .page-hero { padding: 120px 0 40px; }
+            .page-hero h1 { font-size: 34px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .content-wrapper h2 { font-size: 24px; }
+            .logo img { height: 32px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-wrap { padding: 30px 20px; }
+            .event-signup-box { padding: 25px 20px; }
+        }
+        @media (max-width: 480px) {
+            .page-hero h1 { font-size: 28px; }
+            .logo img { height: 32px; }
+            .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
+            </a>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="companies.html">Our Companies</a>
+                <a href="partners.html">Partners</a>
+                <a href="news.html" class="active">News</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="actions">
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <a href="news.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to News</a>
+                <h1>CIL Business Connect: <span>Where Ideas Meet Opportunities</span></h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="meta">
+                    <span>Coming Soon</span>
+                    <span class="badge">Event Announcement</span>
+                    <span>5 min read</span>
+                </div>
+
+                <p><strong>Collaborative Investment Ltd (CIL) is proud to announce the launch of CIL Business Connect, a webinar series designed to educate, connect, and empower individuals and businesses through insightful conversations across key sectors of the economy.</strong></p>
+
+                <p>This initiative brings together industry experts, business leaders, and entrepreneurs to explore strategic wealth-building opportunities and foster meaningful connections across Nigeria's business landscape.</p>
+
+                <h2>What is CIL Business Connect?</h2>
+                <p>CIL Business Connect is a premier webinar series hosted by Collaborative Investment Ltd, designed to bridge the gap between ideas and opportunities. The series features engaging discussions on:</p>
+                <ul>
+                    <li><strong>Investment Strategies:</strong> Exploring wealth-building opportunities across multiple sectors</li>
+                    <li><strong>Business Development:</strong> Practical insights for starting and scaling businesses</li>
+                    <li><strong>Industry Trends:</strong> Understanding emerging trends in key economic sectors</li>
+                    <li><strong>Networking:</strong> Connecting with industry leaders and fellow entrepreneurs</li>
+                    <li><strong>Innovation:</strong> Exploring innovative approaches to business and investment</li>
+                </ul>
+
+                <h2>Why Attend?</h2>
+                <p>Whether you're an entrepreneur, investor, professional, or business owner, CIL Business Connect offers valuable insights and connections:</p>
+                <ul>
+                    <li><strong>Expert Insights:</strong> Learn from industry leaders and subject matter experts</li>
+                    <li><strong>Practical Knowledge:</strong> Gain actionable strategies for business and investment</li>
+                    <li><strong>Networking Opportunities:</strong> Connect with like-minded professionals</li>
+                    <li><strong>Ecosystem Access:</strong> Explore opportunities across the CIL ecosystem</li>
+                    <li><strong>Growth Strategies:</strong> Discover new approaches to business growth and development</li>
+                </ul>
+
+                <h2>Who Should Attend?</h2>
+                <p>The CIL Business Connect webinar series is ideal for:</p>
+                <ul>
+                    <li>Entrepreneurs looking to scale their businesses</li>
+                    <li>Investors seeking strategic opportunities</li>
+                    <li>Business professionals wanting to expand their knowledge</li>
+                    <li>Students and graduates interested in business development</li>
+                    <li>Anyone interested in Nigeria's economic growth and development</li>
+                </ul>
+
+                <h2>Partners &amp; Collaborators</h2>
+                <p>CIL Business Connect is proudly presented by <strong>Collaborative Investment Ltd (CIL)</strong> in collaboration with:</p>
+                <ul>
+                    <li><strong>CIL Private Investors Network (CILPIN):</strong> Connecting members to strategic wealth-building opportunities</li>
+                    <li><strong>ClickTech Quantum Edge Ltd:</strong> Technology and digital innovation partner</li>
+                </ul>
+
+                <h2>Event Details</h2>
+                <ul>
+                    <li><strong>Date:</strong> To be announced soon</li>
+                    <li><strong>Time:</strong> To be announced soon</li>
+                    <li><strong>Platform:</strong> Streaming live on Zoom</li>
+                    <li><strong>Locations:</strong> Lagos · Ogun · Kwara · Abuja · Ibadan</li>
+                </ul>
+
+                <!-- Event Signup Form -->
+                <div class="event-signup-box">
+                    <h3>Register Now</h3>
+                    <p>Stay updated on event dates and exclusive opportunities.</p>
+                    <form id="eventSignupForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventFullName">Full Name</label>
+                                <input type="text" id="eventFullName" placeholder="Enter your full name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="eventEmail">Email Address</label>
+                                <input type="email" id="eventEmail" placeholder="Enter your email" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventPhone">Phone Number</label>
+                            <input type="tel" id="eventPhone" placeholder="Enter your phone number" />
+                        </div>
+                        <button type="submit" class="btn-submit-event" id="eventBtn">
+                            <span id="eventBtnText">Register for CIL Business Connect</span>
+                            <span class="spinner-event" id="eventSpinner" style="display:none;"></span>
+                        </button>
+                        <div class="event-message" id="eventMessage"></div>
+                    </form>
+                </div>
+
+                <p><em>For sponsorship, partnership, and enquiries, please contact us at <a href="mailto:collaborativeinvestmentltd@gmail.com" style="color: var(--gold); font-weight: 600;">collaborativeinvestmentltd@gmail.com</a> or call <a href="tel:+2348129978419" style="color: var(--gold); font-weight: 600;">+234 812 997 8419</a>.</em></p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Collaborative Investment Ltd</h2>
+                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <div class="social-links">
+                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <a href="about.html">About</a>
+                <a href="news.html">News</a>
+                <a href="partners.html">Partners</a>
+                <a href="careers.html">Careers</a>
+            </div>
+            <div>
+                <h3>Ecosystem</h3>
+                <a href="property.html">Property</a>
+                <a href="solar.html">Solar</a>
+                <a href="finance.html">Finance</a>
+                <a href="workforce.html">Workforce</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <a href="tel:+2347078269765">+234 707 826 9765</a>
+                <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+        toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+
+        // Newsletter Script
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
+        });
+
+        // Event Signup Script
+        document.getElementById('eventSignupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('eventFullName').value.trim();
+            const email = document.getElementById('eventEmail').value.trim();
+            const phone = document.getElementById('eventPhone').value.trim();
+            const btn = document.getElementById('eventBtn');
+            const btnText = document.getElementById('eventBtnText');
+            const spinner = document.getElementById('eventSpinner');
+            const messageDiv = document.getElementById('eventMessage');
+
+            if (!fullName || !email) {
+                messageDiv.className = 'event-message error';
+                messageDiv.textContent = 'Please enter your full name and email address.';
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                messageDiv.className = 'event-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'event-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/event-signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, email, phone })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.className = 'event-message success';
+                    messageDiv.textContent = 'Registration successful! We\'ll keep you updated on event details.';
+                    document.getElementById('eventFullName').value = '';
+                    document.getElementById('eventEmail').value = '';
+                    document.getElementById('eventPhone').value = '';
+                } else {
+                    messageDiv.className = 'event-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'event-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+                console.error('Event signup error:', error);
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>
