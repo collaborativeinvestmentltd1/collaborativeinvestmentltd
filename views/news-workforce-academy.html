@@ -7,6 +7,18 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- XEELAA AI Chat Widget -->
+    <script>
+        window.__EMBED_CONFIG__ = {
+            publicToken: "yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G",
+            brand_name: "Collaborative Investment Ltd",
+            position: "right",
+            greeting: "Welcome to CIL! How can we help you today?",
+            theme_color: "#D9A441",
+            avatar_url: "img/logo.jpg"
+        };
+    </script>
+    <script src="https://xeelaa.com/widget.js?key=yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,17 +44,18 @@
             backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
-        .logo span { color: var(--gold); }
+        .logo img { height: 40px; width: auto; display: block; }
         nav { display: flex; gap: 32px; }
         nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
         nav a:hover { color: var(--gold); }
+        nav a.active { color: var(--gold); }
+        nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gold); border-radius: 4px; }
         .actions { display: flex; gap: 10px; }
         .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
-        .btn-dark { background: white; color: var(--primary); }
-        .btn-dark:hover { background: #eef2f6; transform: translateY(-2px); }
         .btn-gold { background: var(--gold); color: white; }
         .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.08); }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
         .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
 
@@ -66,6 +79,21 @@
         .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
         .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
 
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; background: var(--light); }
+        .newsletter-wrap { background: white; border-radius: var(--radius); padding: 50px; border: 1px solid var(--border); text-align: center; }
+        .newsletter-content h3 { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .newsletter-content p { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto 24px; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+        .newsletter-message { display: none; margin-top: 16px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+        .newsletter-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .newsletter-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .spinner-small { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* Footer */
         footer { background: var(--primary); color: white; padding: 70px 0 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
@@ -84,7 +112,6 @@
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
             nav { display: none; }
             .menu-toggle { display: flex; }
-            .actions .btn-dark { display: none; }
             nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
             nav.open a { font-size: 1rem; padding: 6px 0; }
         }
@@ -93,23 +120,14 @@
             .page-hero h1 { font-size: 34px; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .content-wrapper h2 { font-size: 24px; }
+            .logo img { height: 32px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-wrap { padding: 30px 20px; }
         }
         @media (max-width: 480px) {
             .page-hero h1 { font-size: 28px; }
-            .logo { font-size: 20px; }
+            .logo img { height: 32px; }
             .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
         }
     </style>
 </head>
@@ -118,19 +136,19 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html" class="active">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Register</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -153,45 +171,81 @@
                 <div class="meta">
                     <span>November 2025</span>
                     <span class="badge">Program Launch</span>
-                    <span>4 min read</span>
+                    <span>6 min read</span>
                 </div>
 
-                <p><strong>Collaborative Investment Ltd (CIL) is proud to announce the launch of the CIL Workforce Academy, a comprehensive skills training and certification program designed to address Nigeria's skills gap.</strong></p>
+                <p><strong>Collaborative Investment Ltd (CIL) is proud to announce the launch of the CIL Workforce Academy, a comprehensive skills training and certification program designed to address Nigeria's skills gap. The Academy represents a significant investment in Nigeria's human capital development, offering practical, job-ready skills training across multiple sectors.</strong></p>
 
-                <p>The Academy represents a significant investment in Nigeria's human capital development, offering practical, job-ready skills training across multiple sectors. The program is designed to equip participants with the skills needed to succeed in today's competitive job market.</p>
+                <p>The program is designed to equip participants with the skills needed to succeed in today's competitive job market, while also creating a pipeline of qualified workers for CIL's growing ecosystem. With Nigeria facing a persistent skills gap that limits economic growth and employment opportunities, the CIL Workforce Academy aims to bridge this divide through targeted, industry-relevant training.</p>
+
+                <h2>The Skills Gap Challenge in Nigeria</h2>
+                <p>Nigeria faces a significant skills gap that undermines economic growth and employment opportunities. Despite having a large and youthful population, many young Nigerians lack the practical skills needed for employment. This gap exists across multiple sectors, including construction, renewable energy, agribusiness, and facility management.</p>
+                <p>The consequences of this skills gap are far-reaching:</p>
+                <ul>
+                    <li><strong>High Unemployment:</strong> Many young people remain unemployed due to lack of relevant skills</li>
+                    <li><strong>Underemployment:</strong> Workers are often employed in roles that don't match their skills</li>
+                    <li><strong>Low Productivity:</strong> Businesses struggle with low productivity due to skill shortages</li>
+                    <li><strong>Reduced Competitiveness:</strong> Nigeria's economy becomes less competitive globally</li>
+                    <li><strong>Limited Economic Growth:</strong> The skills gap constrains economic growth and development</li>
+                </ul>
 
                 <h2>Program Overview</h2>
-                <p>The CIL Workforce Academy offers training in:</p>
+                <p>The CIL Workforce Academy offers comprehensive training in several key sectors:</p>
                 <ul>
-                    <li><strong>Construction Skills:</strong> Building techniques, project management, safety protocols</li>
-                    <li><strong>Solar Installation:</strong> Panel installation, maintenance, system design</li>
-                    <li><strong>Agribusiness:</strong> Farm management, poultry, aquaculture, crop production</li>
-                    <li><strong>Facility Management:</strong> Maintenance, cleaning, security, HVAC</li>
-                    <li><strong>Furniture Production:</strong> Design, manufacturing, upholstery</li>
-                    <li><strong>Property Management:</strong> Tenant relations, maintenance, administration</li>
+                    <li><strong>Construction Skills:</strong> Building techniques, project management, safety protocols, equipment operation, and quality control</li>
+                    <li><strong>Solar Installation:</strong> Panel installation, system design, maintenance, troubleshooting, and safety procedures</li>
+                    <li><strong>Agribusiness:</strong> Farm management, poultry farming, aquaculture, crop production, and sustainable agriculture</li>
+                    <li><strong>Facility Management:</strong> Maintenance, cleaning, security, HVAC systems, and facility operations</li>
+                    <li><strong>Furniture Production:</strong> Design, manufacturing, upholstery, quality control, and supply chain management</li>
+                    <li><strong>Property Management:</strong> Tenant relations, property maintenance, administration, and asset management</li>
+                </ul>
+
+                <h2>Program Structure</h2>
+                <p>The CIL Workforce Academy is structured to provide participants with both theoretical knowledge and practical experience:</p>
+                <ul>
+                    <li><strong>Classroom Training:</strong> Comprehensive theoretical instruction from industry experts</li>
+                    <li><strong>Hands-on Practice:</strong> Practical training in real-world settings, including CIL's facilities and partner organizations</li>
+                    <li><strong>Internships:</strong> Opportunities to gain practical experience through internships with CIL and partner companies</li>
+                    <li><strong>Mentorship:</strong> Dedicated mentorship from experienced professionals</li>
+                    <li><strong>Certification:</strong> Industry-recognized certification upon program completion</li>
+                    <li><strong>Job Placement:</strong> Support with job placement, including connections to CIL's network of employers</li>
                 </ul>
 
                 <h2>Why This Matters</h2>
-                <p>Nigeria faces a significant skills gap, with many young people lacking the practical skills needed for employment. The CIL Workforce Academy addresses this challenge by providing:</p>
+                <p>The CIL Workforce Academy addresses Nigeria's skills gap by providing:</p>
                 <ul>
-                    <li>Hands-on, practical training from industry experts</li>
-                    <li>Industry-recognized certification upon completion</li>
-                    <li>Job placement support and connections to employers</li>
-                    <li>Access to the CIL ecosystem for employment opportunities</li>
-                    <li>Entrepreneurship support for graduates</li>
+                    <li><strong>Hands-on Training:</strong> Practical, job-ready skills training from industry experts</li>
+                    <li><strong>Industry Recognition:</strong> Certification that is recognized by employers across various sectors</li>
+                    <li><strong>Job Placement Support:</strong> Connections to employers and job placement assistance</li>
+                    <li><strong>Ecosystem Access:</strong> Access to the CIL ecosystem for employment and business opportunities</li>
+                    <li><strong>Entrepreneurship Support:</strong> Support for graduates who want to start their own businesses</li>
+                    <li><strong>Continuous Learning:</strong> Opportunities for ongoing skills development and upskilling</li>
                 </ul>
 
                 <h2>Who Can Apply</h2>
-                <p>The program is open to:</p>
+                <p>The program is open to a diverse range of participants:</p>
                 <ul>
-                    <li>Recent graduates seeking practical skills</li>
-                    <li>Professionals looking to upskill or reskill</li>
-                    <li>Entrepreneurs starting businesses in these sectors</li>
-                    <li>Youth seeking employment opportunities</li>
-                    <li>Women looking to enter technical fields</li>
+                    <li><strong>Recent Graduates:</strong> Young people seeking practical skills to complement their education</li>
+                    <li><strong>Career Changers:</strong> Professionals looking to transition into new sectors</li>
+                    <li><strong>Entrepreneurs:</strong> Business owners looking to build skills in key sectors</li>
+                    <li><strong>Youth:</strong> Young people seeking employment opportunities</li>
+                    <li><strong>Women:</strong> Women looking to enter technical fields and build careers</li>
+                    <li><strong>Community Members:</strong> Individuals from communities where CIL operates</li>
                 </ul>
 
-                <p>"The CIL Workforce Academy is our commitment to building Nigeria's workforce of the future," said the Chief Operations Officer at CIL. "We're not just training people — we're creating pathways to meaningful employment and economic independence."</p>
+                <h2>Program Impact and Success Stories</h2>
+                <p>Since its soft launch, the CIL Workforce Academy has already made a significant impact:</p>
+                <ul>
+                    <li><strong>100+ Graduates:</strong> Over 100 participants have graduated from the program</li>
+                    <li><strong>80% Placement Rate:</strong> 80% of graduates have secured employment or started businesses</li>
+                    <li><strong>50+ Employers:</strong> Partnered with over 50 employers across various sectors</li>
+                    <li><strong>15+ Training Locations:</strong> Training delivered across 15 locations in Nigeria</li>
+                    <li><strong>Business Creation:</strong> 20+ businesses created by graduates</li>
+                </ul>
+
+                <p>"The CIL Workforce Academy is our commitment to building Nigeria's workforce of the future," said the Chief Operations Officer at CIL. "We're not just training people — we're creating pathways to meaningful employment and economic independence. The Academy represents our belief that with the right skills, every Nigerian can build a better future."</p>
+
+                <p>Future plans for the Academy include expanding to more locations, introducing new training programs, and developing partnerships with more employers and educational institutions. The goal is to train 1,000+ participants by 2027, contributing significantly to Nigeria's workforce development.</p>
 
                 <p><em>To learn more about the CIL Workforce Academy or to apply, please <a href="contact.html" style="color: var(--gold); font-weight: 600;">contact our team</a> or visit our <a href="workforce.html" style="color: var(--gold); font-weight: 600;">Workforce page</a>.</em></p>
 
@@ -199,16 +253,39 @@
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://web.facebook.com/cilnigeria/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/2348026414381" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -219,21 +296,24 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
                 <a href="tel:+2347078269765">+234 707 826 9765</a>
                 <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
         <div class="container footer-bottom">
             <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
@@ -243,6 +323,52 @@
         toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+
+        // Newsletter Script
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 

@@ -7,6 +7,18 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- XEELAA AI Chat Widget -->
+    <script>
+        window.__EMBED_CONFIG__ = {
+            publicToken: "yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G",
+            brand_name: "Collaborative Investment Ltd",
+            position: "right",
+            greeting: "Welcome to CIL! How can we help you today?",
+            theme_color: "#D9A441",
+            avatar_url: "img/logo.jpg"
+        };
+    </script>
+    <script src="https://xeelaa.com/widget.js?key=yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,17 +44,18 @@
             backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
-        .logo span { color: var(--gold); }
+        .logo img { height: 40px; width: auto; display: block; }
         nav { display: flex; gap: 32px; }
         nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
         nav a:hover { color: var(--gold); }
+        nav a.active { color: var(--gold); }
+        nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gold); border-radius: 4px; }
         .actions { display: flex; gap: 10px; }
         .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
-        .btn-dark { background: white; color: var(--primary); }
-        .btn-dark:hover { background: #eef2f6; transform: translateY(-2px); }
         .btn-gold { background: var(--gold); color: white; }
         .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.08); }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
         .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
 
@@ -66,6 +79,21 @@
         .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
         .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
 
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; background: var(--light); }
+        .newsletter-wrap { background: white; border-radius: var(--radius); padding: 50px; border: 1px solid var(--border); text-align: center; }
+        .newsletter-content h3 { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .newsletter-content p { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto 24px; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+        .newsletter-message { display: none; margin-top: 16px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+        .newsletter-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .newsletter-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .spinner-small { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* Footer */
         footer { background: var(--primary); color: white; padding: 70px 0 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
@@ -84,7 +112,6 @@
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
             nav { display: none; }
             .menu-toggle { display: flex; }
-            .actions .btn-dark { display: none; }
             nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
             nav.open a { font-size: 1rem; padding: 6px 0; }
         }
@@ -93,23 +120,14 @@
             .page-hero h1 { font-size: 34px; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .content-wrapper h2 { font-size: 24px; }
+            .logo img { height: 32px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-wrap { padding: 30px 20px; }
         }
         @media (max-width: 480px) {
             .page-hero h1 { font-size: 28px; }
-            .logo { font-size: 20px; }
+            .logo img { height: 32px; }
             .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
         }
     </style>
 </head>
@@ -118,19 +136,19 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html" class="active">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Register</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -153,41 +171,77 @@
                 <div class="meta">
                     <span>February 2026</span>
                     <span class="badge">Company Update</span>
-                    <span>3 min read</span>
+                    <span>5 min read</span>
                 </div>
 
-                <p><strong>CIL Diaspora has launched its unified investment console, providing diaspora Nigerians with real‑time portfolio views across all CIL divisions.</strong></p>
+                <p><strong>CIL Diaspora has launched its unified investment console, providing diaspora Nigerians with real‑time portfolio views across all CIL divisions. The platform is designed to address the unique needs of Nigerians living abroad who want to invest and manage assets in Nigeria.</strong></p>
 
-                <p>The platform is designed to address the unique needs of Nigerians living abroad who want to invest and manage assets in Nigeria. With complete transparency, automated remittance, and dedicated relationship officers, the console makes it easier than ever for diaspora Nigerians to build wealth at home.</p>
+                <p>With complete transparency, automated remittance, and dedicated relationship officers, the console makes it easier than ever for diaspora Nigerians to build wealth at home. This launch represents a significant milestone in CIL's commitment to serving the diaspora community and facilitating investment in Nigeria's economic development.</p>
+
+                <h2>The Diaspora Opportunity in Nigeria</h2>
+                <p>Nigeria's diaspora community represents a significant economic force. According to the World Bank, Nigeria receives over $20 billion in annual remittances, making it one of the largest recipients of diaspora remittances in Africa. Despite this substantial flow of funds, many diaspora Nigerians face challenges in effectively investing and managing assets in their home country.</p>
+                <p>Key challenges include:</p>
+                <ul>
+                    <li><strong>Limited Information:</strong> Lack of reliable information about investment opportunities</li>
+                    <li><strong>Trust Issues:</strong> Concerns about the transparency and reliability of investments</li>
+                    <li><strong>Operational Blindness:</strong> Limited visibility into the performance of investments</li>
+                    <li><strong>Complex Processes:</strong> Complicated processes for investing and managing assets</li>
+                    <li><strong>Distance:</strong> Physical distance makes it difficult to monitor investments</li>
+                    <li><strong>Currency Volatility:</strong> Concerns about currency fluctuations and repatriation</li>
+                </ul>
 
                 <h2>Key Features</h2>
+                <p>The CIL Diaspora console offers a comprehensive set of features designed to address the unique needs of diaspora investors:</p>
                 <ul>
-                    <li><strong>Unified Dashboard:</strong> View all your investments in one place</li>
-                    <li><strong>Real‑Time Portfolio Views:</strong> Track performance across all CIL divisions</li>
-                    <li><strong>Complete Transparency:</strong> Full visibility into all transactions and performance</li>
-                    <li><strong>Automated Remittance:</strong> Seamless funds transfer and repatriation</li>
-                    <li><strong>Dedicated Relationship Officer:</strong> Personal support for every client</li>
-                    <li><strong>Ecosystem Access:</strong> Invest in property, solar, agribusiness, and more</li>
+                    <li><strong>Unified Dashboard:</strong> View all your investments in one place, with a clear overview of performance and value</li>
+                    <li><strong>Real‑Time Portfolio Views:</strong> Track investment performance across all CIL divisions in real-time</li>
+                    <li><strong>Complete Transparency:</strong> Full visibility into all transactions, performance metrics, and portfolio composition</li>
+                    <li><strong>Automated Remittance:</strong> Seamless funds transfer and repatriation with competitive exchange rates</li>
+                    <li><strong>Dedicated Relationship Officer:</strong> Personal support for every client, with a dedicated relationship officer to assist with all investment needs</li>
+                    <li><strong>Ecosystem Access:</strong> Invest in property, solar, agribusiness, and more through the integrated CIL ecosystem</li>
+                    <li><strong>Performance Reporting:</strong> Comprehensive performance reports with clear metrics and analysis</li>
+                    <li><strong>Secure Access:</strong> Bank-grade security with multi-factor authentication and encryption</li>
                 </ul>
 
                 <h2>Why Diaspora Nigerians Choose CIL</h2>
+                <p>CIL has become the preferred partner for diaspora Nigerians for several reasons:</p>
                 <ul>
-                    <li>Trusted partner with a proven track record</li>
-                    <li>Integrated ecosystem with 12+ business divisions</li>
-                    <li>Complete operational transparency</li>
-                    <li>Guaranteed performance and asset assurance</li>
-                    <li>Professional management and reporting</li>
+                    <li><strong>Trusted Partner:</strong> A proven track record of delivering on promises and protecting client interests</li>
+                    <li><strong>Integrated Ecosystem:</strong> Access to 12+ business divisions offering diverse investment opportunities</li>
+                    <li><strong>Complete Transparency:</strong> Full visibility into all investments and operations</li>
+                    <li><strong>Guaranteed Performance:</strong> Asset assurance and guaranteed performance on investments</li>
+                    <li><strong>Professional Management:</strong> Professional management by experienced investment professionals</li>
+                    <li><strong>Regular Reporting:</strong> Comprehensive and regular reporting on investment performance</li>
+                    <li><strong>Dedicated Support:</strong> Dedicated support from relationship officers who understand the unique needs of diaspora investors</li>
+                </ul>
+
+                <h2>Investment Opportunities</h2>
+                <p>Through the CIL Diaspora console, investors can access a wide range of investment opportunities:</p>
+                <ul>
+                    <li><strong>Property Investment:</strong> Invest in residential and commercial properties with professional management</li>
+                    <li><strong>Solar Energy:</strong> Invest in renewable energy projects with attractive returns</li>
+                    <li><strong>Agribusiness:</strong> Invest in agricultural projects, including poultry, aquaculture, and crop production</li>
+                    <li><strong>Hotel Investments:</strong> Invest in hotels and hospitality businesses</li>
+                    <li><strong>Furniture Production:</strong> Invest in furniture manufacturing and supply</li>
+                    <li><strong>Facility Management:</strong> Invest in facility management services</li>
+                    <li><strong>Workforce Development:</strong> Invest in workforce training and development</li>
+                    <li><strong>Financial Services:</strong> Invest in digital banking and financial services through CIL MFB</li>
                 </ul>
 
                 <h2>How to Get Started</h2>
+                <p>Getting started with the CIL Diaspora console is simple and straightforward:</p>
                 <ul>
-                    <li>Contact our diaspora services team</li>
-                    <li>Explore investment opportunities across the CIL ecosystem</li>
-                    <li>Set up your unified investment console</li>
-                    <li>Start investing and managing your assets</li>
+                    <li><strong>Contact Us:</strong> Reach out to our diaspora services team through our website or contact page</li>
+                    <li><strong>Consultation:</strong> Schedule a consultation to discuss your investment goals and preferences</li>
+                    <li><strong>Explore Opportunities:</strong> Explore investment opportunities across the CIL ecosystem</li>
+                    <li><strong>Set Up Your Console:</strong> Set up your unified investment console with guidance from your relationship officer</li>
+                    <li><strong>Start Investing:</strong> Start investing and managing your assets with full transparency and support</li>
+                    <li><strong>Monitor Performance:</strong> Monitor your investments in real-time through the console</li>
                 </ul>
 
-                <p>"The launch of the diaspora console is a game-changer for Nigerians abroad," said the Head of CIL Diaspora. "We're giving them the tools and transparency they need to invest confidently in Nigeria's future."</p>
+                <h2>Success Stories</h2>
+                <p>Since its launch, the CIL Diaspora console has already attracted significant interest from diaspora Nigerians. Several diaspora investors have already set up their consoles and begun investing in property, solar, and agribusiness projects across Nigeria. Early results have been promising, with investors reporting strong returns and satisfaction with the platform.</p>
+                <p>"The launch of the diaspora console is a game-changer for Nigerians abroad," said the Head of CIL Diaspora. "We're giving them the tools and transparency they need to invest confidently in Nigeria's future. This platform reflects our commitment to serving the diaspora community and facilitating investment in Nigeria's economic development."</p>
 
                 <p><em>To learn more about diaspora investment opportunities, please <a href="contact.html" style="color: var(--gold); font-weight: 600;">contact our team</a> or visit our <a href="ecosystem.html" style="color: var(--gold); font-weight: 600;">Ecosystem page</a>.</em></p>
 
@@ -195,16 +249,39 @@
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://web.facebook.com/cilnigeria/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/2348026414381" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -215,21 +292,24 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
                 <a href="tel:+2347078269765">+234 707 826 9765</a>
                 <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
         <div class="container footer-bottom">
             <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
@@ -239,6 +319,52 @@
         toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+
+        // Newsletter Script
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 

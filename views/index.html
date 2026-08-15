@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Collaborative Investment Ltd · Integrated Business Ecosystem</title>
+    <title>Collaborative Investment Ltd(CIL) · Integrated Business Ecosystem</title>
     <meta name="description" content="Collaborative Investment Ltd (CIL) – Integrated Business Development & Investment Management across 10 sectors. Asset assurance, operational transparency." />
 
     <!-- Google Font & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- XEELAA AI Chat Widget -->
+    <script>
+        window.__EMBED_CONFIG__ = {
+            publicToken: "yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G",
+            brand_name: "Collaborative Investment Ltd",
+            position: "right",
+            greeting: "Welcome to CIL! How can we help you today?",
+            theme_color: "#D9A441",
+            avatar_url: "img/logo.jpg"
+        };
+    </script>
+    <script src="https://xeelaa.com/widget.js?key=yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G"></script>
 
     <style>
         /* ----- RESET & VARIABLES ----- */
@@ -68,15 +81,10 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--gold);
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
 
         nav {
@@ -96,6 +104,21 @@
             color: var(--gold);
         }
 
+        nav a.active {
+            color: var(--gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
         .actions {
             display: flex;
             gap: 10px;
@@ -111,16 +134,6 @@
             font-size: 0.9rem;
         }
 
-        .btn-dark {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-dark:hover {
-            background: #eef2f6;
-            transform: translateY(-2px);
-        }
-
         .btn-gold {
             background: var(--gold);
             color: white;
@@ -129,6 +142,16 @@
         .btn-gold:hover {
             background: #c4913a;
             transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
         }
 
         /* Mobile menu toggle */
@@ -151,7 +174,7 @@
             transition: .3s;
         }
 
-        /* ----- HERO (redesigned, no search) ----- */
+        /* ----- HERO ----- */
         .hero {
             min-height: 100vh;
             background: linear-gradient(rgba(8, 27, 51, .88), rgba(8, 27, 51, .94)),
@@ -251,17 +274,6 @@
         .hero-actions .btn {
             padding: 14px 32px;
             font-size: 1rem;
-        }
-
-        .hero-actions .btn-outline-light {
-            background: transparent;
-            border: 1.5px solid rgba(255,255,255,0.3);
-            color: white;
-        }
-
-        .hero-actions .btn-outline-light:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.5);
         }
 
         .quick-tags {
@@ -387,32 +399,450 @@
             color: #c4913a;
         }
 
-        /* ----- NUMBERS ----- */
-        .numbers {
+        /* ----- EVENT BLOG PREVIEW (Latest Announcement) ----- */
+        .event-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #fdf6e9 0%, #faf3e0 100%);
+        }
+
+        .event-section .title h2 {
+            color: var(--primary);
+        }
+
+        .event-section .title p {
+            color: var(--muted);
+        }
+
+        .event-blog-card {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(217, 164, 65, 0.12);
+            border: 1px solid rgba(217, 164, 65, 0.15);
+            max-width: 1100px;
+            margin: 0 auto;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .metric {
+        .event-blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 60px rgba(217, 164, 65, 0.2);
+        }
+
+        .event-blog-image {
+            position: relative;
+            overflow: hidden;
+            min-height: 320px;
             background: var(--light);
-            padding: 40px 20px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid var(--border);
         }
 
-        .metric h3 {
-            font-size: 56px;
-            font-weight: 800;
+        .event-blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .event-blog-card:hover .event-blog-image img {
+            transform: scale(1.04);
+        }
+
+        .event-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 6px 18px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            box-shadow: 0 4px 12px rgba(217, 164, 65, 0.3);
+        }
+
+        .event-blog-content {
+            padding: 35px 40px 35px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .event-meta i {
+            margin-right: 6px;
+            color: var(--gold);
+        }
+
+        .event-blog-content h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .event-blog-content p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .event-blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .event-partners-mini {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .event-partners-mini .partner-tag {
+            background: var(--light);
+            padding: 2px 12px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .btn-read-more {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: .2s;
+            white-space: nowrap;
+        }
+
+        .btn-read-more:hover {
+            gap: 12px;
+            color: #c4913a;
+        }
+
+        .btn-register-now {
+            background: var(--gold);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px 24px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(217, 164, 65, 0.25);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-register-now:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(217, 164, 65, 0.35);
+            color: var(--primary);
+        }
+
+        .event-blog-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ----- EVENT REGISTRATION MODAL ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 35px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: modalIn .3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: .2s;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .modal .close-modal:hover {
+            color: var(--text);
+        }
+
+        .modal h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .modal .form-group {
+            margin-bottom: 16px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .modal .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            transition: .3s;
+            color: var(--text);
+        }
+
+        .modal .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 164, 65, .1);
+        }
+
+        .modal .btn-submit-event {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .modal .btn-submit-event:hover {
+            background: #c4913a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(217, 164, 65, 0.3);
+        }
+
+        .modal .spinner-event {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(8, 27, 51, 0.3);
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        .modal .event-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .modal .event-message.success {
+            display: block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1px solid #a5d6a7;
+        }
+
+        .modal .event-message.error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .modal .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .modal .success-message i {
+            font-size: 48px;
+            color: #22c55e;
+            margin-bottom: 12px;
+        }
+
+        .modal .success-message h4 {
+            font-size: 20px;
             color: var(--primary);
             margin-bottom: 6px;
-            letter-spacing: -0.02em;
         }
 
-        .metric p {
+        .modal .success-message p {
             color: var(--muted);
-            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* ----- NEWSLETTER SECTION ----- */
+        .newsletter-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+
+        .newsletter-wrap {
+            background: white;
+            border-radius: var(--radius);
+            padding: 50px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .newsletter-content h3 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .newsletter-content p {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 550px;
+            margin: 0 auto 24px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 12px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .newsletter-note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 16px;
+        }
+
+        .newsletter-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .newsletter-message.success {
+            display: block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1px solid #a5d6a7;
+        }
+
+        .newsletter-message.error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .newsletter-message .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* ----- CTA ----- */
@@ -529,10 +959,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .numbers {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 40px;
@@ -546,11 +972,6 @@
                 display: flex;
             }
 
-            .actions .btn-dark {
-                display: none;
-            }
-
-            /* Mobile nav */
             nav.open {
                 display: flex;
                 flex-direction: column;
@@ -598,8 +1019,38 @@
                 grid-template-columns: 1fr;
             }
 
-            .numbers {
+            .event-blog-card {
                 grid-template-columns: 1fr;
+                gap: 0;
+                margin: 0 16px;
+            }
+
+            .event-blog-image {
+                min-height: 220px;
+            }
+
+            .event-blog-content {
+                padding: 25px 24px 30px;
+            }
+
+            .event-blog-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .event-blog-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .event-blog-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-read-more,
+            .btn-register-now {
+                width: 100%;
+                justify-content: center;
             }
 
             .footer-grid {
@@ -635,6 +1086,22 @@
                 font-size: 12px;
                 padding: 6px 16px;
             }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-wrap {
+                padding: 30px 20px;
+            }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .modal {
+                padding: 30px 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -646,20 +1113,12 @@
                 font-size: 15px;
             }
 
-            .metric h3 {
-                font-size: 40px;
-            }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
             .logo img {
                 height: 32px;
+            }
+
+            .event-blog-content h3 {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -670,19 +1129,19 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html" class="active">Home</a>
-                <a href="About.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="about.html">About Us</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Get Started</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -690,17 +1149,25 @@
         </div>
     </header>
 
-    <!-- HERO (redesigned, no search) -->
+    <!-- HERO -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="badge">Africa's Connected Business Ecosystem</div>
-                <h1>Collaborative <span class="highlight">Investment Ltd</span></h1>
-                <p class="subtitle">Integrated Business Development &amp; Investment Management</p>
-                <p class="description">We start, manage, and scale businesses across multiple sectors — creating a self‑reinforcing ecosystem that builds jobs and sustainable value.</p>
+                <div class="badge">Africa's First Connected Business Ecosystem</div>
+                <h1>Collaborative <span class="highlight">Investment Ltd (CIL).</span></h1>
+                <p class="subtitle">Nigeria's First Integrated Business Development &amp; Investment Management Company Operating Across Multiple Sectors</p>
+                <p class="description">We start, manage, and scale businesses across multiple sectors creating a self‑reinforcing ecosystem that builds jobs and sustainable value.</p>
                 <div class="hero-actions">
-                    <a href="register.html" class="btn btn-gold"><i class="fas fa-rocket"></i> Get Started</a>
-                    <a href="login.html" class="btn btn-outline-light"><i class="fas fa-building"></i> Sign In</a>
+                    <a href="companies.html" class="btn btn-gold"><i class="fas fa-building"></i> Explore Our Companies</a>
+                    <a href="contact.html" class="btn btn-outline-light"><i class="fas fa-envelope"></i> Get In Touch</a>
+                </div>
+                <div class="quick-tags">
+                    <span>🏢 Property</span>
+                    <span>☀ Solar</span>
+                    <span>🌾 Agribusiness</span>
+                    <span>👷 Workforce</span>
+                    <span>🏨 Hotels</span>
+                    <span>💰 Finance</span>
                 </div>
             </div>
         </div>
@@ -724,7 +1191,7 @@
                         <span class="ecosystem-tag">Fish</span>
                         <span class="ecosystem-tag">Crop</span>
                     </div>
-                    <a href="https://cilagribusiness.com" target="_blank">Visit Agribusiness <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilagribusiness.netlify.app" target="_blank">Visit Agribusiness <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 2 -->
                 <div class="ecosystem-card">
@@ -736,7 +1203,7 @@
                         <span class="ecosystem-tag">Cages</span>
                         <span class="ecosystem-tag">Gates</span>
                     </div>
-                    <a href="https://cilconstruction.com" target="_blank">Visit Construction <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilconstruction.netlify.app" target="_blank">Visit Construction <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 3 -->
                 <div class="ecosystem-card">
@@ -748,7 +1215,7 @@
                         <span class="ecosystem-tag">Rental</span>
                         <span class="ecosystem-tag">Training</span>
                     </div>
-                    <a href="https://cilmachinery.com" target="_blank">Visit Machinery <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilmachinery.netlify.app" target="_blank">Visit Machinery <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 4 -->
                 <div class="ecosystem-card">
@@ -760,7 +1227,7 @@
                         <span class="ecosystem-tag">PPA</span>
                         <span class="ecosystem-tag">Maintenance</span>
                     </div>
-                    <a href="https://cilsolar.com" target="_blank">Visit Solar <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilsolar.netlify.app" target="_blank">Visit Solar <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 5 -->
                 <div class="ecosystem-card">
@@ -772,7 +1239,7 @@
                         <span class="ecosystem-tag">Office</span>
                         <span class="ecosystem-tag">Upholstery</span>
                     </div>
-                    <a href="https://cilfurniture.com" target="_blank">Visit Furniture <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilfurniture.netlify.app" target="_blank">Visit Furniture <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 6 -->
                 <div class="ecosystem-card">
@@ -784,7 +1251,7 @@
                         <span class="ecosystem-tag">Revenue</span>
                         <span class="ecosystem-tag">Staff</span>
                     </div>
-                    <a href="https://cilhotels.com" target="_blank">Visit Hotels <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilhotels.netlify.app" target="_blank">Visit Hotels <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 7 -->
                 <div class="ecosystem-card">
@@ -796,7 +1263,7 @@
                         <span class="ecosystem-tag">Security</span>
                         <span class="ecosystem-tag">HVAC</span>
                     </div>
-                    <a href="https://cilfacility.com" target="_blank">Visit Facility Mgmt <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilfacility.netlify.app" target="_blank">Visit Facility Mgmt <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 8 -->
                 <div class="ecosystem-card">
@@ -808,7 +1275,7 @@
                         <span class="ecosystem-tag">Maintenance</span>
                         <span class="ecosystem-tag">CAPP</span>
                     </div>
-                    <a href="https://cilproperty.com" target="_blank">Visit Property <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilpandt.netlify.app" target="_blank">Visit Property <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 9 -->
                 <div class="ecosystem-card">
@@ -820,7 +1287,7 @@
                         <span class="ecosystem-tag">3D Scans</span>
                         <span class="ecosystem-tag">Remittance</span>
                     </div>
-                    <a href="https://cildiaspora.com" target="_blank">Visit Diaspora <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cildiaspora.netlify.app" target="_blank">Visit Diaspora <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 10 -->
                 <div class="ecosystem-card">
@@ -832,7 +1299,7 @@
                         <span class="ecosystem-tag">Training</span>
                         <span class="ecosystem-tag">Verification</span>
                     </div>
-                    <a href="https://cilworkforce.com" target="_blank">Visit Workforce <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilworkforce.netlify.app" target="_blank">Visit Workforce <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 11 -->
                 <div class="ecosystem-card">
@@ -840,11 +1307,11 @@
                     <h3>Microfinance Bank</h3>
                     <p>Digital banking and financial services for individuals and businesses. Savings, loans, and asset financing.</p>
                     <div class="ecosystem-tags">
-                        <span class="ecosystem-tag">Savings</span>
+                        <span class="ecosystem-tag">Current</span>
                         <span class="ecosystem-tag">Loans</span>
                         <span class="ecosystem-tag">Banking</span>
                     </div>
-                    <a href="https://cilmfb.com" target="_blank">Visit MFB <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilmfb.netlify.app" target="_blank">Visit MFB <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <!-- Division 12 -->
                 <div class="ecosystem-card">
@@ -856,34 +1323,64 @@
                         <span class="ecosystem-tag">Institutional</span>
                         <span class="ecosystem-tag">Capital</span>
                     </div>
-                    <a href="https://cilprivate.com" target="_blank">Visit CILPIN <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://cilprivate.netlify.app" target="_blank">Visit CILPIN <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NUMBERS -->
-    <section>
+    <!-- CIL BUSINESS CONNECT - Blog Preview Section -->
+    <section class="event-section">
         <div class="container">
             <div class="title">
-                <h2>Growing Together</h2>
+                <h2>Latest <span style="color:var(--gold);">Announcement</span></h2>
+                <p>Stay updated with our latest events and initiatives</p>
             </div>
-            <div class="numbers">
-                <div class="metric">
-                    <h3>12+</h3>
-                    <p>Business Divisions</p>
+            <div class="event-blog-card">
+                <div class="event-blog-image">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80" alt="CIL Business Connect - Where Ideas Meet Opportunities" />
+                    <span class="event-badge">Announcement</span>
                 </div>
-                <div class="metric">
-                    <h3>1</h3>
-                    <p>Connected Ecosystem</p>
+                <div class="event-blog-content">
+                    <div class="event-meta">
+                        <span><i class="far fa-calendar-alt"></i> Coming Soon on theSparkhubs & Zoom</span>
+                        <span><i class="far fa-clock"></i> TBA</span>
+                    </div>
+                    <h3>CIL Business Connect: Where Ideas Meet Opportunities</h3>
+                    <p>CIL Business Connect is a webinar series designed to educate, connect, and empower individuals and businesses through insightful conversations across key sectors of the economy. Join us as we explore strategic wealth-building opportunities and connect with industry leaders.</p>
+                    <div class="event-blog-footer">
+                        <div class="event-partners-mini">
+                            <span>In collaboration with:</span>
+                            <span class="partner-tag">CIL</span>
+                            <span class="partner-tag">CILPIN</span>
+                            <span class="partner-tag">ClickTech Quantum Edge</span>
+                        </div>
+                        <div class="event-blog-actions">
+                            <a href="news-cilconnect.html" class="btn-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            <button class="btn-register-now" id="openEventModalBtn">Register Now <i class="fas fa-check-circle"></i></button>
+                        </div>
+                    </div>
                 </div>
-                <div class="metric">
-                    <h3>∞</h3>
-                    <p>Growth Opportunities</p>
-                </div>
-                <div class="metric">
-                    <h3>24/7</h3>
-                    <p>Digital Access</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
                 </div>
             </div>
         </div>
@@ -894,8 +1391,8 @@
         <div class="container">
             <div class="cta-wrap">
                 <h2>Build Bigger With CIL</h2>
-                <p>One account. Multiple opportunities. Endless possibilities.</p>
-                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <p>One ecosystem. Multiple opportunities. Endless possibilities.</p>
+                <a href="contact.html" class="btn btn-gold">Contact Us</a>
             </div>
         </div>
     </section>
@@ -905,12 +1402,13 @@
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://web.facebook.com/cilnigeria/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/2348026414381" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -921,11 +1419,12 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
@@ -950,13 +1449,218 @@
             nav.classList.toggle('open');
         });
 
-        // Close menu on link click (mobile)
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('open');
             });
         });
     </script>
+
+    <!-- Newsletter Script -->
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const emailInput = document.getElementById('newsletterEmail');
+            const email = emailInput.value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter your email address.';
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    emailInput.value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+                console.error('Newsletter error:', error);
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
+        });
+    </script>
+
+    <!-- Event Registration Modal Script -->
+<!-- Event Registration Modal Script -->
+<script>
+    // ----- EVENT REGISTRATION MODAL -----
+    const eventModal = document.getElementById('eventModal');
+    const openEventModalBtn = document.getElementById('openEventModalBtn');
+    const closeEventModal = document.getElementById('closeEventModal');
+
+    // Open modal
+    openEventModalBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        eventModal.classList.add('active');
+        document.getElementById('eventModalForm').style.display = 'block';
+        document.getElementById('eventModalSuccess').style.display = 'none';
+        document.getElementById('eventModalFormSubmit').reset();
+        document.getElementById('eventModalBtn').style.display = 'block';
+        document.getElementById('eventModalSpinner').style.display = 'none';
+        document.getElementById('eventModalMessage').className = 'event-message';
+        document.getElementById('eventModalMessage').textContent = '';
+    });
+
+    // Close modal
+    function closeEventModalFunc() {
+        eventModal.classList.remove('active');
+    }
+
+    closeEventModal.addEventListener('click', closeEventModalFunc);
+    eventModal.addEventListener('click', function(e) {
+        if (e.target === this) closeEventModalFunc();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeEventModalFunc();
+    });
+
+    // Event Modal Form Submission
+    document.getElementById('eventModalFormSubmit').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const fullName = document.getElementById('eventModalFullName').value.trim();
+        const email = document.getElementById('eventModalEmail').value.trim();
+        const phone = document.getElementById('eventModalPhone').value.trim();
+        const btn = document.getElementById('eventModalBtn');
+        const btnText = document.getElementById('eventModalBtnText');
+        const spinner = document.getElementById('eventModalSpinner');
+        const messageDiv = document.getElementById('eventModalMessage');
+
+        if (!fullName || !email) {
+            messageDiv.className = 'event-message error';
+            messageDiv.textContent = 'Please enter your full name and email address.';
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            messageDiv.className = 'event-message error';
+            messageDiv.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        btnText.style.display = 'none';
+        spinner.style.display = 'inline-block';
+        btn.disabled = true;
+        messageDiv.className = 'event-message';
+        messageDiv.textContent = '';
+
+        try {
+            const response = await fetch('/api/event-signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ fullName, email, phone })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                document.getElementById('eventModalForm').style.display = 'none';
+                document.getElementById('eventModalSuccess').style.display = 'block';
+                
+                // Reset form after 5 seconds and close modal
+                setTimeout(() => {
+                    document.getElementById('eventModalFormSubmit').reset();
+                    closeEventModalFunc();
+                }, 5000);
+            } else {
+                messageDiv.className = 'event-message error';
+                messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
+        } catch (error) {
+            messageDiv.className = 'event-message error';
+            messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            console.error('Event signup error:', error);
+            btnText.style.display = 'inline';
+            spinner.style.display = 'none';
+            btn.disabled = false;
+        }
+    });
+</script>
+
+<!-- Event Registration Modal -->
+<div class="modal-overlay" id="eventModal">
+    <div class="modal">
+        <button class="close-modal" id="closeEventModal">&times;</button>
+
+        <div id="eventModalForm">
+            <h3>Register for CIL Business Connect</h3>
+            <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 20px;">Stay updated on event dates and exclusive opportunities.</p>
+
+            <form id="eventModalFormSubmit">
+                <div class="form-group">
+                    <label for="eventModalFullName">Full Name *</label>
+                    <input type="text" id="eventModalFullName" placeholder="Enter your full name" required />
+                </div>
+                <div class="form-group">
+                    <label for="eventModalEmail">Email Address *</label>
+                    <input type="email" id="eventModalEmail" placeholder="Enter your email address" required />
+                </div>
+                <div class="form-group">
+                    <label for="eventModalPhone">Phone Number</label>
+                    <input type="tel" id="eventModalPhone" placeholder="Enter your phone number" />
+                </div>
+                <button type="submit" class="btn-submit-event" id="eventModalBtn">
+                    <span id="eventModalBtnText">Register Now</span>
+                    <span class="spinner-event" id="eventModalSpinner" style="display:none;"></span>
+                </button>
+                <div class="event-message" id="eventModalMessage"></div>
+            </form>
+        </div>
+
+        <div class="success-message" id="eventModalSuccess">
+            <i class="fas fa-check-circle"></i>
+            <h4>Registration Successful!</h4>
+            <p>Thank you for registering for CIL Business Connect. We'll keep you updated on event details.</p>
+            <p style="margin-top: 8px; font-size: 14px; color: var(--muted);">A confirmation email has been sent to your inbox.</p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

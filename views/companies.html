@@ -4,11 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CIL Companies · Collaborative Investment Ltd</title>
-    <meta name="description" content="Explore all CIL companies – 12+ integrated business divisions across Agribusiness, Construction, Solar, Property, Workforce and more." />
+    <meta name="description" content="Explore all CIL subsidiary companies – 12+ integrated business divisions across Agribusiness, Construction, Solar, Property, Workforce and more." />
 
     <!-- Google Font & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- XEELAA AI Chat Widget -->
+    <script>
+        window.__EMBED_CONFIG__ = {
+            publicToken: "yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G",
+            brand_name: "Collaborative Investment Ltd",
+            position: "right",
+            greeting: "Welcome to CIL! How can we help you today?",
+            theme_color: "#D9A441",
+            avatar_url: "img/logo.jpg"
+        };
+    </script>
+    <script src="https://xeelaa.com/widget.js?key=yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G"></script>
 
     <style>
         /* ----- RESET & VARIABLES ----- */
@@ -68,15 +80,10 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--gold);
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
 
         nav {
@@ -126,16 +133,6 @@
             font-size: 0.9rem;
         }
 
-        .btn-dark {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-dark:hover {
-            background: #eef2f6;
-            transform: translateY(-2px);
-        }
-
         .btn-gold {
             background: var(--gold);
             color: white;
@@ -144,6 +141,16 @@
         .btn-gold:hover {
             background: #c4913a;
             transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
         }
 
         .menu-toggle {
@@ -279,9 +286,11 @@
         }
 
         .company-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 10px;
             color: var(--primary);
+            line-height: 1.3;
         }
 
         .company-card p {
@@ -357,6 +366,100 @@
             font-size: 1rem;
         }
 
+        /* ----- NEWSLETTER SECTION ----- */
+        .newsletter-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+
+        .newsletter-wrap {
+            background: white;
+            border-radius: var(--radius);
+            padding: 50px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .newsletter-content h3 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .newsletter-content p {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 550px;
+            margin: 0 auto 24px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 12px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .newsletter-note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 16px;
+        }
+
+        /* Newsletter Messages */
+        .newsletter-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .newsletter-message.success {
+            display: block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1px solid #a5d6a7;
+        }
+
+        .newsletter-message.error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* ----- CTA ----- */
         .cta-wrap {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -378,6 +481,11 @@
             max-width: 700px;
             margin: 0 auto 35px;
             opacity: .85;
+        }
+
+        .cta-wrap .btn-gold {
+            font-size: 1.1rem;
+            padding: 16px 40px;
         }
 
         /* ----- FOOTER ----- */
@@ -484,10 +592,6 @@
                 display: flex;
             }
 
-            .actions .btn-dark {
-                display: none;
-            }
-
             nav.open {
                 display: flex;
                 flex-direction: column;
@@ -548,18 +652,29 @@
             .cta-wrap p {
                 font-size: 16px;
             }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-wrap {
+                padding: 30px 20px;
+            }
         }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
             .stat-card h3 {
                 font-size: 40px;
             }
 
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
             .logo img {
                 height: 32px;
             }
@@ -572,19 +687,19 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html">Home</a>
-                <a href="About.html">About Us</a>
-                <a href="companies.html" class="active">Companies</a>
+                <a href="about.html">About Us</a>
+                <a href="companies.html" class="active">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -597,7 +712,7 @@
         <div class="container">
             <div class="page-hero-content">
                 <h1>Our <span>Companies</span></h1>
-                <p>12+ integrated business divisions working as one self‑reinforcing engine. Each company strengthens the others, creating a 25–40% margin advantage and building sustainable economic infrastructure.</p>
+                <p>12+ integrated subsidiary companies working as one self‑reinforcing engine. Each company strengthens the others, creating a 25–40% margin advantage and building sustainable economic infrastructure.</p>
             </div>
         </div>
     </section>
@@ -613,9 +728,9 @@
             <div class="companies-grid">
                 <!-- 1. Agribusiness -->
                 <div class="company-card">
-                    <div class="company-badge">CIL Agribusiness</div>
+                    <div class="company-badge">CIL Agriculture</div>
                     <div class="card-icon"><i class="fas fa-seedling"></i></div>
-                    <h3>Agribusiness Management</h3>
+                    <h3>CIL Agriculture &amp; Agribusiness Management Ltd</h3>
                     <p>Full‑service farm management for absentee landowners. Specialized production: poultry, aquaculture, crop mastery. Digital transparency from input to harvest.</p>
                     <div class="company-tags">
                         <span class="company-tag">Poultry</span>
@@ -629,7 +744,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Construction</div>
                     <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
-                    <h3>Construction &amp; Fabrication</h3>
+                    <h3>CIL Construction &amp; Fabrication Nig Ltd</h3>
                     <p>End‑to‑end project assurance with biometric check‑in, stage‑gate approvals, and third‑party inspection. Fabrication of poultry cages, block machines, security gates.</p>
                     <div class="company-tags">
                         <span class="company-tag">Building</span>
@@ -643,7 +758,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Machinery</div>
                     <div class="card-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Machinery &amp; Industrial</h3>
+                    <h3>CIL Machinery &amp; Industrial Services Ltd</h3>
                     <p>Equipment optimization: idle machinery is booked, operated, and maintained via GPS/IoT. Also equipment financing and a national technician academy.</p>
                     <div class="company-tags">
                         <span class="company-tag">Generators</span>
@@ -657,7 +772,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Solar</div>
                     <div class="card-icon"><i class="fas fa-solar-panel"></i></div>
-                    <h3>Solar Energy Solutions</h3>
+                    <h3>CIL Solar Energy Solutions Ltd</h3>
                     <p>Comprehensive renewable energy platform. Manufacturer partnerships, investor‑funded solar branches, and artisan development for installation &amp; maintenance.</p>
                     <div class="company-tags">
                         <span class="company-tag">Solar</span>
@@ -671,7 +786,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Furniture</div>
                     <div class="card-icon"><i class="fas fa-chair"></i></div>
-                    <h3>Furniture Production &amp; Supply</h3>
+                    <h3>CIL Furniture Production &amp; Supply Nig Ltd</h3>
                     <p>Furniture‑entrepreneurship ecosystem. CIL Certified Partners access standardized designs, bulk materials, and guaranteed order flow from internal demand.</p>
                     <div class="company-tags">
                         <span class="company-tag">Custom</span>
@@ -685,7 +800,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Hotels</div>
                     <div class="card-icon"><i class="fas fa-hotel"></i></div>
-                    <h3>Hotel Turnaround Services</h3>
+                    <h3>CIL Hotel Turnaround Services Nig Ltd</h3>
                     <p>Transform underperforming hotels. Full operational takeover, integrated supply chain (furniture, food, solar), and revenue flow management.</p>
                     <div class="company-tags">
                         <span class="company-tag">Management</span>
@@ -699,7 +814,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Facility</div>
                     <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
-                    <h3>Business Facility Management</h3>
+                    <h3>CIL Business &amp; Facility Management Ltd</h3>
                     <p>Integrated facility management: cleaning, security, technical maintenance (HVAC, electrical), space management. Tiered service levels with digital tracking.</p>
                     <div class="company-tags">
                         <span class="company-tag">Cleaning</span>
@@ -713,7 +828,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Property</div>
                     <div class="card-icon"><i class="fas fa-building"></i></div>
-                    <h3>Property &amp; Tenant Management</h3>
+                    <h3>CIL Property &amp; Tenant Management Ltd</h3>
                     <p>Nigeria's property‑ecosystem gateway. Tenant screening, rent collection, annual asset preservation (CAPP), and upgrade programs — all professionally managed.</p>
                     <div class="company-tags">
                         <span class="company-tag">Tenant</span>
@@ -727,7 +842,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Diaspora</div>
                     <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
-                    <h3>Diaspora Asset Management</h3>
+                    <h3>CIL Diaspora Asset Management Nig Ltd</h3>
                     <p>Single gateway for diaspora wealth deployment. Unified investment console with real‑time portfolio views across all 12 divisions. Complete transparency.</p>
                     <div class="company-tags">
                         <span class="company-tag">Dashboard</span>
@@ -741,7 +856,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Workforce</div>
                     <div class="card-icon"><i class="fas fa-users"></i></div>
-                    <h3>Employment &amp; Workforce</h3>
+                    <h3>CIL Employment &amp; Workforce Dev Nig Ltd</h3>
                     <p>Trusted intermediary for labor. Job matching platform, CIL Workforce Academy (certification), worker verification (Levels 1‑4), and replacement guarantee.</p>
                     <div class="company-tags">
                         <span class="company-tag">Jobs</span>
@@ -755,7 +870,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL MFB</div>
                     <div class="card-icon"><i class="fas fa-piggy-bank"></i></div>
-                    <h3>Microfinance Bank</h3>
+                    <h3>CIL Microfinance Bank Limited</h3>
                     <p>Digital banking and financial services for individuals and businesses. Savings, loans, asset financing, and business banking.</p>
                     <div class="company-tags">
                         <span class="company-tag">Savings</span>
@@ -769,7 +884,7 @@
                 <div class="company-card">
                     <div class="company-badge">CIL Private</div>
                     <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Private Investors Network</h3>
+                    <h3>CIL Private Investors Network Ltd</h3>
                     <p>Private wealth and institutional finance. Connecting capital with vetted opportunities across the ecosystem. Portfolio management and advisory.</p>
                     <div class="company-tags">
                         <span class="company-tag">Wealth</span>
@@ -809,13 +924,34 @@
         </div>
     </section>
 
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section style="padding:0 0 80px;">
         <div class="container">
             <div class="cta-wrap">
                 <h2>Ready to Build Bigger?</h2>
                 <p>Join the ecosystem that's transforming Nigeria's economic infrastructure. One account, multiple opportunities.</p>
-                <a href="get-started.html" class="btn btn-gold">Get Started</a>
+                <a href="contact.html" class="btn btn-gold">Contact Us</a>
             </div>
         </div>
     </section>
@@ -825,12 +961,13 @@
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management. Connected ecosystem, asset assurance, operational transparency.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://web.facebook.com/cilnigeria/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/2348026414381" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -841,11 +978,12 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
@@ -874,6 +1012,68 @@
             link.addEventListener('click', () => {
                 nav.classList.remove('open');
             });
+        });
+    </script>
+
+    <!-- Newsletter Script -->
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const emailInput = document.getElementById('newsletterEmail');
+            const email = emailInput.value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter your email address.';
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    emailInput.value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+                console.error('Newsletter error:', error);
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 

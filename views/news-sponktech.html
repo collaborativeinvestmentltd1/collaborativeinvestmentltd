@@ -8,6 +8,18 @@
     <!-- Google Font & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- XEELAA AI Chat Widget -->
+    <script>
+        window.__EMBED_CONFIG__ = {
+            publicToken: "yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G",
+            brand_name: "Collaborative Investment Ltd",
+            position: "right",
+            greeting: "Welcome to CIL! How can we help you today?",
+            theme_color: "#D9A441",
+            avatar_url: "img/logo.jpg"
+        };
+    </script>
+    <script src="https://xeelaa.com/widget.js?key=yRe8r6oQz5dfCbFAgIgR2L1E0dRIgPlj2EqrP8JY0bDPdnfnkJOVD5n2SjpEZu3G"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,17 +45,18 @@
             backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
-        .logo span { color: var(--gold); }
+        .logo img { height: 40px; width: auto; display: block; }
         nav { display: flex; gap: 32px; }
         nav a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.9rem; transition: .2s; position: relative; }
         nav a:hover { color: var(--gold); }
+        nav a.active { color: var(--gold); }
+        nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gold); border-radius: 4px; }
         .actions { display: flex; gap: 10px; }
         .btn { padding: 10px 24px; border-radius: 100px; font-weight: 600; transition: .3s; border: none; cursor: pointer; font-size: 0.9rem; }
-        .btn-dark { background: white; color: var(--primary); }
-        .btn-dark:hover { background: #eef2f6; transform: translateY(-2px); }
         .btn-gold { background: var(--gold); color: white; }
         .btn-gold:hover { background: #c4913a; transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.08); }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
         .menu-toggle span { display: block; width: 26px; height: 2.5px; background: white; border-radius: 4px; transition: .3s; }
 
@@ -67,6 +80,21 @@
         .content-wrapper ul li { color: var(--muted); font-size: 16px; line-height: 1.8; padding: 6px 0 6px 28px; position: relative; }
         .content-wrapper ul li::before { content: '•'; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: 4px; }
 
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; background: var(--light); }
+        .newsletter-wrap { background: white; border-radius: var(--radius); padding: 50px; border: 1px solid var(--border); text-align: center; }
+        .newsletter-content h3 { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .newsletter-content p { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto 24px; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+        .newsletter-message { display: none; margin-top: 16px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+        .newsletter-message.success { display: block; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .newsletter-message.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .spinner-small { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* Footer */
         footer { background: var(--primary); color: white; padding: 70px 0 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
@@ -85,7 +113,6 @@
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
             nav { display: none; }
             .menu-toggle { display: flex; }
-            .actions .btn-dark { display: none; }
             nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); padding: 24px 30px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
             nav.open a { font-size: 1rem; padding: 6px 0; }
         }
@@ -94,23 +121,14 @@
             .page-hero h1 { font-size: 34px; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .content-wrapper h2 { font-size: 24px; }
+            .logo img { height: 32px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-wrap { padding: 30px 20px; }
         }
         @media (max-width: 480px) {
             .page-hero h1 { font-size: 28px; }
-            .logo { font-size: 20px; }
+            .logo img { height: 32px; }
             .actions .btn { padding: 8px 16px; font-size: 0.8rem; }
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 32px;
-            }
         }
     </style>
 </head>
@@ -119,19 +137,19 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="public/img/logo.jpg" alt="Collaborative Investment Ltd" />
+                <img src="img/logo.jpg" alt="Collaborative Investment Ltd" />
             </a>
             <nav id="mainNav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
-                <a href="companies.html">Companies</a>
+                <a href="companies.html">Our Companies</a>
                 <a href="partners.html">Partners</a>
                 <a href="news.html" class="active">News</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="actions">
-                <a href="login.html" class="btn btn-dark">Login</a>
-                <a href="register.html" class="btn btn-gold">Register</a>
+                <a href="contact.html" class="btn btn-outline-light">Contact Us</a>
+                <a href="#newsletter" class="btn btn-gold">Subscribe</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                     <span></span><span></span><span></span>
                 </button>
@@ -154,37 +172,51 @@
                 <div class="meta">
                     <span>April 2026</span>
                     <span class="badge">Partnership</span>
-                    <span>3 min read</span>
+                    <span>5 min read</span>
                 </div>
 
-                <p><strong>Collaborative Investment Ltd (CIL) is proud to announce a strategic partnership with Sponktech Energy Limited, a leading renewable energy solutions provider.</strong></p>
+                <p><strong>Collaborative Investment Ltd (CIL) is proud to announce a strategic partnership with Sponktech Energy Limited, a leading renewable energy solutions provider. This collaboration marks a significant milestone in CIL's mission to deliver comprehensive, sustainable energy solutions across Nigeria.</strong></p>
 
-                <p>This collaboration marks a significant milestone in CIL's mission to deliver comprehensive, sustainable energy solutions across Nigeria. By combining Sponktech Energy's technical expertise with CIL's integrated business ecosystem, the partnership aims to provide reliable, affordable solar energy to homes and businesses nationwide.</p>
+                <p>By combining Sponktech Energy's technical expertise with CIL's integrated business ecosystem, the partnership aims to provide reliable, affordable solar energy to homes and businesses nationwide. This strategic alliance will accelerate the adoption of renewable energy in Nigeria, contributing to the country's sustainable development goals and energy transition agenda.</p>
+
+                <h2>About Sponktech Energy Limited</h2>
+                <p>Sponktech Energy Limited is a leading renewable energy company specializing in solar power solutions for residential, commercial, and industrial applications. With years of experience in the Nigerian market, Sponktech has built a reputation for quality, reliability, and innovation in the renewable energy sector.</p>
+                <p>The company's expertise spans solar panel installation, system design, maintenance, and after-sales support, making them an ideal partner for CIL's solar energy division. Their commitment to quality and customer satisfaction aligns perfectly with CIL's values of transparency, professionalism, and excellence.</p>
 
                 <h2>What This Partnership Means</h2>
                 <p>The partnership with Sponktech Energy Limited enhances CIL's solar energy offerings in several key ways:</p>
                 <ul>
-                    <li>Access to premium solar equipment and technology</li>
-                    <li>Expert installation and maintenance services</li>
-                    <li>Competitive pricing through bulk procurement</li>
-                    <li>Enhanced technical support and training</li>
-                    <li>Expanded reach across Nigeria</li>
+                    <li><strong>Premium Equipment Access:</strong> CIL gains access to top-tier solar equipment and technology from leading manufacturers, ensuring high-quality installations.</li>
+                    <li><strong>Expert Installation:</strong> Sponktech's certified technicians bring years of installation experience, ensuring optimal system performance.</li>
+                    <li><strong>Competitive Pricing:</strong> Through bulk procurement and strategic partnerships, customers benefit from competitive pricing on solar systems.</li>
+                    <li><strong>Technical Support:</strong> Enhanced technical support and training for CIL's solar team ensures continuous improvement and customer satisfaction.</li>
+                    <li><strong>Expanded Reach:</strong> The partnership enables CIL to expand its solar services across Nigeria, reaching more communities and businesses.</li>
                 </ul>
 
-                <h2>About Sponktech Energy Limited</h2>
-                <p>Sponktech Energy Limited is a leading renewable energy company specializing in solar power solutions for residential, commercial, and industrial applications. With years of experience in the Nigerian market, Sponktech has built a reputation for quality, reliability, and innovation in the renewable energy sector.</p>
+                <h2>Impact on Nigeria's Renewable Energy Landscape</h2>
+                <p>This partnership comes at a critical time when Nigeria is actively seeking to diversify its energy mix and reduce reliance on fossil fuels. With the country facing significant energy challenges, including unreliable grid power and high electricity costs, solar energy presents a viable and sustainable alternative.</p>
+                <p>Through this collaboration, CIL and Sponktech Energy will contribute to:</p>
+                <ul>
+                    <li><strong>Energy Access:</strong> Providing reliable, affordable solar energy to underserved communities</li>
+                    <li><strong>Job Creation:</strong> Creating employment opportunities in the renewable energy sector</li>
+                    <li><strong>Skills Development:</strong> Training and certifying local technicians in solar installation and maintenance</li>
+                    <li><strong>Environmental Impact:</strong> Reducing carbon emissions and promoting sustainable energy practices</li>
+                </ul>
 
                 <h2>What's Next</h2>
                 <p>Through this partnership, CIL and Sponktech Energy will work together to:</p>
                 <ul>
-                    <li>Deploy solar systems across CIL-managed properties</li>
-                    <li>Offer PPA (Power Purchase Agreement) financing options</li>
-                    <li>Train and certify solar installation technicians</li>
-                    <li>Provide ongoing maintenance and support</li>
-                    <li>Expand solar access to underserved communities</li>
+                    <li>Deploy solar systems across CIL-managed properties, including hotels, residential estates, and commercial facilities</li>
+                    <li>Offer PPA (Power Purchase Agreement) financing options to make solar more accessible</li>
+                    <li>Train and certify solar installation technicians through the CIL Workforce Academy</li>
+                    <li>Provide ongoing maintenance and support for all solar installations</li>
+                    <li>Expand solar access to underserved communities through targeted initiatives</li>
+                    <li>Develop innovative solar solutions for agribusiness and industrial applications</li>
                 </ul>
 
-                <p>"This partnership with Sponktech Energy represents our commitment to providing sustainable, affordable energy solutions to Nigerians," said the Managing Director of Collaborative Investment Ltd. "Together, we will power homes, businesses, and communities across the country."</p>
+                <p>"This partnership with Sponktech Energy represents our commitment to providing sustainable, affordable energy solutions to Nigerians," said the Managing Director of Collaborative Investment Ltd. "Together, we will power homes, businesses, and communities across the country, contributing to Nigeria's sustainable development and energy security."</p>
+
+                <p>The partnership is already yielding results, with several projects in the pipeline, including the installation of solar systems at CIL-managed hotels and commercial properties. These projects will serve as showcases for the potential of solar energy in Nigeria, demonstrating its viability and benefits to a wider audience.</p>
 
                 <p><em>For more information about our solar solutions, please visit our <a href="solar.html" style="color: var(--gold); font-weight: 600;">Solar page</a> or <a href="contact.html" style="color: var(--gold); font-weight: 600;">contact our team</a>.</em></p>
 
@@ -192,16 +224,39 @@
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrap">
+                <div class="newsletter-content">
+                    <h3>Stay Updated with CIL</h3>
+                    <p>Subscribe to receive news, updates, and investment opportunities from across our ecosystem.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-gold" id="newsletterBtn">
+                            <span id="newsletterBtnText">Subscribe</span>
+                            <span class="spinner-small" id="newsletterSpinner" style="display:none;"></span>
+                        </button>
+                    </form>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container footer-grid">
             <div>
                 <h2>Collaborative Investment Ltd</h2>
-                <p>Integrated Business Development &amp; Investment Management.</p>
+                <p>Integrated Business Development &amp; Investment Management Company Operating across Multiple Sectors across Nigeria & Africa.</p>
+                <p>Invest. Manage. Grow.</p>
                 <div class="social-links">
-                    <a href="https://web.facebook.com/people/Collaborative-Investment-Ltd/61583564231583/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://web.facebook.com/cilnigeria/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/Colainveltd" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://wa.me/2348129978419" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/Collaborativeinvestment.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/2348026414381" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/c.i.ltd" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
@@ -212,21 +267,24 @@
                 <a href="careers.html">Careers</a>
             </div>
             <div>
-                <h3>Ecosystem</h3>
-                <a href="property.html">Property</a>
-                <a href="solar.html">Solar</a>
-                <a href="finance.html">Finance</a>
-                <a href="workforce.html">Workforce</a>
+                <h3>Our Companies</h3>
+                <a href="companies.html#agribusiness">Agribusiness</a>
+                <a href="companies.html#construction">Construction</a>
+                <a href="companies.html#solar">Solar Energy</a>
+                <a href="companies.html#property">Property</a>
+                <a href="companies.html#workforce">Workforce</a>
             </div>
             <div>
                 <h3>Contact</h3>
-                <p>212 Ijegun Road, Ikotun, Lagos</p>
+                <p>212 Ijegun Road</p>
+                <p>Ikotun, Lagos</p>
                 <a href="tel:+2347078269765">+234 707 826 9765</a>
                 <a href="mailto:collaborativeinvestmentltd@gmail.com">collaborativeinvestmentltd@gmail.com</a>
             </div>
         </div>
         <div class="container footer-bottom">
             <p>&copy; 2026 Collaborative Investment Ltd. All rights reserved.</p>
+            <p style="margin-top:0.3rem;">Building Nigeria's economic infrastructure through integrated business development</p>
         </div>
     </footer>
 
@@ -236,6 +294,52 @@
         toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => { nav.classList.remove('open'); });
+        });
+
+        // Newsletter Script
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            const btn = document.getElementById('newsletterBtn');
+            const btnText = document.getElementById('newsletterBtnText');
+            const spinner = document.getElementById('newsletterSpinner');
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            messageDiv.className = 'newsletter-message';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'newsletter-message success';
+                    messageDiv.textContent = 'Thank you for subscribing! You\'ll receive our latest updates.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    messageDiv.className = 'newsletter-message error';
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.className = 'newsletter-message error';
+                messageDiv.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }
         });
     </script>
 
